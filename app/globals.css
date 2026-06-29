@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Azure Clinical token layer — Design §14.1.
+   Components reference the semantic vars below (wired into tailwind.config.ts).
+   ────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* surfaces */
+  --background: #f2f8fd;
+  --surface: #ffffff;
+  --surface-alt: #f4f9fc;
+
+  /* text */
+  --text-primary: #0c2233;
+  --text-secondary: #5c7388;
+  --text-muted: #90aac0;
+  --text-link: #0a5a92;
+
+  /* brand */
+  --primary: #0e80cc;
+  --primary-hover: #0a5a92;
+  --primary-foreground: #ffffff;
+  --tint: #e2f0fb;
+
+  /* lines */
+  --border: #d8e8f4;
+  --border-strong: #b6c8d8;
+
+  /* status */
+  --success: #0e9f6e;
+  --success-bg: #e3f6ef;
+  --warning: #d98e04;
+  --warning-bg: #fcf1dc;
+  --danger: #dc4c4a;
+  --danger-bg: #fcebeb;
+  --star: #f2a900;
+
+  /* effects */
+  --ring: rgba(14, 128, 204, 0.25);
+  --radius: 10px;
+  --radius-card: 16px;
+  --shadow-card:
+    0 1px 2px rgba(12, 34, 51, 0.05), 0 8px 24px -16px rgba(12, 34, 51, 0.18);
+  --shadow-elevated: 0 8px 24px -10px rgba(14, 128, 204, 0.24);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+  }
+
+  /* Focus-visible ring on every interactive element — Design §12. */
+  :focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px var(--ring),
+      0 0 0 1px var(--primary);
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--tint);
+    color: var(--text-primary);
+  }
+}
+
+/* Article body typography (Stage 5.8) — renderMarkdown output container. */
+.prose-article {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.75;
+}
+.prose-article > * + * {
+  margin-top: 1.1em;
+}
+.prose-article h2 {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-top: 1.8em;
+}
+.prose-article h3 {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 1.5em;
+}
+.prose-article strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.prose-article ul {
+  list-style: disc;
+  padding-left: 1.4em;
+}
+.prose-article li + li {
+  margin-top: 0.4em;
+}
+.prose-article blockquote {
+  border-left: 3px solid var(--primary);
+  padding: 4px 0 4px 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  background: var(--surface-alt);
+  border-radius: 0 8px 8px 0;
+}
+
+/* Respect reduced-motion globally — Design §9. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
