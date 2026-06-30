@@ -76,17 +76,9 @@ export function Navbar({
   }, [pathname]);
 
   const defaultAccount = (
-    <>
-      <Link
-        href="/auth/sign-in"
-        className="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
-      >
-        Sign in
-      </Link>
-      <Button asChild>
-        <Link href={cta.href}>{cta.label}</Link>
-      </Button>
-    </>
+    <Button asChild>
+      <Link href={cta.href}>{cta.label}</Link>
+    </Button>
   );
 
   return (
@@ -169,14 +161,6 @@ export function Navbar({
               </nav>
 
               <div className="mt-auto flex flex-col gap-3 pt-6">
-                <SheetClose asChild>
-                  <Link
-                    href="/auth/sign-in"
-                    className="text-center text-sm font-medium text-text-secondary"
-                  >
-                    Sign in
-                  </Link>
-                </SheetClose>
                 <SheetClose asChild>
                   <Button asChild className="w-full">
                     <Link href={cta.href}>{cta.label}</Link>

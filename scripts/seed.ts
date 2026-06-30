@@ -22,6 +22,7 @@ import mongoose, {
 } from "mongoose";
 
 import { dbConnect } from "@/lib/db";
+import { hashPassword } from "@/lib/auth/password";
 import { SUB_RATING_KEYS, type SubRatingKey } from "@/lib/enums";
 import { DEFAULT_CURRENCY, MEDICAL_DISCLAIMER, SITE_NAME } from "@/config/site";
 import {
@@ -63,7 +64,30 @@ import {
 } from "@/scripts/seed-data";
 
 const DRY = process.argv.includes("--dry");
-const ADMIN_EMAIL = "admin@stemconnect.example";
+
+/**
+ * SuperAdmin seed credentials, read from the environment (`site/.env.local`) so
+ * each deployment owns its own login. Falls back to a demo email when unset.
+ * Set these before seeding:
+ *
+ *   ADMIN_SEED_EMAIL=you@example.com
+ *   ADMIN_SEED_PASSWORD=your-password
+ *   ADMIN_SEED_NAME=Your Name
+ *
+ * Read lazily (via `adminSeed()`), since `loadEnv()` runs after this module is
+ * first evaluated.
+ */
+const DEFAULT_ADMIN_EMAIL = "admin@stemconnect.example";
+
+function adminSeed(): { email: string; password: string; name: string } {
+  return {
+    email: (process.env.ADMIN_SEED_EMAIL || DEFAULT_ADMIN_EMAIL)
+      .trim()
+      .toLowerCase(),
+    password: (process.env.ADMIN_SEED_PASSWORD ?? "").trim(),
+    name: (process.env.ADMIN_SEED_NAME || "StemConnect Admin").trim(),
+  };
+}
 
 let dryErrors = 0;
 
@@ -85,8 +109,17 @@ const mean = (xs: number[]): number =>
 async function loadEnv(): Promise<void> {
   try {
     const mod = await import("@next/env");
-    mod.loadEnvConfig(process.cwd());
-    return;
+    // `@next/env` exposes `loadEnvConfig` on the CJS `default` export when
+    // imported as ESM (tsx), so prefer that and fall back to the namespace.
+    const ns = mod as unknown as {
+      default?: { loadEnvConfig?: typeof mod.loadEnvConfig };
+      loadEnvConfig?: typeof mod.loadEnvConfig;
+    };
+    const loadEnvConfig = ns.default?.loadEnvConfig ?? ns.loadEnvConfig;
+    if (typeof loadEnvConfig === "function") {
+      loadEnvConfig(process.cwd());
+      if (process.env.MONGODB_URI || process.env.ADMIN_SEED_EMAIL) return;
+    }
   } catch {
     // Fall back to a minimal parser if @next/env isn't resolvable.
   }
@@ -376,14 +409,18 @@ async function main(): Promise<void> {
   // 7) Plans ──────────────────────────────────────────────────────────────--
   const plans = build(Plan, PLANS);
 
-  // 8) SuperAdmin user (no password — set after Stage 2 auth lands) ────────────
+  // 8) SuperAdmin user — credentials come from ADMIN_SEED_* env vars ──────────
+  const admin = adminSeed();
   const adminUser = new User({
-    name: "StemConnect Admin",
-    email: ADMIN_EMAIL,
+    name: admin.name,
+    email: admin.email,
     role: "superadmin",
     status: "active",
     provider: "credentials",
     emailVerified: new Date(),
+    // Hash the env password so the account can sign in immediately. When no
+    // password is configured, leave it unset (login disabled until reset).
+    passwordHash: admin.password ? await hashPassword(admin.password) : undefined,
   });
 
   // 9) Site settings singleton ─────────────────────────────────────────────---
@@ -450,11 +487,15 @@ async function main(): Promise<void> {
   }
 
   log(`\n✅ Seed complete.`);
-  log(`   SuperAdmin user: ${ADMIN_EMAIL}`);
-  log(
-    `   NOTE: no password is set yet — once Stage 2 (Auth.js) lands, set one via\n` +
-      `   the password-reset flow before signing in.\n`,
-  );
+  log(`   SuperAdmin user: ${admin.email}`);
+  if (admin.password) {
+    log(`   Password: set from ADMIN_SEED_PASSWORD — sign in at /auth/sign-in.\n`);
+  } else {
+    log(
+      `   NOTE: ADMIN_SEED_PASSWORD is not set, so no password was created.\n` +
+        `   Set one via the password-reset flow before signing in.\n`,
+    );
+  }
   await mongoose.disconnect();
 }
 
@@ -582,7 +623,12 @@ async function clearCollections(): Promise<void> {
     Article.deleteMany({}),
     Plan.deleteMany({}),
     SiteSetting.deleteMany({ key: GLOBAL_SETTINGS_KEY }),
-    User.deleteOne({ email: ADMIN_EMAIL }),
+    // Remove any prior superadmin seed (by configured email or the legacy
+    // default) so re-seeding with a new ADMIN_SEED_EMAIL doesn't leave a stale
+    // admin behind.
+    User.deleteOne({
+      email: { $in: [adminSeed().email, DEFAULT_ADMIN_EMAIL] },
+    }),
   ]);
 }
 

@@ -6,8 +6,6 @@
  */
 import mongoose, { type Mongoose } from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
-
 interface MongooseCache {
   conn: Mongoose | null;
   promise: Promise<Mongoose> | null;
@@ -25,6 +23,9 @@ global._mongoose = cached;
 export async function dbConnect(): Promise<Mongoose> {
   if (cached.conn) return cached.conn;
 
+  // Read lazily (not at module load) so standalone scripts that populate
+  // `process.env` after import — e.g. the seed — still see the value.
+  const MONGODB_URI = process.env.MONGODB_URI;
   if (!MONGODB_URI) {
     throw new Error(
       "MONGODB_URI is not set. Add it to .env.local (see .env.example).",
