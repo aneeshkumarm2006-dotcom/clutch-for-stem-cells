@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getDirectoryData } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { Directory } from "@/components/directory/directory";
 
-export const metadata: Metadata = buildMetadata({
-  title: "All clinics",
-  description:
-    "Browse and compare accredited stem cell and regenerative-medicine clinics worldwide by treatment, condition, location, price, and verified reviews.",
-  path: "/clinics",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "All clinics",
+    description:
+      "Browse and compare accredited stem cell and regenerative-medicine clinics worldwide by treatment, condition, location, price, and verified reviews.",
+    path: "/clinics",
+  });
 
 export default async function ClinicsPage({
   searchParams,

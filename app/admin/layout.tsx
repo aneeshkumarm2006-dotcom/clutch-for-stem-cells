@@ -12,6 +12,7 @@ import { requireRole } from "@/lib/auth";
 import { AdminSidebar } from "@/components/admin/sidebar";
 import { MobileNav } from "@/components/admin/mobile-nav";
 import { getPendingReviewCount } from "@/lib/admin/dashboard";
+import { getOpenReportCount } from "@/lib/admin/reports";
 import { SITE_NAME } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -27,14 +28,25 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const user = await requireRole("editor", "/admin");
-  const pendingReviews = await getPendingReviewCount();
+  const [pendingReviews, openReports] = await Promise.all([
+    getPendingReviewCount(),
+    getOpenReportCount(),
+  ]);
   const role = user.role ?? "editor";
 
   return (
     <div className="flex min-h-screen bg-surface-alt">
-      <AdminSidebar role={role} pendingReviews={pendingReviews} />
+      <AdminSidebar
+        role={role}
+        pendingReviews={pendingReviews}
+        openReports={openReports}
+      />
       <div className="flex min-w-0 flex-1 flex-col">
-        <MobileNav role={role} pendingReviews={pendingReviews} />
+        <MobileNav
+          role={role}
+          pendingReviews={pendingReviews}
+          openReports={openReports}
+        />
         {children}
       </div>
     </div>

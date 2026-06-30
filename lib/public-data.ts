@@ -7,11 +7,11 @@
  * the server/client boundary). Pairs with `lib/search.ts` (faceted directory
  * query) and `lib/seo.ts` (metadata/JSON-LD).
  *
- * `cache()` dedupes repeated reads within a single request (e.g. taxonomy used
- * by both the filter rail and the active-filter chips).
+ * Stable reference data (taxonomy, languages) is wrapped in `unstable_cache` so
+ * it's cached across requests — see {@link getTreatments} et al.
  */
 import "server-only";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { Types } from "mongoose";
 
 import { dbConnect } from "@/lib/db";
@@ -42,6 +42,7 @@ import {
   type IClinic,
   type IPlan,
   type IReview,
+  type ISeo,
   type ITaxonomyBase,
 } from "@/models";
 
@@ -55,6 +56,10 @@ export interface TaxonomyTerm {
   name: string;
   slug: string;
   shortDescription?: string;
+  /** Long-form admin-editable SEO intro for the term's directory page (§8.5). */
+  description?: string;
+  /** Per-term SEO overrides (metaTitle/metaDescription/ogImage/canonical/noindex). */
+  seo?: ISeo | null;
   icon?: string;
   category?: string;
   clinicCount: number;
@@ -71,67 +76,104 @@ function toTerm(doc: ITaxonomyBase & { category?: string }): TaxonomyTerm {
     name: doc.name,
     slug: doc.slug,
     shortDescription: doc.shortDescription,
+    description: doc.description,
+    seo: doc.seo ? { ...doc.seo } : null,
     icon: doc.icon,
     category: doc.category,
     clinicCount: doc.clinicCount ?? 0,
   };
 }
 
-// ── Taxonomy (cached per request) ────────────────────────────────────────────
+// ── Taxonomy (cached cross-request) ──────────────────────────────────────────
+// Taxonomy + language lists are stable reference data read on many pages,
+// including the *dynamic* directory routes (URL-driven facets). `unstable_cache`
+// caches them across requests with a 1-hour revalidate so those dynamic renders
+// don't re-query Mongo every time (Stage 9.5 "cached taxonomy" / PRD §13). The
+// shared `taxonomy` tag lets admin taxonomy mutations bust the cache on demand
+// via `revalidateTag("taxonomy")`; the time bound is the safety net.
+export const TAXONOMY_CACHE_TAG = "taxonomy";
+const TAXONOMY_REVALIDATE_SECONDS = 3600;
 
-export const getTreatments = cache(async (): Promise<TaxonomyTerm[]> => {
-  await dbConnect();
-  const docs = await Treatment.find({ isActive: true })
-    .sort({ order: 1, name: 1 })
-    .lean();
-  return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
-});
+function cachedTaxonomy<T>(key: string, fn: () => Promise<T>): () => Promise<T> {
+  return unstable_cache(fn, [`public-taxonomy:${key}`], {
+    revalidate: TAXONOMY_REVALIDATE_SECONDS,
+    tags: [TAXONOMY_CACHE_TAG],
+  });
+}
 
-export const getConditions = cache(async (): Promise<TaxonomyTerm[]> => {
-  await dbConnect();
-  const docs = await Condition.find({ isActive: true })
-    .sort({ order: 1, name: 1 })
-    .lean();
-  return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
-});
+export const getTreatments = cachedTaxonomy(
+  "treatments",
+  async (): Promise<TaxonomyTerm[]> => {
+    await dbConnect();
+    const docs = await Treatment.find({ isActive: true })
+      .sort({ order: 1, name: 1 })
+      .lean();
+    return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
+  },
+);
 
-export const getCellSources = cache(async (): Promise<TaxonomyTerm[]> => {
-  await dbConnect();
-  const docs = await CellSource.find({ isActive: true })
-    .sort({ order: 1, name: 1 })
-    .lean();
-  return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
-});
+export const getConditions = cachedTaxonomy(
+  "conditions",
+  async (): Promise<TaxonomyTerm[]> => {
+    await dbConnect();
+    const docs = await Condition.find({ isActive: true })
+      .sort({ order: 1, name: 1 })
+      .lean();
+    return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
+  },
+);
 
-export const getAccreditations = cache(async (): Promise<TaxonomyTerm[]> => {
-  await dbConnect();
-  const docs = await Accreditation.find({ isActive: true })
-    .sort({ order: 1, name: 1 })
-    .lean();
-  return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
-});
+export const getCellSources = cachedTaxonomy(
+  "cell-sources",
+  async (): Promise<TaxonomyTerm[]> => {
+    await dbConnect();
+    const docs = await CellSource.find({ isActive: true })
+      .sort({ order: 1, name: 1 })
+      .lean();
+    return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
+  },
+);
 
-export const getCountries = cache(async (): Promise<CountryTerm[]> => {
-  await dbConnect();
-  const docs = await Location.find({ kind: "country", isActive: true })
-    .sort({ order: 1, name: 1 })
-    .lean();
-  return docs.map((d) => ({
-    ...toTerm(d as unknown as ITaxonomyBase),
-    countryCode: d.countryCode,
-    flag: d.flag,
-  }));
-});
+export const getAccreditations = cachedTaxonomy(
+  "accreditations",
+  async (): Promise<TaxonomyTerm[]> => {
+    await dbConnect();
+    const docs = await Accreditation.find({ isActive: true })
+      .sort({ order: 1, name: 1 })
+      .lean();
+    return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
+  },
+);
+
+export const getCountries = cachedTaxonomy(
+  "countries",
+  async (): Promise<CountryTerm[]> => {
+    await dbConnect();
+    const docs = await Location.find({ kind: "country", isActive: true })
+      .sort({ order: 1, name: 1 })
+      .lean();
+    return docs.map((d) => ({
+      ...toTerm(d as unknown as ITaxonomyBase),
+      countryCode: d.countryCode,
+      flag: d.flag,
+    }));
+  },
+);
 
 /** Spoken languages present on published clinics (for the directory filter). */
-export const getClinicLanguages = cache(async (): Promise<string[]> => {
-  await dbConnect();
-  const langs = await Clinic.distinct("languages", {
-    status: "published",
-    isDeleted: false,
-  });
-  return (langs as string[]).filter(Boolean).sort((a, b) => a.localeCompare(b));
-});
+export const getClinicLanguages = cachedTaxonomy(
+  "clinic-languages",
+  async (): Promise<string[]> => {
+    await dbConnect();
+    const langs = await Clinic.distinct("languages", {
+      status: "published",
+      isDeleted: false,
+    });
+    return (langs as string[])
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
+  },
+);
 
 /** A single taxonomy term by slug (for directory landing pages). */
 export async function getTaxonomyTermBySlug(
@@ -1261,4 +1303,87 @@ export async function globalSearch(
     articles: articleDocs.map(toArticleCard),
     articleTotal: articleDocs.length,
   };
+}
+
+// ── Sitemap (Stage 7.4) ──────────────────────────────────────────────────────
+
+/** A single URL entry for `app/sitemap.ts` (path is root-relative). */
+export interface SitemapEntry {
+  path: string;
+  lastModified?: Date;
+}
+
+/** Published clinic profile URLs with their last-updated timestamp. */
+export async function getClinicSitemapEntries(): Promise<SitemapEntry[]> {
+  await dbConnect();
+  const docs = await Clinic.find({ status: "published", isDeleted: false })
+    .select("slug updatedAt")
+    .lean();
+  return docs.map((d) => ({
+    path: `/clinic/${d.slug}`,
+    lastModified: d.updatedAt,
+  }));
+}
+
+/** Published article URLs with their last-updated timestamp. */
+export async function getArticleSitemapEntries(): Promise<SitemapEntry[]> {
+  await dbConnect();
+  const docs = await Article.find(articlePublishedFilter)
+    .select("slug updatedAt publishedAt")
+    .lean();
+  return docs.map((d) => ({
+    path: `/resources/${d.slug}`,
+    lastModified: d.updatedAt ?? d.publishedAt ?? undefined,
+  }));
+}
+
+/**
+ * Programmatic taxonomy landing-page URLs (Stage 7.1): every active treatment,
+ * condition, country, and city term — countries/cities resolved to their
+ * `/locations/[country]([/city])` paths.
+ */
+export async function getTaxonomySitemapEntries(): Promise<SitemapEntry[]> {
+  await dbConnect();
+  const [treatments, conditions, countries, cities] = await Promise.all([
+    Treatment.find({ isActive: true }).select("slug updatedAt").lean(),
+    Condition.find({ isActive: true }).select("slug updatedAt").lean(),
+    Location.find({ kind: "country", isActive: true })
+      .select("slug updatedAt")
+      .lean(),
+    Location.find({ kind: "city", isActive: true })
+      .select("slug updatedAt parentId")
+      .lean(),
+  ]);
+
+  const countrySlugById = new Map(
+    countries.map((c) => [id(c._id), c.slug] as const),
+  );
+
+  const entries: SitemapEntry[] = [
+    ...treatments.map((t) => ({
+      path: `/treatments/${t.slug}`,
+      lastModified: t.updatedAt,
+    })),
+    ...conditions.map((c) => ({
+      path: `/conditions/${c.slug}`,
+      lastModified: c.updatedAt,
+    })),
+    ...countries.map((c) => ({
+      path: `/locations/${c.slug}`,
+      lastModified: c.updatedAt,
+    })),
+  ];
+
+  for (const city of cities) {
+    const countrySlug = city.parentId
+      ? countrySlugById.get(id(city.parentId))
+      : undefined;
+    if (!countrySlug) continue; // skip orphan cities (no crawlable URL)
+    entries.push({
+      path: `/locations/${countrySlug}/${city.slug}`,
+      lastModified: city.updatedAt,
+    });
+  }
+
+  return entries;
 }

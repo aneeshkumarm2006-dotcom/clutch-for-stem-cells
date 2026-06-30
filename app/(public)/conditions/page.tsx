@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getConditions, type TaxonomyTerm } from "@/lib/public-data";
+import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { TaxonomyCard } from "@/components/taxonomy/taxonomy-card";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = buildMetadata({
-  title: "Conditions treated",
-  description:
-    "Find regenerative-medicine clinics by the condition you're researching — from knee osteoarthritis to autoimmune and neurological conditions.",
-  path: "/conditions",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Conditions treated",
+    description:
+      "Find regenerative-medicine clinics by the condition you're researching — from knee osteoarthritis to autoimmune and neurological conditions.",
+    path: "/conditions",
+  });
 
 function groupByCategory(terms: TaxonomyTerm[]): [string, TaxonomyTerm[]][] {
   const groups = new Map<string, TaxonomyTerm[]>();
@@ -29,6 +31,13 @@ export default async function ConditionsIndexPage() {
 
   return (
     <div className="container py-10 md:py-14">
+      <Breadcrumbs
+        className="mb-4"
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Conditions", href: "/conditions" },
+        ]}
+      />
       <header className="max-w-3xl">
         <h1 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[32px]">
           Browse by condition

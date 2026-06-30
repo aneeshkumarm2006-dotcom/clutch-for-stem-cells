@@ -1,15 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { ProsePage } from "@/components/common/prose-page";
 import { SITE_NAME } from "@/config/site";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Terms of service",
-  description: `The terms that govern your use of ${SITE_NAME}.`,
-  path: "/terms",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Terms of service",
+    description: `The terms that govern your use of ${SITE_NAME}.`,
+    path: "/terms",
+  });
 
 export default function TermsPage() {
   return (

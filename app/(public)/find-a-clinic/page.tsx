@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import { Sparkles } from "lucide-react";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getConditions, getTreatments, getCountries } from "@/lib/public-data";
 import { FindClinicWizard } from "@/components/find/find-clinic-wizard";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = buildMetadata({
-  title: "Find a clinic",
-  description:
-    "Answer a few questions about your condition, budget, and timeframe and get matched with accredited regenerative-medicine clinics that fit.",
-  path: "/find-a-clinic",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Find a clinic",
+    description:
+      "Answer a few questions about your condition, budget, and timeframe and get matched with accredited regenerative-medicine clinics that fit.",
+    path: "/find-a-clinic",
+  });
 
 export default async function FindAClinicPage() {
   const [conditions, treatments, countries] = await Promise.all([

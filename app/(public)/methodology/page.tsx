@@ -1,15 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { ProsePage } from "@/components/common/prose-page";
 import { SITE_NAME } from "@/config/site";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Methodology",
-  description: `How ${SITE_NAME} ranks clinics, verifies accreditations, and labels paid placement.`,
-  path: "/methodology",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Methodology",
+    description: `How ${SITE_NAME} ranks clinics, verifies accreditations, and labels paid placement.`,
+    path: "/methodology",
+  });
 
 export default function MethodologyPage() {
   return (

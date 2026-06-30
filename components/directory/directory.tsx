@@ -1,8 +1,9 @@
 import * as React from "react";
 import Link from "next/link";
-import { ChevronRight, SearchX, Sparkles } from "lucide-react";
+import { SearchX, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Pagination } from "@/components/ui/pagination";
 import { DirectoryTabs } from "@/components/ui/directory-tabs";
@@ -14,8 +15,12 @@ import {
   type FilterDimension,
 } from "@/components/directory/directory-controls";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
+import { FilterUseTracker } from "@/components/analytics/filter-use-tracker";
 import { formatCount } from "@/lib/format";
 import type { DirectoryData } from "@/lib/public-data";
+
+/** Query keys that are navigation/sort state, not user-applied filters. */
+const NON_FILTER_KEYS = new Set(["page", "view"]);
 
 export interface DirectoryBreadcrumb {
   name: string;
@@ -81,30 +86,19 @@ export function Directory({
   const tabHref = (view: "all" | "top") =>
     view === "top" ? `${basePath}?view=top` : basePath;
 
+  // Active filter dimension names (not values) for the analytics beacon.
+  const activeFilterKeys = Object.keys(searchParams)
+    .filter((k) => !NON_FILTER_KEYS.has(k) && searchParams[k] != null)
+    .sort();
+
   return (
     <div className="container py-8 md:py-10">
+      <FilterUseTracker
+        signature={activeFilterKeys.join(",")}
+        count={activeFilterKeys.length}
+      />
       {breadcrumbs?.length ? (
-        <nav aria-label="Breadcrumb" className="mb-4">
-          <ol className="flex flex-wrap items-center gap-1 text-[13px] text-text-muted">
-            {breadcrumbs.map((b, i) => (
-              <li key={b.href} className="flex items-center gap-1">
-                {i > 0 ? (
-                  <ChevronRight className="size-3.5" aria-hidden="true" />
-                ) : null}
-                {i < breadcrumbs.length - 1 ? (
-                  <Link
-                    href={b.href}
-                    className="transition-colors hover:text-text-secondary"
-                  >
-                    {b.name}
-                  </Link>
-                ) : (
-                  <span className="text-text-secondary">{b.name}</span>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
+        <Breadcrumbs items={breadcrumbs} className="mb-4" />
       ) : null}
 
       <header className="max-w-3xl">

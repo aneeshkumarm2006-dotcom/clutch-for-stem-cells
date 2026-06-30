@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { Check, ShieldCheck } from "lucide-react";
+import { AlertTriangle, Check, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -110,6 +110,12 @@ export function ReviewsModeration({ rows }: { rows: AdminReviewRow[] }) {
                   Email confirmed
                 </Badge>
               ) : null}
+              {r.contentFlags.length > 0 ? (
+                <Badge variant="warning" className="gap-1 text-[10px]">
+                  <AlertTriangle className="size-2.5" />
+                  Claim flag
+                </Badge>
+              ) : null}
             </div>
             <p className="line-clamp-2 text-[13px] text-text-secondary">
               {r.snippet || "—"}
@@ -167,6 +173,26 @@ export function ReviewsModeration({ rows }: { rows: AdminReviewRow[] }) {
                 ) : null,
               )}
             </div>
+
+            {selected.contentFlags.length > 0 ? (
+              <div className="mb-4 rounded-lg border border-warning-fg/25 bg-warning-bg px-3.5 py-3 text-[12.5px] text-warning-fg">
+                <div className="flex items-center gap-1.5 font-semibold">
+                  <AlertTriangle className="size-3.5" aria-hidden="true" />
+                  Unsupported-claim language detected
+                </div>
+                <p className="mt-1 text-warning-fg/90">
+                  This review uses phrasing that may imply a guaranteed or
+                  curative outcome. Review before approving (§14).
+                </p>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {selected.contentFlags.map((f) => (
+                    <Badge key={f.phrase} variant="warning" className="text-[10px]">
+                      “{f.phrase}”
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ) : null}
 
             {selected.headline ? (
               <div className="mb-4 font-display text-[15px] font-semibold">

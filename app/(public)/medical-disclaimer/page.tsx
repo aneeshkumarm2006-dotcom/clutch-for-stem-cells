@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { ProsePage } from "@/components/common/prose-page";
 import { SITE_NAME } from "@/config/site";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Medical disclaimer",
-  description: `${SITE_NAME} provides information only and is not medical advice.`,
-  path: "/medical-disclaimer",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Medical disclaimer",
+    description: `${SITE_NAME} provides information only and is not medical advice.`,
+    path: "/medical-disclaimer",
+  });
 
 export default function MedicalDisclaimerPage() {
   return (

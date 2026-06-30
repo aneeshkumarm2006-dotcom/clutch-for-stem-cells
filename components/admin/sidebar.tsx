@@ -7,6 +7,7 @@ import {
   Building2,
   CreditCard,
   FileText,
+  Flag,
   Image as ImageIcon,
   LayoutDashboard,
   ListTree,
@@ -29,8 +30,8 @@ interface NavLeaf {
   href: string;
   icon: LucideIcon;
   minRole: UserRole;
-  /** Renders the pending-reviews count badge. */
-  badge?: "reviews";
+  /** Renders a count badge fed by the matching admin metric. */
+  badge?: "reviews" | "reports";
 }
 interface NavGroup {
   type: "group";
@@ -47,6 +48,7 @@ const NAV: NavEntry[][] = [
     { type: "leaf", label: "Dashboard", href: "/admin", icon: LayoutDashboard, minRole: "editor" },
     { type: "leaf", label: "Clinics", href: "/admin/clinics", icon: Building2, minRole: "editor" },
     { type: "leaf", label: "Reviews", href: "/admin/reviews", icon: Star, minRole: "editor", badge: "reviews" },
+    { type: "leaf", label: "Reports", href: "/admin/reports", icon: Flag, minRole: "editor", badge: "reports" },
     { type: "leaf", label: "Leads", href: "/admin/leads", icon: Send, minRole: "editor" },
     {
       type: "group",
@@ -95,15 +97,23 @@ function Leaf({
   item,
   pathname,
   pendingReviews,
+  openReports,
   onNavigate,
 }: {
   item: NavLeaf;
   pathname: string;
   pendingReviews: number;
+  openReports: number;
   onNavigate?: () => void;
 }) {
   const Icon = item.icon;
   const active = isActive(pathname, item.href);
+  const badgeCount =
+    item.badge === "reviews"
+      ? pendingReviews
+      : item.badge === "reports"
+        ? openReports
+        : 0;
   return (
     <Link
       href={item.href}
@@ -121,9 +131,9 @@ function Leaf({
       ) : null}
       <Icon className={cn("size-4", active ? "text-azure-700" : "text-slate-500")} />
       <span className="flex-1">{item.label}</span>
-      {item.badge === "reviews" && pendingReviews > 0 ? (
+      {item.badge && badgeCount > 0 ? (
         <span className="rounded-md bg-warning-bg px-1.5 py-0.5 text-[11px] font-semibold text-warning-fg">
-          {pendingReviews}
+          {badgeCount}
         </span>
       ) : null}
     </Link>
@@ -193,10 +203,12 @@ function Group({
 export function NavList({
   role,
   pendingReviews,
+  openReports,
   onNavigate,
 }: {
   role: UserRole;
   pendingReviews: number;
+  openReports: number;
   onNavigate?: () => void;
 }) {
   const pathname = usePathname();
@@ -216,6 +228,7 @@ export function NavList({
                 item={entry}
                 pathname={pathname}
                 pendingReviews={pendingReviews}
+                openReports={openReports}
                 onNavigate={onNavigate}
               />
             ) : (
@@ -237,9 +250,11 @@ export function NavList({
 export function AdminSidebar({
   role,
   pendingReviews,
+  openReports,
 }: {
   role: UserRole;
   pendingReviews: number;
+  openReports: number;
 }) {
   return (
     <aside className="sticky top-0 hidden h-screen w-60 flex-none flex-col overflow-y-auto border-r border-border bg-surface px-3 py-4 lg:flex">
@@ -249,7 +264,11 @@ export function AdminSidebar({
           Admin
         </span>
       </div>
-      <NavList role={role} pendingReviews={pendingReviews} />
+      <NavList
+        role={role}
+        pendingReviews={pendingReviews}
+        openReports={openReports}
+      />
     </aside>
   );
 }

@@ -157,6 +157,27 @@ export function organizationJsonLd(opts: { logo?: string } = {}): JsonLd {
   });
 }
 
+/**
+ * `WebSite` with a `SearchAction` — lets search engines render a sitelinks
+ * search box that deep-links into our global search (PRD §11). Homepage only.
+ */
+export function websiteJsonLd(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${absoluteUrl("/search")}?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
 type ClinicSeoInput = Pick<
   IClinic,
   | "name"

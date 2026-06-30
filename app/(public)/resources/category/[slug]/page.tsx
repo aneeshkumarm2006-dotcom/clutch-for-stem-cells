@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getArticlesPage, titleizeSlug } from "@/lib/public-data";
 import { ResourcesIndex } from "@/components/article/resources-index";
 
@@ -13,7 +13,7 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const label = titleizeSlug(params.slug);
-  return buildMetadata({
+  return pageMetadata({
     title: `${label} — Resources`,
     description: `Patient guides and articles about ${label.toLowerCase()}.`,
     path: `/resources/category/${params.slug}`,

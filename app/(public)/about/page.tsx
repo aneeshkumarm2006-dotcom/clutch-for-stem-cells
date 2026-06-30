@@ -1,15 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { ProsePage } from "@/components/common/prose-page";
 import { SITE_NAME } from "@/config/site";
 
-export const metadata: Metadata = buildMetadata({
-  title: "About",
-  description: `${SITE_NAME} is an independent directory helping patients research and compare regenerative-medicine clinics.`,
-  path: "/about",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "About",
+    description: `${SITE_NAME} is an independent directory helping patients research and compare regenerative-medicine clinics.`,
+    path: "/about",
+  });
 
 export default function AboutPage() {
   return (

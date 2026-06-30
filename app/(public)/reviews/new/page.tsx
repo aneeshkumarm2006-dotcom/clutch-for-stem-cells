@@ -2,18 +2,19 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { AlertCircle, CheckCircle2, Star } from "lucide-react";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getReviewClinic } from "@/lib/public-data";
 import { SearchBar } from "@/components/search/search-bar";
 import { ReviewForm } from "@/components/review/review-form";
 import { EmptyState } from "@/components/ui/empty-state";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Write a review",
-  description:
-    "Share your experience with a regenerative-medicine clinic. Reviews are email-verified and moderated before they go live.",
-  path: "/reviews/new",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Write a review",
+    description:
+      "Share your experience with a regenerative-medicine clinic. Reviews are email-verified and moderated before they go live.",
+    path: "/reviews/new",
+  });
 
 export default async function NewReviewPage({
   searchParams,

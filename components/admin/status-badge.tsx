@@ -4,6 +4,7 @@ import type {
   ClinicStatus,
   ClinicTier,
   LeadStatus,
+  ReportStatus,
   ReviewStatus,
   UserRole,
   UserStatus,
@@ -44,6 +45,13 @@ const LEAD_STATUS: Record<LeadStatus, [Variant, string]> = {
   qualified: ["success", "Qualified"],
   closed: ["neutral", "Closed"],
   spam: ["danger", "Spam"],
+};
+
+const REPORT_STATUS: Record<ReportStatus, [Variant, string]> = {
+  open: ["warning", "Open"],
+  reviewing: ["info", "Reviewing"],
+  resolved: ["success", "Resolved"],
+  dismissed: ["neutral", "Dismissed"],
 };
 
 const USER_STATUS: Record<UserStatus, [Variant, string]> = {
@@ -90,6 +98,9 @@ export const ReviewStatusBadge = ({ status }: { status: ReviewStatus }) => (
 );
 export const LeadStatusBadge = ({ status }: { status: LeadStatus }) => (
   <Pill pair={LEAD_STATUS[status]} />
+);
+export const ReportStatusBadge = ({ status }: { status: ReportStatus }) => (
+  <Pill pair={REPORT_STATUS[status]} />
 );
 export const UserStatusBadge = ({ status }: { status: UserStatus }) => (
   <Pill pair={USER_STATUS[status]} />

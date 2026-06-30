@@ -6,7 +6,6 @@ import {
   Building2,
   CalendarDays,
   CheckCircle2,
-  ChevronRight,
   ExternalLink,
   Globe,
   Languages,
@@ -18,12 +17,12 @@ import {
 } from "lucide-react";
 
 import {
-  buildMetadata,
-  breadcrumbListJsonLd,
   medicalClinicJsonLd,
   renderJsonLd,
   reviewJsonLd,
 } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
+import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import {
   getClinicProfile,
   getClinicReviews,
@@ -46,7 +45,9 @@ import { ReviewItem } from "@/components/clinic/review-item";
 import { ReviewsControls } from "@/components/clinic/review-controls";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
+import { ReportDialog } from "@/components/compliance/report-dialog";
 import { LeadForm } from "@/components/lead/lead-form";
+import { ProfileViewTracker } from "@/components/analytics/profile-view-tracker";
 
 export const revalidate = 600;
 
@@ -74,8 +75,8 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const clinic = await getClinicProfile(params.slug);
-  if (!clinic) return buildMetadata({ title: "Clinic not found" });
-  return buildMetadata({
+  if (!clinic) return pageMetadata({ title: "Clinic not found" });
+  return pageMetadata({
     title: clinic.name,
     description:
       clinic.tagline ??
@@ -152,11 +153,6 @@ export default async function ClinicProfilePage({
 
   const jsonLd = [
     medicalClinicJsonLd(clinic.raw),
-    breadcrumbListJsonLd([
-      { name: "Home", path: "/" },
-      { name: "Clinics", path: "/clinics" },
-      { name: clinic.name, path: `/clinic/${clinic.slug}` },
-    ]),
     ...reviews.reviews.slice(0, 5).map((r) =>
       reviewJsonLd({
         reviewer: { isAnonymous: r.displayName === "Verified Patient", displayName: r.displayName },
@@ -171,6 +167,7 @@ export default async function ClinicProfilePage({
 
   return (
     <>
+      <ProfileViewTracker clinicId={clinic.id} />
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -180,25 +177,14 @@ export default async function ClinicProfilePage({
       {/* Header */}
       <div className="border-b border-border bg-surface">
         <div className="container py-6 md:py-8">
-          <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex flex-wrap items-center gap-1 text-[13px] text-text-muted">
-              <li>
-                <Link href="/" className="hover:text-text-secondary">
-                  Home
-                </Link>
-              </li>
-              <li className="flex items-center gap-1">
-                <ChevronRight className="size-3.5" aria-hidden="true" />
-                <Link href="/clinics" className="hover:text-text-secondary">
-                  Clinics
-                </Link>
-              </li>
-              <li className="flex items-center gap-1">
-                <ChevronRight className="size-3.5" aria-hidden="true" />
-                <span className="text-text-secondary">{clinic.name}</span>
-              </li>
-            </ol>
-          </nav>
+          <Breadcrumbs
+            className="mb-4"
+            items={[
+              { name: "Home", href: "/" },
+              { name: "Clinics", href: "/clinics" },
+              { name: clinic.name, href: `/clinic/${clinic.slug}` },
+            ]}
+          />
 
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex items-start gap-4">
@@ -706,6 +692,13 @@ export default async function ClinicProfilePage({
                     How verification works
                   </Link>
                 </div>
+              </div>
+              <div className="mt-4 flex items-center justify-end border-t border-border pt-3">
+                <ReportDialog
+                  entityType="clinic"
+                  entityId={clinic.id}
+                  label={`${clinic.name}'s listing`}
+                />
               </div>
             </div>
           </section>

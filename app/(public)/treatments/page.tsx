@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getTreatments, type TaxonomyTerm } from "@/lib/public-data";
+import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { TaxonomyCard } from "@/components/taxonomy/taxonomy-card";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = buildMetadata({
-  title: "Treatment types",
-  description:
-    "Explore stem cell and regenerative-medicine treatment types, from MSC therapy to exosomes and PRP, and find clinics that offer each.",
-  path: "/treatments",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Treatment types",
+    description:
+      "Explore stem cell and regenerative-medicine treatment types, from MSC therapy to exosomes and PRP, and find clinics that offer each.",
+    path: "/treatments",
+  });
 
 function groupByCategory(terms: TaxonomyTerm[]): [string, TaxonomyTerm[]][] {
   const groups = new Map<string, TaxonomyTerm[]>();
@@ -29,6 +31,13 @@ export default async function TreatmentsIndexPage() {
 
   return (
     <div className="container py-10 md:py-14">
+      <Breadcrumbs
+        className="mb-4"
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Treatments", href: "/treatments" },
+        ]}
+      />
       <header className="max-w-3xl">
         <h1 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[32px]">
           Browse by treatment type

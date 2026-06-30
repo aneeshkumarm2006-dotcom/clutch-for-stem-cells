@@ -92,6 +92,43 @@ export const LEAD_STATUSES = [
 ] as const;
 export type LeadStatus = (typeof LEAD_STATUSES)[number];
 
+// ── Report / flag (PRD §14 / Stage 8.7) ─────────────────────────────────────
+/** What a user can flag for admin review. */
+export const REPORT_ENTITY_TYPES = ["review", "clinic"] as const;
+export type ReportEntityType = (typeof REPORT_ENTITY_TYPES)[number];
+
+/** Why the content was flagged. `other` pairs with a free-text detail. */
+export const REPORT_REASONS = [
+  "inaccurate",
+  "spam",
+  "offensive",
+  "fake",
+  "unsupported_claim",
+  "privacy",
+  "other",
+] as const;
+export type ReportReason = (typeof REPORT_REASONS)[number];
+
+/** Human labels for the report-reason picker + admin queue. */
+export const REPORT_REASON_LABELS: Record<ReportReason, string> = {
+  inaccurate: "Inaccurate or misleading",
+  spam: "Spam or advertising",
+  offensive: "Offensive or abusive",
+  fake: "Fake or not a real patient",
+  unsupported_claim: "Unsupported medical claim",
+  privacy: "Privacy / personal information",
+  other: "Something else",
+};
+
+/** Moderation lifecycle of a flag. */
+export const REPORT_STATUSES = [
+  "open",
+  "reviewing",
+  "resolved",
+  "dismissed",
+] as const;
+export type ReportStatus = (typeof REPORT_STATUSES)[number];
+
 // ── Article (PRD §5.5) ──────────────────────────────────────────────────────
 // PRD-ASSUMPTION: §5.5 lists draft|published; `scheduled` is added to support
 // the CMS schedule/publish flow in §8.6 (publishedAt in the future).

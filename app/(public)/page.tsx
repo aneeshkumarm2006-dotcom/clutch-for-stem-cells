@@ -9,7 +9,8 @@ import {
   Star,
 } from "lucide-react";
 
-import { buildMetadata, organizationJsonLd, renderJsonLd } from "@/lib/seo";
+import { organizationJsonLd, renderJsonLd, websiteJsonLd } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getHomeData } from "@/lib/public-data";
 import { formatCount } from "@/lib/format";
 import { Button } from "@/components/ui/button";
@@ -19,10 +20,13 @@ import { Section, SectionHeader } from "@/components/common/section";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { TaxonomyCard, DestinationCard } from "@/components/taxonomy/taxonomy-card";
 import { ArticleCard } from "@/components/article/article-card";
+import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 
 export const revalidate = 600;
 
-export const metadata: Metadata = buildMetadata({ path: "/" });
+export function generateMetadata(): Promise<Metadata> {
+  return pageMetadata({ path: "/" });
+}
 
 export default async function HomePage() {
   const home = await getHomeData();
@@ -32,7 +36,9 @@ export default async function HomePage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: renderJsonLd(organizationJsonLd()) }}
+        dangerouslySetInnerHTML={{
+          __html: renderJsonLd([organizationJsonLd(), websiteJsonLd()]),
+        }}
       />
 
       {/* Hero — Design §5.3 */}
@@ -257,6 +263,10 @@ export default async function HomePage() {
                 </figure>
               ))}
             </div>
+            <DisclaimerNote variant="results" className="mt-6">
+              Testimonials reflect individual experiences. Individual results
+              vary and are not typical or guaranteed.
+            </DisclaimerNote>
           </div>
         </Section>
       ) : null}

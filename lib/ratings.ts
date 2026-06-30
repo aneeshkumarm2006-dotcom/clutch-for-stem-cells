@@ -149,3 +149,87 @@ export async function recomputeClinicRatings(
 
   return aggregate;
 }
+
+/**
+ * Batch recompute of every clinic's rating aggregates (Stage 9.1 nightly cron).
+ *
+ * One aggregation pass for the per-clinic summary + one for top mentions, then a
+ * single `bulkWrite`. Crucially this also **resets** clinics whose approved
+ * reviews dropped to zero (e.g. all reviews removed), so the job is idempotent
+ * and self-correcting (Stage 9.7). Does *not* touch `sortScore` — the cron calls
+ * `recomputeAllSortScores()` afterwards so ranking is computed once over fresh
+ * ratings. Returns the number of clinics written.
+ */
+export async function recomputeAllClinicRatings(): Promise<number> {
+  await dbConnect();
+
+  const summaries = await Review.aggregate<SummaryRow & { _id: Types.ObjectId }>([
+    { $match: { status: "approved", isDeleted: false } },
+    {
+      $group: {
+        _id: "$clinicId",
+        reviewCount: { $sum: 1 },
+        ratingAvg: { $avg: "$ratingOverall" },
+        outcome: { $avg: "$ratings.outcome" },
+        communication: { $avg: "$ratings.communication" },
+        facility: { $avg: "$ratings.facility" },
+        value: { $avg: "$ratings.value" },
+        refer: { $avg: "$ratings.refer" },
+      },
+    },
+  ]);
+  const summaryByClinic = new Map(summaries.map((s) => [String(s._id), s]));
+
+  const mentionsAgg = await Review.aggregate<{
+    _id: Types.ObjectId;
+    mentions: ITopMention[];
+  }>([
+    { $match: { status: "approved", isDeleted: false } },
+    { $unwind: "$whyChosenTags" },
+    {
+      $group: {
+        _id: { clinicId: "$clinicId", tag: "$whyChosenTags" },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { count: -1, "_id.tag": 1 } },
+    {
+      $group: {
+        _id: "$_id.clinicId",
+        mentions: { $push: { tag: "$_id.tag", count: "$count" } },
+      },
+    },
+  ]);
+  const mentionsByClinic = new Map(
+    mentionsAgg.map((m) => [String(m._id), m.mentions.slice(0, TOP_MENTIONS_LIMIT)]),
+  );
+
+  // Write every non-deleted clinic so zero-review clinics are reset to defaults.
+  const clinics = await Clinic.find({ isDeleted: false }).select("_id").lean();
+  const ops = clinics.map((clinic) => {
+    const key = String(clinic._id);
+    const summary = summaryByClinic.get(key);
+    const ratingBreakdown = summary
+      ? SUB_RATING_KEYS.reduce((acc, k) => {
+          acc[k] = round2(summary[k]);
+          return acc;
+        }, {} as IRatingBreakdown)
+      : { ...EMPTY_BREAKDOWN };
+    return {
+      updateOne: {
+        filter: { _id: clinic._id },
+        update: {
+          $set: {
+            ratingAvg: round2(summary?.ratingAvg),
+            ratingBreakdown,
+            reviewCount: summary?.reviewCount ?? 0,
+            topMentions: mentionsByClinic.get(key) ?? [],
+          },
+        },
+      },
+    };
+  });
+
+  if (ops.length) await Clinic.bulkWrite(ops);
+  return ops.length;
+}

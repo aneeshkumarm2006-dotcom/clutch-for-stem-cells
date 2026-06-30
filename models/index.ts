@@ -63,6 +63,9 @@ export type {
 export { Lead, default as LeadModel } from "@/models/lead";
 export type { ILead, ILeadNote } from "@/models/lead";
 
+export { Report, default as ReportModel } from "@/models/report";
+export type { IReport } from "@/models/report";
+
 export { Article, default as ArticleModel } from "@/models/article";
 export type { IArticle, IArticleAuthor } from "@/models/article";
 
@@ -97,3 +100,14 @@ export type { IAuditLog } from "@/models/audit-log";
 
 export { Media, default as MediaModel } from "@/models/media";
 export type { IMedia } from "@/models/media";
+
+export {
+  AnalyticsEvent,
+  default as AnalyticsEventModel,
+  ANALYTICS_EVENT_NAMES,
+  ANALYTICS_TTL_SECONDS,
+} from "@/models/analytics-event";
+export type {
+  IAnalyticsEvent,
+  AnalyticsEventName,
+} from "@/models/analytics-event";

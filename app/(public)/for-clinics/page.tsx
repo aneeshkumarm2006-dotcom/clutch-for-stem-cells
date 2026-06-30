@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Check, ShieldCheck, TrendingUp, Users } from "lucide-react";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getActivePlans } from "@/lib/public-data";
 import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -12,11 +12,12 @@ import { SITE_NAME } from "@/config/site";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = buildMetadata({
-  title: "For clinics",
-  description: `Get your regenerative-medicine clinic listed on ${SITE_NAME}. Build trust with verification and receive qualified patient inquiries.`,
-  path: "/for-clinics",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "For clinics",
+    description: `Get your regenerative-medicine clinic listed on ${SITE_NAME}. Build trust with verification and receive qualified patient inquiries.`,
+    path: "/for-clinics",
+  });
 
 export default async function ForClinicsPage() {
   const plans = await getActivePlans();

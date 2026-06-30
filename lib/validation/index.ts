@@ -9,6 +9,7 @@ export * from "@/lib/validation/clinic";
 export * from "@/lib/validation/review";
 export * from "@/lib/validation/taxonomy";
 export * from "@/lib/validation/lead";
+export * from "@/lib/validation/report";
 export * from "@/lib/validation/article";
 export * from "@/lib/validation/user";
 export * from "@/lib/validation/plan";

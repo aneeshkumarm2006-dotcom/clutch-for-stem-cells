@@ -12,6 +12,7 @@ import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/db";
 import { createToken, expiryFromNow, EMAIL_VERIFICATION_TTL_HOURS } from "@/lib/auth/tokens";
 import { guardPublicForm } from "@/lib/public-form";
+import { trackEvent } from "@/lib/analytics";
 import { sendReviewConfirmationEmail } from "@/lib/email";
 import { reviewSubmitSchema } from "@/lib/validation/review";
 import { Clinic, Review } from "@/models";
@@ -94,6 +95,10 @@ export async function POST(req: Request): Promise<Response> {
     emailVerificationToken: tokenHash,
     emailVerificationExpires: expiryFromNow(EMAIL_VERIFICATION_TTL_HOURS),
   });
+
+  // Analytics — submission attempt, by clinic (no PII). Approval rate is derived
+  // later from review status in admin. PRD §15.
+  void trackEvent("review_submit", { clinicId: String(data.clinicId) });
 
   try {
     await sendReviewConfirmationEmail({

@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getArticlesPage } from "@/lib/public-data";
 import { ResourcesIndex } from "@/components/article/resources-index";
 
 export const revalidate = 600;
 
-export const metadata: Metadata = buildMetadata({
-  title: "Patient resources",
-  description:
-    "Plain-language guides to regenerative medicine: treatments, medical travel, costs, and questions to ask a clinic.",
-  path: "/resources",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Patient resources",
+    description:
+      "Plain-language guides to regenerative medicine: treatments, medical travel, costs, and questions to ask a clinic.",
+    path: "/resources",
+  });
 
 export default async function ResourcesPage({
   searchParams,

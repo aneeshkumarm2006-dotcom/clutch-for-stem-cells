@@ -2,14 +2,16 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ChevronDown } from "lucide-react";
 
-import { buildMetadata, faqPageJsonLd, renderJsonLd } from "@/lib/seo";
+import { faqPageJsonLd, renderJsonLd } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { SITE_NAME } from "@/config/site";
 
-export const metadata: Metadata = buildMetadata({
-  title: "FAQ",
-  description: `Common questions about ${SITE_NAME}, verification, reviews, and how to use the directory.`,
-  path: "/faq",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "FAQ",
+    description: `Common questions about ${SITE_NAME}, verification, reviews, and how to use the directory.`,
+    path: "/faq",
+  });
 
 const FAQS: { question: string; answer: string }[] = [
   {

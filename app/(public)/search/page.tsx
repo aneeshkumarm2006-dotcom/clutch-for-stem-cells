@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { SearchX } from "lucide-react";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { globalSearch } from "@/lib/public-data";
 import { trackEvent } from "@/lib/analytics";
 import { SearchBar } from "@/components/search/search-bar";
@@ -11,11 +11,12 @@ import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { ArticleCard } from "@/components/article/article-card";
 import { formatCount } from "@/lib/format";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Search",
-  description: "Search clinics, treatments, conditions, and patient resources.",
-  path: "/search",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Search",
+    description: "Search clinics, treatments, conditions, and patient resources.",
+    path: "/search",
+  });
 
 export default async function SearchPage({
   searchParams,

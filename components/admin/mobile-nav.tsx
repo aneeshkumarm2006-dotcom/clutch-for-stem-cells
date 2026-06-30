@@ -12,9 +12,11 @@ import type { UserRole } from "@/lib/enums";
 export function MobileNav({
   role,
   pendingReviews,
+  openReports,
 }: {
   role: UserRole;
   pendingReviews: number;
+  openReports: number;
 }) {
   const [open, setOpen] = React.useState(false);
   return (
@@ -36,6 +38,7 @@ export function MobileNav({
           <NavList
             role={role}
             pendingReviews={pendingReviews}
+            openReports={openReports}
             onNavigate={() => setOpen(false)}
           />
         </SheetContent>

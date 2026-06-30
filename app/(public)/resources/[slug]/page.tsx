@@ -4,18 +4,15 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowRight, Clock } from "lucide-react";
 
-import {
-  articleJsonLd,
-  breadcrumbListJsonLd,
-  buildMetadata,
-  renderJsonLd,
-} from "@/lib/seo";
+import { articleJsonLd, renderJsonLd } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import {
   getArticleBySlug,
   getPublishedArticleSlugs,
   titleizeSlug,
 } from "@/lib/public-data";
 import { renderMarkdown } from "@/lib/markdown";
+import { Breadcrumbs, type Crumb } from "@/components/common/breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { getInitials } from "@/lib/format";
@@ -39,8 +36,8 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const article = await getArticleBySlug(params.slug);
-  if (!article) return buildMetadata({ title: "Article not found" });
-  return buildMetadata({
+  if (!article) return pageMetadata({ title: "Article not found" });
+  return pageMetadata({
     title: article.title,
     description: article.excerpt,
     path: `/resources/${article.slug}`,
@@ -70,13 +67,18 @@ export default async function ArticlePage({
   const date = formatDate(article.publishedAt);
   const bodyHtml = article.body ? renderMarkdown(article.body) : "";
 
-  const jsonLd = [
-    articleJsonLd(article.raw),
-    breadcrumbListJsonLd([
-      { name: "Home", path: "/" },
-      { name: "Resources", path: "/resources" },
-      { name: article.title, path: `/resources/${article.slug}` },
-    ]),
+  const crumbs: Crumb[] = [
+    { name: "Home", href: "/" },
+    { name: "Resources", href: "/resources" },
+    ...(article.category
+      ? [
+          {
+            name: titleizeSlug(article.category),
+            href: `/resources/category/${article.category}`,
+          },
+        ]
+      : []),
+    { name: article.title, href: `/resources/${article.slug}` },
   ];
 
   return (
@@ -84,26 +86,11 @@ export default async function ArticlePage({
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: renderJsonLd(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: renderJsonLd(articleJsonLd(article.raw)) }}
       />
 
       <article className="container max-w-3xl py-10 md:py-14">
-        <nav aria-label="Breadcrumb" className="mb-5 text-[13px] text-text-muted">
-          <Link href="/resources" className="hover:text-text-secondary">
-            Resources
-          </Link>
-          {article.category ? (
-            <>
-              <span className="mx-1.5">/</span>
-              <Link
-                href={`/resources/category/${article.category}`}
-                className="hover:text-text-secondary"
-              >
-                {titleizeSlug(article.category)}
-              </Link>
-            </>
-          ) : null}
-        </nav>
+        <Breadcrumbs items={crumbs} className="mb-5" />
 
         <header>
           {article.category ? (

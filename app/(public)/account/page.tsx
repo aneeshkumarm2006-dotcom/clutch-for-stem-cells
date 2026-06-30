@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Heart, MessageSquare, Star } from "lucide-react";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { requireUser } from "@/lib/auth";
 import { getMemberLeads, getMemberReviews } from "@/lib/public-data";
 import { Badge } from "@/components/ui/badge";
@@ -10,11 +10,14 @@ import { Button } from "@/components/ui/button";
 import { RatingStars } from "@/components/ui/rating-stars";
 import { DeleteAccount } from "@/components/account/delete-account";
 
-export const metadata: Metadata = buildMetadata({
-  title: "My account",
-  description: "Manage your profile, reviews, and inquiries.",
-  path: "/account",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "My account",
+    description: "Manage your profile, reviews, and inquiries.",
+    path: "/account",
+    // Private member area — keep it out of the index.
+    seo: { noindex: true },
+  });
 
 const REVIEW_STATUS_VARIANT: Record<
   string,

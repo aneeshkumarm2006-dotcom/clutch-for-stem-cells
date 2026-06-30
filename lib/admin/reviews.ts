@@ -10,6 +10,7 @@ import type { FilterQuery } from "mongoose";
 
 import { dbConnect } from "@/lib/db";
 import { id, iso } from "@/lib/admin/serialize";
+import { scanContentFlags, type ContentFlag } from "@/lib/content-flags";
 import { Clinic, Condition, Review, Treatment } from "@/models";
 import type { IReview } from "@/models";
 import type { ReviewStatus } from "@/lib/enums";
@@ -52,6 +53,8 @@ export interface AdminReviewRow {
   providerResponse?: { body: string; respondedAt?: string };
   rejectionReason?: string;
   submittedAt?: string;
+  /** Unsupported "cure/guaranteed" language flagged for staff review (§8.8). */
+  contentFlags: ContentFlag[];
 }
 
 export interface ReviewsQuery {
@@ -191,6 +194,15 @@ export async function getAdminReviews(
         : undefined,
       rejectionReason: r.moderation?.rejectionReason,
       submittedAt: iso(r.createdAt),
+      contentFlags: scanContentFlags([
+        r.headline,
+        r.body?.condition,
+        r.body?.whyChosen,
+        r.body?.treatmentDescription,
+        r.body?.outcome,
+        r.body?.experience,
+        r.body?.improvement,
+      ]),
     };
   });
 

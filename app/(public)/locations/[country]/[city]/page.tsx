@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import {
   getCityBySlug,
   getCountryBySlug,
@@ -19,11 +19,15 @@ export async function generateMetadata({
     getCountryBySlug(params.country),
     getCityBySlug(params.city),
   ]);
-  if (!country || !city) return buildMetadata({ title: "Destination not found" });
-  return buildMetadata({
+  if (!country || !city) return pageMetadata({ title: "Destination not found" });
+  return pageMetadata({
     title: `Stem cell clinics in ${city.name}, ${country.name}`,
-    description: `Compare accredited regenerative-medicine clinics in ${city.name}, ${country.name} and read verified patient reviews.`,
+    description:
+      city.shortDescription ??
+      city.description?.slice(0, 160) ??
+      `Compare accredited regenerative-medicine clinics in ${city.name}, ${country.name} and read verified patient reviews.`,
     path: `/locations/${country.slug}/${city.slug}`,
+    seo: city.seo ?? null,
   });
 }
 
@@ -49,7 +53,11 @@ export default async function CityDirectoryPage({
   return (
     <Directory
       heading={`Stem cell clinics in ${city.name}`}
-      intro={`Accredited regenerative-medicine clinics in ${city.name}, ${country.name}. Compare providers, pricing ranges, and verified patient reviews.`}
+      intro={
+        city.description ??
+        city.shortDescription ??
+        `Accredited regenerative-medicine clinics in ${city.name}, ${country.name}. Compare providers, pricing ranges, and verified patient reviews.`
+      }
       basePath={`/locations/${country.slug}/${city.slug}`}
       searchParams={searchParams}
       data={data}

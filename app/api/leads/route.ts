@@ -11,6 +11,7 @@ import { NextResponse } from "next/server";
 
 import { dbConnect } from "@/lib/db";
 import { guardPublicForm } from "@/lib/public-form";
+import { trackEvent } from "@/lib/analytics";
 import { sendLeadNotificationEmail } from "@/lib/email";
 import { absoluteUrl } from "@/lib/seo";
 import { leadCreateSchema } from "@/lib/validation/lead";
@@ -75,6 +76,13 @@ export async function POST(req: Request): Promise<Response> {
     ageConfirmed: data.ageConfirmed,
     source: data.source,
     status: "new",
+  });
+
+  // Analytics (no PII — type + source + clinic only). PRD §15.
+  void trackEvent("lead_submit", {
+    clinicId: data.clinicId ? String(data.clinicId) : undefined,
+    leadType: data.type,
+    source: data.source,
   });
 
   // Best-effort notification — never block the response on email.

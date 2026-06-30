@@ -12,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { RatingStars } from "@/components/ui/rating-stars";
 import { Chip } from "@/components/ui/chip";
+import { ReportDialog } from "@/components/compliance/report-dialog";
 import { SITE_NAME } from "@/config/site";
 import type { ReviewView } from "@/lib/public-data";
 
@@ -175,6 +176,12 @@ export function ReviewItem({ review }: { review: ReviewView }) {
           />
           Helpful{helpful > 0 ? ` (${helpful})` : ""}
         </button>
+        <ReportDialog
+          entityType="review"
+          entityId={review.id}
+          label="this review"
+          className="ml-auto"
+        />
       </div>
 
       {review.providerResponse ? (

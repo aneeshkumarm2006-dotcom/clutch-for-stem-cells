@@ -32,6 +32,7 @@ import { Toggle } from "@/components/admin/toggle";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { adminFetch } from "@/lib/admin/client";
 import { slugify } from "@/lib/slug";
+import { scanContentFlags } from "@/lib/content-flags";
 import { cn } from "@/lib/utils";
 import {
   CLINIC_STATUSES,
@@ -220,6 +221,32 @@ function Section({
       ) : null}
       <div className="mt-5 space-y-4">{children}</div>
     </section>
+  );
+}
+
+/**
+ * ContentFlagWarning — live "cure/guaranteed" language check (§8.8). Advisory:
+ * surfaces unsupported-efficacy phrasing in provider copy so the editor can
+ * soften it before publishing. Never blocks save.
+ */
+function ContentFlagWarning({ texts }: { texts: (string | undefined)[] }) {
+  const flags = React.useMemo(() => scanContentFlags(texts), [texts]);
+  if (flags.length === 0) return null;
+  return (
+    <div className="flex items-start gap-2 rounded-lg border border-warning-fg/25 bg-warning-bg px-3 py-2.5 text-[12.5px] text-warning-fg">
+      <AlertCircle className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
+      <div>
+        <span className="font-semibold">Possible unsupported claim.</span> Avoid
+        implying a guaranteed or curative outcome ({" "}
+        {flags.map((f, i) => (
+          <React.Fragment key={f.phrase}>
+            {i > 0 ? ", " : ""}
+            <span className="font-medium">“{f.phrase}”</span>
+          </React.Fragment>
+        ))}
+        ). Treatments must not be presented as proven efficacy (§14).
+      </div>
+    </div>
   );
 }
 
@@ -664,6 +691,7 @@ export function ClinicForm({
               rows={6}
               {...register("description")}
             />
+            <ContentFlagWarning texts={[watch("description"), watch("tagline")]} />
             <div className="grid gap-4 sm:grid-cols-2">
               <Controller
                 control={control}
@@ -1081,6 +1109,12 @@ export function ClinicForm({
                     label="Outcome"
                     rows={2}
                     {...register(`caseStudies.${i}.outcome` as const)}
+                  />
+                  <ContentFlagWarning
+                    texts={[
+                      watch(`caseStudies.${i}.summary` as const),
+                      watch(`caseStudies.${i}.outcome` as const),
+                    ]}
                   />
                   <label className="flex items-center gap-2 text-[13px] text-text-secondary">
                     <Controller

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/page-metadata";
 import { ShortlistView } from "@/components/shortlist/shortlist-view";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Your shortlist",
-  description: "Clinics you've saved to compare.",
-  path: "/shortlist",
-});
+export const generateMetadata = (): Promise<Metadata> =>
+  pageMetadata({
+    title: "Your shortlist",
+    description: "Clinics you've saved to compare.",
+    path: "/shortlist",
+    // Personal saved-clinics view — keep it out of the index.
+    seo: { noindex: true },
+  });
 
 export default function ShortlistPage() {
   return (

@@ -8,8 +8,10 @@ import {
   type ClinicFormOptions,
   type ClinicFormValues,
 } from "@/components/admin/clinics/clinic-form";
+import { ClinicAnalyticsPanel } from "@/components/admin/clinics/clinic-analytics-panel";
 import { getAdminClinicFormData } from "@/lib/admin/clinics";
 import { getTaxonomyOptions, getUserOptions } from "@/lib/admin/lookups";
+import { getClinicAnalytics } from "@/lib/analytics";
 
 export const dynamic = "force-dynamic";
 
@@ -18,10 +20,11 @@ export default async function EditClinicPage({
 }: {
   params: { id: string };
 }) {
-  const [data, taxonomy, providers] = await Promise.all([
+  const [data, taxonomy, providers, analytics] = await Promise.all([
     getAdminClinicFormData(params.id),
     getTaxonomyOptions(),
     getUserOptions("provider"),
+    getClinicAnalytics(params.id, 30),
   ]);
 
   if (!data) notFound();
@@ -35,12 +38,15 @@ export default async function EditClinicPage({
   };
 
   return (
-    <ClinicForm
-      mode="edit"
-      clinicId={data.id}
-      slug={data.values.slug as string}
-      defaultValues={data.values as unknown as ClinicFormValues}
-      options={options}
-    />
+    <div className="space-y-5">
+      <ClinicAnalyticsPanel analytics={analytics} className="mx-5 mt-5 lg:mx-7" />
+      <ClinicForm
+        mode="edit"
+        clinicId={data.id}
+        slug={data.values.slug as string}
+        defaultValues={data.values as unknown as ClinicFormValues}
+        options={options}
+      />
+    </div>
   );
 }
