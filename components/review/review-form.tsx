@@ -165,7 +165,7 @@ export function ReviewForm({
         <h2 className="font-display text-xl font-bold text-text-primary">
           Confirm your email
         </h2>
-        <p className="mx-auto mt-2 max-w-md text-sm text-text-secondary">
+        <p className="mx-auto mt-2 max-w-md break-words text-sm text-text-secondary">
           We sent a confirmation link to <strong>{sentTo}</strong>. Open it to
           send your review to our moderation team — reviews are checked before
           they go live, and we never publish your email.

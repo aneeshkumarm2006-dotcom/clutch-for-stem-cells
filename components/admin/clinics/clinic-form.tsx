@@ -302,7 +302,7 @@ function ServiceFocusBuilder({
     <div className="space-y-3">
       {focus.map((f) => (
         <div key={f.treatmentId} className="flex items-center gap-3.5">
-          <span className="w-40 flex-none text-[13.5px] font-medium text-slate-700">
+          <span className="w-24 flex-none text-[13.5px] font-medium text-slate-700 sm:w-40">
             {labelFor(f.treatmentId)}
           </span>
           <input

@@ -108,12 +108,12 @@ export function ProvidersView({
             {claims.map((c) => (
               <div
                 key={c.clinicId}
-                className="flex items-center gap-3.5 rounded-xl border border-border bg-surface p-4"
+                className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-4 sm:flex-row sm:items-center sm:gap-3.5"
               >
                 <InitialsAvatar name={c.clinicName} initials={c.initials} />
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                   <div className="font-semibold">{c.clinicName}</div>
-                  <div className="text-[12.5px] text-text-muted">
+                  <div className="truncate text-[12.5px] text-text-muted">
                     Claimed by {c.ownerEmail ?? "a provider"}
                   </div>
                 </div>

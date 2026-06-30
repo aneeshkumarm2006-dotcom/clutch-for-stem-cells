@@ -94,7 +94,7 @@ export function ImageField({
               onChange={(e) => onChange({ ...value, alt: e.target.value })}
               placeholder="Alt text (describe the image for SEO)"
             />
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button
                 type="button"
                 size="sm"

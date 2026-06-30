@@ -121,7 +121,7 @@ export function MediaLibraryDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="w-[calc(100%-2rem)] max-w-2xl">
         <DialogHeader>
           <DialogTitle>Media library</DialogTitle>
         </DialogHeader>

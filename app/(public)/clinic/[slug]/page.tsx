@@ -359,7 +359,7 @@ export default async function ClinicProfilePage({
               <div className="mt-4 space-y-2.5">
                 {clinic.serviceFocus.map((f) => (
                   <div key={f.name} className="flex items-center gap-3">
-                    <span className="w-44 shrink-0 truncate text-[13.5px] text-text-secondary">
+                    <span className="w-28 sm:w-44 shrink-0 truncate text-[13.5px] text-text-secondary">
                       {f.name}
                     </span>
                     <span className="h-2 flex-1 overflow-hidden rounded-full bg-tint">

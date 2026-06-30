@@ -206,7 +206,7 @@ export default async function HomePage() {
                 </Link>
               </Button>
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
               <Stat value={formatCount(home.stats.clinics)} label="Clinics" />
               <Stat
                 value={formatCount(home.stats.verified)}
@@ -348,8 +348,8 @@ function HowItWorksStep({
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-xl border border-border bg-surface p-5 text-center shadow-card">
-      <div className="font-display text-[26px] font-bold tracking-[-0.01em] text-text-primary">
+    <div className="rounded-xl border border-border bg-surface p-3 text-center shadow-card sm:p-5">
+      <div className="font-display text-[20px] font-bold tracking-[-0.01em] text-text-primary sm:text-[26px]">
         {value}
       </div>
       <div className="mt-1 text-[12.5px] text-text-muted">{label}</div>

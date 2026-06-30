@@ -116,7 +116,7 @@ export function ReportDialog({
         Report
       </button>
 
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] overflow-y-auto">
         {done ? (
           <>
             <DialogHeader>

@@ -205,7 +205,7 @@ function PlanDialog({
 
   return (
     <Dialog open={draft !== null} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[85vh] max-w-lg overflow-y-auto">
+      <DialogContent className="max-h-[85vh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{isEdit ? "Edit plan" : "New plan"}</DialogTitle>
         </DialogHeader>
