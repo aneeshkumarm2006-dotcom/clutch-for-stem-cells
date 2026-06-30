@@ -39,6 +39,7 @@ export const clinicUrl = (slug: string): string =>
   absoluteUrl(`/clinic/${slug}`);
 export const articleUrl = (slug: string): string =>
   absoluteUrl(`/resources/${slug}`);
+export const blogUrl = (slug: string): string => absoluteUrl(`/blog/${slug}`);
 
 /** Apply a Settings title template (e.g. `"%s · StemConnect"`). */
 export function applyTitleTemplate(title?: string, template?: string): string {
@@ -347,6 +348,48 @@ export function articleJsonLd(article: ArticleSeoInput): JsonLd {
       undefined,
     author: article.author?.name
       ? { "@type": "Person", name: article.author.name }
+      : { "@type": "Organization", name: SITE_NAME },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  });
+}
+
+// ── Blog (SEO-team posts) ────────────────────────────────────────────────────
+
+export interface BlogPostingSeoInput {
+  title: string;
+  slug: string;
+  excerpt?: string;
+  coverImageUrl?: string;
+  author?: string;
+  publishedAt?: Date | string | null;
+  updatedAt?: Date | string | null;
+}
+
+const toIso = (d?: Date | string | null): string | undefined => {
+  if (!d) return undefined;
+  const date = d instanceof Date ? d : new Date(d);
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
+};
+
+/** `BlogPosting` JSON-LD for a public /blog post (§5 technical SEO). */
+export function blogPostingJsonLd(post: BlogPostingSeoInput): JsonLd {
+  const url = blogUrl(post.slug);
+  return compact({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImageUrl ? absoluteUrl(post.coverImageUrl) : undefined,
+    url,
+    datePublished: toIso(post.publishedAt),
+    dateModified: toIso(post.updatedAt) ?? toIso(post.publishedAt),
+    author: post.author
+      ? { "@type": "Person", name: post.author }
       : { "@type": "Organization", name: SITE_NAME },
     publisher: {
       "@type": "Organization",

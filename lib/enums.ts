@@ -210,3 +210,31 @@ export const SUPPORTED_CURRENCIES = [
   "KRW",
 ] as const;
 export type SupportedCurrency = (typeof SUPPORTED_CURRENCIES)[number];
+
+// ── Blog (SEO team dashboard — /seoteam + /blog) ─────────────────────────────
+// Self-contained content system published by the non-technical SEO team behind
+// a shared-password session (separate from the role-based admin above). Drives
+// the `BlogPost` model, its Zod validation, and the editor UI.
+
+/** Publish state — drafts are never public (no `pending`/`scheduled` here). */
+export const BLOG_POST_STATUSES = ["draft", "published"] as const;
+export type BlogPostStatus = (typeof BLOG_POST_STATUSES)[number];
+
+/**
+ * `rel` for a keyword backlink. `dofollow` is the absence of a `nofollow`/
+ * `sponsored` token (we still always emit `noopener`); the other two append the
+ * matching token so the team can disclose paid/UGC links per Google guidance.
+ */
+export const KEYWORD_RELS = ["dofollow", "nofollow", "sponsored"] as const;
+export type KeywordRel = (typeof KEYWORD_RELS)[number];
+
+/** Ready-made SEO post templates the team picks from (pre-fills the editor). */
+export const BLOG_TEMPLATE_KEYS = [
+  "how-to",
+  "listicle",
+  "comparison",
+  "review",
+  "news",
+  "generic",
+] as const;
+export type BlogTemplateKey = (typeof BLOG_TEMPLATE_KEYS)[number];

@@ -69,6 +69,9 @@ export type { IReport } from "@/models/report";
 export { Article, default as ArticleModel } from "@/models/article";
 export type { IArticle, IArticleAuthor } from "@/models/article";
 
+export { BlogPost, default as BlogPostModel } from "@/models/blog-post";
+export type { IBlogPost, IBlogKeyword } from "@/models/blog-post";
+
 export { User, default as UserModel } from "@/models/user";
 export type { IUser, ISavedSearch } from "@/models/user";
 

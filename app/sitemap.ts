@@ -16,6 +16,7 @@ import {
   getTaxonomySitemapEntries,
   type SitemapEntry,
 } from "@/lib/public-data";
+import { getBlogSitemapEntries } from "@/lib/seoteam/blog-data";
 
 export const revalidate = 3600;
 
@@ -33,6 +34,7 @@ const STATIC_ROUTES: {
   { path: "/conditions", changeFrequency: "weekly", priority: 0.8 },
   { path: "/locations", changeFrequency: "weekly", priority: 0.8 },
   { path: "/resources", changeFrequency: "daily", priority: 0.7 },
+  { path: "/blog", changeFrequency: "daily", priority: 0.7 },
   { path: "/find-a-clinic", changeFrequency: "monthly", priority: 0.7 },
   { path: "/for-clinics", changeFrequency: "monthly", priority: 0.6 },
   { path: "/about", changeFrequency: "monthly", priority: 0.4 },
@@ -57,7 +59,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let dynamicEntries: MetadataRoute.Sitemap = [];
   try {
-    const [clinics, taxonomy, articles]: [
+    const [clinics, taxonomy, articles, blog]: [
+      SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
@@ -65,6 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getClinicSitemapEntries(),
       getTaxonomySitemapEntries(),
       getArticleSitemapEntries(),
+      getBlogSitemapEntries(),
     ]);
 
     dynamicEntries = [
@@ -84,6 +88,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: absoluteUrl(e.path),
         lastModified: e.lastModified ?? now,
         changeFrequency: "monthly" as const,
+        priority: 0.6,
+      })),
+      ...blog.map((e) => ({
+        url: absoluteUrl(e.path),
+        lastModified: e.lastModified ?? now,
+        changeFrequency: "weekly" as const,
         priority: 0.6,
       })),
     ];
