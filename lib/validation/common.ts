@@ -7,6 +7,14 @@
  */
 import { z } from "zod";
 
+/**
+ * Coerce a blank form input to `undefined` so `.optional()` accepts it. Text
+ * inputs submit `""` when empty, but `.optional()` only permits `undefined`;
+ * without this, constrained optional fields (URLs, fixed-length codes) reject a
+ * left-blank field with a confusing min-length/format error.
+ */
+export const blankToUndefined = (v: unknown) => (v === "" ? undefined : v);
+
 /** 24-char hex Mongo ObjectId (refs arrive as strings from forms/JSON). */
 export const objectIdSchema = z.string().regex(/^[a-f\d]{24}$/i, "Invalid id");
 
@@ -39,10 +47,16 @@ export const imageSchema = z.object({
 
 export const seoSchema = z
   .object({
-    metaTitle: z.string().max(120).optional(),
-    metaDescription: z.string().max(320).optional(),
-    ogImage: mediaUrlSchema.optional(),
-    canonicalUrl: z.string().url().optional(),
+    metaTitle: z.preprocess(blankToUndefined, z.string().max(120).optional()),
+    metaDescription: z.preprocess(
+      blankToUndefined,
+      z.string().max(320).optional(),
+    ),
+    ogImage: z.preprocess(blankToUndefined, mediaUrlSchema.optional()),
+    canonicalUrl: z.preprocess(
+      blankToUndefined,
+      z.string().url().optional(),
+    ),
     noindex: z.boolean().optional(),
   })
   .partial();

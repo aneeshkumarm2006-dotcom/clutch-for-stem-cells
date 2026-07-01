@@ -14,6 +14,7 @@ import {
   VERIFICATION_BADGES,
 } from "@/lib/enums";
 import {
+  blankToUndefined,
   currencySchema,
   imageSchema,
   objectIdSchema,
@@ -41,7 +42,10 @@ const clinicLocationSchema = z.object({
   city: z.string().max(120).optional(),
   region: z.string().max(120).optional(),
   country: z.string().max(120).optional(),
-  countryCode: z.string().length(2).toUpperCase().optional(),
+  countryCode: z.preprocess(
+    blankToUndefined,
+    z.string().length(2).toUpperCase().optional(),
+  ),
   postalCode: z.string().max(20).optional(),
   lat: z.number().min(-90).max(90).optional(),
   lng: z.number().min(-180).max(180).optional(),
