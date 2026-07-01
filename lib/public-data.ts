@@ -1219,7 +1219,6 @@ export interface MemberReview {
   ratingOverall: number;
   headline?: string;
   createdAt: string;
-  emailVerified: boolean;
 }
 
 export interface MemberLead {
@@ -1247,7 +1246,6 @@ export async function getMemberReviews(email: string): Promise<MemberReview[]> {
       ratingOverall: r.ratingOverall,
       headline: r.headline,
       createdAt: new Date(r.createdAt).toISOString(),
-      emailVerified: Boolean(r.emailVerifiedAt),
     };
   });
 }

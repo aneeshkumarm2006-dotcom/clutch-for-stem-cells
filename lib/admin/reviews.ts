@@ -1,9 +1,9 @@
 /**
  * Reviews moderation read-layer (PRD §8.3 / Stage 6.5).
  *
- * The queue surfaces email-confirmed reviews (unconfirmed pending submissions
- * aren't real yet). Resolves clinic/condition/treatment names and exposes the
- * private reviewer email (admin-only) for moderation.
+ * The queue surfaces every non-deleted review — new submissions land here as
+ * `pending` for an admin to approve or reject. Resolves clinic/condition/
+ * treatment names and exposes the private reviewer email (admin-only).
  */
 import "server-only";
 import type { FilterQuery } from "mongoose";
@@ -26,7 +26,6 @@ export interface AdminReviewRow {
   country?: string;
   status: ReviewStatus;
   isVerified: boolean;
-  emailConfirmed: boolean;
   ratingOverall: number;
   ratings: {
     outcome?: number;
@@ -72,15 +71,9 @@ export interface ReviewsResult {
   counts: Record<"pending" | "approved" | "rejected" | "spam" | "all", number>;
 }
 
-/** Real reviews only: confirmed email, or any non-pending status. */
+/** Every non-deleted review (pending submissions included). */
 function baseFilter(): FilterQuery<IReview> {
-  return {
-    isDeleted: false,
-    $or: [
-      { status: { $ne: "pending" } },
-      { status: "pending", emailVerifiedAt: { $ne: null } },
-    ],
-  };
+  return { isDeleted: false };
 }
 
 function snippetOf(r: IReview): string {
@@ -156,7 +149,6 @@ export async function getAdminReviews(
       country: r.reviewer?.country,
       status: r.status,
       isVerified: r.isVerified,
-      emailConfirmed: r.emailVerifiedAt != null,
       ratingOverall: r.ratingOverall,
       ratings: {
         outcome: r.ratings?.outcome,

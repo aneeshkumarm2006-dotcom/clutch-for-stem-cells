@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { AlertCircle, CheckCircle2, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 import { pageMetadata } from "@/lib/page-metadata";
 import { getReviewClinic } from "@/lib/public-data";
@@ -12,7 +12,7 @@ export const generateMetadata = (): Promise<Metadata> =>
   pageMetadata({
     title: "Write a review",
     description:
-      "Share your experience with a regenerative-medicine clinic. Reviews are email-verified and moderated before they go live.",
+      "Share your experience with a regenerative-medicine clinic. Reviews are checked by our team before they go live.",
     path: "/reviews/new",
   });
 
@@ -24,7 +24,6 @@ export default async function NewReviewPage({
   const single = (v: string | string[] | undefined) =>
     Array.isArray(v) ? v[0] : v;
   const clinicSlug = single(searchParams.clinic);
-  const confirmed = single(searchParams.confirmed);
 
   const clinic = clinicSlug ? await getReviewClinic(clinicSlug) : null;
 
@@ -35,29 +34,10 @@ export default async function NewReviewPage({
           Write a review
         </h1>
         <p className="mt-2 text-[15px] text-text-secondary">
-          Your honest experience helps other patients. Reviews are
-          email-verified and checked by our team before they go live.
+          Your honest experience helps other patients. Reviews are checked by our
+          team before they go live.
         </p>
       </header>
-
-      {confirmed === "ok" ? (
-        <div className="mb-6 flex items-start gap-2.5 rounded-xl border border-success-bg bg-success-bg/40 p-4 text-sm text-[#07623F]">
-          <CheckCircle2 className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
-          <span>
-            Your email is confirmed. Your review is now with our moderation team
-            and will appear once approved.
-          </span>
-        </div>
-      ) : null}
-      {confirmed === "invalid" ? (
-        <div className="mb-6 flex items-start gap-2.5 rounded-xl border border-danger-bg bg-danger-bg/40 p-4 text-sm text-[#97231F]">
-          <AlertCircle className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
-          <span>
-            That confirmation link is invalid or has expired. You can submit your
-            review again below.
-          </span>
-        </div>
-      ) : null}
 
       {clinic ? (
         <ReviewForm

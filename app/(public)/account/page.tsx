@@ -120,7 +120,6 @@ export default async function AccountPage() {
                   ) : null}
                   <p className="mt-0.5 text-[12px] text-text-muted">
                     {formatDate(r.createdAt)}
-                    {!r.emailVerified ? " · email not confirmed" : ""}
                   </p>
                 </div>
                 <Badge variant={REVIEW_STATUS_VARIANT[r.status] ?? "neutral"}>

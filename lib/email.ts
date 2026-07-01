@@ -242,40 +242,6 @@ export async function sendLeadNotificationEmail({
   });
 }
 
-// ── Review email confirmation (Stage 5.5 / PRD §6.4) ─────────────────────────
-
-export function confirmReviewUrl(token: string): string {
-  return `${SITE_URL}/api/reviews/confirm?token=${encodeURIComponent(token)}`;
-}
-
-/**
- * Confirm a submitted review's email before it enters moderation (PRD §6.4
- * anti-spam). Sent to the reviewer's private email; opening the link marks the
- * review email-verified so staff can moderate it.
- */
-export async function sendReviewConfirmationEmail({
-  to,
-  token,
-  clinicName,
-}: {
-  to: string;
-  token: string;
-  clinicName: string;
-}): Promise<void> {
-  const url = confirmReviewUrl(token);
-  await sendEmail({
-    to,
-    subject: `Confirm your review of ${clinicName}`,
-    html: layout(
-      "Confirm your review",
-      `<p style="margin:0 0 20px;color:#5C7388;">Thanks for reviewing ${esc(clinicName)}. Confirm your email so our team can review and publish it.</p>
-       ${button(url, "Confirm review")}
-       <p style="margin:20px 0 0;color:#90AAC0;font-size:13px;">This link expires in 24 hours. Reviews are checked before they go live; we never publish your email address.</p>`,
-    ),
-    text: `Thanks for reviewing ${clinicName}. Confirm your email so we can review and publish it (link expires in 24 hours):\n${url}\n\nReviews are checked before they go live; we never publish your email address.`,
-  });
-}
-
 // ── Review status (Stage 3.5 / PRD §6.4, §8.3) ───────────────────────────────
 
 export type ReviewStatusOutcome = "approved" | "rejected";

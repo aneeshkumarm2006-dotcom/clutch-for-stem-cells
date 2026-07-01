@@ -104,12 +104,6 @@ export function ReviewsModeration({ rows }: { rows: AdminReviewRow[] }) {
             </div>
             <div className="mb-1.5 flex items-center gap-2">
               <RatingStars value={r.ratingOverall} size={13} showValue={false} />
-              {r.emailConfirmed ? (
-                <Badge variant="info" className="gap-1 text-[10px]">
-                  <ShieldCheck className="size-2.5" />
-                  Email confirmed
-                </Badge>
-              ) : null}
               {r.contentFlags.length > 0 ? (
                 <Badge variant="warning" className="gap-1 text-[10px]">
                   <AlertTriangle className="size-2.5" />

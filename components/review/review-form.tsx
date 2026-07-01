@@ -1,15 +1,15 @@
 "use client";
 
 /**
- * ReviewForm — multi-step review submission (Stage 5.5 / PRD §6.4). Steps:
+ * ReviewForm — multi-step review submission (PRD §6.4). Steps:
  * (1) treatment context, (2) ratings, (3) story, (4) cost, (5) identity +
- * consent. POSTs to `/api/reviews`; the review is created `pending` and
- * email-unverified, then a confirmation email is sent — it never auto-publishes.
+ * consent. POSTs to `/api/reviews`; the review is created `pending` and goes
+ * straight to the admin moderation queue — it never auto-publishes.
  * Email + consent + 18+ are required (PRD §14, §8.6).
  */
 import * as React from "react";
 import Link from "next/link";
-import { MailCheck } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -49,7 +49,7 @@ export function ReviewForm({
 }: ReviewFormProps) {
   const [step, setStep] = React.useState(0);
   const [submitting, setSubmitting] = React.useState(false);
-  const [sentTo, setSentTo] = React.useState<string | null>(null);
+  const [submitted, setSubmitted] = React.useState(false);
 
   // Field state.
   const [treatmentId, setTreatmentId] = React.useState("");
@@ -103,7 +103,7 @@ export function ReviewForm({
       return;
     }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-      setError("Enter a valid email address so we can verify your review.");
+      setError("Enter a valid email address so we can contact you if needed.");
       return;
     }
     if (!consent || !age) {
@@ -148,7 +148,7 @@ export function ReviewForm({
     setSubmitting(false);
 
     if (res.ok) {
-      setSentTo(email);
+      setSubmitted(true);
       return;
     }
     const data = (await res.json().catch(() => null)) as { error?: string } | null;
@@ -156,19 +156,19 @@ export function ReviewForm({
     toast.error(data?.error ?? "Something went wrong. Please try again.");
   }
 
-  if (sentTo) {
+  if (submitted) {
     return (
       <div className="rounded-xl border border-border bg-surface p-8 text-center shadow-card">
         <span className="mb-3 inline-flex size-12 items-center justify-center rounded-full bg-success-bg text-success">
-          <MailCheck className="size-6" aria-hidden="true" />
+          <CheckCircle2 className="size-6" aria-hidden="true" />
         </span>
         <h2 className="font-display text-xl font-bold text-text-primary">
-          Confirm your email
+          Thanks for your review
         </h2>
         <p className="mx-auto mt-2 max-w-md break-words text-sm text-text-secondary">
-          We sent a confirmation link to <strong>{sentTo}</strong>. Open it to
-          send your review to our moderation team — reviews are checked before
-          they go live, and we never publish your email.
+          Your review has been submitted and is with our moderation team. It will
+          appear on the clinic&apos;s profile once approved. We never publish your
+          email.
         </p>
         <Button asChild variant="secondary" className="mt-5">
           <Link href="/clinics">Browse more clinics</Link>
@@ -366,7 +366,7 @@ export function ReviewForm({
             label="Email"
             type="email"
             required
-            hint="Private — used to verify your review. Never shown publicly."
+            hint="Private — stored for our records only. Never shown publicly."
             placeholder="you@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

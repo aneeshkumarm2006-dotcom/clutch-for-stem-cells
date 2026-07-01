@@ -88,15 +88,6 @@ export interface IReview extends TimestampFields, SoftDeleteFields {
   ageConfirmed: boolean;
   /** §14: agreed to terms/privacy & "not medical advice". */
   consentGiven: boolean;
-  /**
-   * PRD §6.4: a public review must verify the submitter's email before it enters
-   * the moderation queue (anti-spam). Set when the emailed link is opened; the
-   * admin queue surfaces only reviews where this is non-null. Token stored hashed
-   * (SHA-256), mirroring `User` — see `lib/auth/tokens.ts`. All `select: false`.
-   */
-  emailVerifiedAt?: Date | null;
-  emailVerificationToken?: string;
-  emailVerificationExpires?: Date;
 }
 
 // ── Sub-schemas ─────────────────────────────────────────────────────────────
@@ -198,9 +189,6 @@ const ReviewSchema = new Schema<IReview>(
     moderation: { type: moderationSchema, default: undefined },
     ageConfirmed: { type: Boolean, default: false },
     consentGiven: { type: Boolean, default: false },
-    emailVerifiedAt: { type: Date, default: null },
-    emailVerificationToken: { type: String, select: false },
-    emailVerificationExpires: { type: Date, select: false },
   },
   { timestamps: true },
 );

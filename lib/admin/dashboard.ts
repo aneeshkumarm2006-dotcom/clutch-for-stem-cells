@@ -18,13 +18,12 @@ import {
 } from "@/models";
 import type { ClinicStatus, ClinicTier } from "@/lib/enums";
 
-/** Pending reviews awaiting moderation = email-confirmed + not deleted. */
+/** Pending reviews awaiting moderation = pending + not deleted. */
 export const getPendingReviewCount = cache(async (): Promise<number> => {
   await dbConnect();
   return Review.countDocuments({
     status: "pending",
     isDeleted: false,
-    emailVerifiedAt: { $ne: null },
   });
 });
 
