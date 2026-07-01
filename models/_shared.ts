@@ -119,6 +119,27 @@ export function softDeletePlugin(schema: Schema): void {
   };
 }
 
+// ── Serialization helpers ───────────────────────────────────────────────────
+
+/**
+ * Convert a Mongoose sub-document to a plain, spreadable object.
+ *
+ * Spreading a *hydrated* sub-document (`{ ...doc.subfield }`) is a trap on two
+ * counts: it copies Mongoose internals (`$__`, `_doc`, `$__parent`, …) — class
+ * instances that break React Server Component serialization ("Only plain
+ * objects … can be passed to Client Components") — while NOT copying the
+ * schema-path values, which live on the prototype as getters, so any merge
+ * defaults silently win over the real DB values. `.toObject()` returns the
+ * stored values as plain data. Lean/plain inputs pass through unchanged.
+ */
+export function toPlainObject<T extends object>(
+  value: T | null | undefined,
+): Partial<T> {
+  if (!value) return {};
+  const doc = value as { toObject?: () => Partial<T> };
+  return typeof doc.toObject === "function" ? doc.toObject() : { ...value };
+}
+
 // ── Model registration ──────────────────────────────────────────────────────
 
 /**

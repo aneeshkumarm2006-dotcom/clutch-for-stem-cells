@@ -11,6 +11,7 @@ export {
   personSchema,
   softDeletePlugin,
   registerModel,
+  toPlainObject,
 } from "@/models/_shared";
 export type {
   IImage,

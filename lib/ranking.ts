@@ -20,7 +20,7 @@
  */
 import { dbConnect } from "@/lib/db";
 import type { ClinicTier } from "@/lib/enums";
-import { Clinic, Review, SiteSetting } from "@/models";
+import { Clinic, Review, SiteSetting, toPlainObject } from "@/models";
 import type { IClinic, IRankingWeights } from "@/models";
 
 // ── Tunables (saturation points / decay) ────────────────────────────────────
@@ -228,7 +228,7 @@ export function compareClinicsForListing(
 /** Admin-tunable weights from `SiteSetting`, merged over {@link DEFAULT_RANKING_WEIGHTS}. */
 export async function getRankingWeights(): Promise<IRankingWeights> {
   const settings = await SiteSetting.getGlobal();
-  return { ...DEFAULT_RANKING_WEIGHTS, ...(settings.rankingWeights ?? {}) };
+  return { ...DEFAULT_RANKING_WEIGHTS, ...toPlainObject(settings.rankingWeights) };
 }
 
 /** Most recent approved, non-deleted review timestamp for a clinic (or null). */

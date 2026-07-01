@@ -8,7 +8,7 @@ import "server-only";
 
 import { dbConnect } from "@/lib/db";
 import { id, serializeImage, type ImageView } from "@/lib/admin/serialize";
-import { SiteSetting } from "@/models";
+import { SiteSetting, toPlainObject } from "@/models";
 import { DEFAULT_RANKING_WEIGHTS } from "@/lib/ranking";
 import { FEATURES } from "@/config/site";
 
@@ -114,7 +114,10 @@ export async function getSettingsView(): Promise<SettingsView> {
       plausibleDomain: s.analytics?.plausibleDomain ?? "",
       posthogKey: s.analytics?.posthogKey ?? "",
     },
-    featureFlags: { ...FEATURES, ...(s.featureFlags ?? {}) },
-    rankingWeights: { ...DEFAULT_RANKING_WEIGHTS, ...(s.rankingWeights ?? {}) },
+    featureFlags: { ...FEATURES, ...toPlainObject(s.featureFlags) },
+    rankingWeights: {
+      ...DEFAULT_RANKING_WEIGHTS,
+      ...toPlainObject(s.rankingWeights),
+    },
   };
 }
