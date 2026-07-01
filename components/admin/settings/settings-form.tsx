@@ -25,7 +25,6 @@ const FLAGS: [string, string, string][] = [
   ["enableCompare", "Compare clinics", "Side-by-side comparison from the shortlist"],
   ["enableProviderSelfServe", "Provider self-serve", "Let clinics claim and submit profiles"],
   ["enableShortlist", "Shortlist", "Save clinics to a shortlist"],
-  ["enableResources", "Resources hub", "Education hub / blog"],
   ["enableMatchingWizard", "Matching wizard", "Find-a-clinic guided stepper"],
   ["enableBilling", "Billing", "Live Stripe billing for tiers"],
   ["enableSavedSearches", "Saved searches", "Save searches with alerts"],

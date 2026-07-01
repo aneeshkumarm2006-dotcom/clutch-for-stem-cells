@@ -12,6 +12,7 @@ import {
 import { organizationJsonLd, renderJsonLd, websiteJsonLd } from "@/lib/seo";
 import { pageMetadata } from "@/lib/page-metadata";
 import { getHomeData } from "@/lib/public-data";
+import { getPublishedBlogPosts } from "@/lib/seoteam/blog-data";
 import { formatCount } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
@@ -19,7 +20,7 @@ import { SearchBar } from "@/components/search/search-bar";
 import { Section, SectionHeader } from "@/components/common/section";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { TaxonomyCard, DestinationCard } from "@/components/taxonomy/taxonomy-card";
-import { ArticleCard } from "@/components/article/article-card";
+import { BlogCard } from "@/components/blog/blog-card";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 
 export const revalidate = 600;
@@ -29,7 +30,11 @@ export function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const home = await getHomeData();
+  const [home, blog] = await Promise.all([
+    getHomeData(),
+    getPublishedBlogPosts({ page: 1 }),
+  ]);
+  const latestPosts = blog.posts.slice(0, 3);
 
   return (
     <>
@@ -294,18 +299,18 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* Education teaser */}
-      {home.latestArticles.length ? (
+      {/* Blog teaser */}
+      {latestPosts.length ? (
         <Section>
           <div className="container">
             <SectionHeader
-              title="Patient education"
-              description="Plain-language guides to help you research regenerative medicine."
-              link={{ href: "/resources", label: "All resources" }}
+              title="From the blog"
+              description="Guides, updates, and insights to help you research regenerative medicine."
+              link={{ href: "/blog", label: "All blog posts" }}
             />
             <div className="mt-7 grid gap-5 md:grid-cols-3">
-              {home.latestArticles.map((a) => (
-                <ArticleCard key={a.slug} article={a} />
+              {latestPosts.map((post) => (
+                <BlogCard key={post.slug} post={post} />
               ))}
             </div>
           </div>

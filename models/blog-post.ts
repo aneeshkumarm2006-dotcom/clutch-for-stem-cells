@@ -1,8 +1,7 @@
 /**
  * BlogPost — SEO-team blog entry (/seoteam dashboard → public /blog).
  *
- * A self-contained content type, separate from {@link Article} (the role-based
- * education hub at /resources). Published by the non-technical SEO team behind a
+ * A self-contained content type published by the non-technical SEO team behind a
  * shared-password session; writes render instantly on /blog with no redeploy.
  *
  * `body` holds **sanitized HTML** (Tiptap output, cleaned with `sanitize-html`

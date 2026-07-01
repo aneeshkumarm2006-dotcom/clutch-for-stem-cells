@@ -27,7 +27,7 @@ export const DEFAULT_FOOTER_COLUMNS: FooterColumn[] = [
       { label: "Browse clinics", href: "/clinics" },
       { label: "Find a clinic", href: "/find-a-clinic" },
       { label: "Write a review", href: "/reviews/new" },
-      { label: "Resources", href: "/resources" },
+      { label: "Blog", href: "/blog" },
     ],
   },
   {

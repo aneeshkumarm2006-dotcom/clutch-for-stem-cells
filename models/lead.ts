@@ -3,7 +3,7 @@
  *
  * `clinicId` is null for matching-wizard leads (`type: 'match'`), where
  * `matchedClinicIds` holds the computed shortlist (PRD §6.5). Not soft-deleted
- * (PRD §5 lists soft-delete for clinics/reviews/articles/users only); spam is a
+ * (PRD §5 lists soft-delete for clinics/reviews/users only); spam is a
  * status value instead.
  */
 import { Schema, type Types } from "mongoose";

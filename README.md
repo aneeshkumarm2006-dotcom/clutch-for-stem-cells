@@ -73,5 +73,5 @@ semantic tokens (`bg-primary`, `text-text-secondary`, `border-border`, `shadow-c
 ## Conventions
 
 - `MUST` / `SHOULD` / `MAY` per the build plan; defaults left with `// PRD-ASSUMPTION` notes.
-- Public URLs use slugs; clinics/reviews/articles/users are soft-deleted.
+- Public URLs use slugs; clinics/reviews/users are soft-deleted.
 - Authorization is enforced **server-side** on every admin/API route.

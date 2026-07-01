@@ -66,7 +66,6 @@ export interface IFeatureFlags {
   enableCompare: boolean;
   enableProviderSelfServe: boolean;
   enableShortlist: boolean;
-  enableResources: boolean;
   enableMatchingWizard: boolean;
   enableBilling: boolean;
   enableSavedSearches: boolean;
@@ -180,7 +179,6 @@ const featureFlagsSchema = new Schema<IFeatureFlags>(
     enableCompare: { type: Boolean, default: false },
     enableProviderSelfServe: { type: Boolean, default: false },
     enableShortlist: { type: Boolean, default: true },
-    enableResources: { type: Boolean, default: true },
     enableMatchingWizard: { type: Boolean, default: true },
     enableBilling: { type: Boolean, default: false },
     enableSavedSearches: { type: Boolean, default: false },

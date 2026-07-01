@@ -71,7 +71,6 @@ const NAV: NavEntry[][] = [
       minRole: "editor",
       basePath: "/admin/content",
       children: [
-        { label: "Articles", href: "/admin/content/articles" },
         { label: "Pages & homepage", href: "/admin/content/pages" },
       ],
     },

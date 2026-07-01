@@ -1,7 +1,7 @@
 /**
  * Database seed — Stage 1.11.
  *
- * Seeds taxonomy (PRD §18), demo clinics/reviews/articles, listing plans, a
+ * Seeds taxonomy (PRD §18), demo clinics/reviews, listing plans, a
  * SuperAdmin user, and the default site settings. Denormalized rating fields,
  * `sortScore`, and taxonomy `clinicCount` are computed here (provisional — the
  * canonical jobs are `/lib/ratings.ts` §3.2 and `/lib/ranking.ts` §3.1).
@@ -10,7 +10,7 @@
  *   npm run seed            # wipe seed collections + insert (needs MONGODB_URI)
  *   npm run seed -- --dry   # build & schema-validate everything, no DB needed
  *
- * The seed REPLACES taxonomy/clinic/review/article/plan/settings collections and
+ * The seed REPLACES taxonomy/clinic/review/plan/settings collections and
  * the demo admin user. It does not touch leads or audit logs.
  */
 import { readFileSync } from "node:fs";
@@ -27,7 +27,6 @@ import { SUB_RATING_KEYS, type SubRatingKey } from "@/lib/enums";
 import { DEFAULT_CURRENCY, MEDICAL_DISCLAIMER, SITE_NAME } from "@/config/site";
 import {
   Accreditation,
-  Article,
   CellSource,
   Clinic,
   Condition,
@@ -46,7 +45,6 @@ import {
   type ITreatment,
 } from "@/models";
 import {
-  ARTICLES,
   ACCREDITATIONS,
   CELL_SOURCES,
   CITIES,
@@ -380,33 +378,7 @@ async function main(): Promise<void> {
     ).length;
   }
 
-  // 6) Articles ────────────────────────────────────────────────────────────--
-  const articles = build(
-    Article,
-    ARTICLES.map((a) => ({
-      title: a.title,
-      slug: a.slug,
-      status: a.status,
-      excerpt: a.excerpt,
-      body: a.body,
-      author: a.author,
-      categories: a.categories,
-      tags: a.tags,
-      relatedConditionIds: (a.relatedConditionSlugs ?? [])
-        .map((s) => cBySlug.get(s)?._id)
-        .filter((id): id is Types.ObjectId => !!id),
-      relatedTreatmentIds: (a.relatedTreatmentSlugs ?? [])
-        .map((s) => tBySlug.get(s)?._id)
-        .filter((id): id is Types.ObjectId => !!id),
-      readingTime: a.readingTime,
-      publishedAt:
-        a.status === "published"
-          ? new Date(Date.now() - (a.publishedAtDaysAgo ?? 0) * 86_400_000)
-          : null,
-    })),
-  );
-
-  // 7) Plans ──────────────────────────────────────────────────────────────--
+  // 6) Plans ──────────────────────────────────────────────────────────────--
   const plans = build(Plan, PLANS);
 
   // 8) SuperAdmin user — credentials come from ADMIN_SEED_* env vars ──────────
@@ -471,7 +443,6 @@ async function main(): Promise<void> {
   await commit(Location, cities, "cities");
   await commit(Clinic, clinics, "clinics");
   await commit(Review, reviews, "reviews");
-  await commit(Article, articles, "articles");
   await commit(Plan, plans, "plans");
   await commit(User, [adminUser], "admin user");
   await commit(SiteSetting, [settings], "site settings");
@@ -620,7 +591,6 @@ async function clearCollections(): Promise<void> {
     Location.deleteMany({}),
     Clinic.deleteMany({}),
     Review.deleteMany({}),
-    Article.deleteMany({}),
     Plan.deleteMany({}),
     SiteSetting.deleteMany({ key: GLOBAL_SETTINGS_KEY }),
     // Remove any prior superadmin seed (by configured email or the legacy

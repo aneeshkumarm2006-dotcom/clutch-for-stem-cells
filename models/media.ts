@@ -3,7 +3,7 @@
  *
  * Deferred from Stage 1 (images were embedded `imageSchema` sub-docs); the admin
  * media library now persists each upload as its own record so images can be
- * browsed, searched, and reused across clinic & article forms. `publicId` links
+ * browsed, searched, and reused across clinic forms. `publicId` links
  * back to the storage provider (Cloudinary) for delivery transforms / deletion.
  */
 import { Schema, type Types } from "mongoose";
@@ -16,7 +16,7 @@ export interface IMedia extends TimestampFields {
   publicId?: string;
   alt?: string;
   filename?: string;
-  /** Logical folder/prefix, e.g. "clinics" or "articles". */
+  /** Logical folder/prefix, e.g. "clinics" or "blog". */
   folder?: string;
   format?: string;
   width?: number;

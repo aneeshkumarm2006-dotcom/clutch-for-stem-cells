@@ -8,7 +8,6 @@ import type {
   ReviewStatus,
   UserRole,
   UserStatus,
-  ArticleStatus,
 } from "@/lib/enums";
 
 /**
@@ -67,12 +66,6 @@ const USER_ROLE: Record<UserRole, [Variant, string]> = {
   member: ["neutral", "Member"],
 };
 
-const ARTICLE_STATUS: Record<ArticleStatus, [Variant, string]> = {
-  published: ["success", "Published"],
-  scheduled: ["warning", "Scheduled"],
-  draft: ["neutral", "Draft"],
-};
-
 function Pill({
   pair,
   className,
@@ -107,7 +100,4 @@ export const UserStatusBadge = ({ status }: { status: UserStatus }) => (
 );
 export const UserRoleBadge = ({ role }: { role: UserRole }) => (
   <Pill pair={USER_ROLE[role]} />
-);
-export const ArticleStatusBadge = ({ status }: { status: ArticleStatus }) => (
-  <Pill pair={ARTICLE_STATUS[status]} />
 );

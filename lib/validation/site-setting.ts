@@ -65,7 +65,6 @@ const featureFlagsSchema = z
     enableCompare: z.boolean(),
     enableProviderSelfServe: z.boolean(),
     enableShortlist: z.boolean(),
-    enableResources: z.boolean(),
     enableMatchingWizard: z.boolean(),
     enableBilling: z.boolean(),
     enableSavedSearches: z.boolean(),

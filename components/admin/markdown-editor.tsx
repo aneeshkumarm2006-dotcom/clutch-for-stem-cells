@@ -9,7 +9,7 @@ import { renderMarkdown } from "@/lib/markdown";
 /**
  * Markdown body editor (PRD §8.6) — a toolbar that wraps/inserts Markdown around
  * the selection, with a live preview tab rendered via the same `renderMarkdown`
- * the public article page uses. Pragmatic alternative to a heavy WYSIWYG/MDX
+ * the public prose pages use. Pragmatic alternative to a heavy WYSIWYG/MDX
  * dependency; output renders identically on the public site.
  */
 export function MarkdownEditor({

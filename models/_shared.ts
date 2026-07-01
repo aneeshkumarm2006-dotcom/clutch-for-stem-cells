@@ -98,7 +98,7 @@ export const personSchema = new Schema<IPerson>({
  * Adds `isDeleted` + `deletedAt` and `softDelete()` / `restore()` instance
  * helpers. Intentionally does NOT add a global query filter — admin modules
  * need to see soft-deleted rows; public queries filter `{ isDeleted: false }`
- * explicitly. Applied to Clinic, Review, Article, User (PRD §5 intro).
+ * explicitly. Applied to Clinic, Review, User (PRD §5 intro).
  */
 export function softDeletePlugin(schema: Schema): void {
   schema.add({

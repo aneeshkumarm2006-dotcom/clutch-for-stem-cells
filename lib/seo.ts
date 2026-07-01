@@ -8,7 +8,7 @@
  * which win over the `config/site.ts` constants.
  *
  * Schema.org types emitted (PRD §11): `Organization`, `MedicalClinic`,
- * `AggregateRating`, `Review`, `BreadcrumbList`, `Article`, `FAQPage`.
+ * `AggregateRating`, `Review`, `BreadcrumbList`, `FAQPage`.
  */
 import type { Metadata } from "next";
 
@@ -19,7 +19,6 @@ import {
   SOCIAL_LINKS,
 } from "@/config/site";
 import type {
-  IArticle,
   IClinic,
   IFaq,
   IReview,
@@ -37,8 +36,6 @@ export function absoluteUrl(path = "/"): string {
 
 export const clinicUrl = (slug: string): string =>
   absoluteUrl(`/clinic/${slug}`);
-export const articleUrl = (slug: string): string =>
-  absoluteUrl(`/resources/${slug}`);
 export const blogUrl = (slug: string): string => absoluteUrl(`/blog/${slug}`);
 
 /** Apply a Settings title template (e.g. `"%s · StemConnect"`). */
@@ -60,7 +57,7 @@ export interface BuildMetadataInput {
   image?: string;
   /** OpenGraph type — `website` (default), `article`, `profile`. */
   type?: "website" | "article" | "profile";
-  /** Per-entity overrides (`Clinic.seo`, `Article.seo`, …). */
+  /** Per-entity overrides (`Clinic.seo`, `BlogPost` meta, …). */
   seo?: ISeo | null;
   /** Site-wide defaults from `SiteSetting.seoDefaults`. */
   defaults?: ISeoDefaults | null;
@@ -319,43 +316,6 @@ export function breadcrumbListJsonLd(items: BreadcrumbItem[]): JsonLd {
   };
 }
 
-type ArticleSeoInput = Pick<
-  IArticle,
-  | "title"
-  | "slug"
-  | "excerpt"
-  | "coverImage"
-  | "author"
-  | "publishedAt"
-  | "updatedAt"
->;
-
-/** `Article` / `BlogPosting` for education-hub posts (PRD §6.7). */
-export function articleJsonLd(article: ArticleSeoInput): JsonLd {
-  return compact({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    description: article.excerpt,
-    image: article.coverImage?.url
-      ? absoluteUrl(article.coverImage.url)
-      : undefined,
-    url: articleUrl(article.slug),
-    datePublished: article.publishedAt?.toISOString?.() ?? undefined,
-    dateModified:
-      article.updatedAt?.toISOString?.() ??
-      article.publishedAt?.toISOString?.() ??
-      undefined,
-    author: article.author?.name
-      ? { "@type": "Person", name: article.author.name }
-      : { "@type": "Organization", name: SITE_NAME },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-  });
-}
 
 // ── Blog (SEO-team posts) ────────────────────────────────────────────────────
 

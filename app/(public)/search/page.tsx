@@ -8,13 +8,12 @@ import { trackEvent } from "@/lib/analytics";
 import { SearchBar } from "@/components/search/search-bar";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
-import { ArticleCard } from "@/components/article/article-card";
 import { formatCount } from "@/lib/format";
 
 export const generateMetadata = (): Promise<Metadata> =>
   pageMetadata({
     title: "Search",
-    description: "Search clinics, treatments, conditions, and patient resources.",
+    description: "Search clinics, treatments, and conditions.",
     path: "/search",
   });
 
@@ -27,19 +26,18 @@ export default async function SearchPage({
   const query = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
   const results = query
     ? await globalSearch(query)
-    : { clinics: [], clinicTotal: 0, articles: [], articleTotal: 0 };
+    : { clinics: [], clinicTotal: 0 };
 
   if (query) {
     // Track searches (incl. zero-result) without PII — PRD §15.
     void trackEvent("search", {
       length: query.length,
       clinics: results.clinicTotal,
-      articles: results.articleTotal,
-      zeroResult: results.clinicTotal + results.articleTotal === 0,
+      zeroResult: results.clinicTotal === 0,
     });
   }
 
-  const hasResults = results.clinics.length + results.articles.length > 0;
+  const hasResults = results.clinics.length > 0;
 
   return (
     <div className="container py-10 md:py-14">
@@ -48,7 +46,7 @@ export default async function SearchPage({
           {query ? `Results for “${query}”` : "Search"}
         </h1>
         <p className="mt-2 text-[15px] text-text-secondary">
-          Search across clinics, treatments, conditions, and patient resources.
+          Search across clinics, treatments, and conditions.
         </p>
         <div className="mt-5">
           <SearchBar
@@ -95,22 +93,6 @@ export default async function SearchPage({
                   See all {formatCount(results.clinicTotal)} clinics
                 </Link>
               ) : null}
-            </section>
-          ) : null}
-
-          {results.articles.length ? (
-            <section>
-              <h2 className="mb-4 font-display text-xl font-semibold text-text-primary">
-                Resources{" "}
-                <span className="text-text-muted">
-                  ({formatCount(results.articleTotal)})
-                </span>
-              </h2>
-              <div className="grid gap-5 md:grid-cols-3">
-                {results.articles.map((a) => (
-                  <ArticleCard key={a.slug} article={a} />
-                ))}
-              </div>
             </section>
           ) : null}
         </div>

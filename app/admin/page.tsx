@@ -72,16 +72,10 @@ export default async function AdminDashboardPage() {
   return (
     <>
       <PageHeader title="Dashboard">
-        <Button asChild variant="secondary" size="sm">
+        <Button asChild size="sm">
           <Link href="/admin/clinics/new">
             <Plus className="size-4" />
             Add clinic
-          </Link>
-        </Button>
-        <Button asChild size="sm">
-          <Link href="/admin/content/articles/new">
-            <Plus className="size-4" />
-            New article
           </Link>
         </Button>
       </PageHeader>

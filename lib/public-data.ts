@@ -2,7 +2,7 @@
  * Public data-access layer — Stage 5.
  *
  * Server-only read helpers that the public pages (homepage, directory, profile,
- * resources, …) call. Keeps the Mongoose/aggregation details out of the page
+ * …) call. Keeps the Mongoose/aggregation details out of the page
  * components and returns plain, serializable view models (no Mongoose docs cross
  * the server/client boundary). Pairs with `lib/search.ts` (faceted directory
  * query) and `lib/seo.ts` (metadata/JSON-LD).
@@ -27,7 +27,6 @@ import {
 import type { ClinicCardData } from "@/components/clinic/clinic-card";
 import {
   Accreditation,
-  Article,
   CellSource,
   Clinic,
   Condition,
@@ -38,7 +37,6 @@ import {
   SiteSetting,
   Treatment,
   User,
-  type IArticle,
   type IClinic,
   type IPlan,
   type IReview,
@@ -911,7 +909,6 @@ export interface HomeData {
     location?: string;
     rating?: number;
   }[];
-  latestArticles: ArticleCardView[];
   stats: { clinics: number; verified: number; reviews: number };
 }
 
@@ -966,7 +963,6 @@ export async function getHomeData(): Promise<HomeData> {
     conditions,
     countries,
     featuredClinics,
-    latestArticles,
     clinicCount,
     verifiedCount,
     reviewCount,
@@ -975,7 +971,6 @@ export async function getHomeData(): Promise<HomeData> {
     getConditions(),
     getCountries(),
     getFeaturedClinics(settings.featuredClinicIds ?? []),
-    getLatestArticles(3),
     Clinic.countDocuments({ status: "published", isDeleted: false }),
     Clinic.countDocuments({
       status: "published",
@@ -1008,171 +1003,12 @@ export async function getHomeData(): Promise<HomeData> {
       location: t.location,
       rating: t.rating,
     })),
-    latestArticles,
     stats: {
       clinics: clinicCount,
       verified: verifiedCount,
       reviews: reviewCount,
     },
   };
-}
-
-// ── Articles (education hub) ─────────────────────────────────────────────────
-
-export interface ArticleCardView {
-  title: string;
-  slug: string;
-  excerpt?: string;
-  coverUrl?: string;
-  coverAlt?: string;
-  category?: string;
-  readingTime?: number;
-  publishedAt?: string;
-  authorName?: string;
-}
-
-function toArticleCard(a: IArticle): ArticleCardView {
-  return {
-    title: a.title,
-    slug: a.slug,
-    excerpt: a.excerpt,
-    coverUrl: a.coverImage?.url,
-    coverAlt: a.coverImage?.alt,
-    category: a.categories?.[0],
-    readingTime: a.readingTime,
-    publishedAt: a.publishedAt
-      ? new Date(a.publishedAt).toISOString()
-      : undefined,
-    authorName: a.author?.name,
-  };
-}
-
-const articlePublishedFilter = {
-  status: "published",
-  isDeleted: false,
-  publishedAt: { $ne: null },
-} as const;
-
-export async function getLatestArticles(
-  limit = 3,
-): Promise<ArticleCardView[]> {
-  await dbConnect();
-  const docs = await Article.find(articlePublishedFilter)
-    .sort({ publishedAt: -1 })
-    .limit(limit)
-    .lean<IArticle[]>();
-  return docs.map(toArticleCard);
-}
-
-export interface ArticlesPage {
-  articles: ArticleCardView[];
-  featured?: ArticleCardView;
-  categories: { slug: string; label: string; count: number }[];
-  total: number;
-  page: number;
-  pageCount: number;
-}
-
-const ARTICLE_PAGE_SIZE = 9;
-
-/** Titleize a category slug ("medical-travel" → "Medical travel"). */
-export function titleizeSlug(slug: string): string {
-  const s = slug.replace(/[-_]+/g, " ").trim();
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-export async function getArticlesPage(opts: {
-  category?: string;
-  page?: number;
-}): Promise<ArticlesPage> {
-  await dbConnect();
-  const page = Math.max(1, opts.page ?? 1);
-  const filter: Record<string, unknown> = { ...articlePublishedFilter };
-  if (opts.category) filter.categories = opts.category;
-
-  const [docs, total, categoryAgg, featuredDoc] = await Promise.all([
-    Article.find(filter)
-      .sort({ publishedAt: -1 })
-      .skip((page - 1) * ARTICLE_PAGE_SIZE)
-      .limit(ARTICLE_PAGE_SIZE)
-      .lean<IArticle[]>(),
-    Article.countDocuments(filter),
-    Article.aggregate<{ _id: string; count: number }>([
-      { $match: articlePublishedFilter },
-      { $unwind: "$categories" },
-      { $group: { _id: "$categories", count: { $sum: 1 } } },
-      { $sort: { count: -1, _id: 1 } },
-    ]),
-    !opts.category && page === 1
-      ? Article.findOne(articlePublishedFilter)
-          .sort({ publishedAt: -1 })
-          .lean<IArticle>()
-      : Promise.resolve(null),
-  ]);
-
-  return {
-    articles: docs.map(toArticleCard),
-    featured: featuredDoc ? toArticleCard(featuredDoc) : undefined,
-    categories: categoryAgg.map((c) => ({
-      slug: c._id,
-      label: titleizeSlug(c._id),
-      count: c.count,
-    })),
-    total,
-    page,
-    pageCount: Math.max(1, Math.ceil(total / ARTICLE_PAGE_SIZE)),
-  };
-}
-
-export interface ArticleDetail extends ArticleCardView {
-  body?: string;
-  authorBio?: string;
-  authorAvatarUrl?: string;
-  categories: string[];
-  tags: string[];
-  updatedAt?: string;
-  relatedTreatments: TaxonomyTerm[];
-  relatedConditions: TaxonomyTerm[];
-  raw: IArticle;
-}
-
-export async function getArticleBySlug(
-  slug: string,
-): Promise<ArticleDetail | null> {
-  await dbConnect();
-  const doc = await Article.findOne({ slug, ...articlePublishedFilter })
-    .populate("relatedTreatmentIds", "name slug clinicCount")
-    .populate("relatedConditionIds", "name slug clinicCount")
-    .lean<IArticle>();
-  if (!doc) return null;
-
-  const treatmentRefs = (doc.relatedTreatmentIds ?? []) as unknown as PopulatedRef[];
-  const conditionRefs = (doc.relatedConditionIds ?? []) as unknown as PopulatedRef[];
-  const termOf = (r: PopulatedRef): TaxonomyTerm => ({
-    id: id(r._id),
-    name: r.name,
-    slug: r.slug,
-    clinicCount: r.clinicCount ?? 0,
-  });
-
-  return {
-    ...toArticleCard(doc),
-    body: doc.body,
-    authorBio: doc.author?.bio,
-    authorAvatarUrl: doc.author?.avatar?.url,
-    categories: doc.categories ?? [],
-    tags: doc.tags ?? [],
-    updatedAt: doc.updatedAt ? new Date(doc.updatedAt).toISOString() : undefined,
-    relatedTreatments: treatmentRefs.map(termOf),
-    relatedConditions: conditionRefs.map(termOf),
-    raw: doc,
-  };
-}
-
-export async function getPublishedArticleSlugs(): Promise<string[]> {
-  await dbConnect();
-  const docs = await Article.find(articlePublishedFilter).select("slug").lean();
-  return docs.map((d) => d.slug);
 }
 
 // ── Plans (for-clinics) ──────────────────────────────────────────────────────
@@ -1269,13 +1105,11 @@ export async function getMemberLeads(email: string): Promise<MemberLead[]> {
   });
 }
 
-// ── Global search (clinics + articles) ───────────────────────────────────────
+// ── Global search (clinics) ──────────────────────────────────────────────────
 
 export interface GlobalSearchResult {
   clinics: ClinicCardData[];
   clinicTotal: number;
-  articles: ArticleCardView[];
-  articleTotal: number;
 }
 
 export async function globalSearch(
@@ -1283,23 +1117,19 @@ export async function globalSearch(
 ): Promise<GlobalSearchResult> {
   const q = query.trim();
   if (!q) {
-    return { clinics: [], clinicTotal: 0, articles: [], articleTotal: 0 };
+    return { clinics: [], clinicTotal: 0 };
   }
   await dbConnect();
 
-  const [clinicResult, articleDocs] = await Promise.all([
-    getDirectoryData({ query: q, pageSize: 12, sort: "relevance" }),
-    Article.find({ ...articlePublishedFilter, $text: { $search: q } })
-      .select("title slug excerpt coverImage categories readingTime publishedAt author")
-      .limit(8)
-      .lean<IArticle[]>(),
-  ]);
+  const clinicResult = await getDirectoryData({
+    query: q,
+    pageSize: 12,
+    sort: "relevance",
+  });
 
   return {
     clinics: clinicResult.cards,
     clinicTotal: clinicResult.total,
-    articles: articleDocs.map(toArticleCard),
-    articleTotal: articleDocs.length,
   };
 }
 
@@ -1320,18 +1150,6 @@ export async function getClinicSitemapEntries(): Promise<SitemapEntry[]> {
   return docs.map((d) => ({
     path: `/clinic/${d.slug}`,
     lastModified: d.updatedAt,
-  }));
-}
-
-/** Published article URLs with their last-updated timestamp. */
-export async function getArticleSitemapEntries(): Promise<SitemapEntry[]> {
-  await dbConnect();
-  const docs = await Article.find(articlePublishedFilter)
-    .select("slug updatedAt publishedAt")
-    .lean();
-  return docs.map((d) => ({
-    path: `/resources/${d.slug}`,
-    lastModified: d.updatedAt ?? d.publishedAt ?? undefined,
   }));
 }
 

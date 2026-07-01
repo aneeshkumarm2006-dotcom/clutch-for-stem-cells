@@ -34,8 +34,6 @@ export const FEATURES = {
   enableProviderSelfServe: false,
   /** Member shortlist (guest localStorage → sync on login) — Stage 5.11. */
   enableShortlist: true,
-  /** Education hub / blog — Stage 5.8. */
-  enableResources: true,
   /** Find-a-clinic matching wizard — Stage 5.6. */
   enableMatchingWizard: true,
   /** Live Stripe billing for tiers (display-only in MVP) — Phase 2. */

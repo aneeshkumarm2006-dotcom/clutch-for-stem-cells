@@ -49,7 +49,7 @@ async function termOptions<T extends ITaxonomyBase>(
   }));
 }
 
-/** All taxonomy option sets for the clinic & article forms. */
+/** All taxonomy option sets for the clinic forms. */
 export const getTaxonomyOptions = cache(
   async (): Promise<{
     treatments: TaxonomyOption[];

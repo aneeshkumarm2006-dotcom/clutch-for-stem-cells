@@ -3,7 +3,7 @@
  *
  * `app/sitemap.ts` and `app/robots.ts` are ISR routes (`revalidate = 3600`), so
  * they refresh on their own. This cron forces an off-peak refresh so newly
- * published clinics/articles/taxonomy land in the sitemap promptly without
+ * published clinics/blog posts/taxonomy land in the sitemap promptly without
  * waiting for organic traffic to trigger revalidation. Gated by `CRON_SECRET`.
  */
 import { revalidatePath } from "next/cache";

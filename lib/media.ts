@@ -8,7 +8,7 @@
  *
  * Every upload is validated for MIME type and size first (PRD §13 secure
  * uploads). Returned shape matches the `IImage` sub-document so results drop
- * straight onto a clinic/article. {@link cloudinaryLoader} feeds `next/image`.
+ * straight onto a clinic profile. {@link cloudinaryLoader} feeds `next/image`.
  */
 import { createHash } from "node:crypto";
 
@@ -67,7 +67,7 @@ export interface UploadInput {
   data: Buffer | Uint8Array | ArrayBuffer;
   contentType: string;
   filename?: string;
-  /** Logical folder/prefix, e.g. "clinics" or "articles". */
+  /** Logical folder/prefix, e.g. "clinics" or "blog". */
   folder?: string;
 }
 

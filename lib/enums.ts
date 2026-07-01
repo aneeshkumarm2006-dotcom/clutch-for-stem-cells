@@ -129,12 +129,6 @@ export const REPORT_STATUSES = [
 ] as const;
 export type ReportStatus = (typeof REPORT_STATUSES)[number];
 
-// ── Article (PRD §5.5) ──────────────────────────────────────────────────────
-// PRD-ASSUMPTION: §5.5 lists draft|published; `scheduled` is added to support
-// the CMS schedule/publish flow in §8.6 (publishedAt in the future).
-export const ARTICLE_STATUSES = ["draft", "published", "scheduled"] as const;
-export type ArticleStatus = (typeof ARTICLE_STATUSES)[number];
-
 // ── User (PRD §3, §5.6) ─────────────────────────────────────────────────────
 // "Visitor" (PRD §3) is the unauthenticated state — never persisted on a User
 // record — so it is intentionally absent from the stored role enum.

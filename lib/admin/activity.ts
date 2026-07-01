@@ -52,7 +52,6 @@ const ENTITY_LABEL: Record<string, string> = {
   Clinic: "Clinic",
   Review: "Review",
   Lead: "Lead",
-  Article: "Article",
   Treatment: "Treatment",
   Condition: "Condition",
   CellSource: "Cell source",

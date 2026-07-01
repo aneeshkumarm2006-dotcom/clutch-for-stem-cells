@@ -2,7 +2,7 @@
  * Dynamic `sitemap.xml` — Stage 7.4 / PRD §11.
  *
  * Emits the static marketing/trust routes plus every published clinic, taxonomy
- * landing page (treatment/condition/country/city), and article. DB reads are
+ * landing page (treatment/condition/country/city), and blog post. DB reads are
  * wrapped so a build-time outage degrades to "static routes only" rather than
  * failing the build (mirrors the `generateStaticParams` fallback pattern).
  * Revalidated hourly so newly published content appears without a redeploy.
@@ -11,7 +11,6 @@ import type { MetadataRoute } from "next";
 
 import { absoluteUrl } from "@/lib/seo";
 import {
-  getArticleSitemapEntries,
   getClinicSitemapEntries,
   getTaxonomySitemapEntries,
   type SitemapEntry,
@@ -33,7 +32,6 @@ const STATIC_ROUTES: {
   { path: "/treatments", changeFrequency: "weekly", priority: 0.8 },
   { path: "/conditions", changeFrequency: "weekly", priority: 0.8 },
   { path: "/locations", changeFrequency: "weekly", priority: 0.8 },
-  { path: "/resources", changeFrequency: "daily", priority: 0.7 },
   { path: "/blog", changeFrequency: "daily", priority: 0.7 },
   { path: "/find-a-clinic", changeFrequency: "monthly", priority: 0.7 },
   { path: "/for-clinics", changeFrequency: "monthly", priority: 0.6 },
@@ -59,15 +57,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let dynamicEntries: MetadataRoute.Sitemap = [];
   try {
-    const [clinics, taxonomy, articles, blog]: [
-      SitemapEntry[],
+    const [clinics, taxonomy, blog]: [
       SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
     ] = await Promise.all([
       getClinicSitemapEntries(),
       getTaxonomySitemapEntries(),
-      getArticleSitemapEntries(),
       getBlogSitemapEntries(),
     ]);
 
@@ -83,12 +79,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: e.lastModified ?? now,
         changeFrequency: "weekly" as const,
         priority: 0.7,
-      })),
-      ...articles.map((e) => ({
-        url: absoluteUrl(e.path),
-        lastModified: e.lastModified ?? now,
-        changeFrequency: "monthly" as const,
-        priority: 0.6,
       })),
       ...blog.map((e) => ({
         url: absoluteUrl(e.path),

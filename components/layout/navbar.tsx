@@ -28,7 +28,7 @@ export const DEFAULT_NAV_LINKS: NavLink[] = [
   { label: "Treatments", href: "/treatments" },
   { label: "Conditions", href: "/conditions" },
   { label: "Destinations", href: "/locations" },
-  { label: "Resources", href: "/resources" },
+  { label: "Blog", href: "/blog" },
 ];
 
 function isActive(pathname: string, href: string): boolean {

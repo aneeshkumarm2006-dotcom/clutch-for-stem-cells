@@ -2,11 +2,10 @@
  * Seed data — Stage 1.11. Pure data (no DB/model imports). Cross-references use
  * slugs; `scripts/seed.ts` resolves them to ObjectIds at insert time.
  *
- * Taxonomy mirrors PRD §18. Demo clinics/reviews/articles are illustrative only
+ * Taxonomy mirrors PRD §18. Demo clinics/reviews are illustrative only
  * (a sensitive medical vertical — see PRD §14; nothing here implies efficacy).
  */
 import type {
-  ArticleStatus,
   ClinicStatus,
   ClinicTier,
   PlanKey,
@@ -144,21 +143,6 @@ export interface ReviewSeed {
   whyChosenTags?: string[];
   wouldRecommend?: boolean;
   providerResponse?: { body: string };
-}
-
-export interface ArticleSeed {
-  title: string;
-  slug: string;
-  status: ArticleStatus;
-  excerpt: string;
-  body: string;
-  author: { name: string; bio?: string };
-  categories: string[];
-  tags: string[];
-  relatedConditionSlugs?: string[];
-  relatedTreatmentSlugs?: string[];
-  readingTime?: number;
-  publishedAtDaysAgo?: number;
 }
 
 export interface PlanSeed {
@@ -1235,54 +1219,6 @@ export const REVIEWS: ReviewSeed[] = [
     body: {},
     whyChosenTags: [],
     wouldRecommend: false,
-  },
-];
-
-// ── Demo articles ───────────────────────────────────────────────────────────
-
-export const ARTICLES: ArticleSeed[] = [
-  {
-    title: "What is MSC therapy? A patient's guide",
-    slug: "what-is-msc-therapy",
-    status: "published",
-    excerpt:
-      "A plain-language overview of mesenchymal stem cell therapy, how it's studied, and questions to ask a clinic.",
-    body: "## What is MSC therapy?\n\nMesenchymal stem cell (MSC) therapy uses cells sourced from tissues such as umbilical cord, fat, or bone marrow. This guide explains the basics in plain language.\n\n> This article is for information only and is not medical advice. Always consult a licensed physician. Individual results vary and no outcome is guaranteed.\n\n### Questions to ask a clinic\n\n- Where are the cells sourced and processed?\n- Is the lab GMP-certified?\n- What does the protocol involve and what are realistic expectations?",
-    author: { name: "StemConnect Editorial", bio: "Patient education team." },
-    categories: ["treatment-guides"],
-    tags: ["msc", "basics"],
-    relatedConditionSlugs: ["knee-osteoarthritis"],
-    relatedTreatmentSlugs: ["msc-therapy"],
-    readingTime: 6,
-    publishedAtDaysAgo: 20,
-  },
-  {
-    title: "Medical travel for stem cell treatment: what to know",
-    slug: "medical-travel-stem-cell-treatment",
-    status: "published",
-    excerpt:
-      "Practical considerations for traveling abroad for regenerative medicine, from accreditation to aftercare.",
-    body: "## Planning medical travel\n\nMany patients consider traveling abroad for regenerative medicine. This guide covers accreditation, pricing transparency, and aftercare planning.\n\n> Informational only — not medical advice. Verify clinic credentials independently.",
-    author: { name: "StemConnect Editorial" },
-    categories: ["medical-travel"],
-    tags: ["travel", "planning"],
-    relatedTreatmentSlugs: ["msc-therapy", "cord-blood-therapy"],
-    readingTime: 8,
-    publishedAtDaysAgo: 12,
-  },
-  {
-    title: "Understanding stem cell treatment costs",
-    slug: "understanding-stem-cell-costs",
-    status: "published",
-    excerpt:
-      "Why prices vary so widely and how to compare quotes between clinics.",
-    body: "## Why costs vary\n\nPricing depends on cell source, processing, protocol complexity, and location. This guide helps you compare quotes fairly.\n\n> Pricing on StemConnect is indicative; confirm directly with each clinic.",
-    author: { name: "StemConnect Editorial" },
-    categories: ["pricing"],
-    tags: ["cost", "comparison"],
-    relatedTreatmentSlugs: ["prp", "exosome-therapy"],
-    readingTime: 5,
-    publishedAtDaysAgo: 5,
   },
 ];
 
