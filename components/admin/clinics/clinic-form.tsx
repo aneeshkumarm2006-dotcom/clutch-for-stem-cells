@@ -471,6 +471,16 @@ export function ClinicForm({
       medicalDirector: v.medicalDirector?.name?.trim()
         ? v.medicalDirector
         : undefined,
+      // Drop untouched repeatable rows so an empty "Add …" row can't fail
+      // server validation. Partially-filled rows are kept so the (now
+      // field-named) validation error guides the user to complete them.
+      team: (v.team ?? []).filter((m) => m.name?.trim()),
+      faqs: (v.faqs ?? []).filter(
+        (f) => f.question?.trim() || f.answer?.trim(),
+      ),
+      caseStudies: (v.caseStudies ?? []).filter(
+        (c) => c.title?.trim() || c.summary?.trim() || c.outcome?.trim(),
+      ),
       locations: (v.locations ?? []).map((l) => ({
         ...l,
         lat: num(l.lat),

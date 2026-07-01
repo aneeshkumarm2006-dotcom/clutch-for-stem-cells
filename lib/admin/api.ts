@@ -66,12 +66,16 @@ export async function parseBody<S extends ZodTypeAny>(
   }
   const parsed = schema.safeParse(raw);
   if (!parsed.success) {
-    return {
-      error: fail(
-        parsed.error.issues[0]?.message ?? "Check the form and try again.",
-        422,
-      ),
-    };
+    const issue = parsed.error.issues[0];
+    // Prefix the field path so the toast names the offending field instead of a
+    // bare "String must contain at least 1 character(s)".
+    const path = issue?.path.join(".");
+    const message = issue
+      ? path
+        ? `${path}: ${issue.message}`
+        : issue.message
+      : "Check the form and try again.";
+    return { error: fail(message, 422) };
   }
   return { data: parsed.data };
 }
