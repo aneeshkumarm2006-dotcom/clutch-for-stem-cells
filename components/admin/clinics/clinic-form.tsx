@@ -163,37 +163,10 @@ const SECTIONS = [
 const opt = (vals: readonly string[]) =>
   vals.map((v) => ({ value: v, label: v.charAt(0).toUpperCase() + v.slice(1) }));
 
-export function emptyClinic(): ClinicFormValues {
-  return {
-    name: "",
-    slug: "",
-    status: "draft",
-    tier: "basic",
-    tagline: "",
-    description: "",
-    verification: { isVerified: false, badge: undefined, method: "", notes: "" },
-    gallery: [],
-    videoUrl: "",
-    treatmentTypes: [],
-    conditionsTreated: [],
-    cellSources: [],
-    serviceFocus: [],
-    accreditations: [],
-    currency: "USD",
-    priceNote: "",
-    team: [],
-    languages: [],
-    locations: [{ isHQ: true }],
-    website: "",
-    social: {},
-    contactEmail: "",
-    caseStudies: [],
-    faqs: [],
-    highlights: [],
-    isClaimed: false,
-    seo: {},
-  };
-}
+// `emptyClinic()` lives in `./clinic-form-defaults` (a non-client module) so the
+// New-clinic Server Component can call it without hitting the client-reference
+// stub error. Re-exported here for backward-compatible imports.
+export { emptyClinic } from "@/components/admin/clinics/clinic-form-defaults";
 
 // ── Section wrapper ──────────────────────────────────────────────────────────
 

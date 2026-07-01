@@ -1,10 +1,8 @@
 /**
  * New article `/admin/content/articles/new` (PRD §8.6 / Stage 6.8).
  */
-import {
-  ArticleForm,
-  emptyArticle,
-} from "@/components/admin/content/article-form";
+import { ArticleForm } from "@/components/admin/content/article-form";
+import { emptyArticle } from "@/components/admin/content/article-form-defaults";
 import { getTaxonomyOptions } from "@/lib/admin/lookups";
 
 export const dynamic = "force-dynamic";

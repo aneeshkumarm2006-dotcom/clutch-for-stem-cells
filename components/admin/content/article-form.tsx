@@ -42,21 +42,10 @@ export interface ArticleFormValues {
   };
 }
 
-export function emptyArticle(): ArticleFormValues {
-  return {
-    title: "",
-    slug: "",
-    status: "draft",
-    excerpt: "",
-    body: "",
-    author: { name: "" },
-    categories: [],
-    tags: [],
-    relatedConditionIds: [],
-    relatedTreatmentIds: [],
-    seo: {},
-  };
-}
+// `emptyArticle()` lives in `./article-form-defaults` (a non-client module) so
+// the New-article Server Component can call it without hitting the
+// client-reference stub error. Re-exported here for backward-compatible imports.
+export { emptyArticle } from "@/components/admin/content/article-form-defaults";
 
 function toLocalInput(iso?: string): string {
   if (!iso) return "";

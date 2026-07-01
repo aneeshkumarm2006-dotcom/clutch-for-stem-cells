@@ -3,9 +3,9 @@
  */
 import {
   ClinicForm,
-  emptyClinic,
   type ClinicFormOptions,
 } from "@/components/admin/clinics/clinic-form";
+import { emptyClinic } from "@/components/admin/clinics/clinic-form-defaults";
 import { getTaxonomyOptions, getUserOptions } from "@/lib/admin/lookups";
 
 export const dynamic = "force-dynamic";
