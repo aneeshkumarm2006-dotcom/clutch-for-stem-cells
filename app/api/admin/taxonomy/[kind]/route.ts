@@ -5,6 +5,7 @@ import { dbConnect } from "@/lib/db";
 import { fail, ok, parseBody, withRole } from "@/lib/admin/api";
 import { recordAuditFromRequest } from "@/lib/audit";
 import { getTaxonomyConfig } from "@/lib/admin/taxonomy-config";
+import { reviewEditorialWrite } from "@/lib/content-review";
 
 export const dynamic = "force-dynamic";
 
@@ -28,8 +29,20 @@ export async function POST(
       return fail("That slug is already taken.", 409);
     }
 
+    // YMYL review gate: recompute content flags + block unreviewed approvals.
+    const gate = reviewEditorialWrite(null, data);
+    if (gate.error) return fail(gate.error, 422);
+
     const order = await config.model.countDocuments();
-    const doc = await config.model.create({ ...data, order });
+    const approved = data.reviewStatus === "approved";
+    const doc = await config.model.create({
+      ...data,
+      order,
+      contentFlags: gate.contentFlags,
+      ...(approved && data.lastReviewedAt == null
+        ? { lastReviewedAt: new Date() }
+        : {}),
+    });
 
     await recordAuditFromRequest(req, {
       actorUserId: user.id,

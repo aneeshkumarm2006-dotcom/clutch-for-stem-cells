@@ -7,8 +7,10 @@
  * {@link renderJsonLd}. Page-level `seo` overrides win over Settings defaults,
  * which win over the `config/site.ts` constants.
  *
- * Schema.org types emitted (PRD §11): `Organization`, `MedicalClinic`,
- * `AggregateRating`, `Review`, `BreadcrumbList`, `FAQPage`.
+ * Schema.org types emitted (PRD §11 + AEO): `Organization`, `WebSite`,
+ * `MedicalClinic`, `AggregateRating`, `Review`, `BreadcrumbList`, `FAQPage`,
+ * `BlogPosting`, `MedicalWebPage`, `MedicalCondition`, `MedicalTherapy`,
+ * `ItemList`.
  */
 import type { Metadata } from "next";
 
@@ -18,13 +20,7 @@ import {
   SITE_URL,
   SOCIAL_LINKS,
 } from "@/config/site";
-import type {
-  IClinic,
-  IFaq,
-  IReview,
-  ISeo,
-  ISeoDefaults,
-} from "@/models";
+import type { IClinic, IFaq, IReview, ISeo, ISeoDefaults } from "@/models";
 
 // ── URL helpers ──────────────────────────────────────────────────────────────
 
@@ -61,6 +57,18 @@ export interface BuildMetadataInput {
   seo?: ISeo | null;
   /** Site-wide defaults from `SiteSetting.seoDefaults`. */
   defaults?: ISeoDefaults | null;
+  /**
+   * Route-level `noindex` for thin/filtered/paginated URLs (e.g. a directory
+   * page carrying `?sort=` or `?page=2`, or an incomplete combination page).
+   * OR-ed with the per-entity/global `seo.noindex`. See `lib/seo-indexation.ts`.
+   */
+  noindex?: boolean;
+  /**
+   * When `noindex` is set, whether to also stop following links. Defaults to
+   * `false` so a thin page stays `noindex, follow` — it de-dupes from search
+   * but still passes link equity through to canonical/child pages.
+   */
+  nofollow?: boolean;
 }
 
 /**
@@ -86,7 +94,7 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
   const imageRaw = input.image ?? seo?.ogImage ?? defaults?.ogImage;
   const images = imageRaw ? [{ url: absoluteUrl(imageRaw) }] : undefined;
 
-  const noindex = seo?.noindex ?? defaults?.noindex ?? false;
+  const noindex = input.noindex || seo?.noindex || defaults?.noindex || false;
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -108,7 +116,9 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
       images: images?.map((i) => i.url),
       site: defaults?.twitterHandle,
     },
-    robots: noindex ? { index: false, follow: false } : undefined,
+    // Thin/filtered pages stay `follow` so equity flows to canonical + children;
+    // only an explicit `nofollow` (or a hard per-entity noindex) drops it.
+    robots: noindex ? { index: false, follow: !input.nofollow } : undefined,
   };
 }
 
@@ -316,7 +326,6 @@ export function breadcrumbListJsonLd(items: BreadcrumbItem[]): JsonLd {
   };
 }
 
-
 // ── Blog (SEO-team posts) ────────────────────────────────────────────────────
 
 export interface BlogPostingSeoInput {
@@ -370,6 +379,187 @@ export function faqPageJsonLd(
       "@type": "Question",
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+}
+
+// ── Medical / topical pages (taxonomy + combination pages, AEO) ───────────────
+
+/** A credentialed medical reviewer, surfaced as a `Person` for E-E-A-T. */
+export interface ReviewerSeoInput {
+  name: string;
+  /** Post-nominal credentials, e.g. "MD, PhD". */
+  credentials?: string;
+  /** Authoritative profile URLs (registry, ORCID, LinkedIn). */
+  sameAs?: string[];
+}
+
+/** Build the `Person` node for a medical reviewer (or `undefined` if none). */
+function reviewerNode(reviewer?: ReviewerSeoInput | null): JsonLd | undefined {
+  if (!reviewer?.name) return undefined;
+  return compact({
+    "@type": "Person",
+    name: reviewer.name,
+    honorificSuffix: reviewer.credentials,
+    sameAs: reviewer.sameAs?.length ? reviewer.sameAs : undefined,
+  });
+}
+
+export interface MedicalWebPageSeoInput {
+  name: string;
+  description?: string;
+  /** Root-relative path or absolute URL (canonical of the page). */
+  path: string;
+  /** ISO date or Date the page was last medically reviewed. */
+  lastReviewed?: Date | string | null;
+  /** ISO date or Date the page content was last modified. */
+  dateModified?: Date | string | null;
+  reviewedBy?: ReviewerSeoInput | null;
+  /** The primary entity the page is about (a MedicalCondition/Therapy node). */
+  about?: JsonLd;
+  /** Schema.org `MedicalSpecialty` string, e.g. "Rheumatology". */
+  specialty?: string;
+}
+
+/**
+ * `MedicalWebPage` — the YMYL page wrapper carrying medical-review provenance
+ * (`lastReviewed` + `reviewedBy`) and an `about` link to the condition/therapy
+ * entity. Emit alongside the more specific `MedicalCondition`/`MedicalTherapy`
+ * node (pass that node as `about`).
+ */
+export function medicalWebPageJsonLd(input: MedicalWebPageSeoInput): JsonLd {
+  return compact({
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    lastReviewed: toIso(input.lastReviewed),
+    dateModified: toIso(input.dateModified) ?? toIso(input.lastReviewed),
+    reviewedBy: reviewerNode(input.reviewedBy),
+    about: input.about,
+    specialty: input.specialty,
+  });
+}
+
+export interface MedicalConditionSeoInput {
+  name: string;
+  description?: string;
+  path: string;
+  /** Synonyms for entity matching, e.g. ["knee OA", "gonarthrosis"]. */
+  alternateName?: string[];
+  /** Names of therapies used for this condition (plain strings). */
+  possibleTreatment?: string[];
+}
+
+/**
+ * `MedicalCondition`. Attaches to condition pages and as the `about` of a
+ * treatment×condition page. `alternateName` carries synonyms so answer engines
+ * resolve the entity from any phrasing.
+ */
+export function medicalConditionJsonLd(
+  input: MedicalConditionSeoInput,
+): JsonLd {
+  return compact({
+    "@context": "https://schema.org",
+    "@type": "MedicalCondition",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    alternateName: input.alternateName?.length
+      ? input.alternateName
+      : undefined,
+    possibleTreatment: input.possibleTreatment?.length
+      ? input.possibleTreatment.map((name) => ({
+          "@type": "MedicalTherapy",
+          name,
+        }))
+      : undefined,
+  });
+}
+
+export interface MedicalTherapySeoInput {
+  name: string;
+  description?: string;
+  path: string;
+  /** How the therapy is performed (e.g. delivery route), free text. */
+  howPerformed?: string;
+  /** Condition names this therapy is indicated for (plain strings). */
+  indication?: string[];
+}
+
+/**
+ * `MedicalTherapy` (a `MedicalProcedure` subtype — correct for cell/biologic
+ * therapies). Attaches to treatment pages and all treatment×* combination
+ * pages. Keep claims neutral — `description` is scanned for flagged phrases
+ * upstream; this generator does not assert efficacy.
+ */
+export function medicalTherapyJsonLd(input: MedicalTherapySeoInput): JsonLd {
+  return compact({
+    "@context": "https://schema.org",
+    "@type": "MedicalTherapy",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    howPerformed: input.howPerformed,
+    indication: input.indication?.length
+      ? input.indication.map((name) => ({
+          "@type": "MedicalCondition",
+          name,
+        }))
+      : undefined,
+  });
+}
+
+export interface PersonSeoInput {
+  name: string;
+  path: string;
+  credentials?: string;
+  jobTitle?: string;
+  description?: string;
+  image?: string;
+  sameAs?: string[];
+}
+
+/**
+ * `Person` node for a medical reviewer's bio page — the E-E-A-T author entity
+ * that `MedicalWebPage.reviewedBy` references across the site.
+ */
+export function personJsonLd(input: PersonSeoInput): JsonLd {
+  return compact({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: input.name,
+    url: absoluteUrl(input.path),
+    honorificSuffix: input.credentials,
+    jobTitle: input.jobTitle,
+    description: input.description,
+    image: input.image ? absoluteUrl(input.image) : undefined,
+    sameAs: input.sameAs?.length ? input.sameAs : undefined,
+  });
+}
+
+export interface ItemListEntry {
+  /** Root-relative path or absolute URL of the listed item. */
+  path: string;
+  name?: string;
+}
+
+/**
+ * `ItemList` of the clinics rendered on a directory/combination page — helps
+ * search + answer engines read the result set as an ordered list. Only emit
+ * when there is at least one item (never an empty list).
+ */
+export function itemListJsonLd(items: ItemListEntry[]): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    numberOfItems: items.length,
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: absoluteUrl(item.path),
+      name: item.name,
     })),
   };
 }

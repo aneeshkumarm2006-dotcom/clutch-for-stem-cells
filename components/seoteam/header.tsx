@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileText, PlusCircle } from "lucide-react";
+import { FileText, LayoutGrid, PlusCircle, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SITE_NAME } from "@/config/site";
@@ -25,6 +25,18 @@ export function SeoTeamHeader() {
           <Link href="/seoteam">
             <FileText className="size-4" />
             <span className="hidden sm:inline">Posts</span>
+          </Link>
+        </Button>
+        <Button asChild variant="ghost" size="sm">
+          <Link href="/seoteam/matrix">
+            <LayoutGrid className="size-4" />
+            <span className="hidden sm:inline">Combinations</span>
+          </Link>
+        </Button>
+        <Button asChild variant="ghost" size="sm">
+          <Link href="/seoteam/reviewers">
+            <ShieldCheck className="size-4" />
+            <span className="hidden sm:inline">Reviewers</span>
           </Link>
         </Button>
         <Button asChild size="sm">

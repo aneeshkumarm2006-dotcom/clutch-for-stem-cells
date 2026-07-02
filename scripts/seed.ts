@@ -24,14 +24,18 @@ import mongoose, {
 import { dbConnect } from "@/lib/db";
 import { hashPassword } from "@/lib/auth/password";
 import { SUB_RATING_KEYS, type SubRatingKey } from "@/lib/enums";
+import { scanContentFlags } from "@/lib/content-flags";
 import { DEFAULT_CURRENCY, MEDICAL_DISCLAIMER, SITE_NAME } from "@/config/site";
 import {
   Accreditation,
+  BlogPost,
   CellSource,
   Clinic,
   Condition,
   GLOBAL_SETTINGS_KEY,
   Location,
+  MatrixPage,
+  MedicalReviewer,
   Plan,
   Review,
   SiteSetting,
@@ -46,6 +50,7 @@ import {
 } from "@/models";
 import {
   ACCREDITATIONS,
+  BLOG_POSTS,
   CELL_SOURCES,
   CITIES,
   CLINICS,
@@ -53,12 +58,17 @@ import {
   COUNTRIES,
   FEATURED_CLINIC_SLUGS,
   HERO,
+  MATRIX_PAGES,
+  MEDICAL_REVIEWERS,
   PLANS,
   POPULAR_SEARCHES,
   REVIEWS,
+  TAXONOMY_EDITORIAL,
   TESTIMONIALS,
   TREATMENTS,
   type ClinicSeed,
+  type MatrixPageSeed,
+  type TaxonomyEditorialSeed,
 } from "@/scripts/seed-data";
 
 const DRY = process.argv.includes("--dry");
@@ -102,6 +112,31 @@ const round = (n: number, dp = 1): number => {
 };
 const mean = (xs: number[]): number =>
   xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0;
+
+/** All scannable strings on a taxonomy editorial seed (for the flag scanner). */
+function taxonomyEditorialText(e: TaxonomyEditorialSeed): string[] {
+  return [
+    e.body,
+    e.mechanism,
+    e.evidenceSummary,
+    e.costRange,
+    e.recoveryTimeline,
+    e.risks,
+    ...(e.faqs ?? []).flatMap((f) => [f.question, f.answer]),
+    ...(e.keyFacts ?? []).flatMap((k) => [k.label, k.value]),
+  ].filter((s): s is string => Boolean(s));
+}
+
+/** All scannable strings on a MatrixPage seed. */
+function matrixEditorialText(m: MatrixPageSeed): string[] {
+  return [
+    m.title,
+    m.intro,
+    m.body,
+    ...(m.faqs ?? []).flatMap((f) => [f.question, f.answer]),
+    ...(m.keyFacts ?? []).flatMap((k) => [k.label, k.value]),
+  ].filter((s): s is string => Boolean(s));
+}
 
 /** Load env from .env.local / .env (Next-style) so MONGODB_URI is available. */
 async function loadEnv(): Promise<void> {
@@ -381,6 +416,70 @@ async function main(): Promise<void> {
   // 6) Plans ──────────────────────────────────────────────────────────────--
   const plans = build(Plan, PLANS);
 
+  // 7) Editorial content (programmatic-SEO / AEO) — all `in_review`, never public.
+  //    A real reviewer must approve before anything renders (PRD §14).
+  const reviewers = build(MedicalReviewer, MEDICAL_REVIEWERS);
+
+  // Enrich taxonomy terms in place with the (unreviewed) editorial content.
+  for (const e of TAXONOMY_EDITORIAL) {
+    const doc =
+      e.kind === "treatment"
+        ? tBySlug.get(e.slug)
+        : e.kind === "condition"
+          ? cBySlug.get(e.slug)
+          : countryBySlug.get(e.slug);
+    if (!doc) continue;
+    (doc as HydratedDocument<ITreatment>).set({
+      body: e.body,
+      faqs: e.faqs ?? [],
+      keyFacts: e.keyFacts ?? [],
+      mechanism: e.mechanism,
+      evidenceLevel: e.evidenceLevel,
+      evidenceSummary: e.evidenceSummary,
+      costRange: e.costRange,
+      recoveryTimeline: e.recoveryTimeline,
+      risks: e.risks,
+      reviewStatus: "in_review",
+      contentFlags: scanContentFlags(taxonomyEditorialText(e)),
+    });
+  }
+
+  const matrixPages = build(
+    MatrixPage,
+    MATRIX_PAGES.map((m) => ({
+      kind: m.kind,
+      slugA: m.slugA,
+      slugB: m.slugB,
+      title: m.title,
+      metaTitle: m.metaTitle,
+      metaDescription: m.metaDescription,
+      intro: m.intro,
+      body: m.body ?? "",
+      faqs: m.faqs ?? [],
+      keyFacts: m.keyFacts ?? [],
+      reviewStatus: "in_review",
+      reviewedBy: null,
+      flagsAcknowledged: false,
+      contentFlags: scanContentFlags(matrixEditorialText(m)),
+    })),
+  );
+
+  // Pillar guides — seeded as drafts (never public until editorial review).
+  const blogPosts = build(
+    BlogPost,
+    BLOG_POSTS.map((p) => ({
+      title: p.title,
+      slug: p.slug,
+      template: p.template,
+      status: "draft" as const,
+      body: p.body,
+      excerpt: p.excerpt,
+      metaTitle: p.metaTitle,
+      author: p.author,
+      publishedAt: null,
+    })),
+  );
+
   // 8) SuperAdmin user — credentials come from ADMIN_SEED_* env vars ──────────
   const admin = adminSeed();
   const adminUser = new User({
@@ -392,7 +491,9 @@ async function main(): Promise<void> {
     emailVerified: new Date(),
     // Hash the env password so the account can sign in immediately. When no
     // password is configured, leave it unset (login disabled until reset).
-    passwordHash: admin.password ? await hashPassword(admin.password) : undefined,
+    passwordHash: admin.password
+      ? await hashPassword(admin.password)
+      : undefined,
   });
 
   // 9) Site settings singleton ─────────────────────────────────────────────---
@@ -444,6 +545,9 @@ async function main(): Promise<void> {
   await commit(Clinic, clinics, "clinics");
   await commit(Review, reviews, "reviews");
   await commit(Plan, plans, "plans");
+  await commit(MedicalReviewer, reviewers, "medical reviewers");
+  await commit(MatrixPage, matrixPages, "matrix pages (in_review)");
+  await commit(BlogPost, blogPosts, "blog pillar drafts");
   await commit(User, [adminUser], "admin user");
   await commit(SiteSetting, [settings], "site settings");
 
@@ -460,7 +564,9 @@ async function main(): Promise<void> {
   log(`\n✅ Seed complete.`);
   log(`   SuperAdmin user: ${admin.email}`);
   if (admin.password) {
-    log(`   Password: set from ADMIN_SEED_PASSWORD — sign in at /auth/sign-in.\n`);
+    log(
+      `   Password: set from ADMIN_SEED_PASSWORD — sign in at /auth/sign-in.\n`,
+    );
   } else {
     log(
       `   NOTE: ADMIN_SEED_PASSWORD is not set, so no password was created.\n` +
@@ -592,6 +698,9 @@ async function clearCollections(): Promise<void> {
     Clinic.deleteMany({}),
     Review.deleteMany({}),
     Plan.deleteMany({}),
+    MedicalReviewer.deleteMany({}),
+    MatrixPage.deleteMany({}),
+    BlogPost.deleteMany({}),
     SiteSetting.deleteMany({ key: GLOBAL_SETTINGS_KEY }),
     // Remove any prior superadmin seed (by configured email or the legacy
     // default) so re-seeding with a new ADMIN_SEED_EMAIL doesn't leave a stale

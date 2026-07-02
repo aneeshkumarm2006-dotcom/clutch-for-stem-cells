@@ -92,6 +92,62 @@ export const personSchema = new Schema<IPerson>({
   bio: { type: String, trim: true },
 });
 
+// ── Editorial content sub-schemas (taxonomy enrichment + combination pages) ──
+
+/** A scoped Q&A pair. Reused by editorial `faqs` on terms + MatrixPages. */
+export interface IFaqEntry {
+  _id?: Types.ObjectId;
+  question: string;
+  answer: string;
+}
+
+export const faqSchema = new Schema<IFaqEntry>(
+  {
+    question: { type: String, required: true, trim: true },
+    answer: { type: String, required: true, trim: true },
+  },
+  { _id: false },
+);
+
+/**
+ * A single sourced fact (label/value + a visible citation URL) — rendered as a
+ * key-facts table for extractability and E-E-A-T. `sourceUrl` should point at a
+ * primary source (PubMed, clinicaltrials.gov, a regulator).
+ */
+export interface IKeyFact {
+  _id?: Types.ObjectId;
+  label: string;
+  value: string;
+  sourceUrl?: string;
+}
+
+export const keyFactSchema = new Schema<IKeyFact>(
+  {
+    label: { type: String, required: true, trim: true, maxlength: 120 },
+    value: { type: String, required: true, trim: true, maxlength: 400 },
+    sourceUrl: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
+/**
+ * A cached cure/guarantee-scanner hit (mirrors `lib/content-flags.ts`
+ * `ContentFlag`). Stored on a record so moderators see flags in the review
+ * queue and the approval gate can require each be acknowledged.
+ */
+export interface IContentFlag {
+  phrase: string;
+  context: string;
+}
+
+export const contentFlagSchema = new Schema<IContentFlag>(
+  {
+    phrase: { type: String, required: true },
+    context: { type: String, default: "" },
+  },
+  { _id: false },
+);
+
 // ── Soft-delete plugin ──────────────────────────────────────────────────────
 
 /**

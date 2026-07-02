@@ -8,13 +8,26 @@
  * the admin-editable SEO intro for that term's directory page (§8.5).
  */
 import { Schema, type SchemaDefinition, type Types } from "mongoose";
-import { LOCATION_KINDS, type LocationKind } from "@/lib/enums";
+import {
+  CONTENT_REVIEW_STATUSES,
+  EVIDENCE_LEVELS,
+  LOCATION_KINDS,
+  type ContentReviewStatus,
+  type EvidenceLevel,
+  type LocationKind,
+} from "@/lib/enums";
 import {
   imageSchema,
   seoSchema,
+  faqSchema,
+  keyFactSchema,
+  contentFlagSchema,
   registerModel,
   type IImage,
   type ISeo,
+  type IFaqEntry,
+  type IKeyFact,
+  type IContentFlag,
   type TimestampFields,
 } from "@/models/_shared";
 
@@ -24,6 +37,7 @@ export interface ITaxonomyBase extends TimestampFields {
   _id: Types.ObjectId;
   name: string;
   slug: string;
+  /** Short admin-editable SEO intro rendered as the directory-page lede (§8.5). */
   description?: string;
   shortDescription?: string;
   /** Lucide icon name (e.g. "Activity") or an image is used instead. */
@@ -35,6 +49,50 @@ export interface ITaxonomyBase extends TimestampFields {
   isActive: boolean;
   /** Computed — number of published clinics referencing this term (§8.5). */
   clinicCount: number;
+
+  // ── Editorial enrichment (rendered only when reviewStatus === "approved") ──
+  /** Long-form markdown body rendered below the intro on the term page. */
+  body?: string;
+  /** Scoped Q&A → visible accordion + FAQPage JSON-LD (AEO). */
+  faqs: IFaqEntry[];
+  /** Sourced facts with visible citations (extractability + E-E-A-T). */
+  keyFacts: IKeyFact[];
+  /** YMYL review lifecycle — only `approved` editorial content is public. */
+  reviewStatus: ContentReviewStatus;
+  /** Credentialed reviewer (→ MedicalReviewer). Required before approval. */
+  reviewedBy?: Types.ObjectId | null;
+  lastReviewedAt?: Date | null;
+  /** Cached cure/guarantee scanner hits for the review queue. */
+  contentFlags: IContentFlag[];
+  /** Reviewer has acknowledged the flags — required to approve flagged content. */
+  flagsAcknowledged: boolean;
+}
+
+/**
+ * Editorial + review-gate fields shared by every taxonomy collection (and
+ * structurally mirrored by MatrixPage). Enrichment renders only once the term
+ * is `approved`; the term's short `description` still shows regardless.
+ */
+function editorialFields(): SchemaDefinition {
+  return {
+    body: { type: String },
+    faqs: { type: [faqSchema], default: [] },
+    keyFacts: { type: [keyFactSchema], default: [] },
+    reviewStatus: {
+      type: String,
+      enum: CONTENT_REVIEW_STATUSES,
+      default: "draft",
+      index: true,
+    },
+    reviewedBy: {
+      type: Schema.Types.ObjectId,
+      ref: "MedicalReviewer",
+      default: null,
+    },
+    lastReviewedAt: { type: Date, default: null },
+    contentFlags: { type: [contentFlagSchema], default: [] },
+    flagsAcknowledged: { type: Boolean, default: false },
+  };
 }
 
 /**
@@ -61,6 +119,7 @@ function taxonomyBaseFields(refName: string): SchemaDefinition {
     order: { type: Number, default: 0 },
     isActive: { type: Boolean, default: true },
     clinicCount: { type: Number, default: 0, min: 0 },
+    ...editorialFields(),
   };
 }
 
@@ -76,12 +135,30 @@ function addTaxonomyIndexes(schema: Schema): void {
 export interface ITreatment extends ITaxonomyBase {
   /** Flat group label for browse grids (e.g. "Cell therapies"). */
   category?: string;
+  /** How the therapy works (markdown). */
+  mechanism?: string;
+  /** Neutral strength-of-evidence signal (never inflate). */
+  evidenceLevel?: EvidenceLevel;
+  /** Sourced summary of the clinical evidence (markdown). */
+  evidenceSummary?: string;
+  /** Indicative cost range copy (markdown). */
+  costRange?: string;
+  /** Typical recovery/aftercare timeline (markdown). */
+  recoveryTimeline?: string;
+  /** Known risks / contraindications (markdown). */
+  risks?: string;
 }
 
 const TreatmentSchema = new Schema<ITreatment>(
   {
     ...taxonomyBaseFields("Treatment"),
     category: { type: String, trim: true },
+    mechanism: { type: String },
+    evidenceLevel: { type: String, enum: EVIDENCE_LEVELS },
+    evidenceSummary: { type: String },
+    costRange: { type: String },
+    recoveryTimeline: { type: String },
+    risks: { type: String },
   },
   { timestamps: true },
 );
@@ -96,12 +173,24 @@ export const Treatment = registerModel<ITreatment>(
 export interface ICondition extends ITaxonomyBase {
   /** Body-system / category group label (e.g. "Orthopedic/Musculoskeletal"). */
   category?: string;
+  /** Plain-language overview of the condition (markdown). */
+  overview?: string;
+  /** Conventional standard of care (markdown) — anchors expectations. */
+  standardOfCare?: string;
+  /** Sourced, cautious summary of cell-therapy evidence for this condition. */
+  evidenceForCellTherapy?: string;
+  /** Common symptoms (for entity clarity + AEO). */
+  symptoms: string[];
 }
 
 const ConditionSchema = new Schema<ICondition>(
   {
     ...taxonomyBaseFields("Condition"),
     category: { type: String, trim: true },
+    overview: { type: String },
+    standardOfCare: { type: String },
+    evidenceForCellTherapy: { type: String },
+    symptoms: { type: [String], default: [] },
   },
   { timestamps: true },
 );
@@ -156,6 +245,12 @@ export interface ILocation extends ITaxonomyBase {
   lng?: number;
   /** Emoji flag or asset reference for countries. */
   flag?: string;
+  /** Medical-travel regulatory context, e.g. COFEPRIS status (markdown). */
+  regulatoryStatus?: string;
+  /** Travel logistics: visas, typical trip length, getting there (markdown). */
+  logistics?: string;
+  /** Practical destination notes (markdown). */
+  travelNotes?: string;
 }
 
 const LocationSchema = new Schema<ILocation>(
@@ -172,6 +267,9 @@ const LocationSchema = new Schema<ILocation>(
     lat: { type: Number, min: -90, max: 90 },
     lng: { type: Number, min: -180, max: 180 },
     flag: { type: String, trim: true },
+    regulatoryStatus: { type: String },
+    logistics: { type: String },
+    travelNotes: { type: String },
   },
   { timestamps: true },
 );

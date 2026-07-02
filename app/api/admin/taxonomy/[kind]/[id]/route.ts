@@ -6,6 +6,7 @@ import { dbConnect } from "@/lib/db";
 import { fail, ok, parseBody, withRole } from "@/lib/admin/api";
 import { recordAuditFromRequest } from "@/lib/audit";
 import { getTaxonomyConfig } from "@/lib/admin/taxonomy-config";
+import { reviewEditorialWrite } from "@/lib/content-review";
 import { Clinic } from "@/models";
 
 export const dynamic = "force-dynamic";
@@ -34,9 +35,29 @@ export async function PATCH(
       if (clash) return fail("That slug is already taken.", 409);
     }
 
-    const doc = await config.model.findByIdAndUpdate(params.id, data, {
-      new: true,
-    });
+    // YMYL review gate: scan the merged (existing + patch) state, block
+    // unreviewed/unacknowledged approvals, and persist recomputed flags.
+    const existing = await config.model.findById(params.id).lean();
+    if (!existing) return fail("Not found.", 404);
+    const existingRecord = existing as unknown as Record<string, unknown>;
+    const gate = reviewEditorialWrite(existingRecord, data);
+    if (gate.error) return fail(gate.error, 422);
+
+    // Refresh the medical-review date on any approved save (freshness cadence).
+    const isApproved =
+      (data.reviewStatus ?? existingRecord.reviewStatus) === "approved";
+
+    const doc = await config.model.findByIdAndUpdate(
+      params.id,
+      {
+        ...data,
+        contentFlags: gate.contentFlags,
+        ...(isApproved && data.lastReviewedAt == null
+          ? { lastReviewedAt: new Date() }
+          : {}),
+      },
+      { new: true },
+    );
     if (!doc) return fail("Not found.", 404);
 
     await recordAuditFromRequest(req, {

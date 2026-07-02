@@ -12,7 +12,7 @@
  */
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { Types } from "mongoose";
+import { Types, type Model } from "mongoose";
 
 import { dbConnect } from "@/lib/db";
 import { formatLocation } from "@/lib/format";
@@ -32,6 +32,7 @@ import {
   Condition,
   Lead,
   Location,
+  MedicalReviewer,
   Plan,
   Review,
   SiteSetting,
@@ -43,10 +44,20 @@ import {
   type ISeo,
   type ITaxonomyBase,
 } from "@/models";
+import type { EvidenceLevel } from "@/lib/enums";
+import type { ReviewerByline } from "@/components/content/reviewed-by-byline";
 
 // ── Small serialization helpers ──────────────────────────────────────────────
 
 const id = (v: unknown): string => String(v);
+
+/**
+ * View a concrete taxonomy model (Treatment/Condition/…) as its shared base for
+ * generic reads. The per-kind interfaces diverge enough that a union of the
+ * models isn't callable, so we widen to `Model<ITaxonomyBase>` at the call site.
+ */
+const asTaxonomyModel = (m: unknown): Model<ITaxonomyBase> =>
+  m as Model<ITaxonomyBase>;
 
 /** A lightweight, serializable taxonomy term for grids, chips, and filters. */
 export interface TaxonomyTerm {
@@ -61,11 +72,37 @@ export interface TaxonomyTerm {
   icon?: string;
   category?: string;
   clinicCount: number;
+  /**
+   * Approved editorial content for the term's detail page (body, FAQ, key
+   * facts, medical-reviewer byline). Populated ONLY by the single-term readers
+   * and ONLY when `reviewStatus === "approved"` — grid/facet readers leave it
+   * undefined. `null` means "no approved editorial content".
+   */
+  editorial?: TermEditorial | null;
 }
 
 export interface CountryTerm extends TaxonomyTerm {
   countryCode?: string;
   flag?: string;
+}
+
+/** One labeled long-form section composed from a term's per-kind fields. */
+export interface EditorialSection {
+  title: string;
+  /** Markdown source (render via `lib/markdown.ts::renderMarkdown`). */
+  body: string;
+}
+
+/** Approved, human-reviewed editorial content rendered on a term detail page. */
+export interface TermEditorial {
+  body?: string;
+  faqs: { question: string; answer: string }[];
+  keyFacts: { label: string; value: string; sourceUrl?: string }[];
+  sections: EditorialSection[];
+  evidenceLevel?: EvidenceLevel | null;
+  reviewer?: ReviewerByline | null;
+  lastReviewedAt?: string | null;
+  updatedAt?: string | null;
 }
 
 function toTerm(doc: ITaxonomyBase & { category?: string }): TaxonomyTerm {
@@ -82,6 +119,88 @@ function toTerm(doc: ITaxonomyBase & { category?: string }): TaxonomyTerm {
   };
 }
 
+/** Labeled per-kind editorial sections, in display order (blank fields skipped). */
+const EDITORIAL_SECTION_FIELDS: { field: string; title: string }[] = [
+  // Condition
+  { field: "overview", title: "Overview" },
+  { field: "standardOfCare", title: "Standard of care" },
+  { field: "evidenceForCellTherapy", title: "Evidence for cell therapy" },
+  // Treatment
+  { field: "mechanism", title: "How it works" },
+  { field: "evidenceSummary", title: "What the evidence shows" },
+  { field: "costRange", title: "Typical cost" },
+  { field: "recoveryTimeline", title: "Recovery timeline" },
+  { field: "risks", title: "Risks & considerations" },
+  // Location (country)
+  { field: "regulatoryStatus", title: "Regulatory status" },
+  { field: "logistics", title: "Getting there & logistics" },
+  { field: "travelNotes", title: "Travel notes" },
+];
+
+/**
+ * Build the gated editorial view for a taxonomy detail page. Returns `null`
+ * unless the term is `approved` (drafts/in-review never render publicly). Loads
+ * the credentialed reviewer for the byline + schema.
+ */
+/** Load a credentialed reviewer as a byline (or null if unset/inactive). */
+export async function loadReviewerByline(
+  reviewedById: unknown,
+): Promise<ReviewerByline | null> {
+  if (!reviewedById) return null;
+  const r = await MedicalReviewer.findById(reviewedById)
+    .select("name credentials title slug sameAs isActive")
+    .lean();
+  if (!r || !r.isActive) return null;
+  return {
+    name: r.name,
+    credentials: r.credentials,
+    title: r.title,
+    slug: r.slug,
+    sameAs: r.sameAs,
+  };
+}
+
+async function buildTermEditorial(
+  doc: Record<string, unknown>,
+): Promise<TermEditorial | null> {
+  if (doc.reviewStatus !== "approved") return null;
+
+  const reviewer = await loadReviewerByline(doc.reviewedBy);
+
+  const sections: EditorialSection[] = [];
+  for (const { field, title } of EDITORIAL_SECTION_FIELDS) {
+    const value = doc[field];
+    if (typeof value === "string" && value.trim()) {
+      sections.push({ title, body: value });
+    }
+  }
+
+  const faqs =
+    (doc.faqs as { question: string; answer: string }[] | undefined) ?? [];
+  const keyFacts =
+    (doc.keyFacts as
+      { label: string; value: string; sourceUrl?: string }[] | undefined) ?? [];
+
+  return {
+    body: typeof doc.body === "string" ? doc.body : undefined,
+    faqs: faqs.map((f) => ({ question: f.question, answer: f.answer })),
+    keyFacts: keyFacts.map((k) => ({
+      label: k.label,
+      value: k.value,
+      sourceUrl: k.sourceUrl,
+    })),
+    sections,
+    evidenceLevel: (doc.evidenceLevel as EvidenceLevel | undefined) ?? null,
+    reviewer,
+    lastReviewedAt: doc.lastReviewedAt
+      ? new Date(doc.lastReviewedAt as Date).toISOString()
+      : null,
+    updatedAt: doc.updatedAt
+      ? new Date(doc.updatedAt as Date).toISOString()
+      : null,
+  };
+}
+
 // ── Taxonomy (cached cross-request) ──────────────────────────────────────────
 // Taxonomy + language lists are stable reference data read on many pages,
 // including the *dynamic* directory routes (URL-driven facets). `unstable_cache`
@@ -92,7 +211,10 @@ function toTerm(doc: ITaxonomyBase & { category?: string }): TaxonomyTerm {
 export const TAXONOMY_CACHE_TAG = "taxonomy";
 const TAXONOMY_REVALIDATE_SECONDS = 3600;
 
-function cachedTaxonomy<T>(key: string, fn: () => Promise<T>): () => Promise<T> {
+function cachedTaxonomy<T>(
+  key: string,
+  fn: () => Promise<T>,
+): () => Promise<T> {
   return unstable_cache(fn, [`public-taxonomy:${key}`], {
     revalidate: TAXONOMY_REVALIDATE_SECONDS,
     tags: [TAXONOMY_CACHE_TAG],
@@ -179,9 +301,15 @@ export async function getTaxonomyTermBySlug(
   slug: string,
 ): Promise<TaxonomyTerm | null> {
   await dbConnect();
-  const model = kind === "treatment" ? Treatment : Condition;
+  const model = asTaxonomyModel(kind === "treatment" ? Treatment : Condition);
   const doc = await model.findOne({ slug, isActive: true }).lean();
-  return doc ? toTerm(doc as unknown as ITaxonomyBase) : null;
+  if (!doc) return null;
+  return {
+    ...toTerm(doc as unknown as ITaxonomyBase),
+    editorial: await buildTermEditorial(
+      doc as unknown as Record<string, unknown>,
+    ),
+  };
 }
 
 export async function getCountryBySlug(
@@ -198,6 +326,9 @@ export async function getCountryBySlug(
     ...toTerm(doc as unknown as ITaxonomyBase),
     countryCode: doc.countryCode,
     flag: doc.flag,
+    editorial: await buildTermEditorial(
+      doc as unknown as Record<string, unknown>,
+    ),
   };
 }
 
@@ -215,6 +346,9 @@ export async function getCityBySlug(
     ...toTerm(doc as unknown as ITaxonomyBase),
     region: doc.region,
     countryCode: doc.countryCode,
+    editorial: await buildTermEditorial(
+      doc as unknown as Record<string, unknown>,
+    ),
   };
 }
 
@@ -412,7 +546,12 @@ export async function getDirectoryData(
   const cards = await toClinicCards(result.clinics);
 
   const filterLabels: Record<string, string> = {};
-  for (const t of [...treatments, ...conditions, ...cellSources, ...countries]) {
+  for (const t of [
+    ...treatments,
+    ...conditions,
+    ...cellSources,
+    ...countries,
+  ]) {
     filterLabels[t.slug] = t.name;
   }
   for (const f of result.facets.languages) filterLabels[f.value] = f.value;
@@ -543,7 +682,10 @@ export async function getClinicProfile(
     status: "published",
     isDeleted: false,
   })
-    .populate("treatmentTypes", "name slug shortDescription category clinicCount")
+    .populate(
+      "treatmentTypes",
+      "name slug shortDescription category clinicCount",
+    )
     .populate("conditionsTreated", "name slug category clinicCount")
     .populate("cellSources", "name slug shortDescription")
     .populate("accreditations", "name slug issuingBody shortDescription")
@@ -563,9 +705,11 @@ export async function getClinicProfile(
   });
 
   const treatmentRefs = (doc.treatmentTypes ?? []) as unknown as PopulatedRef[];
-  const conditionRefs = (doc.conditionsTreated ?? []) as unknown as PopulatedRef[];
+  const conditionRefs = (doc.conditionsTreated ??
+    []) as unknown as PopulatedRef[];
   const cellSourceRefs = (doc.cellSources ?? []) as unknown as PopulatedRef[];
-  const accreditationRefs = (doc.accreditations ?? []) as unknown as (PopulatedRef & {
+  const accreditationRefs = (doc.accreditations ??
+    []) as unknown as (PopulatedRef & {
     issuingBody?: string;
   })[];
 
@@ -687,7 +831,8 @@ export async function getReviewClinic(
   if (!doc) return null;
 
   const treatmentRefs = (doc.treatmentTypes ?? []) as unknown as PopulatedRef[];
-  const conditionRefs = (doc.conditionsTreated ?? []) as unknown as PopulatedRef[];
+  const conditionRefs = (doc.conditionsTreated ??
+    []) as unknown as PopulatedRef[];
   return {
     id: id(doc._id),
     name: doc.name,
@@ -803,7 +948,10 @@ export async function getClinicReviews(
       conditionName: condition?.name,
       treatmentDate: r.treatmentDate,
       cost: r.cost
-        ? { range: r.cost.range, isConfidential: Boolean(r.cost.isConfidential) }
+        ? {
+            range: r.cost.range,
+            isConfidential: Boolean(r.cost.isConfidential),
+          }
         : undefined,
       helpfulCount: r.helpfulCount ?? 0,
       wouldRecommend: r.wouldRecommend,
@@ -852,6 +1000,132 @@ export async function getRelatedClinics(
     .sort(compareClinicsForListing)
     .slice(0, limit) as unknown as ClinicListItem[];
   return toClinicCards(sorted);
+}
+
+// ── Related taxonomy terms (hub-and-spoke internal linking) ───────────────────
+// These power the `RelatedLinks` sections on taxonomy + combination pages so no
+// term is orphaned and link equity flows across the treatment/condition/location
+// matrix. All are DB-backed like the directory query these pages already run.
+
+/** Sibling terms in the same `category`, ranked by clinic coverage (self excluded). */
+export async function getRelatedTerms(
+  kind: "treatment" | "condition",
+  slug: string,
+  limit = 6,
+): Promise<TaxonomyTerm[]> {
+  await dbConnect();
+  const model = asTaxonomyModel(kind === "treatment" ? Treatment : Condition);
+  const term = await model
+    .findOne({ slug, isActive: true })
+    .select("category")
+    .lean<{ category?: string } | null>();
+  if (!term) return [];
+  const query: Record<string, unknown> = {
+    slug: { $ne: slug },
+    isActive: true,
+  };
+  if (term.category) query.category = term.category;
+  const docs = await model
+    .find(query)
+    .sort({ clinicCount: -1, order: 1, name: 1 })
+    .limit(limit)
+    .lean();
+  return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
+}
+
+/**
+ * Conditions most often co-listed by published clinics that offer `treatmentSlug`
+ * — a data-driven "related conditions" set that works before any editorial
+ * combination page exists. Neutral by construction (co-occurrence, not efficacy).
+ */
+export async function getCoOccurringConditions(
+  treatmentSlug: string,
+  limit = 6,
+): Promise<TaxonomyTerm[]> {
+  await dbConnect();
+  const treatment = await Treatment.findOne({
+    slug: treatmentSlug,
+    isActive: true,
+  })
+    .select("_id")
+    .lean();
+  if (!treatment) return [];
+  return coOccurringTerms(
+    asTaxonomyModel(Condition),
+    { treatmentTypes: treatment._id },
+    "$conditionsTreated",
+    limit,
+  );
+}
+
+/** Treatments most often co-listed by published clinics that treat `conditionSlug`. */
+export async function getCoOccurringTreatments(
+  conditionSlug: string,
+  limit = 6,
+): Promise<TaxonomyTerm[]> {
+  await dbConnect();
+  const condition = await Condition.findOne({
+    slug: conditionSlug,
+    isActive: true,
+  })
+    .select("_id")
+    .lean();
+  if (!condition) return [];
+  return coOccurringTerms(
+    asTaxonomyModel(Treatment),
+    { conditionsTreated: condition._id },
+    "$treatmentTypes",
+    limit,
+  );
+}
+
+/** Shared co-occurrence aggregation: count a facet array over matching clinics. */
+async function coOccurringTerms(
+  termModel: Model<ITaxonomyBase>,
+  match: Record<string, unknown>,
+  unwindField: string,
+  limit: number,
+): Promise<TaxonomyTerm[]> {
+  const rows = await Clinic.aggregate<{ _id: Types.ObjectId; count: number }>([
+    { $match: { status: "published", isDeleted: false, ...match } },
+    { $unwind: unwindField },
+    { $group: { _id: unwindField, count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: limit },
+  ]);
+  if (!rows.length) return [];
+  const rank = new Map(rows.map((r) => [id(r._id), r.count]));
+  const docs = await termModel
+    .find({ _id: { $in: rows.map((r) => r._id) }, isActive: true })
+    .lean();
+  return docs
+    .map((d) => toTerm(d as unknown as ITaxonomyBase))
+    .sort((a, b) => (rank.get(b.id) ?? 0) - (rank.get(a.id) ?? 0));
+}
+
+/** Active cities under a country (by slug), ranked by clinic coverage. */
+export async function getCitiesByCountry(
+  countrySlug: string,
+  limit = 12,
+): Promise<TaxonomyTerm[]> {
+  await dbConnect();
+  const country = await Location.findOne({
+    kind: "country",
+    slug: countrySlug,
+    isActive: true,
+  })
+    .select("_id")
+    .lean();
+  if (!country) return [];
+  const docs = await Location.find({
+    kind: "city",
+    parentId: country._id,
+    isActive: true,
+  })
+    .sort({ clinicCount: -1, order: 1, name: 1 })
+    .limit(limit)
+    .lean();
+  return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
 }
 
 // ── Member shortlist (PRD §6.10 / §7) ────────────────────────────────────────
@@ -936,7 +1210,9 @@ async function getFeaturedClinics(
   const base = { status: "published", isDeleted: false } as const;
 
   const curated = featuredIds?.length
-    ? await Clinic.find({ ...base, _id: { $in: featuredIds } }).lean<IClinic[]>()
+    ? await Clinic.find({ ...base, _id: { $in: featuredIds } }).lean<
+        IClinic[]
+      >()
     : [];
   const curatedIds = new Set(curated.map((c) => id(c._id)));
 
@@ -1112,9 +1388,7 @@ export interface GlobalSearchResult {
   clinicTotal: number;
 }
 
-export async function globalSearch(
-  query: string,
-): Promise<GlobalSearchResult> {
+export async function globalSearch(query: string): Promise<GlobalSearchResult> {
   const q = query.trim();
   if (!q) {
     return { clinics: [], clinicTotal: 0 };

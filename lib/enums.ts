@@ -232,3 +232,46 @@ export const BLOG_TEMPLATE_KEYS = [
   "generic",
 ] as const;
 export type BlogTemplateKey = (typeof BLOG_TEMPLATE_KEYS)[number];
+
+// ── Editorial content review (taxonomy enrichment + combination pages) ───────
+// YMYL content carries a human-review lifecycle. Only `approved` records are
+// public and eligible for indexing; the approval gate additionally requires a
+// real `reviewedBy` reviewer and that every cure/guarantee flag is acknowledged
+// (see lib/content-flags.ts + lib/seo-indexation.ts).
+
+/** Review lifecycle for editorial content. Only `approved` is ever public. */
+export const CONTENT_REVIEW_STATUSES = [
+  "draft",
+  "in_review",
+  "changes_requested",
+  "approved",
+] as const;
+export type ContentReviewStatus = (typeof CONTENT_REVIEW_STATUSES)[number];
+
+/**
+ * How strong the clinical evidence is for a therapy — shown as a neutral,
+ * non-promotional signal. Ordered weakest → strongest. Never inflate this.
+ */
+export const EVIDENCE_LEVELS = [
+  "preclinical",
+  "early-clinical",
+  "mixed",
+  "established",
+] as const;
+export type EvidenceLevel = (typeof EVIDENCE_LEVELS)[number];
+
+/** Human labels for the evidence-level badge. */
+export const EVIDENCE_LEVEL_LABELS: Record<EvidenceLevel, string> = {
+  preclinical: "Preclinical / early research",
+  "early-clinical": "Early clinical trials",
+  mixed: "Mixed / emerging evidence",
+  established: "Established for some uses",
+};
+
+/** The three combination-page axes (see the MatrixPage model). */
+export const MATRIX_KINDS = [
+  "treatment_condition",
+  "treatment_country",
+  "condition_country",
+] as const;
+export type MatrixKind = (typeof MATRIX_KINDS)[number];

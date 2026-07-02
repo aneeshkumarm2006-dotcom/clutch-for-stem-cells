@@ -16,6 +16,8 @@ import {
   type SitemapEntry,
 } from "@/lib/public-data";
 import { getBlogSitemapEntries } from "@/lib/seoteam/blog-data";
+import { getMatrixSitemapEntries } from "@/lib/seoteam/matrix-data";
+import { getReviewerSitemapEntries } from "@/lib/seoteam/reviewer-data";
 
 export const revalidate = 3600;
 
@@ -57,7 +59,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let dynamicEntries: MetadataRoute.Sitemap = [];
   try {
-    const [clinics, taxonomy, blog]: [
+    const [clinics, taxonomy, blog, matrix, reviewers]: [
+      SitemapEntry[],
+      SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
@@ -65,6 +69,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getClinicSitemapEntries(),
       getTaxonomySitemapEntries(),
       getBlogSitemapEntries(),
+      getMatrixSitemapEntries(),
+      getReviewerSitemapEntries(),
     ]);
 
     dynamicEntries = [
@@ -85,6 +91,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: e.lastModified ?? now,
         changeFrequency: "weekly" as const,
         priority: 0.6,
+      })),
+      // Approved, content-complete combination pages (authored-into-existence).
+      ...matrix.map((e) => ({
+        url: absoluteUrl(e.path),
+        lastModified: e.lastModified ?? now,
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+      })),
+      // Medical-reviewer bio pages (E-E-A-T).
+      ...reviewers.map((e) => ({
+        url: absoluteUrl(e.path),
+        lastModified: e.lastModified ?? now,
+        changeFrequency: "monthly" as const,
+        priority: 0.3,
       })),
     ];
   } catch {

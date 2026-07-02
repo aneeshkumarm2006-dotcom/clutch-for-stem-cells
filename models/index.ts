@@ -9,6 +9,9 @@ export {
   imageSchema,
   seoSchema,
   personSchema,
+  faqSchema,
+  keyFactSchema,
+  contentFlagSchema,
   softDeletePlugin,
   registerModel,
   toPlainObject,
@@ -17,6 +20,9 @@ export type {
   IImage,
   ISeo,
   IPerson,
+  IFaqEntry,
+  IKeyFact,
+  IContentFlag,
   SoftDeleteFields,
   TimestampFields,
 } from "@/models/_shared";
@@ -69,6 +75,15 @@ export type { IReport } from "@/models/report";
 
 export { BlogPost, default as BlogPostModel } from "@/models/blog-post";
 export type { IBlogPost, IBlogKeyword } from "@/models/blog-post";
+
+export {
+  MedicalReviewer,
+  default as MedicalReviewerModel,
+} from "@/models/medical-reviewer";
+export type { IMedicalReviewer } from "@/models/medical-reviewer";
+
+export { MatrixPage, default as MatrixPageModel } from "@/models/matrix-page";
+export type { IMatrixPage } from "@/models/matrix-page";
 
 export { User, default as UserModel } from "@/models/user";
 export type { IUser, ISavedSearch } from "@/models/user";

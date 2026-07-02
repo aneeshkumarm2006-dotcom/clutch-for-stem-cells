@@ -2,19 +2,40 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, ChevronUp, GripVertical, Plus, Trash2 } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  GripVertical,
+  Plus,
+  Trash2,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import { PageHeader } from "@/components/admin/page-header";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { TextField, SelectField, Label } from "@/components/ui/form-field";
 import { Toggle } from "@/components/admin/toggle";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
+import {
+  ContentFlagWarning,
+  FaqRepeater,
+  KeyFactRepeater,
+  ReviewControls,
+  editorialSelectClass,
+  type FaqItem,
+  type KeyFactItem,
+} from "@/components/content/editorial-fields";
 import { adminFetch } from "@/lib/admin/client";
+import { findFlaggedPhrases } from "@/lib/content-flags";
 import { slugify } from "@/lib/slug";
 import { cn } from "@/lib/utils";
-import { LOCATION_KINDS } from "@/lib/enums";
+import {
+  EVIDENCE_LEVELS,
+  LOCATION_KINDS,
+  type ContentReviewStatus,
+} from "@/lib/enums";
 import type { AdminTaxonomyRow, TaxonomyView } from "@/lib/admin/taxonomy";
 
 interface FormState {
@@ -34,7 +55,49 @@ interface FormState {
   description?: string;
   icon?: string;
   isActive: boolean;
+  // ── Editorial enrichment ──
+  body: string;
+  faqs: FaqItem[];
+  keyFacts: KeyFactItem[];
+  reviewStatus: ContentReviewStatus;
+  reviewedBy: string;
+  flagsAcknowledged: boolean;
+  mechanism: string;
+  evidenceLevel: string;
+  evidenceSummary: string;
+  costRange: string;
+  recoveryTimeline: string;
+  risks: string;
+  overview: string;
+  standardOfCare: string;
+  evidenceForCellTherapy: string;
+  symptoms: string;
+  regulatoryStatus: string;
+  logistics: string;
+  travelNotes: string;
 }
+
+const EDITORIAL_BLANK = {
+  body: "",
+  faqs: [] as FaqItem[],
+  keyFacts: [] as KeyFactItem[],
+  reviewStatus: "draft" as ContentReviewStatus,
+  reviewedBy: "",
+  flagsAcknowledged: false,
+  mechanism: "",
+  evidenceLevel: "",
+  evidenceSummary: "",
+  costRange: "",
+  recoveryTimeline: "",
+  risks: "",
+  overview: "",
+  standardOfCare: "",
+  evidenceForCellTherapy: "",
+  symptoms: "",
+  regulatoryStatus: "",
+  logistics: "",
+  travelNotes: "",
+};
 
 function blank(isLocation: boolean): FormState {
   return {
@@ -42,6 +105,7 @@ function blank(isLocation: boolean): FormState {
     slug: "",
     isActive: true,
     kind: isLocation ? "country" : undefined,
+    ...EDITORIAL_BLANK,
   };
 }
 
@@ -63,7 +127,57 @@ function fromRow(r: AdminTaxonomyRow): FormState {
     description: r.description ?? "",
     icon: r.icon ?? "",
     isActive: r.isActive,
+    body: r.body ?? "",
+    faqs: r.faqs.map((f) => ({ question: f.question, answer: f.answer })),
+    keyFacts: r.keyFacts.map((k) => ({
+      label: k.label,
+      value: k.value,
+      sourceUrl: k.sourceUrl ?? "",
+    })),
+    reviewStatus: (r.reviewStatus as ContentReviewStatus) ?? "draft",
+    reviewedBy: r.reviewedBy ?? "",
+    flagsAcknowledged: r.flagsAcknowledged,
+    mechanism: r.mechanism ?? "",
+    evidenceLevel: r.evidenceLevel ?? "",
+    evidenceSummary: r.evidenceSummary ?? "",
+    costRange: r.costRange ?? "",
+    recoveryTimeline: r.recoveryTimeline ?? "",
+    risks: r.risks ?? "",
+    overview: r.overview ?? "",
+    standardOfCare: r.standardOfCare ?? "",
+    evidenceForCellTherapy: r.evidenceForCellTherapy ?? "",
+    symptoms: r.symptoms.join(", "),
+    regulatoryStatus: r.regulatoryStatus ?? "",
+    logistics: r.logistics ?? "",
+    travelNotes: r.travelNotes ?? "",
   };
+}
+
+/** Labeled markdown textarea for an editorial field. */
+function MdField({
+  label,
+  value,
+  onChange,
+  placeholder,
+  rows = 3,
+}: {
+  label: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder?: string;
+  rows?: number;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <Label>{label}</Label>
+      <Textarea
+        rows={rows}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+    </div>
+  );
 }
 
 export function TaxonomyManager({ view }: { view: TaxonomyView }) {
@@ -80,7 +194,8 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
   }, [view.segment, view.isLocation]);
 
   const base = `/api/admin/taxonomy/${view.segment}`;
-  const set = (patch: Partial<FormState>) => setForm((f) => ({ ...f, ...patch }));
+  const set = (patch: Partial<FormState>) =>
+    setForm((f) => ({ ...f, ...patch }));
 
   const selectRow = (r: AdminTaxonomyRow) => {
     setForm(fromRow(r));
@@ -105,9 +220,23 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
       description: form.description || undefined,
       icon: form.icon || undefined,
       isActive: form.isActive,
+      // ── Common editorial (all kinds) ──
+      body: form.body || undefined,
+      faqs: form.faqs.filter((f) => f.question.trim() && f.answer.trim()),
+      keyFacts: form.keyFacts
+        .filter((k) => k.label.trim() && k.value.trim())
+        .map((k) => ({
+          label: k.label.trim(),
+          value: k.value.trim(),
+          sourceUrl: k.sourceUrl.trim() || undefined,
+        })),
+      reviewStatus: form.reviewStatus,
+      reviewedBy: form.reviewedBy || null,
+      flagsAcknowledged: form.flagsAcknowledged,
     };
     if (view.hasCategory) payload.category = form.category || undefined;
-    if (view.hasIssuingBody) payload.issuingBody = form.issuingBody || undefined;
+    if (view.hasIssuingBody)
+      payload.issuingBody = form.issuingBody || undefined;
     if (view.isLocation) {
       payload.kind = form.kind || "country";
       payload.countryCode = form.countryCode || undefined;
@@ -116,8 +245,52 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
       payload.lat = num(form.lat);
       payload.lng = num(form.lng);
     }
+    // ── Per-kind editorial extras ──
+    if (view.kind === "treatment") {
+      payload.mechanism = form.mechanism || undefined;
+      payload.evidenceLevel = form.evidenceLevel || undefined;
+      payload.evidenceSummary = form.evidenceSummary || undefined;
+      payload.costRange = form.costRange || undefined;
+      payload.recoveryTimeline = form.recoveryTimeline || undefined;
+      payload.risks = form.risks || undefined;
+    } else if (view.kind === "condition") {
+      payload.overview = form.overview || undefined;
+      payload.standardOfCare = form.standardOfCare || undefined;
+      payload.evidenceForCellTherapy = form.evidenceForCellTherapy || undefined;
+      payload.symptoms = form.symptoms
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
+    } else if (view.kind === "location") {
+      payload.regulatoryStatus = form.regulatoryStatus || undefined;
+      payload.logistics = form.logistics || undefined;
+      payload.travelNotes = form.travelNotes || undefined;
+    }
     return payload;
   };
+
+  // Live cure/guarantee scan (server independently re-scans + enforces the gate).
+  const flags = React.useMemo(
+    () =>
+      findFlaggedPhrases([
+        form.body,
+        form.description ?? "",
+        form.mechanism,
+        form.evidenceSummary,
+        form.costRange,
+        form.recoveryTimeline,
+        form.risks,
+        form.overview,
+        form.standardOfCare,
+        form.evidenceForCellTherapy,
+        form.regulatoryStatus,
+        form.logistics,
+        form.travelNotes,
+        ...form.faqs.flatMap((f) => [f.question, f.answer]),
+        ...form.keyFacts.flatMap((k) => [k.label, k.value]),
+      ]),
+    [form],
+  );
 
   const save = async () => {
     if (!form.name.trim() || !form.slug.trim()) {
@@ -315,7 +488,8 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
                 </div>
               </>
             ) : null}
-            {view.parentOptions.filter((o) => o.value !== form.id).length > 0 ? (
+            {view.parentOptions.filter((o) => o.value !== form.id).length >
+            0 ? (
               <SelectField
                 label="Parent group"
                 placeholder="None"
@@ -363,6 +537,160 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
                   <Trash2 className="size-4" />
                 </Button>
               ) : null}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Editorial content (review-gated) */}
+      <div className="px-5 pb-8 lg:px-7">
+        <div className="rounded-xl border border-border bg-surface p-5">
+          <div className="mb-1 font-display text-base font-semibold">
+            Editorial content — {form.name || `new ${view.singular}`}
+          </div>
+          <p className="mb-4 text-[13px] text-text-muted">
+            Long-form content for this term&apos;s page. Rendered publicly only
+            when <strong>approved</strong> — the cure/guarantee scanner and an
+            assigned medical reviewer gate approval.
+          </p>
+
+          <ContentFlagWarning flags={flags} />
+
+          <div className="mt-4 grid gap-5 lg:grid-cols-[1fr_280px]">
+            <div className="min-w-0 space-y-4">
+              <MdField
+                label="Body (markdown)"
+                rows={6}
+                value={form.body}
+                onChange={(e) => set({ body: e.target.value })}
+                placeholder="Long-form overview rendered below the intro."
+              />
+
+              {view.kind === "treatment" ? (
+                <>
+                  <MdField
+                    label="How it works"
+                    value={form.mechanism}
+                    onChange={(e) => set({ mechanism: e.target.value })}
+                  />
+                  <div className="space-y-1.5">
+                    <Label>Evidence level</Label>
+                    <select
+                      className={editorialSelectClass}
+                      value={form.evidenceLevel}
+                      onChange={(e) => set({ evidenceLevel: e.target.value })}
+                    >
+                      <option value="">— not set —</option>
+                      {EVIDENCE_LEVELS.map((l) => (
+                        <option key={l} value={l}>
+                          {l}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <MdField
+                    label="What the evidence shows"
+                    value={form.evidenceSummary}
+                    onChange={(e) => set({ evidenceSummary: e.target.value })}
+                  />
+                  <MdField
+                    label="Typical cost"
+                    value={form.costRange}
+                    onChange={(e) => set({ costRange: e.target.value })}
+                  />
+                  <MdField
+                    label="Recovery timeline"
+                    value={form.recoveryTimeline}
+                    onChange={(e) => set({ recoveryTimeline: e.target.value })}
+                  />
+                  <MdField
+                    label="Risks & considerations"
+                    value={form.risks}
+                    onChange={(e) => set({ risks: e.target.value })}
+                  />
+                </>
+              ) : null}
+
+              {view.kind === "condition" ? (
+                <>
+                  <MdField
+                    label="Overview"
+                    value={form.overview}
+                    onChange={(e) => set({ overview: e.target.value })}
+                  />
+                  <MdField
+                    label="Standard of care"
+                    value={form.standardOfCare}
+                    onChange={(e) => set({ standardOfCare: e.target.value })}
+                  />
+                  <MdField
+                    label="Evidence for cell therapy"
+                    value={form.evidenceForCellTherapy}
+                    onChange={(e) =>
+                      set({ evidenceForCellTherapy: e.target.value })
+                    }
+                  />
+                  <div className="space-y-1.5">
+                    <Label>Symptoms (comma-separated)</Label>
+                    <Input
+                      value={form.symptoms}
+                      onChange={(e) => set({ symptoms: e.target.value })}
+                      placeholder="e.g. knee pain, stiffness, swelling"
+                    />
+                  </div>
+                </>
+              ) : null}
+
+              {view.kind === "location" ? (
+                <>
+                  <MdField
+                    label="Regulatory status"
+                    value={form.regulatoryStatus}
+                    onChange={(e) => set({ regulatoryStatus: e.target.value })}
+                  />
+                  <MdField
+                    label="Getting there & logistics"
+                    value={form.logistics}
+                    onChange={(e) => set({ logistics: e.target.value })}
+                  />
+                  <MdField
+                    label="Travel notes"
+                    value={form.travelNotes}
+                    onChange={(e) => set({ travelNotes: e.target.value })}
+                  />
+                </>
+              ) : null}
+
+              <FaqRepeater
+                value={form.faqs}
+                onChange={(faqs) => set({ faqs })}
+              />
+              <KeyFactRepeater
+                value={form.keyFacts}
+                onChange={(keyFacts) => set({ keyFacts })}
+              />
+            </div>
+
+            <div className="space-y-4">
+              <div className="rounded-xl border border-border bg-surface p-4">
+                <div className="mb-3 font-display text-sm font-semibold text-text-primary">
+                  Review
+                </div>
+                <ReviewControls
+                  reviewStatus={form.reviewStatus}
+                  onReviewStatusChange={(reviewStatus) => set({ reviewStatus })}
+                  reviewedBy={form.reviewedBy}
+                  onReviewedByChange={(reviewedBy) => set({ reviewedBy })}
+                  flagsAcknowledged={form.flagsAcknowledged}
+                  onFlagsAcknowledgedChange={(flagsAcknowledged) =>
+                    set({ flagsAcknowledged })
+                  }
+                  reviewers={view.reviewers}
+                />
+              </div>
+              <Button className="w-full" onClick={save} disabled={busy}>
+                {form.id ? "Save changes" : `Create ${view.singular}`}
+              </Button>
             </div>
           </div>
         </div>
