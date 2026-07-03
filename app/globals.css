@@ -51,6 +51,12 @@
     @apply border-border;
   }
 
+  /* Smooth in-page scrolling (anchor jumps, scrollTo). Disabled under
+     prefers-reduced-motion by the media query at the bottom of this file. */
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background: var(--background);
     color: var(--text-primary);
@@ -58,6 +64,33 @@
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  /* ── Custom scrollbar — replaces the default OS bar site-wide (Design §14).
+     Firefox uses scrollbar-width/-color; WebKit/Chromium uses the
+     ::-webkit-scrollbar pseudo-elements below. ── */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--surface-alt);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border: 2px solid var(--surface-alt);
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+  ::-webkit-scrollbar-corner {
+    background: var(--surface-alt);
   }
 
   h1,
