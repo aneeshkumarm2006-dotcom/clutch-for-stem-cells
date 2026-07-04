@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import type { Metadata } from "next";
-import { Clock } from "lucide-react";
 
 import { blogPostingJsonLd, renderJsonLd } from "@/lib/seo";
 import { pageMetadata } from "@/lib/page-metadata";
@@ -12,7 +10,7 @@ import {
 import { applyKeywordLinks } from "@/lib/seoteam/keyword-links";
 import { Breadcrumbs, type Crumb } from "@/components/common/breadcrumbs";
 import { ViewBeacon } from "@/components/blog/view-beacon";
-import { getInitials } from "@/lib/format";
+import { BlogArticle } from "@/components/blog/blog-article";
 
 export const revalidate = 60;
 
@@ -88,65 +86,17 @@ export default async function BlogPostPage({
       />
       <ViewBeacon slug={post.slug} />
 
-      <article className="container max-w-3xl py-10 md:py-14">
-        <Breadcrumbs items={crumbs} className="mb-5" />
-
-        <header>
-          <h1 className="font-display text-[30px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[36px]">
-            {post.title}
-          </h1>
-          {post.excerpt ? (
-            <p className="mt-3 text-[17px] leading-relaxed text-text-secondary">
-              {post.excerpt}
-            </p>
-          ) : null}
-          <div className="mt-5 flex flex-wrap items-center gap-3 text-[13px] text-text-muted">
-            {post.author ? (
-              <span className="inline-flex items-center gap-2">
-                <span className="flex size-7 items-center justify-center rounded-full bg-tint font-display text-[11px] font-bold text-azure-700">
-                  {getInitials(post.author)}
-                </span>
-                {post.author}
-              </span>
-            ) : null}
-            {date ? <span>{date}</span> : null}
-            {post.readingTime ? (
-              <span className="inline-flex items-center gap-1">
-                <Clock className="size-3.5" aria-hidden="true" />
-                {post.readingTime} min read
-              </span>
-            ) : null}
-          </div>
-        </header>
-
-        {post.coverUrl ? (
-          <div className="relative mt-6 aspect-[16/8] overflow-hidden rounded-xl border border-border bg-tint">
-            <Image
-              src={post.coverUrl}
-              alt={post.coverAlt ?? post.title}
-              fill
-              sizes="(min-width: 768px) 768px, 100vw"
-              className="object-cover"
-              priority
-              unoptimized
-            />
-          </div>
-        ) : null}
-
-        {bodyHtml ? (
-          <div
-            className="prose-blog mt-8"
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: bodyHtml }}
-          />
-        ) : null}
-
-        <p className="mt-10 border-t border-border pt-6 text-[12.5px] leading-relaxed text-text-muted">
-          This article is for general information only and is not medical advice.
-          Always consult a licensed physician. Individual results vary and no
-          outcome is guaranteed.
-        </p>
-      </article>
+      <BlogArticle
+        title={post.title}
+        excerpt={post.excerpt}
+        author={post.author}
+        dateLabel={date}
+        readingTime={post.readingTime}
+        coverUrl={post.coverUrl}
+        coverAlt={post.coverAlt}
+        bodyHtml={bodyHtml}
+        topSlot={<Breadcrumbs items={crumbs} className="mb-5" />}
+      />
     </>
   );
 }

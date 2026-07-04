@@ -25,6 +25,10 @@ export const blogPostCreateSchema = z.object({
   slug: slugSchema,
   template: z.enum(BLOG_TEMPLATE_KEYS).default("generic"),
   status: z.enum(BLOG_POST_STATUSES).default("draft"),
+  // ISO-8601 UTC string (the client must send `new Date(local).toISOString()`;
+  // a raw `datetime-local` value fails `.datetime()`). Drives scheduling: a
+  // future value on a published post = scheduled. Optional — publish-now omits it.
+  publishedAt: z.string().datetime().optional(),
   body: z.string().max(200_000).default(""),
   excerpt: z.string().max(500).optional(),
   metaTitle: z.string().max(120).optional(),

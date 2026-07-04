@@ -17,10 +17,21 @@ const iso = (d?: Date | null): string | undefined =>
 
 export const BLOG_PAGE_SIZE = 9;
 
-const publishedFilter = {
-  status: "published",
-  publishedAt: { $ne: null },
-} as const;
+/**
+ * Public-visibility gate — shared by EVERY public blog read (index, single,
+ * generateStaticParams, sitemap, view beacon). A post is public only when it is
+ * `published` AND its `publishedAt` is in the past. A future `publishedAt`
+ * therefore models a *scheduled* post: invisible until its time, then it appears
+ * automatically on the next ISR revalidation (no cron). Built per-call so `now`
+ * is fresh; `$lte:<Date>` also excludes null/missing via BSON type-bracketing,
+ * so the `$ne:null` is belt-and-braces for legacy rows.
+ */
+function publishedFilter() {
+  return {
+    status: "published",
+    publishedAt: { $ne: null, $lte: new Date() },
+  } as const;
+}
 
 // ── View models ──────────────────────────────────────────────────────────────
 
@@ -80,13 +91,14 @@ export async function getPublishedBlogPosts(
 ): Promise<BlogIndexPage> {
   await dbConnect();
   const page = Math.max(1, opts.page ?? 1);
+  const filter = publishedFilter();
   const [docs, total] = await Promise.all([
-    BlogPost.find(publishedFilter)
+    BlogPost.find(filter)
       .sort({ publishedAt: -1 })
       .skip((page - 1) * BLOG_PAGE_SIZE)
       .limit(BLOG_PAGE_SIZE)
       .lean<IBlogPost[]>(),
-    BlogPost.countDocuments(publishedFilter),
+    BlogPost.countDocuments(filter),
   ]);
   return {
     posts: docs.map(toCard),
@@ -100,8 +112,16 @@ export async function getBlogPostBySlug(
   slug: string,
 ): Promise<BlogPostView | null> {
   await dbConnect();
-  const p = await BlogPost.findOne({ slug, ...publishedFilter }).lean<IBlogPost>();
+  const p = await BlogPost.findOne({
+    slug,
+    ...publishedFilter(),
+  }).lean<IBlogPost>();
   if (!p) return null;
+  return toPostView(p);
+}
+
+/** Shared BlogPostView mapping (used by the public slug read + preview read). */
+function toPostView(p: IBlogPost): BlogPostView {
   return {
     ...toCard(p),
     body: p.body ?? "",
@@ -116,9 +136,25 @@ export async function getBlogPostBySlug(
   };
 }
 
+/**
+ * Preview read for /seoteam/preview/[id] — fetches a post by id **regardless of
+ * status or publish date** (drafts + scheduled included). Access is gated by the
+ * /seoteam auth guard, NOT by this query, so it deliberately skips
+ * `publishedFilter()`. Returns the same shape as the public slug read.
+ */
+export async function getBlogPostForPreview(
+  postId: string,
+): Promise<BlogPostView | null> {
+  await dbConnect();
+  if (!/^[a-f\d]{24}$/i.test(postId)) return null;
+  const p = await BlogPost.findById(postId).lean<IBlogPost>();
+  if (!p) return null;
+  return toPostView(p);
+}
+
 export async function getPublishedBlogSlugs(): Promise<string[]> {
   await dbConnect();
-  const docs = await BlogPost.find(publishedFilter).select("slug").lean();
+  const docs = await BlogPost.find(publishedFilter()).select("slug").lean();
   return docs.map((d) => d.slug);
 }
 
@@ -129,7 +165,7 @@ export interface BlogSitemapEntry {
 
 export async function getBlogSitemapEntries(): Promise<BlogSitemapEntry[]> {
   await dbConnect();
-  const docs = await BlogPost.find(publishedFilter)
+  const docs = await BlogPost.find(publishedFilter())
     .select("slug updatedAt publishedAt")
     .lean();
   return docs.map((d) => ({
@@ -141,7 +177,10 @@ export async function getBlogSitemapEntries(): Promise<BlogSitemapEntry[]> {
 /** Fire-and-forget view increment (called by the public beacon route). */
 export async function incrementBlogViews(slug: string): Promise<void> {
   await dbConnect();
-  await BlogPost.updateOne({ slug, ...publishedFilter }, { $inc: { views: 1 } });
+  await BlogPost.updateOne(
+    { slug, ...publishedFilter() },
+    { $inc: { views: 1 } },
+  );
 }
 
 // ── Dashboard reads ──────────────────────────────────────────────────────────
@@ -151,6 +190,8 @@ export interface BlogAdminRow {
   title: string;
   slug: string;
   status: IBlogPost["status"];
+  /** `published` with a future `publishedAt` — hidden on /blog until its time. */
+  scheduled: boolean;
   publishedAt?: string;
   updatedAt?: string;
   views: number;
@@ -171,6 +212,7 @@ export async function getAdminBlogPosts(opts: {
     .sort({ updatedAt: -1 })
     .lean<IBlogPost[]>();
 
+  const now = Date.now();
   return docs.map((p) => {
     const checks = runSeoChecks({
       title: p.title,
@@ -185,6 +227,10 @@ export async function getAdminBlogPosts(opts: {
       title: p.title,
       slug: p.slug,
       status: p.status,
+      scheduled:
+        p.status === "published" &&
+        !!p.publishedAt &&
+        new Date(p.publishedAt).getTime() > now,
       publishedAt: iso(p.publishedAt ?? null),
       updatedAt: iso(p.updatedAt),
       views: p.views ?? 0,

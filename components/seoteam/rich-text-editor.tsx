@@ -5,10 +5,12 @@ import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import ImageExt from "@tiptap/extension-image";
+import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
 import {
   Bold,
   Italic,
+  Underline as UnderlineIcon,
   Heading2,
   Heading3,
   List,
@@ -20,11 +22,24 @@ import {
   Undo2,
   Redo2,
   Strikethrough,
+  Code2,
+  Loader2,
+  Upload,
   type LucideIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/form-field";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { uploadBlogImage } from "@/components/seoteam/image-field";
 
 function ToolbarButton({
@@ -63,9 +78,18 @@ const Divider = () => <span className="mx-1 h-5 w-px bg-border" aria-hidden />;
 
 /**
  * Tiptap WYSIWYG editor for blog bodies. Outputs HTML (sanitized server-side on
- * save). ProseMirror cleans up pasted Google-Docs/Word markup; images can be
- * dragged in, pasted, or added via the toolbar (uploaded to the project's
- * Cloudinary pipeline).
+ * save). Supports a raw-HTML source view (`<>`), link/image insertion via small
+ * dialogs, and inline image upload (drag, paste, or the image dialog → Cloudinary).
+ *
+ * Prop contract `{ value, onChange, placeholder }` is intentionally stable — this
+ * component is shared with the combination-page editor (matrix-editor.tsx).
+ *
+ * HTML source mode: the `<textarea>` is the source of truth; its raw value flows
+ * straight to `onChange` so tags Tiptap can't model round-trip untouched. On the
+ * way back to visual mode we `setContent(value, false)` (emitUpdate=false) so we
+ * never re-emit the normalized `getHTML()` and clobber that raw value. Tiptap
+ * still drops nodes outside its schema when it renders visual mode, so hand-written
+ * HTML is best finished in the source view.
  */
 export function RichTextEditor({
   value,
@@ -77,7 +101,19 @@ export function RichTextEditor({
   placeholder?: string;
 }) {
   const editorRef = React.useRef<Editor | null>(null);
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const dialogFileRef = React.useRef<HTMLInputElement>(null);
+
+  const [mode, setMode] = React.useState<"visual" | "html">("visual");
+
+  // Link dialog
+  const [linkOpen, setLinkOpen] = React.useState(false);
+  const [linkUrl, setLinkUrl] = React.useState("");
+
+  // Image dialog
+  const [imageOpen, setImageOpen] = React.useState(false);
+  const [imgSrc, setImgSrc] = React.useState("");
+  const [imgAlt, setImgAlt] = React.useState("");
+  const [uploading, setUploading] = React.useState(false);
 
   const insertImageFile = React.useCallback(async (file: File) => {
     if (!file.type.startsWith("image/")) return;
@@ -97,6 +133,7 @@ export function RichTextEditor({
       StarterKit.configure({
         heading: { levels: [2, 3, 4] },
       }),
+      Underline,
       Link.configure({
         openOnClick: false,
         autolink: true,
@@ -138,28 +175,89 @@ export function RichTextEditor({
 
   editorRef.current = editor;
 
-  const setLink = React.useCallback(() => {
+  // ── HTML source toggle ──────────────────────────────────────────────────────
+  const toggleMode = React.useCallback(() => {
+    if (mode === "html") {
+      // Returning to visual: load the raw HTML WITHOUT emitting an update, so the
+      // form keeps the raw value (nodes Tiptap can't model aren't lost from state).
+      editor?.commands.setContent(value, false);
+      setMode("visual");
+    } else {
+      setMode("html");
+    }
+  }, [mode, editor, value]);
+
+  // ── Link dialog ─────────────────────────────────────────────────────────────
+  const openLinkDialog = React.useCallback(() => {
     if (!editor) return;
     const previous = editor.getAttributes("link").href as string | undefined;
-    const url = window.prompt("Link URL", previous ?? "https://");
-    if (url === null) return;
-    if (url === "") {
+    setLinkUrl(previous ?? "https://");
+    setLinkOpen(true);
+  }, [editor]);
+
+  const applyLink = React.useCallback(() => {
+    if (!editor) return;
+    const url = linkUrl.trim();
+    if (!url) {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
+    } else {
+      editor
+        .chain()
+        .focus()
+        .extendMarkRange("link")
+        .setLink({ href: url })
+        .run();
+    }
+    setLinkOpen(false);
+  }, [editor, linkUrl]);
+
+  const removeLink = React.useCallback(() => {
+    editor?.chain().focus().extendMarkRange("link").unsetLink().run();
+    setLinkOpen(false);
+  }, [editor]);
+
+  // ── Image dialog ────────────────────────────────────────────────────────────
+  const openImageDialog = React.useCallback(() => {
+    setImgSrc("");
+    setImgAlt("");
+    setImageOpen(true);
+  }, []);
+
+  const handleDialogUpload = React.useCallback(async (file: File) => {
+    if (!file.type.startsWith("image/")) return;
+    setUploading(true);
+    try {
+      const { url } = await uploadBlogImage(file);
+      setImgSrc(url);
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Image upload failed.");
+    } finally {
+      setUploading(false);
+    }
+  }, []);
+
+  const insertImage = React.useCallback(() => {
+    if (!editor) return;
+    const src = imgSrc.trim();
+    if (!/^https?:\/\//i.test(src)) {
+      toast.error("Upload an image or paste a valid http(s) URL.");
       return;
     }
     editor
       .chain()
       .focus()
-      .extendMarkRange("link")
-      .setLink({ href: url })
+      .setImage({ src, alt: imgAlt.trim() || undefined })
       .run();
-  }, [editor]);
+    setImageOpen(false);
+  }, [editor, imgSrc, imgAlt]);
 
   if (!editor) {
     return (
       <div className="min-h-[420px] rounded-lg border border-border bg-surface" />
     );
   }
+
+  const fmtDisabled = mode === "html";
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-surface focus-within:border-primary">
@@ -168,18 +266,28 @@ export function RichTextEditor({
           icon={Bold}
           label="Bold"
           active={editor.isActive("bold")}
+          disabled={fmtDisabled}
           onClick={() => editor.chain().focus().toggleBold().run()}
         />
         <ToolbarButton
           icon={Italic}
           label="Italic"
           active={editor.isActive("italic")}
+          disabled={fmtDisabled}
           onClick={() => editor.chain().focus().toggleItalic().run()}
+        />
+        <ToolbarButton
+          icon={UnderlineIcon}
+          label="Underline"
+          active={editor.isActive("underline")}
+          disabled={fmtDisabled}
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
         />
         <ToolbarButton
           icon={Strikethrough}
           label="Strikethrough"
           active={editor.isActive("strike")}
+          disabled={fmtDisabled}
           onClick={() => editor.chain().focus().toggleStrike().run()}
         />
         <Divider />
@@ -187,6 +295,7 @@ export function RichTextEditor({
           icon={Heading2}
           label="Heading 2"
           active={editor.isActive("heading", { level: 2 })}
+          disabled={fmtDisabled}
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
@@ -195,6 +304,7 @@ export function RichTextEditor({
           icon={Heading3}
           label="Heading 3"
           active={editor.isActive("heading", { level: 3 })}
+          disabled={fmtDisabled}
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
@@ -204,18 +314,21 @@ export function RichTextEditor({
           icon={List}
           label="Bullet list"
           active={editor.isActive("bulletList")}
+          disabled={fmtDisabled}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
         />
         <ToolbarButton
           icon={ListOrdered}
           label="Numbered list"
           active={editor.isActive("orderedList")}
+          disabled={fmtDisabled}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
         />
         <ToolbarButton
           icon={Quote}
           label="Quote"
           active={editor.isActive("blockquote")}
+          disabled={fmtDisabled}
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
         />
         <Divider />
@@ -223,47 +336,167 @@ export function RichTextEditor({
           icon={Link2}
           label="Add link"
           active={editor.isActive("link")}
-          onClick={setLink}
+          disabled={fmtDisabled}
+          onClick={openLinkDialog}
         />
         <ToolbarButton
           icon={Unlink}
           label="Remove link"
-          disabled={!editor.isActive("link")}
+          disabled={fmtDisabled || !editor.isActive("link")}
           onClick={() => editor.chain().focus().unsetLink().run()}
         />
         <ToolbarButton
           icon={ImagePlus}
           label="Insert image"
-          onClick={() => fileInputRef.current?.click()}
+          disabled={fmtDisabled}
+          onClick={openImageDialog}
         />
         <Divider />
         <ToolbarButton
           icon={Undo2}
           label="Undo"
-          disabled={!editor.can().undo()}
+          disabled={fmtDisabled || !editor.can().undo()}
           onClick={() => editor.chain().focus().undo().run()}
         />
         <ToolbarButton
           icon={Redo2}
           label="Redo"
-          disabled={!editor.can().redo()}
+          disabled={fmtDisabled || !editor.can().redo()}
           onClick={() => editor.chain().focus().redo().run()}
         />
+
+        {/* Source toggle — right-aligned, always enabled. */}
+        <div className="ml-auto">
+          <ToolbarButton
+            icon={Code2}
+            label={mode === "html" ? "Show editor" : "Show HTML"}
+            active={mode === "html"}
+            onClick={toggleMode}
+          />
+        </div>
       </div>
 
-      <EditorContent editor={editor} />
+      {mode === "html" ? (
+        <textarea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          spellCheck={false}
+          aria-label="HTML source"
+          className="block min-h-[360px] w-full resize-y bg-surface px-4 py-3 font-mono text-[13px] leading-relaxed text-text-primary focus:outline-none"
+        />
+      ) : (
+        <EditorContent editor={editor} />
+      )}
 
+      {/* Dedicated file input for the image dialog's upload button. */}
       <input
-        ref={fileInputRef}
+        ref={dialogFileRef}
         type="file"
         accept="image/*"
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];
-          if (file) void insertImageFile(file);
+          if (file) void handleDialogUpload(file);
           e.target.value = "";
         }}
       />
+
+      {/* Link dialog */}
+      <Dialog open={linkOpen} onOpenChange={setLinkOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Insert link</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-1.5">
+            <Label htmlFor="rte-link-url">URL</Label>
+            <Input
+              id="rte-link-url"
+              value={linkUrl}
+              autoFocus
+              onChange={(e) => setLinkUrl(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  applyLink();
+                }
+              }}
+              placeholder="https://example.com"
+            />
+          </div>
+          <DialogFooter>
+            {editor.isActive("link") ? (
+              <Button variant="ghost" onClick={removeLink}>
+                Remove
+              </Button>
+            ) : null}
+            <Button onClick={applyLink}>Apply</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Image dialog */}
+      <Dialog open={imageOpen} onOpenChange={setImageOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Insert image</DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-3">
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              disabled={uploading}
+              onClick={() => dialogFileRef.current?.click()}
+            >
+              {uploading ? (
+                <>
+                  <Loader2 className="size-4 animate-spin" /> Uploading…
+                </>
+              ) : (
+                <>
+                  <Upload className="size-4" /> Upload image
+                </>
+              )}
+            </Button>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="rte-img-src">Image URL</Label>
+              <Input
+                id="rte-img-src"
+                value={imgSrc}
+                onChange={(e) => setImgSrc(e.target.value)}
+                placeholder="https://example.com/image.jpg — or upload above"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="rte-img-alt">Alt text</Label>
+              <Input
+                id="rte-img-alt"
+                value={imgAlt}
+                onChange={(e) => setImgAlt(e.target.value)}
+                placeholder="Describe the image (for SEO & accessibility)"
+              />
+            </div>
+
+            {imgSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={imgSrc}
+                alt={imgAlt || "Preview"}
+                className="max-h-40 w-auto rounded-md border border-border"
+              />
+            ) : null}
+          </div>
+
+          <DialogFooter>
+            <Button onClick={insertImage} disabled={!imgSrc || uploading}>
+              Insert
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

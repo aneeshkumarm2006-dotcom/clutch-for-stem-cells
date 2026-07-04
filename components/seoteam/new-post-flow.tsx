@@ -27,7 +27,8 @@ export function NewPostFlow() {
     linkFirstOnly: true,
     author: "",
     body: tpl.body,
-    status: "draft",
+    visibility: "draft",
+    publishedAt: "",
   };
 
   return <PostEditor mode="create" initial={initial} />;

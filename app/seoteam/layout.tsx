@@ -1,32 +1,22 @@
 /**
- * SEO-team dashboard shell — its own chrome (NOT the public navbar/footer) and
- * hard `noindex, nofollow` so the dashboard never appears in search results
- * (paired with the `Disallow: /seoteam` in robots.txt and the middleware gate).
- *
- * The header (with nav + logout) renders only when authenticated, so the login
- * screen stays clean. Middleware guarantees: /seoteam/login ⇒ unauthenticated,
- * every other /seoteam route ⇒ authenticated.
+ * SEO-team root shell — hard `noindex, nofollow` so nothing under /seoteam ever
+ * appears in search results (paired with `Disallow: /seoteam` in robots.txt and
+ * the middleware gate). Deliberately header-LESS: the authenticated dashboard
+ * chrome lives in the `(dashboard)` route group, so sibling routes (the login
+ * screen and the full-page /seoteam/preview/[id]) render without it — the
+ * preview supplies the real public navbar/footer itself.
  */
 import type { Metadata } from "next";
-
-import { isSeoAuthenticated } from "@/lib/seoteam/auth";
-import { SeoTeamHeader } from "@/components/seoteam/header";
 
 export const metadata: Metadata = {
   title: "SEO Team",
   robots: { index: false, follow: false },
 };
 
-export default async function SeoTeamLayout({
+export default function SeoTeamLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const authed = await isSeoAuthenticated();
-  return (
-    <div className="min-h-screen bg-background">
-      {authed ? <SeoTeamHeader /> : null}
-      {children}
-    </div>
-  );
+  return <div className="min-h-screen bg-background">{children}</div>;
 }

@@ -47,7 +47,15 @@ export async function POST(req: Request): Promise<Response> {
       ...data,
       body,
       readingTime: estimateReadingTime(htmlToText(body)),
-      publishedAt: data.status === "published" ? new Date() : null,
+      // Published → use the explicit date (a future value schedules the post) or
+      // publish now; draft → no date. Overrides the string `publishedAt` spread
+      // from `...data` with a real Date.
+      publishedAt:
+        data.status === "published"
+          ? data.publishedAt
+            ? new Date(data.publishedAt)
+            : new Date()
+          : null,
     });
 
     if (post.status === "published") {

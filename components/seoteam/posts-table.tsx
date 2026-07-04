@@ -78,7 +78,12 @@ export function PostsTable({ initialPosts }: { initialPosts: BlogAdminRow[] }) {
   const [toDelete, setToDelete] = React.useState<BlogAdminRow | null>(null);
 
   const filtered = posts.filter((p) => {
-    if (status !== "all" && p.status !== status) return false;
+    // "Published" means live only — scheduled posts (also status:"published")
+    // are a separate filter, since both share the raw status.
+    if (status === "published" && !(p.status === "published" && !p.scheduled))
+      return false;
+    if (status === "scheduled" && !p.scheduled) return false;
+    if (status === "draft" && p.status !== "draft") return false;
     if (query.trim() && !p.title.toLowerCase().includes(query.trim().toLowerCase()))
       return false;
     return true;
@@ -98,6 +103,9 @@ export function PostsTable({ initialPosts }: { initialPosts: BlogAdminRow[] }) {
             ? {
                 ...p,
                 status: nextStatus,
+                // A one-click publish/unpublish is always immediate (server sets
+                // publishedAt to now), so the row is never scheduled after it.
+                scheduled: false,
                 publishedAt:
                   nextStatus === "published"
                     ? (p.publishedAt ?? new Date().toISOString())
@@ -148,6 +156,7 @@ export function PostsTable({ initialPosts }: { initialPosts: BlogAdminRow[] }) {
             options={[
               { value: "all", label: "All statuses" },
               { value: "published", label: "Published" },
+              { value: "scheduled", label: "Scheduled" },
               { value: "draft", label: "Drafts" },
             ]}
             value={status}
@@ -199,11 +208,13 @@ export function PostsTable({ initialPosts }: { initialPosts: BlogAdminRow[] }) {
                     <div className="text-[12px] text-text-muted">/{post.slug}</div>
                   </Td>
                   <Td>
-                    <Badge
-                      variant={post.status === "published" ? "success" : "neutral"}
-                    >
-                      {post.status === "published" ? "Published" : "Draft"}
-                    </Badge>
+                    {post.scheduled ? (
+                      <Badge variant="warning">Scheduled</Badge>
+                    ) : post.status === "published" ? (
+                      <Badge variant="success">Published</Badge>
+                    ) : (
+                      <Badge variant="neutral">Draft</Badge>
+                    )}
                   </Td>
                   <Td>
                     <SeoIndicator seo={post.seo} />
@@ -214,7 +225,19 @@ export function PostsTable({ initialPosts }: { initialPosts: BlogAdminRow[] }) {
                   </Td>
                   <Td>
                     <div className="flex items-center justify-end gap-1">
-                      {post.status === "published" ? (
+                      {post.status === "published" && !post.scheduled ? (
+                        <Button
+                          asChild
+                          variant="ghost"
+                          size="sm"
+                          aria-label="View public"
+                          title="View public"
+                        >
+                          <Link href={`/blog/${post.slug}`} target="_blank">
+                            <Eye className="size-4" />
+                          </Link>
+                        </Button>
+                      ) : (
                         <Button
                           asChild
                           variant="ghost"
@@ -222,11 +245,14 @@ export function PostsTable({ initialPosts }: { initialPosts: BlogAdminRow[] }) {
                           aria-label="Preview"
                           title="Preview"
                         >
-                          <Link href={`/blog/${post.slug}`} target="_blank">
+                          <Link
+                            href={`/seoteam/preview/${post.id}`}
+                            target="_blank"
+                          >
                             <Eye className="size-4" />
                           </Link>
                         </Button>
-                      ) : null}
+                      )}
                       <Button
                         asChild
                         variant="ghost"

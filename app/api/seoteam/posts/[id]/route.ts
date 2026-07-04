@@ -45,16 +45,28 @@ export async function PATCH(
       post.readingTime = estimateReadingTime(htmlToText(body));
     }
 
-    // Apply the remaining fields (body already sanitized + assigned above).
+    // Apply the remaining fields. `body` (sanitized above) and `publishedAt`
+    // (resolved below) are handled explicitly, so drop them from the bulk set —
+    // in particular, keeping `publishedAt` out preserves the ORIGINAL stored date
+    // for the comparison below.
     const rest = { ...data };
     delete rest.body;
+    delete rest.publishedAt;
     post.set(rest);
 
-    // Keep publishedAt consistent with status transitions.
-    if (data.status === "published" && !post.publishedAt) {
-      post.publishedAt = new Date();
-    }
-    if (data.status === "draft") {
+    // Keep publishedAt consistent with visibility. Publishing with no explicit
+    // date must NOT blindly reuse the existing date — if that date is in the
+    // future (a scheduled post switched to Visible), reusing it would leave the
+    // post hidden. So: explicit date wins; otherwise keep the existing date only
+    // if it is already ≤ now (an already-live post keeps its original date),
+    // else publish now.
+    if (data.status === "published") {
+      const now = new Date();
+      const explicit = data.publishedAt ? new Date(data.publishedAt) : undefined;
+      post.publishedAt =
+        explicit ??
+        (post.publishedAt && post.publishedAt <= now ? post.publishedAt : now);
+    } else if (data.status === "draft") {
       post.publishedAt = null;
     }
 
