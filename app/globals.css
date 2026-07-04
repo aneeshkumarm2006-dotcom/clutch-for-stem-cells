@@ -52,9 +52,11 @@
   }
 
   /* Smooth in-page scrolling (anchor jumps, scrollTo). Disabled under
-     prefers-reduced-motion by the media query at the bottom of this file. */
+     prefers-reduced-motion by the media query at the bottom of this file.
+     Site-wide inertia scroll is handled by Lenis (components/smooth-scroll). */
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* offset for the fixed navbar */
   }
 
   body {
@@ -262,6 +264,27 @@
   border: 0;
   border-top: 1px solid var(--border);
   margin: 2em 0;
+}
+
+/* Lenis smooth-scroll runtime classes (components/smooth-scroll.tsx). Lenis
+   toggles these on <html>; they keep anchor jumps and inner scroll regions
+   behaving correctly. Add data-lenis-prevent to any element that should scroll
+   on its own (modals, dropdowns, sidebars, code blocks). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 /* Respect reduced-motion globally — Design §9. */

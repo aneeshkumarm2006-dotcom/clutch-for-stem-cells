@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { inter, jakarta } from "./fonts";
 import "./globals.css";
 import { AuthSessionProvider } from "@/components/auth/session-provider";
+import SmoothScroll from "@/components/smooth-scroll";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
       <body>
+        <SmoothScroll />
         <AuthSessionProvider>
           <TooltipProvider delayDuration={200}>
             {children}
