@@ -26,7 +26,12 @@ import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 export const revalidate = 600;
 
 export function generateMetadata(): Promise<Metadata> {
-  return pageMetadata({ path: "/" });
+  return pageMetadata({
+    path: "/",
+    title: "Stem Cell Guide | Trusted Stem Cell Therapy Information",
+    description:
+      "Learn about stem cell therapy, regenerative medicine, clinical research, treatment options, safety, and the latest advances with expert educational guides.",
+  });
 }
 
 export default async function HomePage() {
