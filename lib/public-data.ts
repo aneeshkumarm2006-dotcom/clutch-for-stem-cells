@@ -1187,7 +1187,7 @@ export interface HomeData {
 }
 
 const HERO_FALLBACK = {
-  headline: "Find and trust regenerative-medicine clinics",
+  headline: "My Stem Cell Guide: Trusted Information, Research & Patient Resources",
   subhead:
     "Compare accredited stem cell clinics worldwide by treatment, condition, location, and verified patient reviews.",
   ctaPrimaryLabel: "Find a clinic",
