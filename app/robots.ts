@@ -19,8 +19,16 @@ import type { MetadataRoute } from "next";
 
 import { SITE_URL } from "@/config/site";
 
-/** Paths kept out of every crawler (admin/auth/account/API/redirect). */
-const DISALLOW = ["/admin", "/api/", "/auth/", "/account", "/seoteam", "/r/"];
+/** Paths kept out of every crawler (admin/auth/account/API/redirect/hub). */
+const DISALLOW = [
+  "/admin",
+  "/api/",
+  "/auth/",
+  "/account",
+  "/seoteam",
+  "/analyticshub",
+  "/r/",
+];
 
 /**
  * Named AI / answer-engine crawlers we explicitly welcome (AEO). Listing them
