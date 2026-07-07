@@ -29,5 +29,22 @@ export const mediaUpdateSchema = z
   })
   .partial();
 
+/** Bulk action over selected library rows (seoteam gallery). */
+export const mediaBulkSchema = z.object({
+  ids: z.array(objectIdSchema).min(1, "Select at least one image."),
+  action: z.enum(["delete", "setFolder"]),
+  value: z.string().max(120).optional(),
+});
+
+/** Bulk-import a list of pasted image URLs (seoteam gallery). */
+export const mediaUrlImportSchema = z.object({
+  urls: z
+    .array(mediaUrlSchema)
+    .min(1, "Add at least one image URL.")
+    .max(100, "Import up to 100 URLs at a time."),
+});
+
 export type MediaInput = z.infer<typeof mediaCreateSchema>;
 export type MediaUpdateInput = z.infer<typeof mediaUpdateSchema>;
+export type MediaBulkInput = z.infer<typeof mediaBulkSchema>;
+export type MediaUrlImportInput = z.infer<typeof mediaUrlImportSchema>;

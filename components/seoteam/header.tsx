@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileText, LayoutGrid, PlusCircle, ShieldCheck } from "lucide-react";
+import { FileText, Images, LayoutGrid, PlusCircle, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SITE_NAME } from "@/config/site";
@@ -31,6 +31,12 @@ export function SeoTeamHeader() {
           <Link href="/seoteam/matrix">
             <LayoutGrid className="size-4" />
             <span className="hidden sm:inline">Combinations</span>
+          </Link>
+        </Button>
+        <Button asChild variant="ghost" size="sm">
+          <Link href="/seoteam/media">
+            <Images className="size-4" />
+            <span className="hidden sm:inline">Media</span>
           </Link>
         </Button>
         <Button asChild variant="ghost" size="sm">

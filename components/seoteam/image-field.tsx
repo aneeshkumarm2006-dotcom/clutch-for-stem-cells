@@ -2,13 +2,14 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { ImagePlus, Trash2, Loader2, Link2 } from "lucide-react";
+import { ImagePlus, Trash2, Loader2, Link2, Images } from "lucide-react";
 import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/form-field";
+import { MediaPickerDialog } from "@/components/seoteam/media-picker-dialog";
 
 export interface ImageValue {
   url: string;
@@ -49,6 +50,7 @@ export function ImageField({
   const [dragOver, setDragOver] = React.useState(false);
   const [urlMode, setUrlMode] = React.useState(false);
   const [urlValue, setUrlValue] = React.useState("");
+  const [libraryOpen, setLibraryOpen] = React.useState(false);
 
   const handleFile = async (file: File) => {
     setBusy(true);
@@ -66,14 +68,24 @@ export function ImageField({
     <div className="space-y-1.5">
       <div className="flex items-center justify-between">
         <Label>{label}</Label>
-        <button
-          type="button"
-          onClick={() => setUrlMode((v) => !v)}
-          className="inline-flex items-center gap-1 text-[12px] text-text-link hover:underline"
-        >
-          <Link2 className="size-3.5" />
-          {urlMode ? "Upload instead" : "Paste URL"}
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setLibraryOpen(true)}
+            className="inline-flex items-center gap-1 text-[12px] text-text-link hover:underline"
+          >
+            <Images className="size-3.5" />
+            Library
+          </button>
+          <button
+            type="button"
+            onClick={() => setUrlMode((v) => !v)}
+            className="inline-flex items-center gap-1 text-[12px] text-text-link hover:underline"
+          >
+            <Link2 className="size-3.5" />
+            {urlMode ? "Upload instead" : "Paste URL"}
+          </button>
+        </div>
       </div>
 
       {value?.url ? (
@@ -184,6 +196,12 @@ export function ImageField({
           if (file) void handleFile(file);
           e.target.value = "";
         }}
+      />
+
+      <MediaPickerDialog
+        open={libraryOpen}
+        onOpenChange={setLibraryOpen}
+        onSelect={({ url, alt }) => onChange({ url, alt: alt ?? "" })}
       />
     </div>
   );

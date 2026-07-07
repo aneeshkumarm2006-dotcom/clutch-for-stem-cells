@@ -25,6 +25,7 @@ import {
   Code2,
   Loader2,
   Upload,
+  Images,
   type LucideIcon,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -41,6 +42,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { uploadBlogImage } from "@/components/seoteam/image-field";
+import { MediaPickerDialog } from "@/components/seoteam/media-picker-dialog";
 
 function ToolbarButton({
   icon: Icon,
@@ -109,11 +111,16 @@ export function RichTextEditor({
   const [linkOpen, setLinkOpen] = React.useState(false);
   const [linkUrl, setLinkUrl] = React.useState("");
 
-  // Image dialog
+  // Image dialog. `imgMode` distinguishes inserting a new image from editing one
+  // that's already in the body; `imgPos` is the document position of the node
+  // being edited so we can target it with updateAttributes.
   const [imageOpen, setImageOpen] = React.useState(false);
+  const [imgMode, setImgMode] = React.useState<"insert" | "edit">("insert");
+  const [imgPos, setImgPos] = React.useState<number | null>(null);
   const [imgSrc, setImgSrc] = React.useState("");
   const [imgAlt, setImgAlt] = React.useState("");
   const [uploading, setUploading] = React.useState(false);
+  const [libraryOpen, setLibraryOpen] = React.useState(false);
 
   const insertImageFile = React.useCallback(async (file: File) => {
     if (!file.type.startsWith("image/")) return;
@@ -122,6 +129,21 @@ export function RichTextEditor({
     try {
       const { url } = await uploadBlogImage(file);
       editor.chain().focus().setImage({ src: url }).run();
+      // Drag/paste images arrive with no alt — locate the node we just inserted
+      // and open the dialog focused on its alt field so it can be added right
+      // away. Non-blocking: the image is already in the body; skipping the
+      // dialog just leaves it without alt (editable later by clicking it).
+      let pos: number | null = null;
+      editor.state.doc.descendants((node, nodePos) => {
+        if (node.type.name === "image" && node.attrs.src === url) pos = nodePos;
+      });
+      if (pos != null) {
+        setImgMode("edit");
+        setImgPos(pos);
+        setImgSrc(url);
+        setImgAlt("");
+        setImageOpen(true);
+      }
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Image upload failed.");
     }
@@ -168,6 +190,19 @@ export function RichTextEditor({
           return true;
         }
         return false;
+      },
+      // Click an existing image to edit it — opens the dialog pre-filled with its
+      // src/alt so alt text can be added or fixed after insertion (including on
+      // drag/pasted images, which arrive with no alt).
+      handleClickOn: (_view, _pos, node, nodePos, _event, direct) => {
+        if (!direct || node.type.name !== "image") return false;
+        setImgMode("edit");
+        setImgPos(nodePos);
+        setImgSrc((node.attrs.src as string | null) ?? "");
+        setImgAlt((node.attrs.alt as string | null) ?? "");
+        setImageOpen(true);
+        editorRef.current?.chain().setNodeSelection(nodePos).run();
+        return true;
       },
     },
     onUpdate: ({ editor: ed }) => onChange(ed.getHTML()),
@@ -218,6 +253,8 @@ export function RichTextEditor({
 
   // ── Image dialog ────────────────────────────────────────────────────────────
   const openImageDialog = React.useCallback(() => {
+    setImgMode("insert");
+    setImgPos(null);
     setImgSrc("");
     setImgAlt("");
     setImageOpen(true);
@@ -243,13 +280,25 @@ export function RichTextEditor({
       toast.error("Upload an image or paste a valid http(s) URL.");
       return;
     }
-    editor
-      .chain()
-      .focus()
-      .setImage({ src, alt: imgAlt.trim() || undefined })
-      .run();
+    const alt = imgAlt.trim();
+    if (imgMode === "edit" && imgPos != null) {
+      // Update the clicked image in place. Empty alt is stored as null so the
+      // rendered <img> carries no alt attribute rather than alt="".
+      editor
+        .chain()
+        .focus()
+        .setNodeSelection(imgPos)
+        .updateAttributes("image", { src, alt: alt || null })
+        .run();
+    } else {
+      editor
+        .chain()
+        .focus()
+        .setImage({ src, alt: alt || undefined })
+        .run();
+    }
     setImageOpen(false);
-  }, [editor, imgSrc, imgAlt]);
+  }, [editor, imgSrc, imgAlt, imgMode, imgPos]);
 
   if (!editor) {
     return (
@@ -438,27 +487,40 @@ export function RichTextEditor({
       <Dialog open={imageOpen} onOpenChange={setImageOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Insert image</DialogTitle>
+            <DialogTitle>
+              {imgMode === "edit" ? "Edit image" : "Insert image"}
+            </DialogTitle>
           </DialogHeader>
 
           <div className="space-y-3">
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              disabled={uploading}
-              onClick={() => dialogFileRef.current?.click()}
-            >
-              {uploading ? (
-                <>
-                  <Loader2 className="size-4 animate-spin" /> Uploading…
-                </>
-              ) : (
-                <>
-                  <Upload className="size-4" /> Upload image
-                </>
-              )}
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                disabled={uploading}
+                onClick={() => dialogFileRef.current?.click()}
+              >
+                {uploading ? (
+                  <>
+                    <Loader2 className="size-4 animate-spin" /> Uploading…
+                  </>
+                ) : (
+                  <>
+                    <Upload className="size-4" />{" "}
+                    {imgMode === "edit" ? "Replace image" : "Upload image"}
+                  </>
+                )}
+              </Button>
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                onClick={() => setLibraryOpen(true)}
+              >
+                <Images className="size-4" /> From library
+              </Button>
+            </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="rte-img-src">Image URL</Label>
@@ -492,11 +554,21 @@ export function RichTextEditor({
 
           <DialogFooter>
             <Button onClick={insertImage} disabled={!imgSrc || uploading}>
-              Insert
+              {imgMode === "edit" ? "Save" : "Insert"}
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Browse the media library to reuse an existing image. */}
+      <MediaPickerDialog
+        open={libraryOpen}
+        onOpenChange={setLibraryOpen}
+        onSelect={({ url, alt }) => {
+          setImgSrc(url);
+          if (alt) setImgAlt(alt);
+        }}
+      />
     </div>
   );
 }

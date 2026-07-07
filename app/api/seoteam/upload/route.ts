@@ -10,6 +10,7 @@ import {
   MediaValidationError,
   uploadImage,
 } from "@/lib/media";
+import { persistUploadedMedia } from "@/lib/seoteam/media-data";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +33,15 @@ export async function POST(req: Request): Promise<Response> {
         filename: file.name,
         folder: "blog",
       });
+      // Record it in the shared library so cover/inline uploads are browsable
+      // and reusable from the gallery. A library-write hiccup must never fail
+      // the actual upload the editor is waiting on.
+      try {
+        await persistUploadedMedia(uploaded, { filename: file.name });
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error("Media library persist failed:", err);
+      }
       return ok(
         {
           url: uploaded.url,
