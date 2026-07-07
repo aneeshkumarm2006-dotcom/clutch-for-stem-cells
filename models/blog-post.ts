@@ -50,6 +50,10 @@ export interface IBlogPost extends TimestampFields {
   /** Link only the first occurrence of each keyword (avoids over-optimization). */
   linkFirstOnly: boolean;
   author?: string;
+  /** Optional credentialed medical reviewer (E-E-A-T byline + `reviewedBy` schema). */
+  reviewedBy?: Types.ObjectId | null;
+  /** When the reviewer last signed off — drives "Last reviewed" + `lastReviewed`. */
+  lastReviewedAt?: Date | null;
   readingTime?: number;
   views: number;
   publishedAt?: Date | null;
@@ -92,6 +96,12 @@ const BlogPostSchema = new Schema<IBlogPost>(
     keywords: { type: [blogKeywordSchema], default: [] },
     linkFirstOnly: { type: Boolean, default: true },
     author: { type: String, trim: true, maxlength: 160 },
+    reviewedBy: {
+      type: Schema.Types.ObjectId,
+      ref: "MedicalReviewer",
+      default: null,
+    },
+    lastReviewedAt: { type: Date, default: null },
     readingTime: { type: Number, min: 0 },
     views: { type: Number, default: 0, min: 0 },
     publishedAt: { type: Date, default: null },

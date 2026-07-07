@@ -182,7 +182,7 @@ export function ClinicCard({
             <a
               href={websiteHref}
               target="_blank"
-              rel="noopener noreferrer nofollow"
+              rel="noopener noreferrer nofollow sponsored"
               className="inline-flex items-center gap-1 text-[13px] font-semibold text-text-link hover:underline focus-visible:outline-none"
             >
               <ExternalLink className="size-3.5" aria-hidden="true" />

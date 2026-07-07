@@ -21,6 +21,10 @@ import {
   type KeywordEntry,
 } from "@/components/seoteam/keyword-manager";
 import { SeoCheckPanel } from "@/components/seoteam/seo-check-panel";
+import {
+  editorialSelectClass,
+  type ReviewerOption,
+} from "@/components/content/editorial-fields";
 import { adminFetch } from "@/lib/admin/client";
 import { slugify } from "@/lib/slug";
 import { estimateReadingTime } from "@/lib/reading-time";
@@ -44,6 +48,10 @@ export interface EditorValues {
   keywords: KeywordEntry[];
   linkFirstOnly: boolean;
   author: string;
+  /** Selected medical reviewer id (empty = none). */
+  reviewedBy: string;
+  /** ISO-8601 date the reviewer signed off (empty = none). */
+  lastReviewedAt: string;
   body: string;
   visibility: BlogVisibility;
   /** ISO-8601 string (empty = publish now / no scheduled time). */
@@ -282,10 +290,12 @@ export function PostEditor({
   mode,
   postId,
   initial,
+  reviewers,
 }: {
   mode: "create" | "edit";
   postId?: string;
   initial: EditorValues;
+  reviewers: ReviewerOption[];
 }) {
   const router = useRouter();
   const mounted = useMounted();
@@ -352,6 +362,9 @@ export function PostEditor({
         .filter((k) => k.keyword && k.url),
       linkFirstOnly: v.linkFirstOnly,
       author: v.author.trim() || undefined,
+      // `null` clears an existing reviewer; a 24-char id assigns one.
+      reviewedBy: v.reviewedBy || null,
+      lastReviewedAt: v.reviewedBy ? v.lastReviewedAt || null : null,
       body: v.body,
     };
 
@@ -403,6 +416,14 @@ export function PostEditor({
         : mode === "edit"
           ? "Update"
           : "Publish";
+
+  // Selected reviewer → byline shape for the live in-editor preview (null = none).
+  const selected = v.reviewedBy
+    ? reviewers.find((r) => r.id === v.reviewedBy)
+    : undefined;
+  const previewReviewer = selected
+    ? { name: selected.name, credentials: selected.credentials }
+    : null;
 
   // Preview href: live posts → the real page; drafts/scheduled → the full-page preview.
   const previewHref =
@@ -545,6 +566,8 @@ export function PostEditor({
                       coverUrl={v.coverImage?.url}
                       coverAlt={v.coverImage?.alt}
                       bodyHtml={v.body}
+                      reviewer={previewReviewer}
+                      lastReviewedAt={v.lastReviewedAt || undefined}
                       className="!max-w-none !py-6"
                     />
                   </div>
@@ -617,9 +640,67 @@ export function PostEditor({
             <Input
               value={v.author}
               onChange={(e) => set({ author: e.target.value })}
-              placeholder="Author name (optional)"
+              placeholder="Stem Cell Guide Team"
               aria-label="Author"
             />
+            <p className="text-[12px] text-text-muted">
+              Leave blank to use “Stem Cell Guide Team”.
+            </p>
+          </Panel>
+
+          <Panel title="Medical review">
+            <div className="space-y-1.5">
+              <Label htmlFor="post-reviewer">Reviewed by</Label>
+              <select
+                id="post-reviewer"
+                className={editorialSelectClass}
+                value={v.reviewedBy}
+                onChange={(e) => set({ reviewedBy: e.target.value })}
+              >
+                <option value="">— none —</option>
+                {reviewers.map((r) => (
+                  <option key={r.id} value={r.id}>
+                    {r.name}
+                    {r.credentials ? `, ${r.credentials}` : ""}
+                  </option>
+                ))}
+              </select>
+              {reviewers.length ? (
+                <p className="text-[12px] text-text-muted">
+                  Adds a “Medically reviewed by” byline + <code>reviewedBy</code>{" "}
+                  schema (E-E-A-T). Leave as “none” until a real, credentialed
+                  reviewer has signed off.
+                </p>
+              ) : (
+                <p className="text-[12px] text-text-muted">
+                  No reviewers yet. Add one under{" "}
+                  <Link
+                    href="/seoteam/reviewers"
+                    className="text-text-link hover:underline"
+                  >
+                    Reviewers
+                  </Link>
+                  , then attach it here.
+                </p>
+              )}
+            </div>
+            {v.reviewedBy ? (
+              <div className="space-y-1.5">
+                <Label htmlFor="post-reviewed-at">Last reviewed</Label>
+                <Input
+                  id="post-reviewed-at"
+                  type="date"
+                  value={v.lastReviewedAt ? v.lastReviewedAt.slice(0, 10) : ""}
+                  onChange={(e) =>
+                    set({
+                      lastReviewedAt: e.target.value
+                        ? new Date(`${e.target.value}T00:00:00Z`).toISOString()
+                        : "",
+                    })
+                  }
+                />
+              </div>
+            ) : null}
           </Panel>
         </div>
       </div>

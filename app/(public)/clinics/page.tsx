@@ -14,7 +14,10 @@ export const generateMetadata = ({
   searchParams: Record<string, string | string[] | undefined>;
 }): Promise<Metadata> =>
   pageMetadata({
-    title: "All clinics",
+    // Keyword-aligned with the on-page H1 ("Stem cell & regenerative-medicine
+    // clinics") rather than the thin "All clinics" — stronger title tag for the
+    // main directory and consistent title↔H1 signaling.
+    title: "Stem Cell & Regenerative-Medicine Clinic Directory",
     description:
       "Browse and compare accredited stem cell and regenerative-medicine clinics worldwide by treatment, condition, location, price, and verified reviews.",
     path: "/clinics",

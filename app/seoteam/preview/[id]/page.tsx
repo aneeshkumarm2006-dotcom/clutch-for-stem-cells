@@ -88,6 +88,9 @@ export default async function BlogPreviewPage({
           coverUrl={post.coverUrl}
           coverAlt={post.coverAlt}
           bodyHtml={bodyHtml}
+          reviewer={post.reviewer}
+          lastReviewedAt={post.lastReviewedAt}
+          updatedAt={post.updatedAt}
         />
       </main>
 

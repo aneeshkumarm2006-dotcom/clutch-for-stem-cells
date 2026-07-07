@@ -20,13 +20,16 @@ export async function generateStaticParams() {
 
 export function generateMetadata({
   params,
+  searchParams,
 }: {
   params: { country: string; treatment: string };
+  searchParams: Record<string, string | string[] | undefined>;
 }): Promise<Metadata> {
   return buildCombinationMetadata(
     "treatment_country",
     params.treatment,
     params.country,
+    searchParams,
   );
 }
 

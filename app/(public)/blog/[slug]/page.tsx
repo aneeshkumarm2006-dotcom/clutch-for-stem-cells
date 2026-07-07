@@ -80,6 +80,8 @@ export default async function BlogPostPage({
               author: post.author,
               publishedAt: post.publishedAt,
               updatedAt: post.updatedAt,
+              reviewer: post.reviewer,
+              lastReviewed: post.lastReviewedAt,
             }),
           ),
         }}
@@ -95,6 +97,9 @@ export default async function BlogPostPage({
         coverUrl={post.coverUrl}
         coverAlt={post.coverAlt}
         bodyHtml={bodyHtml}
+        reviewer={post.reviewer}
+        lastReviewedAt={post.lastReviewedAt}
+        updatedAt={post.updatedAt}
         topSlot={<Breadcrumbs items={crumbs} className="mb-5" />}
       />
     </>

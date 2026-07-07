@@ -10,12 +10,26 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { formatCount } from "@/lib/format";
 
-export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
+export const generateMetadata = ({
+  searchParams,
+}: {
+  searchParams: Record<string, string | string[] | undefined>;
+}): Promise<Metadata> => {
+  const raw = searchParams.q;
+  const hasQuery = Boolean((Array.isArray(raw) ? raw[0] : raw)?.trim());
+  return pageMetadata({
     title: "Search",
     description: "Search clinics, treatments, and conditions.",
     path: "/search",
+    // Internal site-search results (`/search?q=…`) are thin, near-infinite
+    // query-string permutations — a crawl-budget trap for a small site, and one
+    // Google explicitly advises keeping out of the index. The bare `/search`
+    // landing stays indexable; every `?q=` results permutation is
+    // `noindex, follow` (canonical already points to `/search`). Mirrors the
+    // faceted-directory rule in `lib/seo-indexation.ts`.
+    noindex: hasQuery,
   });
+};
 
 export default async function SearchPage({
   searchParams,

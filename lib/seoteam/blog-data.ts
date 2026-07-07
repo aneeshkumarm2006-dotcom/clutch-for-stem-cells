@@ -8,7 +8,10 @@ import "server-only";
 import { dbConnect } from "@/lib/db";
 import { estimateReadingTime } from "@/lib/reading-time";
 import { htmlToText, runSeoChecks, seoReadiness } from "@/lib/seoteam/seo-checks";
+import { loadReviewerByline } from "@/lib/public-data";
+import { DEFAULT_BLOG_AUTHOR } from "@/lib/seoteam/blog-constants";
 import { BlogPost, type IBlogPost } from "@/models";
+import type { ReviewerByline } from "@/components/content/reviewed-by-byline";
 import type { KeywordRel } from "@/lib/enums";
 
 const id = (v: unknown): string => String(v);
@@ -58,6 +61,10 @@ export interface BlogPostView extends BlogCardView {
   updatedAt?: string;
   keywords: BlogKeywordView[];
   linkFirstOnly: boolean;
+  /** Credentialed medical reviewer (null until one is assigned in the CMS). */
+  reviewer: ReviewerByline | null;
+  /** ISO date the reviewer last signed off (drives the "Last reviewed" byline). */
+  lastReviewedAt?: string;
 }
 
 function readingTimeOf(p: IBlogPost): number {
@@ -71,7 +78,8 @@ function toCard(p: IBlogPost): BlogCardView {
     excerpt: p.excerpt,
     coverUrl: p.coverImage?.url,
     coverAlt: p.coverImage?.alt,
-    author: p.author,
+    // Posts with no explicit human author show the site's editorial team.
+    author: p.author?.trim() || DEFAULT_BLOG_AUTHOR,
     publishedAt: iso(p.publishedAt ?? null),
     readingTime: readingTimeOf(p),
   };
@@ -120,14 +128,21 @@ export async function getBlogPostBySlug(
   return toPostView(p);
 }
 
-/** Shared BlogPostView mapping (used by the public slug read + preview read). */
-function toPostView(p: IBlogPost): BlogPostView {
+/**
+ * Shared BlogPostView mapping (used by the public slug read + preview read).
+ * Async because it resolves the (active) medical reviewer for the byline/schema;
+ * `loadReviewerByline` returns null for an unset or deactivated reviewer, so the
+ * attribution stays hidden until a real one is assigned.
+ */
+async function toPostView(p: IBlogPost): Promise<BlogPostView> {
   return {
     ...toCard(p),
     body: p.body ?? "",
     metaTitle: p.metaTitle,
     updatedAt: iso(p.updatedAt),
     linkFirstOnly: p.linkFirstOnly ?? true,
+    reviewer: await loadReviewerByline(p.reviewedBy),
+    lastReviewedAt: iso(p.lastReviewedAt ?? null),
     keywords: (p.keywords ?? []).map((k) => ({
       keyword: k.keyword,
       url: k.url,
@@ -151,6 +166,9 @@ export async function getBlogPostForPreview(
   if (!p) return null;
   return toPostView(p);
 }
+
+/** Active reviewers as picker options for the blog editor (id/name/credentials). */
+export { getReviewerOptions } from "@/lib/seoteam/reviewer-data";
 
 export async function getPublishedBlogSlugs(): Promise<string[]> {
   await dbConnect();
@@ -253,6 +271,10 @@ export interface BlogEditView {
   keywords: BlogKeywordView[];
   linkFirstOnly: boolean;
   author?: string;
+  /** Raw reviewer id (empty when none) for the editor's picker. */
+  reviewedBy?: string;
+  /** ISO date the reviewer last signed off. */
+  lastReviewedAt?: string;
   views: number;
   publishedAt?: string;
 }
@@ -283,6 +305,8 @@ export async function getBlogPostForEdit(
     })),
     linkFirstOnly: p.linkFirstOnly ?? true,
     author: p.author,
+    reviewedBy: p.reviewedBy ? id(p.reviewedBy) : undefined,
+    lastReviewedAt: iso(p.lastReviewedAt ?? null),
     views: p.views ?? 0,
     publishedAt: iso(p.publishedAt ?? null),
   };

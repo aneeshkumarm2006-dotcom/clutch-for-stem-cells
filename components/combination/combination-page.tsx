@@ -12,6 +12,7 @@ import {
   getApprovedMatrixPage,
 } from "@/lib/seoteam/matrix-data";
 import { directoryParamsFrom } from "@/lib/directory-query";
+import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import { matrixPagePath } from "@/lib/matrix";
 import {
   faqPageJsonLd,
@@ -46,6 +47,26 @@ interface CombinationContext {
 }
 
 /**
+ * The filter dimensions pinned by each combo route's path. Single source of
+ * truth shared by {@link resolveContext} (which locks these facets in the UI)
+ * and {@link buildCombinationMetadata} (which must ignore the same locked
+ * dimensions when deciding if a URL is a thin faceted variant). Keep in sync
+ * with the `locked` arrays below.
+ */
+function lockedDimensionsForKind(kind: MatrixKind): FilterDimension[] {
+  switch (kind) {
+    case "treatment_condition":
+      return ["treatment", "condition"];
+    case "treatment_country":
+      return ["treatment", "country"];
+    case "condition_country":
+      return ["condition", "country"];
+    default:
+      return [];
+  }
+}
+
+/**
  * Resolve the per-kind bits: which facets to lock, breadcrumb trail, the primary
  * schema entity, and sibling/parent internal links. Returns null when a parent
  * term is missing (→ 404).
@@ -67,7 +88,7 @@ async function resolveContext(
     });
     return {
       overrides: { treatments: [slugA], conditions: [slugB] },
-      locked: ["treatment", "condition"],
+      locked: lockedDimensionsForKind(kind),
       breadcrumbs: [
         { name: "Home", href: "/" },
         { name: "Treatments", href: "/treatments" },
@@ -114,9 +135,7 @@ async function resolveContext(
   const overrides = isTreatment
     ? { treatments: [slugA], country: country.name }
     : { conditions: [slugA], country: country.name };
-  const locked: FilterDimension[] = isTreatment
-    ? ["treatment", "country"]
-    : ["condition", "country"];
+  const locked = lockedDimensionsForKind(kind);
   const primaryBase = isTreatment
     ? `/treatments/${slugA}`
     : `/conditions/${slugA}`;
@@ -264,12 +283,18 @@ export async function CombinationPage({
 /**
  * Shared `generateMetadata` for the three combination routes. Canonical is the
  * combo's own path; a non-indexable (approved-but-thin) or missing record gets
- * `noindex` so we never surface a thin combination URL in search.
+ * `noindex`, and — because the page renders a filterable clinic list — any
+ * faceted/sorted/paged variant (`?minRating=…`, `?priceMax=…`, `?page=2`, …)
+ * also gets `noindex, follow`, canonicalized back to the clean combo path. The
+ * route-locked dimensions (treatment/condition/country pinned in the path) are
+ * ignored so the clean combo URL itself stays indexable. Mirrors the
+ * faceted-directory rule applied on `/clinics` and `/treatments/[slug]`.
  */
 export async function buildCombinationMetadata(
   kind: MatrixKind,
   slugA: string,
   slugB: string,
+  searchParams: Record<string, string | string[] | undefined> = {},
 ): Promise<Metadata> {
   const view = await getApprovedMatrixPage(kind, slugA, slugB);
   if (!view) {
@@ -279,11 +304,16 @@ export async function buildCombinationMetadata(
       noindex: true,
     });
   }
+  const noindex =
+    !view.indexable ||
+    shouldNoindexDirectory(searchParams, {
+      locked: lockedDimensionsForKind(kind),
+    });
   return pageMetadata({
     title: view.metaTitle ?? view.title,
     description: view.metaDescription ?? view.intro?.slice(0, 160),
     path: view.path,
     seo: view.seo ?? null,
-    noindex: !view.indexable,
+    noindex,
   });
 }

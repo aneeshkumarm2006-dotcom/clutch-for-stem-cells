@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getBlogPostForEdit } from "@/lib/seoteam/blog-data";
+import { getBlogPostForEdit, getReviewerOptions } from "@/lib/seoteam/blog-data";
 import {
   PostEditor,
   type EditorValues,
@@ -20,7 +20,10 @@ export default async function EditPostPage({
 }: {
   params: { id: string };
 }) {
-  const post = await getBlogPostForEdit(params.id);
+  const [post, reviewers] = await Promise.all([
+    getBlogPostForEdit(params.id),
+    getReviewerOptions(),
+  ]);
   if (!post) notFound();
 
   // Derive the visibility control server-side (avoids a client `new Date()` at
@@ -40,10 +43,19 @@ export default async function EditPostPage({
     keywords: post.keywords,
     linkFirstOnly: post.linkFirstOnly,
     author: post.author ?? "",
+    reviewedBy: post.reviewedBy ?? "",
+    lastReviewedAt: post.lastReviewedAt ?? "",
     body: post.body,
     visibility,
     publishedAt: post.publishedAt ?? "",
   };
 
-  return <PostEditor mode="edit" postId={post.id} initial={initial} />;
+  return (
+    <PostEditor
+      mode="edit"
+      postId={post.id}
+      initial={initial}
+      reviewers={reviewers}
+    />
+  );
 }

@@ -251,7 +251,7 @@ export default async function ClinicProfilePage({
                   <a
                     href={`/r/${clinic.id}`}
                     target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    rel="noopener noreferrer nofollow sponsored"
                   >
                     <ExternalLink className="size-[18px]" aria-hidden="true" />
                     Visit website
@@ -814,7 +814,7 @@ export default async function ClinicProfilePage({
                   <a
                     href={`/r/${clinic.id}`}
                     target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    rel="noopener noreferrer nofollow sponsored"
                   >
                     <Globe className="size-[18px]" aria-hidden="true" />
                     Visit website

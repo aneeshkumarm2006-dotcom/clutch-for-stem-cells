@@ -1521,7 +1521,7 @@ export const BLOG_POSTS: BlogPostSeed[] = [
     title: "How to vet a stem cell clinic: a practical checklist",
     slug: "how-to-vet-a-stem-cell-clinic",
     template: "how-to",
-    author: "StemConnect Editorial",
+    author: "Stem Cell Guide Team",
     excerpt:
       "A practical, non-medical checklist for researching a regenerative-medicine clinic — regulatory status, protocol transparency, accreditations, costs, and red flags.",
     metaTitle: "How to Vet a Stem Cell Clinic — A Practical Checklist",
@@ -1531,7 +1531,7 @@ export const BLOG_POSTS: BlogPostSeed[] = [
     title: "Stem cell therapy safety and regulation: what to understand",
     slug: "stem-cell-therapy-safety-and-regulation",
     template: "generic",
-    author: "StemConnect Editorial",
+    author: "Stem Cell Guide Team",
     excerpt:
       "Why regulation varies by country, what 'investigational' vs 'approved' means, and how to check the regulatory status of a treatment. Informational only.",
     metaTitle: "Stem Cell Therapy Safety & Regulation — What to Understand",

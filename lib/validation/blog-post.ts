@@ -11,7 +11,12 @@ import {
   BLOG_TEMPLATE_KEYS,
   KEYWORD_RELS,
 } from "@/lib/enums";
-import { imageSchema, mediaUrlSchema, slugSchema } from "@/lib/validation/common";
+import {
+  imageSchema,
+  mediaUrlSchema,
+  objectIdSchema,
+  slugSchema,
+} from "@/lib/validation/common";
 
 /** A keyword backlink. `url` accepts absolute http(s) or a root-relative path. */
 export const blogKeywordSchema = z.object({
@@ -37,6 +42,11 @@ export const blogPostCreateSchema = z.object({
   keywords: z.array(blogKeywordSchema).max(50).default([]),
   linkFirstOnly: z.boolean().default(true),
   author: z.string().max(160).optional(),
+  // Optional medical reviewer (an active MedicalReviewer id) + the date they
+  // signed off. `null` clears an existing assignment. Left unset by default —
+  // the byline/schema stay hidden until a real reviewer is picked in the CMS.
+  reviewedBy: objectIdSchema.nullish(),
+  lastReviewedAt: z.coerce.date().nullish(),
 });
 
 export const blogPostUpdateSchema = blogPostCreateSchema.partial();

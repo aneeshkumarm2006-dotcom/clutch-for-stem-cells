@@ -34,6 +34,13 @@ export const clinicUrl = (slug: string): string =>
   absoluteUrl(`/clinic/${slug}`);
 export const blogUrl = (slug: string): string => absoluteUrl(`/blog/${slug}`);
 
+/**
+ * Fallback title template used when Settings supply none — keeps every page
+ * brand-suffixed even when the DB is unavailable at build time. Mirrors the
+ * seeded `SiteSetting.seoDefaults.titleTemplate`.
+ */
+export const DEFAULT_TITLE_TEMPLATE = `%s · ${SITE_NAME}`;
+
 /** Apply a Settings title template (e.g. `"%s · StemConnect"`). */
 export function applyTitleTemplate(title?: string, template?: string): string {
   if (!title) return SITE_NAME;
@@ -80,7 +87,7 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
 
   const title = applyTitleTemplate(
     seo?.metaTitle ?? input.title,
-    defaults?.titleTemplate,
+    defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
   );
   const description =
     seo?.metaDescription ??
@@ -98,7 +105,10 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
 
   return {
     metadataBase: new URL(SITE_URL),
-    title,
+    // `absolute` opts out of the root layout's `title.template` so the brand
+    // suffix (applied above via the Settings/default template) isn't appended a
+    // second time — e.g. "All clinics · StemConnect", not "… · StemConnect · StemConnect".
+    title: { absolute: title },
     description,
     alternates: { canonical },
     openGraph: {
@@ -336,6 +346,10 @@ export interface BlogPostingSeoInput {
   author?: string;
   publishedAt?: Date | string | null;
   updatedAt?: Date | string | null;
+  /** Credentialed medical reviewer → `reviewedBy` Person node (E-E-A-T). */
+  reviewer?: ReviewerSeoInput | null;
+  /** ISO date/Date the post was last medically reviewed → `lastReviewed`. */
+  lastReviewed?: Date | string | null;
 }
 
 const toIso = (d?: Date | string | null): string | undefined => {
@@ -360,6 +374,9 @@ export function blogPostingJsonLd(post: BlogPostingSeoInput): JsonLd {
     author: post.author
       ? { "@type": "Person", name: post.author }
       : { "@type": "Organization", name: SITE_NAME },
+    // Medical-review provenance for YMYL health content (omitted when unset).
+    reviewedBy: reviewerNode(post.reviewer),
+    lastReviewed: toIso(post.lastReviewed),
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,

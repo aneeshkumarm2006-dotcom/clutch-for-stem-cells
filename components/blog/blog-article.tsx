@@ -4,6 +4,10 @@ import { Clock } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { getInitials } from "@/lib/format";
+import {
+  ReviewedByByline,
+  type ReviewerByline,
+} from "@/components/content/reviewed-by-byline";
 
 export interface BlogArticleProps {
   title: string;
@@ -16,6 +20,12 @@ export interface BlogArticleProps {
   coverAlt?: string;
   /** Sanitized (+ keyword-linked) HTML — rendered via dangerouslySetInnerHTML. */
   bodyHtml: string;
+  /** Credentialed medical reviewer — renders nothing when null/undefined. */
+  reviewer?: ReviewerByline | null;
+  /** ISO date/Date the post was last medically reviewed. */
+  lastReviewedAt?: Date | string | null;
+  /** ISO date/Date the post was last modified (for the "Updated" byline). */
+  updatedAt?: Date | string | null;
   /** Slot above the header (e.g. breadcrumbs on the public page). */
   topSlot?: React.ReactNode;
   className?: string;
@@ -37,6 +47,9 @@ export function BlogArticle({
   coverUrl,
   coverAlt,
   bodyHtml,
+  reviewer,
+  lastReviewedAt,
+  updatedAt,
   topSlot,
   className,
 }: BlogArticleProps) {
@@ -70,6 +83,12 @@ export function BlogArticle({
             </span>
           ) : null}
         </div>
+        <ReviewedByByline
+          reviewer={reviewer}
+          lastReviewedAt={lastReviewedAt}
+          updatedAt={updatedAt}
+          className="mt-3"
+        />
       </header>
 
       {coverUrl ? (

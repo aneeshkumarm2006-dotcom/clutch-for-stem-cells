@@ -5,10 +5,11 @@ import * as React from "react";
 import { TemplatePicker } from "@/components/seoteam/template-picker";
 import { PostEditor, type EditorValues } from "@/components/seoteam/post-editor";
 import { getTemplate } from "@/lib/seoteam/templates";
+import type { ReviewerOption } from "@/components/content/editorial-fields";
 import type { BlogTemplateKey } from "@/lib/enums";
 
 /** New-post flow: choose a template, then edit. */
-export function NewPostFlow() {
+export function NewPostFlow({ reviewers }: { reviewers: ReviewerOption[] }) {
   const [template, setTemplate] = React.useState<BlogTemplateKey | null>(null);
 
   if (!template) {
@@ -26,10 +27,12 @@ export function NewPostFlow() {
     keywords: [],
     linkFirstOnly: true,
     author: "",
+    reviewedBy: "",
+    lastReviewedAt: "",
     body: tpl.body,
     visibility: "draft",
     publishedAt: "",
   };
 
-  return <PostEditor mode="create" initial={initial} />;
+  return <PostEditor mode="create" initial={initial} reviewers={reviewers} />;
 }
