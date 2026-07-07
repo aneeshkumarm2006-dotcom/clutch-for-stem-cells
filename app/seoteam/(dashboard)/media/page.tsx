@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-import { getSeoMedia, type MediaSort } from "@/lib/seoteam/media-data";
+import {
+  getSeoMedia,
+  type MediaSort,
+  type SeoMediaQuery,
+} from "@/lib/seoteam/media-data";
 import { firstParam, parsePage } from "@/lib/admin/serialize";
 import { MediaManager } from "@/components/seoteam/media-manager";
 
@@ -13,12 +17,19 @@ export const dynamic = "force-dynamic";
 
 type SP = { [key: string]: string | string[] | undefined };
 
-const SORTS: MediaSort[] = ["newest", "name", "size", "usage"];
+const SORTS: MediaSort[] = ["newest", "name", "size", "usage", "dimensions"];
+
+function parseFilter(v: string | undefined): SeoMediaQuery["filter"] {
+  if (v === "unused") return "unused";
+  if (v === "missing-alt") return "missing-alt";
+  return undefined;
+}
 
 function fmtBytes(bytes: number): string {
   if (bytes <= 0) return "0 MB";
   if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
-  if (bytes < 1024 * 1024 * 1024) return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+  if (bytes < 1024 * 1024 * 1024)
+    return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
   return `${(bytes / 1024 / 1024 / 1024).toFixed(2)} GB`;
 }
 
@@ -45,7 +56,7 @@ export default async function SeoMediaPage({
     sort: SORTS.includes(sortParam as MediaSort)
       ? (sortParam as MediaSort)
       : undefined,
-    filter: firstParam(searchParams.filter) === "unused" ? "unused" : undefined,
+    filter: parseFilter(firstParam(searchParams.filter)),
     page: parsePage(firstParam(searchParams.page)),
   });
 
@@ -56,8 +67,8 @@ export default async function SeoMediaPage({
           Media
         </h1>
         <p className="mt-1 text-sm text-text-secondary">
-          Manage your blog images, see where each one is used, and bulk-import in
-          one place.
+          Manage your blog images, see where each one is used, and bulk-import
+          in one place.
         </p>
       </div>
 

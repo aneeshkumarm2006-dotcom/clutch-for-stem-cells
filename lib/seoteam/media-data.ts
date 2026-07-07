@@ -25,7 +25,7 @@ import {
   type UsageRef,
 } from "@/lib/seoteam/media-usage";
 
-export type MediaSort = "newest" | "name" | "size" | "usage";
+export type MediaSort = "newest" | "name" | "size" | "usage" | "dimensions";
 
 export interface SeoMediaRow {
   id: string;
@@ -38,6 +38,7 @@ export interface SeoMediaRow {
   width?: number;
   height?: number;
   bytes?: number;
+  tags: string[];
   createdAt?: string;
   usageCount: number;
   usedIn: UsageRef[];
@@ -47,6 +48,8 @@ export interface SeoMediaStats {
   total: number;
   used: number;
   unused: number;
+  /** Images with no alt text — the SEO gap the table flags. */
+  missingAlt: number;
   totalBytes: number;
 }
 
@@ -60,7 +63,7 @@ export interface SeoMediaQuery {
   /** A folder name, or the `__all__` sentinel for every folder. Default: blog. */
   folder?: string;
   sort?: MediaSort;
-  filter?: "unused";
+  filter?: "unused" | "missing-alt";
   page?: number;
   pageSize?: number;
 }
@@ -81,7 +84,7 @@ export async function getSeoMedia(
   else if (query.folder !== ALL_FOLDERS) filter.folder = query.folder;
   if (query.q) {
     const rx = new RegExp(escapeRegex(query.q), "i");
-    filter.$or = [{ filename: rx }, { alt: rx }, { url: rx }];
+    filter.$or = [{ filename: rx }, { alt: rx }, { url: rx }, { tags: rx }];
   }
 
   const [docs, folders, index] = await Promise.all([
@@ -99,10 +102,11 @@ export async function getSeoMedia(
       alt: d.alt,
       filename: d.filename,
       folder: d.folder,
-      format: d.format,
+      format: d.format ?? formatFromUrl(d.url),
       width: d.width,
       height: d.height,
       bytes: d.bytes,
+      tags: d.tags ?? [],
       createdAt: iso(d.createdAt),
       usageCount: usedIn.length,
       usedIn,
@@ -114,10 +118,13 @@ export async function getSeoMedia(
     total: rows.length,
     used: rows.filter((r) => r.usageCount > 0).length,
     unused: rows.filter((r) => r.usageCount === 0).length,
+    missingAlt: rows.filter((r) => !r.alt?.trim()).length,
     totalBytes: rows.reduce((s, r) => s + (r.bytes ?? 0), 0),
   };
 
   if (query.filter === "unused") rows = rows.filter((r) => r.usageCount === 0);
+  else if (query.filter === "missing-alt")
+    rows = rows.filter((r) => !r.alt?.trim());
 
   rows.sort((a, b) => {
     switch (sort) {
@@ -127,6 +134,10 @@ export async function getSeoMedia(
         );
       case "size":
         return (b.bytes ?? 0) - (a.bytes ?? 0);
+      case "dimensions":
+        return (
+          (b.width ?? 0) * (b.height ?? 0) - (a.width ?? 0) * (a.height ?? 0)
+        );
       case "usage":
         return b.usageCount - a.usageCount;
       case "newest":
@@ -141,7 +152,9 @@ export async function getSeoMedia(
 
   return {
     ...paginate(pageRows, total, page, pageSize),
-    folders: ((folders as (string | null)[]).filter(Boolean) as string[]).sort(),
+    folders: (
+      (folders as (string | null)[]).filter(Boolean) as string[]
+    ).sort(),
     stats,
   };
 }
@@ -230,4 +243,11 @@ export async function backfillBlogMedia(): Promise<{ imported: number }> {
 
 function escapeRegex(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/** Best-effort file extension → format for records missing a stored `format`. */
+function formatFromUrl(url: string): string | undefined {
+  const path = url.split(/[?#]/)[0] ?? url;
+  const m = /\.([a-z0-9]{2,5})$/i.exec(path);
+  return m?.[1]?.toLowerCase();
 }

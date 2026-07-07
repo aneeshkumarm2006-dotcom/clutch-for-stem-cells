@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
@@ -18,6 +17,11 @@ import {
   FolderInput,
   Loader2,
   ImageOff,
+  AlertTriangle,
+  LayoutGrid,
+  List,
+  Plus,
+  Tag,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -26,6 +30,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/form-field";
+import { Chip } from "@/components/ui/chip";
 import {
   Dialog,
   DialogContent,
@@ -43,9 +48,19 @@ import {
 } from "@/components/ui/select";
 import { Pagination } from "@/components/ui/pagination";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
-import type { SeoMediaResult, SeoMediaRow } from "@/lib/seoteam/media-data";
+import type {
+  MediaSort,
+  SeoMediaResult,
+  SeoMediaRow,
+} from "@/lib/seoteam/media-data";
+import { MediaThumb } from "@/components/seoteam/media-thumb";
+import { MediaTable } from "@/components/seoteam/media-table";
+import { copyToClipboard } from "@/components/seoteam/media-actions";
 
 const ALL_FOLDERS = "__all__";
+const VIEW_STORAGE_KEY = "seoteam.media.view";
+
+type View = "grid" | "table";
 
 export function fmtSize(bytes?: number): string {
   if (!bytes) return "";
@@ -54,7 +69,6 @@ export function fmtSize(bytes?: number): string {
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
 
-/** Parse and dedupe a textarea of URLs (one per line). */
 async function seoFetch<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, init);
   let payload: unknown = null;
@@ -88,6 +102,54 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
   const [bulkDeleteOpen, setBulkDeleteOpen] = React.useState(false);
   const [importOpen, setImportOpen] = React.useState(false);
   const [moveFolder, setMoveFolder] = React.useState("");
+  const [bulkTag, setBulkTag] = React.useState("");
+
+  // ── View (grid | table), persisted in localStorage ─────────────────────────
+  const [view, setView] = React.useState<View>("grid");
+  React.useEffect(() => {
+    const stored = window.localStorage.getItem(VIEW_STORAGE_KEY);
+    if (stored === "grid" || stored === "table") setView(stored);
+  }, []);
+  const changeView = (next: View) => {
+    setView(next);
+    window.localStorage.setItem(VIEW_STORAGE_KEY, next);
+  };
+
+  // ── Optimistic inline-edit overrides (alt / tags) ──────────────────────────
+  const [overrides, setOverrides] = React.useState<
+    Record<string, Partial<SeoMediaRow>>
+  >({});
+  // Fresh server data supersedes any pending optimistic overrides.
+  React.useEffect(() => setOverrides({}), [rows]);
+
+  const displayRows = React.useMemo(
+    () => rows.map((r) => (overrides[r.id] ? { ...r, ...overrides[r.id] } : r)),
+    [rows, overrides],
+  );
+
+  const saveInline = React.useCallback(
+    async (id: string, patch: Partial<SeoMediaRow>) => {
+      setOverrides((prev) => ({ ...prev, [id]: { ...prev[id], ...patch } }));
+      try {
+        await seoFetch(`/api/seoteam/media/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(patch),
+        });
+        toast.success("Saved");
+      } catch (e) {
+        // Roll back only the fields we tried to change.
+        setOverrides((prev) => {
+          const cur = { ...(prev[id] ?? {}) } as Record<string, unknown>;
+          for (const k of Object.keys(patch)) delete cur[k];
+          return { ...prev, [id]: cur as Partial<SeoMediaRow> };
+        });
+        toast.error(e instanceof Error ? e.message : "Could not save.");
+        throw e;
+      }
+    },
+    [],
+  );
 
   // ── URL-driven filters ──────────────────────────────────────────────────────
   const setParams = (updates: Record<string, string | undefined>) => {
@@ -102,8 +164,8 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
   };
 
   const currentFolder = sp.get("folder") ?? "blog";
-  const currentSort = sp.get("sort") ?? "newest";
-  const unusedOnly = sp.get("filter") === "unused";
+  const currentSort = (sp.get("sort") as MediaSort) || "newest";
+  const currentFilter = sp.get("filter"); // "unused" | "missing-alt" | null
 
   // Debounced search.
   const [term, setTerm] = React.useState(sp.get("q") ?? "");
@@ -156,7 +218,9 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
         method: "POST",
         body: form,
       });
-      toast.success(`Uploaded ${res.uploaded} image${res.uploaded === 1 ? "" : "s"}`);
+      toast.success(
+        `Uploaded ${res.uploaded} image${res.uploaded === 1 ? "" : "s"}`,
+      );
       router.refresh();
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Upload failed.");
@@ -186,7 +250,10 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
     }
   };
 
-  const runBulk = async (action: "delete" | "setFolder", value?: string) => {
+  const runBulk = async (
+    action: "delete" | "setFolder" | "addTag" | "removeTag",
+    value?: string,
+  ) => {
     const ids = Array.from(selected);
     if (!ids.length) return;
     try {
@@ -195,16 +262,33 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ids, action, value }),
       });
+      const noun = `image${res.count === 1 ? "" : "s"}`;
       toast.success(
         action === "delete"
-          ? `Deleted ${res.count} image${res.count === 1 ? "" : "s"}`
-          : `Moved ${res.count} image${res.count === 1 ? "" : "s"}`,
+          ? `Deleted ${res.count} ${noun}`
+          : action === "setFolder"
+            ? `Moved ${res.count} ${noun}`
+            : action === "addTag"
+              ? `Tagged ${res.count} ${noun}`
+              : `Untagged ${res.count} ${noun}`,
       );
-      setSelected(new Set());
+      if (action === "delete" || action === "setFolder") setSelected(new Set());
+      if (action === "addTag" || action === "removeTag") setBulkTag("");
       router.refresh();
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Action failed.");
     }
+  };
+
+  const bulkCopyUrls = () => {
+    const urls = displayRows
+      .filter((r) => selected.has(r.id))
+      .map((r) => r.url);
+    if (!urls.length) return;
+    void copyToClipboard(
+      urls.join("\n"),
+      `Copied ${urls.length} URL${urls.length === 1 ? "" : "s"}`,
+    );
   };
 
   const deleteOne = async (row: SeoMediaRow) => {
@@ -225,9 +309,7 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
     return qs ? `${pathname}?${qs}` : pathname;
   };
 
-  const folderOptions = Array.from(
-    new Set(["blog", ...data.folders]),
-  );
+  const folderOptions = Array.from(new Set(["blog", ...data.folders]));
 
   const start = data.total === 0 ? 0 : (data.page - 1) * data.pageSize + 1;
   const end = Math.min(data.page * data.pageSize, data.total);
@@ -241,7 +323,7 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
           <Input
             value={term}
             onChange={(e) => setTerm(e.target.value)}
-            placeholder="Search by name or alt text"
+            placeholder="Search by name, alt text, or tag"
             className="pl-9"
           />
         </div>
@@ -278,18 +360,64 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
             <SelectItem value="newest">Newest</SelectItem>
             <SelectItem value="name">Name</SelectItem>
             <SelectItem value="size">Largest</SelectItem>
+            <SelectItem value="dimensions">Dimensions</SelectItem>
             <SelectItem value="usage">Most used</SelectItem>
           </SelectContent>
         </Select>
 
+        {/* View toggle */}
+        <div
+          role="group"
+          aria-label="View"
+          className="flex items-center rounded-md border border-border bg-surface p-0.5"
+        >
+          <ViewToggleButton
+            active={view === "grid"}
+            label="Grid view"
+            onClick={() => changeView("grid")}
+          >
+            <LayoutGrid className="size-4" />
+          </ViewToggleButton>
+          <ViewToggleButton
+            active={view === "table"}
+            label="Table view"
+            onClick={() => changeView("table")}
+          >
+            <List className="size-4" />
+          </ViewToggleButton>
+        </div>
+      </div>
+
+      {/* Filter chips */}
+      <div className="mb-4 flex flex-wrap items-center gap-2">
         <Button
           type="button"
           size="sm"
-          variant={unusedOnly ? "primary" : "secondary"}
-          onClick={() => setParams({ filter: unusedOnly ? undefined : "unused" })}
+          variant={currentFilter === "unused" ? "primary" : "secondary"}
+          onClick={() =>
+            setParams({
+              filter: currentFilter === "unused" ? undefined : "unused",
+            })
+          }
         >
           <ImageOff className="size-4" />
-          Unused only
+          Unused
+          <span className="text-text-muted">{data.stats.unused}</span>
+        </Button>
+        <Button
+          type="button"
+          size="sm"
+          variant={currentFilter === "missing-alt" ? "primary" : "secondary"}
+          onClick={() =>
+            setParams({
+              filter:
+                currentFilter === "missing-alt" ? undefined : "missing-alt",
+            })
+          }
+        >
+          <AlertTriangle className="size-4" />
+          Missing alt
+          <span className="text-text-muted">{data.stats.missingAlt}</span>
         </Button>
       </div>
 
@@ -303,7 +431,11 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
           className="hidden"
           onChange={(e) => upload(e.target.files)}
         />
-        <Button size="sm" onClick={() => fileRef.current?.click()} disabled={uploading}>
+        <Button
+          size="sm"
+          onClick={() => fileRef.current?.click()}
+          disabled={uploading}
+        >
           {uploading ? (
             <>
               <Loader2 className="size-4 animate-spin" /> Uploading…
@@ -314,10 +446,19 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
             </>
           )}
         </Button>
-        <Button size="sm" variant="secondary" onClick={() => setImportOpen(true)}>
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={() => setImportOpen(true)}
+        >
           <Link2 className="size-4" /> Import from URLs
         </Button>
-        <Button size="sm" variant="secondary" onClick={scan} disabled={scanning}>
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={scan}
+          disabled={scanning}
+        >
           {scanning ? (
             <>
               <Loader2 className="size-4 animate-spin" /> Scanning…
@@ -340,131 +481,48 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
         ) : null}
       </div>
 
-      {/* Grid */}
+      {/* Views */}
       {rows.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border-strong bg-surface p-12 text-center text-sm text-text-muted">
-          {unusedOnly
+          {currentFilter === "unused"
             ? "No unused images — every image here is attached to a post."
-            : "No images yet. Upload some, import URLs, or scan your posts."}
+            : currentFilter === "missing-alt"
+              ? "No images missing alt text — nice, your library is fully described."
+              : "No images yet. Upload some, import URLs, or scan your posts."}
         </div>
+      ) : view === "table" ? (
+        <MediaTable
+          rows={displayRows}
+          selected={selected}
+          allOnPage={allOnPage}
+          currentSort={currentSort}
+          onToggleOne={toggleOne}
+          onToggleAll={toggleAll}
+          onSort={(s) => setParams({ sort: s === "newest" ? undefined : s })}
+          onPreview={setDetailFor}
+          onEdit={setEditing}
+          onDelete={setDeleteFor}
+          onSaveInline={saveInline}
+        />
       ) : (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {rows.map((m) => {
-            const isSelected = selected.has(m.id);
-            return (
-              <div
-                key={m.id}
-                className={cn(
-                  "group overflow-hidden rounded-xl border bg-surface transition-colors",
-                  isSelected ? "border-primary ring-1 ring-primary" : "border-border",
-                )}
-              >
-                <div
-                  className="relative aspect-square cursor-pointer bg-surface-alt"
-                  onClick={() => setDetailFor(m)}
-                >
-                  <Image
-                    src={m.url}
-                    alt={m.alt ?? ""}
-                    fill
-                    sizes="200px"
-                    className="object-cover"
-                    unoptimized
-                  />
-
-                  {/* Selection checkbox */}
-                  <button
-                    type="button"
-                    aria-label={isSelected ? "Deselect" : "Select"}
-                    aria-pressed={isSelected}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleOne(m.id);
-                    }}
-                    className={cn(
-                      "absolute left-1.5 top-1.5 flex size-5 items-center justify-center rounded border bg-white/90 text-ink transition-opacity",
-                      isSelected
-                        ? "border-primary bg-primary text-primary-foreground opacity-100"
-                        : "border-border opacity-0 group-hover:opacity-100",
-                    )}
-                  >
-                    {isSelected ? <Check className="size-3.5" /> : null}
-                  </button>
-
-                  {/* Usage badge */}
-                  <span
-                    className={cn(
-                      "absolute right-1.5 top-1.5 inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold",
-                      m.usageCount > 0
-                        ? "bg-ink/75 text-white"
-                        : "bg-ink/40 text-white",
-                    )}
-                  >
-                    {m.usageCount > 0 ? `Used ${m.usageCount}` : "Unused"}
-                  </span>
-
-                  {/* Hover actions */}
-                  <div className="absolute inset-x-0 bottom-0 flex justify-end gap-1 bg-ink/55 p-1.5 opacity-0 transition-opacity group-hover:opacity-100">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigator.clipboard?.writeText(m.url);
-                        toast.success("URL copied");
-                      }}
-                      className="rounded p-1 text-white hover:bg-white/20"
-                      aria-label="Copy URL"
-                    >
-                      <Copy className="size-4" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setEditing(m);
-                      }}
-                      className="rounded p-1 text-white hover:bg-white/20"
-                      aria-label="Edit"
-                    >
-                      <Pencil className="size-4" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setDeleteFor(m);
-                      }}
-                      className="rounded p-1 text-white hover:bg-white/20"
-                      aria-label="Delete"
-                    >
-                      <Trash2 className="size-4" />
-                    </button>
-                  </div>
-                </div>
-                <div className="p-2">
-                  <div className="truncate text-[12px] font-medium text-text-primary">
-                    {m.filename ?? m.alt ?? "Image"}
-                  </div>
-                  <div className="text-[11px] text-text-muted">
-                    {[
-                      m.width && m.height ? `${m.width}×${m.height}` : null,
-                      fmtSize(m.bytes),
-                      m.folder,
-                    ]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <MediaGrid
+          rows={displayRows}
+          selected={selected}
+          onToggleOne={toggleOne}
+          onPreview={setDetailFor}
+          onEdit={setEditing}
+          onDelete={setDeleteFor}
+        />
       )}
 
       {data.totalPages > 1 ? (
         <div className="mt-5 flex items-center justify-between text-[13px] text-text-muted">
           <span>{`Showing ${start}–${end} of ${data.total}`}</span>
-          <Pagination page={data.page} totalPages={data.totalPages} hrefFor={hrefFor} />
+          <Pagination
+            page={data.page}
+            totalPages={data.totalPages}
+            hrefFor={hrefFor}
+          />
         </div>
       ) : null}
 
@@ -480,6 +538,41 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
             ) : null}
           </span>
           <div className="ml-auto flex flex-wrap items-center gap-2">
+            <Button size="sm" variant="secondary" onClick={bulkCopyUrls}>
+              <Copy className="size-4" /> Copy URLs
+            </Button>
+
+            <div className="flex items-center gap-1">
+              <div className="relative">
+                <Tag className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-text-muted" />
+                <Input
+                  value={bulkTag}
+                  onChange={(e) => setBulkTag(e.target.value)}
+                  placeholder="tag"
+                  aria-label="Bulk tag"
+                  className="h-9 w-28 pl-7"
+                />
+              </div>
+              <Button
+                size="sm"
+                variant="secondary"
+                disabled={!bulkTag.trim()}
+                onClick={() => runBulk("addTag", bulkTag)}
+                title="Add tag to selected"
+              >
+                <Plus className="size-4" /> Add
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                disabled={!bulkTag.trim()}
+                onClick={() => runBulk("removeTag", bulkTag)}
+                title="Remove tag from selected"
+              >
+                Remove
+              </Button>
+            </div>
+
             <Select value={moveFolder} onValueChange={setMoveFolder}>
               <SelectTrigger className="h-9 w-auto min-w-[130px]">
                 <SelectValue placeholder="Move to folder…" />
@@ -507,14 +600,18 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
             >
               <Trash2 className="size-4" /> Delete
             </Button>
-            <Button size="sm" variant="ghost" onClick={() => setSelected(new Set())}>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setSelected(new Set())}
+            >
               <X className="size-4" /> Clear
             </Button>
           </div>
         </div>
       ) : null}
 
-      {/* Detail dialog */}
+      {/* Detail / lightbox dialog */}
       <DetailDialog
         media={detailFor}
         onOpenChange={(o) => !o && setDetailFor(null)}
@@ -576,6 +673,175 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
   );
 }
 
+// ── View toggle button ───────────────────────────────────────────────────────
+
+function ViewToggleButton({
+  active,
+  label,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  label: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      aria-pressed={active}
+      title={label}
+      className={cn(
+        "inline-flex size-8 items-center justify-center rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+        active
+          ? "bg-primary text-primary-foreground"
+          : "text-text-muted hover:bg-surface-alt hover:text-text-primary",
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+// ── Grid view ────────────────────────────────────────────────────────────────
+
+function MediaGrid({
+  rows,
+  selected,
+  onToggleOne,
+  onPreview,
+  onEdit,
+  onDelete,
+}: {
+  rows: SeoMediaRow[];
+  selected: Set<string>;
+  onToggleOne: (id: string) => void;
+  onPreview: (row: SeoMediaRow) => void;
+  onEdit: (row: SeoMediaRow) => void;
+  onDelete: (row: SeoMediaRow) => void;
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      {rows.map((m) => {
+        const isSelected = selected.has(m.id);
+        const missingAlt = !m.alt?.trim();
+        return (
+          <div
+            key={m.id}
+            className={cn(
+              "group overflow-hidden rounded-xl border bg-surface transition-colors",
+              isSelected
+                ? "border-primary ring-1 ring-primary"
+                : "border-border",
+            )}
+          >
+            <div
+              className="relative aspect-square cursor-pointer bg-surface-alt"
+              onClick={() => onPreview(m)}
+            >
+              <MediaThumb src={m.url} alt={m.alt ?? ""} sizes="200px" />
+
+              {/* Selection checkbox */}
+              <button
+                type="button"
+                aria-label={isSelected ? "Deselect" : "Select"}
+                aria-pressed={isSelected}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleOne(m.id);
+                }}
+                className={cn(
+                  "absolute left-1.5 top-1.5 flex size-5 items-center justify-center rounded border bg-white/90 text-ink transition-opacity",
+                  isSelected
+                    ? "border-primary bg-primary text-primary-foreground opacity-100"
+                    : "border-border opacity-0 group-hover:opacity-100",
+                )}
+              >
+                {isSelected ? <Check className="size-3.5" /> : null}
+              </button>
+
+              {/* Missing-alt flag */}
+              {missingAlt ? (
+                <span
+                  className="absolute left-1.5 top-8 inline-flex items-center gap-1 rounded-full bg-danger px-1.5 py-0.5 text-[10px] font-semibold text-white"
+                  title="Missing alt text"
+                >
+                  <AlertTriangle className="size-3" /> No alt
+                </span>
+              ) : null}
+
+              {/* Usage badge */}
+              <span
+                className={cn(
+                  "absolute right-1.5 top-1.5 inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold",
+                  m.usageCount > 0
+                    ? "bg-ink/75 text-white"
+                    : "bg-ink/40 text-white",
+                )}
+              >
+                {m.usageCount > 0 ? `Used ${m.usageCount}` : "Unused"}
+              </span>
+
+              {/* Hover actions */}
+              <div className="absolute inset-x-0 bottom-0 flex justify-end gap-1 bg-ink/55 p-1.5 opacity-0 transition-opacity group-hover:opacity-100">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    void copyToClipboard(m.url, "URL copied");
+                  }}
+                  className="rounded p-1 text-white hover:bg-white/20"
+                  aria-label="Copy URL"
+                >
+                  <Copy className="size-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onEdit(m);
+                  }}
+                  className="rounded p-1 text-white hover:bg-white/20"
+                  aria-label="Edit"
+                >
+                  <Pencil className="size-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(m);
+                  }}
+                  className="rounded p-1 text-white hover:bg-white/20"
+                  aria-label="Delete"
+                >
+                  <Trash2 className="size-4" />
+                </button>
+              </div>
+            </div>
+            <div className="p-2">
+              <div className="truncate text-[12px] font-medium text-text-primary">
+                {m.filename ?? m.alt ?? "Image"}
+              </div>
+              <div className="text-[11px] text-text-muted">
+                {[
+                  m.width && m.height ? `${m.width}×${m.height}` : null,
+                  fmtSize(m.bytes),
+                  m.folder,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ── Detail dialog ──────────────────────────────────────────────────────────────
 
 function DetailDialog({
@@ -598,13 +864,11 @@ function DetailDialog({
         {media ? (
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="relative aspect-square overflow-hidden rounded-lg border border-border bg-surface-alt">
-              <Image
+              <MediaThumb
                 src={media.url}
                 alt={media.alt ?? ""}
-                fill
                 sizes="320px"
-                className="object-contain"
-                unoptimized
+                contain
               />
             </div>
             <div className="min-w-0 space-y-3 text-sm">
@@ -617,20 +881,40 @@ function DetailDialog({
                 <Meta label="Size">{fmtSize(media.bytes) || "—"}</Meta>
                 <Meta label="Folder">{media.folder ?? "—"}</Meta>
                 <Meta label="Format">{media.format ?? "—"}</Meta>
+                <Meta label="Alt text">
+                  {media.alt?.trim() ? (
+                    media.alt
+                  ) : (
+                    <span className="inline-flex items-center gap-1 text-danger">
+                      <AlertTriangle className="size-3.5" /> Missing
+                    </span>
+                  )}
+                </Meta>
               </dl>
+
+              {media.tags.length > 0 ? (
+                <div className="flex flex-wrap gap-1">
+                  {media.tags.map((t) => (
+                    <Chip key={t} size="sm">
+                      {t}
+                    </Chip>
+                  ))}
+                </div>
+              ) : null}
 
               <div className="flex flex-wrap gap-2">
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={() => {
-                    navigator.clipboard?.writeText(media.url);
-                    toast.success("URL copied");
-                  }}
+                  onClick={() => copyToClipboard(media.url, "URL copied")}
                 >
                   <Copy className="size-4" /> Copy URL
                 </Button>
-                <Button size="sm" variant="secondary" onClick={() => onEdit(media)}>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => onEdit(media)}
+                >
                   <Pencil className="size-4" /> Edit
                 </Button>
                 <Button size="sm" variant="ghost" asChild>
@@ -675,11 +959,17 @@ function DetailDialog({
   );
 }
 
-function Meta({ label, children }: { label: string; children: React.ReactNode }) {
+function Meta({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex justify-between gap-3">
       <dt className="text-text-muted">{label}</dt>
-      <dd className="text-text-primary">{children}</dd>
+      <dd className="min-w-0 truncate text-text-primary">{children}</dd>
     </div>
   );
 }
@@ -699,16 +989,27 @@ function EditDialog({
 }) {
   const [alt, setAlt] = React.useState("");
   const [folder, setFolder] = React.useState("");
+  const [tags, setTags] = React.useState<string[]>([]);
+  const [tagDraft, setTagDraft] = React.useState("");
   const [busy, setBusy] = React.useState(false);
 
   React.useEffect(() => {
     if (media) {
       setAlt(media.alt ?? "");
       setFolder(media.folder ?? "blog");
+      setTags(media.tags);
+      setTagDraft("");
     }
   }, [media]);
 
   const options = Array.from(new Set([...folders, folder].filter(Boolean)));
+
+  const addTag = () => {
+    const next = tagDraft.trim().toLowerCase();
+    setTagDraft("");
+    if (!next || tags.includes(next)) return;
+    setTags((prev) => [...prev, next]);
+  };
 
   return (
     <Dialog open={media !== null} onOpenChange={onOpenChange}>
@@ -741,9 +1042,42 @@ function EditDialog({
               </SelectContent>
             </Select>
           </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="seo-media-tag">Tags</Label>
+            <div className="flex flex-wrap gap-1.5">
+              {tags.map((t) => (
+                <Chip
+                  key={t}
+                  size="sm"
+                  onRemove={() =>
+                    setTags((prev) => prev.filter((x) => x !== t))
+                  }
+                >
+                  {t}
+                </Chip>
+              ))}
+            </div>
+            <Input
+              id="seo-media-tag"
+              value={tagDraft}
+              onChange={(e) => setTagDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === ",") {
+                  e.preventDefault();
+                  addTag();
+                }
+              }}
+              onBlur={addTag}
+              placeholder="Add a tag, press Enter"
+            />
+          </div>
         </div>
         <DialogFooter>
-          <Button variant="secondary" onClick={() => onOpenChange(false)} disabled={busy}>
+          <Button
+            variant="secondary"
+            onClick={() => onOpenChange(false)}
+            disabled={busy}
+          >
             Cancel
           </Button>
           <Button
@@ -755,7 +1089,7 @@ function EditDialog({
                 await seoFetch(`/api/seoteam/media/${media.id}`, {
                   method: "PATCH",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ alt, folder }),
+                  body: JSON.stringify({ alt, folder, tags }),
                 });
                 toast.success("Saved");
                 onOpenChange(false);
@@ -842,12 +1176,18 @@ function ImportDialog({
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={7}
-          placeholder={"https://example.com/one.jpg\nhttps://example.com/two.png"}
+          placeholder={
+            "https://example.com/one.jpg\nhttps://example.com/two.png"
+          }
           spellCheck={false}
           className="font-mono text-[13px]"
         />
         <DialogFooter>
-          <Button variant="secondary" onClick={() => onOpenChange(false)} disabled={busy}>
+          <Button
+            variant="secondary"
+            onClick={() => onOpenChange(false)}
+            disabled={busy}
+          >
             Cancel
           </Button>
           <Button onClick={submit} disabled={busy}>

@@ -22,6 +22,8 @@ export interface IMedia extends TimestampFields {
   width?: number;
   height?: number;
   bytes?: number;
+  /** Free-form organizational tags (lowercased, deduped) — filter/search aid. */
+  tags?: string[];
   /** Admin who uploaded it (audit/attribution). */
   uploadedBy?: Types.ObjectId | null;
 }
@@ -37,6 +39,7 @@ const MediaSchema = new Schema<IMedia>(
     width: { type: Number, min: 0 },
     height: { type: Number, min: 0 },
     bytes: { type: Number, min: 0 },
+    tags: { type: [String], default: undefined },
     uploadedBy: { type: Schema.Types.ObjectId, ref: "User", default: null },
   },
   { timestamps: true },

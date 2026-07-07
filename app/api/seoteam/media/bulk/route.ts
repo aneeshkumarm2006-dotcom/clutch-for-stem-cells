@@ -8,7 +8,7 @@
 import { dbConnect } from "@/lib/db";
 import { fail, ok, parseBody, withSeoAuth } from "@/lib/seoteam/api";
 import { destroyImage, MediaConfigError } from "@/lib/media";
-import { mediaBulkSchema } from "@/lib/validation/media";
+import { mediaBulkSchema, normalizeTag } from "@/lib/validation/media";
 import { Media } from "@/models";
 
 export const dynamic = "force-dynamic";
@@ -28,6 +28,17 @@ export async function POST(req: Request): Promise<Response> {
         { _id: { $in: ids } },
         { $set: { folder } },
       );
+      return ok({ ok: true, count: result.modifiedCount ?? ids.length });
+    }
+
+    if (action === "addTag" || action === "removeTag") {
+      const tag = normalizeTag(value ?? "");
+      if (!tag) return fail("Enter a tag to apply.", 422);
+      const update =
+        action === "addTag"
+          ? { $addToSet: { tags: tag } }
+          : { $pull: { tags: tag } };
+      const result = await Media.updateMany({ _id: { $in: ids } }, update);
       return ok({ ok: true, count: result.modifiedCount ?? ids.length });
     }
 

@@ -25,7 +25,13 @@ import { mediaUrlImportSchema } from "@/lib/validation/media";
 
 export const dynamic = "force-dynamic";
 
-const SORTS: MediaSort[] = ["newest", "name", "size", "usage"];
+const SORTS: MediaSort[] = ["newest", "name", "size", "usage", "dimensions"];
+
+function parseFilter(v: string | null): SeoMediaQuery["filter"] {
+  if (v === "unused") return "unused";
+  if (v === "missing-alt") return "missing-alt";
+  return undefined;
+}
 
 export async function GET(req: Request): Promise<Response> {
   return withSeoAuth(async () => {
@@ -37,7 +43,7 @@ export async function GET(req: Request): Promise<Response> {
       sort: SORTS.includes(sortParam as MediaSort)
         ? (sortParam as MediaSort)
         : undefined,
-      filter: sp.get("filter") === "unused" ? "unused" : undefined,
+      filter: parseFilter(sp.get("filter")),
       page: parsePage(sp.get("page") ?? undefined),
     };
     return ok(await getSeoMedia(query));
