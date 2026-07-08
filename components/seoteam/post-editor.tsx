@@ -304,8 +304,67 @@ export function PostEditor({
   const [slugStatus, setSlugStatus] = React.useState<SlugStatus>("idle");
   const [saving, setSaving] = React.useState(false);
 
+  // ── Unsaved-changes tracking ────────────────────────────────────────────────
+  // Snapshot of the last *saved* state; anything different means the editor is
+  // dirty and the user would lose work by navigating away without saving.
+  const initialSnapshot = React.useMemo(() => JSON.stringify(initial), [initial]);
+  const [savedSnapshot, setSavedSnapshot] = React.useState(initialSnapshot);
+  const dirty = JSON.stringify(v) !== savedSnapshot;
+
   const set = (patch: Partial<EditorValues>) =>
     setV((cur) => ({ ...cur, ...patch }));
+
+  // Warn on tab close / refresh / full-page navigation while dirty.
+  React.useEffect(() => {
+    if (!dirty) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      // Legacy browsers require a returnValue to trigger the native prompt.
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [dirty]);
+
+  // Warn on in-app link navigation (sidebar, header, the "Posts /" back link).
+  // The App Router does soft navigations that don't fire `beforeunload`, so we
+  // intercept anchor clicks in the capture phase and confirm before leaving.
+  React.useEffect(() => {
+    if (!dirty) return;
+    const onClick = (e: MouseEvent) => {
+      if (
+        e.defaultPrevented ||
+        e.button !== 0 ||
+        e.metaKey ||
+        e.ctrlKey ||
+        e.shiftKey ||
+        e.altKey
+      )
+        return;
+      const anchor = (e.target as HTMLElement | null)?.closest("a");
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href || href.startsWith("#")) return;
+      // New-tab links (e.g. Preview) don't lose the editor — let them through.
+      if (anchor.target && anchor.target !== "_self") return;
+      const dest = new URL(anchor.href, window.location.href);
+      if (
+        dest.pathname === window.location.pathname &&
+        dest.search === window.location.search
+      )
+        return;
+      if (
+        !window.confirm(
+          "You have unsaved changes. Leave this page without saving?",
+        )
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, [dirty]);
 
   const onTitle = (title: string) =>
     set({ title, slug: slugTouched ? v.slug : slugify(title) });
@@ -375,6 +434,9 @@ export function PostEditor({
           ? "Scheduled — publishes automatically"
           : "Published — live on your blog";
 
+    // Snapshot what we're persisting so the editor reads "clean" once saved.
+    const savedState = JSON.stringify(v);
+
     setSaving(true);
     try {
       if (mode === "create") {
@@ -382,6 +444,7 @@ export function PostEditor({
           method: "POST",
           body: payload,
         });
+        setSavedSnapshot(savedState);
         toast.success(successMsg);
         router.push(`/seoteam/${res.id}`);
         router.refresh();
@@ -390,6 +453,7 @@ export function PostEditor({
           method: "PATCH",
           body: payload,
         });
+        setSavedSnapshot(savedState);
         toast.success(successMsg);
         router.refresh();
       }
@@ -450,6 +514,12 @@ export function PostEditor({
           <Badge variant={badge.variant}>{badge.label}</Badge>
         </div>
         <div className="flex items-center gap-2">
+          {dirty ? (
+            <span className="hidden items-center gap-1.5 text-[12px] text-warning sm:inline-flex">
+              <span className="size-1.5 rounded-full bg-warning" />
+              Unsaved changes
+            </span>
+          ) : null}
           {mode === "edit" && previewHref ? (
             <Button asChild variant="ghost" size="sm">
               <Link href={previewHref} target="_blank">
