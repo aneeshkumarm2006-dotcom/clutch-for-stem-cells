@@ -97,10 +97,18 @@ export function RichTextEditor({
   value,
   onChange,
   placeholder = "Write your post…",
+  maxHeight = "calc(100vh - 14rem)",
 }: {
   value: string;
   onChange: (html: string) => void;
   placeholder?: string;
+  /**
+   * Caps the editor's own scroll area so the toolbar has a scroll context to
+   * pin to (sticky top-0). The content scrolls under the toolbar; the toolbar
+   * stays put. Defaults to roughly the viewport minus the dashboard header,
+   * action bar, and the fields above the editor in both editor layouts.
+   */
+  maxHeight?: string;
 }) {
   const editorRef = React.useRef<Editor | null>(null);
   const dialogFileRef = React.useRef<HTMLInputElement>(null);
@@ -309,8 +317,14 @@ export function RichTextEditor({
   const fmtDisabled = mode === "html";
 
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-surface focus-within:border-primary">
-      <div className="flex flex-wrap items-center gap-0.5 border-b border-border bg-surface-alt/60 px-2 py-1.5">
+    // Own scroll context (bounded height + overflow-y) so the toolbar below can
+    // pin to the top of the editor with `sticky top-0` while the body scrolls
+    // under it — rather than the toolbar scrolling away with the page content.
+    <div
+      style={{ maxHeight }}
+      className="overflow-y-auto rounded-lg border border-border bg-surface focus-within:border-primary"
+    >
+      <div className="sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b border-border bg-surface-alt px-2 py-1.5 shadow-[0_1px_0_rgba(0,0,0,0.02)]">
         <ToolbarButton
           icon={Bold}
           label="Bold"
