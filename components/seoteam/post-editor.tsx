@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Eye, Check, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -297,12 +296,22 @@ export function PostEditor({
   initial: EditorValues;
   reviewers: ReviewerOption[];
 }) {
-  const router = useRouter();
   const mounted = useMounted();
   const [v, setV] = React.useState<EditorValues>(initial);
   const [slugTouched, setSlugTouched] = React.useState(mode === "edit");
   const [slugStatus, setSlugStatus] = React.useState<SlugStatus>("idle");
-  const [saving, setSaving] = React.useState(false);
+
+  // The post's id once it exists. In create mode the first auto-save POSTs a
+  // draft and fills this in; every save after that PATCHes the same post.
+  const [currentId, setCurrentId] = React.useState<string | undefined>(postId);
+  const isEdit = currentId != null;
+
+  // Auto-save status surfaced in the action bar.
+  const [saveState, setSaveState] = React.useState<
+    "idle" | "saving" | "saved" | "error"
+  >("idle");
+  const [saveError, setSaveError] = React.useState<string | null>(null);
+  const saving = saveState === "saving";
 
   // ── Unsaved-changes tracking ────────────────────────────────────────────────
   // Snapshot of the last *saved* state; anything different means the editor is
@@ -382,7 +391,7 @@ export function PostEditor({
       try {
         const res = await adminFetch<{ available: boolean }>(
           `/api/seoteam/posts/check-slug?slug=${encodeURIComponent(slug)}${
-            postId ? `&id=${postId}` : ""
+            currentId ? `&id=${currentId}` : ""
           }`,
           { signal: ctrl.signal },
         );
@@ -395,74 +404,160 @@ export function PostEditor({
       clearTimeout(t);
       ctrl.abort();
     };
-  }, [v.slug, postId]);
+  }, [v.slug, currentId]);
 
-  const save = async () => {
-    if (!v.title.trim() || !v.slug.trim()) {
-      toast.error("Title and slug are required.");
-      return;
-    }
-    const status = v.visibility === "draft" ? "draft" : "published";
-    const payload = {
-      title: v.title.trim(),
-      slug: v.slug.trim(),
-      template: v.template,
+  // ── Persist (shared by auto-save and the explicit Save button) ──────────────
+  const buildPayload = React.useCallback((val: EditorValues) => {
+    const status = val.visibility === "draft" ? "draft" : "published";
+    return {
+      title: val.title.trim(),
+      slug: val.slug.trim(),
+      template: val.template,
       status,
-      publishedAt: status === "published" ? blankToUndef(v.publishedAt) : undefined,
-      excerpt: v.excerpt.trim() || undefined,
-      metaTitle: v.metaTitle.trim() || undefined,
-      coverImage: v.coverImage?.url ? v.coverImage : null,
-      keywords: v.keywords
+      publishedAt:
+        status === "published" ? blankToUndef(val.publishedAt) : undefined,
+      excerpt: val.excerpt.trim() || undefined,
+      metaTitle: val.metaTitle.trim() || undefined,
+      coverImage: val.coverImage?.url ? val.coverImage : null,
+      keywords: val.keywords
         .map((k) => ({
           keyword: k.keyword.trim(),
           url: k.url.trim(),
           rel: k.rel,
         }))
         .filter((k) => k.keyword && k.url),
-      linkFirstOnly: v.linkFirstOnly,
-      author: v.author.trim() || undefined,
+      linkFirstOnly: val.linkFirstOnly,
+      author: val.author.trim() || undefined,
       // `null` clears an existing reviewer; a 24-char id assigns one.
-      reviewedBy: v.reviewedBy || null,
-      lastReviewedAt: v.reviewedBy ? v.lastReviewedAt || null : null,
-      body: v.body,
+      reviewedBy: val.reviewedBy || null,
+      lastReviewedAt: val.reviewedBy ? val.lastReviewedAt || null : null,
+      body: val.body,
     };
+  }, []);
 
-    const successMsg =
-      v.visibility === "draft"
-        ? "Draft saved"
-        : v.visibility === "scheduled"
-          ? "Scheduled — publishes automatically"
-          : "Published — live on your blog";
+  // Guards so overlapping edits never fire two saves at once or re-POST a draft:
+  // `inFlight` blocks concurrent requests; `lastAttempt` is the exact content we
+  // last tried, so a failed save doesn't retry-loop until the content changes.
+  const inFlight = React.useRef(false);
+  const lastAttempt = React.useRef<string | null>(null);
 
-    // Snapshot what we're persisting so the editor reads "clean" once saved.
-    const savedState = JSON.stringify(v);
-
-    setSaving(true);
-    try {
-      if (mode === "create") {
-        const res = await adminFetch<{ id: string }>("/api/seoteam/posts", {
-          method: "POST",
-          body: payload,
-        });
-        setSavedSnapshot(savedState);
-        toast.success(successMsg);
-        router.push(`/seoteam/${res.id}`);
-        router.refresh();
-      } else {
-        await adminFetch(`/api/seoteam/posts/${postId}`, {
-          method: "PATCH",
-          body: payload,
-        });
-        setSavedSnapshot(savedState);
-        toast.success(successMsg);
-        router.refresh();
+  const persist = React.useCallback(
+    async ({ manual = false }: { manual?: boolean } = {}): Promise<boolean> => {
+      if (!v.title.trim() || !v.slug.trim()) {
+        if (manual) toast.error("Title and slug are required.");
+        return false;
       }
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Could not save.");
-    } finally {
-      setSaving(false);
-    }
-  };
+      if (slugStatus === "taken") {
+        if (manual) toast.error("That slug is already taken.");
+        return false;
+      }
+      const snapshot = JSON.stringify(v);
+      if (snapshot === savedSnapshot && isEdit) {
+        if (manual) toast.success("Already up to date");
+        return true;
+      }
+      if (inFlight.current) return false; // a save is running; we re-run after it
+
+      inFlight.current = true;
+      lastAttempt.current = snapshot;
+      setSaveState("saving");
+      const payload = buildPayload(v);
+      try {
+        if (currentId) {
+          await adminFetch(`/api/seoteam/posts/${currentId}`, {
+            method: "PATCH",
+            body: payload,
+          });
+        } else {
+          const res = await adminFetch<{ id: string }>("/api/seoteam/posts", {
+            method: "POST",
+            body: payload,
+          });
+          setCurrentId(res.id);
+          // Swap the URL to the post's edit page WITHOUT a full navigation, so
+          // the editor keeps its state/cursor and a reload lands in the right place.
+          try {
+            window.history.replaceState(null, "", `/seoteam/${res.id}`);
+          } catch {
+            /* history unavailable — non-fatal */
+          }
+        }
+        setSavedSnapshot(snapshot);
+        setSaveError(null);
+        setSaveState("saved");
+        if (manual) {
+          toast.success(
+            v.visibility === "draft"
+              ? "Draft saved"
+              : v.visibility === "scheduled"
+                ? "Scheduled — publishes automatically"
+                : "Published — live on your blog",
+          );
+        }
+        return true;
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : "Could not save.";
+        setSaveError(msg);
+        setSaveState("error");
+        if (manual) toast.error(msg);
+        return false;
+      } finally {
+        inFlight.current = false;
+      }
+    },
+    [v, savedSnapshot, currentId, isEdit, slugStatus, buildPayload],
+  );
+
+  // Keep a ref to the latest persist so the debounce timer never calls a stale one.
+  const persistRef = React.useRef(persist);
+  React.useEffect(() => {
+    persistRef.current = persist;
+  }, [persist]);
+
+  // Debounced auto-save: when the content is dirty, valid, and different from
+  // the last thing we tried, save ~1.2s after typing stops. Depending on
+  // `saveState` re-runs this when a save finishes, so edits made mid-save (which
+  // the in-flight guard skipped) still get picked up right after.
+  React.useEffect(() => {
+    if (!dirty) return;
+    if (!v.title.trim() || !v.slug.trim()) return;
+    if (slugStatus === "taken" || slugStatus === "checking") return;
+    if (JSON.stringify(v) === lastAttempt.current) return; // already tried this
+    const t = setTimeout(() => {
+      void persistRef.current();
+    }, 1200);
+    return () => clearTimeout(t);
+  }, [v, dirty, slugStatus, saveState]);
+
+  // Best-effort flush of the last edits when the tab is hidden or closed. Uses
+  // `keepalive` so the request survives the page going away (the beforeunload
+  // guard below is the fallback when the body is too large for keepalive).
+  React.useEffect(() => {
+    const flush = () => {
+      if (!dirty || !currentId || !v.title.trim() || !v.slug.trim()) return;
+      try {
+        fetch(`/api/seoteam/posts/${currentId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(buildPayload(v)),
+          keepalive: true,
+        });
+      } catch {
+        /* best effort */
+      }
+    };
+    const onVisibility = () => {
+      if (document.visibilityState === "hidden") flush();
+    };
+    window.addEventListener("pagehide", flush);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      window.removeEventListener("pagehide", flush);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [dirty, currentId, v, buildPayload]);
+
+  const save = () => void persist({ manual: true });
 
   const badge =
     v.visibility === "visible"
@@ -477,7 +572,7 @@ export function PostEditor({
       ? "Save draft"
       : v.visibility === "scheduled"
         ? "Schedule"
-        : mode === "edit"
+        : isEdit
           ? "Update"
           : "Publish";
 
@@ -489,12 +584,13 @@ export function PostEditor({
     ? { name: selected.name, credentials: selected.credentials }
     : null;
 
-  // Preview href: live posts → the real page; drafts/scheduled → the full-page preview.
+  // Preview href: live posts → the real page; drafts/scheduled → the full-page
+  // preview (available once the post exists, i.e. after the first auto-save).
   const previewHref =
     v.visibility === "visible"
       ? `/blog/${v.slug}`
-      : postId
-        ? `/seoteam/preview/${postId}`
+      : currentId
+        ? `/seoteam/preview/${currentId}`
         : null;
 
   return (
@@ -509,18 +605,40 @@ export function PostEditor({
             Posts /
           </Link>
           <h1 className="truncate font-display text-base font-bold text-text-primary lg:text-lg">
-            {mode === "create" ? "New post" : v.title || "Post"}
+            {v.title.trim() ? v.title : "New post"}
           </h1>
           <Badge variant={badge.variant}>{badge.label}</Badge>
         </div>
         <div className="flex items-center gap-2">
-          {dirty ? (
-            <span className="hidden items-center gap-1.5 text-[12px] text-warning sm:inline-flex">
-              <span className="size-1.5 rounded-full bg-warning" />
-              Unsaved changes
+          {saveState === "saving" ? (
+            <span className="hidden items-center gap-1.5 text-[12px] text-text-muted sm:inline-flex">
+              <Loader2 className="size-3 animate-spin" /> Saving…
+            </span>
+          ) : saveState === "error" ? (
+            <span className="inline-flex items-center gap-1.5 text-[12px] text-danger">
+              <X className="size-3 flex-none" />
+              <span className="hidden max-w-[16ch] truncate sm:inline">
+                {saveError ?? "Couldn’t save"}
+              </span>
+              <button
+                type="button"
+                onClick={save}
+                className="font-medium underline hover:no-underline"
+              >
+                Retry
+              </button>
+            </span>
+          ) : dirty ? (
+            <span className="hidden items-center gap-1.5 text-[12px] text-text-muted sm:inline-flex">
+              <span className="size-1.5 rounded-full bg-warning" /> Unsaved
+              changes…
+            </span>
+          ) : saveState === "saved" ? (
+            <span className="hidden items-center gap-1.5 text-[12px] text-success sm:inline-flex">
+              <Check className="size-3" /> Saved
             </span>
           ) : null}
-          {mode === "edit" && previewHref ? (
+          {previewHref ? (
             <Button asChild variant="ghost" size="sm">
               <Link href={previewHref} target="_blank">
                 <Eye className="size-4" />
@@ -660,6 +778,7 @@ export function PostEditor({
 
           <Panel title="SEO checks">
             <SeoCheckPanel
+              storageKey={postId ? `seo-overrides:${postId}` : undefined}
               input={{
                 title: v.title,
                 metaTitle: v.metaTitle,
