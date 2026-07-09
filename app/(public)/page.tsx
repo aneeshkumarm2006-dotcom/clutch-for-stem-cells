@@ -25,13 +25,23 @@ import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 
 export const revalidate = 600;
 
-export function generateMetadata(): Promise<Metadata> {
-  return pageMetadata({
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await pageMetadata({
     path: "/",
     title: "Stem Cell Guide | Trusted Stem Cell Therapy Information",
     description:
       "Learn about stem cell therapy, regenerative medicine, clinical research, treatment options, safety, and the latest advances with expert educational guides.",
   });
+  return {
+    ...meta,
+    keywords: [
+      "stem cell guide",
+      "stem cell cost",
+      "stem cell benefits",
+      "stem cell treatment",
+      "stem cell therapy",
+    ],
+  };
 }
 
 export default async function HomePage() {
