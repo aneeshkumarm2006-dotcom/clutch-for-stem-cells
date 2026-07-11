@@ -27,6 +27,8 @@ export interface TaxonomySeed {
   category?: string;
   issuingBody?: string;
   order?: number;
+  /** Per-term SEO overrides (persist to `Taxonomy.seo`; win over auto title). */
+  seo?: { metaTitle?: string; metaDescription?: string };
 }
 
 export interface CountrySeed {
@@ -170,6 +172,11 @@ export const TREATMENTS: TaxonomySeed[] = [
     shortDescription:
       "Therapies using mesenchymal stem cells from cord, fat, or marrow.",
     order: 1,
+    seo: {
+      metaTitle: "MSC Stem Cell Treatment",
+      metaDescription:
+        "Learn how msc stem cell treatment works, where mesenchymal stem cells come from, and compare verified clinics offering MSC therapy.",
+    },
   },
   {
     name: "Autologous (own-cell) Therapy",
@@ -178,6 +185,11 @@ export const TREATMENTS: TaxonomySeed[] = [
     icon: "RefreshCw",
     shortDescription: "Treatments using a patient's own cells.",
     order: 2,
+    seo: {
+      metaTitle: "Autologous Therapy",
+      metaDescription:
+        "Autologous therapy uses cells drawn from your own body, reducing rejection risk. See how it works, typical costs, and which clinics offer it.",
+    },
   },
   {
     name: "Allogeneic (donor) Therapy",
@@ -202,6 +214,11 @@ export const TREATMENTS: TaxonomySeed[] = [
     icon: "Bone",
     shortDescription: "Cells concentrated from bone marrow aspirate.",
     order: 5,
+    seo: {
+      metaTitle: "Bone-Marrow-Derived Therapy",
+      metaDescription:
+        "Bone-marrow-derived therapy extracts stem cells from your marrow for regenerative treatment. Compare clinics, procedure steps, and typical costs.",
+    },
   },
   {
     name: "Umbilical Cord / Cord-Blood Therapy",
@@ -210,6 +227,11 @@ export const TREATMENTS: TaxonomySeed[] = [
     icon: "Baby",
     shortDescription: "Cells sourced from umbilical cord tissue or cord blood.",
     order: 6,
+    seo: {
+      metaTitle: "Umbilical Cord Therapy",
+      metaDescription:
+        "Umbilical cord therapy uses donor cells from cord tissue, screened before use. See how it differs from autologous options and compare clinics.",
+    },
   },
   {
     name: "Exosome Therapy",
@@ -269,6 +291,11 @@ export const CONDITIONS: TaxonomySeed[] = [
     slug: "knee-osteoarthritis",
     category: "Orthopedic/Musculoskeletal",
     order: 1,
+    seo: {
+      metaTitle: "Stem Cell Therapy Knee Arthritis",
+      metaDescription:
+        "Compare clinics offering stem cell therapy for knee arthritis and other stem cell therapy for knees options, with verified reviews and pricing.",
+    },
   },
   {
     name: "Hip Osteoarthritis",
@@ -299,6 +326,11 @@ export const CONDITIONS: TaxonomySeed[] = [
     slug: "joint-pain",
     category: "Orthopedic/Musculoskeletal",
     order: 6,
+    seo: {
+      metaTitle: "Stem Cell Therapy Joint Pain",
+      metaDescription:
+        "See how stem cell therapy for joint pain works, which joints it treats, and compare verified clinics offering regenerative options for joint pain.",
+    },
   },
   // Autoimmune / Inflammatory
   {

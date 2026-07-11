@@ -8,21 +8,25 @@ import { itemListJsonLd } from "@/lib/seo";
 import { Directory } from "@/components/directory/directory";
 import { JsonLd } from "@/components/seo/json-ld";
 
-export const generateMetadata = ({
+export const generateMetadata = async ({
   searchParams,
 }: {
   searchParams: Record<string, string | string[] | undefined>;
-}): Promise<Metadata> =>
-  pageMetadata({
-    // Keyword-aligned with the on-page H1 ("Stem cell & regenerative-medicine
-    // clinics") rather than the thin "All clinics" — stronger title tag for the
-    // main directory and consistent title↔H1 signaling.
-    title: "Stem Cell & Regenerative-Medicine Clinic Directory",
+}): Promise<Metadata> => {
+  const meta = await pageMetadata({
+    // Keyword-aligned with the target "stem cell clinics" and the on-page H1,
+    // giving a strong, non-thin title tag for the main directory.
+    title: "Stem Cell Clinics",
     description:
-      "Browse and compare accredited stem cell and regenerative-medicine clinics worldwide by treatment, condition, location, price, and verified reviews.",
+      "Browse and compare verified stem cell clinics and stem cell treatment clinics worldwide by treatment, condition, location, and patient reviews.",
     path: "/clinics",
     noindex: shouldNoindexDirectory(searchParams),
   });
+  return {
+    ...meta,
+    keywords: ["stem cell clinics", "stem cell treatment clinics"],
+  };
+};
 
 export default async function ClinicsPage({
   searchParams,

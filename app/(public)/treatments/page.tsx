@@ -7,13 +7,22 @@ import { TaxonomyCard } from "@/components/taxonomy/taxonomy-card";
 
 export const revalidate = 3600;
 
-export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Treatment types",
+export const generateMetadata = async (): Promise<Metadata> => {
+  const meta = await pageMetadata({
+    title: "Stem Cell Treatment",
     description:
-      "Explore stem cell and regenerative-medicine treatment types, from MSC therapy to exosomes and PRP, and find clinics that offer each.",
+      "Explore every stem cell treatment type, from local injections to systemic cell therapy delivered by IV, and compare clinics offering each approach.",
     path: "/treatments",
   });
+  return {
+    ...meta,
+    keywords: [
+      "stem cell treatment",
+      "systemic cell therapy",
+      "stem cell therapy types",
+    ],
+  };
+};
 
 function groupByCategory(terms: TaxonomyTerm[]): [string, TaxonomyTerm[]][] {
   const groups = new Map<string, TaxonomyTerm[]>();

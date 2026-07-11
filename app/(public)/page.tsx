@@ -19,7 +19,10 @@ import { Chip } from "@/components/ui/chip";
 import { SearchBar } from "@/components/search/search-bar";
 import { Section, SectionHeader } from "@/components/common/section";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
-import { TaxonomyCard, DestinationCard } from "@/components/taxonomy/taxonomy-card";
+import {
+  TaxonomyCard,
+  DestinationCard,
+} from "@/components/taxonomy/taxonomy-card";
 import { BlogCard } from "@/components/blog/blog-card";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 
@@ -28,18 +31,17 @@ export const revalidate = 600;
 export async function generateMetadata(): Promise<Metadata> {
   const meta = await pageMetadata({
     path: "/",
-    title: "Stem Cell Guide | Trusted Stem Cell Therapy Information",
+    title: "Stem Cell Guide",
     description:
-      "Learn about stem cell therapy, regenerative medicine, clinical research, treatment options, safety, and the latest advances with expert educational guides.",
+      "A trusted stem cell guide for comparing verified regenerative-medicine clinics by treatment, condition, and cost. Start your research here.",
   });
   return {
     ...meta,
     keywords: [
       "stem cell guide",
-      "stem cell cost",
-      "stem cell benefits",
+      "stem cell therapy guide",
       "stem cell treatment",
-      "stem cell therapy",
+      "stem cell clinics",
     ],
   };
 }
@@ -228,10 +230,7 @@ export default async function HomePage() {
             </div>
             <div className="grid grid-cols-3 gap-2 sm:gap-4">
               <Stat value={formatCount(home.stats.clinics)} label="Clinics" />
-              <Stat
-                value={formatCount(home.stats.verified)}
-                label="Verified"
-              />
+              <Stat value={formatCount(home.stats.verified)} label="Verified" />
               <Stat
                 value={formatCount(home.stats.reviews)}
                 label="Patient reviews"

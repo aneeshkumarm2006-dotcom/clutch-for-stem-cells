@@ -41,6 +41,9 @@ export interface AdminTaxonomyRow {
   flag?: string;
   lat?: number;
   lng?: number;
+  // ── SEO overrides (per-term `seo`; win over the auto title/description) ──
+  metaTitle?: string;
+  metaDescription?: string;
   // ── Editorial enrichment (see B5 / lib/content-review.ts gate) ──
   body?: string;
   faqs: EditorialFaqRow[];
@@ -86,6 +89,9 @@ const str = (v: unknown): string | undefined =>
   typeof v === "string" && v ? v : undefined;
 
 function toRow(d: Record<string, unknown>): AdminTaxonomyRow {
+  const seo =
+    (d.seo as { metaTitle?: string; metaDescription?: string } | undefined) ??
+    undefined;
   return {
     id: id(d._id),
     name: d.name as string,
@@ -105,6 +111,8 @@ function toRow(d: Record<string, unknown>): AdminTaxonomyRow {
     flag: (d.flag as string) ?? undefined,
     lat: d.lat as number | undefined,
     lng: d.lng as number | undefined,
+    metaTitle: str(seo?.metaTitle),
+    metaDescription: str(seo?.metaDescription),
     // Editorial
     body: str(d.body),
     faqs: ((d.faqs as EditorialFaqRow[] | undefined) ?? []).map((f) => ({

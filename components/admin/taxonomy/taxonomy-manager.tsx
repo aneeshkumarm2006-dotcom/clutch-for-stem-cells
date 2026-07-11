@@ -55,6 +55,9 @@ interface FormState {
   description?: string;
   icon?: string;
   isActive: boolean;
+  // ── SEO overrides (per-term `seo`) ──
+  metaTitle: string;
+  metaDescription: string;
   // ── Editorial enrichment ──
   body: string;
   faqs: FaqItem[];
@@ -105,6 +108,8 @@ function blank(isLocation: boolean): FormState {
     slug: "",
     isActive: true,
     kind: isLocation ? "country" : undefined,
+    metaTitle: "",
+    metaDescription: "",
     ...EDITORIAL_BLANK,
   };
 }
@@ -127,6 +132,8 @@ function fromRow(r: AdminTaxonomyRow): FormState {
     description: r.description ?? "",
     icon: r.icon ?? "",
     isActive: r.isActive,
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
     body: r.body ?? "",
     faqs: r.faqs.map((f) => ({ question: f.question, answer: f.answer })),
     keyFacts: r.keyFacts.map((k) => ({
@@ -220,6 +227,12 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
       description: form.description || undefined,
       icon: form.icon || undefined,
       isActive: form.isActive,
+      // Per-term SEO overrides — win over the auto title/description on the
+      // public page (see lib/seo.ts buildMetadata). Empty → clears the override.
+      seo: {
+        metaTitle: form.metaTitle || undefined,
+        metaDescription: form.metaDescription || undefined,
+      },
       // ── Common editorial (all kinds) ──
       body: form.body || undefined,
       faqs: form.faqs.filter((f) => f.question.trim() && f.answer.trim()),
@@ -499,13 +512,42 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
               />
             ) : null}
             <div className="space-y-1.5">
-              <Label>SEO description</Label>
+              <Label>Intro copy</Label>
               <Textarea
                 rows={4}
                 value={form.description}
                 onChange={(e) => set({ description: e.target.value })}
                 placeholder="Intro copy shown on this term's directory page."
               />
+            </div>
+            <div className="bg-surface-alt/60 space-y-3.5 rounded-xl border border-border p-3.5">
+              <div className="text-[12px] font-semibold uppercase tracking-wide text-text-secondary">
+                Search engine (SEO)
+              </div>
+              <TextField
+                label="Meta title"
+                value={form.metaTitle}
+                onChange={(e) => set({ metaTitle: e.target.value })}
+                placeholder={
+                  form.name
+                    ? `${form.name} clinics`
+                    : "e.g. MSC Stem Cell Treatment"
+                }
+              />
+              <div className="space-y-1.5">
+                <Label>Meta description</Label>
+                <Textarea
+                  rows={3}
+                  value={form.metaDescription}
+                  onChange={(e) => set({ metaDescription: e.target.value })}
+                  placeholder="Shown in search results. Aim for ~155 characters."
+                />
+              </div>
+              <p className="text-[12px] leading-snug text-text-muted">
+                Overrides the auto-generated title and description in search
+                results. Leave blank to fall back to the name and intro copy
+                above. The site brand suffix is added automatically.
+              </p>
             </div>
             <TextField
               label="Icon (Lucide name)"
