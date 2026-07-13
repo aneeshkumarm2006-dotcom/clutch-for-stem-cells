@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { pageMetadata } from "@/lib/page-metadata";
+import { faqPageJsonLd, renderJsonLd } from "@/lib/seo";
 import { getHomeData } from "@/lib/public-data";
 import { getPublishedBlogPosts } from "@/lib/seoteam/blog-data";
 import { formatCount } from "@/lib/format";
@@ -23,6 +24,7 @@ import {
   DestinationCard,
 } from "@/components/taxonomy/taxonomy-card";
 import { BlogCard } from "@/components/blog/blog-card";
+import { FaqSection, type FaqItem } from "@/components/content/faq-section";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 
 export const revalidate = 600;
@@ -32,18 +34,84 @@ export async function generateMetadata(): Promise<Metadata> {
     path: "/",
     title: "Stem Cell Guide",
     description:
-      "A trusted stem cell guide for comparing verified regenerative-medicine clinics by treatment, condition, and cost. Start your research here.",
+      "Compare stem cell treatment options, costs and benefits across verified clinics: MSC, autologous, bone-marrow-derived, umbilical-cord and systemic cell therapy.",
   });
   return {
     ...meta,
+    // Head terms only. The long-tails (knee arthritis, MSC, autologous,
+    // umbilical-cord, systemic) are ranking targets for their own taxonomy
+    // pages — the homepage links to them rather than competing with them.
     keywords: [
       "stem cell guide",
-      "stem cell therapy guide",
       "stem cell treatment",
-      "stem cell clinics",
+      "stem cell therapy",
+      "stem cell cost",
+      "stem cell treatment price",
+      "stem cell benefits",
+      "stem cell treatment benefits",
     ],
   };
 }
+
+/** Home FAQ — mirrors the highest-volume research questions and is emitted as
+ *  FAQPage JSON-LD so answer engines can quote a passage directly. */
+const HOME_FAQS: FaqItem[] = [
+  {
+    question: "How much does stem cell treatment cost?",
+    answer:
+      "There is no single stem cell treatment price. Cost follows the cell source, how many sessions a protocol needs, and the country you travel to — a single knee injection sits at the low end, a multi-day systemic protocol with follow-up at the high end. Each listing shows the clinic's own indicative starting price, and you can filter the directory by budget.",
+  },
+  {
+    question: "What are the benefits of stem cell therapy?",
+    answer:
+      "Most people researching therapy with stem cells are after the same stem cell treatment benefits: less pain, better mobility, and an alternative to surgery. How well the evidence supports that varies by condition and by treatment, so ask a clinic what its protocol has been shown to do, and take the answer to your own physician before booking.",
+  },
+  {
+    question: "Does stem cell therapy help with knee pain?",
+    answer:
+      "Knees are the most researched use case in this directory. Clinics offering stem cell therapy for knee arthritis typically inject cells into the joint to target pain and stiffness, but research is still developing and outcomes differ between patients. Compare what each clinic actually offers before you commit.",
+  },
+  {
+    question: "What are mesenchymal stem cells?",
+    answer:
+      "Mesenchymal stem cells (MSCs) are cells sourced from bone marrow, fat tissue, or umbilical cord tissue. They are the cell type behind most MSC therapy listed here, and clinics differ in where they source them and how many cells a protocol uses.",
+  },
+  {
+    question:
+      "What is the difference between autologous and umbilical-cord therapy?",
+    answer:
+      "Autologous therapy uses your own cells, harvested on the day from fat or marrow — bone-marrow-derived therapy is one form of it. Umbilical-cord therapy uses screened donor cells and skips the harvest step. Which one you can access depends on the regulations where the clinic operates.",
+  },
+  {
+    question: "What is systemic cell therapy?",
+    answer:
+      "Systemic (IV) cell therapy delivers cells into the bloodstream rather than into a single joint, so clinics tend to price it per protocol rather than per injection. It is usually discussed for whole-body or autoimmune concerns rather than one painful knee.",
+  },
+];
+
+/** Entry points for the knee/joint cluster — every slug is a seeded taxonomy term. */
+const KNEE_AND_JOINT_LINKS = [
+  {
+    title: "Knee osteoarthritis",
+    body: "Clinics offering stem cell therapy for knee arthritis, with pricing and patient reviews.",
+    href: "/conditions/knee-osteoarthritis",
+  },
+  {
+    title: "Joint pain",
+    body: "Stem cell therapy for joint pain in the hip, shoulder, and knee, compared side by side.",
+    href: "/conditions/joint-pain",
+  },
+  {
+    title: "Sports injuries",
+    body: "Cartilage, ligament, and tendon damage treated with regenerative injections.",
+    href: "/conditions/sports-injuries",
+  },
+  {
+    title: "Regenerative orthopedics",
+    body: "Image-guided injections into the joint rather than a systemic protocol.",
+    href: "/treatments/regenerative-orthopedics",
+  },
+];
 
 export default async function HomePage() {
   const [home, blog] = await Promise.all([
@@ -56,6 +124,13 @@ export default async function HomePage() {
     <>
       {/* Organization + WebSite JSON-LD now come from <BaseSchema> in the public
           layout, so every page carries them — not just the homepage. */}
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: renderJsonLd(faqPageJsonLd(HOME_FAQS)),
+        }}
+      />
 
       {/* Hero — Design §5.3 */}
       <section
@@ -102,8 +177,8 @@ export default async function HomePage() {
         {home.treatments.length ? (
           <Section>
             <SectionHeader
-              title="Browse by treatment"
-              description="Explore clinics by the regenerative therapy you're researching."
+              title="Browse by type of stem cell therapy"
+              description="Compare clinics offering mesenchymal stem cell (MSC), autologous, bone-marrow-derived, umbilical-cord, and systemic cell therapy."
               link={{ href: "/treatments", label: "All treatments" }}
             />
             <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -119,7 +194,7 @@ export default async function HomePage() {
           <Section className="border-t border-border">
             <SectionHeader
               title="Browse by condition"
-              description="Find clinics that treat the condition you care about."
+              description="From stem cell therapy for knee arthritis and joint pain to neurological, autoimmune, and anti-aging care."
               link={{ href: "/conditions", label: "All conditions" }}
             />
             <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -129,6 +204,31 @@ export default async function HomePage() {
             </div>
           </Section>
         ) : null}
+
+        {/* Knees & joints — the most-searched use case, given its own entry points */}
+        <Section className="border-t border-border">
+          <SectionHeader
+            eyebrow="Most researched"
+            title="Stem cell therapy for knees and joints"
+            description="Knee pain is what brings most people here. Start with whichever of these is closest to your situation."
+          />
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {KNEE_AND_JOINT_LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="rounded-xl border border-border bg-surface p-5 shadow-card transition-colors hover:border-border-strong"
+              >
+                <h3 className="font-display text-[15px] font-semibold text-text-primary">
+                  {l.title}
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-text-secondary">
+                  {l.body}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </Section>
 
         {/* Browse by destination */}
         {home.countries.length ? (
@@ -194,6 +294,92 @@ export default async function HomePage() {
               title="Connect"
               body="Request a consultation or get matched with clinics that fit your needs."
             />
+          </div>
+        </div>
+      </Section>
+
+      {/* Cost & benefits — the two questions every visitor arrives with */}
+      <Section>
+        <div className="container">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div>
+              <h2 className="font-display text-[24px] font-bold leading-tight tracking-[-0.02em] text-text-primary">
+                What does stem cell treatment cost?
+              </h2>
+              <p className="mt-3 text-[15px] leading-relaxed text-text-secondary">
+                There is no flat stem cell treatment price. Four things move it
+                more than anything else:
+              </p>
+              <ul className="mt-3 space-y-2 text-[15px] leading-relaxed text-text-secondary">
+                <li className="flex gap-2">
+                  <span className="text-primary">•</span>
+                  <span>
+                    The cell source — your own cells in autologous or
+                    bone-marrow-derived therapy, or screened donor cells in
+                    umbilical-cord therapy.
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary">•</span>
+                  <span>
+                    Cell count, and how many sessions the protocol runs to.
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary">•</span>
+                  <span>
+                    One injection into a single joint versus IV or systemic cell
+                    therapy.
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary">•</span>
+                  <span>
+                    The country, the clinic&apos;s accreditation, and whether
+                    travel and aftercare are bundled in.
+                  </span>
+                </li>
+              </ul>
+              <p className="mt-3 text-[15px] leading-relaxed text-text-secondary">
+                Every listing shows the clinic&apos;s own indicative starting
+                price, so you can filter by budget instead of guessing at a
+                number.
+              </p>
+              <Button asChild variant="ghost" className="mt-3 px-0">
+                <Link href="/clinics">
+                  Compare clinics by price
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </Button>
+              <DisclaimerNote variant="pricing" className="mt-4" />
+            </div>
+
+            <div>
+              <h2 className="font-display text-[24px] font-bold leading-tight tracking-[-0.02em] text-text-primary">
+                Stem cell benefits, and the honest limits
+              </h2>
+              <p className="mt-3 text-[15px] leading-relaxed text-text-secondary">
+                People researching therapy with stem cells tend to want the same
+                stem cell treatment benefits: less pain, more movement, and a
+                path that isn&apos;t surgery. How strongly the research backs
+                that up depends on the condition and on the treatment, and it is
+                still developing for most uses.
+              </p>
+              <p className="mt-3 text-[15px] leading-relaxed text-text-secondary">
+                So compare on the things you can actually check: what cells a
+                clinic uses, what its protocol involves, what it costs, what
+                accreditation it holds, and what patients said afterwards. Any
+                clinic promising you a certain outcome is telling you something
+                useful about itself.
+              </p>
+              <Button asChild variant="ghost" className="mt-3 px-0">
+                <Link href="/methodology">
+                  How we verify and rank clinics
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </Button>
+              <DisclaimerNote variant="medical" className="mt-4" />
+            </div>
           </div>
         </div>
       </Section>
@@ -304,6 +490,22 @@ export default async function HomePage() {
               </Link>
             </Button>
           </div>
+        </div>
+      </Section>
+
+      {/* FAQ — paired with the FAQPage JSON-LD emitted at the top of this page */}
+      <Section className="bg-surface-alt">
+        <div className="container max-w-3xl">
+          <FaqSection
+            items={HOME_FAQS}
+            heading="Stem cell therapy: common questions"
+          />
+          <Button asChild variant="ghost" className="mt-4 px-0">
+            <Link href="/faq">
+              More questions about using this guide
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+          </Button>
         </div>
       </Section>
 
