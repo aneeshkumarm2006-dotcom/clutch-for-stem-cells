@@ -1,7 +1,9 @@
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { blogPostingJsonLd, renderJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { buildJsonLd } from "@/lib/schema/engine";
+import { getSchemaContext } from "@/lib/schema/context";
+import { redirectOrNotFound } from "@/lib/redirects";
 import { pageMetadata } from "@/lib/page-metadata";
 import {
   getBlogPostBySlug,
@@ -36,6 +38,9 @@ export async function generateMetadata({
     path: `/blog/${post.slug}`,
     image: post.coverUrl,
     type: "article",
+    // Per-page overrides (canonical, OG/Twitter, robots) win over the derived
+    // values above and over the Settings defaults.
+    seo: post.seo,
   });
 }
 
@@ -54,7 +59,8 @@ export default async function BlogPostPage({
   params: { slug: string };
 }) {
   const post = await getBlogPostBySlug(params.slug);
-  if (!post) notFound();
+  // A re-slugged post should send its old URL onward rather than 404.
+  if (!post) return redirectOrNotFound(`/blog/${params.slug}`);
 
   const date = formatDate(post.publishedAt);
   const bodyHtml = applyKeywordLinks(post.body, post.keywords, post.linkFirstOnly);
@@ -65,27 +71,29 @@ export default async function BlogPostPage({
     { name: post.title, href: `/blog/${post.slug}` },
   ];
 
+  const ctx = await getSchemaContext();
+  const jsonLd = buildJsonLd(
+    "blogPost",
+    {
+      post: {
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt,
+        coverImageUrl: post.coverUrl,
+        author: post.author,
+        publishedAt: post.publishedAt,
+        updatedAt: post.updatedAt,
+        reviewer: post.reviewer,
+        lastReviewed: post.lastReviewedAt,
+      },
+    },
+    ctx,
+    post.schemaOverrides ?? null,
+  );
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: renderJsonLd(
-            blogPostingJsonLd({
-              title: post.title,
-              slug: post.slug,
-              excerpt: post.excerpt,
-              coverImageUrl: post.coverUrl,
-              author: post.author,
-              publishedAt: post.publishedAt,
-              updatedAt: post.updatedAt,
-              reviewer: post.reviewer,
-              lastReviewed: post.lastReviewedAt,
-            }),
-          ),
-        }}
-      />
+      <JsonLd data={jsonLd} />
       <ViewBeacon slug={post.slug} />
 
       <BlogArticle

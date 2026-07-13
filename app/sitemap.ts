@@ -18,6 +18,7 @@ import {
 import { getBlogSitemapEntries } from "@/lib/seoteam/blog-data";
 import { getMatrixSitemapEntries } from "@/lib/seoteam/matrix-data";
 import { getReviewerSitemapEntries } from "@/lib/seoteam/reviewer-data";
+import { getPageSitemapEntries } from "@/lib/seoteam/page-data";
 
 export const revalidate = 3600;
 
@@ -59,7 +60,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let dynamicEntries: MetadataRoute.Sitemap = [];
   try {
-    const [clinics, taxonomy, blog, matrix, reviewers]: [
+    const [clinics, taxonomy, blog, matrix, reviewers, pages]: [
+      SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
@@ -71,6 +73,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getBlogSitemapEntries(),
       getMatrixSitemapEntries(),
       getReviewerSitemapEntries(),
+      getPageSitemapEntries(),
     ]);
 
     dynamicEntries = [
@@ -105,6 +108,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: e.lastModified ?? now,
         changeFrequency: "monthly" as const,
         priority: 0.3,
+      })),
+      // Editor-composed (block) pages — approved only.
+      ...pages.map((e) => ({
+        url: absoluteUrl(e.path),
+        lastModified: e.lastModified ?? now,
+        changeFrequency: "monthly" as const,
+        priority: 0.5,
       })),
     ];
   } catch {

@@ -21,8 +21,12 @@ import {
 } from "@/lib/enums";
 import {
   imageSchema,
+  schemaOverrideSchema,
+  seoSchema,
   registerModel,
   type IImage,
+  type ISchemaOverrides,
+  type ISeo,
   type TimestampFields,
 } from "@/models/_shared";
 
@@ -45,6 +49,14 @@ export interface IBlogPost extends TimestampFields {
   excerpt?: string;
   /** Defaults to `title` when blank. */
   metaTitle?: string;
+  /**
+   * Full per-page SEO override (canonical, OG/Twitter, robots, focus keyword).
+   * The legacy flat `metaTitle`/`excerpt` above still work and take part in the
+   * same precedence chain — this adds the fields they never had.
+   */
+  seo?: ISeo;
+  /** Per-page control over the auto-generated JSON-LD (schema engine). */
+  schemaOverrides?: ISchemaOverrides;
   coverImage?: IImage;
   keywords: IBlogKeyword[];
   /** Link only the first occurrence of each keyword (avoids over-optimization). */
@@ -92,6 +104,8 @@ const BlogPostSchema = new Schema<IBlogPost>(
     body: { type: String, default: "" },
     excerpt: { type: String, trim: true, maxlength: 500 },
     metaTitle: { type: String, trim: true, maxlength: 120 },
+    seo: { type: seoSchema, default: undefined },
+    schemaOverrides: { type: schemaOverrideSchema, default: undefined },
     coverImage: { type: imageSchema, default: undefined },
     keywords: { type: [blogKeywordSchema], default: [] },
     linkFirstOnly: { type: Boolean, default: true },

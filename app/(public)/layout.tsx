@@ -10,6 +10,7 @@ import { Footer } from "@/components/layout/footer";
 import { AccountNav } from "@/components/layout/account-nav";
 import { CookieConsent } from "@/components/compliance/cookie-consent";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
+import { BaseSchema } from "@/components/seo/base-schema";
 import { getAnalyticsConfig } from "@/lib/analytics";
 import { ShortlistProvider } from "@/lib/hooks/use-shortlist";
 
@@ -24,6 +25,8 @@ export default async function PublicLayout({
 
   return (
     <ShortlistProvider>
+      {/* Organization + WebSite JSON-LD on every public page (server-rendered). */}
+      <BaseSchema />
       {/* Skip link — first focusable element for keyboard users (WCAG 2.4.1). */}
       <a
         href="#main-content"

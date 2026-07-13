@@ -10,7 +10,12 @@ import { estimateReadingTime } from "@/lib/reading-time";
 import { htmlToText, runSeoChecks, seoReadiness } from "@/lib/seoteam/seo-checks";
 import { loadReviewerByline } from "@/lib/public-data";
 import { DEFAULT_BLOG_AUTHOR } from "@/lib/seoteam/blog-constants";
-import { BlogPost, type IBlogPost } from "@/models";
+import {
+  BlogPost,
+  type IBlogPost,
+  type ISchemaOverrides,
+  type ISeo,
+} from "@/models";
 import type { ReviewerByline } from "@/components/content/reviewed-by-byline";
 import type { KeywordRel } from "@/lib/enums";
 
@@ -65,6 +70,10 @@ export interface BlogPostView extends BlogCardView {
   reviewer: ReviewerByline | null;
   /** ISO date the reviewer last signed off (drives the "Last reviewed" byline). */
   lastReviewedAt?: string;
+  /** Per-page SEO override (canonical, OG/Twitter, robots, focus keyword). */
+  seo: ISeo | null;
+  /** Per-page control over the auto-generated JSON-LD. */
+  schemaOverrides: ISchemaOverrides | null;
 }
 
 function readingTimeOf(p: IBlogPost): number {
@@ -143,6 +152,8 @@ async function toPostView(p: IBlogPost): Promise<BlogPostView> {
     linkFirstOnly: p.linkFirstOnly ?? true,
     reviewer: await loadReviewerByline(p.reviewedBy),
     lastReviewedAt: iso(p.lastReviewedAt ?? null),
+    seo: p.seo ?? null,
+    schemaOverrides: p.schemaOverrides ?? null,
     keywords: (p.keywords ?? []).map((k) => ({
       keyword: k.keyword,
       url: k.url,

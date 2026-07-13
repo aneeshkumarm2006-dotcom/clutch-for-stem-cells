@@ -94,6 +94,21 @@ export interface ISeoDefaults extends ISeo {
   twitterHandle?: string;
 }
 
+/**
+ * Site identity for the structured-data engine — the runtime overlay on top of
+ * `config/content-engine`'s build-time fallback. Lets an admin change the
+ * publisher name, its schema.org type, and the logo that appears in every page's
+ * `Organization` node without a redeploy. Blank fields fall back to config.
+ */
+export interface IStructuredData {
+  /** Publisher name. Defaults to `SITE_NAME`. */
+  organizationName?: string;
+  /** schema.org publisher type, e.g. "Organization" / "MedicalOrganization". */
+  organizationType?: string;
+  /** Logo shown in `Organization.logo`. */
+  logo?: IImage;
+}
+
 export interface ISiteSetting extends TimestampFields {
   _id: Types.ObjectId;
   key: string;
@@ -103,6 +118,8 @@ export interface ISiteSetting extends TimestampFields {
   testimonials: ITestimonial[];
   partnerLogos: IImage[];
   seoDefaults?: ISeoDefaults;
+  /** Site identity for the structured-data engine (Organization node). */
+  structuredData?: IStructuredData;
   disclaimers?: IDisclaimers;
   contact?: IContactInfo;
   social?: ISocialLinks;
@@ -217,6 +234,15 @@ const seoDefaultsSchema = new Schema<ISeoDefaults>(
   { _id: false },
 );
 
+const structuredDataSchema = new Schema<IStructuredData>(
+  {
+    organizationName: { type: String, trim: true },
+    organizationType: { type: String, trim: true },
+    logo: { type: imageSchema, default: undefined },
+  },
+  { _id: false },
+);
+
 // ── SiteSetting schema ──────────────────────────────────────────────────────
 
 const SiteSettingSchema = new Schema<ISiteSetting, SiteSettingModel>(
@@ -236,6 +262,7 @@ const SiteSettingSchema = new Schema<ISiteSetting, SiteSettingModel>(
     testimonials: { type: [testimonialSchema], default: [] },
     partnerLogos: { type: [imageSchema], default: [] },
     seoDefaults: { type: seoDefaultsSchema, default: () => ({}) },
+    structuredData: { type: structuredDataSchema, default: () => ({}) },
     disclaimers: { type: disclaimersSchema, default: () => ({}) },
     contact: { type: contactSchema, default: () => ({}) },
     social: { type: socialLinksSchema, default: () => ({}) },

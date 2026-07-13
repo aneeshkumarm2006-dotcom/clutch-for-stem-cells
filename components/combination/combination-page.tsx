@@ -15,13 +15,12 @@ import { directoryParamsFrom } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import { matrixPagePath } from "@/lib/matrix";
 import {
-  faqPageJsonLd,
-  itemListJsonLd,
   medicalConditionJsonLd,
   medicalTherapyJsonLd,
-  medicalWebPageJsonLd,
   type JsonLd as JsonLdData,
 } from "@/lib/seo";
+import { buildJsonLd } from "@/lib/schema/engine";
+import { getSchemaContext } from "@/lib/schema/context";
 import type { MatrixKind } from "@/lib/enums";
 import type { FilterDimension } from "@/components/directory/directory-controls";
 import type { DirectoryBreadcrumb } from "@/components/directory/directory";
@@ -202,28 +201,31 @@ export async function CombinationPage({
     directoryParamsFrom(searchParams, ctx.overrides),
   );
 
-  const jsonLd = [
-    medicalWebPageJsonLd({
-      name: view.title,
-      description: view.metaDescription ?? view.intro,
-      path: view.path,
-      lastReviewed: view.editorial.lastReviewedAt,
-      dateModified: view.editorial.updatedAt,
-      reviewedBy: view.editorial.reviewer,
-      about: ctx.about,
-    }),
-    ...(view.editorial.faqs.length ? [faqPageJsonLd(view.editorial.faqs)] : []),
-    ...(data.cards.length
-      ? [
-          itemListJsonLd(
-            data.cards.map((c) => ({
-              path: `/clinic/${c.slug}`,
-              name: c.name,
-            })),
-          ),
-        ]
-      : []),
-  ];
+  // MedicalWebPage (+ the therapy/condition entity) + FAQPage + ItemList, all
+  // assembled by the schema engine from the `matrixPage` content-type map, with
+  // any per-record overrides an editor set in the CMS applied on top.
+  const schemaCtx = await getSchemaContext();
+  const jsonLd = buildJsonLd(
+    "matrixPage",
+    {
+      webPage: {
+        name: view.title,
+        description: view.metaDescription ?? view.intro,
+        path: view.path,
+        lastReviewed: view.editorial.lastReviewedAt,
+        dateModified: view.editorial.updatedAt,
+        reviewedBy: view.editorial.reviewer,
+        about: ctx.about,
+      },
+      faqs: view.editorial.faqs,
+      items: data.cards.map((c) => ({
+        path: `/clinic/${c.slug}`,
+        name: c.name,
+      })),
+    },
+    schemaCtx,
+    view.schemaOverrides ?? null,
+  );
 
   return (
     <>

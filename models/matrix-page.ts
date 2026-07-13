@@ -24,11 +24,13 @@ import {
 } from "@/lib/enums";
 import {
   seoSchema,
+  schemaOverrideSchema,
   faqSchema,
   keyFactSchema,
   contentFlagSchema,
   registerModel,
   type ISeo,
+  type ISchemaOverrides,
   type IFaqEntry,
   type IKeyFact,
   type IContentFlag,
@@ -46,6 +48,8 @@ export interface IMatrixPage extends TimestampFields {
   metaTitle?: string;
   metaDescription?: string;
   seo?: ISeo;
+  /** Per-page control over the auto-generated JSON-LD (schema engine). */
+  schemaOverrides?: ISchemaOverrides;
   /** Answer-first TL;DR (plain text, 40–60 words) — the highest-risk quote. */
   intro?: string;
   /** Sanitized HTML long-form body. */
@@ -69,6 +73,7 @@ const MatrixPageSchema = new Schema<IMatrixPage>(
     metaTitle: { type: String, trim: true, maxlength: 120 },
     metaDescription: { type: String, trim: true, maxlength: 320 },
     seo: { type: seoSchema, default: undefined },
+    schemaOverrides: { type: schemaOverrideSchema, default: undefined },
     intro: { type: String },
     body: { type: String, default: "" },
     faqs: { type: [faqSchema], default: [] },

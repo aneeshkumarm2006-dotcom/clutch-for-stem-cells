@@ -12,6 +12,8 @@ export {
   faqSchema,
   keyFactSchema,
   contentFlagSchema,
+  schemaOverrideSchema,
+  blockSchema,
   softDeletePlugin,
   registerModel,
   toPlainObject,
@@ -19,6 +21,9 @@ export {
 export type {
   IImage,
   ISeo,
+  IRobots,
+  ISchemaOverrides,
+  IBlock,
   IPerson,
   IFaqEntry,
   IKeyFact,
@@ -85,6 +90,12 @@ export type { IMedicalReviewer } from "@/models/medical-reviewer";
 export { MatrixPage, default as MatrixPageModel } from "@/models/matrix-page";
 export type { IMatrixPage } from "@/models/matrix-page";
 
+export { Page, default as PageModel } from "@/models/page";
+export type { IPage } from "@/models/page";
+
+export { Redirect, default as RedirectModel } from "@/models/redirect";
+export type { IRedirect } from "@/models/redirect";
+
 export { User, default as UserModel } from "@/models/user";
 export type { IUser, ISavedSearch } from "@/models/user";
 
@@ -109,6 +120,7 @@ export type {
   IRankingWeights,
   IAnalyticsConfig,
   ISeoDefaults,
+  IStructuredData,
 } from "@/models/site-setting";
 
 export { AuditLog, default as AuditLogModel } from "@/models/audit-log";

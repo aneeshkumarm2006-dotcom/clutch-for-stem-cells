@@ -275,3 +275,46 @@ export const MATRIX_KINDS = [
   "condition_country",
 ] as const;
 export type MatrixKind = (typeof MATRIX_KINDS)[number];
+
+// ── Structured-data / SEO engine (config-driven schema.org + per-page SEO) ────
+// Generic, domain-free primitives for the schema engine, the extended per-page
+// SEO override, the modular block system, and redirects. Nothing site-specific
+// lives here — the content-type→schema-node map is in `config/content-engine`.
+
+/** Twitter/X card type for the per-page SEO override + Settings default. */
+export const TWITTER_CARD_TYPES = ["summary", "summary_large_image"] as const;
+export type TwitterCardType = (typeof TWITTER_CARD_TYPES)[number];
+
+/**
+ * The reusable content blocks editors compose Pages from. Keep in lockstep with
+ * the block registry (`lib/blocks/registry.ts`) and the enabled set in
+ * `config/content-engine`. Blocks with structured meaning (`faq`,
+ * `comparisonTable`) auto-wire into the schema engine.
+ */
+export const BLOCK_TYPES = [
+  "richText",
+  "faq",
+  "comparisonTable",
+  "featureGrid",
+  "prosCons",
+  "cta",
+  "media",
+  "rawHtml",
+] as const;
+export type BlockType = (typeof BLOCK_TYPES)[number];
+
+/** Human labels for the block-type picker in the page editor. */
+export const BLOCK_TYPE_LABELS: Record<BlockType, string> = {
+  richText: "Rich text",
+  faq: "FAQ",
+  comparisonTable: "Comparison table",
+  featureGrid: "Feature grid",
+  prosCons: "Pros & cons",
+  cta: "Call to action",
+  media: "Image / media",
+  rawHtml: "Raw HTML / embed",
+};
+
+/** HTTP status for a redirect record — permanent (301) or temporary (302). */
+export const REDIRECT_STATUS_CODES = [301, 302] as const;
+export type RedirectStatusCode = (typeof REDIRECT_STATUS_CODES)[number];

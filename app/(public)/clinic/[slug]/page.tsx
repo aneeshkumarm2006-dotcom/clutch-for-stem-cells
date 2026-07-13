@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -16,11 +15,10 @@ import {
   Stethoscope,
 } from "lucide-react";
 
-import {
-  medicalClinicJsonLd,
-  renderJsonLd,
-  reviewJsonLd,
-} from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { buildJsonLd } from "@/lib/schema/engine";
+import { getSchemaContext } from "@/lib/schema/context";
+import { redirectOrNotFound } from "@/lib/redirects";
 import { pageMetadata } from "@/lib/page-metadata";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import {
@@ -97,7 +95,8 @@ export default async function ClinicProfilePage({
   searchParams: Record<string, string | string[] | undefined>;
 }) {
   const clinic = await getClinicProfile(params.slug);
-  if (!clinic) notFound();
+  // A clinic that was re-slugged should send its old URL onward, not 404.
+  if (!clinic) return redirectOrNotFound(`/clinic/${params.slug}`);
 
   const single = (v: string | string[] | undefined) =>
     Array.isArray(v) ? v[0] : v;
@@ -151,28 +150,37 @@ export default async function ClinicProfilePage({
       ? formatPrice(clinic.priceMin, { currency: clinic.currency })
       : null;
 
-  const jsonLd = [
-    medicalClinicJsonLd(clinic.raw),
-    ...reviews.reviews.slice(0, 5).map((r) =>
-      reviewJsonLd({
-        reviewer: { isAnonymous: r.displayName === "Verified Patient", displayName: r.displayName },
-        ratingOverall: r.ratingOverall,
-        headline: r.headline,
-        body: r.body,
-        createdAt: new Date(r.createdAt),
-        clinicName: clinic.name,
-      } as Parameters<typeof reviewJsonLd>[0]),
-    ),
-  ];
+  // MedicalClinic (+ nested AggregateRating) + up to 5 Reviews, assembled by the
+  // schema engine from the `clinic` content-type map, with any per-record
+  // overrides an editor set in the admin schema panel applied on top.
+  const ctx = await getSchemaContext();
+  const jsonLd = buildJsonLd(
+    "clinic",
+    {
+      clinic: clinic.raw,
+      reviews: reviews.reviews.slice(0, 5).map(
+        (r) =>
+          ({
+            reviewer: {
+              isAnonymous: r.displayName === "Verified Patient",
+              displayName: r.displayName,
+            },
+            ratingOverall: r.ratingOverall,
+            headline: r.headline,
+            body: r.body,
+            createdAt: new Date(r.createdAt),
+            clinicName: clinic.name,
+          }) as never,
+      ),
+    },
+    ctx,
+    clinic.raw.schemaOverrides ?? null,
+  );
 
   return (
     <>
       <ProfileViewTracker clinicId={clinic.id} />
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: renderJsonLd(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       {/* Header */}
       <div className="border-b border-border bg-surface">

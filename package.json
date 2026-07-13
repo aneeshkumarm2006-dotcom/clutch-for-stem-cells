@@ -10,7 +10,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "seed": "tsx scripts/seed.ts",
-    "test": "tsx --test tests/analyticshub/crypto.test.ts tests/analyticshub/password.test.ts tests/analyticshub/session.test.ts tests/analyticshub/handler.test.ts tests/analyticshub/palette.test.ts"
+    "migrate": "tsx scripts/migrations/001-content-engine.ts",
+    "test": "npm run test:analyticshub && npm run test:engine",
+    "test:analyticshub": "tsx --test tests/analyticshub/crypto.test.ts tests/analyticshub/password.test.ts tests/analyticshub/session.test.ts tests/analyticshub/handler.test.ts tests/analyticshub/palette.test.ts",
+    "test:engine": "tsx --tsconfig tsconfig.test.json --test tests/content-engine/engine.test.ts tests/content-engine/db.test.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -55,6 +58,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
     "eslint-config-prettier": "^9.1.0",
+    "mongodb-memory-server": "^10.1.2",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",

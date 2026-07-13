@@ -7,9 +7,11 @@ import { toast } from "sonner";
 import { PageHeader } from "@/components/admin/page-header";
 import { Button } from "@/components/ui/button";
 import { TextField } from "@/components/ui/form-field";
+import { ImagePicker } from "@/components/admin/image-picker";
 import { Toggle } from "@/components/admin/toggle";
 import { adminFetch } from "@/lib/admin/client";
 import { cn } from "@/lib/utils";
+import { SITE_NAME } from "@/config/site";
 import type { SettingsView } from "@/lib/admin/settings";
 
 const WEIGHTS: [keyof SettingsView["rankingWeights"], string][] = [
@@ -34,6 +36,7 @@ const FLAGS: [string, string, string][] = [
 const NAV = [
   ["ranking", "Ranking weights"],
   ["seo", "SEO defaults"],
+  ["structured-data", "Structured data"],
   ["contact", "Contact & social"],
   ["analytics", "Analytics"],
   ["flags", "Feature flags"],
@@ -53,6 +56,7 @@ export function SettingsForm({ settings }: { settings: SettingsView }) {
         body: {
           rankingWeights: v.rankingWeights,
           seoDefaults: v.seoDefaults,
+          structuredData: v.structuredData,
           contact: v.contact,
           social: v.social,
           analytics: v.analytics,
@@ -183,6 +187,64 @@ export function SettingsForm({ settings }: { settings: SettingsView }) {
                 }
               />
             </div>
+          </Section>
+
+          <Section
+            id="structured-data"
+            title="Structured data"
+            description="Site identity for the Organization + WebSite JSON-LD emitted on every public page. Leave a field blank to fall back to the build-time config."
+          >
+            <div className="grid gap-4 sm:grid-cols-2">
+              <TextField
+                label="Organization name"
+                placeholder={SITE_NAME}
+                hint="Defaults to the site name."
+                value={v.structuredData.organizationName}
+                onChange={(e) =>
+                  setV((c) => ({
+                    ...c,
+                    structuredData: {
+                      ...c.structuredData,
+                      organizationName: e.target.value,
+                    },
+                  }))
+                }
+              />
+              <TextField
+                label="Organization type"
+                placeholder="Organization"
+                hint="A schema.org type, e.g. MedicalOrganization."
+                value={v.structuredData.organizationType}
+                onChange={(e) =>
+                  setV((c) => ({
+                    ...c,
+                    structuredData: {
+                      ...c.structuredData,
+                      organizationType: e.target.value,
+                    },
+                  }))
+                }
+              />
+            </div>
+
+            <ImagePicker
+              label="Organization logo"
+              value={v.structuredData.logo}
+              onChange={(logo) =>
+                setV((c) => ({
+                  ...c,
+                  structuredData: { ...c.structuredData, logo: logo ?? undefined },
+                }))
+              }
+            />
+
+            <p className="text-[12.5px] text-text-muted">
+              The social links below are emitted as the organization&apos;s{" "}
+              <code className="rounded bg-surface-alt px-1 py-0.5 text-[11.5px]">
+                sameAs
+              </code>{" "}
+              profiles.
+            </p>
           </Section>
 
           <Section id="contact" title="Contact & social">

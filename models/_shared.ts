@@ -14,6 +14,13 @@ import {
   type HydratedDocument,
 } from "mongoose";
 
+import {
+  BLOCK_TYPES,
+  TWITTER_CARD_TYPES,
+  type BlockType,
+  type TwitterCardType,
+} from "@/lib/enums";
+
 // ── Base type fragments (mixed into each model interface) ────────────────────
 
 /** `createdAt`/`updatedAt` provided by `{ timestamps: true }`. */
@@ -54,14 +61,48 @@ export const imageSchema = new Schema<IImage>(
   { _id: false },
 );
 
-/** Per-document SEO overrides (PRD §5.1, §11). Defaults come from SiteSetting. */
+/**
+ * Per-document SEO overrides (PRD §5.1, §11). Defaults come from SiteSetting.
+ *
+ * The first five keys are the original set; the rest were added with the
+ * modular content/SEO layer. **Every added field is optional**, so existing
+ * documents (which simply lack them) keep resolving exactly as before —
+ * `buildMetadata` falls back to the derived/global value whenever one is unset.
+ */
 export interface ISeo {
   metaTitle?: string;
   metaDescription?: string;
   ogImage?: string;
   canonicalUrl?: string;
   noindex?: boolean;
+  /** OpenGraph title/description — fall back to metaTitle/metaDescription. */
+  ogTitle?: string;
+  ogDescription?: string;
+  /** Twitter/X card type. Falls back to the Settings default. */
+  twitterCard?: TwitterCardType;
+  /** Editorial focus keyword — drives the SEO checks panel, never emitted. */
+  focusKeyword?: string;
+  /**
+   * Granular robots control. `noindex` above remains the coarse switch (and is
+   * OR-ed in); this adds `follow` so an editor can express `index, nofollow`.
+   * Unset means "inherit" — see `buildMetadata`.
+   */
+  robots?: IRobots;
 }
+
+/** Granular robots directives. Unset keys mean "inherit / default". */
+export interface IRobots {
+  index?: boolean;
+  follow?: boolean;
+}
+
+const robotsSchema = new Schema<IRobots>(
+  {
+    index: { type: Boolean },
+    follow: { type: Boolean },
+  },
+  { _id: false },
+);
 
 export const seoSchema = new Schema<ISeo>(
   {
@@ -70,6 +111,69 @@ export const seoSchema = new Schema<ISeo>(
     ogImage: { type: String, trim: true },
     canonicalUrl: { type: String, trim: true },
     noindex: { type: Boolean, default: false },
+    ogTitle: { type: String, trim: true, maxlength: 120 },
+    ogDescription: { type: String, trim: true, maxlength: 320 },
+    twitterCard: { type: String, enum: TWITTER_CARD_TYPES },
+    focusKeyword: { type: String, trim: true, maxlength: 120 },
+    robots: { type: robotsSchema, default: undefined },
+  },
+  { _id: false },
+);
+
+// ── Structured-data overrides (the schema engine's per-page seam) ────────────
+
+/**
+ * Per-page control over the auto-generated JSON-LD. The engine
+ * (`lib/schema/engine.ts`) builds a record's nodes from the content-type map in
+ * `config/content-engine`, then applies this: nodes named in `disabledNodes` are
+ * dropped, `fieldOverrides` shallow-overwrite keys on the matching node, and
+ * `customJsonLd` (raw, editor-authored) is appended.
+ *
+ * All-optional and additive: a record without `schemaOverrides` gets the plain
+ * auto-generated graph, which is exactly what every existing document does now.
+ */
+export interface ISchemaOverrides {
+  /** schema.org `@type`s to omit for this page, e.g. ["AggregateRating"]. */
+  disabledNodes?: string[];
+  /**
+   * `{ "MedicalClinic": { "name": "…" } }` — shallow field overrides applied to
+   * the node with that `@type`. Stored as a free-form map (values are arbitrary
+   * JSON), so it is `Schema.Types.Mixed`.
+   */
+  fieldOverrides?: Record<string, Record<string, unknown>>;
+  /** Raw advanced-case JSON-LD, appended verbatim. Validated as JSON on save. */
+  customJsonLd?: string;
+}
+
+export const schemaOverrideSchema = new Schema<ISchemaOverrides>(
+  {
+    disabledNodes: { type: [String], default: [] },
+    fieldOverrides: { type: Schema.Types.Mixed, default: undefined },
+    customJsonLd: { type: String, default: undefined },
+  },
+  { _id: false },
+);
+
+// ── Modular content blocks ──────────────────────────────────────────────────
+
+/**
+ * One block in a Page's ordered composition. `type` selects the entry in the
+ * block registry (`lib/blocks/registry.ts`), which owns the Zod schema for
+ * `data`, the public renderer, and the optional `toSchemaOrg()` mapping.
+ *
+ * `data` is `Mixed` because each block type has its own shape; it is validated
+ * by the registry's discriminated-union Zod schema on every write (and HTML
+ * inside it is sanitized server-side), so nothing unvalidated ever lands here.
+ */
+export interface IBlock {
+  type: BlockType;
+  data: Record<string, unknown>;
+}
+
+export const blockSchema = new Schema<IBlock>(
+  {
+    type: { type: String, enum: BLOCK_TYPES, required: true },
+    data: { type: Schema.Types.Mixed, default: () => ({}) },
   },
   { _id: false },
 );

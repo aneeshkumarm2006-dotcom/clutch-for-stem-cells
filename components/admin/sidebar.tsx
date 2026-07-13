@@ -11,6 +11,7 @@ import {
   Image as ImageIcon,
   LayoutDashboard,
   ListTree,
+  Milestone,
   ScrollText,
   Send,
   Settings,
@@ -80,6 +81,7 @@ const NAV: NavEntry[][] = [
     { type: "leaf", label: "Users", href: "/admin/users", icon: Users, minRole: "admin" },
     { type: "leaf", label: "Providers", href: "/admin/providers", icon: Building2, minRole: "admin" },
     { type: "leaf", label: "Plans", href: "/admin/plans", icon: CreditCard, minRole: "admin" },
+    { type: "leaf", label: "Redirects", href: "/admin/redirects", icon: Milestone, minRole: "admin" },
     { type: "leaf", label: "Settings", href: "/admin/settings", icon: Settings, minRole: "admin" },
   ],
   [

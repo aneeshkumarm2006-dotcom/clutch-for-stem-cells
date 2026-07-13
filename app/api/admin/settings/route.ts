@@ -15,6 +15,8 @@ export const dynamic = "force-dynamic";
 const ALLOWED = [
   "rankingWeights",
   "seoDefaults",
+  // Site identity for the structured-data engine (Organization node).
+  "structuredData",
   "contact",
   "social",
   "analytics",

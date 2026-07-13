@@ -81,6 +81,12 @@ export interface BuildMetadataInput {
 /**
  * Build a Next.js `Metadata` object with title template, canonical, OpenGraph,
  * and Twitter cards. Precedence: `seo` override → `defaults` → config constant.
+ *
+ * The per-page override (`ISeo`) may additionally carry `ogTitle`/`ogDescription`
+ * (distinct social copy), a `twitterCard` type, and granular `robots`
+ * (`{index, follow}`). All are optional — a record that sets none behaves
+ * exactly as before, which is what keeps this backward-compatible with every
+ * existing document.
  */
 export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
   const { seo, defaults } = input;
@@ -101,7 +107,11 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
   const imageRaw = input.image ?? seo?.ogImage ?? defaults?.ogImage;
   const images = imageRaw ? [{ url: absoluteUrl(imageRaw) }] : undefined;
 
-  const noindex = input.noindex || seo?.noindex || defaults?.noindex || false;
+  // Social copy falls back to the page title/description when not overridden.
+  const ogTitle = seo?.ogTitle ?? title;
+  const ogDescription = seo?.ogDescription ?? description;
+  const twitterCard =
+    seo?.twitterCard ?? defaults?.twitterCard ?? "summary_large_image";
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -112,24 +122,53 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
     description,
     alternates: { canonical },
     openGraph: {
-      title,
-      description,
+      title: ogTitle,
+      description: ogDescription,
       url: canonical,
       siteName: SITE_NAME,
       type: input.type ?? "website",
       images,
     },
     twitter: {
-      card: "summary_large_image",
-      title,
-      description,
+      card: twitterCard,
+      title: ogTitle,
+      description: ogDescription,
       images: images?.map((i) => i.url),
       site: defaults?.twitterHandle,
     },
-    // Thin/filtered pages stay `follow` so equity flows to canonical + children;
-    // only an explicit `nofollow` (or a hard per-entity noindex) drops it.
-    robots: noindex ? { index: false, follow: !input.nofollow } : undefined,
+    robots: resolveRobots(input),
   };
+}
+
+/**
+ * Resolve the meta-robots directive.
+ *
+ * `noindex` is the coarse switch and is OR-ed across the route-level flag, the
+ * per-entity override, and the global default (any one of them can suppress a
+ * page). A page-level `robots.index === false` counts as a `noindex` too.
+ *
+ * `follow` defaults to `true` even when noindexed — a thin/filtered page should
+ * stay `noindex, follow` so link equity still flows to its canonical and
+ * children. An explicit `robots.follow: false` (or the route-level `nofollow`)
+ * is what actually drops it.
+ *
+ * Returns `undefined` when the page is fully indexable and followable, so we
+ * emit no robots tag at all rather than a redundant `index, follow`.
+ */
+function resolveRobots(input: BuildMetadataInput): Metadata["robots"] {
+  const { seo, defaults } = input;
+  const override = seo?.robots;
+
+  const noindex = Boolean(
+    input.noindex ||
+      seo?.noindex ||
+      defaults?.noindex ||
+      override?.index === false,
+  );
+  const nofollow = Boolean(input.nofollow || override?.follow === false);
+
+  if (!noindex && !nofollow) return undefined;
+  return { index: !noindex, follow: !nofollow };
 }
 
 // ── JSON-LD ──────────────────────────────────────────────────────────────────
@@ -162,14 +201,35 @@ function compact<T extends JsonLd>(obj: T): T {
   return obj;
 }
 
-/** `Organization` for the publisher (homepage / global). */
-export function organizationJsonLd(opts: { logo?: string } = {}): JsonLd {
-  const sameAs = Object.values(SOCIAL_LINKS).filter(Boolean);
+/** Runtime identity for the site-wide nodes, resolved from admin Settings. */
+export interface SiteIdentityInput {
+  name?: string;
+  url?: string;
+  logo?: string;
+  /** Authoritative profile URLs → `sameAs`. */
+  sameAs?: string[];
+  /** schema.org publisher type, e.g. `Organization` / `MedicalOrganization`. */
+  type?: string;
+  /** Path the sitelinks search box deep-links into. */
+  searchPath?: string;
+}
+
+/**
+ * `Organization` for the publisher.
+ *
+ * Every field is overridable so the admin Settings (site name, uploaded logo,
+ * social profiles) drive the node at runtime; the `config/site.ts` constants are
+ * only the build-time fallback for when the DB is unavailable. Passing no
+ * argument reproduces the original constants-only behaviour.
+ */
+export function organizationJsonLd(opts: SiteIdentityInput = {}): JsonLd {
+  const sameAs = (opts.sameAs ?? Object.values(SOCIAL_LINKS)).filter(Boolean);
   return compact({
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: SITE_NAME,
-    url: SITE_URL,
+    "@type": opts.type ?? "Organization",
+    "@id": `${(opts.url ?? SITE_URL).replace(/\/$/, "")}/#organization`,
+    name: opts.name ?? SITE_NAME,
+    url: opts.url ?? SITE_URL,
     logo: opts.logo ? absoluteUrl(opts.logo) : undefined,
     sameAs: sameAs.length ? sameAs : undefined,
   });
@@ -177,19 +237,25 @@ export function organizationJsonLd(opts: { logo?: string } = {}): JsonLd {
 
 /**
  * `WebSite` with a `SearchAction` — lets search engines render a sitelinks
- * search box that deep-links into our global search (PRD §11). Homepage only.
+ * search box that deep-links into our global search (PRD §11). Emitted
+ * site-wide (see `components/seo/base-schema.tsx`) and linked to the
+ * `Organization` node by `@id` so crawlers read one connected graph.
  */
-export function websiteJsonLd(): JsonLd {
+export function websiteJsonLd(opts: SiteIdentityInput = {}): JsonLd {
+  const base = (opts.url ?? SITE_URL).replace(/\/$/, "");
+  const searchPath = opts.searchPath ?? "/search";
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: SITE_NAME,
-    url: SITE_URL,
+    "@id": `${base}/#website`,
+    name: opts.name ?? SITE_NAME,
+    url: opts.url ?? SITE_URL,
+    publisher: { "@id": `${base}/#organization` },
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${absoluteUrl("/search")}?q={search_term_string}`,
+        urlTemplate: `${absoluteUrl(searchPath)}?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -553,6 +619,51 @@ export function personJsonLd(input: PersonSeoInput): JsonLd {
     description: input.description,
     image: input.image ? absoluteUrl(input.image) : undefined,
     sameAs: input.sameAs?.length ? input.sameAs : undefined,
+  });
+}
+
+// ── Generic page wrappers (non-medical pages: composed pages + directories) ──
+
+/** The `WebPage` subtypes we emit. `CollectionPage` marks a directory/index. */
+export type WebPageType =
+  | "WebPage"
+  | "CollectionPage"
+  | "AboutPage"
+  | "ContactPage";
+
+export interface WebPageSeoInput {
+  name: string;
+  description?: string;
+  /** Root-relative path or absolute URL (the page's canonical). */
+  path: string;
+  /** Narrower `@type` — defaults to `WebPage`. */
+  type?: WebPageType;
+  image?: string;
+  datePublished?: Date | string | null;
+  dateModified?: Date | string | null;
+}
+
+/**
+ * A plain `WebPage`/`CollectionPage` wrapper for pages with no medical entity to
+ * describe — editor-composed pages and directory/index pages. Medical topic
+ * pages use {@link medicalWebPageJsonLd} instead, which additionally carries the
+ * `reviewedBy`/`lastReviewed` YMYL provenance.
+ */
+export function webPageJsonLd(input: WebPageSeoInput): JsonLd {
+  return compact({
+    "@context": "https://schema.org",
+    "@type": input.type ?? "WebPage",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    image: input.image ? absoluteUrl(input.image) : undefined,
+    datePublished: toIso(input.datePublished),
+    dateModified: toIso(input.dateModified) ?? toIso(input.datePublished),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
   });
 }
 

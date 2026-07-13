@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { FileText, Images, LayoutGrid, PlusCircle, ShieldCheck } from "lucide-react";
+import {
+  FileText,
+  Images,
+  LayoutGrid,
+  Layers,
+  PlusCircle,
+  ShieldCheck,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SITE_NAME } from "@/config/site";
@@ -25,6 +32,12 @@ export function SeoTeamHeader() {
           <Link href="/seoteam">
             <FileText className="size-4" />
             <span className="hidden sm:inline">Posts</span>
+          </Link>
+        </Button>
+        <Button asChild variant="ghost" size="sm">
+          <Link href="/seoteam/pages">
+            <Layers className="size-4" />
+            <span className="hidden sm:inline">Pages</span>
           </Link>
         </Button>
         <Button asChild variant="ghost" size="sm">

@@ -19,12 +19,14 @@ import {
 import {
   imageSchema,
   seoSchema,
+  schemaOverrideSchema,
   faqSchema,
   keyFactSchema,
   contentFlagSchema,
   registerModel,
   type IImage,
   type ISeo,
+  type ISchemaOverrides,
   type IFaqEntry,
   type IKeyFact,
   type IContentFlag,
@@ -44,6 +46,8 @@ export interface ITaxonomyBase extends TimestampFields {
   icon?: string;
   image?: IImage;
   seo?: ISeo;
+  /** Per-page control over the auto-generated JSON-LD (schema engine). */
+  schemaOverrides?: ISchemaOverrides;
   parentId?: Types.ObjectId | null;
   order: number;
   isActive: boolean;
@@ -115,6 +119,7 @@ function taxonomyBaseFields(refName: string): SchemaDefinition {
     icon: { type: String, trim: true },
     image: { type: imageSchema, default: undefined },
     seo: { type: seoSchema, default: undefined },
+    schemaOverrides: { type: schemaOverrideSchema, default: undefined },
     parentId: { type: Schema.Types.ObjectId, ref: refName, default: null },
     order: { type: Number, default: 0 },
     isActive: { type: Boolean, default: true },

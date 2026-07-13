@@ -96,6 +96,19 @@ const seoDefaultsSchema = seoSchema.extend({
   twitterHandle: z.string().max(40).optional(),
 });
 
+/**
+ * Site identity for the structured-data engine. Blank values are meaningful
+ * here — they mean "fall back to `config/content-engine`" — so empty strings are
+ * accepted rather than rejected.
+ */
+const structuredDataSchema = z
+  .object({
+    organizationName: z.string().max(160),
+    organizationType: z.string().max(60),
+    logo: imageSchema,
+  })
+  .partial();
+
 export const siteSettingUpdateSchema = z
   .object({
     hero: heroSchema,
@@ -104,6 +117,7 @@ export const siteSettingUpdateSchema = z
     testimonials: z.array(testimonialSchema),
     partnerLogos: z.array(imageSchema),
     seoDefaults: seoDefaultsSchema,
+    structuredData: structuredDataSchema,
     disclaimers: disclaimersSchema,
     contact: contactSchema,
     social: socialLinksSchema,

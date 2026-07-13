@@ -39,6 +39,8 @@ export interface MatrixPageView {
   metaTitle?: string;
   metaDescription?: string;
   seo?: IMatrixPage["seo"] | null;
+  /** Per-page control over the auto-generated JSON-LD (schema engine). */
+  schemaOverrides?: IMatrixPage["schemaOverrides"] | null;
   intro?: string;
   /** Ready-to-render editorial payload (body/faqs/keyFacts/byline). */
   editorial: EditorialArticleData;
@@ -74,6 +76,7 @@ async function toView(p: IMatrixPage): Promise<MatrixPageView> {
     metaTitle: p.metaTitle,
     metaDescription: p.metaDescription,
     seo: p.seo ?? null,
+    schemaOverrides: p.schemaOverrides ?? null,
     intro: p.intro,
     editorial,
     indexable: isMatrixIndexable(p),

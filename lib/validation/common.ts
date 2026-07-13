@@ -7,6 +7,8 @@
  */
 import { z } from "zod";
 
+import { TWITTER_CARD_TYPES } from "@/lib/enums";
+
 /**
  * Coerce a blank form input to `undefined` so `.optional()` accepts it. Text
  * inputs submit `""` when empty, but `.optional()` only permits `undefined`;
@@ -45,6 +47,18 @@ export const imageSchema = z.object({
   height: z.number().int().positive().optional(),
 });
 
+/** Granular robots directives; unset keys mean "inherit". */
+export const robotsSchema = z
+  .object({
+    index: z.boolean().optional(),
+    follow: z.boolean().optional(),
+  })
+  .partial();
+
+/**
+ * Per-document SEO override. Mirrors `ISeo` in `models/_shared.ts`. Every field
+ * beyond the original five is optional, so existing payloads stay valid.
+ */
 export const seoSchema = z
   .object({
     metaTitle: z.preprocess(blankToUndefined, z.string().max(120).optional()),
@@ -58,6 +72,46 @@ export const seoSchema = z
       z.string().url().optional(),
     ),
     noindex: z.boolean().optional(),
+    ogTitle: z.preprocess(blankToUndefined, z.string().max(120).optional()),
+    ogDescription: z.preprocess(
+      blankToUndefined,
+      z.string().max(320).optional(),
+    ),
+    twitterCard: z.enum(TWITTER_CARD_TYPES).optional(),
+    focusKeyword: z.preprocess(
+      blankToUndefined,
+      z.string().max(120).optional(),
+    ),
+    robots: robotsSchema.optional(),
+  })
+  .partial();
+
+/**
+ * Per-page structured-data overrides. `customJsonLd` must parse as JSON —
+ * this is the guard that stops malformed JSON-LD ever reaching a page.
+ */
+export const schemaOverrideSchema = z
+  .object({
+    disabledNodes: z.array(z.string()).default([]),
+    fieldOverrides: z.record(z.record(z.unknown())).optional(),
+    customJsonLd: z.preprocess(
+      blankToUndefined,
+      z
+        .string()
+        .max(20_000)
+        .refine(
+          (v) => {
+            try {
+              JSON.parse(v);
+              return true;
+            } catch {
+              return false;
+            }
+          },
+          { message: "Custom JSON-LD must be valid JSON" },
+        )
+        .optional(),
+    ),
   })
   .partial();
 
@@ -89,3 +143,5 @@ export const ageConfirmedSchema = z.literal(true, {
 export type ImageInput = z.infer<typeof imageSchema>;
 export type SeoInput = z.infer<typeof seoSchema>;
 export type PersonInput = z.infer<typeof personSchema>;
+export type RobotsInput = z.infer<typeof robotsSchema>;
+export type SchemaOverrideInput = z.infer<typeof schemaOverrideSchema>;

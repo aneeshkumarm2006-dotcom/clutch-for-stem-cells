@@ -25,8 +25,10 @@ import {
   imageSchema,
   personSchema,
   seoSchema,
+  schemaOverrideSchema,
   softDeletePlugin,
   registerModel,
+  type ISchemaOverrides,
   type IImage,
   type IPerson,
   type ISeo,
@@ -146,6 +148,8 @@ export interface IClinic extends TimestampFields, SoftDeleteFields {
   ownerUserId?: Types.ObjectId | null;
   isClaimed: boolean;
   seo?: ISeo;
+  /** Per-page control over the auto-generated JSON-LD (schema engine). */
+  schemaOverrides?: ISchemaOverrides;
   sortScore: number;
 }
 
@@ -320,6 +324,7 @@ const ClinicSchema = new Schema<IClinic>(
     ownerUserId: { type: Schema.Types.ObjectId, ref: "User", default: null },
     isClaimed: { type: Boolean, default: false },
     seo: { type: seoSchema, default: undefined },
+    schemaOverrides: { type: schemaOverrideSchema, default: undefined },
 
     // Computed — see /lib/ranking.ts (Stage 3.1).
     sortScore: { type: Number, default: 0 },

@@ -38,6 +38,12 @@ export interface SettingsView {
     metaDescription?: string;
     ogImage?: string;
   };
+  /** Site identity for the structured-data engine (the `Organization` node). */
+  structuredData: {
+    organizationName?: string;
+    organizationType?: string;
+    logo?: ImageView;
+  };
   contact: { email?: string; phone?: string; address?: string };
   social: {
     linkedin?: string;
@@ -96,6 +102,11 @@ export async function getSettingsView(): Promise<SettingsView> {
       metaTitle: s.seoDefaults?.metaTitle ?? "",
       metaDescription: s.seoDefaults?.metaDescription ?? "",
       ogImage: s.seoDefaults?.ogImage ?? "",
+    },
+    structuredData: {
+      organizationName: s.structuredData?.organizationName ?? "",
+      organizationType: s.structuredData?.organizationType ?? "",
+      logo: serializeImage(s.structuredData?.logo),
     },
     contact: {
       email: s.contact?.email ?? "",

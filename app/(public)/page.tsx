@@ -9,7 +9,6 @@ import {
   Star,
 } from "lucide-react";
 
-import { organizationJsonLd, renderJsonLd, websiteJsonLd } from "@/lib/seo";
 import { pageMetadata } from "@/lib/page-metadata";
 import { getHomeData } from "@/lib/public-data";
 import { getPublishedBlogPosts } from "@/lib/seoteam/blog-data";
@@ -55,13 +54,8 @@ export default async function HomePage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: renderJsonLd([organizationJsonLd(), websiteJsonLd()]),
-        }}
-      />
+      {/* Organization + WebSite JSON-LD now come from <BaseSchema> in the public
+          layout, so every page carries them — not just the homepage. */}
 
       {/* Hero — Design §5.3 */}
       <section
