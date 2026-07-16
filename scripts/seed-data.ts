@@ -679,6 +679,16 @@ export const CITIES: CitySeed[] = [
     lng: 139.6503,
     parentCountrySlug: "japan",
   },
+  {
+    name: "Dallas",
+    slug: "dallas",
+    countryCode: "US",
+    country: "United States",
+    region: "Texas",
+    lat: 32.7767,
+    lng: -96.797,
+    parentCountrySlug: "usa",
+  },
 ];
 
 // ── Demo clinics ────────────────────────────────────────────────────────────
@@ -1046,6 +1056,73 @@ export const CLINICS: ClinicSeed[] = [
     ],
     contactEmail: "info@helixstem.example",
     highlights: ["Longevity focus", "Japanese & English support"],
+  },
+  {
+    // Real US clinic (Dallas, TX) — sourced from the clinic's own website,
+    // July 2026. Copy is neutral/non-promotional per the YMYL content rules;
+    // ratings/reviews are left to the recompute pipeline (none fabricated).
+    name: "Innovations Stem Cell Center",
+    slug: "innovations-stem-cell-center",
+    status: "published",
+    tier: "verified",
+    isVerified: true,
+    badge: "verified",
+    verificationMethod: "Clinic website & public business records (July 2026)",
+    tagline: "Adipose-derived stem cell therapy for longevity in Dallas",
+    description:
+      "Innovations Stem Cell Center has run adipose-derived stem cell therapy in Dallas since 2005. The cells come from the patient's own fat, so no donor or cord cells are involved, and they're processed in the clinic's own lab rather than shipped out. Founder Dr. Bill Johnson built the center's longevity protocol around those cells, aimed at chronic inflammation, tissue repair, and cellular and mitochondrial health. The clinic is careful about what it claims: it frames the work as supporting healthspan, not extending lifespan, and states plainly that stem cell therapy for anti-aging is not FDA-approved and is still investigational.",
+    treatmentSlugs: ["adipose-derived-therapy", "msc-therapy"],
+    conditionSlugs: ["anti-aging-longevity", "joint-pain"],
+    cellSourceSlugs: ["adipose", "autologous"],
+    serviceFocus: [
+      { treatmentSlug: "adipose-derived-therapy", percent: 60 },
+      { treatmentSlug: "msc-therapy", percent: 40 },
+    ],
+    accreditationSlugs: [],
+    currency: "USD",
+    priceModel: "consult_to_quote",
+    priceNote: "Pricing depends on the protocol and is quoted after a consultation.",
+    foundedYear: 2005,
+    medicalDirector: {
+      name: "Dr. Bill Johnson",
+      title: "Founder & Medical Director",
+      credentials: "MD",
+      bio: "Has performed stem cell procedures for over 13 years and was an early adopter of adipose-derived therapy.",
+    },
+    languages: ["English"],
+    locations: [
+      {
+        citySlug: "dallas",
+        isHQ: true,
+        addressLine: "12660 Coit Road",
+        postalCode: "75251",
+        phone: "(972) 893-9849",
+      },
+    ],
+    website: "https://innovationsstemcellcenter.com",
+    faqs: [
+      {
+        question: "What kind of stem cells does the clinic use?",
+        answer:
+          "Your own. They're mesenchymal stem cells drawn from your fat tissue and processed on-site, so no donor or umbilical-cord cells are involved.",
+      },
+      {
+        question: "Is stem cell therapy for anti-aging FDA-approved?",
+        answer:
+          "No. The clinic states that stem cell therapy for anti-aging and longevity isn't FDA-approved and is still considered investigational. Results vary from person to person.",
+      },
+      {
+        question: "Where is the clinic, and how long has it been running?",
+        answer:
+          "Dallas, Texas, at 12660 Coit Road. It has been doing adipose-derived stem cell work since 2005.",
+      },
+    ],
+    highlights: [
+      "Running since 2005",
+      "Uses your own fat-derived cells",
+      "Processes cells in its own lab",
+      "Dallas, Texas",
+    ],
   },
 ];
 
