@@ -31,7 +31,15 @@ export function BlogCard({
         className,
       )}
     >
-      <Link href={`/blog/${post.slug}`} className="block">
+      {/* Cover is a redundant, decorative route to the same post as the title
+          link below — hide it from the a11y tree so it isn't reported as an
+          unnamed / duplicate link (WCAG 2.4.4). */}
+      <Link
+        href={`/blog/${post.slug}`}
+        className="block"
+        aria-hidden="true"
+        tabIndex={-1}
+      >
         <div className="relative aspect-[16/9] overflow-hidden bg-tint">
           {post.coverUrl ? (
             <Image

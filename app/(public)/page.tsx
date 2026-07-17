@@ -312,7 +312,7 @@ export default async function HomePage() {
               </p>
               <ul className="mt-3 space-y-2 text-[15px] leading-relaxed text-text-secondary">
                 <li className="flex gap-2">
-                  <span className="text-primary">•</span>
+                  <span className="text-primary" aria-hidden="true">•</span>
                   <span>
                     The cell source — your own cells in autologous or
                     bone-marrow-derived therapy, or screened donor cells in
@@ -320,20 +320,20 @@ export default async function HomePage() {
                   </span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-primary">•</span>
+                  <span className="text-primary" aria-hidden="true">•</span>
                   <span>
                     Cell count, and how many sessions the protocol runs to.
                   </span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-primary">•</span>
+                  <span className="text-primary" aria-hidden="true">•</span>
                   <span>
                     One injection into a single joint versus IV or systemic cell
                     therapy.
                   </span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-primary">•</span>
+                  <span className="text-primary" aria-hidden="true">•</span>
                   <span>
                     The country, the clinic&apos;s accreditation, and whether
                     travel and aftercare are bundled in.
