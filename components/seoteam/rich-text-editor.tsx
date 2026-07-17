@@ -320,9 +320,12 @@ export function RichTextEditor({
     // Own scroll context (bounded height + overflow-y) so the toolbar below can
     // pin to the top of the editor with `sticky top-0` while the body scrolls
     // under it — rather than the toolbar scrolling away with the page content.
+    // `overscroll-contain` stops scroll chaining: once the body reaches its top
+    // or bottom, the wheel/touch scroll is absorbed here instead of bubbling up
+    // and scrolling the whole editor page.
     <div
       style={{ maxHeight }}
-      className="overflow-y-auto rounded-lg border border-border bg-surface focus-within:border-primary"
+      className="overflow-y-auto overscroll-contain rounded-lg border border-border bg-surface focus-within:border-primary"
     >
       <div className="sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b border-border bg-surface-alt px-2 py-1.5 shadow-[0_1px_0_rgba(0,0,0,0.02)]">
         <ToolbarButton
@@ -445,7 +448,7 @@ export function RichTextEditor({
           onChange={(e) => onChange(e.target.value)}
           spellCheck={false}
           aria-label="HTML source"
-          className="block min-h-[360px] w-full resize-y bg-surface px-4 py-3 font-mono text-[13px] leading-relaxed text-text-primary focus:outline-none"
+          className="block min-h-[360px] w-full resize-y overscroll-contain bg-surface px-4 py-3 font-mono text-[13px] leading-relaxed text-text-primary focus:outline-none"
         />
       ) : (
         <EditorContent editor={editor} />
