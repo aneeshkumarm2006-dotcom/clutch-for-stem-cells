@@ -12,6 +12,7 @@
  */
 import { createHash } from "node:crypto";
 
+import { optimizeToWebp } from "@/lib/image-optimize";
 import type { IImage } from "@/models";
 
 // ── Validation ───────────────────────────────────────────────────────────────
@@ -209,10 +210,30 @@ export const mediaProvider: MediaProvider = cloudinaryProvider;
 
 export const isMediaConfigured = (): boolean => mediaProvider.isConfigured();
 
-/** Validate then upload. The single entry point for API upload handlers. */
+/**
+ * Validate → optimize → upload. The single entry point for API upload handlers.
+ *
+ * Every raster image is normalized to WebP under {@link TARGET_MAX_BYTES}
+ * ({@link optimizeToWebp}) before it reaches the provider, so uploads from the
+ * admin media library and the blog editor are compact and format-consistent for
+ * SEO / page-speed. Validation runs on the *original* bytes (the 8 MB cap);
+ * optimization then shrinks them.
+ */
 export async function uploadImage(input: UploadInput): Promise<UploadedMedia> {
   validateUpload({ type: input.contentType, size: byteLength(input.data) });
-  return mediaProvider.upload(input);
+
+  const original = toBuffer(input.data);
+  const optimized = await optimizeToWebp(original, {
+    contentType: input.contentType,
+    filename: input.filename,
+  });
+
+  return mediaProvider.upload({
+    ...input,
+    data: optimized.data,
+    contentType: optimized.contentType,
+    filename: optimized.filename,
+  });
 }
 
 export const destroyImage = (publicId: string): Promise<void> =>
@@ -221,6 +242,13 @@ export const destroyImage = (publicId: string): Promise<void> =>
 function byteLength(data: UploadInput["data"]): number {
   if (data instanceof ArrayBuffer) return data.byteLength;
   return (data as Uint8Array).byteLength;
+}
+
+/** Normalize any accepted upload payload to a Node `Buffer` for `sharp`. */
+function toBuffer(data: UploadInput["data"]): Buffer {
+  if (Buffer.isBuffer(data)) return data;
+  if (data instanceof ArrayBuffer) return Buffer.from(data);
+  return Buffer.from(data.buffer, data.byteOffset, data.byteLength);
 }
 
 // ── Delivery / next/image optimization ───────────────────────────────────────

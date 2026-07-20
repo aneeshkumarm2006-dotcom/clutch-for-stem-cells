@@ -10,7 +10,7 @@ const nextConfig = {
   },
   // Mongoose ships server-only code; keep it external to the server bundle.
   experimental: {
-    serverComponentsExternalPackages: ["mongoose"],
+    serverComponentsExternalPackages: ["mongoose", "sharp"],
   },
 };
 
