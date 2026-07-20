@@ -1,13 +1,13 @@
 /**
  * Central site config — Stage 0.3 / PRD §12.
  *
- * `SITE_NAME` is a placeholder ("StemConnect", PRD §7 / Q7). Reference this
- * constant everywhere the brand name appears so it can be renamed in one place.
- * Runtime-tunable values (hero, featured clinics, ranking weights, etc.) live in
- * the `SiteSetting` singleton; this file holds build-time defaults only.
+ * Reference `SITE_NAME` everywhere the brand name appears so it can be renamed
+ * in one place. Runtime-tunable values (hero, featured clinics, ranking weights,
+ * etc.) live in the `SiteSetting` singleton; this file holds build-time
+ * defaults only.
  */
 
-export const SITE_NAME = "StemConnect";
+export const SITE_NAME = "My Stem Cell Guide";
 
 export const SITE_TAGLINE = "Find and trust regenerative-medicine clinics";
 

@@ -41,7 +41,7 @@ export const blogUrl = (slug: string): string => absoluteUrl(`/blog/${slug}`);
  */
 export const DEFAULT_TITLE_TEMPLATE = `%s · ${SITE_NAME}`;
 
-/** Apply a Settings title template (e.g. `"%s · StemConnect"`). */
+/** Apply a Settings title template (e.g. `"%s · My Stem Cell Guide"`). */
 export function applyTitleTemplate(title?: string, template?: string): string {
   if (!title) return SITE_NAME;
   if (!template) return title;
@@ -117,7 +117,7 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
     metadataBase: new URL(SITE_URL),
     // `absolute` opts out of the root layout's `title.template` so the brand
     // suffix (applied above via the Settings/default template) isn't appended a
-    // second time — e.g. "All clinics · StemConnect", not "… · StemConnect · StemConnect".
+    // second time — e.g. "All clinics · My Stem Cell Guide", not "… · My Stem Cell Guide · My Stem Cell Guide".
     title: { absolute: title },
     description,
     alternates: { canonical },

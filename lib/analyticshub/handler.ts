@@ -50,7 +50,7 @@ const LOGIN_LIMIT = 8;
 const LOGIN_WINDOW_MS = 15 * 60 * 1000;
 
 const DEFAULT_PROJECT: ProjectConfig = {
-  name: "StemConnect",
+  name: "My Stem Cell Guide",
   primary: "#0e80cc",
   accent: "#e2f0fb",
 };

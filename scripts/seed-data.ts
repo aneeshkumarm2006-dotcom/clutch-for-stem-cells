@@ -1337,7 +1337,7 @@ export const PLANS: PlanSeed[] = [
   {
     key: "basic",
     name: "Basic",
-    description: "Get listed in the StemConnect directory.",
+    description: "Get listed in the My Stem Cell Guide directory.",
     priceMonthly: 0,
     priceYearly: 0,
     currency: "USD",
@@ -1409,7 +1409,7 @@ export const POPULAR_SEARCHES = [
 export const TESTIMONIALS = [
   {
     quote:
-      "StemConnect made it easy to compare clinics and see real reviews before reaching out.",
+      "My Stem Cell Guide made it easy to compare clinics and see real reviews before reaching out.",
     author: "James T.",
     role: "Patient",
     location: "United States",

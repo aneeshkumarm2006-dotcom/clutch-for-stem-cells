@@ -1,5 +1,5 @@
 /**
- * Domain adapters — the StemConnect-specific half of the schema engine.
+ * Domain adapters — the My Stem Cell Guide-specific half of the schema engine.
  *
  * Each function maps one of this app's content shapes onto the JSON-LD
  * generators that already live in `lib/seo.ts`. **This file and

@@ -89,7 +89,7 @@ export interface IAnalyticsConfig {
 }
 
 export interface ISeoDefaults extends ISeo {
-  /** Title template, e.g. "%s · StemConnect". */
+  /** Title template, e.g. "%s · My Stem Cell Guide". */
   titleTemplate?: string;
   twitterHandle?: string;
 }

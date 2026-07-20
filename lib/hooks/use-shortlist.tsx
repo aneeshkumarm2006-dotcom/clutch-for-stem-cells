@@ -15,7 +15,7 @@ import { useSession } from "next-auth/react";
  * unions any guest slugs with the server set, pushes the merge once, then treats
  * the server as the source of truth (and clears the guest copy).
  */
-const STORAGE_KEY = "stemconnect:shortlist";
+const STORAGE_KEY = "mystemcellguide:shortlist";
 
 interface ShortlistContextValue {
   slugs: Set<string>;

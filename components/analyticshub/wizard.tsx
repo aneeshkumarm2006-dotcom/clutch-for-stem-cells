@@ -62,7 +62,7 @@ export function Wizard() {
   const [step, setStep] = useState<Step>("password");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [name, setName] = useState(status?.project.name ?? "StemConnect");
+  const [name, setName] = useState(status?.project.name ?? "My Stem Cell Guide");
   const [primary, setPrimary] = useState(status?.project.primary ?? "#0e80cc");
   const [accent, setAccent] = useState(status?.project.accent ?? "#e2f0fb");
   const [error, setError] = useState<string | null>(null);

@@ -426,7 +426,7 @@ export default async function HomePage() {
           <div className="container">
             <SectionHeader
               title="What patients say"
-              description="Experiences shared by patients who used StemConnect to research clinics."
+              description="Experiences shared by patients who used My Stem Cell Guide to research clinics."
             />
             <div className="mt-7 grid gap-5 md:grid-cols-3">
               {home.testimonials.slice(0, 3).map((t, i) => (

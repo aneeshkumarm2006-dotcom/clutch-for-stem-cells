@@ -1,8 +1,8 @@
-# StemConnect
+# My Stem Cell Guide
 
 A Clutch-style discovery & review marketplace for stem cell / regenerative-medicine clinics.
 
-> Brand name "StemConnect" is a placeholder (PRD §7 / Q7) — change it in one place via `SITE_NAME` in [`config/site.ts`](config/site.ts).
+> The brand name is defined in one place via `SITE_NAME` in [`config/site.ts`](config/site.ts).
 
 ## Stack
 
@@ -60,7 +60,7 @@ Auth.js (NextAuth v4) with **credentials + Google**, JWT sessions carrying
 password reset go through Resend — with `RESEND_API_KEY` unset, links are logged
 to the server console so the flows are testable locally.
 
-The seeded SuperAdmin (`admin@stemconnect.example`) ships without a password —
+The seeded SuperAdmin (`admin@mystemcellguide.com`) ships without a password —
 use **Reset your password** (`/auth/reset`) to set one, then sign in.
 
 ## Design tokens

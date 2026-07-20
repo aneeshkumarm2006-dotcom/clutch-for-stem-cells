@@ -1,7 +1,7 @@
 /**
  * NextAuth module augmentation — Stage 2.1.
  *
- * Adds the StemConnect `id`, `role`, and `status` claims to the session, the
+ * Adds the My Stem Cell Guide `id`, `role`, and `status` claims to the session, the
  * authorize() user, and the JWT so server code and middleware can authorize
  * without a DB round-trip. Roles come from the shared enum (`lib/enums`).
  */

@@ -85,7 +85,7 @@ const DRY = process.argv.includes("--dry");
  * Read lazily (via `adminSeed()`), since `loadEnv()` runs after this module is
  * first evaluated.
  */
-const DEFAULT_ADMIN_EMAIL = "admin@stemconnect.example";
+const DEFAULT_ADMIN_EMAIL = "admin@mystemcellguide.com";
 
 function adminSeed(): { email: string; password: string; name: string } {
   return {
@@ -93,7 +93,7 @@ function adminSeed(): { email: string; password: string; name: string } {
       .trim()
       .toLowerCase(),
     password: (process.env.ADMIN_SEED_PASSWORD ?? "").trim(),
-    name: (process.env.ADMIN_SEED_NAME || "StemConnect Admin").trim(),
+    name: (process.env.ADMIN_SEED_NAME || "My Stem Cell Guide Admin").trim(),
   };
 }
 
@@ -516,7 +516,7 @@ async function main(): Promise<void> {
       results: "Individual results vary and are not typical or guaranteed.",
       footer: MEDICAL_DISCLAIMER,
     },
-    contact: { email: "hello@stemconnect.example" },
+    contact: { email: "hello@mystemcellguide.com" },
     // featureFlags / rankingWeights fall back to schema defaults.
   });
 

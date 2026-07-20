@@ -11,7 +11,7 @@
  *    with no image). Surfaced in the admin panel; never blocks anything.
  *
  * Rules are keyed by `@type` and are generic schema.org requirements — no
- * StemConnect concept appears here, so this file ports unchanged.
+ * My Stem Cell Guide concept appears here, so this file ports unchanged.
  */
 import type { JsonLd, SchemaIssue } from "@/lib/schema/types";
 

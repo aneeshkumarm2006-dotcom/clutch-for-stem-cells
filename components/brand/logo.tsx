@@ -6,7 +6,7 @@ import { SITE_NAME } from "@/config/site";
 
 /**
  * Logo — Design §2. Concentric-circle "cell" glyph in an azure rounded square
- * + "StemConnect" wordmark (Plus Jakarta Sans 700, single weight).
+ * + "My Stem Cell Guide" wordmark (Plus Jakarta Sans 700, single weight).
  */
 
 type LogoSize = "sm" | "md" | "lg";

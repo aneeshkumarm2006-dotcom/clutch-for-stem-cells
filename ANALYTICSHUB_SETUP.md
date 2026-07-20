@@ -1,7 +1,7 @@
 # AnalyticsHub — setup guide
 
 A self-configuring analytics dashboard at **`/analyticshub`**, built natively
-into the StemConnect Next.js app. Single owner, password-protected, self-hosted
+into the My Stem Cell Guide Next.js app. Single owner, password-protected, self-hosted
 on Vercel. All data-source credentials are entered through the dashboard's own
 Settings page — never in code.
 
