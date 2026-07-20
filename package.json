@@ -10,6 +10,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "seed": "tsx scripts/seed.ts",
+    "import-clinics": "tsx scripts/import-clinics.ts",
     "migrate": "tsx scripts/migrations/001-content-engine.ts",
     "test": "npm run test:analyticshub && npm run test:engine",
     "test:analyticshub": "tsx --test tests/analyticshub/crypto.test.ts tests/analyticshub/password.test.ts tests/analyticshub/session.test.ts tests/analyticshub/handler.test.ts tests/analyticshub/palette.test.ts",

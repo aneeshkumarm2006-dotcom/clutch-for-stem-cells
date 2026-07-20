@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Example Regenerative Center",
+    "status": "draft",
+    "tier": "basic",
+    "tagline": "Short one-line positioning",
+    "description": "A couple of plain, factual paragraphs about the clinic. No 'cure' or 'guaranteed' language.",
+    "videoUrl": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+
+    "treatmentTypes": ["msc-therapy", "exosome-therapy", "prp"],
+    "conditionsTreated": ["anti-aging-longevity", "joint-pain"],
+    "cellSources": ["autologous", "exosomes"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "msc-therapy", "percent": 60 },
+      { "treatment": "prp", "percent": 40 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Priced per treatment after a consult.",
+
+    "foundedYear": 2015,
+    "teamSize": "11-50",
+    "physiciansCount": 3,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Jane Doe",
+      "title": "Medical Director",
+      "credentials": "MD",
+      "bio": "Short factual bio."
+    },
+    "team": [
+      { "name": "John Smith", "title": "Physician", "credentials": "DO", "bio": "Short bio." }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "123 Main St, Suite 100",
+        "city": "Austin",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "78701",
+        "phone": "512-555-0100",
+        "lat": 30.2672,
+        "lng": -97.7431
+      }
+    ],
+
+    "website": "https://example.com/",
+    "contactEmail": "info@example.com",
+    "social": {
+      "linkedin": "https://www.linkedin.com/company/example",
+      "instagram": "https://www.instagram.com/example/"
+    },
+
+    "highlights": ["Key point one", "Key point two"],
+    "faqs": [{ "question": "A question?", "answer": "A plain answer." }],
+
+    "isClaimed": false
+  }
+]
