@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/form-field";
 import { MediaPickerDialog } from "@/components/seoteam/media-picker-dialog";
+import { seoFetchRaw } from "@/lib/seoteam/client";
 
 export interface ImageValue {
   url: string;
@@ -20,19 +21,12 @@ export interface ImageValue {
 export async function uploadBlogImage(file: File): Promise<{ url: string }> {
   const form = new FormData();
   form.append("file", file);
-  const res = await fetch("/api/seoteam/upload", { method: "POST", body: form });
-  let payload: unknown = null;
-  try {
-    payload = await res.json();
-  } catch {
-    /* non-JSON */
-  }
-  if (!res.ok) {
-    throw new Error(
-      (payload as { error?: string } | null)?.error ?? "Upload failed.",
-    );
-  }
-  return payload as { url: string };
+  // seoFetchRaw redirects to login on a 401 (expired Studio session) instead of
+  // surfacing a dead-end "Unauthorized." error into the upload UI.
+  return seoFetchRaw<{ url: string }>("/api/seoteam/upload", {
+    method: "POST",
+    body: form,
+  });
 }
 
 /** Cover-image field: drag/drop or click to upload, or paste a URL, plus alt. */

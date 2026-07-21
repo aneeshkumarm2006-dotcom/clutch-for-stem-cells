@@ -56,6 +56,7 @@ import type {
 import { MediaThumb } from "@/components/seoteam/media-thumb";
 import { MediaTable } from "@/components/seoteam/media-table";
 import { copyToClipboard } from "@/components/seoteam/media-actions";
+import { seoFetchRaw } from "@/lib/seoteam/client";
 
 const ALL_FOLDERS = "__all__";
 const VIEW_STORAGE_KEY = "seoteam.media.view";
@@ -69,21 +70,9 @@ export function fmtSize(bytes?: number): string {
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
 
-async function seoFetch<T>(url: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(url, init);
-  let payload: unknown = null;
-  try {
-    payload = await res.json();
-  } catch {
-    /* non-JSON */
-  }
-  if (!res.ok) {
-    throw new Error(
-      (payload as { error?: string } | null)?.error ?? "Request failed.",
-    );
-  }
-  return payload as T;
-}
+// Shared Studio fetch: redirects to login on a 401 (expired session) rather than
+// dead-ending on an "Unauthorized." toast. See lib/seoteam/client.ts.
+const seoFetch = seoFetchRaw;
 
 export function MediaManager({ data }: { data: SeoMediaResult }) {
   const router = useRouter();

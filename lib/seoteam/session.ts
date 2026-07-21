@@ -18,7 +18,7 @@ export const SESSION_TTL_SECONDS = 7 * 24 * 60 * 60;
 
 const SUBJECT = "seoteam";
 
-interface SessionPayload {
+export interface SessionPayload {
   sub: string;
   /** Expiry, epoch seconds. */
   exp: number;
@@ -88,6 +88,41 @@ export async function createSessionToken(nowMs = Date.now()): Promise<string> {
 }
 
 /**
+ * Decode + verify a token: returns its payload only when the signature matches,
+ * the subject is ours, and it hasn't expired. Returns `null` otherwise. Never
+ * throws. This is the shared core behind {@link verifySessionToken} and the
+ * sliding-renewal check in `middleware.ts`.
+ */
+export async function decodeSessionToken(
+  token: string | undefined | null,
+  nowMs = Date.now(),
+): Promise<SessionPayload | null> {
+  if (!token) return null;
+  const secret = getSessionSecret();
+  if (!secret) return null;
+
+  const dot = token.indexOf(".");
+  if (dot <= 0) return null;
+  const payloadPart = token.slice(0, dot);
+  const sigPart = token.slice(dot + 1);
+
+  try {
+    const expected = await hmacSign(secret, payloadPart);
+    const provided = base64UrlToBytes(sigPart);
+    if (!timingSafeEqual(expected, provided)) return null;
+
+    const payload = JSON.parse(
+      new TextDecoder().decode(base64UrlToBytes(payloadPart)),
+    ) as SessionPayload;
+    if (payload.sub !== SUBJECT) return null;
+    if (payload.exp <= Math.floor(nowMs / 1000)) return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Verify a session token's signature + expiry. Returns `true` only when the
  * signature matches and the token hasn't expired. Never throws.
  */
@@ -95,28 +130,22 @@ export async function verifySessionToken(
   token: string | undefined | null,
   nowMs = Date.now(),
 ): Promise<boolean> {
-  if (!token) return false;
-  const secret = getSessionSecret();
-  if (!secret) return false;
+  return (await decodeSessionToken(token, nowMs)) !== null;
+}
 
-  const dot = token.indexOf(".");
-  if (dot <= 0) return false;
-  const payloadPart = token.slice(0, dot);
-  const sigPart = token.slice(dot + 1);
-
-  try {
-    const expected = await hmacSign(secret, payloadPart);
-    const provided = base64UrlToBytes(sigPart);
-    if (!timingSafeEqual(expected, provided)) return false;
-
-    const payload = JSON.parse(
-      new TextDecoder().decode(base64UrlToBytes(payloadPart)),
-    ) as SessionPayload;
-    if (payload.sub !== SUBJECT) return false;
-    return payload.exp > Math.floor(nowMs / 1000);
-  } catch {
-    return false;
-  }
+/**
+ * Sliding-renewal check: `true` when a still-valid token is past the halfway
+ * point of its lifetime and should be re-issued so an actively-used session
+ * never expires out from under the user mid-edit. `payload` is what
+ * {@link decodeSessionToken} returned (already known-valid).
+ */
+export function sessionNeedsRenewal(
+  payload: SessionPayload,
+  nowMs = Date.now(),
+): boolean {
+  const nowSec = Math.floor(nowMs / 1000);
+  const ageSec = SESSION_TTL_SECONDS - (payload.exp - nowSec);
+  return ageSec >= SESSION_TTL_SECONDS / 2;
 }
 
 /** Cookie attributes for `Set-Cookie` (Secure in production only). */

@@ -20,9 +20,37 @@ import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 import { isAdminRole, type UserRole } from "@/lib/enums";
-import { SEOTEAM_COOKIE, verifySessionToken } from "@/lib/seoteam/session";
+import {
+  SEOTEAM_COOKIE,
+  createSessionToken,
+  decodeSessionToken,
+  sessionCookieOptions,
+  sessionNeedsRenewal,
+  type SessionPayload,
+} from "@/lib/seoteam/session";
 
 const UNSAFE_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"]);
+
+/**
+ * Sliding renewal: when a valid Studio session is past half its lifetime,
+ * re-issue the cookie on the outgoing response so an actively-used session
+ * (long editing/upload sessions) never expires mid-work. Best-effort — a mint
+ * failure just lets the session age normally.
+ */
+async function renewSeoSession(
+  res: NextResponse,
+  session: SessionPayload,
+): Promise<NextResponse> {
+  if (!sessionNeedsRenewal(session)) return res;
+  try {
+    res.cookies.set(SEOTEAM_COOKIE, await createSessionToken(), {
+      ...sessionCookieOptions(),
+    });
+  } catch {
+    /* renewal is best-effort */
+  }
+  return res;
+}
 
 /** True when a cross-origin write should be blocked (forged request). */
 function isCrossOrigin(req: NextRequest): boolean {
@@ -52,15 +80,16 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
       );
     }
     // The login endpoint must be reachable while unauthenticated.
-    if (!pathname.startsWith("/api/seoteam/login")) {
-      const authed = await verifySessionToken(
-        req.cookies.get(SEOTEAM_COOKIE)?.value,
-      );
-      if (!authed) {
-        return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
-      }
+    if (pathname.startsWith("/api/seoteam/login")) {
+      return NextResponse.next();
     }
-    return NextResponse.next();
+    const session = await decodeSessionToken(
+      req.cookies.get(SEOTEAM_COOKIE)?.value,
+    );
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+    }
+    return renewSeoSession(NextResponse.next(), session);
   }
 
   // ── Other /api/* — CSRF same-origin guard for mutations ────────────────────
@@ -80,9 +109,10 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 
   // ── /seoteam/* UI — shared-password signed cookie ──────────────────────────
   if (pathname.startsWith("/seoteam")) {
-    const authed = await verifySessionToken(
+    const session = await decodeSessionToken(
       req.cookies.get(SEOTEAM_COOKIE)?.value,
     );
+    const authed = session !== null;
     if (pathname === "/seoteam/login") {
       // Already signed in? Skip the login screen.
       return authed
@@ -94,7 +124,7 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
       login.searchParams.set("next", pathname + search);
       return NextResponse.redirect(login);
     }
-    return NextResponse.next();
+    return renewSeoSession(NextResponse.next(), session);
   }
 
   // ── /admin/* + /account/* — NextAuth JWT ───────────────────────────────────

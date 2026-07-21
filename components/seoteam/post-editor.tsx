@@ -24,7 +24,7 @@ import {
   editorialSelectClass,
   type ReviewerOption,
 } from "@/components/content/editorial-fields";
-import { adminFetch } from "@/lib/admin/client";
+import { seoFetch } from "@/lib/seoteam/client";
 import { slugify } from "@/lib/slug";
 import { estimateReadingTime } from "@/lib/reading-time";
 import {
@@ -389,7 +389,7 @@ export function PostEditor({
     const ctrl = new AbortController();
     const t = setTimeout(async () => {
       try {
-        const res = await adminFetch<{ available: boolean }>(
+        const res = await seoFetch<{ available: boolean }>(
           `/api/seoteam/posts/check-slug?slug=${encodeURIComponent(slug)}${
             currentId ? `&id=${currentId}` : ""
           }`,
@@ -464,12 +464,12 @@ export function PostEditor({
       const payload = buildPayload(v);
       try {
         if (currentId) {
-          await adminFetch(`/api/seoteam/posts/${currentId}`, {
+          await seoFetch(`/api/seoteam/posts/${currentId}`, {
             method: "PATCH",
             body: payload,
           });
         } else {
-          const res = await adminFetch<{ id: string }>("/api/seoteam/posts", {
+          const res = await seoFetch<{ id: string }>("/api/seoteam/posts", {
             method: "POST",
             body: payload,
           });
