@@ -1,0 +1,152 @@
+[
+  {
+    "name": "AgeRejuvenation",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Regenerative and longevity medicine across five Tampa Bay and Orlando clinics",
+    "description": "AgeRejuvenation is a functional-medicine and longevity practice based in Tampa, Florida. It started as Tampa Rejuvenation and took its current name in 2020 when it expanded past the Tampa Bay area. Today it runs five clinics, in South Tampa, Brandon, Wesley Chapel, Winter Garden, and Orlando, plus telehealth, and the clinical side is led by chief medical director Dr. Dawn Ericsson, a board-certified OB/GYN.\n\nMost of what the practice does is hormone therapy, medical weight loss, peptides, IV therapy, and aesthetics. Its regenerative side uses exosomes and mesenchymal cells taken from screened, donated umbilical-cord tissue, given in the office as an IV infusion or a targeted injection on the same day. For anti-aging and longevity, that mostly means skin and hair work, sexual-health procedures, and joint or back pain, usually run alongside the clinic's hormone and IV programs rather than on their own.\n\nThese cell and exosome therapies are not FDA-approved and are considered investigational. AgeRejuvenation prices each protocol after an assessment and offers a free first consultation.",
+
+    "treatmentTypes": ["exosome-therapy", "msc-therapy", "cord-blood-therapy", "iv-systemic-therapy", "prp"],
+    "conditionsTreated": ["anti-aging-longevity", "skin-aesthetic", "hair-restoration", "sexual-health", "joint-pain", "back-and-spine"],
+    "cellSources": ["umbilical-cord", "exosomes"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "exosome-therapy", "percent": 40 },
+      { "treatment": "msc-therapy", "percent": 25 },
+      { "treatment": "iv-systemic-therapy", "percent": 20 },
+      { "treatment": "prp", "percent": 15 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No set price list. Regenerative and exosome protocols are quoted per plan after an assessment, and the first consultation is free. Hormone, weight-loss, and IV programs are billed separately.",
+
+    "teamSize": "11-50",
+    "physiciansCount": 4,
+    "languages": ["English", "Spanish"],
+
+    "medicalDirector": {
+      "name": "Dr. Dawn Ericsson",
+      "title": "Chief Medical Director",
+      "credentials": "MD, board-certified OB/GYN",
+      "bio": "Board-certified OB/GYN who runs the clinical side of AgeRejuvenation as chief medical director, overseeing its hormone, regenerative, and longevity protocols across the clinics."
+    },
+    "team": [
+      {
+        "name": "Dr. Michael Meighen",
+        "title": "Physician",
+        "credentials": "MD, double board-certified in physical medicine & rehabilitation and pain medicine",
+        "bio": "Covers the regenerative and pain side of the practice, including image-guided joint and soft-tissue injections."
+      },
+      {
+        "name": "Dr. Shelanda Hayes",
+        "title": "Physician",
+        "credentials": "MD, board-certified in family medicine",
+        "bio": "Family-medicine physician working across the clinic's hormone and longevity programs."
+      },
+      {
+        "name": "Yaneisy Fumero",
+        "title": "Nurse Practitioner",
+        "credentials": "APRN, board-certified family nurse practitioner",
+        "bio": "Sees patients across hormone therapy, weight loss, and IV programs."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "220 N Howard Ave",
+        "city": "Tampa",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "33606",
+        "phone": "813-254-6141",
+        "lat": 27.9436,
+        "lng": -82.4818
+      },
+      {
+        "isHQ": false,
+        "addressLine": "1940 Bruce B Downs Blvd",
+        "city": "Wesley Chapel",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 28.1789,
+        "lng": -82.352
+      },
+      {
+        "isHQ": false,
+        "city": "Brandon",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 27.9378,
+        "lng": -82.2859
+      },
+      {
+        "isHQ": false,
+        "city": "Winter Garden",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 28.5653,
+        "lng": -81.5862
+      },
+      {
+        "isHQ": false,
+        "city": "Orlando",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 28.5383,
+        "lng": -81.3792
+      }
+    ],
+
+    "website": "https://agerejuvenation.com",
+    "contactEmail": "info@agerejuvenation.com",
+    "social": {
+      "instagram": "https://www.instagram.com/agerejuvenation/",
+      "facebook": "https://www.facebook.com/p/AgeRejuvenation-100061441354153/",
+      "linkedin": "https://www.linkedin.com/company/agerejuvenation"
+    },
+
+    "highlights": [
+      "Five clinics across Tampa Bay and Orlando, plus telehealth",
+      "Led by a board-certified OB/GYN as chief medical director",
+      "Exosome and umbilical-cord-derived cell therapy, done in-office",
+      "Anti-aging work runs alongside hormone, peptide, and IV programs",
+      "Same-day procedures with a free first consultation"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "Exosomes and mesenchymal cells from screened, donated umbilical-cord tissue, not the patient's own cells. They are given in the office as an IV infusion or a targeted injection."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell and exosome therapies are investigational and are not approved by the FDA for anti-aging or the other uses offered here. They are elective procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "What is it used for?",
+        "answer": "Mostly skin and hair, sexual-health procedures, and joint or back pain. For longevity, it is usually paired with the clinic's hormone and IV programs."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "There is no fixed price. Each protocol is quoted after an assessment, and the first consultation is free."
+      },
+      {
+        "question": "Is there downtime?",
+        "answer": "Most procedures are done the same day in the office, and patients usually go back to their normal routine afterward."
+      }
+    ],
+
+    "seo": {
+      "metaTitle": "AgeRejuvenation: Anti-Aging & Regenerative Medicine in Tampa, FL",
+      "metaDescription": "AgeRejuvenation is a Tampa longevity practice offering exosome and cord-derived cell therapy for anti-aging, skin, hair, and joints, led by a board-certified OB/GYN."
+    },
+
+    "isClaimed": false
+  }
+]

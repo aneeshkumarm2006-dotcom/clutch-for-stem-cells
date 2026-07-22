@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Docere Clinics",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Whole-body regenerative cell therapy for pain, joints, and longevity in Park City, Utah",
+    "description": "Docere Clinics opened in Park City, Utah in 2002. Harry Adelson, a naturopathic doctor, started doing prolotherapy injections in the late 1990s, added ultrasound-guided PRP in 2006, and has since built the practice almost entirely around regenerative injections for worn-out joints, spines, and ligaments. He has performed more than 7,000 bone-marrow and fat-tissue cell procedures.\n\nThe clinic's best-known offering is the Full-Body Stem Cell Make-Over, which injects the spine and the major joints, including shoulders, elbows, wrists, hips, knees, and ankles, in a single sedated visit. The cells come from the patient's own bone marrow and fat, or from screened, donated umbilical-cord tissue. Adelson pitches it partly at people who don't have much pain yet and want to stay ahead of it, which is where the longevity framing comes in. Amy Killen, an emergency-medicine physician who moved into regenerative and aesthetic work, can add skin, hair, and sexual-health injections during the same visit.\n\nThis is expensive, and Docere is upfront about it: treatments start around $25,000 and the average runs $40,000 to $65,000, sedation included. The clinic is also blunt that the science isn't settled. Its own FAQ says regenerative medicine has not been scientifically proven to be effective, results aren't lasting, and most patients return for a tune-up every few years. These therapies are not FDA-approved for these uses and are considered investigational.",
+
+    "treatmentTypes": ["regenerative-orthopedics", "bone-marrow-derived-therapy", "adipose-derived-therapy", "autologous-therapy", "cord-blood-therapy", "prp"],
+    "conditionsTreated": ["anti-aging-longevity", "joint-pain", "back-and-spine", "hair-restoration", "sexual-health", "skin-aesthetic"],
+    "cellSources": ["bone-marrow", "adipose", "autologous", "umbilical-cord"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 45 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 20 },
+      { "treatment": "adipose-derived-therapy", "percent": 15 },
+      { "treatment": "prp", "percent": 10 },
+      { "treatment": "cord-blood-therapy", "percent": 10 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "package",
+    "priceMin": 25000,
+    "priceMax": 100000,
+    "priceNote": "Docere sits at the high end. Treatments start around $25,000 and go up with complexity; the average is $40,000 to $65,000, and top-end cases reach about $100,000, with sedation by a board-certified anesthesiologist included. Insurance does not cover these elective procedures. For lower-cost options the clinic points patients to its affiliated Humanaut Health.",
+
+    "foundedYear": 2002,
+    "teamSize": "1-10",
+    "physiciansCount": 2,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Harry Adelson",
+      "title": "Founder & Naturopathic Physician",
+      "credentials": "ND (Naturopathic Doctor)",
+      "bio": "Adelson founded Docere Clinics in 2002 and has focused on regenerative injection therapy ever since. He trained in prolotherapy starting in 1998, finished an integrative-medicine residency at Yale/Griffin Hospital in 2001, and added ultrasound-guided PRP in 2006. He has performed over 7,000 bone-marrow and fat-tissue cell procedures and created the clinic's Full-Body Stem Cell Make-Over."
+    },
+    "team": [
+      {
+        "name": "Dr. Amy Killen",
+        "title": "Regenerative & Aesthetic Physician",
+        "credentials": "MD, board-certified in emergency medicine",
+        "bio": "Killen spent about a decade in emergency medicine before moving into regenerative and anti-aging work. At Docere she handles the skin, hair, and sexual-health injections, and she teaches and speaks on regenerative medicine outside the clinic."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "1389 Center Dr, Suite 340",
+        "city": "Park City",
+        "region": "Utah",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "84098",
+        "phone": "435-604-0438",
+        "lat": 40.7188,
+        "lng": -111.5364
+      }
+    ],
+
+    "website": "https://www.docereclinics.com",
+    "social": {
+      "instagram": "https://www.instagram.com/harry.adelson/",
+      "facebook": "https://www.facebook.com/docereclinics/",
+      "youtube": "https://www.youtube.com/channel/UCuEDtYQm7HgZJDJDLTxZ43g"
+    },
+
+    "highlights": [
+      "Regenerative injection practice running in Park City since 2002",
+      "Full-Body Stem Cell Make-Over treats the spine and major joints in one sedated visit",
+      "Uses your own bone marrow and fat, or screened donated umbilical-cord tissue",
+      "Founder Dr. Harry Adelson has done more than 7,000 cell procedures",
+      "Skin, hair, and sexual-health injections available with Dr. Amy Killen"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "Either your own, concentrated from your bone marrow and fat, or cells and growth factors from screened, donated umbilical-cord tissue. The donor route tends to be easier to go through, with a quicker recovery."
+      },
+      {
+        "question": "Are these treatments FDA-approved?",
+        "answer": "No. Stem cell and related regenerative injections for pain, joints, and longevity are not approved by the FDA for these uses and are considered investigational. They are elective procedures, not a substitute for standard medical care."
+      },
+      {
+        "question": "Does it actually work?",
+        "answer": "The clinic is candid that the evidence isn't settled. Its own FAQ says regenerative medicine has not been scientifically proven to be effective. The main risk is that a treatment may not help, rather than that it causes harm."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "Treatments start around $25,000 and rise with complexity, averaging $40,000 to $65,000, up to about $100,000 for the most involved cases. Sedation is included. Insurance does not cover it."
+      },
+      {
+        "question": "How long do results last?",
+        "answer": "They aren't lasting. Most patients come back for a tune-up every two to six years."
+      },
+      {
+        "question": "What is recovery like?",
+        "answer": "Expect localized soreness for a few days that over-the-counter pain relievers usually handle. Most people are back to their normal routine soon after."
+      }
+    ],
+
+    "seo": {
+      "metaTitle": "Docere Clinics: Regenerative Cell Therapy in Park City, Utah",
+      "metaDescription": "Docere Clinics in Park City, Utah offers whole-body regenerative cell therapy for pain, joints, and longevity, including its Full-Body Stem Cell Make-Over."
+    },
+
+    "isClaimed": false
+  }
+]
