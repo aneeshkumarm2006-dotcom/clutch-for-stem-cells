@@ -1,0 +1,230 @@
+[
+  {
+    "name": "Regeneration Clinic of Panama",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Umbilical-cord stem cell therapy at a boutique clinic in Panama City",
+    "description": "The Regeneration Clinic of Panama, known online as Regenerate Panama, is a boutique stem cell clinic in Panama City. It works with adult allogeneic mesenchymal stem cells taken from Wharton's jelly in donated umbilical cords, and it runs its own lab in the Sortis Business Tower, where the cells are cultured and batch-tested before use.\n\nTreatment is built around a personalized protocol rather than a fixed package. After an intake review, the medical team proposes a plan that usually runs 3 to 7 days: preparatory IV nutrition and vitamin drips first, then the stem cell infusions, given by IV in most cases and by injection into a joint when an orthopedic problem is being treated. Patients typically stay in Panama for up to ten days. The clinic treats a broad range of conditions, including autoimmune diseases such as lupus and rheumatoid arthritis, multiple sclerosis and other neurological conditions, joint and sports injuries, Crohn's and other inflammatory bowel disease, cardiovascular conditions, autism, and general anti-aging and longevity.\n\nThese therapies are not approved by the FDA and are considered investigational. The clinic quotes each protocol after an assessment; published costs run from about $5,000 to $30,000 and cover bloodwork, IV therapy, the infusions, and airport transfers. It is not covered by insurance.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816807/library/regeneration-clinic-of-panama/ntf3rykqn0mxkgvmhoau.webp",
+      "alt": "Regeneration Clinic of Panama logo",
+      "publicId": "library/regeneration-clinic-of-panama/ntf3rykqn0mxkgvmhoau",
+      "width": 984,
+      "height": 212
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816809/library/regeneration-clinic-of-panama/o84fryc6bogpaxcs3wz6.webp",
+      "alt": "Reception at the Regeneration Clinic of Panama in Panama City",
+      "publicId": "library/regeneration-clinic-of-panama/o84fryc6bogpaxcs3wz6",
+      "width": 2000,
+      "height": 1333
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816811/library/regeneration-clinic-of-panama/j9i3s4bbvqsihu0a46pr.webp",
+        "alt": "The Regeneration Clinic of Panama medical and laboratory team",
+        "publicId": "library/regeneration-clinic-of-panama/j9i3s4bbvqsihu0a46pr",
+        "width": 2000,
+        "height": 1126
+      },
+      {
+        "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816812/library/regeneration-clinic-of-panama/bw46sgmv4nr9z2o9v0ka.webp",
+        "alt": "Mesenchymal stem cells in culture at the clinic's Panama City lab",
+        "publicId": "library/regeneration-clinic-of-panama/bw46sgmv4nr9z2o9v0ka",
+        "width": 630,
+        "height": 371
+      }
+    ],
+
+    "treatmentTypes": ["msc-therapy", "allogeneic-therapy", "iv-systemic-therapy", "regenerative-orthopedics", "exosome-therapy"],
+    "conditionsTreated": ["autism-supportive", "lupus", "rheumatoid-arthritis", "anti-aging-longevity", "parkinsons", "multiple-sclerosis", "stroke-recovery", "spinal-cord-injury", "sports-injuries", "joint-pain", "cardiovascular", "crohns-ibd"],
+    "cellSources": ["umbilical-cord", "placental-whartons-jelly", "allogeneic"],
+    "serviceFocus": [
+      { "treatment": "msc-therapy", "percent": 50 },
+      { "treatment": "iv-systemic-therapy", "percent": 25 },
+      { "treatment": "regenerative-orthopedics", "percent": 10 },
+      { "treatment": "allogeneic-therapy", "percent": 10 },
+      { "treatment": "exosome-therapy", "percent": 5 }
+    ],
+
+    "currency": "USD",
+    "priceMin": 5000,
+    "priceMax": 30000,
+    "priceModel": "package",
+    "priceNote": "The clinic quotes each protocol after an intake review, so there is no fixed price list. Published costs run from about $5,000 to $30,000 depending on the protocol and cover bloodwork, IV therapy, the stem cell infusions, and airport transfers. Not covered by insurance, and the clinic does not offer financing.",
+
+    "teamSize": "11-50",
+    "physiciansCount": 2,
+    "languages": ["English", "Spanish"],
+
+    "medicalDirector": {
+      "name": "Dr. Javier E. Garrido L.",
+      "title": "Lead Physician",
+      "credentials": "MD, MSc in Stem Cell Therapy & Longevity Medicine",
+      "bio": "The physician on the clinic's medical team. He holds a master's in stem cell therapy and longevity medicine and has worked in the field since 2011.",
+      "photo": {
+        "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816814/library/regeneration-clinic-of-panama/zsiq3fuuz5d2gcriawhz.webp",
+        "alt": "Dr. Javier E. Garrido L.",
+        "publicId": "library/regeneration-clinic-of-panama/zsiq3fuuz5d2gcriawhz",
+        "width": 1600,
+        "height": 2000
+      }
+    },
+    "team": [
+      {
+        "name": "Jonathan J. Hernandez",
+        "title": "Chief Scientific Officer",
+        "credentials": "MSc, PhD",
+        "photo": {
+          "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816815/library/regeneration-clinic-of-panama/rpjk7ookqchurg3mx4wk.webp",
+          "alt": "Jonathan J. Hernandez, Chief Scientific Officer",
+          "publicId": "library/regeneration-clinic-of-panama/rpjk7ookqchurg3mx4wk",
+          "width": 1600,
+          "height": 2000
+        }
+      },
+      {
+        "name": "Pierre Serhal",
+        "title": "Chief Executive Officer",
+        "bio": "Entrepreneur with a background in IT and digital payments, where he founded several companies before running the clinic.",
+        "photo": {
+          "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816816/library/regeneration-clinic-of-panama/jazqabwyxu1yq33vpbzu.webp",
+          "alt": "Pierre Serhal, Chief Executive Officer",
+          "publicId": "library/regeneration-clinic-of-panama/jazqabwyxu1yq33vpbzu",
+          "width": 1042,
+          "height": 1142
+        }
+      },
+      {
+        "name": "Sofia Gutierrez D.",
+        "title": "General Manager",
+        "photo": {
+          "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816818/library/regeneration-clinic-of-panama/snd7qpjxeasiqghou6md.webp",
+          "alt": "Sofia Gutierrez D., General Manager",
+          "publicId": "library/regeneration-clinic-of-panama/snd7qpjxeasiqghou6md",
+          "width": 1600,
+          "height": 2000
+        }
+      },
+      {
+        "name": "Kathia Espinosa",
+        "title": "Lab Manager",
+        "photo": {
+          "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816819/library/regeneration-clinic-of-panama/purnibgg1cdua5fov0yu.webp",
+          "alt": "Kathia Espinosa, Lab Manager",
+          "publicId": "library/regeneration-clinic-of-panama/purnibgg1cdua5fov0yu",
+          "width": 1600,
+          "height": 2000
+        }
+      },
+      {
+        "name": "Kimberly A. McIntosh T.",
+        "title": "Manufacturing and Stem Cell Bank Coordinator",
+        "photo": {
+          "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816821/library/regeneration-clinic-of-panama/hks88qav6nfpblvzonp2.webp",
+          "alt": "Kimberly A. McIntosh T., Manufacturing and Stem Cell Bank Coordinator",
+          "publicId": "library/regeneration-clinic-of-panama/hks88qav6nfpblvzonp2",
+          "width": 1600,
+          "height": 2000
+        }
+      },
+      {
+        "name": "Vanessa Barrios",
+        "title": "Clinical Laboratory Technician, adult stem cell culture",
+        "photo": {
+          "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816822/library/regeneration-clinic-of-panama/fwcqp6q8uhoqirfrvxd9.webp",
+          "alt": "Vanessa Barrios, Clinical Laboratory Technician",
+          "publicId": "library/regeneration-clinic-of-panama/fwcqp6q8uhoqirfrvxd9",
+          "width": 1600,
+          "height": 2000
+        }
+      },
+      {
+        "name": "Diana V. Moscoso R.",
+        "title": "Executive Patient Coordinator",
+        "photo": {
+          "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816824/library/regeneration-clinic-of-panama/n2qdcsknrgcsajkpyru4.webp",
+          "alt": "Diana V. Moscoso R., Executive Patient Coordinator",
+          "publicId": "library/regeneration-clinic-of-panama/n2qdcsknrgcsajkpyru4",
+          "width": 1567,
+          "height": 2000
+        }
+      },
+      {
+        "name": "M. Madelyn Rodriguez",
+        "title": "Staff Nurse",
+        "photo": {
+          "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1784816825/library/regeneration-clinic-of-panama/mzgdk4yetbmhhvv2tkl5.webp",
+          "alt": "M. Madelyn Rodriguez, Staff Nurse",
+          "publicId": "library/regeneration-clinic-of-panama/mzgdk4yetbmhhvv2tkl5",
+          "width": 1583,
+          "height": 2000
+        }
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "Sortis Business Tower, Suite 4",
+        "city": "Panama City",
+        "region": "Panama",
+        "country": "Panama",
+        "countryCode": "PA",
+        "phone": "+1 323-425-8385",
+        "lat": 8.984,
+        "lng": -79.521
+      }
+    ],
+
+    "website": "https://regeneratepanama.com",
+    "contactEmail": "info@regeneratepanama.com",
+    "social": {
+      "instagram": "https://www.instagram.com/regenerationclinicpanama/",
+      "facebook": "https://www.facebook.com/p/Regeneration-Clinic-Panama-100083086034630/",
+      "youtube": "https://www.youtube.com/@RegeneratePanama"
+    },
+
+    "highlights": [
+      "Runs its own cell lab in Panama City, culturing and batch-testing the stem cells it uses",
+      "Uses allogeneic mesenchymal stem cells from Wharton's jelly in screened, donated umbilical cords",
+      "Personalized 3 to 7 day protocols, mostly IV infusions, with vitamin drips beforehand and structured aftercare",
+      "All-inclusive quote covers bloodwork, IV therapy, infusions, and airport transfers",
+      "English- and Spanish-speaking team in the Sortis Business Tower, Panama City"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of stem cells does the clinic use?",
+        "answer": "Adult allogeneic mesenchymal stem cells, taken from Wharton's jelly in donated umbilical cords. Donors complete a health questionnaire and are screened for HIV and hepatitis B and C, and the cords go through further testing before anything is cultured. Each batch of vials is checked for sterility and endotoxins before it is used."
+      },
+      {
+        "question": "Are these therapies approved by the FDA?",
+        "answer": "No. Mesenchymal stem cell therapy is investigational and is not FDA-approved for these uses in the United States. The clinic operates in Panama, where it is offered as an elective treatment, and it is not a substitute for standard medical care. Mesenchymal cells have been approved for some uses in the European Union and Australia and are the subject of many ongoing clinical trials."
+      },
+      {
+        "question": "How are the cells given?",
+        "answer": "In most protocols the cells are given by IV. When a specific joint is being treated, an orthopedist injects the cells into the joint instead."
+      },
+      {
+        "question": "How long does treatment take, and how long will I be in Panama?",
+        "answer": "Most protocols run 3 to 7 working days, with a stay in Panama of up to about ten days. A single clinic appointment takes roughly an hour, and patients can usually go about their day afterward."
+      },
+      {
+        "question": "What does it cost, and what is included?",
+        "answer": "The clinic quotes each protocol after reviewing your intake form, so there is no fixed price list. Published costs run from about $5,000 to $30,000 depending on the protocol, and that covers bloodwork, IV therapy, the stem cell infusions, and airport transfers. It is not covered by insurance, and the clinic does not offer financing."
+      },
+      {
+        "question": "Are there side effects?",
+        "answer": "Some patients have pain at the injection site, and less often a headache, nausea, or fatigue that usually settles within a day. The clinic says there are no documented long-term side effects from mesenchymal stem cells to date."
+      }
+    ],
+
+    "seo": {
+      "metaTitle": "Regeneration Clinic of Panama: Stem Cell Therapy in Panama City",
+      "metaDescription": "Regenerate Panama (Regeneration Clinic of Panama) offers umbilical-cord mesenchymal stem cell therapy from its own Panama City lab, with personalized 3 to 7 day IV protocols for autoimmune, neurological, joint, and other conditions."
+    },
+
+    "isClaimed": false
+  }
+]
