@@ -55,8 +55,10 @@ interface TaxoMaps {
 }
 
 async function loadTaxonomy(): Promise<TaxoMaps> {
-  const toMap = async (Model: typeof Treatment) => {
-    const docs = await Model.find({}, { slug: 1 }).lean();
+  const toMap = async <T extends { slug: string }>(
+    model: mongoose.Model<T>,
+  ) => {
+    const docs = await model.find({}, { slug: 1 }).lean();
     return new Map(docs.map((d) => [d.slug, String(d._id)]));
   };
   const [treatment, condition, cellSource, accreditation] = await Promise.all([

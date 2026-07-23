@@ -69,7 +69,10 @@ async function main() {
   }
 
   // ── Ref-based taxonomies (treatment/condition/cellSource/accreditation) ──
-  const refGroups: [string, typeof Treatment, keyof IClinic][] = [
+  // Mongoose's Model<T> is invariant, so a permissive element type is required
+  // to hold the distinct taxonomy models (Treatment, Condition, …) in one array.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const refGroups: [string, mongoose.Model<any>, keyof IClinic][] = [
     ["Treatment", Treatment, "treatmentTypes"],
     ["Condition", Condition, "conditionsTreated"],
     ["CellSource", CellSource, "cellSources"],

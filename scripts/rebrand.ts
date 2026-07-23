@@ -133,7 +133,7 @@ async function main(): Promise<void> {
       for (const h of hits) console.log(`      ${h}`);
       if (APPLY) {
         const { _id, ...rest } = updated;
-        await col.replaceOne({ _id }, rest);
+        await col.replaceOne({ _id: _id as mongoose.Types.ObjectId }, rest);
       }
     }
     if (colDocs)

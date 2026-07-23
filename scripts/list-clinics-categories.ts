@@ -7,6 +7,7 @@ import dns from "node:dns";
 // the OS resolves them fine — point it at public DNS so mongodb+srv works.
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
+import type { Model } from "mongoose";
 import { dbConnect } from "@/lib/db";
 import {
   Clinic,
@@ -40,7 +41,11 @@ async function main() {
     console.log(`- ${c.name}  [${c.slug}]  (${c.status ?? "?"})`);
   }
 
-  const taxonomies: [string, typeof Treatment][] = [
+  // Mixed taxonomy models: Mongoose's Model<T> is invariant, so a permissive
+  // element type is required to hold the distinct document interfaces
+  // (ITreatment, ICondition, ILocation, …) in one array.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const taxonomies: [string, Model<any>][] = [
     ["Treatments", Treatment],
     ["Conditions", Condition],
     ["Cell Sources", CellSource],
