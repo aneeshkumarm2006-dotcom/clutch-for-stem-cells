@@ -976,6 +976,128 @@ export async function getClinicReviews(
   };
 }
 
+/** One star bucket of a clinic's rating histogram. */
+export interface RatingBucket {
+  /** 1–5. Overall ratings are rounded to the nearest whole star. */
+  stars: number;
+  count: number;
+  /** Share of all approved reviews, 0–100. */
+  percent: number;
+}
+
+export interface ClinicReviewStats {
+  total: number;
+  /** Always five buckets, 5★ → 1★, zero-filled. */
+  distribution: RatingBucket[];
+  /** % of reviewers who answered "would recommend" — `null` if none answered. */
+  recommendRate: number | null;
+  /** How many of the reviews are treatment-verified. */
+  verifiedCount: number;
+  /** ISO timestamp of the newest approved review, or `null`. */
+  lastReviewedAt: string | null;
+}
+
+const EMPTY_REVIEW_STATS: ClinicReviewStats = {
+  total: 0,
+  distribution: [5, 4, 3, 2, 1].map((stars) => ({
+    stars,
+    count: 0,
+    percent: 0,
+  })),
+  recommendRate: null,
+  verifiedCount: 0,
+  lastReviewedAt: null,
+};
+
+/**
+ * Aggregate review stats for the dedicated `/clinic/[slug]/reviews` page — the
+ * star histogram, recommend rate, verified count, and freshness date. One
+ * `$facet` pass over the approved reviews rather than four round trips.
+ *
+ * Deliberately computed live rather than denormalized onto `Clinic`: it's a
+ * single indexed aggregation on one page, and it can never drift out of sync
+ * with moderation the way `ratingAvg`/`reviewCount` can between recomputes.
+ */
+export async function getClinicReviewStats(
+  clinicId: string,
+): Promise<ClinicReviewStats> {
+  await dbConnect();
+
+  const [agg] = await Review.aggregate<{
+    buckets: { _id: number; count: number }[];
+    recommend: { yes: number; answered: number }[];
+    totals: { total: number; verified: number; latest: Date | null }[];
+  }>([
+    {
+      $match: {
+        clinicId: new Types.ObjectId(clinicId),
+        status: "approved",
+        isDeleted: false,
+      },
+    },
+    {
+      $facet: {
+        buckets: [
+          {
+            $group: {
+              _id: { $round: ["$ratingOverall", 0] },
+              count: { $sum: 1 },
+            },
+          },
+        ],
+        recommend: [
+          { $match: { wouldRecommend: { $ne: null } } },
+          {
+            $group: {
+              _id: null,
+              yes: { $sum: { $cond: ["$wouldRecommend", 1, 0] } },
+              answered: { $sum: 1 },
+            },
+          },
+        ],
+        totals: [
+          {
+            $group: {
+              _id: null,
+              total: { $sum: 1 },
+              verified: { $sum: { $cond: ["$isVerified", 1, 0] } },
+              latest: { $max: "$createdAt" },
+            },
+          },
+        ],
+      },
+    },
+  ]);
+
+  const totals = agg?.totals?.[0];
+  const total = totals?.total ?? 0;
+  if (!total) return EMPTY_REVIEW_STATS;
+
+  const counts = new Map<number, number>();
+  for (const b of agg?.buckets ?? []) {
+    // Clamp defensively — a stray 0 or 6 would otherwise fall out of the chart.
+    const stars = Math.min(5, Math.max(1, b._id));
+    counts.set(stars, (counts.get(stars) ?? 0) + b.count);
+  }
+
+  const recommend = agg?.recommend?.[0];
+
+  return {
+    total,
+    distribution: [5, 4, 3, 2, 1].map((stars) => {
+      const count = counts.get(stars) ?? 0;
+      return { stars, count, percent: Math.round((count / total) * 100) };
+    }),
+    recommendRate: recommend?.answered
+      ? Math.round((recommend.yes / recommend.answered) * 100)
+      : null,
+    verifiedCount: totals?.verified ?? 0,
+    lastReviewedAt: totals?.latest
+      ? new Date(totals.latest).toISOString()
+      : null,
+  };
+}
+
 // ── Related clinics ──────────────────────────────────────────────────────────
 
 /** "Similar clinics" by shared treatments/conditions, then ranking order. */
@@ -1423,6 +1545,26 @@ export async function getClinicSitemapEntries(): Promise<SitemapEntry[]> {
     .lean();
   return docs.map((d) => ({
     path: `/clinic/${d.slug}`,
+    lastModified: d.updatedAt,
+  }));
+}
+
+/**
+ * The dedicated `/clinic/[slug]/reviews` URLs. Emitted only for clinics that
+ * actually have approved reviews — an empty reviews page self-`noindex`es, and
+ * the sitemap must never disagree with the page (see `lib/seo-indexation.ts`).
+ */
+export async function getClinicReviewSitemapEntries(): Promise<SitemapEntry[]> {
+  await dbConnect();
+  const docs = await Clinic.find({
+    status: "published",
+    isDeleted: false,
+    reviewCount: { $gt: 0 },
+  })
+    .select("slug updatedAt")
+    .lean();
+  return docs.map((d) => ({
+    path: `/clinic/${d.slug}/reviews`,
     lastModified: d.updatedAt,
   }));
 }

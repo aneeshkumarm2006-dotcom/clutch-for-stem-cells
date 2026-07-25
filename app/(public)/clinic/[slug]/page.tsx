@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import {
+  ArrowRight,
   Building2,
   CalendarDays,
   CheckCircle2,
@@ -26,7 +27,6 @@ import {
   getClinicReviews,
   getPublishedClinicSlugs,
   getRelatedClinics,
-  type ReviewSortKey,
 } from "@/lib/public-data";
 import { formatPrice, formatCount, getInitials } from "@/lib/format";
 import { Button } from "@/components/ui/button";
@@ -34,13 +34,11 @@ import { Chip } from "@/components/ui/chip";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
 import { RatingStars, SubRatings } from "@/components/ui/rating-stars";
 import { EmptyState } from "@/components/ui/empty-state";
-import { Pagination } from "@/components/ui/pagination";
 import { ConsultationDialog } from "@/components/lead/consultation-dialog";
 import { SaveButton } from "@/components/shortlist/save-button";
 import { ShareButton } from "@/components/clinic/share-button";
 import { ProfileSubnav, type SubnavItem } from "@/components/clinic/profile-subnav";
 import { ReviewItem } from "@/components/clinic/review-item";
-import { ReviewsControls } from "@/components/clinic/review-controls";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 import { ReportDialog } from "@/components/compliance/report-dialog";
@@ -48,6 +46,13 @@ import { LeadForm } from "@/components/lead/lead-form";
 import { ProfileViewTracker } from "@/components/analytics/profile-view-tracker";
 
 export const revalidate = 600;
+
+/**
+ * How many reviews the profile shows inline. The rest live on the dedicated
+ * `/clinic/[slug]/reviews` page — a teaser here keeps the profile about the
+ * clinic and gives the reviews page its own, non-duplicated content to rank on.
+ */
+const REVIEW_PREVIEW_COUNT = 3;
 
 const PRICE_MODEL_LABELS: Record<string, string> = {
   per_treatment: "per treatment",
@@ -89,30 +94,15 @@ export async function generateMetadata({
 
 export default async function ClinicProfilePage({
   params,
-  searchParams,
 }: {
   params: { slug: string };
-  searchParams: Record<string, string | string[] | undefined>;
 }) {
   const clinic = await getClinicProfile(params.slug);
   // A clinic that was re-slugged should send its old URL onward, not 404.
   if (!clinic) return redirectOrNotFound(`/clinic/${params.slug}`);
 
-  const single = (v: string | string[] | undefined) =>
-    Array.isArray(v) ? v[0] : v;
-
-  const reviewSort = (single(searchParams.revSort) ?? "recent") as ReviewSortKey;
-  const reviewPage = Number(single(searchParams.revPage) ?? "1") || 1;
-  const revTreatment = single(searchParams.revTreatment);
-  const revCondition = single(searchParams.revCondition);
-
   const [reviews, related] = await Promise.all([
-    getClinicReviews(clinic.id, {
-      page: reviewPage,
-      sort: reviewSort,
-      treatment: revTreatment,
-      condition: revCondition,
-    }),
+    getClinicReviews(clinic.id, { pageSize: REVIEW_PREVIEW_COUNT }),
     getRelatedClinics(clinic.raw, 3),
   ]);
 
@@ -491,7 +481,9 @@ export default async function ClinicProfilePage({
             </div>
           </section>
 
-          {/* Reviews */}
+          {/* Reviews — a teaser only. The full, sortable, filterable set lives
+              at /clinic/[slug]/reviews so the two URLs don't compete as
+              near-duplicates in search. */}
           <section id="reviews" className="scroll-mt-32">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="font-display text-xl font-semibold text-text-primary">
@@ -503,7 +495,11 @@ export default async function ClinicProfilePage({
             </div>
 
             {clinic.reviewCount > 0 ? (
-              <div className="mt-4 grid gap-5 rounded-xl border border-border bg-surface p-5 shadow-card sm:grid-cols-[auto_1fr]">
+              <Link
+                href={`/clinic/${clinic.slug}/reviews`}
+                aria-label={`${clinic.name} reviews: ${clinic.ratingAvg.toFixed(1)} out of 5 from ${formatCount(clinic.reviewCount)} reviews`}
+                className="mt-4 grid gap-5 rounded-xl border border-border bg-surface p-5 shadow-card transition-colors hover:border-border-strong sm:grid-cols-[auto_1fr]"
+              >
                 <div className="text-center sm:border-r sm:border-border sm:pr-6">
                   <div className="font-display text-4xl font-bold text-text-primary">
                     {clinic.ratingAvg.toFixed(1)}
@@ -519,7 +515,7 @@ export default async function ClinicProfilePage({
                   </p>
                 </div>
                 <SubRatings breakdown={clinic.ratingBreakdown} />
-              </div>
+              </Link>
             ) : null}
 
             {clinic.topMentions.length ? (
@@ -539,15 +535,6 @@ export default async function ClinicProfilePage({
 
             <DisclaimerNote variant="results" className="mt-4" />
 
-            {reviews.total > 0 ? (
-              <div className="mt-5 flex justify-end">
-                <ReviewsControls
-                  treatments={clinic.treatments.map((t) => ({ slug: t.slug, name: t.name }))}
-                  conditions={clinic.conditions.map((c) => ({ slug: c.slug, name: c.name }))}
-                />
-              </div>
-            ) : null}
-
             <div className="mt-4 space-y-4">
               {reviews.reviews.length ? (
                 reviews.reviews.map((r) => <ReviewItem key={r.id} review={r} />)
@@ -565,22 +552,21 @@ export default async function ClinicProfilePage({
               )}
             </div>
 
-            {reviews.pageCount > 1 ? (
-              <Pagination
-                className="mt-8"
-                page={reviews.page}
-                totalPages={reviews.pageCount}
-                hrefFor={(p) => {
-                  const sp = new URLSearchParams();
-                  for (const [k, v] of Object.entries(searchParams)) {
-                    if (k === "revPage") continue;
-                    if (typeof v === "string") sp.set(k, v);
-                  }
-                  if (p > 1) sp.set("revPage", String(p));
-                  const qs = sp.toString();
-                  return `/clinic/${clinic.slug}${qs ? `?${qs}` : ""}#reviews`;
-                }}
-              />
+            {/* Shown whenever there's at least one review, not just when the
+                teaser truncates: it's the descriptive, keyword-bearing internal
+                link into the reviews page, which also carries the rating
+                breakdown and histogram the profile doesn't. */}
+            {reviews.total > 0 ? (
+              <div className="mt-5">
+                <Button asChild variant="secondary">
+                  <Link href={`/clinic/${clinic.slug}/reviews`}>
+                    {reviews.total > REVIEW_PREVIEW_COUNT
+                      ? `Read all ${formatCount(reviews.total)} ${clinic.name} reviews`
+                      : `See all ${clinic.name} reviews`}
+                    <ArrowRight className="size-[18px]" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </div>
             ) : null}
           </section>
 

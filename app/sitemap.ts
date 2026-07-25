@@ -11,6 +11,7 @@ import type { MetadataRoute } from "next";
 
 import { absoluteUrl } from "@/lib/seo";
 import {
+  getClinicReviewSitemapEntries,
   getClinicSitemapEntries,
   getTaxonomySitemapEntries,
   type SitemapEntry,
@@ -60,7 +61,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let dynamicEntries: MetadataRoute.Sitemap = [];
   try {
-    const [clinics, taxonomy, blog, matrix, reviewers, pages]: [
+    const [clinics, clinicReviews, taxonomy, blog, matrix, reviewers, pages]: [
+      SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
@@ -69,6 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       SitemapEntry[],
     ] = await Promise.all([
       getClinicSitemapEntries(),
+      getClinicReviewSitemapEntries(),
       getTaxonomySitemapEntries(),
       getBlogSitemapEntries(),
       getMatrixSitemapEntries(),
@@ -82,6 +85,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: e.lastModified ?? now,
         changeFrequency: "weekly" as const,
         priority: 0.8,
+      })),
+      // Dedicated per-clinic reviews pages — only clinics that actually have
+      // approved reviews (an empty one self-`noindex`es).
+      ...clinicReviews.map((e) => ({
+        url: absoluteUrl(e.path),
+        lastModified: e.lastModified ?? now,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
       })),
       ...taxonomy.map((e) => ({
         url: absoluteUrl(e.path),
