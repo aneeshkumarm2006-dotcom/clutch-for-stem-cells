@@ -36,6 +36,9 @@ const TYPE_LABEL: Record<Suggestion["type"], string> = {
   condition: "Condition",
 };
 
+/** Stable option id so the combobox can point `aria-activedescendant` at it. */
+const optionId = (i: number) => `header-search-option-${i}`;
+
 export function SearchTypeahead({ className }: { className?: string }) {
   const router = useRouter();
   const [query, setQuery] = React.useState("");
@@ -106,6 +109,8 @@ export function SearchTypeahead({ className }: { className?: string }) {
     }
   };
 
+  const listboxOpen = open && suggestions.length > 0;
+
   return (
     <div ref={rootRef} className={cn("relative", className)}>
       <div className="relative">
@@ -116,9 +121,14 @@ export function SearchTypeahead({ className }: { className?: string }) {
         <input
           type="search"
           role="combobox"
-          aria-expanded={open}
+          aria-expanded={listboxOpen}
           aria-controls="header-search-listbox"
           aria-autocomplete="list"
+          // Without this the arrow keys move the highlight visually but a
+          // screen reader announces nothing (WCAG 4.1.2).
+          aria-activedescendant={
+            listboxOpen && active >= 0 ? optionId(active) : undefined
+          }
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => suggestions.length && setOpen(true)}
@@ -129,16 +139,22 @@ export function SearchTypeahead({ className }: { className?: string }) {
         />
       </div>
 
-      {open && suggestions.length ? (
+      {listboxOpen ? (
         <ul
           id="header-search-listbox"
           role="listbox"
+          aria-label="Search suggestions"
           className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 overflow-hidden rounded-lg border border-border bg-surface py-1 shadow-lg"
         >
           {suggestions.map((s, i) => {
             const Icon = ICON[s.type];
             return (
-              <li key={`${s.type}-${s.slug}`} role="option" aria-selected={active === i}>
+              <li
+                key={`${s.type}-${s.slug}`}
+                id={optionId(i)}
+                role="option"
+                aria-selected={active === i}
+              >
                 <button
                   type="button"
                   onMouseEnter={() => setActive(i)}

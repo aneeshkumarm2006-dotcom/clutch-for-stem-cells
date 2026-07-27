@@ -28,6 +28,38 @@ export interface ClinicResultsProps {
   emptyDescription?: string;
 }
 
+/** Comma-joined (multi-value) filter params — each value is its own chip. */
+const LIST_FILTER_KEYS = ["treatment", "condition", "cellSource", "language"];
+/** Single-value filter params. `priceMin`/`priceMax` collapse into one chip. */
+const SCALAR_FILTER_KEYS = ["country", "city", "q", "minRating"];
+
+/**
+ * How many filters the visitor has applied — mirrors the chips `ActiveFilters`
+ * renders, so the mobile trigger badge and the chip row always agree. Computed
+ * here (server side) because `FilterRail` only receives the count.
+ */
+function countActiveFilters(
+  searchParams: Record<string, string | string[] | undefined>,
+): number {
+  const first = (key: string): string | undefined => {
+    const v = searchParams[key];
+    return Array.isArray(v) ? v[0] : v;
+  };
+
+  let count = 0;
+  for (const key of LIST_FILTER_KEYS) {
+    const raw = first(key);
+    if (raw) count += raw.split(",").filter((s) => s.trim()).length;
+  }
+  for (const key of SCALAR_FILTER_KEYS) {
+    if (first(key)) count += 1;
+  }
+  // `verified` is only a filter when explicitly on (matches `ActiveFilters`).
+  if (first("verified") === "1") count += 1;
+  if (first("priceMin") || first("priceMax")) count += 1;
+  return count;
+}
+
 /** Build a query string from the current params with `page` overridden. */
 function buildPageHref(
   basePath: string,
@@ -65,7 +97,7 @@ export function ClinicResults({
     <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
       <FilterRail
         resultCount={data.total}
-        activeCount={undefined}
+        activeCount={countActiveFilters(searchParams)}
         clearAllHref={basePath}
       >
         <DirectoryFilters facets={data.facets} locked={locked} />

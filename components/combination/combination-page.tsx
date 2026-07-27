@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 import { pageMetadata } from "@/lib/page-metadata";
@@ -255,9 +256,9 @@ export async function CombinationPage({
           </h2>
           <p className="mt-1 text-[13px] text-text-muted">
             Every result is ranked by our published{" "}
-            <a href="/methodology" className="text-text-link hover:underline">
+            <Link href="/methodology" className="text-text-link hover:underline">
               methodology
-            </a>
+            </Link>
             .
           </p>
           <div className="mt-5">

@@ -4,6 +4,7 @@ import { BookOpen } from "lucide-react";
 import { pageMetadata } from "@/lib/page-metadata";
 import { getPublishedBlogPosts } from "@/lib/seoteam/blog-data";
 import { BlogCard } from "@/components/blog/blog-card";
+import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { Pagination } from "@/components/ui/pagination";
 import { EmptyState } from "@/components/ui/empty-state";
 import { SITE_NAME } from "@/config/site";
@@ -45,6 +46,15 @@ export default async function BlogIndexPage({
 
   return (
     <div className="container py-10 md:py-14">
+      {/* Matches the other index pages (and the trail /blog/[slug] links back
+          through), and emits the BreadcrumbList JSON-LD with it. */}
+      <Breadcrumbs
+        className="mb-4"
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Blog", href: "/blog" },
+        ]}
+      />
       <header className="max-w-2xl">
         <h1 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[32px]">
           Blog
@@ -56,8 +66,9 @@ export default async function BlogIndexPage({
 
       {data.posts.length ? (
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {data.posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
+          {data.posts.map((post, i) => (
+            // The first row is above the fold; its cover is the LCP element.
+            <BlogCard key={post.slug} post={post} priority={i < 3} />
           ))}
         </div>
       ) : (

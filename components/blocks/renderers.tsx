@@ -58,8 +58,11 @@ export function FaqRenderer({ data }: { data: FaqBlock }) {
       <BlockHeading>{data.title ?? "Frequently asked questions"}</BlockHeading>
       <div className="divide-y divide-border rounded-xl border border-border bg-surface">
         {items.map((item, i) => (
-          <details key={i} className="group p-4 [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex cursor-pointer items-center justify-between gap-3 font-display text-[15px] font-semibold text-text-primary">
+          <details key={i} className="group p-4">
+            {/* `list-none` kills the standard marker (Firefox/Safari); the
+                `::-webkit-details-marker` rule kills the Chrome/older-Safari
+                one. Without both, a stray triangle sits beside the `+`. */}
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-display text-[15px] font-semibold text-text-primary [&::-webkit-details-marker]:hidden">
               {item.question}
               <span
                 aria-hidden="true"
