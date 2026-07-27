@@ -1,0 +1,121 @@
+[
+  {
+    "name": "Boulder Biologics",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Investigational autologous bone marrow cell therapy for long COVID and post-viral illness, alongside interventional orthopedics",
+    "description": "Boulder Biologics opened in 2018 on the Boulder Community Health Foothills campus and spends most of its week on non-operative interventional orthopedics: bone marrow aspirate concentrate, microfragmented fat, PRP and its variants, prolotherapy, hydrodissection. The long COVID program grew out of that same autologous approach.\n\nThe protocol is bone marrow drawn from the patient's own posterior superior iliac spine under local anesthetic, filtered on site with minimal processing, and given back during the same visit. It goes in by IV, and for selected cases by intranasal atomization. Follow-up is at six and twelve weeks. To be a candidate you need symptoms that have lasted at least three months, a documented infection, and other explanations ruled out.\n\nWhat separates this clinic from most of the market is how it talks about evidence. Its long COVID page opens by stating that no stem cell or cellular therapy has been approved by the FDA for long COVID or post-COVID conditions. It says outright that it does not use donor-derived or culture-expanded cells sold as stem cell injections, only your own, minimally manipulated. On PRP it says effectiveness is variable and the evidence is strongest for knee osteoarthritis, tennis elbow, and rotator cuff tendinopathy. It also turns people away: advanced, diffuse arthritis typically does not respond, and those patients get referred elsewhere. The first visit is a 45 to 60 minute consultation with the physician, and the clinic's own line is that you leave with a plan rather than a sales pitch.\n\nJason Glowney founded the practice. He trained in internal medicine, holds a sports medicine certificate of added qualification from a University of Colorado fellowship, and practiced at the Boulder Center for Sports Medicine and CU Sports Medicine before going out on his own. In 2025 he started the Apeiron Research Center, a nonprofit running IRB-approved investigator-led trials in cellular therapy.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785162656/library/hrp3xbpmmbztm4jqawrj.webp",
+      "publicId": "library/hrp3xbpmmbztm4jqawrj",
+      "width": 1920,
+      "height": 1042,
+      "alt": "Boulder Biologics logo"
+    },
+
+    "treatmentTypes": ["bone-marrow-derived-therapy", "autologous-therapy", "adipose-derived-therapy", "prp", "regenerative-orthopedics"],
+    "conditionsTreated": ["post-covid-recovery", "knee-osteoarthritis", "hip-osteoarthritis", "back-and-spine", "rotator-cuff-shoulder", "joint-pain", "sports-injuries", "anti-aging-longevity"],
+    "cellSources": ["bone-marrow", "adipose", "autologous"],
+    "accreditations": ["board-certified-physicians", "clinical-trial-participation"],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 40 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 25 },
+      { "treatment": "prp", "percent": 20 },
+      { "treatment": "adipose-derived-therapy", "percent": 15 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Pricing depends on the joint, the number of sites, and the formulation, and is given at the consultation. Most plans classify autologous biologic procedures as investigational and do not cover them, so everything is self-pay. HSA and FSA funds usually work and the clinic provides itemized documentation for them. Payment plans at 0% APR are available.",
+
+    "foundedYear": 2018,
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Jason Glowney",
+      "title": "Founder and Physician",
+      "credentials": "MD, MSc, board certified in internal medicine with a CAQ in sports medicine",
+      "bio": "Glowney earned his MD at the University of Chicago and completed a sports medicine fellowship at the University of Colorado in 2009. He trained across internal medicine, emergency medicine, and interventional orthopedics, and has practiced biologic orthopedics in Boulder for more than a decade, previously at the Boulder Center for Sports Medicine and CU Sports Medicine. He later added a master's in applied mathematics from the University of Washington and now works on machine learning applied to orthobiologics outcomes. He founded the Apeiron Research Center in 2025 and is its principal investigator."
+    },
+    "team": [
+      {
+        "name": "Ryan Shiling",
+        "title": "Co-Founder and Clinical Staff",
+        "credentials": "RN",
+        "bio": "Shiling co-founded Boulder Biologics and handles clinical care through the procedure and follow-up. He completes nurse practitioner training in 2026."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "4745 Arapahoe Ave, Suite 300",
+        "city": "Boulder",
+        "region": "Colorado",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "80303",
+        "phone": "720-550-6175",
+        "lat": 40.0163,
+        "lng": -105.2318
+      }
+    ],
+
+    "website": "https://boulderbiologics.com",
+    "contactEmail": "info@boulderbiologics.com",
+    "social": {
+      "facebook": "https://www.facebook.com/boulderbiologics",
+      "instagram": "https://www.instagram.com/boulderbiologics/"
+    },
+
+    "highlights": [
+      "Long COVID protocol uses only the patient's own bone marrow, no donor or culture-expanded cells",
+      "Cells given by IV, and intranasally in selected cases",
+      "Opened in 2018 on the Boulder Community Health Foothills campus",
+      "Founder Jason Glowney is board certified in internal medicine with a sports medicine CAQ",
+      "Runs IRB-approved cellular therapy trials through the nonprofit Apeiron Research Center",
+      "States upfront that no cellular therapy is FDA approved for long COVID"
+    ],
+    "faqs": [
+      {
+        "question": "Is this an approved treatment for long COVID?",
+        "answer": "No, and the clinic says so first thing on its own page: no stem cell or cellular therapy has been approved by the FDA for long COVID or post-COVID conditions. The procedure is investigational and is offered only after informed consent."
+      },
+      {
+        "question": "What actually gets infused?",
+        "answer": "Your own bone marrow concentrate. Marrow is aspirated from the back of the pelvis under local anesthetic, filtered on site, and given back during the same visit. Nothing is culture expanded and no donor cells are used."
+      },
+      {
+        "question": "Why intranasal?",
+        "answer": "For selected cases the clinic atomizes part of the dose into the nose, on the reasoning that the olfactory and trigeminal routes reach the central nervous system. The bulk of the dose still goes in by IV."
+      },
+      {
+        "question": "Who qualifies?",
+        "answer": "Symptoms lasting three months or more after a documented infection, with other explanations excluded. The clinic also wants patients who will come back for the six and twelve week follow-ups and who understand the treatment is investigational."
+      },
+      {
+        "question": "What does it cost, and will insurance pay?",
+        "answer": "Pricing depends on the protocol and is quoted at the consultation. Insurance rarely covers autologous biologic procedures because plans classify them as investigational, so this is self-pay. HSA and FSA funds usually work, and payment plans at 0% APR are available."
+      },
+      {
+        "question": "Does the bone marrow draw hurt?",
+        "answer": "It is done under local anesthetic. Most patients describe pressure rather than sharp pain, and the harvest site stays sore for two to five days."
+      },
+      {
+        "question": "Is anyone told not to have this?",
+        "answer": "Yes. The clinic says protein-rich PRP should generally be avoided in active inflammatory or autoimmune conditions, active infection, coagulopathies, and pregnancy, and that patients with advanced diffuse arthritis are better served elsewhere."
+      }
+    ],
+
+    "seo": {
+      "metaTitle": "Boulder Biologics | Long COVID Cell Therapy in Boulder, CO",
+      "metaDescription": "Boulder Biologics treats long COVID with investigational autologous bone marrow concentrate, given by IV and sometimes intranasally, in Boulder, Colorado.",
+      "focusKeyword": "boulder biologics long covid"
+    },
+
+    "isClaimed": false
+  }
+]

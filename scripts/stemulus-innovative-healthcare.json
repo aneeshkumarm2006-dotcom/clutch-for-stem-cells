@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Stemulus Innovative Healthcare",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Naturopathic regenerative medicine clinic in central Phoenix, with programs for diabetes, neuropathy, and lung and neurological conditions",
+    "description": "Stemulus Innovative Healthcare works out of a medical building on East Missouri Avenue in central Phoenix. It is a naturopathic practice as much as a regenerative one, and the treatment list reflects that: cell infusions, platelet-rich plasma, prolotherapy, IV rejuvenation, and a microneedling protocol the clinic calls StemClear. Stemulus says it has treated more than 2,500 patients across the United States and Europe.\n\nDiabetes is one of the conditions it runs a dedicated program for, covering both type 1 and type 2. The stated aim is narrow and worth reading carefully: to help the body produce and process insulin better. It is supportive care, not a substitute for insulin, metformin, or anything else an endocrinologist has a patient on. The cells are mesenchymal, and the clinic's material points to human umbilical cord blood as the source. Its own pages acknowledge that the evidence is still thin, citing research that calls for large multi-center, double-blind, placebo-controlled studies before this becomes routine therapy.\n\nThe rest of the condition list runs to peripheral and diabetic neuropathy, COPD, multiple sclerosis, Parkinson's, stroke recovery, heart disease, osteoarthritis, and sports injuries. Most procedures are outpatient with little downtime. Stemulus treats adults only.\n\nJaime Ewald is chief medical officer and the clinic's lead provider. She is a naturopathic physician, a graduate of the Southwest College of Naturopathic Medicine in Tempe, and an adjunct professor there. The clinic states on its own site that stem cell therapy is not an FDA-approved treatment and is not intended to resolve any condition, disease, or injury on its own.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785162653/library/ad5nocp7r646wrzn1yjk.webp",
+      "publicId": "library/ad5nocp7r646wrzn1yjk",
+      "width": 1098,
+      "height": 1648,
+      "alt": "Stemulus Innovative Healthcare logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785162654/library/zn9ydvaloaw2cg5kr4zq.webp",
+      "publicId": "library/zn9ydvaloaw2cg5kr4zq",
+      "width": 796,
+      "height": 521,
+      "alt": "Entrance corridor at the Stemulus Innovative Healthcare clinic in Phoenix, Arizona"
+    },
+
+    "treatmentTypes": ["msc-therapy", "iv-systemic-therapy", "cord-blood-therapy", "allogeneic-therapy", "prp"],
+    "conditionsTreated": ["diabetes-supportive", "neuropathy", "copd-pulmonary", "multiple-sclerosis", "parkinsons", "stroke-recovery", "cardiovascular", "joint-pain", "knee-osteoarthritis", "sports-injuries"],
+    "cellSources": ["umbilical-cord", "cord-blood", "allogeneic", "autologous"],
+    "serviceFocus": [
+      { "treatment": "msc-therapy", "percent": 35 },
+      { "treatment": "iv-systemic-therapy", "percent": 30 },
+      { "treatment": "cord-blood-therapy", "percent": 20 },
+      { "treatment": "prp", "percent": 15 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Stemulus does not publish prices. Cost depends on the condition, the number of cells, and how many sessions are planned, and is quoted after a consultation. As with every clinic in this category, US health insurance does not cover the therapy.",
+
+    "teamSize": "1-10",
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Jaime Ewald",
+      "title": "Chief Medical Officer",
+      "credentials": "NMD, licensed naturopathic physician in Arizona",
+      "bio": "Ewald earned her doctorate at the Southwest College of Naturopathic Medicine and teaches there as an adjunct professor. She has worked in cell therapy since its early years in Arizona and has logged a large share of the clinic's sessions. Alongside the regenerative work she practices hormone and neurotransmitter balancing."
+    },
+    "team": [
+      {
+        "name": "Dr. Josh Lane",
+        "title": "Clinic Manager",
+        "bio": "Lane manages day-to-day operations at the Phoenix clinic and is a patient's first point of contact for scheduling and treatment planning."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "1277 E Missouri Ave, Suite 114",
+        "city": "Phoenix",
+        "region": "Arizona",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "85014",
+        "phone": "602-293-3939",
+        "lat": 33.5089,
+        "lng": -112.0577
+      }
+    ],
+
+    "website": "https://stemulushealth.com",
+    "social": {
+      "facebook": "https://www.facebook.com/stemulus"
+    },
+
+    "highlights": [
+      "Dedicated program for type 1 and type 2 diabetes, framed as supportive care",
+      "Umbilical cord blood derived mesenchymal cells",
+      "Says it has treated more than 2,500 patients in the US and Europe",
+      "Led by Jaime Ewald, NMD, an adjunct professor at the Southwest College of Naturopathic Medicine",
+      "Also runs PRP, prolotherapy, and IV programs from the same Phoenix clinic",
+      "Outpatient procedures with little downtime, adults only"
+    ],
+    "faqs": [
+      {
+        "question": "Is cell therapy for diabetes FDA approved?",
+        "answer": "No. Stemulus states on its own site that stem cell therapy is not an FDA-approved treatment. It is elective and investigational, and it sits alongside standard diabetes care rather than replacing insulin, oral medication, or the plan your endocrinologist set."
+      },
+      {
+        "question": "What is the treatment actually trying to do?",
+        "answer": "The clinic describes the goal as improving the body's ability to produce and process insulin, and improving quality of life. It does not claim to end the need for medication, and outcomes vary between patients."
+      },
+      {
+        "question": "Where do the cells come from?",
+        "answer": "Mesenchymal stem cells, with the clinic's material pointing to human umbilical cord blood as the source. The clinic also uses your own platelets for PRP work."
+      },
+      {
+        "question": "How strong is the evidence?",
+        "answer": "Thin, and the clinic says so. Its own diabetes page cites research calling for large multi-center, double-blind, placebo-controlled trials before mesenchymal cell transplantation can be considered routine therapy for diabetes."
+      },
+      {
+        "question": "Who runs the clinic?",
+        "answer": "Jaime Ewald, NMD, a naturopathic physician licensed in Arizona and an adjunct professor at the Southwest College of Naturopathic Medicine. She is not an MD or DO. Naturopathic scope of practice varies by state, and it is worth understanding what that means before booking."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "Stemulus does not publish prices. You get a quote after a consultation, based on the condition and the protocol. US health insurance does not cover it."
+      },
+      {
+        "question": "Do you treat children?",
+        "answer": "No. The clinic states it only treats patients over 18."
+      }
+    ],
+
+    "seo": {
+      "metaTitle": "Stemulus | Diabetes Stem Cell Clinic in Phoenix, Arizona",
+      "metaDescription": "Stemulus Innovative Healthcare is a Phoenix, Arizona clinic using umbilical cord blood mesenchymal cells as supportive care for type 1 and type 2 diabetes.",
+      "focusKeyword": "stemulus stem cell therapy phoenix"
+    },
+
+    "isClaimed": false
+  }
+]

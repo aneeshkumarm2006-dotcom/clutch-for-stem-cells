@@ -1,0 +1,166 @@
+[
+  {
+    "name": "Stemedix, Inc.",
+    "slug": "stemedix",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Pain management and regenerative medicine under one roof",
+    "description": "Stemedix is a regenerative-medicine clinic in St. Petersburg, Florida. It opened in 2013, which makes it one of the older stem-cell clinics in the US, and it's run by physicians rather than sold as a franchise. Treatments happen the same day, on an outpatient basis, and most patients are in and out in a few hours.\n\nThe clinic works on degenerative conditions, chronic pain, and autoimmune disease, and runs a separate program it calls Age Management for age-related complaints: stiff joints, muscle loss, skin changes, slower recovery. Stemedix is upfront that this work is experimental and not FDA-approved, and its own FAQ says plainly that it doesn't promise a fix. The therapies use the patient's own bone marrow or fat, umbilical-cord cells from Wharton's jelly, or exosomes. No embryonic or fetal cells are used.\n\nCOPD is one of the conditions the clinic has built a specific program around. For lung work the cells go in through an IV so they circulate rather than being placed in one joint, and they come either from the patient's own bone marrow or fat or from screened donated Wharton's jelly, which Stemedix says runs about 80 percent mesenchymal stem cells. Its COPD page states that the therapy is experimental and has not been approved by the FDA, and describes what it is aiming at as easier breathing, better exercise tolerance, and less reliance on supplemental oxygen. Any change usually starts within about a week and takes six weeks to three months to settle.\n\nThere are two Florida locations: the main office in the Bayfront Medical Plaza in St. Petersburg, and a second in Delray Beach. For patients traveling in, the clinic helps arrange transport and hotels.",
+    "videoUrl": "https://www.youtube.com/watch?v=jmxVDvTz3M8",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785162648/library/qxhy4x0c6otft22k14sr.webp",
+      "publicId": "library/qxhy4x0c6otft22k14sr",
+      "width": 318,
+      "height": 94,
+      "alt": "Stemedix logo"
+    },
+
+    "treatmentTypes": ["msc-therapy", "autologous-therapy", "allogeneic-therapy", "adipose-derived-therapy", "bone-marrow-derived-therapy", "cord-blood-therapy", "exosome-therapy", "prp", "iv-systemic-therapy"],
+    "conditionsTreated": ["copd-pulmonary", "diabetes-supportive", "autism-supportive", "multiple-sclerosis", "parkinsons", "neuropathy", "crohns-ibd", "rheumatoid-arthritis", "joint-pain", "knee-osteoarthritis", "back-and-spine", "sports-injuries", "anti-aging-longevity", "hair-restoration"],
+    "cellSources": ["autologous", "allogeneic", "umbilical-cord", "adipose", "bone-marrow", "placental-whartons-jelly", "exosomes"],
+    "accreditations": ["board-certified-physicians", "clinical-trial-participation"],
+    "serviceFocus": [
+      { "treatment": "iv-systemic-therapy", "percent": 30 },
+      { "treatment": "msc-therapy", "percent": 25 },
+      { "treatment": "adipose-derived-therapy", "percent": 15 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 15 },
+      { "treatment": "cord-blood-therapy", "percent": 15 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "per_treatment",
+    "priceMin": 5000,
+    "priceMax": 15000,
+    "priceNote": "Priced per treatment after a records review. Not covered by insurance, so it's out of pocket, though financing is available. Published figures are thin: hair restoration starts around $3,900, and the clinic pegs typical US stem-cell therapy at roughly $5,000 to $15,000.",
+
+    "foundedYear": 2013,
+    "teamSize": "11-50",
+    "physiciansCount": 3,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Gerald Mastaw",
+      "title": "Medical Director",
+      "credentials": "MD",
+      "photo": {
+        "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785162651/library/xly7v3jjrjefcrdgaopy.webp",
+        "publicId": "library/xly7v3jjrjefcrdgaopy",
+        "width": 1257,
+        "height": 1437,
+        "alt": "Dr. Gerald Mastaw, medical director at Stemedix"
+      },
+      "bio": "Medical director at Stemedix, board-certified in anesthesiology, interventional pain management, and regenerative medicine. Trained at the University of Michigan Medical School, served five years in the Navy including a 2006 to 2007 tour in Iraq, and has practiced for more than 25 years."
+    },
+    "team": [
+      {
+        "name": "Khuram Khan",
+        "title": "Regenerative Medicine Physician",
+        "credentials": "DO",
+        "bio": "Board-certified anesthesiologist practicing since 2008. Trained at Nova Southeastern, did a cardiothoracic anesthesia fellowship at Rutgers/Robert Wood Johnson, and does ultrasound-guided orthobiologic injections."
+      },
+      {
+        "name": "Adam Gorberg",
+        "title": "Regenerative Medicine Physician",
+        "credentials": "MD",
+        "bio": "Board-certified in anesthesiology. New York Medical College; active-duty Air Force 2010 to 2014 with a tour in Afghanistan. Works mainly on neurodegenerative disease and trauma."
+      },
+      {
+        "name": "Mike Menza",
+        "title": "Physician Assistant",
+        "credentials": "PA-C",
+        "bio": "Performance health, functional medicine, hormone optimization."
+      },
+      {
+        "name": "Katie Ruffino",
+        "title": "Physician Assistant",
+        "credentials": "PA-C",
+        "bio": "Trained at Marquette. PRP, adipose and bone-marrow procedures, ultrasound-guided injections."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "Bayfront Medical Plaza, 601 7th Street S, Suite 565",
+        "city": "Saint Petersburg",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "33701",
+        "phone": "727-456-8968",
+        "lat": 27.766,
+        "lng": -82.64
+      },
+      {
+        "isHQ": false,
+        "city": "Delray Beach",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "727-362-4630"
+      }
+    ],
+
+    "website": "https://stemedix.com/",
+    "contactEmail": "support@stemedix.com",
+    "social": {
+      "linkedin": "https://www.linkedin.com/company/stemedix",
+      "instagram": "https://www.instagram.com/stemedix.inc/",
+      "facebook": "https://www.facebook.com/stemedix/",
+      "youtube": "https://www.youtube.com/channel/UCvtJJhZIYh61jDNB6UVO4LA"
+    },
+
+    "highlights": [
+      "Opened in 2013, one of the first US stem-cell clinics",
+      "COPD program delivering cells by IV, from your own bone marrow and fat or donated Wharton's jelly",
+      "Run by three board-certified physicians plus two PAs",
+      "Separate Age Management program using MSCs, exosomes, and IV therapy",
+      "Same-day outpatient visits, with follow-ups at 1 week, 6 weeks, 3 months, and a year",
+      "Uses the patient's own cells or umbilical-cord cells, never embryonic or fetal tissue",
+      "Arranges travel and lodging for out-of-town patients"
+    ],
+    "faqs": [
+      {
+        "question": "Will this fix my condition?",
+        "answer": "No, and Stemedix doesn't claim it will. The clinic frames the goal as meaningful improvement in symptoms and holding it steady over time. Outcomes vary and some people notice no change."
+      },
+      {
+        "question": "Are these therapies FDA approved?",
+        "answer": "No. Stemedix states on its own COPD page that stem cell therapy for the condition is experimental and not FDA approved. Everything here is elective and sits alongside standard care rather than replacing it."
+      },
+      {
+        "question": "How are cells given for a lung condition like COPD?",
+        "answer": "By IV, so they travel through the bloodstream rather than being injected into one spot the way an orthopedic treatment would be."
+      },
+      {
+        "question": "How long does the procedure take?",
+        "answer": "Two to four hours, same day, no overnight stay."
+      },
+      {
+        "question": "What are umbilical-cord stem cells?",
+        "answer": "Young cells from Wharton's jelly, about 80% mesenchymal, that tend to live longer than adult cells."
+      },
+      {
+        "question": "Do you use embryonic cells?",
+        "answer": "No embryonic or fetal cells, ever."
+      },
+      {
+        "question": "Does insurance cover it?",
+        "answer": "Not right now. US health insurance doesn't pay for these procedures."
+      },
+      {
+        "question": "Will I need more than one treatment?",
+        "answer": "Many people respond to a single treatment; more severe cases sometimes need several."
+      }
+    ],
+
+    "seo": {
+      "metaTitle": "Stemedix | COPD Stem Cell Therapy in St. Petersburg, FL",
+      "metaDescription": "Stemedix is a St. Petersburg, Florida clinic offering IV stem cell therapy for COPD, using a patient's own bone marrow or donated Wharton's jelly tissue.",
+      "focusKeyword": "stemedix stem cell therapy"
+    },
+
+    "isClaimed": false
+  }
+]
