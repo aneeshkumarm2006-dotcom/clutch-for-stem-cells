@@ -55,8 +55,34 @@ export const RESERVED_SLUGS = new Set([
   "treatments",
 ]);
 
+/**
+ * Route prefixes a composed page *may* nest under, because that route explicitly
+ * falls back to a composed page when its own record lookup misses.
+ *
+ * `/treatments/[slug]` does this: an editorial page like
+ * `treatments/prp-vs-stem-cell-therapy` is a comparison guide, not a treatment
+ * the directory can filter clinics by, so it must not become a taxonomy term —
+ * but it still belongs at that URL. Adding a prefix here without teaching the
+ * matching route to look for the page would create a saveable, unreachable URL.
+ */
+export const NESTABLE_SLUG_PREFIXES = new Set(["treatments"]);
+
+/** `["treatments", "prp-vs-x"]` → the two parts, or a single-element array. */
+function slugSegments(slug: string): string[] {
+  return slug.toLowerCase().split("/").filter(Boolean);
+}
+
 export function isReservedSlug(slug: string): boolean {
-  return RESERVED_SLUGS.has(slug.toLowerCase());
+  const segments = slugSegments(slug);
+  const [first] = segments;
+  if (!first) return true;
+
+  // A nested slug is legal only under a route that opts in; the deeper segment
+  // lives inside that route's namespace, so it can't collide with anything.
+  if (segments.length > 1) {
+    return segments.length > 2 || !NESTABLE_SLUG_PREFIXES.has(first);
+  }
+  return RESERVED_SLUGS.has(first);
 }
 
 /** The public view of a composed page. */

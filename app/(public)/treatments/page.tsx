@@ -8,12 +8,7 @@ import { TaxonomyCard } from "@/components/taxonomy/taxonomy-card";
 export const revalidate = 3600;
 
 export const generateMetadata = async (): Promise<Metadata> => {
-  const meta = await pageMetadata({
-    title: "Stem Cell Treatment",
-    description:
-      "Explore every stem cell treatment type, from local injections to systemic cell therapy delivered by IV, and compare clinics offering each approach.",
-    path: "/treatments",
-  });
+  const meta = await pageMetadata({ path: "/treatments" });
   return {
     ...meta,
     keywords: [

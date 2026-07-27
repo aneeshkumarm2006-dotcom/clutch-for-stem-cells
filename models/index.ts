@@ -32,6 +32,15 @@ export type {
   TimestampFields,
 } from "@/models/_shared";
 
+export {
+  ClinicLanding,
+  default as ClinicLandingModel,
+} from "@/models/clinic-landing";
+export type {
+  IClinicLanding,
+  IClinicLandingFilters,
+} from "@/models/clinic-landing";
+
 export { Clinic, default as ClinicModel } from "@/models/clinic";
 export type {
   IClinic,
@@ -120,6 +129,7 @@ export type {
   IRankingWeights,
   IAnalyticsConfig,
   ISeoDefaults,
+  IPageSeoOverride,
   IStructuredData,
 } from "@/models/site-setting";
 

@@ -46,6 +46,12 @@ export interface ClinicSearchParams {
   country?: string;
   /** Matches `locations.city` (case-insensitive). */
   city?: string;
+  /**
+   * Matches `locations.region` — state/province (case-insensitive). Pinned by a
+   * route (a `/clinics/{state}` landing page); deliberately not parsed from the
+   * query string, so it adds no new faceted-URL surface to crawl.
+   */
+  region?: string;
   /** Spoken languages (OR within). */
   languages?: string[];
   /** Budget window (USD-agnostic; overlaps the clinic's price range). */
@@ -289,10 +295,12 @@ export const mongoSearchProvider: SearchProvider = {
       sel.cellSources = { cellSources: { $in: cellSourceIds } };
     if (params.languages?.length)
       sel.languages = { languages: { $in: params.languages } };
-    if (params.country || params.city) {
+    if (params.country || params.city || params.region) {
       const loc: Record<string, unknown> = {};
       if (params.city)
         loc.city = new RegExp(`^${escapeRegex(params.city)}$`, "i");
+      if (params.region)
+        loc.region = new RegExp(`^${escapeRegex(params.region)}$`, "i");
       if (params.country)
         loc.$or = [
           { country: new RegExp(`^${escapeRegex(params.country)}$`, "i") },

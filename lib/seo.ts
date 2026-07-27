@@ -91,10 +91,19 @@ export interface BuildMetadataInput {
 export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
   const { seo, defaults } = input;
 
-  const title = applyTitleTemplate(
-    seo?.metaTitle ?? input.title,
-    defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
-  );
+  // An explicit meta-title override is used **verbatim**: whoever typed it in
+  // the admin panel typed the exact string they want in the SERP, brand suffix
+  // and separator included. Only a route-supplied `title` gets the Settings
+  // brand template applied — otherwise an override reading
+  // "… | My Stem Cell Guide" would render as "… | My Stem Cell Guide · My Stem
+  // Cell Guide".
+  const titleOverride = seo?.metaTitle?.trim();
+  const title =
+    titleOverride ||
+    applyTitleTemplate(
+      input.title,
+      defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
+    );
   const description =
     seo?.metaDescription ??
     input.description ??

@@ -30,6 +30,22 @@ export const slugSchema = z
     "Use lowercase letters, numbers, and hyphens",
   );
 
+/**
+ * A slug that may carry one path segment of nesting — `prp-vs-stem-cells` or
+ * `treatments/prp-vs-stem-cells`. Only the composed-page CMS uses this, so an
+ * editor can publish a page *inside* a route that supports it (see
+ * `NESTABLE_SLUG_PREFIXES` in `lib/seoteam/page-data.ts`); everything else keeps
+ * the single-segment {@link slugSchema}.
+ */
+export const pathSlugSchema = z
+  .string()
+  .min(1)
+  .max(200)
+  .regex(
+    /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)?$/,
+    "Use lowercase letters, numbers, and hyphens (one optional / for nesting)",
+  );
+
 /** Absolute http(s) URL or root-relative path (media may be either). */
 export const mediaUrlSchema = z
   .string()

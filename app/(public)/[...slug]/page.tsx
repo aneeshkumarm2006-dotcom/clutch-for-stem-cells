@@ -11,17 +11,16 @@
  * `/blog/[slug]`, …). `RESERVED_SLUGS` additionally stops an editor from
  * *creating* a page whose URL would be unreachable.
  *
+ * A composed page may also be nested under a route that opts in (see
+ * `NESTABLE_SLUG_PREFIXES`) — those never reach this catch-all, because the
+ * owning route matches first and looks the page up itself.
+ *
  * Metadata and JSON-LD both flow through the shared engines, so an editor gets
  * correct `<head>` tags and valid structured data purely by composing blocks.
  */
 import type { Metadata } from "next";
 
-import { Breadcrumbs } from "@/components/common/breadcrumbs";
-import { BlockRenderer } from "@/components/blocks/block-renderer";
-import { AnswerBlock } from "@/components/content/answer-block";
-import { JsonLd } from "@/components/seo/json-ld";
-import { buildJsonLd } from "@/lib/schema/engine";
-import { getSchemaContext } from "@/lib/schema/context";
+import { ComposedPageView } from "@/components/blocks/composed-page-view";
 import { pageMetadata } from "@/lib/page-metadata";
 import { redirectOrNotFound } from "@/lib/redirects";
 import {
@@ -36,13 +35,18 @@ export async function generateStaticParams() {
   // than failing the build (the same fallback the clinic route uses).
   try {
     const slugs = await getApprovedPageSlugs();
-    return slugs.map((slug) => ({ slug: [slug] }));
+    // Nested pages belong to the route they're nested under, not to this
+    // catch-all — pre-rendering them here would claim a path this file can't
+    // actually serve.
+    return slugs
+      .filter((slug) => !slug.includes("/"))
+      .map((slug) => ({ slug: [slug] }));
   } catch {
     return [];
   }
 }
 
-/** A composed page only ever lives at a single segment. */
+/** A composed page reached *through this route* only ever lives at one segment. */
 function pageSlugOf(segments: string[]): string | null {
   return segments.length === 1 ? (segments[0] ?? null) : null;
 }
@@ -82,52 +86,5 @@ export default async function ComposedPage({
   // control flow at a return statement).
   if (!page) return redirectOrNotFound(`/${params.slug.join("/")}`);
 
-  const ctx = await getSchemaContext();
-  const jsonLd = buildJsonLd(
-    "page",
-    {
-      page: {
-        name: page.title,
-        description: page.intro,
-        path: page.path,
-        datePublished: page.publishedAt,
-        dateModified: page.updatedAt,
-      },
-      blocks: page.blocks,
-    },
-    ctx,
-    page.schemaOverrides,
-  );
-
-  return (
-    <>
-      <JsonLd data={jsonLd} />
-
-      <div className="container py-8 md:py-10">
-        <Breadcrumbs
-          className="mb-4"
-          items={[
-            { name: "Home", href: "/" },
-            { name: page.title, href: page.path },
-          ]}
-        />
-
-        <header className="max-w-3xl">
-          <h1 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[32px]">
-            {page.title}
-          </h1>
-        </header>
-
-        {page.intro ? (
-          <div className="mt-5 max-w-3xl">
-            <AnswerBlock>{page.intro}</AnswerBlock>
-          </div>
-        ) : null}
-
-        <div className="mt-8 max-w-3xl">
-          <BlockRenderer blocks={page.blocks} />
-        </div>
-      </div>
-    </>
-  );
+  return <ComposedPageView page={page} />;
 }

@@ -8,16 +8,11 @@ import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/common/section";
-import { SITE_NAME } from "@/config/site";
 
 export const revalidate = 3600;
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "For clinics",
-    description: `Get your regenerative-medicine clinic listed on ${SITE_NAME}. Build trust with verification and receive qualified patient inquiries.`,
-    path: "/for-clinics",
-  });
+  pageMetadata({ path: "/for-clinics" });
 
 export default async function ForClinicsPage() {
   const plans = await getActivePlans();

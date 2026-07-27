@@ -11,14 +11,14 @@ import { CONTENT_REVIEW_STATUSES } from "@/lib/enums";
 import { blocksSchema } from "@/lib/validation/block";
 import {
   objectIdSchema,
+  pathSlugSchema,
   schemaOverrideSchema,
   seoSchema,
-  slugSchema,
 } from "@/lib/validation/common";
 
 export const pageCreateSchema = z.object({
   title: z.string().min(1, "Title is required").max(200),
-  slug: slugSchema,
+  slug: pathSlugSchema,
   intro: z.string().max(1000).optional(),
   blocks: blocksSchema,
   seo: seoSchema.optional(),

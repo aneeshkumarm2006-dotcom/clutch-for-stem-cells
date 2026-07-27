@@ -9,12 +9,7 @@ import { ReviewForm } from "@/components/review/review-form";
 import { EmptyState } from "@/components/ui/empty-state";
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Write a review",
-    description:
-      "Share your experience with a regenerative-medicine clinic. Reviews are checked by our team before they go live.",
-    path: "/reviews/new",
-  });
+  pageMetadata({ path: "/reviews/new" });
 
 export default async function NewReviewPage({
   searchParams,

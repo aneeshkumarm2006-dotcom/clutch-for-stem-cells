@@ -1,6 +1,17 @@
+/**
+ * Treatment landing pages — `/treatments/{slug}`.
+ *
+ * Resolves in two steps. A slug that names a Treatment taxonomy term renders the
+ * clinic directory pinned to it. A slug that doesn't falls back to a composed
+ * (block) page stored at `treatments/{slug}` — that's how editorial pieces such
+ * as a "PRP vs stem cell therapy" comparison live under `/treatments/` without
+ * being modelled as a treatment the directory would try to filter clinics by.
+ */
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+import { ComposedPageView } from "@/components/blocks/composed-page-view";
+import { getApprovedPage } from "@/lib/seoteam/page-data";
 import { pageMetadata } from "@/lib/page-metadata";
 import {
   getCoOccurringConditions,
@@ -26,6 +37,10 @@ import { EditorialArticle } from "@/components/content/editorial-article";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 import { JsonLd } from "@/components/seo/json-ld";
 
+/** The composed page authored at `treatments/{slug}`, if one is approved. */
+const composedTreatmentPage = (slug: string) =>
+  getApprovedPage(`treatments/${slug}`);
+
 export async function generateMetadata({
   params,
   searchParams,
@@ -34,7 +49,18 @@ export async function generateMetadata({
   searchParams: Record<string, string | string[] | undefined>;
 }): Promise<Metadata> {
   const term = await getTaxonomyTermBySlug("treatment", params.slug);
-  if (!term) return pageMetadata({ title: "Treatment not found" });
+  if (!term) {
+    const page = await composedTreatmentPage(params.slug);
+    if (!page) return pageMetadata({ title: "Treatment not found" });
+    return pageMetadata({
+      title: page.title,
+      description: page.intro,
+      path: page.path,
+      type: "article",
+      seo: page.seo,
+      noindex: !page.indexable,
+    });
+  }
   return pageMetadata({
     title: `${term.name} clinics`,
     description:
@@ -55,7 +81,20 @@ export default async function TreatmentDirectoryPage({
   searchParams: Record<string, string | string[] | undefined>;
 }) {
   const term = await getTaxonomyTermBySlug("treatment", params.slug);
-  if (!term) notFound();
+  if (!term) {
+    const page = await composedTreatmentPage(params.slug);
+    if (!page) notFound();
+    return (
+      <ComposedPageView
+        page={page}
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Treatments", href: "/treatments" },
+          { name: page.title, href: page.path },
+        ]}
+      />
+    );
+  }
 
   const queryParams = directoryParamsFrom(searchParams, {
     treatments: [term.slug],

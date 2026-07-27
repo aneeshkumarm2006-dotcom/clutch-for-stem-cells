@@ -14,11 +14,6 @@ export const generateMetadata = async ({
   searchParams: Record<string, string | string[] | undefined>;
 }): Promise<Metadata> => {
   const meta = await pageMetadata({
-    // Keyword-aligned with the target "stem cell clinics" and the on-page H1,
-    // giving a strong, non-thin title tag for the main directory.
-    title: "Stem Cell Clinics",
-    description:
-      "Browse and compare verified stem cell clinics and stem cell treatment clinics worldwide by treatment, condition, location, and patient reviews.",
     path: "/clinics",
     noindex: shouldNoindexDirectory(searchParams),
   });

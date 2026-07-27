@@ -8,12 +8,7 @@ import { TaxonomyCard } from "@/components/taxonomy/taxonomy-card";
 export const revalidate = 3600;
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Conditions treated",
-    description:
-      "Find regenerative-medicine clinics by the condition you're researching — from knee osteoarthritis to autoimmune and neurological conditions.",
-    path: "/conditions",
-  });
+  pageMetadata({ path: "/conditions" });
 
 function groupByCategory(terms: TaxonomyTerm[]): [string, TaxonomyTerm[]][] {
   const groups = new Map<string, TaxonomyTerm[]>();

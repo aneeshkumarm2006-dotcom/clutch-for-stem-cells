@@ -8,12 +8,7 @@ import { DestinationCard } from "@/components/taxonomy/taxonomy-card";
 export const revalidate = 3600;
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Destinations",
-    description:
-      "Browse regenerative-medicine clinics by country. Compare popular medical-travel destinations for stem cell treatment.",
-    path: "/locations",
-  });
+  pageMetadata({ path: "/locations" });
 
 export default async function LocationsIndexPage() {
   const countries = await getCountries();

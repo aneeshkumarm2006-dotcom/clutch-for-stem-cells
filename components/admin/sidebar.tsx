@@ -13,6 +13,7 @@ import {
   ListTree,
   Milestone,
   ScrollText,
+  Search,
   Send,
   Settings,
   Star,
@@ -73,8 +74,10 @@ const NAV: NavEntry[][] = [
       basePath: "/admin/content",
       children: [
         { label: "Pages & homepage", href: "/admin/content/pages" },
+        { label: "Clinic landing pages", href: "/admin/content/clinic-landings" },
       ],
     },
+    { type: "leaf", label: "Page SEO", href: "/admin/seo", icon: Search, minRole: "editor" },
     { type: "leaf", label: "Media", href: "/admin/media", icon: ImageIcon, minRole: "editor" },
   ],
   [

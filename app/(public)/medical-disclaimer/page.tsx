@@ -5,11 +5,7 @@ import { ProsePage } from "@/components/common/prose-page";
 import { SITE_NAME } from "@/config/site";
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Medical disclaimer",
-    description: `${SITE_NAME} provides information only and is not medical advice.`,
-    path: "/medical-disclaimer",
-  });
+  pageMetadata({ path: "/medical-disclaimer" });
 
 export default function MedicalDisclaimerPage() {
   return (

@@ -6,11 +6,7 @@ import { ProsePage } from "@/components/common/prose-page";
 import { SITE_NAME } from "@/config/site";
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Terms of service",
-    description: `The terms that govern your use of ${SITE_NAME}.`,
-    path: "/terms",
-  });
+  pageMetadata({ path: "/terms" });
 
 export default function TermsPage() {
   return (

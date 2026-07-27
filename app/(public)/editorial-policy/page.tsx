@@ -3,14 +3,9 @@ import type { Metadata } from "next";
 
 import { pageMetadata } from "@/lib/page-metadata";
 import { ProsePage } from "@/components/common/prose-page";
-import { SITE_NAME } from "@/config/site";
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Editorial policy",
-    description: `How ${SITE_NAME} curates clinics, moderates reviews, and labels paid placement.`,
-    path: "/editorial-policy",
-  });
+  pageMetadata({ path: "/editorial-policy" });
 
 export default function EditorialPolicyPage() {
   return (

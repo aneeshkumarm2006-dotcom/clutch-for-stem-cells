@@ -28,8 +28,9 @@ export function generateMetadata({
   const page = pageNumber(searchParams);
   // Each paginated index page self-canonicalizes (don't fold page 2+ into /blog).
   return pageMetadata({
-    title: page > 1 ? `Blog — Page ${page}` : "Blog",
-    description: `Guides, updates, and insights from the ${SITE_NAME} team.`,
+    // Page 1 takes its title/description from the static-page registry (and any
+    // /admin/seo override); a deeper page keeps its own paginated title.
+    title: page > 1 ? `Blog — Page ${page}` : undefined,
     path: page > 1 ? `/blog?page=${page}` : "/blog",
   });
 }

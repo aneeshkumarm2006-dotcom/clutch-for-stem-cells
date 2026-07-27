@@ -97,6 +97,21 @@ const seoDefaultsSchema = seoSchema.extend({
 });
 
 /**
+ * Per-route meta override for a code-owned page (`/admin/seo`). `path` must
+ * name a route in `config/static-pages.ts` — the handler enforces that, so an
+ * override can't be written for a URL that no page would ever read it back on.
+ */
+export const pageSeoOverrideSchema = seoSchema.extend({
+  path: z.string().min(1).max(200),
+});
+
+export const pageSeoUpdateSchema = z.object({
+  pageSeo: z.array(pageSeoOverrideSchema).max(200),
+});
+
+export type PageSeoUpdateInput = z.infer<typeof pageSeoUpdateSchema>;
+
+/**
  * Site identity for the structured-data engine. Blank values are meaningful
  * here — they mean "fall back to `config/content-engine`" — so empty strings are
  * accepted rather than rejected.
@@ -117,6 +132,7 @@ export const siteSettingUpdateSchema = z
     testimonials: z.array(testimonialSchema),
     partnerLogos: z.array(imageSchema),
     seoDefaults: seoDefaultsSchema,
+    pageSeo: z.array(pageSeoOverrideSchema),
     structuredData: structuredDataSchema,
     disclaimers: disclaimersSchema,
     contact: contactSchema,

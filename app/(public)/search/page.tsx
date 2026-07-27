@@ -18,8 +18,6 @@ export const generateMetadata = ({
   const raw = searchParams.q;
   const hasQuery = Boolean((Array.isArray(raw) ? raw[0] : raw)?.trim());
   return pageMetadata({
-    title: "Search",
-    description: "Search clinics, treatments, and conditions.",
     path: "/search",
     // Internal site-search results (`/search?q=…`) are thin, near-infinite
     // query-string permutations — a crawl-budget trap for a small site, and one

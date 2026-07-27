@@ -30,12 +30,9 @@ import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 export const revalidate = 600;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const meta = await pageMetadata({
-    path: "/",
-    title: "Stem Cell Guide",
-    description:
-      "Compare stem cell treatment options, costs and benefits across verified clinics: MSC, autologous, bone-marrow-derived, umbilical-cord and systemic cell therapy.",
-  });
+  // Title + description ship from `config/static-pages.ts` and are overridable
+  // per-route from /admin/seo.
+  const meta = await pageMetadata({ path: "/" });
   return {
     ...meta,
     // Head terms only. The long-tails (knee arthritis, MSC, autologous,

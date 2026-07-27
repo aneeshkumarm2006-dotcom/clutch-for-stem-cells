@@ -20,6 +20,7 @@ import { getBlogSitemapEntries } from "@/lib/seoteam/blog-data";
 import { getMatrixSitemapEntries } from "@/lib/seoteam/matrix-data";
 import { getReviewerSitemapEntries } from "@/lib/seoteam/reviewer-data";
 import { getPageSitemapEntries } from "@/lib/seoteam/page-data";
+import { getClinicLandingSitemapEntries } from "@/lib/clinic-landings";
 
 export const revalidate = 3600;
 
@@ -61,7 +62,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let dynamicEntries: MetadataRoute.Sitemap = [];
   try {
-    const [clinics, clinicReviews, taxonomy, blog, matrix, reviewers, pages]: [
+    const [
+      clinics,
+      clinicReviews,
+      taxonomy,
+      landings,
+      blog,
+      matrix,
+      reviewers,
+      pages,
+    ]: [
+      SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
       SitemapEntry[],
@@ -73,6 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getClinicSitemapEntries(),
       getClinicReviewSitemapEntries(),
       getTaxonomySitemapEntries(),
+      getClinicLandingSitemapEntries(),
       getBlogSitemapEntries(),
       getMatrixSitemapEntries(),
       getReviewerSitemapEntries(),
@@ -95,6 +107,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       })),
       ...taxonomy.map((e) => ({
+        url: absoluteUrl(e.path),
+        lastModified: e.lastModified ?? now,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      })),
+      // Curated `/clinics/{slug}` landing pages — active, indexable ones only.
+      ...landings.map((e) => ({
         url: absoluteUrl(e.path),
         lastModified: e.lastModified ?? now,
         changeFrequency: "weekly" as const,

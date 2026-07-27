@@ -545,8 +545,10 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
               </div>
               <p className="text-[12px] leading-snug text-text-muted">
                 Overrides the auto-generated title and description in search
-                results. Leave blank to fall back to the name and intro copy
-                above. The site brand suffix is added automatically.
+                results. A meta title you type here is used exactly as written —
+                add the brand suffix yourself if you want one. Leave blank to
+                fall back to the name and intro copy above, which do get the
+                brand suffix automatically.
               </p>
             </div>
             <TextField

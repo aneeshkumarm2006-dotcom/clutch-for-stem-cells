@@ -8,11 +8,7 @@ import { LeadForm } from "@/components/lead/lead-form";
 import { SITE_NAME } from "@/config/site";
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Contact",
-    description: `Get in touch with the ${SITE_NAME} team.`,
-    path: "/contact",
-  });
+  pageMetadata({ path: "/contact" });
 
 async function getContact() {
   await dbConnect();

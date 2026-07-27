@@ -3,14 +3,9 @@ import type { Metadata } from "next";
 
 import { pageMetadata } from "@/lib/page-metadata";
 import { ProsePage } from "@/components/common/prose-page";
-import { SITE_NAME } from "@/config/site";
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Privacy policy",
-    description: `How ${SITE_NAME} collects, uses, and protects your information.`,
-    path: "/privacy",
-  });
+  pageMetadata({ path: "/privacy" });
 
 export default function PrivacyPage() {
   return (

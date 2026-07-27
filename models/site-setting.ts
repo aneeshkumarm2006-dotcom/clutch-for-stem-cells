@@ -95,6 +95,23 @@ export interface ISeoDefaults extends ISeo {
 }
 
 /**
+ * Per-route SEO override for a page whose copy lives in **code**, not in a
+ * content collection — the homepage, `/clinics`, `/about`, and the other fixed
+ * routes (see `config/static-pages.ts`).
+ *
+ * Those pages have no DB record to hang an `seo` sub-document off, so their
+ * `<title>`/meta description used to be editable only by a developer. This
+ * keyed list closes that gap: `pageMetadata` looks the route's `path` up here
+ * and applies the override, which makes every public page metadata-editable
+ * from `/admin/seo`. A record-backed page (clinic, taxonomy term, landing page)
+ * still wins with its own `seo` — this only fills the gap where none exists.
+ */
+export interface IPageSeoOverride extends ISeo {
+  /** Root-relative, normalized path with no trailing slash — `/` or `/clinics`. */
+  path: string;
+}
+
+/**
  * Site identity for the structured-data engine — the runtime overlay on top of
  * `config/content-engine`'s build-time fallback. Lets an admin change the
  * publisher name, its schema.org type, and the logo that appears in every page's
@@ -118,6 +135,8 @@ export interface ISiteSetting extends TimestampFields {
   testimonials: ITestimonial[];
   partnerLogos: IImage[];
   seoDefaults?: ISeoDefaults;
+  /** Per-route meta overrides for the code-owned (fixed) public routes. */
+  pageSeo: IPageSeoOverride[];
   /** Site identity for the structured-data engine (Organization node). */
   structuredData?: IStructuredData;
   disclaimers?: IDisclaimers;
@@ -234,6 +253,14 @@ const seoDefaultsSchema = new Schema<ISeoDefaults>(
   { _id: false },
 );
 
+const pageSeoOverrideSchema = new Schema<IPageSeoOverride>(
+  {
+    ...seoSchema.obj,
+    path: { type: String, required: true, trim: true, lowercase: true },
+  },
+  { _id: false },
+);
+
 const structuredDataSchema = new Schema<IStructuredData>(
   {
     organizationName: { type: String, trim: true },
@@ -262,6 +289,7 @@ const SiteSettingSchema = new Schema<ISiteSetting, SiteSettingModel>(
     testimonials: { type: [testimonialSchema], default: [] },
     partnerLogos: { type: [imageSchema], default: [] },
     seoDefaults: { type: seoDefaultsSchema, default: () => ({}) },
+    pageSeo: { type: [pageSeoOverrideSchema], default: [] },
     structuredData: { type: structuredDataSchema, default: () => ({}) },
     disclaimers: { type: disclaimersSchema, default: () => ({}) },
     contact: { type: contactSchema, default: () => ({}) },

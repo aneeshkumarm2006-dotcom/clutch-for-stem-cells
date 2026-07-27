@@ -7,11 +7,7 @@ import { pageMetadata } from "@/lib/page-metadata";
 import { SITE_NAME } from "@/config/site";
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "FAQ",
-    description: `Common questions about ${SITE_NAME}, verification, reviews, and how to use the directory.`,
-    path: "/faq",
-  });
+  pageMetadata({ path: "/faq" });
 
 const FAQS: { question: string; answer: string }[] = [
   {

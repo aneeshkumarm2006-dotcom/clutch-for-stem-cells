@@ -8,12 +8,7 @@ import { FindClinicWizard } from "@/components/find/find-clinic-wizard";
 export const revalidate = 3600;
 
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({
-    title: "Find a clinic",
-    description:
-      "Answer a few questions about your condition, budget, and timeframe and get matched with accredited regenerative-medicine clinics that fit.",
-    path: "/find-a-clinic",
-  });
+  pageMetadata({ path: "/find-a-clinic" });
 
 export default async function FindAClinicPage() {
   const [conditions, treatments, countries] = await Promise.all([
