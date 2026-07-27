@@ -13,7 +13,7 @@ export default function PrivacyPage() {
       <h2>What we collect</h2>
       <p>
         We collect the information you provide when you create an account, submit
-        a review, request a consultation, or contact us — such as your name,
+        a review, request a consultation, or contact us, such as your name,
         email, and the details of your inquiry. We also collect limited usage
         analytics to improve the service.
       </p>

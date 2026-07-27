@@ -66,7 +66,7 @@ export default async function AccountPage() {
           <div>
             <dt className="text-[12.5px] text-text-muted">Name</dt>
             <dd className="mt-0.5 text-[14px] text-text-primary">
-              {user.name ?? "—"}
+              {user.name ?? "–"}
             </dd>
           </div>
           <div>

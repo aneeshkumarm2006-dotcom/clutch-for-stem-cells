@@ -65,7 +65,7 @@ export default async function BlogPreviewPage({
         <div className="container flex flex-wrap items-center justify-between gap-3 py-2.5">
           <span className="inline-flex items-center gap-2 text-[13px] font-medium text-warning-fg">
             <EyeOff className="size-4" aria-hidden="true" />
-            Preview — this post is not published. It won’t appear on your public
+            Preview: this post is not published. It won’t appear on your public
             blog until it’s live.
           </span>
           <Link

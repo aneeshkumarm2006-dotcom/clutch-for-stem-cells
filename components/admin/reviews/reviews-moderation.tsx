@@ -112,7 +112,7 @@ export function ReviewsModeration({ rows }: { rows: AdminReviewRow[] }) {
               ) : null}
             </div>
             <p className="line-clamp-2 text-[13px] text-text-secondary">
-              {r.snippet || "—"}
+              {r.snippet || "–"}
             </p>
           </button>
         ))}

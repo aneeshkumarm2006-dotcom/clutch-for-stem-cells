@@ -366,7 +366,7 @@ export function ReviewForm({
             label="Email"
             type="email"
             required
-            hint="Private — stored for our records only. Never shown publicly."
+            hint="Private. Stored for our records only, never shown publicly."
             placeholder="you@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

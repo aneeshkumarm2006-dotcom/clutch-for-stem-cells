@@ -36,7 +36,7 @@ import { adminFetch } from "@/lib/admin/client";
 import type { BlogAdminRow } from "@/lib/seoteam/blog-data";
 
 function formatDate(iso?: string): string {
-  if (!iso) return "—";
+  if (!iso) return "–";
   // Pin to UTC so the server-rendered date matches client hydration (this table
   // is a client component SSR'd by the force-dynamic dashboard page).
   return new Date(iso).toLocaleDateString("en-US", {

@@ -13,9 +13,11 @@
     "import-clinics": "tsx scripts/import-clinics.ts",
     "recompute-counts": "tsx scripts/recompute-clinic-counts.ts",
     "migrate": "tsx scripts/migrations/001-content-engine.ts",
+    "check:meta": "tsx scripts/check-meta.ts",
+    "check:meta:crawl": "tsx scripts/check-meta.ts --crawl",
     "test": "npm run test:analyticshub && npm run test:engine",
     "test:analyticshub": "tsx --test tests/analyticshub/crypto.test.ts tests/analyticshub/password.test.ts tests/analyticshub/session.test.ts tests/analyticshub/handler.test.ts tests/analyticshub/palette.test.ts",
-    "test:engine": "tsx --tsconfig tsconfig.test.json --test tests/content-engine/engine.test.ts tests/content-engine/db.test.ts"
+    "test:engine": "tsx --tsconfig tsconfig.test.json --test tests/content-engine/engine.test.ts tests/content-engine/db.test.ts tests/content-engine/meta-text.test.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

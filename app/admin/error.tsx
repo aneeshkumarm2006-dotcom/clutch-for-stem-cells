@@ -30,7 +30,7 @@ export default function AdminError({
         This module hit an error
       </h1>
       <p className="mt-2 max-w-md text-sm text-text-secondary">
-        Something went wrong loading this admin view. Try again — if it persists,
+        Something went wrong loading this admin view. Try again. If it persists,
         check the server logs.
       </p>
       <Button className="mt-5" onClick={() => reset()}>

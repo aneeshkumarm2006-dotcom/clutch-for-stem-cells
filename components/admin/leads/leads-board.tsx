@@ -40,7 +40,7 @@ const TIMEFRAME: Record<string, string> = {
 const WORKFLOW = ["new", "contacted", "qualified", "closed"] as const;
 
 function relTime(iso?: string): string {
-  if (!iso) return "—";
+  if (!iso) return "–";
   const m = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
   if (m < 1) return "just now";
   if (m < 60) return `${m}m ago`;
@@ -117,15 +117,15 @@ export function LeadsBoard({
                     <Td className="font-semibold">{r.name}</Td>
                     <Td className="text-text-secondary">
                       {r.clinicName ??
-                        (r.matchedCount ? `${r.matchedCount} clinics` : "—")}
+                        (r.matchedCount ? `${r.matchedCount} clinics` : "–")}
                     </Td>
                     <Td className="text-text-secondary">
-                      {r.conditionName ?? "—"}
+                      {r.conditionName ?? "–"}
                     </Td>
                     <Td>
                       <LeadStatusBadge status={r.status} />
                     </Td>
-                    <Td className="text-text-muted">{r.source ?? "—"}</Td>
+                    <Td className="text-text-muted">{r.source ?? "–"}</Td>
                     <Td className="text-text-muted">{relTime(r.createdAt)}</Td>
                   </Tr>
                 ))
@@ -227,7 +227,7 @@ export function LeadsBoard({
                 >
                   {n.note}
                   <span className="mt-1 block text-text-muted">
-                    — {n.byName ?? "Admin"}
+                    {n.byName ?? "Admin"}
                     {n.at ? ` · ${relTime(n.at)}` : ""}
                   </span>
                 </div>

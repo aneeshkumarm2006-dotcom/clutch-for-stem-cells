@@ -123,7 +123,7 @@ export function KeywordManager({
         <Label htmlFor="link-first-only" className="cursor-pointer">
           Link first occurrence only
           <span className="mt-0.5 block text-[11.5px] font-normal text-text-muted">
-            Recommended — avoids over-optimization.
+            Recommended. Avoids over-optimization.
           </span>
         </Label>
         <Toggle

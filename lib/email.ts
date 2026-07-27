@@ -149,7 +149,7 @@ export async function sendPasswordResetEmail(
       "Reset your password",
       `<p style="margin:0 0 20px;color:#5C7388;">Choose a new password for your account.</p>
        ${button(url, "Reset password")}
-       <p style="margin:20px 0 0;color:#90AAC0;font-size:13px;">This link expires in 1 hour. If you didn't request a reset, you can ignore this email — your password won't change.</p>`,
+       <p style="margin:20px 0 0;color:#90AAC0;font-size:13px;">This link expires in 1 hour. If you didn't request a reset, you can ignore this email and your password won't change.</p>`,
     ),
     text: `Reset your ${SITE_NAME} password by opening this link (expires in 1 hour):\n${url}\n\nIf you didn't request a reset, you can ignore this email.`,
   });
@@ -189,8 +189,8 @@ export async function sendLeadNotificationEmail({
   manageUrl?: string;
 }): Promise<void> {
   const subject = lead.clinicName
-    ? `New inquiry for ${lead.clinicName} — ${SITE_NAME}`
-    : `New ${lead.typeLabel.toLowerCase()} — ${SITE_NAME}`;
+    ? `New inquiry for ${lead.clinicName} | ${SITE_NAME}`
+    : `New ${lead.typeLabel.toLowerCase()} | ${SITE_NAME}`;
 
   const rows = detailRows([
     ["Type", lead.typeLabel],

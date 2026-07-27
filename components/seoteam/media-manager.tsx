@@ -474,9 +474,9 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
       {rows.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border-strong bg-surface p-12 text-center text-sm text-text-muted">
           {currentFilter === "unused"
-            ? "No unused images — every image here is attached to a post."
+            ? "No unused images. Every image here is attached to a post."
             : currentFilter === "missing-alt"
-              ? "No images missing alt text — nice, your library is fully described."
+              ? "No images missing alt text. Your library is fully described."
               : "No images yet. Upload some, import URLs, or scan your posts."}
         </div>
       ) : view === "table" ? (
@@ -625,7 +625,7 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
         title="Delete image"
         description={
           deleteFor && deleteFor.usageCount > 0
-            ? `This image is used in ${deleteFor.usageCount} post${deleteFor.usageCount === 1 ? "" : "s"} — those images will break. Delete anyway?`
+            ? `This image is used in ${deleteFor.usageCount} post${deleteFor.usageCount === 1 ? "" : "s"}. Those images will break. Delete anyway?`
             : "Delete this image from the library and storage?"
         }
         confirmLabel="Delete"
@@ -642,7 +642,7 @@ export function MediaManager({ data }: { data: SeoMediaResult }) {
         title={`Delete ${selected.size} image${selected.size === 1 ? "" : "s"}`}
         description={
           selectedInUse > 0
-            ? `${selectedInUse} of these ${selected.size === 1 ? "is" : "are"} used in posts — those images will break. Delete anyway?`
+            ? `${selectedInUse} of these ${selected.size === 1 ? "is" : "are"} used in posts. Those images will break. Delete anyway?`
             : "Delete the selected images from the library and storage?"
         }
         confirmLabel="Delete"
@@ -865,11 +865,11 @@ function DetailDialog({
                 <Meta label="Dimensions">
                   {media.width && media.height
                     ? `${media.width}×${media.height}`
-                    : "—"}
+                    : "–"}
                 </Meta>
-                <Meta label="Size">{fmtSize(media.bytes) || "—"}</Meta>
-                <Meta label="Folder">{media.folder ?? "—"}</Meta>
-                <Meta label="Format">{media.format ?? "—"}</Meta>
+                <Meta label="Size">{fmtSize(media.bytes) || "–"}</Meta>
+                <Meta label="Folder">{media.folder ?? "–"}</Meta>
+                <Meta label="Format">{media.format ?? "–"}</Meta>
                 <Meta label="Alt text">
                   {media.alt?.trim() ? (
                     media.alt

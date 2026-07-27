@@ -41,7 +41,7 @@ export const BLOG_TEMPLATES: Record<BlogTemplateKey, BlogTemplate> = {
   listicle: {
     key: "listicle",
     name: "Listicle (Top N …)",
-    description: "Ranked or grouped list — 'Top 10…', 'Best… for…'.",
+    description: "Ranked or grouped list: 'Top 10…', 'Best… for…'.",
     excerptHint: "Tease the list and who it's for (150–160 chars).",
     body: [
       g("Set up the list: what it covers and how you chose the items."),
@@ -102,7 +102,7 @@ export const BLOG_TEMPLATES: Record<BlogTemplateKey, BlogTemplate> = {
     description: "Timely announcement or update with the key facts first.",
     excerptHint: "Summarize the news in one sentence (150–160 chars).",
     body: [
-      g("Lead with the news: who, what, when — the most important fact first."),
+      g("Lead with the news: who, what, when. The most important fact first."),
       "<h2>What happened</h2>",
       g("Give the essential details and context."),
       "<h2>Why it matters</h2>",

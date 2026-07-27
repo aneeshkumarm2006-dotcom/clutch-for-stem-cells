@@ -545,7 +545,7 @@ export function RichTextEditor({
                 id="rte-img-src"
                 value={imgSrc}
                 onChange={(e) => setImgSrc(e.target.value)}
-                placeholder="https://example.com/image.jpg — or upload above"
+                placeholder="https://example.com/image.jpg (or upload above)"
               />
             </div>
 

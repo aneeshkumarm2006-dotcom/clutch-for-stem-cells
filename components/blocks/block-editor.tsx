@@ -300,7 +300,7 @@ function BlockForm({
             placeholder="<iframe src …>"
           />
           <p className="text-[11.5px] text-text-muted">
-            Sanitized on save — scripts and event handlers are stripped.
+            Sanitized on save. Scripts and event handlers are stripped.
           </p>
         </div>
       );

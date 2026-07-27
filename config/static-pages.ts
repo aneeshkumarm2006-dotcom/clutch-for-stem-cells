@@ -43,7 +43,7 @@ export const STATIC_PAGES: StaticPageMeta[] = [
     group: "Core",
     title: "Stem Cell Guide",
     description:
-      "Compare stem cell treatment options, costs and benefits across verified clinics: MSC, autologous, bone-marrow-derived, umbilical-cord and systemic cell therapy.",
+      "Compare stem cell treatment options, costs and benefits across verified clinics offering MSC, autologous, bone-marrow-derived, umbilical-cord and systemic cell therapy.",
   },
   {
     path: "/clinics",
@@ -69,7 +69,7 @@ export const STATIC_PAGES: StaticPageMeta[] = [
     group: "Directory",
     title: "Conditions treated",
     description:
-      "Find regenerative-medicine clinics by the condition you're researching — from knee osteoarthritis to autoimmune and neurological conditions.",
+      "Find regenerative-medicine clinics by the condition you're researching, from knee osteoarthritis to autoimmune and neurological conditions.",
   },
   {
     path: "/locations",

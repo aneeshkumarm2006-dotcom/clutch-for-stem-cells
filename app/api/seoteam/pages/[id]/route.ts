@@ -40,7 +40,7 @@ export async function PATCH(
     if (data.slug && data.slug !== previousSlug) {
       if (isReservedSlug(data.slug)) {
         return fail(
-          `"/${data.slug}" is reserved by an existing route — pick another slug.`,
+          `"/${data.slug}" is reserved by an existing route. Pick another slug.`,
           422,
         );
       }

@@ -12,12 +12,14 @@ import {
   SITE_TAGLINE,
   SITE_URL,
 } from "@/config/site";
+import { META_SEPARATOR } from "@/lib/meta-text";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  // The pipe is the only separator a meta tag may carry — see `lib/meta-text.ts`.
   title: {
-    default: `${SITE_NAME} — ${SITE_TAGLINE}`,
-    template: `%s · ${SITE_NAME}`,
+    default: `${SITE_NAME} ${META_SEPARATOR} ${SITE_TAGLINE}`,
+    template: `%s ${META_SEPARATOR} ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   verification: {

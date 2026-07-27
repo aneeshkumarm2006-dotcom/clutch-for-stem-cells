@@ -120,6 +120,7 @@ export type {
   ISiteSetting,
   SiteSettingModel as SiteSettingModelType,
   IHero,
+  IHomepage,
   IPopularSearch,
   ITestimonial,
   IDisclaimers,

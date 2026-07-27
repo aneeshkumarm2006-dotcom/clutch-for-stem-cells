@@ -108,7 +108,7 @@ export function LineChart({
         ))}
         {model.indexed && (
           <span className="ml-auto rounded-full bg-warning-bg px-2 py-0.5 text-[11px] font-medium text-warning-fg">
-            indexed — each line scaled to its own max
+            indexed: each line scaled to its own max
           </span>
         )}
       </div>

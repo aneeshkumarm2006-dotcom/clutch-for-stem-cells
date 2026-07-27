@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { PostsTable } from "@/components/seoteam/posts-table";
 
 export const metadata: Metadata = {
-  title: "Posts · SEO Team",
+  title: "Posts | SEO Team",
   robots: { index: false, follow: false },
 };
 

@@ -63,7 +63,7 @@ export async function DELETE(
     const inUse = matrix + treatments + conditions + locations;
     if (inUse > 0) {
       return fail(
-        `Can't delete — ${doc.name} is credited on ${inUse} page${
+        `Can't delete. ${doc.name} is credited on ${inUse} page${
           inUse === 1 ? "" : "s"
         }. Reassign or deactivate instead.`,
         409,

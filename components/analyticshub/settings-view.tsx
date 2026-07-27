@@ -13,7 +13,7 @@ import {
 function googleToast() {
   const g = new URLSearchParams(window.location.search).get("google");
   if (!g) return;
-  if (g === "connected") toast.success("Google connected — pick a property and site.");
+  if (g === "connected") toast.success("Google connected. Pick a property and site.");
   else if (g === "denied") toast.error("Google authorization was cancelled.");
   else if (g === "badstate") toast.error("Google sign-in expired. Try again.");
   else if (g === "session") toast.error("Session expired. Sign in and retry.");

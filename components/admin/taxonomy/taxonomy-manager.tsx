@@ -545,8 +545,8 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
               </div>
               <p className="text-[12px] leading-snug text-text-muted">
                 Overrides the auto-generated title and description in search
-                results. A meta title you type here is used exactly as written —
-                add the brand suffix yourself if you want one. Leave blank to
+                results. A meta title you type here is used exactly as written.
+                Add the brand suffix yourself if you want one. Leave blank to
                 fall back to the name and intro copy above, which do get the
                 brand suffix automatically.
               </p>
@@ -590,11 +590,11 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
       <div className="px-5 pb-8 lg:px-7">
         <div className="rounded-xl border border-border bg-surface p-5">
           <div className="mb-1 font-display text-base font-semibold">
-            Editorial content — {form.name || `new ${view.singular}`}
+            Editorial content: {form.name || `new ${view.singular}`}
           </div>
           <p className="mb-4 text-[13px] text-text-muted">
             Long-form content for this term&apos;s page. Rendered publicly only
-            when <strong>approved</strong> — the cure/guarantee scanner and an
+            when <strong>approved</strong>. The cure/guarantee scanner and an
             assigned medical reviewer gate approval.
           </p>
 
@@ -624,7 +624,7 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
                       value={form.evidenceLevel}
                       onChange={(e) => set({ evidenceLevel: e.target.value })}
                     >
-                      <option value="">— not set —</option>
+                      <option value="">Not set</option>
                       {EVIDENCE_LEVELS.map((l) => (
                         <option key={l} value={l}>
                           {l}

@@ -156,7 +156,7 @@ export function FindClinicWizard({
       {step === 0 ? (
         <Fieldset
           title="What condition are you researching?"
-          help="Pick the closest match — you can refine results later."
+          help="Pick the closest match. You can refine results later."
         >
           <div className="flex flex-wrap gap-2">
             {conditions.map((c) => (
@@ -175,7 +175,7 @@ export function FindClinicWizard({
       {step === 1 ? (
         <Fieldset
           title="Which treatments interest you?"
-          help="Optional — select any that apply."
+          help="Optional. Select any that apply."
         >
           <div className="flex flex-wrap gap-2">
             {treatments.map((t) => (
@@ -197,7 +197,7 @@ export function FindClinicWizard({
       {step === 2 ? (
         <Fieldset
           title="Any location preference?"
-          help="Optional — leave blank to see clinics worldwide."
+          help="Optional. Leave blank to see clinics worldwide."
         >
           <div className="flex flex-wrap gap-2">
             {countries.map((c) => (

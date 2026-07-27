@@ -30,7 +30,7 @@ export function generateMetadata({
   return pageMetadata({
     // Page 1 takes its title/description from the static-page registry (and any
     // /admin/seo override); a deeper page keeps its own paginated title.
-    title: page > 1 ? `Blog — Page ${page}` : undefined,
+    title: page > 1 ? `Blog | Page ${page}` : undefined,
     path: page > 1 ? `/blog?page=${page}` : "/blog",
   });
 }

@@ -73,7 +73,8 @@ const NAV: NavEntry[][] = [
       minRole: "editor",
       basePath: "/admin/content",
       children: [
-        { label: "Pages & homepage", href: "/admin/content/pages" },
+        { label: "Homepage", href: "/admin/content/homepage" },
+        { label: "Site content", href: "/admin/content/pages" },
         { label: "Clinic landing pages", href: "/admin/content/clinic-landings" },
       ],
     },

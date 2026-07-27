@@ -177,7 +177,7 @@ export function Wizard() {
               Confirm your project
             </h2>
             <p className="mt-1 text-sm text-text-secondary">
-              We detected these — edit if you like.
+              We detected these. Edit if you like.
             </p>
             <div className="mt-4 space-y-3">
               <div>

@@ -118,7 +118,7 @@ export function ComparisonRenderer({ data }: { data: ComparisonBlock }) {
                 </th>
                 {data.columns.map((_, c) => (
                   <td key={c} className="p-3 align-top text-text-secondary">
-                    {row.cells[c] ?? "—"}
+                    {row.cells[c] ?? "–"}
                   </td>
                 ))}
               </tr>

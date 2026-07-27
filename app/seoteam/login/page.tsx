@@ -5,7 +5,7 @@ import { SITE_NAME } from "@/config/site";
 import { LoginForm } from "@/components/seoteam/login-form";
 
 export const metadata: Metadata = {
-  title: "Sign in · SEO Team",
+  title: "Sign in | SEO Team",
   robots: { index: false, follow: false },
 };
 

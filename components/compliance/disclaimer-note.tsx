@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  */
 const VARIANTS = {
   medical:
-    "Information only — not medical advice or an endorsement. Always consult a licensed physician. Individual results vary and no outcome is guaranteed.",
+    "Information only. Not medical advice or an endorsement. Always consult a licensed physician. Individual results vary and no outcome is guaranteed.",
   results:
     "Individual results vary and are not typical or guaranteed. Case studies and testimonials reflect one person's experience.",
   pricing:

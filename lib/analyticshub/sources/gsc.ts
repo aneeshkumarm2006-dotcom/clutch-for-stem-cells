@@ -153,7 +153,7 @@ export async function fetchGsc(
     title: "Top queries",
     columns: ["Query", "Clicks", "Impressions", "CTR", "Position"],
     rows: (queries.rows ?? []).map((r) => [
-      r.keys?.[0] ?? "—",
+      r.keys?.[0] ?? "–",
       r.clicks ?? 0,
       r.impressions ?? 0,
       `${round((r.ctr ?? 0) * 100, 1)}%`,

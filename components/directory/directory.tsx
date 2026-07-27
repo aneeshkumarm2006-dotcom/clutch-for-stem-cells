@@ -90,8 +90,8 @@ export function Directory({
           </p>
         ) : null}
         <p className="mt-3 text-[12.5px] text-text-muted">
-          Ratings updated {ratingsUpdated}. Verification is accreditation-based
-          —{" "}
+          Ratings updated {ratingsUpdated}. Verification is
+          accreditation-based:{" "}
           <Link
             href="/methodology"
             className="font-medium text-text-link hover:underline"

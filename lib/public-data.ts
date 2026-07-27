@@ -16,7 +16,9 @@ import { Types, type Model } from "mongoose";
 
 import { dbConnect } from "@/lib/db";
 import { formatLocation } from "@/lib/format";
+import { getHomepageContent } from "@/lib/homepage";
 import { compareClinicsForListing } from "@/lib/ranking";
+import type { HomepageContent } from "@/config/homepage";
 import {
   searchClinics,
   type ClinicListItem,
@@ -1286,42 +1288,20 @@ export async function getClinicsBySlugs(
 
 // ── Homepage ─────────────────────────────────────────────────────────────────
 
+/**
+ * The homepage's data: the editable copy (`content`, resolved from Settings by
+ * `lib/homepage.ts`) plus the feeds and counts it can only get from the
+ * database. Every string the page renders comes from `content` — the page holds
+ * no copy of its own.
+ */
 export interface HomeData {
-  hero: {
-    headline: string;
-    subhead: string;
-    ctaPrimaryLabel: string;
-    ctaSecondaryLabel: string;
-  };
-  popularSearches: { label: string; href: string }[];
+  content: HomepageContent;
   treatments: TaxonomyTerm[];
   conditions: TaxonomyTerm[];
   countries: CountryTerm[];
   featuredClinics: ClinicCardData[];
-  testimonials: {
-    quote: string;
-    author?: string;
-    role?: string;
-    location?: string;
-    rating?: number;
-  }[];
   stats: { clinics: number; verified: number; reviews: number };
 }
-
-const HERO_FALLBACK = {
-  headline: "My Stem Cell Guide: Trusted Information, Research & Patient Resources",
-  subhead:
-    "Compare accredited stem cell clinics worldwide by treatment, condition, location, and verified patient reviews.",
-  ctaPrimaryLabel: "Find a clinic",
-  ctaSecondaryLabel: "Browse all clinics",
-};
-
-const POPULAR_FALLBACK = [
-  { label: "Knee osteoarthritis", href: "/conditions/knee-osteoarthritis" },
-  { label: "MSC therapy", href: "/treatments/msc-therapy" },
-  { label: "Anti-aging", href: "/conditions/anti-aging-longevity" },
-  { label: "Clinics in Mexico", href: "/locations/mexico" },
-];
 
 /** Featured clinics: admin-curated IDs first, then top-ranked verified clinics. */
 async function getFeaturedClinics(
@@ -1354,7 +1334,10 @@ async function getFeaturedClinics(
 
 export async function getHomeData(): Promise<HomeData> {
   await dbConnect();
-  const settings = await SiteSetting.getGlobal();
+  const [settings, content] = await Promise.all([
+    SiteSetting.getGlobal(),
+    getHomepageContent(),
+  ]);
 
   const [
     treatments,
@@ -1368,7 +1351,7 @@ export async function getHomeData(): Promise<HomeData> {
     getTreatments(),
     getConditions(),
     getCountries(),
-    getFeaturedClinics(settings.featuredClinicIds ?? []),
+    getFeaturedClinics(settings.featuredClinicIds ?? [], content.featured.limit),
     Clinic.countDocuments({ status: "published", isDeleted: false }),
     Clinic.countDocuments({
       status: "published",
@@ -1379,28 +1362,11 @@ export async function getHomeData(): Promise<HomeData> {
   ]);
 
   return {
-    hero: {
-      headline: settings.hero?.headline || HERO_FALLBACK.headline,
-      subhead: settings.hero?.subhead || HERO_FALLBACK.subhead,
-      ctaPrimaryLabel:
-        settings.hero?.ctaPrimaryLabel || HERO_FALLBACK.ctaPrimaryLabel,
-      ctaSecondaryLabel:
-        settings.hero?.ctaSecondaryLabel || HERO_FALLBACK.ctaSecondaryLabel,
-    },
-    popularSearches: settings.popularSearches?.length
-      ? settings.popularSearches.map((p) => ({ label: p.label, href: p.href }))
-      : POPULAR_FALLBACK,
+    content,
     treatments,
     conditions,
     countries,
     featuredClinics,
-    testimonials: (settings.testimonials ?? []).map((t) => ({
-      quote: t.quote,
-      author: t.author,
-      role: t.role,
-      location: t.location,
-      rating: t.rating,
-    })),
     stats: {
       clinics: clinicCount,
       verified: verifiedCount,

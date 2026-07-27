@@ -4,7 +4,7 @@ import { PageEditor, type PageEditorValues } from "@/components/seoteam/page-edi
 import { getReviewerOptions } from "@/lib/seoteam/matrix-data";
 
 export const metadata: Metadata = {
-  title: "New page · SEO Team",
+  title: "New page | SEO Team",
   robots: { index: false, follow: false },
 };
 

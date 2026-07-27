@@ -180,7 +180,7 @@ export function ContentFlagWarning({ flags }: { flags: string[] }) {
         <AlertTriangle className="size-4" /> Flagged phrases
       </div>
       <p className="text-[12.5px] text-text-secondary">
-        {flags.join(", ")} — approval is blocked until a reviewer acknowledges
+        {flags.join(", ")}. Approval is blocked until a reviewer acknowledges
         these.
       </p>
     </div>
@@ -230,7 +230,7 @@ export function ReviewControls({
           value={reviewedBy}
           onChange={(e) => onReviewedByChange(e.target.value)}
         >
-          <option value="">— none —</option>
+          <option value="">None</option>
           {reviewers.map((r) => (
             <option key={r.id} value={r.id}>
               {r.name}
@@ -240,7 +240,7 @@ export function ReviewControls({
         </select>
         {!reviewers.length ? (
           <p className="text-[12px] text-text-muted">
-            No reviewers yet — add one before approving.
+            No reviewers yet. Add one before approving.
           </p>
         ) : null}
       </div>

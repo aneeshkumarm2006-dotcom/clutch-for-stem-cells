@@ -181,7 +181,7 @@ export default async function TreatmentDirectoryPage({
                 },
                 {
                   title: `Conditions paired with ${term.name}`,
-                  description: `Conditions that clinics offering ${term.name} also list — not a statement that ${term.name} treats them.`,
+                  description: `Conditions that clinics offering ${term.name} also list. This is not a statement that ${term.name} treats them.`,
                   links: relatedConditions.map((c) => ({
                     href: `/conditions/${c.slug}`,
                     label: c.name,

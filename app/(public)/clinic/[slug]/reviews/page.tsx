@@ -14,6 +14,12 @@
  * the clean path is canonical and indexable; sorted/filtered/paged variants are
  * `noindex, follow`. A clinic with no approved reviews is `noindex` too, and is
  * excluded from the sitemap, so we never submit an empty page to the index.
+ *
+ * Every piece of copy here has an editor override on `Clinic.reviewsPage`
+ * (admin → clinic → "Reviews page"): heading, both intro variants, a Markdown
+ * body under the list, the sidebar card, and a `seo` block scoped to this URL.
+ * Each one is a fallback, not a replacement — an unset field keeps the derived
+ * copy below, which is what every clinic without a `reviewsPage` renders.
  */
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -31,6 +37,7 @@ import { buildJsonLd } from "@/lib/schema/engine";
 import { getSchemaContext } from "@/lib/schema/context";
 import { redirectOrNotFound, resolveRedirect } from "@/lib/redirects";
 import { pageMetadata } from "@/lib/page-metadata";
+import { renderMarkdown } from "@/lib/markdown";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import {
@@ -71,6 +78,12 @@ type SearchParams = Record<string, string | string[] | undefined>;
 const single = (v: string | string[] | undefined) =>
   Array.isArray(v) ? v[0] : v;
 
+/** Blank/whitespace-only editor fields mean "not set" — fall through. */
+const override = (v: string | undefined | null): string | undefined => {
+  const t = v?.trim();
+  return t ? t : undefined;
+};
+
 export async function generateMetadata({
   params,
   searchParams,
@@ -87,18 +100,24 @@ export async function generateMetadata({
     ? ` in ${[hq.city, hq.country].filter(Boolean).join(", ")}`
     : "";
   const plural = clinic.reviewCount === 1 ? "review" : "reviews";
+  const seo = clinic.raw.reviewsPage?.seo;
 
   return pageMetadata({
     // Exact-match the query pattern: "<clinic> reviews".
     title: `${clinic.name} Reviews`,
     description:
       clinic.reviewCount > 0
-        ? `${formatCount(clinic.reviewCount)} patient ${plural} of ${clinic.name}${where} — ${clinic.ratingAvg.toFixed(1)} out of 5 across outcome, communication, facility, and value for money.`
-        : `Patient reviews of ${clinic.name}${where}. No reviews have been published yet — be the first to share your treatment experience.`,
+        ? `${formatCount(clinic.reviewCount)} patient ${plural} of ${clinic.name}${where}. Rated ${clinic.ratingAvg.toFixed(1)} out of 5 across outcome, communication, facility, and value for money.`
+        : `Patient reviews of ${clinic.name}${where}. No reviews have been published yet. Be the first to share your treatment experience.`,
     path: `/clinic/${clinic.slug}/reviews`,
-    image: clinic.coverUrl ?? clinic.logoUrl,
-    // Deliberately not `seo: clinic.raw.seo` — that override belongs to the
+    // `buildMetadata` reads `input.image` before `seo.ogImage`, so resolve the
+    // override here or the clinic's cover would always win over it.
+    image: override(seo?.ogImage) ?? clinic.coverUrl ?? clinic.logoUrl,
+    // `reviewsPage.seo`, not `clinic.raw.seo` — the latter belongs to the
     // profile, and reusing it would point this page's canonical at the profile.
+    seo: seo ?? null,
+    // OR-ed with `seo.noindex` inside `buildMetadata`: the editor toggle can add
+    // a noindex, never remove the automatic one on an empty/filtered page.
     noindex: clinic.reviewCount === 0 || shouldNoindexDirectory(searchParams),
   });
 }
@@ -146,6 +165,12 @@ export default async function ClinicReviewsPage({
     id: c.id,
     name: c.name,
   }));
+
+  const cms = clinic.raw.reviewsPage;
+  const introOverride = override(
+    stats.total > 0 ? cms?.intro : (cms?.introEmpty ?? cms?.intro),
+  );
+  const bodyMarkdown = override(cms?.bodyMarkdown);
 
   // Same `clinic` content type as the profile, so any per-record schema
   // overrides an editor set in the admin panel still apply. The `MedicalClinic`
@@ -220,12 +245,14 @@ export default async function ClinicReviewsPage({
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <h1 className="font-display text-[26px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[30px]">
-                    {clinic.name} reviews
+                    {override(cms?.heading) ?? `${clinic.name} reviews`}
                   </h1>
                   {clinic.badge ? <VerifiedBadge badge={clinic.badge} /> : null}
                 </div>
                 <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-text-secondary">
-                  {stats.total > 0 ? (
+                  {introOverride ? (
+                    introOverride
+                  ) : stats.total > 0 ? (
                     <>
                       {formatCount(stats.total)} published{" "}
                       {stats.total === 1 ? "review" : "reviews"} from patients
@@ -437,24 +464,39 @@ export default async function ClinicReviewsPage({
               />
             ) : null}
           </section>
+
+          {/* Editorial context under the list — admin-authored, optional.
+              `renderMarkdown` escapes HTML before rendering its subset, so the
+              stored string can't smuggle markup into the page (PRD §13). */}
+          {bodyMarkdown ? (
+            <section
+              className="prose-article mt-10"
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: renderMarkdown(bodyMarkdown) }}
+            />
+          ) : null}
         </div>
 
         {/* Rail */}
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
             <p className="font-display text-base font-semibold text-text-primary">
-              Been treated at {clinic.name}?
+              {override(cms?.ctaHeading) ?? `Been treated at ${clinic.name}?`}
             </p>
             <p className="mt-1 text-[13.5px] text-text-secondary">
-              Reviews are moderated and published without the clinic&apos;s
-              approval. Read our{" "}
-              <Link
-                href="/methodology"
-                className="font-semibold text-text-link hover:underline"
-              >
-                review policy
-              </Link>
-              .
+              {override(cms?.ctaBody) ?? (
+                <>
+                  Reviews are moderated and published without the clinic&apos;s
+                  approval. Read our{" "}
+                  <Link
+                    href="/methodology"
+                    className="font-semibold text-text-link hover:underline"
+                  >
+                    review policy
+                  </Link>
+                  .
+                </>
+              )}
             </p>
             <Button asChild className="mt-4 w-full">
               <Link href={`/reviews/new?clinic=${clinic.slug}`}>
@@ -468,7 +510,7 @@ export default async function ClinicReviewsPage({
               Considering {clinic.name}?
             </p>
             <p className="mt-1 text-[13.5px] text-text-secondary">
-              Request a consultation — no obligation.
+              Request a consultation. No obligation.
             </p>
             <div className="mt-4">
               <ConsultationDialog

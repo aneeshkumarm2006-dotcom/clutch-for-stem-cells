@@ -134,7 +134,7 @@ export default async function ReviewerBioPage({
         <p className="mt-8 border-t border-border pt-6 text-[13px] text-text-muted">
           Our reviewers verify factual accuracy and cautious framing. Reviewed
           content is informational only and not a substitute for professional
-          medical advice — see our{" "}
+          medical advice. See our{" "}
           <Link
             href="/editorial-policy"
             className="text-text-link hover:underline"

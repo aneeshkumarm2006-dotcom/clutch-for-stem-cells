@@ -73,7 +73,7 @@ export default async function ForClinicsPage() {
         <div className="container">
           <SectionHeader
             title="Listing plans"
-            description="Start free and upgrade as you grow. Plans are display-only today — our team activates your tier when you get listed."
+            description="Start free and upgrade as you grow. Plans are display-only today, and our team activates your tier when you get listed."
             className="mx-auto max-w-2xl text-center [&>div]:mx-auto"
           />
           <div className="mt-10 grid items-stretch gap-5 md:grid-cols-3">
@@ -140,7 +140,7 @@ export default async function ForClinicsPage() {
           </div>
           <p className="mt-6 text-center text-[12.5px] text-text-muted">
             Pricing is indicative and shown for planning. Billing is handled by
-            our team — no payment is collected on this site.
+            our team, and no payment is collected on this site.
           </p>
         </div>
       </Section>

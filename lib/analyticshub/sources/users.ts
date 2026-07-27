@@ -66,10 +66,10 @@ export async function fetchUsersSource(range: DateRange): Promise<SourceResult> 
     title: "Recent signups",
     columns: ["Name", "Email", "Source", "Joined"],
     rows: recent.map((u) => [
-      u.name ?? "—",
+      u.name ?? "–",
       u.email,
       u.provider ?? "credentials",
-      u.createdAt ? new Date(u.createdAt).toISOString().slice(0, 10) : "—",
+      u.createdAt ? new Date(u.createdAt).toISOString().slice(0, 10) : "–",
     ]),
   };
 

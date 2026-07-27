@@ -8,7 +8,7 @@ import {
 } from "@/components/seoteam/reviewer-editor";
 
 export const metadata: Metadata = {
-  title: "Edit reviewer · SEO Team",
+  title: "Edit reviewer | SEO Team",
   robots: { index: false, follow: false },
 };
 

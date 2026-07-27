@@ -490,8 +490,8 @@ export function PostEditor({
             v.visibility === "draft"
               ? "Draft saved"
               : v.visibility === "scheduled"
-                ? "Scheduled — publishes automatically"
-                : "Published — live on your blog",
+                ? "Scheduled (publishes automatically)"
+                : "Published (live on your blog)",
           );
         }
         return true;
@@ -846,7 +846,7 @@ export function PostEditor({
                 value={v.reviewedBy}
                 onChange={(e) => set({ reviewedBy: e.target.value })}
               >
-                <option value="">— none —</option>
+                <option value="">None</option>
                 {reviewers.map((r) => (
                   <option key={r.id} value={r.id}>
                     {r.name}

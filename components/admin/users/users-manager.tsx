@@ -145,7 +145,7 @@ export function UsersManager({
                         name={u.name || u.email}
                         shape="circle"
                       />
-                      <span className="font-semibold">{u.name || "—"}</span>
+                      <span className="font-semibold">{u.name || "–"}</span>
                     </div>
                   </Td>
                   <Td className="text-text-secondary">{u.email}</Td>
@@ -355,7 +355,7 @@ function InviteDialog({
           <TextField
             label="Temporary password"
             type="password"
-            hint="Optional — leave blank to send a reset link instead."
+            hint="Optional. Leave blank to send a reset link instead."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

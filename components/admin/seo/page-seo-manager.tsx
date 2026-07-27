@@ -93,10 +93,12 @@ export function PageSeoManager({
       <div className="max-w-3xl space-y-4 p-5 lg:p-7">
         <p className="text-[13px] leading-relaxed text-text-muted">
           These pages are built in code, so they have no content record of their
-          own. Anything you type here overrides what ships with the site — and
-          it is used <strong>exactly as written</strong>, brand suffix included.
-          Leave a field blank to keep the built-in copy shown as placeholder
-          text.
+          own. Anything you type here overrides what ships with the site,
+          brand suffix included. Leave a field blank to keep the built-in copy
+          shown as placeholder text. Two house rules are applied on the way out:
+          no em dashes, and <strong>|</strong> is the only separator symbol, so
+          a dash, colon or <strong>&amp;</strong> you type is converted before
+          it reaches the page.
         </p>
 
         {grouped.map(([group, items]) => (
@@ -242,6 +244,6 @@ function PageRow({
 function counterHint(value: string, limit: number): string {
   const over = value.length - limit;
   return over > 0
-    ? `${value.length} characters — ${over} over the ~${limit} Google usually shows`
+    ? `${value.length} characters, ${over} over the ~${limit} Google usually shows`
     : `${value.length} / ~${limit} characters`;
 }

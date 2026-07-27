@@ -35,7 +35,7 @@ import { cn } from "@/lib/utils";
 import type { AdminClinicRow } from "@/lib/admin/clinics";
 
 function relTime(iso?: string): string {
-  if (!iso) return "—";
+  if (!iso) return "–";
   const diff = Date.now() - new Date(iso).getTime();
   const m = Math.round(diff / 60000);
   if (m < 1) return "just now";
@@ -298,7 +298,7 @@ export function ClinicsTable({
                     <ClinicTierBadge tier={r.tier} />
                   </Td>
                   <Td className="font-semibold">
-                    {r.reviewCount > 0 ? r.ratingAvg.toFixed(1) : "—"}
+                    {r.reviewCount > 0 ? r.ratingAvg.toFixed(1) : "–"}
                   </Td>
                   <Td className="text-text-secondary">{r.reviewCount}</Td>
                   <Td className="text-text-secondary">{r.location}</Td>

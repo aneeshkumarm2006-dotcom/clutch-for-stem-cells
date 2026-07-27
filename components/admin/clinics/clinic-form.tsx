@@ -28,6 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { ImagePicker, GalleryField } from "@/components/admin/image-picker";
 import { MultiSelect, type MultiOption } from "@/components/admin/multi-select";
 import { TagInput } from "@/components/admin/tag-input";
+import { MarkdownEditor } from "@/components/admin/markdown-editor";
 import { Toggle } from "@/components/admin/toggle";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { adminFetch } from "@/lib/admin/client";
@@ -134,6 +135,22 @@ export interface ClinicFormValues {
     canonicalUrl?: string;
     noindex?: boolean;
   };
+  /** Copy + meta for the child `/clinic/[slug]/reviews` page. */
+  reviewsPage: {
+    heading?: string;
+    intro?: string;
+    introEmpty?: string;
+    bodyMarkdown?: string;
+    ctaHeading?: string;
+    ctaBody?: string;
+    seo: {
+      metaTitle?: string;
+      metaDescription?: string;
+      ogImage?: string;
+      canonicalUrl?: string;
+      noindex?: boolean;
+    };
+  };
 }
 
 export interface ClinicFormOptions {
@@ -158,6 +175,7 @@ const SECTIONS = [
   ["verification", "Verification"],
   ["ownership", "Ownership"],
   ["seo", "SEO overrides"],
+  ["reviews-page", "Reviews page"],
 ] as const;
 
 const opt = (vals: readonly string[]) =>
@@ -1194,7 +1212,7 @@ export function ClinicForm({
           <Section
             id="verification"
             title="Verification"
-            description="Verification reflects accreditation/record checks — never an efficacy endorsement."
+            description="Verification reflects accreditation/record checks, never an efficacy endorsement."
           >
             <label className="flex items-center gap-2 text-[13.5px] text-text-secondary">
               <Controller
@@ -1305,6 +1323,128 @@ export function ClinicForm({
               />
               Exclude from search engines (noindex)
             </label>
+          </Section>
+
+          <Section
+            id="reviews-page"
+            title="Reviews page"
+            description="Copy and meta for /clinic/…/reviews, the clinic's own reviews URL. Every field is optional; leave one blank and the page keeps its auto-generated copy."
+          >
+            {mode === "edit" && existingSlug ? (
+              <a
+                href={`/clinic/${existingSlug}/reviews`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-text-link hover:underline"
+              >
+                <Eye className="size-3.5" aria-hidden="true" />
+                Open the live reviews page
+              </a>
+            ) : null}
+
+            <TextField
+              label="Heading (H1)"
+              placeholder={`${watch("name") || "Clinic name"} reviews`}
+              hint="Defaults to “<clinic name> reviews”, the phrase people search."
+              {...register("reviewsPage.heading")}
+            />
+            <TextareaField
+              label="Intro paragraph"
+              rows={3}
+              hint="Shown under the heading once the clinic has published reviews. Default summarises the count, location and average rating."
+              {...register("reviewsPage.intro")}
+            />
+            <TextareaField
+              label="Intro paragraph (no reviews yet)"
+              rows={2}
+              hint="Used instead of the above while the clinic has zero published reviews."
+              {...register("reviewsPage.introEmpty")}
+            />
+            <ContentFlagWarning
+              texts={[
+                watch("reviewsPage.intro"),
+                watch("reviewsPage.introEmpty"),
+                watch("reviewsPage.bodyMarkdown"),
+                watch("reviewsPage.ctaBody"),
+              ]}
+            />
+
+            <div className="space-y-1.5">
+              <Label>Body content</Label>
+              <Controller
+                control={control}
+                name="reviewsPage.bodyMarkdown"
+                render={({ field }) => (
+                  <MarkdownEditor
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    placeholder="Optional editorial section rendered below the review list: how reviews are collected here, what patients consistently report, caveats…"
+                  />
+                )}
+              />
+              <p className="text-[12.5px] text-text-muted">
+                Renders under the review list. Supports Markdown.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <TextField
+                label="Sidebar card heading"
+                placeholder={`Been treated at ${watch("name") || "this clinic"}?`}
+                {...register("reviewsPage.ctaHeading")}
+              />
+              <TextareaField
+                label="Sidebar card text"
+                rows={2}
+                placeholder="Reviews are moderated and published without the clinic's approval."
+                {...register("reviewsPage.ctaBody")}
+              />
+            </div>
+
+            <div className="rounded-lg border border-border p-4">
+              <div className="mb-3 text-[13px] font-semibold text-text-secondary">
+                Meta overrides (reviews page only)
+              </div>
+              <div className="space-y-4">
+                <TextField
+                  label="Meta title"
+                  {...register("reviewsPage.seo.metaTitle")}
+                />
+                <TextareaField
+                  label="Meta description"
+                  rows={2}
+                  {...register("reviewsPage.seo.metaDescription")}
+                />
+                <TextField
+                  label="OG image URL"
+                  {...register("reviewsPage.seo.ogImage")}
+                />
+                <TextField
+                  label="Canonical URL"
+                  hint={`Leave blank to canonicalise to /clinic/${existingSlug || "your-slug"}/reviews.`}
+                  {...register("reviewsPage.seo.canonicalUrl")}
+                />
+                <label className="flex items-center gap-2 text-[13.5px] text-text-secondary">
+                  <Controller
+                    control={control}
+                    name="reviewsPage.seo.noindex"
+                    render={({ field }) => (
+                      <Toggle
+                        checked={field.value ?? false}
+                        onCheckedChange={field.onChange}
+                        label="No-index"
+                      />
+                    )}
+                  />
+                  Exclude the reviews page from search engines (noindex)
+                </label>
+                <p className="text-[12.5px] text-text-muted">
+                  A clinic with no published reviews is no-indexed automatically
+                  and kept out of the sitemap. This toggle only ever adds
+                  no-index, it can&apos;t force one on.
+                </p>
+              </div>
+            </div>
           </Section>
 
           {mode === "edit" ? (

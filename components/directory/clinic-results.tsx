@@ -59,7 +59,7 @@ export function ClinicResults({
   locked,
   filterLabels,
   emptyTitle = "No clinics match these filters yet",
-  emptyDescription = "Try broadening your search or clearing a filter or two — or let us match you with clinics that fit.",
+  emptyDescription = "Try broadening your search or clearing a filter or two, or let us match you with clinics that fit.",
 }: ClinicResultsProps) {
   return (
     <div className="flex flex-col gap-6 lg:flex-row lg:items-start">

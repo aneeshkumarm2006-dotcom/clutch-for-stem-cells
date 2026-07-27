@@ -39,7 +39,7 @@ export async function POST(req: Request): Promise<Response> {
 
     if (isReservedSlug(data.slug)) {
       return fail(
-        `"/${data.slug}" is reserved by an existing route — pick another slug.`,
+        `"/${data.slug}" is reserved by an existing route. Pick another slug.`,
         422,
       );
     }

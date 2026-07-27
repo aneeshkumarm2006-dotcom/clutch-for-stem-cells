@@ -40,28 +40,34 @@ export interface PageSeoPointer {
 
 export const PAGE_SEO_POINTERS: PageSeoPointer[] = [
   {
+    label: "Homepage OG, canonical & keywords",
+    description:
+      "The title and description below are the homepage's; the rest of its meta is edited with its content.",
+    href: "/admin/content/homepage#seo",
+  },
+  {
     label: "Treatment pages",
-    description: "/treatments/… — meta title & description per treatment term.",
+    description: "/treatments/…: meta title & description per treatment term.",
     href: "/admin/taxonomy/treatments",
   },
   {
     label: "Condition pages",
-    description: "/conditions/… — meta title & description per condition term.",
+    description: "/conditions/…: meta title & description per condition term.",
     href: "/admin/taxonomy/conditions",
   },
   {
     label: "Destination pages",
-    description: "/locations/… — meta title & description per country and city.",
+    description: "/locations/…: meta title & description per country and city.",
     href: "/admin/taxonomy/locations",
   },
   {
     label: "Clinic landing pages",
-    description: "/clinics/… — curated location & treatment landing pages.",
+    description: "/clinics/…: curated location & treatment landing pages.",
     href: "/admin/content/clinic-landings",
   },
   {
     label: "Clinic profiles",
-    description: "/clinic/… — the SEO panel on each clinic record.",
+    description: "/clinic/…: the SEO panel on each clinic record.",
     href: "/admin/clinics",
   },
   {

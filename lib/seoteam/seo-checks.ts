@@ -142,7 +142,7 @@ export function runSeoChecks(input: SeoCheckInput): SeoCheck[] {
         ? "No content yet."
         : words >= THIN_CONTENT_WORDS
           ? `${words} words.`
-          : `${words} words — thin (aim for ${THIN_CONTENT_WORDS}+).`,
+          : `${words} words, thin (aim for ${THIN_CONTENT_WORDS}+).`,
   });
 
   // Keyword presence in body

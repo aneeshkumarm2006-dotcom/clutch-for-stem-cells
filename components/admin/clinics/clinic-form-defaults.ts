@@ -41,5 +41,14 @@ export function emptyClinic(): ClinicFormValues {
     highlights: [],
     isClaimed: false,
     seo: {},
+    reviewsPage: {
+      heading: "",
+      intro: "",
+      introEmpty: "",
+      bodyMarkdown: "",
+      ctaHeading: "",
+      ctaBody: "",
+      seo: {},
+    },
   };
 }

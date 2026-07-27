@@ -17,7 +17,7 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: "How are clinics verified?",
     answer:
-      "Verification is based on accreditation and record checks. It confirms credentials a clinic provides — it is not an endorsement of any treatment's safety or efficacy. See our methodology page for details.",
+      "Verification is based on accreditation and record checks. It confirms credentials a clinic provides, and it is not an endorsement of any treatment's safety or efficacy. See our methodology page for details.",
   },
   {
     question: "Are the reviews real?",

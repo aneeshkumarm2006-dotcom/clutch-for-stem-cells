@@ -67,10 +67,10 @@ function escapeRegex(s: string): string {
 
 function primaryLocation(c: IClinic): string {
   const loc = c.locations?.find((l) => l.isHQ) ?? c.locations?.[0];
-  if (!loc) return "—";
+  if (!loc) return "–";
   const place = loc.city || loc.region || loc.country;
   const cc = loc.countryCode || loc.country;
-  return place ? (cc && cc !== place ? `${place}, ${cc}` : place) : "—";
+  return place ? (cc && cc !== place ? `${place}, ${cc}` : place) : "–";
 }
 
 function buildFilter(query: ClinicsQuery): FilterQuery<IClinic> {
@@ -250,6 +250,23 @@ export async function getAdminClinicFormData(
           noindex: c.seo.noindex ?? false,
         }
       : undefined,
+    // Always a filled object (never `undefined`) so react-hook-form registers
+    // the nested inputs as controlled from the first render.
+    reviewsPage: {
+      heading: c.reviewsPage?.heading ?? "",
+      intro: c.reviewsPage?.intro ?? "",
+      introEmpty: c.reviewsPage?.introEmpty ?? "",
+      bodyMarkdown: c.reviewsPage?.bodyMarkdown ?? "",
+      ctaHeading: c.reviewsPage?.ctaHeading ?? "",
+      ctaBody: c.reviewsPage?.ctaBody ?? "",
+      seo: {
+        metaTitle: c.reviewsPage?.seo?.metaTitle ?? "",
+        metaDescription: c.reviewsPage?.seo?.metaDescription ?? "",
+        ogImage: c.reviewsPage?.seo?.ogImage ?? "",
+        canonicalUrl: c.reviewsPage?.seo?.canonicalUrl ?? "",
+        noindex: c.reviewsPage?.seo?.noindex ?? false,
+      },
+    },
   };
 
   return { id: id(c._id), values };

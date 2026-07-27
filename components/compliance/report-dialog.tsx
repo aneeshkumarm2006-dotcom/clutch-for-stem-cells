@@ -135,8 +135,8 @@ export function ReportDialog({
             <DialogHeader>
               <DialogTitle>Report {subject}</DialogTitle>
               <DialogDescription>
-                Flag {subject} for our moderation team. Tell us what&apos;s wrong
-                — this helps keep listings and reviews trustworthy.
+                Flag {subject} for our moderation team. Tell us what&apos;s
+                wrong, and this helps keep listings and reviews trustworthy.
               </DialogDescription>
             </DialogHeader>
 
@@ -178,7 +178,7 @@ export function ReportDialog({
             <TextField
               label="Your email (optional)"
               type="email"
-              hint="Private — only used if we need to follow up. Never shown publicly."
+              hint="Private. Only used if we need to follow up, never shown publicly."
               placeholder="you@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

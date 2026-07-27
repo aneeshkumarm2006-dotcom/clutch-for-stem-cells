@@ -43,7 +43,7 @@ async function loadEnv(): Promise<void> {
 const PAGE_SEO = [
   {
     path: "/",
-    metaTitle: "My Stem Cell Guide | Compare Clinics & Reviews (USA)",
+    metaTitle: "My Stem Cell Guide | Compare Clinics and Reviews (USA)",
     metaDescription:
       "My Stem Cell Guide is your usa stem cell guide for comparing vetted clinics, reading real testimonials, and understanding your treatment options.",
   },
@@ -62,13 +62,13 @@ const TREATMENT_SEO = [
     slug: "svf",
     metaTitle: "What Is Stromal Vascular Fraction (SVF) | My Stem Cell Guide",
     metaDescription:
-      "Learn what stromal vascular fraction is, how SVF therapy works, and what to expect — an expert-reviewed guide to this regenerative treatment.",
+      "Learn what stromal vascular fraction is, how SVF therapy works, and what to expect, an expert-reviewed guide to this regenerative treatment.",
   },
   {
     slug: "adipose-derived-therapy",
     metaTitle: "Adipose Derived Stem Cell Therapy | My Stem Cell Guide",
     metaDescription:
-      "A clear, expert-reviewed guide to adipose derived stem cell therapy — how it works, what conditions it treats, and how to find a qualified provider.",
+      "A clear, expert-reviewed guide to adipose derived stem cell therapy. How it works, what conditions it treats, and how to find a qualified provider.",
   },
   {
     slug: "exosome-therapy",
@@ -98,7 +98,7 @@ const LANDINGS: LandingSeed[] = [
     name: "Mexico & Tijuana",
     heading: "Stem cell clinics in Mexico",
     intro:
-      "Mexico is one of the most-searched destinations for stem cell treatment, and Tijuana is the entry point most US patients use — it is a short drive from San Diego. Compare the clinics we have vetted, what they charge, and the questions worth asking before you cross the border.",
+      "Mexico is one of the most-searched destinations for stem cell treatment, and Tijuana is the entry point most US patients use, a short drive from San Diego. Compare the clinics we have vetted, what they charge, and the questions worth asking before you cross the border.",
     // Filtered to the country rather than the city: Tijuana is the editorial
     // angle, but a patient searching this page wants every Mexican option.
     filters: { country: "Mexico" },
@@ -149,7 +149,7 @@ const LANDINGS: LandingSeed[] = [
     filters: { country: US, region: "Hawaii" },
     metaTitle: "Stem Cell Therapy Hawaii | My Stem Cell Guide",
     metaDescription:
-      "Compare stem cell therapy hawaii providers, credentials, and patient reviews — an expert-reviewed guide to your regenerative medicine options.",
+      "Compare stem cell therapy hawaii providers, credentials, and patient reviews. An expert-reviewed guide to your regenerative medicine options.",
   },
   {
     slug: "virginia",
@@ -171,7 +171,7 @@ const LANDINGS: LandingSeed[] = [
     filters: { country: US, region: "Ohio" },
     metaTitle: "Stem Cell Therapy Ohio | My Stem Cell Guide",
     metaDescription:
-      "Compare stem cell therapy ohio providers, credentials, and reviews — an expert-reviewed guide to help you choose a qualified clinic.",
+      "Compare stem cell therapy ohio providers, credentials, and reviews. An expert-reviewed guide to help you choose a qualified clinic.",
   },
   {
     slug: "wisconsin",
@@ -189,7 +189,7 @@ const LANDINGS: LandingSeed[] = [
     name: "San Diego",
     heading: "Stem cell clinics in San Diego, CA",
     intro:
-      "San Diego patients have both local providers and, 20 miles south, the Tijuana clinics that treat many Americans. Compare the local options here — and read our Mexico guide if you are weighing cross-border treatment.",
+      "San Diego patients have both local providers and, 20 miles south, the Tijuana clinics that treat many Americans. Compare the local options here, and read our Mexico guide if you are weighing cross-border treatment.",
     filters: { country: US, city: "San Diego" },
     metaTitle: "Stem Cell Therapy San Diego CA | My Stem Cell Guide",
     metaDescription:
@@ -214,10 +214,10 @@ const PRP_PAGE = {
   slug: "treatments/prp-vs-stem-cell-therapy",
   title: "PRP therapy vs stem cell therapy",
   intro:
-    "PRP concentrates the growth factors already in your blood; stem cell therapy introduces cells harvested from fat, bone marrow, or donor tissue. PRP costs less and is more widely available, stem cell therapy is typically used for more advanced degeneration — and evidence quality varies for both.",
+    "PRP concentrates the growth factors already in your blood; stem cell therapy introduces cells harvested from fat, bone marrow, or donor tissue. PRP costs less and is more widely available, stem cell therapy is typically used for more advanced degeneration, and evidence quality varies for both.",
   metaTitle: "PRP Therapy vs Stem Cell Therapy | My Stem Cell Guide",
   metaDescription:
-    "PRP therapy vs stem cell therapy: an expert-reviewed comparison of how each works, costs, recovery, and which option may fit your condition.",
+    "PRP therapy vs stem cell therapy. An expert-reviewed comparison of how each works, costs, recovery, and which option may fit your condition.",
   blocks: [
     {
       type: "richText" as const,
@@ -290,7 +290,7 @@ const PRP_PAGE = {
           "<p>Clinics generally suggest PRP first for tendon problems and earlier-stage joint wear, because it is cheaper, the collection is trivial, and a course can be repeated. Stem cell protocols are more often proposed where cartilage loss is more advanced, or where a patient has already tried PRP without the result they wanted.</p>",
           "<p>That is a pattern in how treatment is offered, not a statement that either works for a given condition. Evidence quality differs sharply between indications, and neither is a substitute for the diagnosis and advice of a licensed physician who has examined you.</p>",
           "<h2>Questions worth asking either way</h2>",
-          "<p>Ask what exactly is being injected and where it came from. Ask how many times the clinic has treated your specific condition and what outcome it tracks. Ask whether imaging guidance is used. Ask what the total cost covers, including follow-up injections. And ask what the published evidence for your indication actually shows — a clinic that answers that one carefully is telling you something useful.</p>",
+          "<p>Ask what exactly is being injected and where it came from. Ask how many times the clinic has treated your specific condition and what outcome it tracks. Ask whether imaging guidance is used. Ask what the total cost covers, including follow-up injections. And ask what the published evidence for your indication actually shows. A clinic that answers that one carefully is telling you something useful.</p>",
         ].join(""),
       },
     },
@@ -302,12 +302,12 @@ const PRP_PAGE = {
           {
             question: "Is stem cell therapy better than PRP?",
             answer:
-              "Neither is universally better. They are different products used at different price points and, in practice, at different stages of joint degeneration. Which is appropriate — if either is — depends on your diagnosis, and that is a decision for a physician who has examined you and reviewed your imaging.",
+              "Neither is universally better. They are different products used at different price points and, in practice, at different stages of joint degeneration. Which is appropriate, if either is, depends on your diagnosis, and that is a decision for a physician who has examined you and reviewed your imaging.",
           },
           {
             question: "Why does stem cell therapy cost so much more?",
             answer:
-              "Cost tracks the work involved. PRP needs a blood draw and a centrifuge. An autologous stem cell procedure adds a harvesting step — liposuction or a bone-marrow aspiration — plus cell processing, more staff time, and a longer appointment. Donor-tissue products carry the cost of the tissue itself.",
+              "Cost tracks the work involved. PRP needs a blood draw and a centrifuge. An autologous stem cell procedure adds a harvesting step (liposuction or a bone-marrow aspiration) plus cell processing, more staff time, and a longer appointment. Donor-tissue products carry the cost of the tissue itself.",
           },
           {
             question: "Can you have PRP and stem cell therapy together?",

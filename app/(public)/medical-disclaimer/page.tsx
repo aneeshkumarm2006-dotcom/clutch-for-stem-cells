@@ -17,8 +17,8 @@ export default function MedicalDisclaimerPage() {
     >
       <h2>Information only</h2>
       <p>
-        The content on {SITE_NAME} — including clinic profiles, treatment
-        descriptions, case studies, and patient reviews — is provided for general
+        The content on {SITE_NAME}, including clinic profiles, treatment
+        descriptions, case studies, and patient reviews, is provided for general
         informational purposes only. It is <strong>not medical advice</strong>,
         diagnosis, or treatment, and it is not a substitute for the advice of a
         qualified healthcare professional.

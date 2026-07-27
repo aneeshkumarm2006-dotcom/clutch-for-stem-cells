@@ -219,7 +219,7 @@ export function GoogleCard() {
 
   return (
     <SettingCard
-      title="Google — Analytics + Search Console"
+      title="Google: Analytics + Search Console"
       description="One connection powers both GA4 and Search Console."
       badge={<StatusBadge status={combined} />}
     >
@@ -252,7 +252,7 @@ export function GoogleCard() {
                 onChange={(e) => setGa4Sel(e.target.value)}
                 className={`mt-1 ${inputClass}`}
               >
-                <option value="">— none —</option>
+                <option value="">None</option>
                 {opts?.properties.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.name} ({p.id})
@@ -267,7 +267,7 @@ export function GoogleCard() {
                 onChange={(e) => setSiteSel(e.target.value)}
                 className={`mt-1 ${inputClass}`}
               >
-                <option value="">— none —</option>
+                <option value="">None</option>
                 {opts?.sites.map((s) => (
                   <option key={s.siteUrl} value={s.siteUrl}>
                     {s.siteUrl}
@@ -742,7 +742,7 @@ export function PasswordCard() {
   return (
     <SettingCard
       title="Change password"
-      description="There is no reset flow — keep this safe."
+      description="There is no reset flow, so keep this safe."
     >
       <div className="space-y-3">
         <div>

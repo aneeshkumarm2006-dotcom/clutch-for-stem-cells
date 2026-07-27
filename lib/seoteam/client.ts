@@ -32,7 +32,7 @@ export function redirectToSeoLogin(): void {
 /** Thrown after a 401 kicks off the login redirect, so callers stop cleanly. */
 export class SeoSessionExpiredError extends Error {
   constructor() {
-    super("Your session expired — taking you to sign in…");
+    super("Your session expired. Taking you to sign in…");
     this.name = "SeoSessionExpiredError";
   }
 }

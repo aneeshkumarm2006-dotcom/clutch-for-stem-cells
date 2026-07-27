@@ -14,9 +14,13 @@ import { MobileNav } from "@/components/admin/mobile-nav";
 import { getPendingReviewCount } from "@/lib/admin/dashboard";
 import { getOpenReportCount } from "@/lib/admin/reports";
 import { SITE_NAME } from "@/config/site";
+import { META_SEPARATOR } from "@/lib/meta-text";
 
 export const metadata: Metadata = {
-  title: { default: `Admin · ${SITE_NAME}`, template: `%s · Admin` },
+  title: {
+    default: `Admin ${META_SEPARATOR} ${SITE_NAME}`,
+    template: `%s ${META_SEPARATOR} Admin`,
+  },
   robots: { index: false, follow: false },
 };
 

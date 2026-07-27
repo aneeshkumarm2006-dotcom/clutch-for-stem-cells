@@ -9,7 +9,7 @@ import {
 } from "@/components/seoteam/post-editor";
 
 export const metadata: Metadata = {
-  title: "Edit post · SEO Team",
+  title: "Edit post | SEO Team",
   robots: { index: false, follow: false },
 };
 

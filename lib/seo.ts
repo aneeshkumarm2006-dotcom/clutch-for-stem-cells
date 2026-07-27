@@ -20,6 +20,7 @@ import {
   SITE_URL,
   SOCIAL_LINKS,
 } from "@/config/site";
+import { META_SEPARATOR, normalizeMetaText } from "@/lib/meta-text";
 import type { IClinic, IFaq, IReview, ISeo, ISeoDefaults } from "@/models";
 
 // ── URL helpers ──────────────────────────────────────────────────────────────
@@ -37,11 +38,12 @@ export const blogUrl = (slug: string): string => absoluteUrl(`/blog/${slug}`);
 /**
  * Fallback title template used when Settings supply none — keeps every page
  * brand-suffixed even when the DB is unavailable at build time. Mirrors the
- * seeded `SiteSetting.seoDefaults.titleTemplate`.
+ * seeded `SiteSetting.seoDefaults.titleTemplate`. The pipe is the only
+ * separator a meta tag may carry (see `lib/meta-text.ts`).
  */
-export const DEFAULT_TITLE_TEMPLATE = `%s · ${SITE_NAME}`;
+export const DEFAULT_TITLE_TEMPLATE = `%s ${META_SEPARATOR} ${SITE_NAME}`;
 
-/** Apply a Settings title template (e.g. `"%s · My Stem Cell Guide"`). */
+/** Apply a Settings title template (e.g. `"%s | My Stem Cell Guide"`). */
 export function applyTitleTemplate(title?: string, template?: string): string {
   if (!title) return SITE_NAME;
   if (!template) return title;
@@ -95,20 +97,29 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
   // the admin panel typed the exact string they want in the SERP, brand suffix
   // and separator included. Only a route-supplied `title` gets the Settings
   // brand template applied — otherwise an override reading
-  // "… | My Stem Cell Guide" would render as "… | My Stem Cell Guide · My Stem
-  // Cell Guide".
+  // "... | My Stem Cell Guide" would render as
+  // "... | My Stem Cell Guide | My Stem Cell Guide".
   const titleOverride = seo?.metaTitle?.trim();
-  const title =
+  // Every string below goes out through `normalizeMetaText`, so the two meta
+  // rules (no em dash, the pipe is the only separator) hold for copy from any
+  // source — a route file, the static-page registry, or a CMS record an editor
+  // typed. On-page copy is untouched; only what reaches the `<head>` is
+  // rewritten. See `lib/meta-text.ts`.
+  const title = normalizeMetaText(
     titleOverride ||
-    applyTitleTemplate(
-      input.title,
-      defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
-    );
-  const description =
+      applyTitleTemplate(
+        input.title,
+        defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
+      ),
+    "title",
+  );
+  const description = normalizeMetaText(
     seo?.metaDescription ??
-    input.description ??
-    defaults?.metaDescription ??
-    SITE_DESCRIPTION;
+      input.description ??
+      defaults?.metaDescription ??
+      SITE_DESCRIPTION,
+    "description",
+  );
 
   const canonical =
     seo?.canonicalUrl ?? (input.path ? absoluteUrl(input.path) : SITE_URL);
@@ -116,9 +127,14 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
   const imageRaw = input.image ?? seo?.ogImage ?? defaults?.ogImage;
   const images = imageRaw ? [{ url: absoluteUrl(imageRaw) }] : undefined;
 
-  // Social copy falls back to the page title/description when not overridden.
-  const ogTitle = seo?.ogTitle ?? title;
-  const ogDescription = seo?.ogDescription ?? description;
+  // Social copy falls back to the page title/description when not overridden
+  // (both already normalized); an override goes through the same rules.
+  const ogTitle = seo?.ogTitle
+    ? normalizeMetaText(seo.ogTitle, "title")
+    : title;
+  const ogDescription = seo?.ogDescription
+    ? normalizeMetaText(seo.ogDescription, "description")
+    : description;
   const twitterCard =
     seo?.twitterCard ?? defaults?.twitterCard ?? "summary_large_image";
 
@@ -126,7 +142,8 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
     metadataBase: new URL(SITE_URL),
     // `absolute` opts out of the root layout's `title.template` so the brand
     // suffix (applied above via the Settings/default template) isn't appended a
-    // second time — e.g. "All clinics · My Stem Cell Guide", not "… · My Stem Cell Guide · My Stem Cell Guide".
+    // second time — e.g. "All clinics | My Stem Cell Guide", not
+    // "All clinics | My Stem Cell Guide | My Stem Cell Guide".
     title: { absolute: title },
     description,
     alternates: { canonical },
@@ -170,9 +187,9 @@ function resolveRobots(input: BuildMetadataInput): Metadata["robots"] {
 
   const noindex = Boolean(
     input.noindex ||
-      seo?.noindex ||
-      defaults?.noindex ||
-      override?.index === false,
+    seo?.noindex ||
+    defaults?.noindex ||
+    override?.index === false,
   );
   const nofollow = Boolean(input.nofollow || override?.follow === false);
 
@@ -635,10 +652,7 @@ export function personJsonLd(input: PersonSeoInput): JsonLd {
 
 /** The `WebPage` subtypes we emit. `CollectionPage` marks a directory/index. */
 export type WebPageType =
-  | "WebPage"
-  | "CollectionPage"
-  | "AboutPage"
-  | "ContactPage";
+  "WebPage" | "CollectionPage" | "AboutPage" | "ContactPage";
 
 export interface WebPageSeoInput {
   name: string;

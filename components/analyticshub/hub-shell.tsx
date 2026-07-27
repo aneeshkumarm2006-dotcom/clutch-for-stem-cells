@@ -77,7 +77,7 @@ function ConfigError({ problems }: { problems: string[] }) {
         </ul>
         <p className="mt-4 text-xs text-text-muted">
           See ANALYTICSHUB_SETUP.md. Environment variables only apply to
-          deployments created after they&apos;re saved — redeploy after adding
+          deployments created after they&apos;re saved, so redeploy after adding
           them.
         </p>
       </div>

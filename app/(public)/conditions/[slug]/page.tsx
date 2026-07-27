@@ -142,7 +142,7 @@ export default async function ConditionDirectoryPage({
                 },
                 {
                   title: `Treatments clinics offer for ${term.name}`,
-                  description: `Treatments that clinics treating ${term.name} commonly list. Evidence and suitability vary — consult a physician.`,
+                  description: `Treatments that clinics treating ${term.name} commonly list. Evidence and suitability vary, so consult a physician.`,
                   links: relatedTreatments.map((t) => ({
                     href: `/treatments/${t.slug}`,
                     label: t.name,

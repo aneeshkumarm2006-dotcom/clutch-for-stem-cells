@@ -136,7 +136,7 @@ async function topReport(
     limit: 10,
   });
   const rows = (rep.rows ?? []).map((r) => [
-    r.dimensionValues?.[0]?.value ?? "—",
+    r.dimensionValues?.[0]?.value ?? "–",
     toNum(r.metricValues?.[0]?.value),
   ]);
   return { id, title, columns, rows };

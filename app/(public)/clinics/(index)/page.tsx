@@ -44,7 +44,7 @@ export default async function ClinicsPage({
       {jsonLd.length ? <JsonLd data={jsonLd} /> : null}
       <Directory
         heading="Stem cell & regenerative-medicine clinics"
-        intro="Compare accredited clinics worldwide. Filter by treatment, condition, cell source, location, price, and verified patient reviews — every result is ranked by our published methodology."
+        intro="Compare accredited clinics worldwide. Filter by treatment, condition, cell source, location, price, and verified patient reviews. Every result is ranked by our published methodology."
         basePath="/clinics"
         searchParams={searchParams}
         data={data}

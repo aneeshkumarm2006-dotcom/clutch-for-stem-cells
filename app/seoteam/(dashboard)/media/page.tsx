@@ -9,7 +9,7 @@ import { firstParam, parsePage } from "@/lib/admin/serialize";
 import { MediaManager } from "@/components/seoteam/media-manager";
 
 export const metadata: Metadata = {
-  title: "Media · SEO Team",
+  title: "Media | SEO Team",
   robots: { index: false, follow: false },
 };
 

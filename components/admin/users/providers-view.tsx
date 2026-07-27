@@ -68,7 +68,7 @@ export function ProvidersView({
                           name={p.name || p.email}
                           shape="circle"
                         />
-                        <span className="font-semibold">{p.name || "—"}</span>
+                        <span className="font-semibold">{p.name || "–"}</span>
                       </div>
                     </Td>
                     <Td className="text-text-secondary">{p.email}</Td>
@@ -81,7 +81,7 @@ export function ProvidersView({
                           {p.clinicName}
                         </Link>
                       ) : (
-                        "—"
+                        "–"
                       )}
                     </Td>
                     <Td>

@@ -6,7 +6,7 @@ import { getPageForEdit } from "@/lib/seoteam/page-data";
 import { getReviewerOptions } from "@/lib/seoteam/matrix-data";
 
 export const metadata: Metadata = {
-  title: "Edit page · SEO Team",
+  title: "Edit page | SEO Team",
   robots: { index: false, follow: false },
 };
 

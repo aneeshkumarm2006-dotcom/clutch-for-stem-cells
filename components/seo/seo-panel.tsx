@@ -141,7 +141,7 @@ export function SeoPanel({
           placeholder="The one query this page should win"
         />
         <p className="text-[11.5px] text-text-muted">
-          Editorial only — never emitted to the page.
+          Editorial only. Never emitted to the page.
         </p>
       </div>
 
@@ -338,7 +338,7 @@ function OgPreview({
           />
         ) : (
           <span className="text-[12px] text-text-muted">
-            No share image — the site default will be used
+            No share image, so the site default will be used
           </span>
         )}
       </div>

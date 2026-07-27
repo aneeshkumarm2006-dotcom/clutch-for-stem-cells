@@ -14,16 +14,43 @@ import { fail, ok, parseBody, withRole } from "@/lib/admin/api";
 import { recordAuditFromRequest } from "@/lib/audit";
 import { pageSeoUpdateSchema } from "@/lib/validation/site-setting";
 import { STATIC_PAGES, normalizePagePath } from "@/config/static-pages";
-import { SiteSetting, GLOBAL_SETTINGS_KEY } from "@/models";
+import { SiteSetting, GLOBAL_SETTINGS_KEY, toPlainObject } from "@/models";
 
 export const dynamic = "force-dynamic";
 
 const KNOWN_PATHS = new Set(STATIC_PAGES.map((p) => p.path));
 
+/**
+ * Fields this screen doesn't show. They're written elsewhere — the homepage
+ * editor sets OG, canonical, Twitter and robots for `/` — so a save here has to
+ * carry them across rather than drop them. Everything this form *does* edit is
+ * taken from the request, blanks included, so clearing still deletes.
+ */
+const PRESERVED = [
+  "ogTitle",
+  "ogDescription",
+  "ogImage",
+  "canonicalUrl",
+  "twitterCard",
+  "focusKeyword",
+  "robots",
+] as const;
+
 export async function PATCH(req: Request): Promise<Response> {
   return withRole("editor", async (user) => {
     const parsed = await parseBody(req, pageSeoUpdateSchema);
     if ("error" in parsed) return parsed.error;
+
+    await dbConnect();
+    const settings = await SiteSetting.getGlobal();
+    const stored = new Map(
+      (settings.pageSeo ?? [])
+        .filter((entry) => entry?.path)
+        .map((entry) => [
+          normalizePagePath(entry.path),
+          toPlainObject(entry) as Record<string, unknown>,
+        ]),
+    );
 
     const seen = new Set<string>();
     const pageSeo: Record<string, unknown>[] = [];
@@ -38,6 +65,12 @@ export async function PATCH(req: Request): Promise<Response> {
 
       const seo: Record<string, unknown> = { ...row };
       delete seo.path;
+      const existing = stored.get(path);
+      if (existing) {
+        for (const key of PRESERVED) {
+          if (existing[key] !== undefined) seo[key] = existing[key];
+        }
+      }
       // `blankToUndefined` in the shared seo schema already turned cleared
       // fields into `undefined`; an entry with nothing left is a deletion.
       const hasValue = Object.values(seo).some(
@@ -46,7 +79,6 @@ export async function PATCH(req: Request): Promise<Response> {
       if (hasValue) pageSeo.push({ ...seo, path });
     }
 
-    await dbConnect();
     await SiteSetting.updateOne(
       { key: GLOBAL_SETTINGS_KEY },
       { $set: { pageSeo } },

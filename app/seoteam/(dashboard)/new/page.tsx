@@ -4,7 +4,7 @@ import { getReviewerOptions } from "@/lib/seoteam/blog-data";
 import { NewPostFlow } from "@/components/seoteam/new-post-flow";
 
 export const metadata: Metadata = {
-  title: "New post · SEO Team",
+  title: "New post | SEO Team",
   robots: { index: false, follow: false },
 };
 

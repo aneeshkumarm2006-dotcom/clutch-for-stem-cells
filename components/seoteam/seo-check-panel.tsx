@@ -119,7 +119,7 @@ export function SeoCheckPanel({
         {summary.fail > 0
           ? `${summary.fail} issue${summary.fail > 1 ? "s" : ""} to fix before this is SEO-ready.`
           : summary.warn > 0
-            ? `Looks good — ${summary.warn} optional improvement${summary.warn > 1 ? "s" : ""}.`
+            ? `Looks good. ${summary.warn} optional improvement${summary.warn > 1 ? "s" : ""}.`
             : "SEO-ready ✓"}
         {overriddenCount > 0 ? (
           <span className="mt-0.5 block text-[11.5px] font-normal opacity-80">
@@ -144,7 +144,7 @@ export function SeoCheckPanel({
                   onClick={() => toggle(check.id)}
                   aria-pressed={overridden}
                   title={
-                    overridden ? "Marked OK — click to undo" : "Mark this as OK"
+                    overridden ? "Marked OK (click to undo)" : "Mark this as OK"
                   }
                   className="flex-none rounded-full transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >

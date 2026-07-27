@@ -22,7 +22,7 @@ import { signInSchema, type SignInInput } from "@/lib/validation/user";
 const ERROR_COPY: Record<string, string> = {
   InvalidCredentials: "That email or password doesn't match. Try again.",
   AccountSuspended: "This account is suspended. Contact support for help.",
-  EmailNotVerified: "Verify your email to sign in — check your inbox.",
+  EmailNotVerified: "Verify your email to sign in. Check your inbox.",
 };
 
 export function SignInForm({

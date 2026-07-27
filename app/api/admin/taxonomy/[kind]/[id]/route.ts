@@ -99,7 +99,7 @@ export async function DELETE(
     }
     if (inUse > 0) {
       return fail(
-        `Can't delete "${doc.name}" — it's used by ${inUse} clinic${
+        `Can't delete "${doc.name}". It's used by ${inUse} clinic${
           inUse === 1 ? "" : "s"
         }. Reassign them first.`,
         409,

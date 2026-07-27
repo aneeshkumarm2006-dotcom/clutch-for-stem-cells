@@ -53,7 +53,7 @@ export function ShortlistView() {
       <EmptyState
         icon={HeartOff}
         title="Your shortlist is empty"
-        description="Save clinics as you browse and they'll appear here — even before you sign in."
+        description="Save clinics as you browse and they'll appear here, even before you sign in."
         action={
           <Button asChild>
             <Link href="/clinics">Browse clinics</Link>

@@ -31,6 +31,123 @@ export interface IPopularSearch {
   href: string;
 }
 
+/**
+ * Homepage (landing page) content — everything the `/` route renders that used
+ * to be hardcoded in the page component: section headings, the highlight cards,
+ * the "how it works" steps, the cost/benefits columns, the trust strip, the
+ * for-clinics band and the FAQ that also feeds the page's `FAQPage` JSON-LD.
+ *
+ * Every field is optional and a blank one means "use the shipped copy" — the
+ * merge lives in `config/homepage.ts` (`resolveHomepage`), which is also where
+ * the defaults are. That keeps this sub-document a pure overlay: an editor who
+ * clears a field restores the shipped string rather than blanking the page.
+ *
+ * The four pieces that predate it — `hero`, `popularSearches`, `testimonials`,
+ * `featuredClinicIds` — deliberately keep their existing top-level storage so no
+ * content had to move; `resolveHomepage` stitches both halves together.
+ */
+export interface IHomepageFeedSection {
+  enabled?: boolean;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  linkLabel?: string;
+  linkHref?: string;
+  limit?: number;
+}
+
+export interface IHomepageCard {
+  title?: string;
+  body?: string;
+  href?: string;
+}
+
+export interface IHomepageStep {
+  icon?: string;
+  title?: string;
+  body?: string;
+}
+
+export interface IHomepageFaqItem {
+  question?: string;
+  answer?: string;
+}
+
+export interface IHomepageColumn {
+  title?: string;
+  intro?: string;
+  bullets?: string[];
+  outro?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  disclaimer?: string;
+}
+
+export interface IHomepage {
+  hero?: {
+    ctaPrimaryHref?: string;
+    ctaSecondaryHref?: string;
+    showSearch?: boolean;
+    popularLabel?: string;
+  };
+  treatments?: IHomepageFeedSection;
+  conditions?: IHomepageFeedSection;
+  highlights?: {
+    enabled?: boolean;
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    cards?: IHomepageCard[];
+  };
+  destinations?: IHomepageFeedSection;
+  featured?: IHomepageFeedSection;
+  howItWorks?: {
+    enabled?: boolean;
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    steps?: IHomepageStep[];
+  };
+  costBenefits?: { enabled?: boolean; columns?: IHomepageColumn[] };
+  trust?: {
+    enabled?: boolean;
+    badge?: string;
+    title?: string;
+    body?: string;
+    ctaLabel?: string;
+    ctaHref?: string;
+    showStats?: boolean;
+    clinicsLabel?: string;
+    verifiedLabel?: string;
+    reviewsLabel?: string;
+  };
+  testimonials?: {
+    enabled?: boolean;
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    note?: string;
+  };
+  forClinics?: {
+    enabled?: boolean;
+    title?: string;
+    body?: string;
+    ctaLabel?: string;
+    ctaHref?: string;
+  };
+  faq?: {
+    enabled?: boolean;
+    heading?: string;
+    items?: IHomepageFaqItem[];
+    moreLabel?: string;
+    moreHref?: string;
+    emitJsonLd?: boolean;
+  };
+  blog?: IHomepageFeedSection;
+  /** `<meta name="keywords">` for `/`; the rest of its meta lives in `pageSeo`. */
+  keywords?: string[];
+}
+
 export interface ITestimonial {
   _id?: Types.ObjectId;
   quote: string;
@@ -89,7 +206,7 @@ export interface IAnalyticsConfig {
 }
 
 export interface ISeoDefaults extends ISeo {
-  /** Title template, e.g. "%s · My Stem Cell Guide". */
+  /** Title template, e.g. "%s | My Stem Cell Guide". */
   titleTemplate?: string;
   twitterHandle?: string;
 }
@@ -130,6 +247,8 @@ export interface ISiteSetting extends TimestampFields {
   _id: Types.ObjectId;
   key: string;
   hero?: IHero;
+  /** Overlay for the rest of the landing page (see {@link IHomepage}). */
+  homepage?: IHomepage;
   popularSearches: IPopularSearch[];
   featuredClinicIds: Types.ObjectId[];
   testimonials: ITestimonial[];
@@ -168,6 +287,182 @@ const popularSearchSchema = new Schema<IPopularSearch>(
   {
     label: { type: String, required: true, trim: true },
     href: { type: String, required: true, trim: true },
+  },
+  { _id: false },
+);
+
+// ── Homepage overlay sub-schemas ────────────────────────────────────────────
+//
+// Nothing is `required` and nothing has a default: an absent field means "fall
+// back to the shipped copy", which `resolveHomepage` decides — a schema-level
+// default here would shadow that and freeze today's copy into the database.
+
+const homepageFeedSectionSchema = new Schema<IHomepageFeedSection>(
+  {
+    enabled: { type: Boolean },
+    eyebrow: { type: String, trim: true },
+    title: { type: String, trim: true },
+    description: { type: String, trim: true },
+    linkLabel: { type: String, trim: true },
+    linkHref: { type: String, trim: true },
+    limit: { type: Number, min: 1, max: 24 },
+  },
+  { _id: false },
+);
+
+const homepageCardSchema = new Schema<IHomepageCard>(
+  {
+    title: { type: String, trim: true },
+    body: { type: String, trim: true },
+    href: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
+const homepageStepSchema = new Schema<IHomepageStep>(
+  {
+    icon: { type: String, trim: true },
+    title: { type: String, trim: true },
+    body: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
+const homepageFaqItemSchema = new Schema<IHomepageFaqItem>(
+  {
+    question: { type: String, trim: true },
+    answer: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
+const homepageColumnSchema = new Schema<IHomepageColumn>(
+  {
+    title: { type: String, trim: true },
+    intro: { type: String, trim: true },
+    bullets: { type: [String], default: undefined },
+    outro: { type: String, trim: true },
+    ctaLabel: { type: String, trim: true },
+    ctaHref: { type: String, trim: true },
+    disclaimer: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
+const homepageSchema = new Schema<IHomepage>(
+  {
+    hero: {
+      type: new Schema(
+        {
+          ctaPrimaryHref: { type: String, trim: true },
+          ctaSecondaryHref: { type: String, trim: true },
+          showSearch: { type: Boolean },
+          popularLabel: { type: String, trim: true },
+        },
+        { _id: false },
+      ),
+      default: undefined,
+    },
+    treatments: { type: homepageFeedSectionSchema, default: undefined },
+    conditions: { type: homepageFeedSectionSchema, default: undefined },
+    highlights: {
+      type: new Schema(
+        {
+          enabled: { type: Boolean },
+          eyebrow: { type: String, trim: true },
+          title: { type: String, trim: true },
+          description: { type: String, trim: true },
+          cards: { type: [homepageCardSchema], default: undefined },
+        },
+        { _id: false },
+      ),
+      default: undefined,
+    },
+    destinations: { type: homepageFeedSectionSchema, default: undefined },
+    featured: { type: homepageFeedSectionSchema, default: undefined },
+    howItWorks: {
+      type: new Schema(
+        {
+          enabled: { type: Boolean },
+          eyebrow: { type: String, trim: true },
+          title: { type: String, trim: true },
+          description: { type: String, trim: true },
+          steps: { type: [homepageStepSchema], default: undefined },
+        },
+        { _id: false },
+      ),
+      default: undefined,
+    },
+    costBenefits: {
+      type: new Schema(
+        {
+          enabled: { type: Boolean },
+          columns: { type: [homepageColumnSchema], default: undefined },
+        },
+        { _id: false },
+      ),
+      default: undefined,
+    },
+    trust: {
+      type: new Schema(
+        {
+          enabled: { type: Boolean },
+          badge: { type: String, trim: true },
+          title: { type: String, trim: true },
+          body: { type: String, trim: true },
+          ctaLabel: { type: String, trim: true },
+          ctaHref: { type: String, trim: true },
+          showStats: { type: Boolean },
+          clinicsLabel: { type: String, trim: true },
+          verifiedLabel: { type: String, trim: true },
+          reviewsLabel: { type: String, trim: true },
+        },
+        { _id: false },
+      ),
+      default: undefined,
+    },
+    testimonials: {
+      type: new Schema(
+        {
+          enabled: { type: Boolean },
+          eyebrow: { type: String, trim: true },
+          title: { type: String, trim: true },
+          description: { type: String, trim: true },
+          note: { type: String, trim: true },
+        },
+        { _id: false },
+      ),
+      default: undefined,
+    },
+    forClinics: {
+      type: new Schema(
+        {
+          enabled: { type: Boolean },
+          title: { type: String, trim: true },
+          body: { type: String, trim: true },
+          ctaLabel: { type: String, trim: true },
+          ctaHref: { type: String, trim: true },
+        },
+        { _id: false },
+      ),
+      default: undefined,
+    },
+    faq: {
+      type: new Schema(
+        {
+          enabled: { type: Boolean },
+          heading: { type: String, trim: true },
+          items: { type: [homepageFaqItemSchema], default: undefined },
+          moreLabel: { type: String, trim: true },
+          moreHref: { type: String, trim: true },
+          emitJsonLd: { type: Boolean },
+        },
+        { _id: false },
+      ),
+      default: undefined,
+    },
+    blog: { type: homepageFeedSectionSchema, default: undefined },
+    keywords: { type: [String], default: undefined },
   },
   { _id: false },
 );
@@ -281,6 +576,7 @@ const SiteSettingSchema = new Schema<ISiteSetting, SiteSettingModel>(
       default: GLOBAL_SETTINGS_KEY,
     },
     hero: { type: heroSchema, default: () => ({}) },
+    homepage: { type: homepageSchema, default: () => ({}) },
     popularSearches: { type: [popularSearchSchema], default: [] },
     featuredClinicIds: {
       type: [{ type: Schema.Types.ObjectId, ref: "Clinic" }],

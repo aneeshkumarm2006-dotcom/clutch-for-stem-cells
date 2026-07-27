@@ -140,7 +140,7 @@ export function SettingsForm({ settings }: { settings: SettingsView }) {
           <Section id="seo" title="SEO defaults">
             <TextField
               label="Title template"
-              placeholder="%s · My Stem Cell Guide"
+              placeholder="%s | My Stem Cell Guide"
               value={v.seoDefaults.titleTemplate}
               onChange={(e) =>
                 setV((c) => ({

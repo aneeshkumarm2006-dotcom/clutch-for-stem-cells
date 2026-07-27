@@ -22,7 +22,7 @@ export default function MethodologyPage() {
       <ul>
         <li>
           <strong>Featured clinics</strong> appear first and are clearly labelled
-          &ldquo;Featured&rdquo; — this is paid placement.
+          &ldquo;Featured&rdquo;. This is paid placement.
         </li>
         <li>
           <strong>Verified clinics</strong> are prioritised next.

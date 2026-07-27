@@ -76,6 +76,26 @@ const faqSchema = z.object({
   answer: z.string().min(1).max(4000),
 });
 
+/**
+ * Copy + meta for the child `/clinic/[slug]/reviews` page. All-optional: a
+ * blank field means "fall back to the auto-generated copy", so the form can
+ * submit empty strings for anything the editor didn't fill in.
+ */
+const reviewsPageSchema = z
+  .object({
+    heading: z.preprocess(blankToUndefined, z.string().max(200).optional()),
+    intro: z.preprocess(blankToUndefined, z.string().max(2000).optional()),
+    introEmpty: z.preprocess(blankToUndefined, z.string().max(2000).optional()),
+    bodyMarkdown: z.preprocess(
+      blankToUndefined,
+      z.string().max(20_000).optional(),
+    ),
+    ctaHeading: z.preprocess(blankToUndefined, z.string().max(200).optional()),
+    ctaBody: z.preprocess(blankToUndefined, z.string().max(1000).optional()),
+    seo: seoSchema.optional(),
+  })
+  .partial();
+
 const clinicObjectSchema = z.object({
   name: z.string().min(1, "Name is required").max(200),
   slug: slugSchema,
@@ -123,6 +143,7 @@ const clinicObjectSchema = z.object({
   ownerUserId: objectIdSchema.nullish(),
   isClaimed: z.boolean().default(false),
   seo: seoSchema.optional(),
+  reviewsPage: reviewsPageSchema.optional(),
 });
 
 // Cross-field invariants shared by create + update.

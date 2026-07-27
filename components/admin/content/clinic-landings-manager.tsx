@@ -368,7 +368,7 @@ export function ClinicLandingsManager({
                 />
               </div>
               <p className="text-[12px] leading-snug text-text-muted">
-                A meta title typed here is used exactly as written — add the
+                A meta title typed here is used exactly as written. Add the
                 brand suffix yourself if you want one.
               </p>
               <label className="flex items-center justify-between py-1">

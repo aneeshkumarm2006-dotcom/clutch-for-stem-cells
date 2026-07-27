@@ -24,7 +24,7 @@ import { REPORT_REASON_LABELS } from "@/lib/enums";
 import type { AdminReportRow } from "@/lib/admin/reports";
 
 function formatDate(iso?: string): string {
-  return iso ? new Date(iso).toLocaleString() : "—";
+  return iso ? new Date(iso).toLocaleString() : "–";
 }
 
 export function ReportsManager({ rows }: { rows: AdminReportRow[] }) {

@@ -191,7 +191,7 @@ export function PageEditor({
           body: payload,
         });
         toast.success(
-          v.reviewStatus === "approved" ? "Approved — live" : "Saved",
+          v.reviewStatus === "approved" ? "Approved (live)" : "Saved",
         );
         router.refresh();
       }
@@ -273,7 +273,7 @@ export function PageEditor({
                 rows={3}
                 value={v.intro}
                 onChange={(e) => set({ intro: e.target.value })}
-                placeholder="A direct answer to the page's core question — the passage answer engines quote."
+                placeholder="A direct answer to the page's core question. This is the passage answer engines quote."
               />
             </div>
           </div>
@@ -352,7 +352,7 @@ function SlugHint({
   if (state === "reserved") {
     return (
       <p className="text-[12px] text-danger">
-        Reserved by an existing route — pick another.
+        Reserved by an existing route. Pick another.
       </p>
     );
   }

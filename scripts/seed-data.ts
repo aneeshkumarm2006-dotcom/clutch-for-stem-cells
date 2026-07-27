@@ -787,7 +787,7 @@ export const CLINICS: ClinicSeed[] = [
       {
         question: "Do you offer a free consultation?",
         answer:
-          "Yes — an initial consultation reviews your history and goals before any protocol is proposed.",
+          "Yes. An initial consultation reviews your history and goals before any protocol is proposed.",
       },
       {
         question: "Where are the cells processed?",
@@ -922,7 +922,7 @@ export const CLINICS: ClinicSeed[] = [
       {
         question: "Do you support medical travel?",
         answer:
-          "Yes — we coordinate scheduling and provide documentation for international patients.",
+          "Yes. We coordinate scheduling and provide documentation for international patients.",
       },
     ],
     highlights: [
@@ -1161,7 +1161,7 @@ export const REVIEWS: ReviewSeed[] = [
     whyChosenTags: ["High ratings", "Accreditation", "Language support"],
     wouldRecommend: true,
     providerResponse: {
-      body: "Thank you, James — we're glad the protocol helped and we've since expanded our written aftercare guides.",
+      body: "Thank you, James. We're glad the protocol helped and we've since expanded our written aftercare guides.",
     },
   },
   {
@@ -1462,10 +1462,10 @@ export interface MedicalReviewerSeed {
  */
 export const MEDICAL_REVIEWERS: MedicalReviewerSeed[] = [
   {
-    name: "Example Reviewer — replace before publishing",
+    name: "Example Reviewer (replace before publishing)",
     slug: "example-reviewer",
     credentials: "MD",
-    title: "Placeholder — add your real medical reviewer",
+    title: "Placeholder: add your real medical reviewer",
     bio: "This is a placeholder record. Add a real, credentialed medical reviewer (name, credentials, and authoritative profile links) and mark them active before approving any YMYL content.",
     isActive: false,
   },
@@ -1502,18 +1502,18 @@ export const MATRIX_PAGES: MatrixPageSeed[] = [
     slugB: "knee-osteoarthritis",
     title: "MSC therapy for knee osteoarthritis: what to know",
     metaTitle:
-      "MSC Therapy for Knee Osteoarthritis — Evidence & Considerations",
+      "MSC Therapy for Knee Osteoarthritis | Evidence and Considerations",
     metaDescription:
       "What mesenchymal stem cell (MSC) therapy is, how it's studied for knee osteoarthritis, and questions to ask before considering it. Informational only.",
     intro:
-      "Mesenchymal stem cell (MSC) therapy is being studied as an investigational option for knee osteoarthritis. Current clinical evidence is still emerging and mixed, and it is not an established standard of care. Potential benefits, risks, and costs vary by person and clinic — discuss any option with a qualified specialist first.",
-    body: "<h2>What MSC therapy is</h2><p>Mesenchymal stem cells are cells that can be sourced from tissues such as bone marrow or adipose (fat). In a regenerative-medicine setting they are prepared and delivered to a target area — for the knee, usually by injection. How a given clinic prepares and delivers cells varies, which makes protocols hard to compare directly.</p><h2>How it's studied for knee osteoarthritis</h2><p>Knee osteoarthritis is a common, progressive joint condition. Researchers are investigating whether MSC-based approaches can help with symptoms such as pain and function. Study designs, cell sources, doses, and follow-up periods differ widely, so results are not directly comparable and should be read with caution.</p><h2>What the evidence shows so far</h2><p>Published research is best described as emerging and mixed. Some early trials report changes in reported symptoms; others are small, short, or lack long-term data. This is not the same as proof of effectiveness, and outcomes reported in one study may not generalize. No responsible source can promise a specific result.</p><h2>How it compares to standard care</h2><p>Conventional management of knee osteoarthritis typically starts with conservative measures (for example, exercise, weight management, and physician-directed medication) and may progress to surgical options in advanced cases. MSC therapy is not a replacement for that pathway and is generally considered investigational.</p><h2>Questions to ask a clinic</h2><ul><li>Is this treatment offered as part of a registered clinical trial, and what is its regulatory status where I live?</li><li>What cell source, preparation, and dose is used, and what evidence supports it for knee osteoarthritis specifically?</li><li>What are the known risks, and what does follow-up and aftercare involve?</li><li>What is the full cost, and what is and isn't included?</li></ul>",
+      "Mesenchymal stem cell (MSC) therapy is being studied as an investigational option for knee osteoarthritis. Current clinical evidence is still emerging and mixed, and it is not an established standard of care. Potential benefits, risks, and costs vary by person and clinic, so discuss any option with a qualified specialist first.",
+    body: "<h2>What MSC therapy is</h2><p>Mesenchymal stem cells are cells that can be sourced from tissues such as bone marrow or adipose (fat). In a regenerative-medicine setting they are prepared and delivered to a target area, and for the knee that usually means an injection. How a given clinic prepares and delivers cells varies, which makes protocols hard to compare directly.</p><h2>How it's studied for knee osteoarthritis</h2><p>Knee osteoarthritis is a common, progressive joint condition. Researchers are investigating whether MSC-based approaches can help with symptoms such as pain and function. Study designs, cell sources, doses, and follow-up periods differ widely, so results are not directly comparable and should be read with caution.</p><h2>What the evidence shows so far</h2><p>Published research is best described as emerging and mixed. Some early trials report changes in reported symptoms; others are small, short, or lack long-term data. This is not the same as proof of effectiveness, and outcomes reported in one study may not generalize. No responsible source can promise a specific result.</p><h2>How it compares to standard care</h2><p>Conventional management of knee osteoarthritis typically starts with conservative measures (for example, exercise, weight management, and physician-directed medication) and may progress to surgical options in advanced cases. MSC therapy is not a replacement for that pathway and is generally considered investigational.</p><h2>Questions to ask a clinic</h2><ul><li>Is this treatment offered as part of a registered clinical trial, and what is its regulatory status where I live?</li><li>What cell source, preparation, and dose is used, and what evidence supports it for knee osteoarthritis specifically?</li><li>What are the known risks, and what does follow-up and aftercare involve?</li><li>What is the full cost, and what is and isn't included?</li></ul>",
     faqs: [
       {
         question:
           "Is MSC therapy an approved treatment for knee osteoarthritis?",
         answer:
-          "In most countries MSC therapy for knee osteoarthritis is considered investigational rather than an approved standard treatment. Regulatory status varies by jurisdiction — confirm the local status and whether a treatment is offered within a registered trial.",
+          "In most countries MSC therapy for knee osteoarthritis is considered investigational rather than an approved standard treatment. Regulatory status varies by jurisdiction, so confirm the local status and whether a treatment is offered within a registered trial.",
       },
       {
         question: "Does MSC therapy cure knee osteoarthritis?",
@@ -1540,7 +1540,7 @@ export const MATRIX_PAGES: MatrixPageSeed[] = [
       {
         label: "Evidence maturity",
         value:
-          "Emerging and mixed — small/short studies; long-term data limited.",
+          "Emerging and mixed: small/short studies; long-term data limited.",
       },
       {
         label: "Standard of care",
@@ -1573,7 +1573,7 @@ export const TAXONOMY_EDITORIAL: TaxonomyEditorialSeed[] = [
     slug: "msc-therapy",
     body: "Mesenchymal stem cell (MSC) therapy is a regenerative-medicine approach studied across a range of conditions. The sections below summarize how it is described in general terms; they are informational only and not medical advice.",
     mechanism:
-      "MSCs are cells that can be isolated from tissues such as bone marrow or adipose (fat). In practice, a clinic collects or sources cells, prepares them, and delivers them — often by injection — to a target area. Exact preparation and delivery methods vary between providers.",
+      "MSCs are cells that can be isolated from tissues such as bone marrow or adipose (fat). In practice, a clinic collects or sources cells, prepares them, and delivers them to a target area, often by injection. Exact preparation and delivery methods vary between providers.",
     evidenceLevel: "mixed",
     evidenceSummary:
       "Clinical research is active but uneven: studies differ in cell source, dose, and follow-up, and many are small or short. Findings should be read as emerging rather than settled, and results in one setting may not generalize.",
@@ -1632,8 +1632,8 @@ export const BLOG_POSTS: BlogPostSeed[] = [
     template: "how-to",
     author: "Stem Cell Guide Team",
     excerpt:
-      "A practical, non-medical checklist for researching a regenerative-medicine clinic — regulatory status, protocol transparency, accreditations, costs, and red flags.",
-    metaTitle: "How to Vet a Stem Cell Clinic — A Practical Checklist",
+      "A practical, non-medical checklist for researching a regenerative-medicine clinic: regulatory status, protocol transparency, accreditations, costs, and red flags.",
+    metaTitle: "How to Vet a Stem Cell Clinic | A Practical Checklist",
     body: "<p>Choosing a clinic in a fast-moving, unevenly-regulated field is hard. This checklist is about <em>process</em>, not medical advice: it helps you ask better questions. Always make treatment decisions with a qualified physician who knows your history.</p><h2>1. Check regulatory and trial status</h2><p>Ask whether the specific treatment is approved where it's offered, or whether it's investigational. If it's described as part of research, ask whether it's a registered clinical trial and where it's registered. Regulatory status varies widely by country.</p><h2>2. Ask about the specific protocol</h2><p>Vague marketing is a warning sign. A transparent clinic can explain the cell source, how cells are prepared, the dose, the delivery method, and the evidence they rely on for your specific condition.</p><h2>3. Verify accreditations and the medical team</h2><p>Look for named, credentialed physicians and independently verifiable accreditations. Confirm who performs the procedure and what their qualifications are.</p><h2>4. Understand costs and what's included</h2><p>Request a full, itemized quote: the procedure, follow-up, aftercare, and any travel-related costs. Be wary of pressure to pay quickly or commit to packages before your questions are answered.</p><h2>5. Weigh the risks and aftercare</h2><p>Every procedure carries risk. Ask what the known risks are, how complications are handled, and what follow-up looks like once you return home.</p><h2>Red flags</h2><ul><li>Guarantees of a cure or a specific outcome.</li><li>Reluctance to explain the protocol or share the evidence.</li><li>No named, credentialed medical team.</li><li>Pressure to decide or pay quickly.</li></ul><p>If something feels off, it's reasonable to walk away and seek a second opinion.</p>",
   },
   {
@@ -1643,7 +1643,7 @@ export const BLOG_POSTS: BlogPostSeed[] = [
     author: "Stem Cell Guide Team",
     excerpt:
       "Why regulation varies by country, what 'investigational' vs 'approved' means, and how to check the regulatory status of a treatment. Informational only.",
-    metaTitle: "Stem Cell Therapy Safety & Regulation — What to Understand",
-    body: "<p>Regenerative medicine spans a wide range of treatments, and the rules that govern them differ from country to country. This overview is informational and does not recommend or endorse any treatment.</p><h2>Why regulation varies</h2><p>Different jurisdictions classify and regulate cell-based treatments differently. A treatment that is tightly restricted in one country may be marketed more freely in another. That variation is one reason patients travel — and one reason careful research matters.</p><h2>'Investigational' vs 'approved'</h2><p>An <strong>approved</strong> treatment has cleared a regulator's bar for a specific use. An <strong>investigational</strong> treatment is still being studied and has not. Many cell-based offerings are investigational for many uses; a clinic should be clear about which applies to you.</p><h2>Questions worth asking about safety</h2><ul><li>What are the known risks of this specific procedure?</li><li>How are potential complications managed, and by whom?</li><li>What does follow-up and aftercare involve?</li></ul><h2>The role of clinical trials</h2><p>Registered clinical trials are how treatments build evidence and, eventually, regulatory approval. If a treatment is offered as research, ask where the trial is registered and what it involves.</p><h2>Where to check</h2><p>Regulatory status is best confirmed with the relevant national regulator and, for trials, with public trial registries. When in doubt, discuss the specifics with a qualified physician before making any decision.</p>",
+    metaTitle: "Stem Cell Therapy Safety and Regulation | What to Understand",
+    body: "<p>Regenerative medicine spans a wide range of treatments, and the rules that govern them differ from country to country. This overview is informational and does not recommend or endorse any treatment.</p><h2>Why regulation varies</h2><p>Different jurisdictions classify and regulate cell-based treatments differently. A treatment that is tightly restricted in one country may be marketed more freely in another. That variation is one reason patients travel, and one reason careful research matters.</p><h2>'Investigational' vs 'approved'</h2><p>An <strong>approved</strong> treatment has cleared a regulator's bar for a specific use. An <strong>investigational</strong> treatment is still being studied and has not. Many cell-based offerings are investigational for many uses; a clinic should be clear about which applies to you.</p><h2>Questions worth asking about safety</h2><ul><li>What are the known risks of this specific procedure?</li><li>How are potential complications managed, and by whom?</li><li>What does follow-up and aftercare involve?</li></ul><h2>The role of clinical trials</h2><p>Registered clinical trials are how treatments build evidence and, eventually, regulatory approval. If a treatment is offered as research, ask where the trial is registered and what it involves.</p><h2>Where to check</h2><p>Regulatory status is best confirmed with the relevant national regulator and, for trials, with public trial registries. When in doubt, discuss the specifics with a qualified physician before making any decision.</p>",
   },
 ];

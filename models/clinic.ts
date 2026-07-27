@@ -105,6 +105,33 @@ export interface ITopMention {
   count: number;
 }
 
+/**
+ * Editor-authored copy + meta for the clinic's child reviews page
+ * (`/clinic/[slug]/reviews`).
+ *
+ * That route is a distinct URL from the profile with its own query intent
+ * ("<clinic> reviews"), so it needs its own overrides: reusing `Clinic.seo`
+ * would point this page's canonical at the profile. Every field is optional —
+ * unset means "keep the auto-generated copy derived from the clinic's name,
+ * location, rating and review count", which is exactly how every existing
+ * clinic (which has no `reviewsPage`) already behaves.
+ */
+export interface IClinicReviewsPage {
+  /** H1 override. Default: "<name> reviews". */
+  heading?: string;
+  /** Intro paragraph shown when the clinic has published reviews. */
+  intro?: string;
+  /** Intro paragraph shown when it has none yet. */
+  introEmpty?: string;
+  /** Markdown section rendered under the review list (editorial context). */
+  bodyMarkdown?: string;
+  /** Sidebar "Been treated here?" card copy. */
+  ctaHeading?: string;
+  ctaBody?: string;
+  /** Meta overrides for this URL only — never inherited from `Clinic.seo`. */
+  seo?: ISeo;
+}
+
 export interface IClinic extends TimestampFields, SoftDeleteFields {
   _id: Types.ObjectId;
   name: string;
@@ -148,6 +175,8 @@ export interface IClinic extends TimestampFields, SoftDeleteFields {
   ownerUserId?: Types.ObjectId | null;
   isClaimed: boolean;
   seo?: ISeo;
+  /** Copy + meta for the child `/clinic/[slug]/reviews` page. */
+  reviewsPage?: IClinicReviewsPage;
   /** Per-page control over the auto-generated JSON-LD (schema engine). */
   schemaOverrides?: ISchemaOverrides;
   sortScore: number;
@@ -232,6 +261,19 @@ const topMentionSchema = new Schema<ITopMention>(
   {
     tag: { type: String, required: true, trim: true },
     count: { type: Number, default: 0, min: 0 },
+  },
+  { _id: false },
+);
+
+const clinicReviewsPageSchema = new Schema<IClinicReviewsPage>(
+  {
+    heading: { type: String, trim: true, maxlength: 200 },
+    intro: { type: String, trim: true, maxlength: 2000 },
+    introEmpty: { type: String, trim: true, maxlength: 2000 },
+    bodyMarkdown: { type: String },
+    ctaHeading: { type: String, trim: true, maxlength: 200 },
+    ctaBody: { type: String, trim: true, maxlength: 1000 },
+    seo: { type: seoSchema, default: undefined },
   },
   { _id: false },
 );
@@ -324,6 +366,7 @@ const ClinicSchema = new Schema<IClinic>(
     ownerUserId: { type: Schema.Types.ObjectId, ref: "User", default: null },
     isClaimed: { type: Boolean, default: false },
     seo: { type: seoSchema, default: undefined },
+    reviewsPage: { type: clinicReviewsPageSchema, default: undefined },
     schemaOverrides: { type: schemaOverrideSchema, default: undefined },
 
     // Computed — see /lib/ranking.ts (Stage 3.1).

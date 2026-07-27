@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Pages · SEO Team",
+  title: "Pages | SEO Team",
   robots: { index: false, follow: false },
 };
 
@@ -78,7 +78,7 @@ export default async function PagesDashboard() {
                         {p.flagCount}
                       </span>
                     ) : (
-                      "—"
+                      "–"
                     )}
                   </td>
                 </tr>

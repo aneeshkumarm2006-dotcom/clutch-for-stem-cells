@@ -135,7 +135,7 @@ export const CONTENT_ENGINE = {
 
   /** Global SEO fallbacks (admin Settings override these at runtime). */
   seoDefaults: {
-    titleTemplate: `%s · ${SITE_NAME}`,
+    titleTemplate: `%s | ${SITE_NAME}`,
     twitterCard: "summary_large_image" as const,
     robots: { index: true, follow: true },
   },

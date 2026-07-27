@@ -84,7 +84,7 @@ export async function generateMetadata({
     description:
       clinic.tagline ??
       clinic.description?.slice(0, 160) ??
-      `${clinic.name} — regenerative-medicine clinic profile, reviews, and pricing.`,
+      `Profile, reviews, and pricing for ${clinic.name}, a regenerative-medicine clinic.`,
     path: `/clinic/${clinic.slug}`,
     image: clinic.coverUrl ?? clinic.logoUrl,
     type: "profile",
@@ -788,7 +788,7 @@ export default async function ClinicProfilePage({
               Interested in {clinic.name}?
             </p>
             <p className="mt-1 text-[13.5px] text-text-secondary">
-              Request a consultation — no obligation.
+              Request a consultation. No obligation.
             </p>
             <div className="mt-4 space-y-2.5">
               <ConsultationDialog
@@ -841,7 +841,7 @@ function Fact({
         {label}
       </dt>
       <dd className="mt-0.5 font-display text-[14px] font-semibold text-text-primary">
-        {value ?? "—"}
+        {value ?? "–"}
       </dd>
     </div>
   );

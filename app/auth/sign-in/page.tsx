@@ -59,11 +59,11 @@ export default async function SignInPage({
       }
     >
       {verified ? (
-        <Banner tone="success">Email verified — sign in to continue.</Banner>
+        <Banner tone="success">Email verified. Sign in to continue.</Banner>
       ) : null}
       {reset ? (
         <Banner tone="success">
-          Password updated — sign in with your new password.
+          Password updated. Sign in with your new password.
         </Banner>
       ) : null}
       {errorMessage ? <Banner tone="danger">{errorMessage}</Banner> : null}

@@ -6,7 +6,7 @@ import {
 } from "@/components/seoteam/reviewer-editor";
 
 export const metadata: Metadata = {
-  title: "New reviewer · SEO Team",
+  title: "New reviewer | SEO Team",
   robots: { index: false, follow: false },
 };
 

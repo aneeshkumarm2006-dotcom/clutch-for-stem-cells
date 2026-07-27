@@ -44,9 +44,9 @@ export function fmtSize(bytes?: number): string {
 
 /** Stable, locale-fixed date (avoids SSR/CSR hydration mismatch). */
 function fmtDate(iso?: string): string {
-  if (!iso) return "—";
+  if (!iso) return "–";
   const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "—";
+  if (Number.isNaN(d.getTime())) return "–";
   return d.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
@@ -167,7 +167,7 @@ export function MediaTable({
                     className="truncate font-medium"
                     title={m.filename ?? m.publicId ?? ""}
                   >
-                    {m.filename ?? "—"}
+                    {m.filename ?? "–"}
                   </div>
                   {m.publicId ? (
                     <div
@@ -202,17 +202,17 @@ export function MediaTable({
 
                 {/* Dimensions */}
                 <TableCell className="whitespace-nowrap tabular-nums text-text-secondary">
-                  {m.width && m.height ? `${m.width}×${m.height}` : "—"}
+                  {m.width && m.height ? `${m.width}×${m.height}` : "–"}
                 </TableCell>
 
                 {/* Size */}
                 <TableCell className="whitespace-nowrap tabular-nums text-text-secondary">
-                  {fmtSize(m.bytes) || "—"}
+                  {fmtSize(m.bytes) || "–"}
                 </TableCell>
 
                 {/* Format */}
                 <TableCell className="uppercase text-text-secondary">
-                  {m.format ?? "—"}
+                  {m.format ?? "–"}
                 </TableCell>
 
                 {/* URL */}

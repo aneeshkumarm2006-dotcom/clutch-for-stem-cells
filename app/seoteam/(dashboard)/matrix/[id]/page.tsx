@@ -12,7 +12,7 @@ import {
 } from "@/components/seoteam/matrix-editor";
 
 export const metadata: Metadata = {
-  title: "Edit combination page · SEO Team",
+  title: "Edit combination page | SEO Team",
   robots: { index: false, follow: false },
 };
 

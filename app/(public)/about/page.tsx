@@ -19,10 +19,10 @@ export default function AboutPage() {
         Researching stem cell and regenerative treatments is hard. Information is
         scattered, claims are often unsubstantiated, and pricing is opaque. We
         bring clinics into one place with consistent profiles, accreditation
-        details, transparent pricing ranges, and verified patient reviews — so
+        details, transparent pricing ranges, and verified patient reviews, so
         you can make a more informed decision.
       </p>
-      <h2>What we are — and aren&apos;t</h2>
+      <h2>What we are, and what we aren&apos;t</h2>
       <p>
         We are an informational directory. We are <strong>not</strong> a medical
         provider, and we do not deliver care, give medical advice, or endorse the

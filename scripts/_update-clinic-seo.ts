@@ -56,7 +56,7 @@ async function main(): Promise<void> {
     metaDescription: clinic.seo?.metaDescription ?? null,
   };
 
-  const len = (s: string | null) => (s == null ? "—" : `${s.length} chars`);
+  const len = (s: string | null) => (s == null ? "–" : `${s.length} chars`);
 
   console.log(`\n${clinic.name}  (/clinic/${clinic.slug})`);
   console.log(`status=${clinic.status}  reviews=${clinic.reviewCount ?? 0}  rating=${clinic.ratingAvg ?? 0}`);

@@ -32,7 +32,7 @@ const TONE: Record<ActivityTone, string> = {
 };
 
 function fmt(iso?: string): string {
-  return iso ? new Date(iso).toLocaleString() : "—";
+  return iso ? new Date(iso).toLocaleString() : "–";
 }
 
 export function AuditTable({
@@ -106,7 +106,7 @@ export function AuditTable({
                       ) : null}
                     </Td>
                     <Td className="text-text-secondary">{r.actorName}</Td>
-                    <Td className="text-text-muted">{r.ip ?? "—"}</Td>
+                    <Td className="text-text-muted">{r.ip ?? "–"}</Td>
                     <Td className="text-text-muted">{fmt(r.at)}</Td>
                     <Td>
                       {hasDiff ? (
@@ -147,7 +147,7 @@ export function AuditTable({
                   Before
                 </div>
                 <pre className="max-h-80 overflow-auto rounded-lg bg-surface-alt p-3 text-[12px] text-slate-700">
-                  {diff.before ? JSON.stringify(diff.before, null, 2) : "—"}
+                  {diff.before ? JSON.stringify(diff.before, null, 2) : "–"}
                 </pre>
               </div>
               <div>
@@ -155,7 +155,7 @@ export function AuditTable({
                   After
                 </div>
                 <pre className="max-h-80 overflow-auto rounded-lg bg-surface-alt p-3 text-[12px] text-slate-700">
-                  {diff.after ? JSON.stringify(diff.after, null, 2) : "—"}
+                  {diff.after ? JSON.stringify(diff.after, null, 2) : "–"}
                 </pre>
               </div>
             </div>

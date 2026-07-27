@@ -506,8 +506,8 @@ async function main(): Promise<void> {
     ).filter((id): id is Types.ObjectId => !!id),
     testimonials: TESTIMONIALS,
     seoDefaults: {
-      titleTemplate: `%s · ${SITE_NAME}`,
-      metaTitle: `${SITE_NAME} — Find and trust regenerative-medicine clinics`,
+      titleTemplate: `%s | ${SITE_NAME}`,
+      metaTitle: `${SITE_NAME} | Find and trust regenerative-medicine clinics`,
       metaDescription:
         "Discover, compare, and review accredited stem cell and regenerative-medicine clinics worldwide.",
     },

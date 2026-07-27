@@ -77,7 +77,7 @@ export function validateNode(node: JsonLd): SchemaIssue[] {
       issues.push({
         node: type,
         level: "warning",
-        message: `${type} is missing the recommended field "${key}" — it may not qualify for a rich result.`,
+        message: `${type} is missing the recommended field "${key}", so it may not qualify for a rich result.`,
       });
     }
   }

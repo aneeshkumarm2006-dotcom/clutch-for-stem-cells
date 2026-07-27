@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Combination pages · SEO Team",
+  title: "Combination pages | SEO Team",
   robots: { index: false, follow: false },
 };
 
@@ -79,7 +79,7 @@ export default async function MatrixDashboard() {
                     </div>
                   </td>
                   <td className="px-4 py-2.5 text-text-secondary">
-                    {p.hasReviewer ? "Assigned" : "—"}
+                    {p.hasReviewer ? "Assigned" : "–"}
                   </td>
                   <td className="px-4 py-2.5">
                     {p.flagCount ? (
@@ -88,7 +88,7 @@ export default async function MatrixDashboard() {
                         {p.flagCount}
                       </span>
                     ) : (
-                      "—"
+                      "–"
                     )}
                   </td>
                 </tr>

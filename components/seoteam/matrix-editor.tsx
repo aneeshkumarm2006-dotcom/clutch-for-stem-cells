@@ -174,7 +174,7 @@ export function MatrixEditor({
           body: editorial,
         });
         toast.success(
-          v.reviewStatus === "approved" ? "Approved — live" : "Saved",
+          v.reviewStatus === "approved" ? "Approved (live)" : "Saved",
         );
         router.refresh();
       }
@@ -302,7 +302,7 @@ export function MatrixEditor({
                 rows={3}
                 value={v.intro}
                 onChange={(e) => set({ intro: e.target.value })}
-                placeholder="A direct, cautious answer to the page's core question — the passage answer engines quote."
+                placeholder="A direct, cautious answer to the page's core question. This is the passage answer engines quote."
               />
             </div>
 
