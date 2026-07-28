@@ -419,7 +419,6 @@ function toClinicCard(
   item: ClinicListItem,
   labels: { treatments: Map<string, string>; conditions: Map<string, string> },
 ): ClinicCardData {
-  const clinicId = id(item._id);
   const badge = item.verification?.isVerified
     ? (item.verification.badge ?? "verified")
     : null;
@@ -442,7 +441,6 @@ function toClinicCard(
     priceMin: item.priceMin ?? null,
     currency: item.currency,
     priceModel: item.priceModel,
-    websiteHref: item.website ? `/r/${clinicId}` : undefined,
   };
 }
 
