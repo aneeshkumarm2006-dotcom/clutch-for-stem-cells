@@ -1,0 +1,123 @@
+[
+  {
+    "name": "CELLAXYS",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Physician-run orthopedic cell therapy in Las Vegas, guided by live X-ray",
+    "description": "CELLAXYS is a physician-owned regenerative medicine practice in southwest Las Vegas. It treats worn and injured joints with cell therapy drawn from the patient's own body, mainly the hip, shoulder, knee, and spine, as an option for people who want to postpone or avoid surgery. Cells come from either bone marrow or fat tissue, both taken and re-injected the same day, and the clinic also offers platelet-rich plasma.\n\nWhat separates the practice from most storefront regenerative clinics is how the injections are placed. Rather than relying on ultrasound alone, the physicians use live fluoroscopic imaging so they can see the needle reach the target, and procedures run in a Joint Commission-accredited operating suite. Both physicians are board certified, and the clinic keeps to autologous material only, so nothing donor-derived or umbilical is used. Consultations are available in English and Spanish.",
+
+    "treatmentTypes": [
+      "bone-marrow-derived-therapy",
+      "adipose-derived-therapy",
+      "prp",
+      "autologous-therapy",
+      "regenerative-orthopedics"
+    ],
+    "conditionsTreated": [
+      "hip-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "knee-osteoarthritis",
+      "back-and-spine",
+      "joint-pain",
+      "sports-injuries",
+      "sexual-health",
+      "skin-aesthetic"
+    ],
+    "cellSources": ["autologous", "bone-marrow", "adipose"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "bone-marrow-derived-therapy", "percent": 40 },
+      { "treatment": "adipose-derived-therapy", "percent": 30 },
+      { "treatment": "prp", "percent": 30 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No set price list. Cost is quoted after a consultation and a look at your imaging, since it depends on the joint and which cell source is used.",
+
+    "teamSize": "1-10",
+    "physiciansCount": 2,
+    "languages": ["English", "Spanish"],
+
+    "medicalDirector": {
+      "name": "Pejman Bady",
+      "title": "Medical Director",
+      "credentials": "DO",
+      "bio": "Dr. Bady spent his first two decades in family and emergency medicine, working emergency departments in Nevada and Kansas, and now heads emergency medical services for Nye County, Nevada. He earned his medical degree at Western University of Health Sciences and has held medical director roles across several US and international healthcare organizations."
+    },
+    "team": [
+      {
+        "name": "Pouya Mohajer",
+        "title": "Director of Regenerative Interventional Spine Medicine",
+        "credentials": "MD",
+        "bio": "Board certified in anesthesiology and interventional pain medicine, with more than 20 years in pain management. He completed his pain management fellowship at Harvard's Brigham and Women's Hospital and his anesthesiology residency at Rush-Presbyterian St. Luke's in Chicago. He also founded Southern Nevada Pain Specialists."
+      },
+      {
+        "name": "Aaron Powell",
+        "title": "Physician Assistant",
+        "credentials": "PA-C",
+        "bio": "Board certified PA practicing since 2016, with a background in primary care and orthopedics. He holds a Master of Physician Assistant Studies from Elon University."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "5741 S Fort Apache Rd #100",
+        "city": "Las Vegas",
+        "region": "Nevada",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "89148",
+        "phone": "(702) 529-2855",
+        "lat": 36.0796,
+        "lng": -115.2969
+      }
+    ],
+
+    "website": "https://cellaxys.com/",
+    "contactEmail": "info@cellaxys.com",
+    "social": {
+      "instagram": "https://www.instagram.com/cellaxys/",
+      "facebook": "https://www.facebook.com/Cellaxys/",
+      "linkedin": "https://www.linkedin.com/company/cellaxys/",
+      "x": "https://twitter.com/cellaxyslv",
+      "youtube": "https://www.youtube.com/channel/UC_nNCn2uKrnzOWxGxPNataA"
+    },
+
+    "highlights": [
+      "Physician-owned and physician-managed",
+      "Injections placed under live fluoroscopic imaging",
+      "Uses only the patient's own bone marrow or fat cells",
+      "Procedures done in a Joint Commission-accredited operating suite",
+      "Consultations in English and Spanish"
+    ],
+    "faqs": [
+      {
+        "question": "Are these treatments approved by the FDA?",
+        "answer": "No. The clinic states plainly on its own site that none of its stem cell procedures have been evaluated or approved by the FDA, and it makes no claim that they resolve any condition outright. Same-day autologous procedures like these sit in an investigational space, so ask what evidence exists for your specific joint before you book."
+      },
+      {
+        "question": "Where do the cells come from?",
+        "answer": "Your own body. CELLAXYS draws either bone marrow or fat tissue, concentrates it, and re-injects it in the same visit. It does not use donor, umbilical, or placental material."
+      },
+      {
+        "question": "Which joints and areas does it treat?",
+        "answer": "Hip, shoulder, knee, neck, lower back, elbow, wrist, and foot and ankle. Most of the caseload is arthritis, tendon injuries, and labral or rotator cuff damage."
+      },
+      {
+        "question": "How are the injections guided?",
+        "answer": "With live fluoroscopy, meaning real-time X-ray, rather than ultrasound alone. That lets the physician confirm the needle is where it should be before anything is delivered, which matters most for deep targets like the hip and spine."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "There is no published price list. You get a quote after a consultation, and the figure varies with the joint treated and whether bone marrow or fat is used. Insurance generally does not cover these procedures."
+      }
+    ],
+
+    "seo": { "focusKeyword": "cellaxys" },
+    "reviewsPage": { "seo": { "focusKeyword": "cellaxys reviews" } },
+
+    "isClaimed": false
+  }
+]
