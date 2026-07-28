@@ -1,0 +1,135 @@
+[
+  {
+    "name": "Forever Labs",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Adult stem cell collection and cryogenic storage, processed at the company's own ISO accredited lab in Ann Arbor",
+    "description": "Forever Labs banks your own adult stem cells so that you still have them decades from now. It is a storage company rather than a treatment clinic, and it is worth being clear about that up front. Cells are collected from bone marrow or fat, processed at the company's lab in Ann Arbor, and held in cryogenic storage under your name.\n\nThe collection itself does not happen in Ann Arbor. Forever Labs works through a network of board certified physicians in California, Florida, Georgia, Michigan, New York, North Carolina, Texas, Washington and Washington DC, mostly orthopedic surgeons, sports medicine physicians and physiatrists who already perform bone marrow aspiration. The draw is taken from the back of the hip under local anesthetic and takes roughly fifteen minutes. Most people describe a few seconds of pressure at the moment of withdrawal. The sample then ships to Ann Arbor, where the lab isolates the cells, runs flow cytometry to confirm identity and purity, screens for microbial contamination by qPCR, tests for endotoxin, and freezes the vials.\n\nThe lab is the part of this that stands up to scrutiny. It was accredited in April 2020, the first biobank anywhere to hold an ISO accreditation covering human stem cell banking, and the company describes it as the only ISO certified adult stem cell processing laboratory in the United States. Isolation work is done in Class II biological safety cabinets. Forever Labs is currently building out a cGMP compliant facility and has said it intends to offer physician directed expansion of stored passage zero cells, a process that takes two to six weeks in culture.\n\nPricing is published rather than quoted at a consultation, which is unusual in this market. A membership is $3,000 with $300 a year after the first year, or $10,000 once with storage for life. Both include the collection and the cryopreservation, and both are HSA and FSA eligible.\n\nThe company was founded in Ann Arbor in 2015 by Mark Katakowski, Ben Buller, Laith Farjo and Steven Clausnitzer, and went through Y Combinator in 2017. It was the first company to sell adult stem cell banking directly to consumers. Katakowski and Clausnitzer left in May 2025 to run a spinout called SuperShot. Kevin Virgil, a client since 2019, has been chief executive since then.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785248605/library/kzblobhqlwgryw0y1q0g.webp",
+      "publicId": "library/kzblobhqlwgryw0y1q0g",
+      "width": 1200,
+      "height": 326,
+      "alt": "Forever Labs logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785248607/library/gpthexx9sowmaq33fk8m.webp",
+      "publicId": "library/gpthexx9sowmaq33fk8m",
+      "width": 1200,
+      "height": 630,
+      "alt": "Forever Labs, a stem cell bank in Ann Arbor, Michigan"
+    },
+
+    "treatmentTypes": ["stem-cell-banking", "autologous-therapy", "bone-marrow-derived-therapy", "adipose-derived-therapy", "msc-therapy"],
+    "conditionsTreated": ["anti-aging-longevity", "knee-osteoarthritis", "joint-pain", "sports-injuries"],
+    "cellSources": ["autologous", "bone-marrow", "adipose"],
+    "accreditations": ["iso-9001", "board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "stem-cell-banking", "percent": 70 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 20 },
+      { "treatment": "adipose-derived-therapy", "percent": 10 }
+    ],
+
+    "priceMin": 3000,
+    "priceMax": 10000,
+    "currency": "USD",
+    "priceModel": "package",
+    "priceNote": "Two published memberships. $3,000 covers collection, processing and the first year of storage, then $300 a year after that. $10,000 covers collection, processing and storage for life with no annual fee. Both are HSA and FSA eligible, and financing is offered through Klarna and Affirm. Prices are for banking only and do not include any future treatment.",
+
+    "foundedYear": 2015,
+    "teamSize": "11-50",
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Tom Nabity",
+      "title": "Chief Medical Officer",
+      "credentials": "MD, physical medicine and rehabilitation",
+      "bio": "Nabity graduated from the University of Nebraska Medical Center College of Medicine in 2004 and has practiced for more than twenty years, working mainly with patients in chronic pain who want alternatives to surgery and long term medication. He founded the Michigan Center for Regenerative Medicine in 2017 and still sees patients there. He joined the Forever Labs physician network the same year and banked his own cells then, several years before taking the chief medical officer role."
+    },
+    "team": [
+      {
+        "name": "Kevin Virgil",
+        "title": "Chief Executive Officer",
+        "credentials": "West Point graduate",
+        "bio": "Virgil became chief executive in May 2025, after the founders left to run the SuperShot spinout. He came to the company as a client, banking his own cells in 2019 and later using them for knee osteoarthritis. Before Forever Labs he covered biotech and healthcare at UBS, founded a security software company called Polysentry, and served in the Army, including with the 75th Ranger Regiment and in US government postings abroad. He has said his focus is moving the company from a biobank toward a regenerative manufacturing platform."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "600 South Wagner Road, Building 1",
+        "city": "Ann Arbor",
+        "region": "Michigan",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "48103",
+        "phone": "(888) 732-2375",
+        "lat": 42.2735,
+        "lng": -83.8006
+      }
+    ],
+
+    "website": "https://www.foreverlabs.com",
+    "contactEmail": "info@foreverlabs.com",
+    "social": {
+      "facebook": "https://www.facebook.com/foreverlabsinc",
+      "instagram": "https://www.instagram.com/foreverlabsinc/",
+      "x": "https://twitter.com/ForeverLabsInc",
+      "linkedin": "https://www.linkedin.com/company/forever-labs-inc/",
+      "youtube": "https://www.youtube.com/@foreverlabsinc"
+    },
+
+    "highlights": [
+      "Banks your own adult mesenchymal stem cells; it does not treat patients",
+      "Ann Arbor lab was the first biobank accredited to ISO for human stem cell banking, in April 2020",
+      "Collection happens at partner physicians' offices across nine states, not in Ann Arbor",
+      "Bone marrow draw from the back of the hip under local anesthetic, about fifteen minutes",
+      "Published pricing: $3,000 plus $300 a year, or $10,000 for lifetime storage",
+      "Founded in 2015 and the first company to sell adult stem cell banking to consumers",
+      "States plainly that most uses of banked cells are not yet approved by the FDA"
+    ],
+    "faqs": [
+      {
+        "question": "Is this a treatment?",
+        "answer": "No. Forever Labs collects, processes and stores your own stem cells. Any decision to use them later is between you and a physician, and it is a separate arrangement from the banking membership."
+      },
+      {
+        "question": "Can I actually use the cells I bank?",
+        "answer": "Not freely, and the company does not pretend otherwise. Banked adult mesenchymal cells have no FDA approval for general therapeutic use. Storage sits under the FDA's Section 361 pathway (21 CFR Part 1271), which covers minimally manipulated autologous tissue. What you can do with the cells depends on where you live and what for. Orthopedic, wound care and pain applications are where physicians currently have room to work, Florida's SB 1768 opened a route in 2025 for expanded autologous cells under medical oversight at cGMP certified labs, and Montana and New Hampshire have passed their own access laws. Otherwise the routes are clinical trials. Banking now is a bet that more becomes available later, not the purchase of a therapy."
+      },
+      {
+        "question": "Bone marrow or fat?",
+        "answer": "Either. Bone marrow is drawn from the back of the hip and is the more common route. Adipose collection is offered as an alternative. Both are outpatient procedures under local anesthetic and are usually finished within the hour."
+      },
+      {
+        "question": "How bad is the collection?",
+        "answer": "The bone marrow draw takes about fifteen minutes and is done under local anesthetic. Most clients report a brief pressure sensation, five to ten seconds, at the moment the marrow is withdrawn. The company describes it as low risk and says it does not leave scarring."
+      },
+      {
+        "question": "Does my age matter?",
+        "answer": "Yes, in one specific sense: the cells you store are the age you are on the day of collection, and they stay that way. Stem cell numbers and quality decline with age, and the decline speeds up later in life, so earlier gives you a better sample. Forever Labs collects from adults aged 18 and over, and banking at any age still gives you a stored sample younger than the one you will have in ten years."
+      },
+      {
+        "question": "Where does the collection happen?",
+        "answer": "At a partner physician's office near you, not at the Ann Arbor lab. The network covers California, Florida, Georgia, Michigan, New York, North Carolina, Texas, Washington and Washington DC, and is made up largely of orthopedic surgeons, sports medicine physicians and physiatrists. Your sample is shipped to Ann Arbor afterwards for processing and storage."
+      },
+      {
+        "question": "What does the lab actually do with the sample?",
+        "answer": "Cells are isolated in Class II biological safety cabinets, then tested: flow cytometry for cell identity and purity, qPCR to screen for microbial contamination, and endotoxin testing. The vials are then cryopreserved. The lab holds ISO 9001:2015 accreditation and the company maintains chain of custody documentation throughout."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "forever labs"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "forever labs reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]
