@@ -101,6 +101,11 @@ export interface ClinicSeed {
   team?: PersonSeed[];
   languages?: string[];
   locations: ClinicLocationSeed[];
+  /**
+   * Only set this for real clinics with a live site. The profile's tracked
+   * "Visit website" button renders whenever this is present, so a placeholder
+   * URL ships a button that leads nowhere — fictional demo clinics leave it off.
+   */
   website?: string;
   social?: Record<string, string>;
   contactEmail?: string;
@@ -766,7 +771,6 @@ export const CLINICS: ClinicSeed[] = [
         phone: "+52 998 555 0140",
       },
     ],
-    website: "https://example.com/renova",
     social: {
       instagram: "https://instagram.com/renovacell",
       linkedin: "https://linkedin.com/company/renovacell",
@@ -854,7 +858,6 @@ export const CLINICS: ClinicSeed[] = [
         phone: "+507 555 0177",
       },
     ],
-    website: "https://example.com/vitalis",
     contactEmail: "hello@vitalis.example",
     highlights: [
       "Transparent package pricing",
@@ -916,7 +919,6 @@ export const CLINICS: ClinicSeed[] = [
         phone: "+66 2 555 0199",
       },
     ],
-    website: "https://example.com/novastem",
     contactEmail: "care@novastem.example",
     faqs: [
       {
@@ -976,7 +978,6 @@ export const CLINICS: ClinicSeed[] = [
         phone: "+1 345 555 0123",
       },
     ],
-    website: "https://example.com/cayman",
     contactEmail: "info@caymanregen.example",
     highlights: ["Regulated jurisdiction", "Neurological focus"],
   },
