@@ -21,6 +21,12 @@ import { buildJsonLd } from "@/lib/schema/engine";
 import { getSchemaContext } from "@/lib/schema/context";
 import { redirectOrNotFound } from "@/lib/redirects";
 import { pageMetadata } from "@/lib/page-metadata";
+import {
+  clinicKeywords,
+  clinicMetaBoldPrefix,
+  clinicMetaDescription,
+  clinicMetaTitle,
+} from "@/lib/clinic-meta";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import {
   getClinicProfile,
@@ -80,11 +86,17 @@ export async function generateMetadata({
   const clinic = await getClinicProfile(params.slug);
   if (!clinic) return pageMetadata({ title: "Clinic not found" });
   return pageMetadata({
-    title: clinic.name,
-    description:
-      clinic.tagline ??
-      clinic.description?.slice(0, 160) ??
-      `Profile, reviews, and pricing for ${clinic.name}, a regenerative-medicine clinic.`,
+    // One formula for every clinic in the directory — see lib/clinic-meta.ts.
+    // The tagline/description are deliberately not used here: they are authored
+    // per clinic and drift out of the "<name> is a stem cell clinic in <place>
+    // treating <conditions>" shape the profile SERP snippet is built around.
+    title: clinicMetaTitle(clinic),
+    // The title already opens with the clinic name and ends with the location;
+    // appending the site name would push the location out of the snippet.
+    titleAbsolute: true,
+    description: clinicMetaDescription(clinic),
+    boldDescriptionPrefix: clinicMetaBoldPrefix(clinic),
+    keywords: clinicKeywords(clinic),
     path: `/clinic/${clinic.slug}`,
     image: clinic.coverUrl ?? clinic.logoUrl,
     type: "profile",

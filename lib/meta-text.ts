@@ -28,6 +28,63 @@
 /** Which meta field the text is destined for — decides how a separator reads. */
 export type MetaTextKind = "title" | "description";
 
+// ── Bold ─────────────────────────────────────────────────────────────────────
+
+/**
+ * A `<meta name="description">` carries no markup — a `<b>` in it is escaped and
+ * shown literally, so the only way to get bold weight into a SERP snippet is to
+ * swap the letters for their Mathematical Sans-Serif Bold code points. They are
+ * Unicode *letters* (`\p{L}`) and digits (`\p{N}`), so they pass the policy
+ * checks above untouched.
+ *
+ * Only ASCII A-Z / a-z / 0-9 have bold twins. Accented letters (the `ú` in
+ * "Cancún"), punctuation and spaces have none and are left as they are.
+ *
+ * Trade-off worth knowing: screen readers announce these code points poorly or
+ * skip them, and Google may normalize them away. Use it on a short lead phrase,
+ * never on a whole description — and keep OG/Twitter copy plain (`buildMetadata`
+ * does exactly that).
+ */
+const BOLD_UPPER_A = 0x1d5d4; // 𝗔
+const BOLD_LOWER_A = 0x1d5ee; // 𝗮
+const BOLD_ZERO = 0x1d7ec; // 𝟬
+
+export function boldMetaText(text: string | null | undefined): string {
+  if (!text) return "";
+  let out = "";
+  for (const ch of text) {
+    const code = ch.codePointAt(0)!;
+    if (code >= 0x41 && code <= 0x5a) {
+      out += String.fromCodePoint(BOLD_UPPER_A + (code - 0x41));
+    } else if (code >= 0x61 && code <= 0x7a) {
+      out += String.fromCodePoint(BOLD_LOWER_A + (code - 0x61));
+    } else if (code >= 0x30 && code <= 0x39) {
+      out += String.fromCodePoint(BOLD_ZERO + (code - 0x30));
+    } else {
+      out += ch;
+    }
+  }
+  return out;
+}
+
+/**
+ * Embolden `prefix` where it opens `text`, leaving the rest plain.
+ *
+ * Both sides are normalized first, so a caller can pass the raw phrase it built
+ * the description from and still match after the meta rules have rewritten it.
+ * A prefix that does not open the description (an editor replaced the copy with
+ * their own in the admin panel) is a no-op — the description goes out plain
+ * rather than with a bold run in the wrong place.
+ */
+export function boldMetaPrefix(
+  text: string,
+  prefix: string | null | undefined,
+): string {
+  const needle = normalizeMetaText(prefix, "description");
+  if (!needle || !text.startsWith(needle)) return text;
+  return boldMetaText(needle) + text.slice(needle.length);
+}
+
 /** The only separator symbol allowed in a meta tag. */
 export const META_SEPARATOR = "|";
 

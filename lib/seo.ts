@@ -20,7 +20,11 @@ import {
   SITE_URL,
   SOCIAL_LINKS,
 } from "@/config/site";
-import { META_SEPARATOR, normalizeMetaText } from "@/lib/meta-text";
+import {
+  META_SEPARATOR,
+  boldMetaPrefix,
+  normalizeMetaText,
+} from "@/lib/meta-text";
 import type { IClinic, IFaq, IReview, ISeo, ISeoDefaults } from "@/models";
 
 // ── URL helpers ──────────────────────────────────────────────────────────────
@@ -55,7 +59,23 @@ export function applyTitleTemplate(title?: string, template?: string): string {
 export interface BuildMetadataInput {
   /** Page title (before the Settings template is applied). */
   title?: string;
+  /**
+   * The route already built the complete title, brand suffix included (or
+   * deliberately excluded) — skip the Settings/`%s` template rather than append
+   * to it. A per-entity `seo.metaTitle` still wins, as it always has.
+   */
+  titleAbsolute?: boolean;
   description?: string;
+  /**
+   * Lead phrase of the description to render in Unicode bold in the SERP
+   * snippet. Matched against the *final* description, so an editor's override
+   * that starts with the same phrase gets the bold too and one that doesn't
+   * simply goes out plain. Only `<meta name="description">` is affected —
+   * OG/Twitter keep the plain text. See `boldMetaPrefix` in lib/meta-text.ts.
+   */
+  boldDescriptionPrefix?: string;
+  /** `<meta name="keywords">` terms. Omitted when empty. */
+  keywords?: string[];
   /** Root-relative path for the canonical + OG url (e.g. `/clinic/acme`). */
   path?: string;
   /** OG/Twitter image URL (absolute or root-relative). */
@@ -107,10 +127,12 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
   // rewritten. See `lib/meta-text.ts`.
   const title = normalizeMetaText(
     titleOverride ||
-      applyTitleTemplate(
-        input.title,
-        defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
-      ),
+      (input.titleAbsolute
+        ? (input.title ?? SITE_NAME)
+        : applyTitleTemplate(
+            input.title,
+            defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
+          )),
     "title",
   );
   const description = normalizeMetaText(
@@ -119,6 +141,14 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
       defaults?.metaDescription ??
       SITE_DESCRIPTION,
     "description",
+  );
+  // Bold is a `<meta name="description">` affordance only: a SERP snippet has no
+  // markup, so the lead phrase is swapped for Unicode bold letters. OG/Twitter
+  // stay on the plain `description` below — those surfaces render the string
+  // as-is and math-alphanumeric code points would read as mangled text there.
+  const metaDescription = boldMetaPrefix(
+    description,
+    input.boldDescriptionPrefix,
   );
 
   const canonical =
@@ -145,7 +175,8 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
     // second time — e.g. "All clinics | My Stem Cell Guide", not
     // "All clinics | My Stem Cell Guide | My Stem Cell Guide".
     title: { absolute: title },
-    description,
+    description: metaDescription,
+    keywords: input.keywords?.length ? input.keywords : undefined,
     alternates: { canonical },
     openGraph: {
       title: ogTitle,

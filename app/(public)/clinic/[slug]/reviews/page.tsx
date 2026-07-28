@@ -37,6 +37,12 @@ import { buildJsonLd } from "@/lib/schema/engine";
 import { getSchemaContext } from "@/lib/schema/context";
 import { redirectOrNotFound, resolveRedirect } from "@/lib/redirects";
 import { pageMetadata } from "@/lib/page-metadata";
+import {
+  clinicReviewsKeywords,
+  clinicReviewsMetaBoldPrefix,
+  clinicReviewsMetaDescription,
+  clinicReviewsMetaTitle,
+} from "@/lib/clinic-meta";
 import { renderMarkdown } from "@/lib/markdown";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
@@ -94,21 +100,17 @@ export async function generateMetadata({
   const clinic = await getClinicProfile(params.slug);
   if (!clinic) return pageMetadata({ title: "Clinic not found" });
 
-  const hq =
-    clinic.locations.find((l) => l.isHQ) ?? clinic.locations[0] ?? null;
-  const where = hq
-    ? ` in ${[hq.city, hq.country].filter(Boolean).join(", ")}`
-    : "";
-  const plural = clinic.reviewCount === 1 ? "review" : "reviews";
   const seo = clinic.raw.reviewsPage?.seo;
 
   return pageMetadata({
-    // Exact-match the query pattern: "<clinic> reviews".
-    title: `${clinic.name} Reviews`,
-    description:
-      clinic.reviewCount > 0
-        ? `${formatCount(clinic.reviewCount)} patient ${plural} of ${clinic.name}${where}. Rated ${clinic.ratingAvg.toFixed(1)} out of 5 across outcome, communication, facility, and value for money.`
-        : `Patient reviews of ${clinic.name}${where}. No reviews have been published yet. Be the first to share your treatment experience.`,
+    // Exact-match the query pattern: "<clinic> reviews". One formula for every
+    // clinic in the directory — see lib/clinic-meta.ts. The brand suffix comes
+    // from the Settings title template, so this renders as
+    // "<clinic> Reviews | My Stem Cell Guide".
+    title: clinicReviewsMetaTitle(clinic),
+    description: clinicReviewsMetaDescription(clinic),
+    boldDescriptionPrefix: clinicReviewsMetaBoldPrefix(clinic),
+    keywords: clinicReviewsKeywords(clinic),
     path: `/clinic/${clinic.slug}/reviews`,
     // `buildMetadata` reads `input.image` before `seo.ogImage`, so resolve the
     // override here or the clinic's cover would always win over it.

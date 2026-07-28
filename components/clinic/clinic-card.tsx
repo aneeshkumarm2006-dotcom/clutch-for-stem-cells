@@ -210,13 +210,18 @@ export function ClinicCard({
               <MessageSquareText className="size-3.5" aria-hidden="true" />
               Reviews
             </Link>
-            <span
+            {/* A real link, not a decorative span: this row sits above the
+                title link's full-card overlay, so a span here would swallow
+                the click instead of navigating. */}
+            <Link
+              href={profileHref}
+              tabIndex={-1}
               aria-hidden="true"
-              className="inline-flex items-center gap-1 rounded-full bg-tint px-3 py-1.5 text-[13px] font-semibold text-azure-700 transition-colors group-hover:bg-primary group-hover:text-white"
+              className="inline-flex items-center gap-1 rounded-full bg-tint px-3 py-1.5 text-[13px] font-semibold text-azure-700 transition-colors hover:bg-primary hover:text-white group-hover:bg-primary group-hover:text-white focus-visible:outline-none"
             >
               View profile
               <ArrowRight className="size-3.5" />
-            </span>
+            </Link>
           </div>
         </div>
       </div>
