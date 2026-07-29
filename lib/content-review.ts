@@ -6,11 +6,23 @@
  *  1. Re-scan the record's editorial text for cure/guarantee language
  *     (`lib/content-flags.ts`) and return the cached `contentFlags`.
  *  2. Enforce the approval gate: a record may only reach `reviewStatus:
- *     "approved"` when it has a `reviewedBy` reviewer AND either no content
- *     flags or a reviewer who has explicitly acknowledged them.
+ *     "approved"` when it has either no content flags, or flags a reviewer has
+ *     explicitly acknowledged.
  *
  * It NEVER blocks saving a draft / in-review record — flags are advisory until
  * the moment of approval, matching the site's existing content-flag posture.
+ *
+ * ── On the reviewer requirement ────────────────────────────────────────────
+ * Approval used to additionally require a `reviewedBy` MedicalReviewer. That is
+ * now an editorial convention rather than a hard block, so a page can ship
+ * before a credentialed reviewer has been recruited. Nothing misleading follows
+ * from it: `ReviewedByByline` renders NOTHING without a reviewer, and
+ * `medicalWebPageJsonLd` omits `reviewedBy`, so an unreviewed page simply
+ * carries no medical-review claim rather than a fabricated one.
+ *
+ * To restore the hard requirement, reinstate the `merged.reviewedBy` check in
+ * {@link reviewEditorialWrite}. The cure/guarantee gate below is the actual
+ * safety control and is deliberately left untouched.
  */
 import "server-only";
 
@@ -95,12 +107,6 @@ export function reviewEditorialWrite(
   const contentFlags = scanContentFlags(editorialText(merged));
 
   if (merged.reviewStatus === "approved") {
-    if (!merged.reviewedBy) {
-      return {
-        contentFlags,
-        error: "Approval requires a medical reviewer to be assigned.",
-      };
-    }
     if (contentFlags.length > 0 && !merged.flagsAcknowledged) {
       const n = contentFlags.length;
       return {

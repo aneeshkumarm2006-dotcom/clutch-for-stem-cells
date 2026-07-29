@@ -199,9 +199,14 @@ async function buildTermEditorial(
     sections,
     evidenceLevel: (doc.evidenceLevel as EvidenceLevel | undefined) ?? null,
     reviewer,
-    lastReviewedAt: doc.lastReviewedAt
-      ? new Date(doc.lastReviewedAt as Date).toISOString()
-      : null,
+    // Only claim a medical-review date when a credentialed reviewer actually
+    // resolved. `lastReviewedAt` is stamped on every approved save, so exposing
+    // it unconditionally would put `lastReviewed` in the page's MedicalWebPage
+    // JSON-LD for content nobody reviewed.
+    lastReviewedAt:
+      reviewer && doc.lastReviewedAt
+        ? new Date(doc.lastReviewedAt as Date).toISOString()
+        : null,
     updatedAt: doc.updatedAt
       ? new Date(doc.updatedAt as Date).toISOString()
       : null,
