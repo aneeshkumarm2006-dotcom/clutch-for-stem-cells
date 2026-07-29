@@ -9,8 +9,10 @@ import {
   getTaxonomyConfig,
   type TaxonomyConfig,
 } from "@/lib/admin/taxonomy-config";
+import { parseBlocks } from "@/lib/blocks/content";
 import { getReviewerOptions } from "@/lib/seoteam/reviewer-data";
 import type { TaxonomyKind } from "@/lib/enums";
+import type { BlockInput } from "@/lib/validation/block";
 
 export interface EditorialFaqRow {
   question: string;
@@ -46,6 +48,8 @@ export interface AdminTaxonomyRow {
   metaDescription?: string;
   // ── Editorial enrichment (see B5 / lib/content-review.ts gate) ──
   body?: string;
+  /** The modular section builder — validated blocks, ready for the composer. */
+  blocks: BlockInput[];
   faqs: EditorialFaqRow[];
   keyFacts: EditorialKeyFactRow[];
   reviewStatus: string;
@@ -115,6 +119,7 @@ function toRow(d: Record<string, unknown>): AdminTaxonomyRow {
     metaDescription: str(seo?.metaDescription),
     // Editorial
     body: str(d.body),
+    blocks: parseBlocks(d.blocks),
     faqs: ((d.faqs as EditorialFaqRow[] | undefined) ?? []).map((f) => ({
       question: f.question,
       answer: f.answer,

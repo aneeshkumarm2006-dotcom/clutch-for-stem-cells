@@ -27,16 +27,20 @@ import {
   type FaqItem,
   type KeyFactItem,
 } from "@/components/content/editorial-fields";
+import { BlockEditor } from "@/components/blocks/block-editor";
 import { adminFetch } from "@/lib/admin/client";
+import { blocksScanText } from "@/lib/blocks/content";
 import { findFlaggedPhrases } from "@/lib/content-flags";
 import { slugify } from "@/lib/slug";
 import { cn } from "@/lib/utils";
+import { CONTENT_ENGINE } from "@/config/content-engine";
 import {
   EVIDENCE_LEVELS,
   LOCATION_KINDS,
   type ContentReviewStatus,
 } from "@/lib/enums";
 import type { AdminTaxonomyRow, TaxonomyView } from "@/lib/admin/taxonomy";
+import type { BlockInput } from "@/lib/validation/block";
 
 interface FormState {
   id?: string;
@@ -60,6 +64,8 @@ interface FormState {
   metaDescription: string;
   // ── Editorial enrichment ──
   body: string;
+  /** The modular section builder — same block union the page CMS composes with. */
+  blocks: BlockInput[];
   faqs: FaqItem[];
   keyFacts: KeyFactItem[];
   reviewStatus: ContentReviewStatus;
@@ -82,6 +88,7 @@ interface FormState {
 
 const EDITORIAL_BLANK = {
   body: "",
+  blocks: [] as BlockInput[],
   faqs: [] as FaqItem[],
   keyFacts: [] as KeyFactItem[],
   reviewStatus: "draft" as ContentReviewStatus,
@@ -135,6 +142,7 @@ function fromRow(r: AdminTaxonomyRow): FormState {
     metaTitle: r.metaTitle ?? "",
     metaDescription: r.metaDescription ?? "",
     body: r.body ?? "",
+    blocks: r.blocks,
     faqs: r.faqs.map((f) => ({ question: f.question, answer: f.answer })),
     keyFacts: r.keyFacts.map((k) => ({
       label: k.label,
@@ -235,6 +243,7 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
       },
       // ── Common editorial (all kinds) ──
       body: form.body || undefined,
+      blocks: form.blocks,
       faqs: form.faqs.filter((f) => f.question.trim() && f.answer.trim()),
       keyFacts: form.keyFacts
         .filter((k) => k.label.trim() && k.value.trim())
@@ -301,6 +310,9 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
         form.travelNotes,
         ...form.faqs.flatMap((f) => [f.question, f.answer]),
         ...form.keyFacts.flatMap((k) => [k.label, k.value]),
+        // Same extractor the server gate runs, so the warning here matches the
+        // 422 an approval would hit.
+        blocksScanText(form.blocks),
       ]),
     [form],
   );
@@ -705,13 +717,34 @@ export function TaxonomyManager({ view }: { view: TaxonomyView }) {
                 </>
               ) : null}
 
-              <FaqRepeater
-                value={form.faqs}
-                onChange={(faqs) => set({ faqs })}
-              />
               <KeyFactRepeater
                 value={form.keyFacts}
                 onChange={(keyFacts) => set({ keyFacts })}
+              />
+
+              {/* The modular section builder. Everything above is a fixed slot;
+                  this is where an editor composes the rest of the page. */}
+              <div className="rounded-xl border border-border bg-surface p-4">
+                <div className="mb-1 font-display text-sm font-semibold text-text-primary">
+                  Page sections
+                </div>
+                <p className="mb-3 text-[12.5px] leading-snug text-text-muted">
+                  Build the rest of the page from reusable sections. Add as many
+                  as you need, in any order, and reorder them with the arrows.
+                  Sections marked <strong>Schema</strong> also generate
+                  structured data for search engines.
+                </p>
+                <BlockEditor
+                  value={form.blocks}
+                  onChange={(blocks) => set({ blocks })}
+                  enabledTypes={CONTENT_ENGINE.blocks}
+                  emptyLabel="No sections yet. Add one to start building this page."
+                />
+              </div>
+
+              <FaqRepeater
+                value={form.faqs}
+                onChange={(faqs) => set({ faqs })}
               />
             </div>
 

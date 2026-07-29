@@ -18,7 +18,14 @@ import { RichTextEditor } from "@/components/seoteam/rich-text-editor";
 import { ImageField } from "@/components/seoteam/image-field";
 import { cn } from "@/lib/utils";
 import { isSchemaAwareBlock } from "@/lib/blocks/schema";
-import { BLOCK_TYPE_LABELS, type BlockType } from "@/lib/enums";
+import {
+  BLOCK_TYPE_HINTS,
+  BLOCK_TYPE_LABELS,
+  CALLOUT_TONES,
+  CALLOUT_TONE_LABELS,
+  type BlockType,
+  type CalloutTone,
+} from "@/lib/enums";
 import type { BlockInput } from "@/lib/validation/block";
 
 /**
@@ -37,10 +44,32 @@ import type { BlockInput } from "@/lib/validation/block";
 /** The empty payload a newly-added block of each type starts from. */
 const DEFAULTS: { [K in BlockType]: Extract<BlockInput, { type: K }>["data"] } = {
   richText: { html: "" },
-  faq: { title: undefined, items: [] },
+  keyTakeaways: { title: undefined, items: [] },
+  steps: {
+    title: undefined,
+    intro: undefined,
+    steps: [],
+    footnote: undefined,
+  },
+  checklist: {
+    title: undefined,
+    intro: undefined,
+    items: [],
+    footnote: undefined,
+  },
   comparisonTable: { title: undefined, columns: [], rows: [] },
+  faq: { title: undefined, items: [] },
   featureGrid: { title: undefined, items: [] },
   prosCons: { title: undefined, pros: [], cons: [] },
+  statGrid: { title: undefined, stats: [] },
+  callout: { tone: "note", title: undefined, body: "" },
+  quote: {
+    quote: "",
+    attribution: undefined,
+    role: undefined,
+    sourceUrl: undefined,
+  },
+  linkList: { title: undefined, links: [] },
   cta: { title: "", body: undefined, buttonLabel: "", buttonHref: "" },
   media: { image: { url: "" }, caption: undefined },
   rawHtml: { html: "" },
@@ -54,11 +83,14 @@ export function BlockEditor({
   value,
   onChange,
   enabledTypes,
+  emptyLabel = "This page has no content yet. Add your first block to begin.",
 }: {
   value: BlockInput[];
   onChange: (next: BlockInput[]) => void;
   /** The block types this dashboard enables (from `config/content-engine`). */
   enabledTypes: readonly BlockType[];
+  /** Empty-state copy — the composer is reused outside the page CMS. */
+  emptyLabel?: string;
 }) {
   const [adding, setAdding] = React.useState(false);
 
@@ -99,9 +131,7 @@ export function BlockEditor({
 
       {!value.length ? (
         <div className="rounded-xl border border-dashed border-border bg-surface-alt/50 p-8 text-center">
-          <p className="text-[13.5px] text-text-muted">
-            This page has no content yet. Add your first block to begin.
-          </p>
+          <p className="text-[13.5px] text-text-muted">{emptyLabel}</p>
         </div>
       ) : null}
 
@@ -127,10 +157,15 @@ export function BlockEditor({
                 key={type}
                 type="button"
                 onClick={() => add(type)}
-                className="flex items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 py-2.5 text-left text-[13.5px] font-medium text-text-secondary transition-colors hover:border-border-strong hover:bg-surface-alt"
+                className="rounded-lg border border-border bg-surface px-3 py-2.5 text-left transition-colors hover:border-border-strong hover:bg-surface-alt"
               >
-                {BLOCK_TYPE_LABELS[type]}
-                {isSchemaAwareBlock(type) ? <SchemaBadge /> : null}
+                <span className="flex items-center justify-between gap-2 text-[13.5px] font-medium text-text-primary">
+                  {BLOCK_TYPE_LABELS[type]}
+                  {isSchemaAwareBlock(type) ? <SchemaBadge /> : null}
+                </span>
+                <span className="mt-0.5 block text-[12px] leading-snug text-text-muted">
+                  {BLOCK_TYPE_HINTS[type]}
+                </span>
               </button>
             ))}
           </div>
@@ -304,6 +339,281 @@ function BlockForm({
           </p>
         </div>
       );
+
+    case "keyTakeaways": {
+      const d = block.data;
+      return (
+        <>
+          <TitleField
+            value={d.title ?? ""}
+            onChange={(title) => onChange({ ...d, title })}
+            placeholder="Key takeaways"
+          />
+          <StringListEditor
+            label="Takeaways"
+            items={d.items}
+            onChange={(items) => onChange({ ...d, items })}
+            placeholder="One sentence a reader could quote on its own"
+          />
+        </>
+      );
+    }
+
+    case "steps": {
+      const d = block.data;
+      return (
+        <>
+          <TitleField
+            value={d.title ?? ""}
+            onChange={(title) => onChange({ ...d, title })}
+            placeholder="How it works"
+          />
+          <OptionalTextArea
+            label="Intro"
+            rows={2}
+            value={d.intro ?? ""}
+            onChange={(intro) => onChange({ ...d, intro })}
+            placeholder="One line setting up the sequence."
+          />
+          <ListEditor
+            label="Steps"
+            addLabel="Add step"
+            items={d.steps}
+            onChange={(steps) => onChange({ ...d, steps })}
+            create={() => ({ title: "", description: undefined })}
+            render={(step, set) => (
+              <div className="flex-1 space-y-2">
+                <Input
+                  value={step.title}
+                  onChange={(e) => set({ ...step, title: e.target.value })}
+                  placeholder="What happens at this step"
+                />
+                <Textarea
+                  rows={2}
+                  value={step.description ?? ""}
+                  onChange={(e) =>
+                    set({ ...step, description: e.target.value || undefined })
+                  }
+                  placeholder="Detail (optional)"
+                />
+              </div>
+            )}
+          />
+          <OptionalTextArea
+            label="Footnote"
+            rows={2}
+            value={d.footnote ?? ""}
+            onChange={(footnote) => onChange({ ...d, footnote })}
+            placeholder="Caveat under the list, e.g. protocols differ between clinics."
+          />
+        </>
+      );
+    }
+
+    case "checklist": {
+      const d = block.data;
+      return (
+        <>
+          <TitleField
+            value={d.title ?? ""}
+            onChange={(title) => onChange({ ...d, title })}
+            placeholder="What to compare"
+          />
+          <OptionalTextArea
+            label="Intro"
+            rows={2}
+            value={d.intro ?? ""}
+            onChange={(intro) => onChange({ ...d, intro })}
+            placeholder="One line setting up the list."
+          />
+          <StringListEditor
+            label="Items"
+            items={d.items}
+            onChange={(items) => onChange({ ...d, items })}
+            placeholder="Something the reader can actually check"
+          />
+          <OptionalTextArea
+            label="Footnote"
+            rows={2}
+            value={d.footnote ?? ""}
+            onChange={(footnote) => onChange({ ...d, footnote })}
+          />
+        </>
+      );
+    }
+
+    case "statGrid": {
+      const d = block.data;
+      return (
+        <>
+          <TitleField
+            value={d.title ?? ""}
+            onChange={(title) => onChange({ ...d, title })}
+            placeholder="By the numbers"
+          />
+          <ListEditor
+            label="Stats"
+            addLabel="Add stat"
+            items={d.stats}
+            onChange={(stats) => onChange({ ...d, stats })}
+            create={() => ({ value: "", label: "", sourceUrl: undefined })}
+            render={(stat, set) => (
+              <div className="grid flex-1 gap-2 sm:grid-cols-3">
+                <Input
+                  value={stat.value}
+                  onChange={(e) => set({ ...stat, value: e.target.value })}
+                  placeholder="Number, e.g. 1 in 4"
+                />
+                <Input
+                  value={stat.label}
+                  onChange={(e) => set({ ...stat, label: e.target.value })}
+                  placeholder="What it measures"
+                />
+                <Input
+                  value={stat.sourceUrl ?? ""}
+                  onChange={(e) =>
+                    set({ ...stat, sourceUrl: e.target.value || undefined })
+                  }
+                  placeholder="Source URL"
+                />
+              </div>
+            )}
+          />
+          <p className="text-[11.5px] text-text-muted">
+            Cite a primary source (PubMed, clinicaltrials.gov, a regulator). An
+            uncited number reads as invented.
+          </p>
+        </>
+      );
+    }
+
+    case "callout": {
+      const d = block.data;
+      return (
+        <>
+          <div className="space-y-1.5">
+            <Label>Tone</Label>
+            <select
+              className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary outline-none focus:border-border-strong"
+              value={d.tone}
+              onChange={(e) =>
+                onChange({ ...d, tone: e.target.value as CalloutTone })
+              }
+            >
+              {CALLOUT_TONES.map((tone) => (
+                <option key={tone} value={tone}>
+                  {CALLOUT_TONE_LABELS[tone]}
+                </option>
+              ))}
+            </select>
+          </div>
+          <TitleField
+            value={d.title ?? ""}
+            onChange={(title) => onChange({ ...d, title })}
+            placeholder={CALLOUT_TONE_LABELS[d.tone]}
+          />
+          <div className="space-y-1.5">
+            <Label>Body</Label>
+            <Textarea
+              rows={3}
+              value={d.body}
+              onChange={(e) => onChange({ ...d, body: e.target.value })}
+            />
+          </div>
+        </>
+      );
+    }
+
+    case "quote": {
+      const d = block.data;
+      return (
+        <>
+          <div className="space-y-1.5">
+            <Label>Quote</Label>
+            <Textarea
+              rows={3}
+              value={d.quote}
+              onChange={(e) => onChange({ ...d, quote: e.target.value })}
+            />
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <div className="space-y-1.5">
+              <Label>Attribution</Label>
+              <Input
+                value={d.attribution ?? ""}
+                onChange={(e) =>
+                  onChange({ ...d, attribution: e.target.value || undefined })
+                }
+                placeholder="Who said it"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label>Role</Label>
+              <Input
+                value={d.role ?? ""}
+                onChange={(e) =>
+                  onChange({ ...d, role: e.target.value || undefined })
+                }
+                placeholder="Title or affiliation"
+              />
+            </div>
+          </div>
+          <div className="space-y-1.5">
+            <Label>Source link</Label>
+            <Input
+              value={d.sourceUrl ?? ""}
+              onChange={(e) =>
+                onChange({ ...d, sourceUrl: e.target.value || undefined })
+              }
+              placeholder="Where the quote is published (optional)"
+            />
+          </div>
+        </>
+      );
+    }
+
+    case "linkList": {
+      const d = block.data;
+      return (
+        <>
+          <TitleField
+            value={d.title ?? ""}
+            onChange={(title) => onChange({ ...d, title })}
+            placeholder="Related reading"
+          />
+          <ListEditor
+            label="Links"
+            addLabel="Add link"
+            items={d.links}
+            onChange={(links) => onChange({ ...d, links })}
+            create={() => ({ label: "", href: "", description: undefined })}
+            render={(link, set) => (
+              <div className="flex-1 space-y-2">
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <Input
+                    value={link.label}
+                    onChange={(e) => set({ ...link, label: e.target.value })}
+                    placeholder="Link text"
+                  />
+                  <Input
+                    value={link.href}
+                    onChange={(e) => set({ ...link, href: e.target.value })}
+                    placeholder="/treatments/msc-therapy"
+                  />
+                </div>
+                <Input
+                  value={link.description ?? ""}
+                  onChange={(e) =>
+                    set({ ...link, description: e.target.value || undefined })
+                  }
+                  placeholder="What the reader gets there (optional)"
+                />
+              </div>
+            )}
+          />
+        </>
+      );
+    }
 
     case "faq": {
       const d = block.data;
@@ -560,6 +870,33 @@ function TitleField({
     <div className="space-y-1.5">
       <Label>Heading</Label>
       <Input
+        value={value}
+        onChange={(e) => onChange(e.target.value || undefined)}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+}
+
+/** Labeled textarea for an optional field — blank round-trips as `undefined`. */
+function OptionalTextArea({
+  label,
+  value,
+  onChange,
+  placeholder,
+  rows = 2,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string | undefined) => void;
+  placeholder?: string;
+  rows?: number;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <Label>{label}</Label>
+      <Textarea
+        rows={rows}
         value={value}
         onChange={(e) => onChange(e.target.value || undefined)}
         placeholder={placeholder}

@@ -10,7 +10,8 @@ import {
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
-import { faqPageJsonLd, itemListJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
+import { itemListJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
+import { editorialJsonLd } from "@/lib/editorial-schema";
 import { getApprovedComboLinks } from "@/lib/seoteam/matrix-data";
 import { Directory } from "@/components/directory/directory";
 import {
@@ -80,7 +81,7 @@ export default async function CountryDirectoryPage({
       dateModified: editorial?.updatedAt,
       reviewedBy: editorial?.reviewer,
     }),
-    ...(editorial?.faqs.length ? [faqPageJsonLd(editorial.faqs)] : []),
+    ...editorialJsonLd(editorial),
     ...(data.cards.length
       ? [
           itemListJsonLd(

@@ -21,6 +21,7 @@ import {
   type ReviewerOption,
 } from "@/components/content/editorial-fields";
 import { adminFetch } from "@/lib/admin/client";
+import { blocksScanText } from "@/lib/blocks/content";
 import { findFlaggedPhrases } from "@/lib/content-flags";
 import { slugify } from "@/lib/slug";
 import { nodesFor } from "@/config/content-engine";
@@ -100,11 +101,7 @@ export function PageEditor({
   // Live cure/guarantee scan (the server independently re-scans and enforces it).
   const flags = React.useMemo(
     () =>
-      findFlaggedPhrases([
-        v.title,
-        v.intro,
-        ...v.blocks.flatMap(blockText),
-      ]),
+      findFlaggedPhrases([v.title, v.intro, blocksScanText(v.blocks)]),
     [v.title, v.intro, v.blocks],
   );
 
@@ -359,23 +356,3 @@ function SlugHint({
   return null;
 }
 
-/** Every string in a block — fed to the live cure/guarantee scanner. */
-function blockText(block: BlockInput): string[] {
-  switch (block.type) {
-    case "richText":
-    case "rawHtml":
-      return [block.data.html.replace(/<[^>]*>/g, " ")];
-    case "faq":
-      return block.data.items.flatMap((i) => [i.question, i.answer]);
-    case "comparisonTable":
-      return block.data.rows.flatMap((r) => [r.label, ...r.cells]);
-    case "featureGrid":
-      return block.data.items.flatMap((i) => [i.title, i.description ?? ""]);
-    case "prosCons":
-      return [...block.data.pros, ...block.data.cons];
-    case "cta":
-      return [block.data.title, block.data.body ?? ""];
-    case "media":
-      return [block.data.caption ?? ""];
-  }
-}

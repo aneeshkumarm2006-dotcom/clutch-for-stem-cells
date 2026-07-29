@@ -1,0 +1,221 @@
+[
+  {
+    "name": "R3 Stem Cell",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Scottsdale-based regenerative medicine network with clinics in the US and Mexico",
+    "description": "R3 Stem Cell is a Scottsdale, Arizona company that sells regenerative medicine treatments through a network of clinics. Dr. David Greene, a fellowship-trained orthopedic spine surgeon who moved to the business side of medicine, started it in 2012 while he was in business school at Arizona State, and he still runs it as CEO. R3's own pages put the network at 45 centers in seven countries in some places and 80 in eight countries in others, with more than 29,000 procedures reported since it began.\n\nR3 owns only a few of those clinics outright. The main one is a 7,000 square foot building on East Dynamite Boulevard in north Scottsdale that houses the stem cell center and R3's medspa arm, and there are R3 Anti Aging clinics in Beverly Hills and Brentwood, Tennessee. Everything else is an independent practice that joined R3's partnership program and uses its biologics, training, and marketing. The several hundred city pages on r3stemcell.com are search landing pages, not separate offices.\n\nWhat gets delivered depends on the country. In the US the visits are same-day outpatient injections: platelet-rich plasma, bone marrow or fat drawn from the patient, and donated umbilical cord or amniotic tissue allograft, placed under ultrasound guidance when the target calls for it. The intravenous protocols priced by cell count, from 25 million up to 250 million umbilical cord mesenchymal cells, are given at the Mexico clinics in Tijuana, Puerto Vallarta, and Cancun.\n\nNone of it is FDA-approved. R3 registered a patient-funded observational study of amniotic and umbilical cord tissue on ClinicalTrials.gov in 2019 under NCT03899298, which is still listed there as not yet recruiting. Consultations are free, insurance does not pay, and published prices start at $3,999 in Mexico and $5,500 per joint in the US.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785301845/library/giuaboefysv89qpig3bi.webp",
+      "publicId": "library/giuaboefysv89qpig3bi",
+      "width": 200,
+      "height": 204,
+      "alt": "R3 Stem Cell logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785301849/library/b50fckbqhqkwwspj0juw.webp",
+      "publicId": "library/b50fckbqhqkwwspj0juw",
+      "width": 678,
+      "height": 586,
+      "alt": "R3 Stem Cell exam room at the Scottsdale, Arizona center"
+    },
+
+    "treatmentTypes": [
+      "regenerative-orthopedics",
+      "msc-therapy",
+      "allogeneic-therapy",
+      "autologous-therapy",
+      "adipose-derived-therapy",
+      "bone-marrow-derived-therapy",
+      "exosome-therapy",
+      "prp",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "knee-osteoarthritis",
+      "joint-pain",
+      "back-and-spine",
+      "hip-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "sports-injuries",
+      "neuropathy",
+      "rheumatoid-arthritis",
+      "multiple-sclerosis",
+      "parkinsons",
+      "copd-pulmonary",
+      "diabetes-supportive",
+      "cardiovascular",
+      "sexual-health",
+      "anti-aging-longevity"
+    ],
+    "cellSources": [
+      "umbilical-cord",
+      "placental-whartons-jelly",
+      "adipose",
+      "bone-marrow",
+      "exosomes",
+      "autologous",
+      "allogeneic"
+    ],
+    "accreditations": [],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 35 },
+      { "treatment": "msc-therapy", "percent": 20 },
+      { "treatment": "allogeneic-therapy", "percent": 15 },
+      { "treatment": "prp", "percent": 15 },
+      { "treatment": "exosome-therapy", "percent": 10 },
+      { "treatment": "iv-systemic-therapy", "percent": 5 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "per_treatment",
+    "priceMin": 3999,
+    "priceMax": 18499,
+    "priceNote": "Prices are published rather than quoted privately. In the US, one extremity joint such as a knee with umbilical cord allograft starts around $5,500, and more involved cases run to about $15,000. At the Mexico clinics the protocols are priced by cell count, from $3,999 for 25 million cells to $18,499 for 250 million, with exosome-only IV protocols between $4,999 and $7,999. The first consultation is free and insurance does not cover any of it.",
+
+    "foundedYear": 2012,
+    "teamSize": "11-50",
+    "languages": ["English", "Spanish"],
+
+    "medicalDirector": {
+      "name": "Dr. David Greene",
+      "title": "Founder and Chief Executive Officer",
+      "credentials": "MD, PhD, MBA; fellowship-trained orthopedic spine surgeon",
+      "bio": "Trained in orthopedic surgery with a spine fellowship, then moved to the business side of medicine and started R3 in 2012 out of a project at Arizona State's business school. He sets the company's protocols and runs the partner network from Scottsdale, and no longer treats patients himself."
+    },
+    "team": [
+      {
+        "name": "Dr. Sabrina Solt",
+        "title": "Provider, R3 Scottsdale",
+        "credentials": "NMD, naturopathic medical doctor",
+        "bio": "Does the injection work at the Scottsdale center, including ultrasound-guided musculoskeletal injections, PRP, adipose and bone marrow procedures, and birth-tissue biologics. She has practiced regenerative and anti-aging medicine in Arizona since 2013."
+      },
+      {
+        "name": "Dr. Francisco Fernandez",
+        "title": "Medical Director, R3 Stem Cell Mexico",
+        "credentials": "MD, Autonomous University of Baja California School of Medicine",
+        "bio": "Oversees the Mexico clinics, where the higher cell-count intravenous protocols are given. He worked in the IMSS hospital system before moving into regenerative medicine."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "10045 E Dynamite Blvd, Suite 230",
+        "city": "Scottsdale",
+        "region": "Arizona",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "85262",
+        "phone": "480-306-6256",
+        "lat": 33.7365,
+        "lng": -111.8638
+      },
+      {
+        "isHQ": false,
+        "addressLine": "9301 Wilshire Blvd, Penthouse",
+        "city": "Beverly Hills",
+        "region": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "90210",
+        "phone": "424-382-1074",
+        "lat": 34.0673,
+        "lng": -118.3959
+      },
+      {
+        "isHQ": false,
+        "addressLine": "5020 Thoroughbred Ln",
+        "city": "Brentwood",
+        "region": "Tennessee",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "37027",
+        "phone": "615-835-2690",
+        "lat": 36.0281,
+        "lng": -86.7871
+      },
+      {
+        "isHQ": false,
+        "city": "Tijuana",
+        "country": "Mexico",
+        "countryCode": "MX",
+        "lat": 32.5149,
+        "lng": -117.0382
+      },
+      {
+        "isHQ": false,
+        "city": "Puerto Vallarta",
+        "country": "Mexico",
+        "countryCode": "MX",
+        "lat": 20.6534,
+        "lng": -105.2253
+      },
+      {
+        "isHQ": false,
+        "city": "Cancun",
+        "country": "Mexico",
+        "countryCode": "MX",
+        "lat": 21.1619,
+        "lng": -86.8515
+      }
+    ],
+
+    "website": "https://r3stemcell.com",
+    "contactEmail": "info@r3stemcell.com",
+    "social": {
+      "instagram": "https://www.instagram.com/r3stemcellofficial/",
+      "facebook": "https://www.facebook.com/r3stemcelltherapyofficial",
+      "linkedin": "https://www.linkedin.com/company/r3-stem-cell/",
+      "x": "https://x.com/r3stemcell",
+      "youtube": "https://www.youtube.com/channel/UCqYMGxtTteHOSmlvAVhNUeA"
+    },
+
+    "highlights": [
+      "Flagship clinic is a 7,000 square foot building in north Scottsdale that also houses R3's medspa",
+      "Started in 2012 by Dr. David Greene, a fellowship-trained orthopedic spine surgeon turned CEO",
+      "US visits are same-day outpatient injections: PRP, bone marrow, fat, and birth-tissue allograft",
+      "IV protocols sold by cell count are given at the Mexico clinics in Tijuana, Puerto Vallarta, and Cancun",
+      "Published starting prices, about $5,500 per joint in the US and $3,999 in Mexico",
+      "Most Centers of Excellence are independent partner practices rather than R3-owned clinics"
+    ],
+    "faqs": [
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell, allograft, and exosome therapies are investigational and are not approved by the FDA for arthritis, autoimmune conditions, or the other uses R3 markets. They are elective, self-pay procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "Are all of R3's listed locations actually R3 clinics?",
+        "answer": "No. R3 owns the Scottsdale center and the R3 Anti Aging clinics in Beverly Hills and Brentwood, Tennessee. The rest of the Centers of Excellence are independent practices that joined R3's partnership program and use its biologics, training, and marketing. The several hundred city pages on the R3 website are search landing pages rather than separate offices."
+      },
+      {
+        "question": "What cells are used, and where is treatment given?",
+        "answer": "In the US: platelet-rich plasma, bone marrow or fat taken from the patient, and donated umbilical cord or amniotic tissue allograft, given as same-day outpatient injections. The intravenous protocols priced by cell count, from 25 million to 250 million umbilical cord mesenchymal cells, are given at the Mexico clinics in Tijuana, Puerto Vallarta, and Cancun rather than in the United States."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "R3 publishes numbers instead of quoting privately. One extremity joint in the US starts around $5,500 and runs to roughly $15,000 for more involved cases. Mexico packages go from $3,999 for 25 million cells to $18,499 for 250 million, and exosome-only IV protocols run $4,999 to $7,999. Consultations are free and insurance does not pay."
+      },
+      {
+        "question": "Has R3 published any research?",
+        "answer": "R3 registered a patient-funded observational study of amniotic and umbilical cord tissue on ClinicalTrials.gov in 2019 under NCT03899298. That registry entry still shows a status of not yet recruiting, so no results have come out of it. R3 also reports an 85% patient satisfaction figure from its own internal data."
+      },
+      {
+        "question": "Has R3 had any regulatory trouble?",
+        "answer": "Yes. In May 2019 the FDA sent an untitled letter to R3 Stem Cell, LLC and Dr. David Greene about marketing unapproved cell products for conditions including Lyme disease, diabetes, Parkinson's disease, stroke, kidney failure, and ALS, and notified R3's affiliate centers of the action. R3 issued a public response at the time. Anyone considering treatment for a serious condition should read both and talk to their own physician first."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "r3 stem cell"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "r3 stem cell reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]

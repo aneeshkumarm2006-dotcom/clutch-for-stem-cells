@@ -1,0 +1,194 @@
+[
+  {
+    "name": "Next Health",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Longevity and health optimization studios offering in-clinic stem cell and exosome sessions, flagship in West Hollywood",
+    "description": "Next Health is a chain of health optimization studios started in 2016 by surgeon Darshan Shah, MD, and Kevin Peake. The first one opened on Sunset Blvd in West Hollywood and there are now about 20 open, most of them in the US, plus one in Dubai. The format is closer to a retail clinic than a doctor's office: daily walk-in hours, posted prices for a lot of the menu, and a service list built around blood panels, IV drips, NAD+, hormone therapy, peptides, cryotherapy, and hyperbaric oxygen.\n\nStem cells and exosomes are one line on that menu. Next Health describes what it gives as mesenchymal stem cells and exosomes, and lists the service on the pages for its West Hollywood, Century City, Studio City, New York, Nashville, and Miami studios. Sessions are booked through a Next Health provider and given on site. Patients are not sent abroad for the cell work, which sets this apart from the US longevity brands that advertise domestically and treat in Mexico or the Caribbean.\n\nThe company does not publish the tissue source for its cells, its donor screening, or the lab that supplies them, and there is no posted price for a stem cell or exosome session. Both are quoted after a consultation, which is free. Next Health's own page carries the disclaimer that these therapies are not approved by the FDA and are not intended to diagnose or treat disease.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785301851/library/j84091eirnuzqbu9jpnr.webp",
+      "publicId": "library/j84091eirnuzqbu9jpnr",
+      "width": 256,
+      "height": 256,
+      "alt": "Next Health logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785301853/library/yvstol6coymuwpnaxfgf.webp",
+      "publicId": "library/yvstol6coymuwpnaxfgf",
+      "width": 1500,
+      "height": 1000,
+      "alt": "Next Health studio on Sunset Blvd in West Hollywood, California"
+    },
+
+    "treatmentTypes": ["msc-therapy", "exosome-therapy", "iv-systemic-therapy", "prp"],
+    "conditionsTreated": ["anti-aging-longevity", "skin-aesthetic", "hair-restoration"],
+    "cellSources": ["exosomes"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "iv-systemic-therapy", "percent": 40 },
+      { "treatment": "exosome-therapy", "percent": 25 },
+      { "treatment": "msc-therapy", "percent": 20 },
+      { "treatment": "prp", "percent": 15 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Next Health posts prices for IV drips, lab panels, NAD+, and therapeutic plasma exchange, but not for stem cells or exosomes. Those are quoted after a consultation with one of its providers, and the consultation is free. Memberships and packages are billed separately from the cell work.",
+
+    "foundedYear": 2016,
+    "teamSize": "200+",
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Darshan Shah",
+      "title": "Founder and Chief Executive Officer",
+      "credentials": "MD, board-certified surgeon",
+      "bio": "Trained in surgery at the Mayo Clinic and finished medical school at 21 through a combined BS/MD program at the University of Missouri, Kansas City. He worked as a trauma, general, and plastic surgeon before starting Next Health with Kevin Peake in 2016, and he sets the clinical direction for the chain."
+    },
+    "team": [
+      {
+        "name": "Kevin Peake",
+        "title": "Co-Founder and President",
+        "bio": "Runs the business side of Next Health. He came from consumer goods and beverage, including early work on Celsius, and handles the operating model behind the studios and the franchise expansion."
+      },
+      {
+        "name": "Dr. M. Shoma Datta-Thomas",
+        "title": "VP of Medical Operations",
+        "credentials": "MD, FACOG, board-certified in obstetrics and gynecology",
+        "bio": "Started out as a gynecologic robotic surgeon, trained at Johns Hopkins and Mount Sinai, then moved into functional and longevity medicine. She oversees medical operations for Next Health and is the medical director for the New York studio."
+      },
+      {
+        "name": "Sirish Pulusani",
+        "title": "Director of Longevity and Wellness",
+        "credentials": "BS biology and chemistry, certified in integrative and precision nutrition",
+        "bio": "Oversees the Executive Physical and the biomarker-driven programs, and works with patients directly on weight, metabolic health, and nutrition."
+      },
+      {
+        "name": "Alyssa Hendrix",
+        "title": "Physician Assistant",
+        "credentials": "PA, NCCPA certified",
+        "bio": "Sees patients across the preventative and metabolic services. Her earlier work was in orthopedics, chronic pain, and plastic surgery."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "8570 Sunset Blvd, Suite 6.1A",
+        "city": "West Hollywood",
+        "region": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "90069",
+        "phone": "310-295-2075",
+        "lat": 34.0906,
+        "lng": -118.3782
+      },
+      {
+        "isHQ": false,
+        "addressLine": "10250 Santa Monica Blvd, Suite 1440, Century City",
+        "city": "Los Angeles",
+        "region": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "90067",
+        "lat": 34.0583,
+        "lng": -118.4173
+      },
+      {
+        "isHQ": false,
+        "addressLine": "12833 Ventura Blvd #161, Studio City",
+        "city": "Los Angeles",
+        "region": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "91604",
+        "lat": 34.1443,
+        "lng": -118.4136
+      },
+      {
+        "isHQ": false,
+        "addressLine": "160 Madison Ave",
+        "city": "New York",
+        "region": "New York",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "10016",
+        "lat": 40.7458,
+        "lng": -73.9828
+      },
+      {
+        "isHQ": false,
+        "addressLine": "616 8th Ave South",
+        "city": "Nashville",
+        "region": "Tennessee",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "37203",
+        "lat": 36.1502,
+        "lng": -86.7826
+      },
+      {
+        "isHQ": false,
+        "addressLine": "19505 Biscayne Blvd",
+        "city": "Miami",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "33180",
+        "lat": 25.9556,
+        "lng": -80.1428
+      }
+    ],
+
+    "website": "https://www.next-health.com",
+    "contactEmail": "info@next-health.com",
+    "social": {
+      "instagram": "https://www.instagram.com/nexthealth/",
+      "facebook": "https://www.facebook.com/nexthealth",
+      "linkedin": "https://www.linkedin.com/company/nexthealthmgmt/"
+    },
+
+    "highlights": [
+      "Stem cell and exosome sessions are given in the company's own US studios, with no referral abroad",
+      "Started on Sunset Blvd in West Hollywood in 2016; about 20 studios open now",
+      "Cell work sits inside a wider menu: blood panels, IV drips, NAD+, hormones, peptides, hyperbaric oxygen",
+      "Most studios keep walk-in hours seven days a week, roughly 9am to 7pm",
+      "Free consultation with a Next Health provider before any stem cell or exosome session"
+    ],
+    "faqs": [
+      {
+        "question": "What cells does Next Health use?",
+        "answer": "The company describes what it gives as mesenchymal stem cells and exosomes. It does not publish the tissue the cells come from, how donors are screened, or which lab supplies them, so ask for that in writing at the consultation."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Next Health states on its own stem cell page that these therapies are not approved by the FDA and are not intended to diagnose, treat, or prevent any disease. They are elective wellness services and are not a substitute for standard medical care."
+      },
+      {
+        "question": "Where is the treatment actually done?",
+        "answer": "In Next Health's own studios in the United States. West Hollywood, Century City, Studio City, New York, Nashville, and Miami all list stem cells and exosomes on their service menus. Patients are not sent to another country for the cell work."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "Next Health posts prices for IV drips, lab panels, and plasma exchange, but not for stem cells or exosomes. Those are quoted after a consultation, and the consultation is free."
+      },
+      {
+        "question": "What else happens on a visit?",
+        "answer": "Most people come in for blood testing, IV drips, NAD+, hormone therapy, or recovery equipment such as cryotherapy and hyperbaric oxygen. Cell and exosome sessions are usually added to that plan rather than booked on their own."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "next health"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "next health reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]

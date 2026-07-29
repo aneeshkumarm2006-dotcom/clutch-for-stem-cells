@@ -9,6 +9,7 @@ import {
   EVIDENCE_LEVELS,
   LOCATION_KINDS,
 } from "@/lib/enums";
+import { blocksSchema } from "@/lib/validation/block";
 import {
   imageSchema,
   objectIdSchema,
@@ -36,6 +37,8 @@ export const keyFactInputSchema = z.object({
  */
 const editorialBase = {
   body: z.string().optional(),
+  /** The modular section builder. HTML inside blocks is sanitized on write. */
+  blocks: blocksSchema,
   faqs: z.array(faqInputSchema).default([]),
   keyFacts: z.array(keyFactInputSchema).default([]),
   reviewStatus: z.enum(CONTENT_REVIEW_STATUSES).default("draft"),

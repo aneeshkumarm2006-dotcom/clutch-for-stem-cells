@@ -14,6 +14,7 @@
  */
 import "server-only";
 
+import { blocksScanText, parseBlocks } from "@/lib/blocks/content";
 import { scanContentFlags, type ContentFlag } from "@/lib/content-flags";
 
 /** Long-form editorial fields that may carry medical claims (any record kind). */
@@ -38,7 +39,12 @@ const SCANNED_TEXT_FIELDS = [
   "travelNotes",
 ];
 
-/** Collect every scannable string on a record (top-level fields + faqs + keyFacts). */
+/**
+ * Collect every scannable string on a record: top-level fields, faqs, keyFacts,
+ * and the prose inside its modular content blocks. Blocks are re-parsed rather
+ * than trusted, so a hand-edited row can't smuggle a claim past the gate by
+ * malforming a block's `data`.
+ */
 function editorialText(doc: Record<string, unknown>): string[] {
   const parts: string[] = [];
   const push = (v: unknown) => {
@@ -46,6 +52,8 @@ function editorialText(doc: Record<string, unknown>): string[] {
   };
 
   for (const field of SCANNED_TEXT_FIELDS) push(doc[field]);
+
+  if (Array.isArray(doc.blocks)) push(blocksScanText(parseBlocks(doc.blocks)));
 
   const faqs = doc.faqs as { question?: string; answer?: string }[] | undefined;
   if (Array.isArray(faqs)) {

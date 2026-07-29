@@ -6,7 +6,9 @@ import { dbConnect } from "@/lib/db";
 import { fail, ok, parseBody, withRole } from "@/lib/admin/api";
 import { recordAuditFromRequest } from "@/lib/audit";
 import { getTaxonomyConfig } from "@/lib/admin/taxonomy-config";
+import { sanitizeBlocks } from "@/lib/blocks/server";
 import { reviewEditorialWrite } from "@/lib/content-review";
+import { blocksSchema } from "@/lib/validation/block";
 import { Clinic } from "@/models";
 
 export const dynamic = "force-dynamic";
@@ -25,6 +27,12 @@ export async function PATCH(
     const parsed = await parseBody(req, config.updateSchema);
     if ("error" in parsed) return parsed.error;
     const data = parsed.data as Record<string, unknown>;
+
+    // Sanitize section blocks only when they were part of this patch; a PATCH
+    // that omits `blocks` (e.g. the list's Active toggle) leaves them untouched.
+    if (data.blocks !== undefined) {
+      data.blocks = sanitizeBlocks(blocksSchema.parse(data.blocks));
+    }
 
     await dbConnect();
     if (data.slug) {

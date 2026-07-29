@@ -1,0 +1,188 @@
+[
+  {
+    "name": "Fountain Life",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Membership longevity centers in five US cities, with placental cell therapy given at the Naples, Florida center",
+    "description": "Fountain Life is a membership longevity and preventive medicine company founded in 2020 by Peter Diamandis, Tony Robbins, Robert Hariri, and William Kapp, an orthopedic surgeon who runs it as CEO. Most of what a member gets is diagnostics: whole-body and brain MRI, coronary imaging, bloodwork, and genome sequencing, packaged into a single visit and read by longevity physicians. It operates centers in Naples and Orlando, Florida, The Colony outside Dallas, White Plains, New York, and Houston, with a Miami location announced.\n\nThe regenerative side is smaller and sits behind the membership. Cell therapy is given at the Naples center and is limited to the APEX and EPIC tiers. In July 2025 Fountain Life signed a supply agreement with Celularity for placental-derived allogeneic cell products, and in June 2026 Celularity made its cenplacel-L product available for investigational use in Florida. Both run under Florida Statute 458.3245, a state law effective July 1, 2025 that allows qualified Florida physicians to give adult stem cell products for orthopedic conditions, wound healing, and pain management without an FDA investigational new drug approval.\n\nThe centers also do ultrasound-guided orthobiologic injections and hydrodissection using high-concentration PRP for arthritic joints, tendinitis, disc and low-back pain, and rotator cuff problems, plus therapeutic plasma exchange and biologic-assisted skin and scalp treatments. Dallas Kingsbury, a sports and spine physiatrist, is medical director at Naples and vice president of regenerative medicine for the company.\n\nFountain Life states on its own site that these therapies are not FDA approved. It publishes no price list. Membership is annual and the regenerative treatments are billed on top of it.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785301839/library/votwmeksb7gyamjk9zul.webp",
+      "publicId": "library/votwmeksb7gyamjk9zul",
+      "width": 256,
+      "height": 256,
+      "alt": "Fountain Life logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785301841/library/emsgfe5cj5xqmzfuzqrt.webp",
+      "publicId": "library/emsgfe5cj5xqmzfuzqrt",
+      "width": 2000,
+      "height": 1050,
+      "alt": "Fountain Life cover image"
+    },
+
+    "treatmentTypes": ["msc-therapy", "allogeneic-therapy", "regenerative-orthopedics", "prp"],
+    "conditionsTreated": ["anti-aging-longevity", "joint-pain", "knee-osteoarthritis", "back-and-spine", "rotator-cuff-shoulder", "sports-injuries", "skin-aesthetic", "hair-restoration"],
+    "cellSources": ["placental-whartons-jelly", "allogeneic"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 40 },
+      { "treatment": "prp", "percent": 25 },
+      { "treatment": "msc-therapy", "percent": 20 },
+      { "treatment": "allogeneic-therapy", "percent": 15 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published price list. Access runs through an annual membership sold in tiers (CORE, APEX, APEX Family), and regenerative treatments are billed separately on top of the membership fee. Restorative biologics at the Naples center are open only to APEX and EPIC members. Figures are quoted after a consultation.",
+
+    "foundedYear": 2020,
+    "teamSize": "51-200",
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Dawn Mussallem",
+      "title": "Chief Medical Officer",
+      "credentials": "DO, DipABLM, double board-certified in lifestyle medicine",
+      "bio": "Spent 25 years at Mayo Clinic as a hematology and oncology consultant and assistant professor of medicine before joining Fountain Life as chief medical officer in December 2025. She started Mayo Clinic Florida's Integrative Medicine and Breast Health Program in 2015."
+    },
+    "team": [
+      {
+        "name": "Dr. Dallas Kingsbury",
+        "title": "Vice President of Regenerative Medicine and Medical Director, Naples",
+        "credentials": "MD, FAAPMR, CAQSM, RMSK",
+        "bio": "Fellowship-trained sports and spine physiatrist and certified musculoskeletal sonographer who runs the regenerative side of the practice, including the ultrasound-guided injection work. He also teaches sports and rehabilitation medicine at NYU Langone Health and has published on orthobiologics for tendinitis and osteoarthritis."
+      },
+      {
+        "name": "Dr. Jimmy Bowen",
+        "title": "Medical Director, Orlando",
+        "credentials": "MD, FAAPMR, CAQ in sports medicine, CSCS",
+        "bio": "Mayo Clinic trained physiatrist working in nonsurgical orthopedics, sports medicine, and rehabilitation. Retired Navy captain who served as consultant to the Navy Surgeon General for physical medicine."
+      },
+      {
+        "name": "Dr. William Kapp",
+        "title": "Co-Founder and Chief Executive Officer",
+        "credentials": "MD, board-certified orthopedic surgeon",
+        "bio": "Orthopedic surgeon and former Air Force flight surgeon. He built and sold surgical centers, hospitals, and health record companies before co-founding Fountain Life, and runs the company day to day."
+      },
+      {
+        "name": "Dr. Robert Hariri",
+        "title": "Co-Founder",
+        "credentials": "MD, PhD",
+        "bio": "Surgeon and biomedical scientist who founded Celularity, the company that supplies the placental-derived cell products used at the Naples center. He co-founded Fountain Life with Kapp, Diamandis, and Robbins."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "1000 Immokalee Rd, Suite 90",
+        "city": "Naples",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "34110",
+        "phone": "(239) 235-6644",
+        "lat": 26.2793,
+        "lng": -81.8036
+      },
+      {
+        "isHQ": false,
+        "addressLine": "6424 Alexandra Louise Drive, Suite 120",
+        "city": "Orlando",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "32827",
+        "phone": "(407) 499-8511",
+        "lat": 28.3705,
+        "lng": -81.276
+      },
+      {
+        "isHQ": false,
+        "addressLine": "5762 Grandscape Blvd, Suite 115",
+        "city": "The Colony",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "75056",
+        "phone": "(469) 647-9344",
+        "lat": 33.0836,
+        "lng": -96.829
+      },
+      {
+        "isHQ": false,
+        "addressLine": "4 Westchester Park Dr, Suite 200",
+        "city": "White Plains",
+        "region": "New York",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "10604",
+        "phone": "(914) 218-4992",
+        "lat": 41.0563,
+        "lng": -73.783
+      },
+      {
+        "isHQ": false,
+        "addressLine": "4411 San Felipe St",
+        "city": "Houston",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "77027",
+        "lat": 29.7448,
+        "lng": -95.446
+      }
+    ],
+
+    "website": "https://www.fountainlife.com",
+    "contactEmail": "care@fountainlife.com",
+    "social": {
+      "instagram": "https://www.instagram.com/fountainlife/",
+      "facebook": "https://www.facebook.com/fountainlife",
+      "linkedin": "https://www.linkedin.com/company/fountain-life"
+    },
+
+    "highlights": [
+      "Five US centers: Naples and Orlando in Florida, The Colony near Dallas, White Plains in New York, and Houston",
+      "Cell therapy is given at the Naples, Florida center and is limited to APEX and EPIC members",
+      "Placental-derived allogeneic cell products supplied by Celularity under Florida Statute 458.3245",
+      "Naples medical director Dallas Kingsbury is a sports and spine physiatrist and certified musculoskeletal sonographer",
+      "Ultrasound-guided orthobiologic injections and hydrodissection using high-concentration PRP",
+      "Annual membership is required, and regenerative treatments are billed on top of it"
+    ],
+    "faqs": [
+      {
+        "question": "Where is the cell therapy actually done?",
+        "answer": "At the Naples, Florida center. Fountain Life lists restorative biologics as available there, and the Celularity supply agreement covers use by licensed physicians in Florida. The Orlando, Dallas, New York, and Houston centers are built around diagnostics and physician review."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell and biologic therapies here are investigational and are not approved by the FDA for longevity or the other uses offered. Florida Statute 458.3245, effective July 1, 2025, allows qualified Florida physicians to give adult stem cell products for orthopedic conditions, wound healing, and pain management without an FDA investigational new drug approval. That is a state allowance, not federal approval, and Fountain Life posts its own notice that the therapy is not FDA approved. These are elective procedures and not a replacement for standard medical care."
+      },
+      {
+        "question": "What kind of cells are used?",
+        "answer": "Donor cells rather than the patient's own. Celularity supplies placental-derived allogeneic cell products sourced from postpartum placenta, and its cenplacel-L product became available for investigational use in Florida in June 2026."
+      },
+      {
+        "question": "What is it used for?",
+        "answer": "The Florida law covers orthopedic conditions, wound healing, and pain management. In practice that means arthritic joints, tendinitis, disc and low-back pain, and rotator cuff problems. The centers also use high-concentration PRP and ultrasound-guided injections for the same list, plus biologic-assisted skin and scalp treatments on the aesthetic side."
+      },
+      {
+        "question": "Do I need a membership?",
+        "answer": "Yes. Restorative biologics are open only to APEX and EPIC tier members. Membership is annual, prices are not published on the site, and the therapies are billed separately from the membership fee."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "fountain life"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "fountain life reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]

@@ -22,11 +22,11 @@ import {
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import {
-  faqPageJsonLd,
   itemListJsonLd,
   medicalTherapyJsonLd,
   medicalWebPageJsonLd,
 } from "@/lib/seo";
+import { editorialJsonLd } from "@/lib/editorial-schema";
 import { getApprovedComboLinks } from "@/lib/seoteam/matrix-data";
 import { Directory } from "@/components/directory/directory";
 import {
@@ -123,7 +123,7 @@ export default async function TreatmentDirectoryPage({
         path,
       }),
     }),
-    ...(editorial?.faqs.length ? [faqPageJsonLd(editorial.faqs)] : []),
+    ...editorialJsonLd(editorial),
     ...(data.cards.length
       ? [
           itemListJsonLd(

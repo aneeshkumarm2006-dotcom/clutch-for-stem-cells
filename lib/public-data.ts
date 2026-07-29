@@ -15,6 +15,7 @@ import { unstable_cache } from "next/cache";
 import { Types, type Model } from "mongoose";
 
 import { dbConnect } from "@/lib/db";
+import { parseBlocks } from "@/lib/blocks/content";
 import { formatLocation } from "@/lib/format";
 import { getHomepageContent } from "@/lib/homepage";
 import { compareClinicsForListing } from "@/lib/ranking";
@@ -47,6 +48,7 @@ import {
   type ITaxonomyBase,
 } from "@/models";
 import type { EvidenceLevel } from "@/lib/enums";
+import type { BlockInput } from "@/lib/validation/block";
 import type { ReviewerByline } from "@/components/content/reviewed-by-byline";
 
 // ── Small serialization helpers ──────────────────────────────────────────────
@@ -98,6 +100,8 @@ export interface EditorialSection {
 /** Approved, human-reviewed editorial content rendered on a term detail page. */
 export interface TermEditorial {
   body?: string;
+  /** Editor-composed sections (the modular block builder), in display order. */
+  blocks: BlockInput[];
   faqs: { question: string; answer: string }[];
   keyFacts: { label: string; value: string; sourceUrl?: string }[];
   sections: EditorialSection[];
@@ -185,6 +189,7 @@ async function buildTermEditorial(
 
   return {
     body: typeof doc.body === "string" ? doc.body : undefined,
+    blocks: parseBlocks(doc.blocks),
     faqs: faqs.map((f) => ({ question: f.question, answer: f.answer })),
     keyFacts: keyFacts.map((k) => ({
       label: k.label,

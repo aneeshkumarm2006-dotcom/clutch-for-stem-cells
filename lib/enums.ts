@@ -286,17 +286,29 @@ export const TWITTER_CARD_TYPES = ["summary", "summary_large_image"] as const;
 export type TwitterCardType = (typeof TWITTER_CARD_TYPES)[number];
 
 /**
- * The reusable content blocks editors compose Pages from. Keep in lockstep with
- * the block registry (`lib/blocks/registry.ts`) and the enabled set in
+ * The reusable content blocks editors compose pages from — composed Pages and
+ * the editorial section builder on taxonomy term pages both draw from this list.
+ * Keep in lockstep with the block schema (`lib/validation/block.ts`), the editor
+ * forms + renderers (`components/blocks/`), and the enabled set in
  * `config/content-engine`. Blocks with structured meaning (`faq`,
- * `comparisonTable`) auto-wire into the schema engine.
+ * `comparisonTable`, `steps`) auto-wire into the schema engine.
+ *
+ * Order is the order of the "Add block" picker, grouped loosely from
+ * most-reached-for to most-specialist.
  */
 export const BLOCK_TYPES = [
   "richText",
-  "faq",
+  "keyTakeaways",
+  "steps",
+  "checklist",
   "comparisonTable",
+  "faq",
   "featureGrid",
   "prosCons",
+  "statGrid",
+  "callout",
+  "quote",
+  "linkList",
   "cta",
   "media",
   "rawHtml",
@@ -306,13 +318,50 @@ export type BlockType = (typeof BLOCK_TYPES)[number];
 /** Human labels for the block-type picker in the page editor. */
 export const BLOCK_TYPE_LABELS: Record<BlockType, string> = {
   richText: "Rich text",
-  faq: "FAQ",
+  keyTakeaways: "Key takeaways",
+  steps: "Step-by-step process",
+  checklist: "Checklist",
   comparisonTable: "Comparison table",
+  faq: "FAQ",
   featureGrid: "Feature grid",
   prosCons: "Pros & cons",
+  statGrid: "Stat grid",
+  callout: "Callout / note",
+  quote: "Quote",
+  linkList: "Link list",
   cta: "Call to action",
   media: "Image / media",
   rawHtml: "Raw HTML / embed",
+};
+
+/** One-line hints shown under each type in the "Add block" picker. */
+export const BLOCK_TYPE_HINTS: Record<BlockType, string> = {
+  richText: "Headings, paragraphs, lists, links, images.",
+  keyTakeaways: "Answer-first bullet summary. Put it at the top.",
+  steps: "Numbered process, e.g. how a therapy is collected.",
+  checklist: "Ticked bullets, e.g. what to compare between clinics.",
+  comparisonTable: "Side-by-side table of options.",
+  faq: "Questions phrased the way people search them.",
+  featureGrid: "Two-column cards of titled points.",
+  prosCons: "Balanced advantages and limitations.",
+  statGrid: "Big numbers with a label and a source link.",
+  callout: "A note, tip, or caution set apart from the prose.",
+  quote: "A pull quote with attribution.",
+  linkList: "Related reading or internal links.",
+  cta: "Heading, blurb, and one button.",
+  media: "An image with an optional caption.",
+  rawHtml: "Embed code. Scripts are stripped on save.",
+};
+
+/** Visual tone of a `callout` block. */
+export const CALLOUT_TONES = ["note", "tip", "important", "caution"] as const;
+export type CalloutTone = (typeof CALLOUT_TONES)[number];
+
+export const CALLOUT_TONE_LABELS: Record<CalloutTone, string> = {
+  note: "Note",
+  tip: "Tip",
+  important: "Important",
+  caution: "Caution",
 };
 
 /** HTTP status for a redirect record — permanent (301) or temporary (302). */

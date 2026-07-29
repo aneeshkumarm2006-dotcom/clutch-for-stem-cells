@@ -3,16 +3,23 @@ import * as React from "react";
 import { renderMarkdown } from "@/lib/markdown";
 import { EVIDENCE_LEVEL_LABELS, type EvidenceLevel } from "@/lib/enums";
 import { cn } from "@/lib/utils";
+import { BlockRenderer } from "@/components/blocks/block-renderer";
 import { KeyFacts, type KeyFact } from "@/components/content/key-facts";
 import { FaqSection, type FaqItem } from "@/components/content/faq-section";
 import {
   ReviewedByByline,
   type ReviewerByline,
 } from "@/components/content/reviewed-by-byline";
+import type { BlockInput } from "@/lib/validation/block";
 
 export interface EditorialArticleData {
   /** Long-form markdown body. */
   body?: string;
+  /**
+   * Editor-composed sections from the modular block builder. Optional so older
+   * callers (and records saved before the builder existed) keep type-checking.
+   */
+  blocks?: BlockInput[];
   keyFacts: KeyFact[];
   /** Labeled per-kind markdown sections (rendered as h2 + prose). */
   sections: { title: string; body: string }[];
@@ -44,9 +51,14 @@ function Markdown({ source }: { source: string }) {
 
 /**
  * Renders approved, human-reviewed editorial content: medical-reviewer byline →
- * evidence badge → key facts → long-form body → labeled sections → scoped FAQ.
- * Reused by taxonomy detail pages and combination pages. Presentation only —
- * the page emits FAQPage/MedicalWebPage JSON-LD from the same data.
+ * evidence badge → key facts → long-form body → labeled sections → composed
+ * blocks → scoped FAQ. Reused by taxonomy detail pages and combination pages.
+ * Presentation only — the page emits FAQPage/MedicalWebPage JSON-LD from the
+ * same data (see `lib/editorial-schema.ts`).
+ *
+ * The composed blocks sit last-but-one deliberately: the fixed per-kind fields
+ * are the term's canonical facts, and the section builder is where an editor
+ * expands on them. The FAQ stays at the bottom, where readers expect it.
  *
  * Renders nothing if there's no meaningful content (so a term with an empty but
  * approved record doesn't show an empty shell).
@@ -58,10 +70,12 @@ export function EditorialArticle({
   data: EditorialArticleData;
   className?: string;
 }) {
+  const blocks = data.blocks ?? [];
   const hasContent =
     Boolean(data.body?.trim()) ||
     data.keyFacts.length > 0 ||
     data.sections.length > 0 ||
+    blocks.length > 0 ||
     data.faqs.length > 0;
   if (!hasContent) return null;
 
@@ -94,6 +108,8 @@ export function EditorialArticle({
           </div>
         </section>
       ))}
+
+      <BlockRenderer blocks={blocks} />
 
       <FaqSection items={data.faqs} />
     </div>

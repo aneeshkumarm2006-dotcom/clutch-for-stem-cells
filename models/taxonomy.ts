@@ -20,10 +20,12 @@ import {
   imageSchema,
   seoSchema,
   schemaOverrideSchema,
+  blockSchema,
   faqSchema,
   keyFactSchema,
   contentFlagSchema,
   registerModel,
+  type IBlock,
   type IImage,
   type ISeo,
   type ISchemaOverrides,
@@ -57,6 +59,14 @@ export interface ITaxonomyBase extends TimestampFields {
   // ── Editorial enrichment (rendered only when reviewStatus === "approved") ──
   /** Long-form markdown body rendered below the intro on the term page. */
   body?: string;
+  /**
+   * The modular section builder — an ordered composition of reusable content
+   * blocks (steps, comparison table, checklist, callout, …) rendered under the
+   * body. Same block union the composed-page CMS uses, so a section type added
+   * once is available everywhere. Blocks carrying structured meaning wire
+   * themselves into the page's JSON-LD (`lib/blocks/schema.ts`).
+   */
+  blocks: IBlock[];
   /** Scoped Q&A → visible accordion + FAQPage JSON-LD (AEO). */
   faqs: IFaqEntry[];
   /** Sourced facts with visible citations (extractability + E-E-A-T). */
@@ -80,6 +90,7 @@ export interface ITaxonomyBase extends TimestampFields {
 function editorialFields(): SchemaDefinition {
   return {
     body: { type: String },
+    blocks: { type: [blockSchema], default: [] },
     faqs: { type: [faqSchema], default: [] },
     keyFacts: { type: [keyFactSchema], default: [] },
     reviewStatus: {

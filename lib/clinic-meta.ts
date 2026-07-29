@@ -7,10 +7,14 @@
  *
  *   profile   title  `<Clinic> | <Condition> Stem Cell Therapy in <City>, <State>`
  *             desc   **<Clinic> is a stem cell clinic in <City>, <State>** treating …
- *             keys   `<Clinic>`
+ *             keys   `<clinic>`
  *   reviews   title  `<Clinic> Reviews | <Site name>`
  *             desc   **Patient reviews of <Clinic> in <City>, <State>.** Read …
- *             keys   `<Clinic> reviews`
+ *             keys   `<clinic> reviews`
+ *
+ * Titles and descriptions are prose and stay in the taxonomy's own casing.
+ * Keywords are the exception: they mirror a typed query, so they are lower case
+ * and unpunctuated (see `keywordText`).
  *
  * The bold run is the leading phrase only, emitted as Unicode bold letters by
  * `buildMetadata` (see `boldMetaPrefix` in lib/meta-text.ts) — a meta tag has no
@@ -91,16 +95,24 @@ export function clinicPlace(clinic: ClinicMetaInput): string {
 /**
  * Taxonomy names are authored as on-page filter labels and carry editorial
  * shorthand a meta tag should not: a slash pairing ("Skin / Aesthetic",
- * "Crohn's / IBD") and a qualifier in parentheses ("Diabetes (supportive)").
+ * "Crohn's / IBD"), a qualifier in parentheses ("Diabetes (supportive)"), and
+ * an ampersand ("Back & Spine").
  *
  * The parenthetical is dropped and the pairing collapses to one side of the
  * slash — spelling both out ("Anti-Aging and Longevity") collides with the
  * "and" that joins the list itself. The first side wins, except where it is a
  * lone word and the other side is the fuller phrase: "Erectile / Sexual Health"
  * reads as "sexual health", while "COPD / Pulmonary" stays "COPD".
+ *
+ * The ampersand is spelled out rather than collapsed, since "back" alone loses
+ * the term. `&` is not in ALLOWED_META_PUNCTUATION (lib/meta-text), so leaving
+ * it in emits a description `findMetaIssues` rejects.
  */
 export function conditionPhrase(name: string): string {
-  const base = name.replace(/\s*\([^)]*\)\s*/g, " ").trim();
+  const base = name
+    .replace(/\s*\([^)]*\)\s*/g, " ")
+    .replace(/\s*&\s*/g, " and ")
+    .trim();
   const parts = base
     .split("/")
     .map((part) => part.trim())
@@ -193,8 +205,27 @@ export function clinicMetaDescription(clinic: ClinicMetaInput): string {
   return conditions ? `${lead} treating ${conditions}.` : `${lead}.`;
 }
 
+/**
+ * Fold a label into the form a keyword is actually typed in: lower case, no
+ * punctuation, no hyphen.
+ *
+ * A search box gets "centeno schultz clinic", not "Centeno-Schultz Clinic", and
+ * nobody types a legal suffix, so "Stemedix, Inc." reduces to "stemedix". The
+ * hyphen matters most: it splits a token, so "Centeno-Schultz" and "Anti-Aging"
+ * only match a query that punctuates the same way.
+ */
+export function keywordText(value: string): string {
+  return value
+    .replace(/,?\s+(inc|llc|ltd|co|corp|corporation|pllc|pc)\.?$/i, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+/** The brand on its own, as it would be typed. */
 export function clinicKeywords(clinic: ClinicMetaInput): string[] {
-  return [clinic.name];
+  return [keywordText(clinic.name)];
 }
 
 // ── Reviews page (/clinic/[slug]/reviews) ────────────────────────────────────
@@ -225,6 +256,7 @@ export function clinicReviewsMetaDescription(clinic: ClinicMetaInput): string {
   return `${clinicReviewsMetaBoldPrefix(clinic)} Read first-hand reports on treatment, communication, facility, and value for money before you book.`;
 }
 
+/** The brand plus "reviews", as it would be typed. */
 export function clinicReviewsKeywords(clinic: ClinicMetaInput): string[] {
-  return [`${clinic.name} reviews`];
+  return [`${keywordText(clinic.name)} reviews`];
 }

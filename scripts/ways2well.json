@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Ways2Well",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Two Texas clinics offering donor-derived cell therapy, plus a nationwide telehealth bloodwork and longevity membership",
+    "description": "Ways2Well is a preventive-medicine company started in 2018 by Brigham Buhler, a Houston native who also owns the compounding pharmacy Revive Rx. Most of the business is telehealth: a $599 annual membership covering two blood panels across 100-plus biomarkers, clinician reviews, and prescriptions, peptides or supplements shipped to the patient, with providers licensed in 45 states. The in-person side is two Texas clinics, the Longevity Lab on Bee Caves Road in Austin and a Houston clinic on North Main that opened in May 2026.\n\nCell therapy happens in those two clinics. Ways2Well does not send patients abroad for it, and its own FAQ draws a line between what it does and what offshore clinics do: US rules bar culturing or expanding the cells, so the material is given close to the form it arrives in. That material is donated perinatal tissue, amniotic fluid, placenta and umbilical cord, collected at pre-planned live-birth C-sections from screened US donors and processed by CLIA-certified partner labs. A clinician administers it as a site-specific injection, an IV infusion, or a nebulized dose, with ultrasound or fluoroscopy guiding injections where that helps.\n\nThe Austin lab surrounds the cell work with other equipment: hyperbaric oxygen, ozone sauna and EBOO, red light, plasmapheresis, DEXA and VO2 max testing, a qEEG brain scan. There is also a three-day Austin package called Immersion that bundles hotel, meals, ground transport and up to four treatments. A newer IV option, Dezawa MuseCell, is listed starting at $5,900.\n\nNone of this is FDA-approved. Ways2Well says as much in its own site disclaimer, describing some of its treatments as experimental or alternative. The practice takes no insurance, accepts HSA and FSA, and quotes cell therapy after a phone consult.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785301855/library/i4r2wlmwk3baix3ibbvj.webp",
+      "publicId": "library/i4r2wlmwk3baix3ibbvj",
+      "width": 512,
+      "height": 512,
+      "alt": "Ways2Well logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785301857/library/swtgorthwb2dkmhu1xsi.webp",
+      "publicId": "library/swtgorthwb2dkmhu1xsi",
+      "width": 1600,
+      "height": 604,
+      "alt": "Ways2Well Longevity Lab in Austin, Texas"
+    },
+
+    "treatmentTypes": ["msc-therapy", "exosome-therapy", "allogeneic-therapy", "iv-systemic-therapy", "regenerative-orthopedics"],
+    "conditionsTreated": ["anti-aging-longevity", "joint-pain", "sports-injuries", "back-and-spine", "knee-osteoarthritis", "rotator-cuff-shoulder", "rheumatoid-arthritis", "hair-restoration", "skin-aesthetic"],
+    "cellSources": ["allogeneic", "umbilical-cord", "placental-whartons-jelly", "exosomes"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "msc-therapy", "percent": 40 },
+      { "treatment": "exosome-therapy", "percent": 25 },
+      { "treatment": "regenerative-orthopedics", "percent": 20 },
+      { "treatment": "iv-systemic-therapy", "percent": 15 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceMin": 5900,
+    "priceNote": "Cell therapy has no published price list and is quoted after a phone consult, which is listed at $30 and has been offered free. Dezawa MuseCell, given by IV, is listed starting at $5,900. The telehealth bloodwork membership is $599 a year and covers two panels plus two clinician reports; separate video consults run $49 for 20 minutes and $99 for 40. Payment plans go through United Credit. Ways2Well takes no insurance and accepts HSA and FSA.",
+
+    "foundedYear": 2018,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Danese Rexroad",
+      "title": "Chief Clinical Officer",
+      "credentials": "MSN, APRN, FNP-C, functional medicine certified",
+      "bio": "Texan, finished nursing school at Lamar University in 2001 and spent years in emergency and trauma work before moving into surgical services. She went back for an MSN as a family nurse practitioner and added a functional-medicine certification. She now leads the clinical side of Ways2Well and sees patients online."
+    },
+    "team": [
+      {
+        "name": "Dr. Ian White",
+        "title": "Chief Science Officer",
+        "credentials": "MS, PhD",
+        "bio": "Twenty years in stem cell and tissue regeneration research. He did his BS and MS at Liverpool University and his PhD at Cornell's Ansary Stem Cell Institute, followed by roles at Harvard and the University of Miami's Miller School of Medicine. He holds a vice-president and board seat at the American College of Regenerative Medicine and founded the Space-Aging Research Institute."
+      },
+      {
+        "name": "Julie Grieco",
+        "title": "VP Clinical Operations",
+        "credentials": "MSN, APRN, FNP-BC",
+        "bio": "Family nurse practitioner since 2014, with a University of Texas MSN and more than 30 years of nursing behind it, most of that in interventional cardiology and internal medicine. At Ways2Well she works on hormone optimization and disease prevention."
+      },
+      {
+        "name": "Professor Mari Dezawa",
+        "title": "Scientific Advisory Board",
+        "credentials": "MD, PhD",
+        "bio": "The Tohoku University researcher who identified Muse cells. She advises Ways2Well on the Dezawa MuseCell protocol the clinic licenses."
+      },
+      {
+        "name": "Dr. Matthew D. Weldon",
+        "title": "Scientific Advisory Board",
+        "credentials": "MD, orthopedic surgeon",
+        "bio": "Orthopedic surgeon working in sports medicine, minimally invasive surgery and joint preservation. He advises the practice on its orthopedic protocols."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "8226 Bee Caves Rd",
+        "city": "Austin",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "78746",
+        "phone": "281-742-0993",
+        "lat": 30.2746,
+        "lng": -97.8007
+      },
+      {
+        "isHQ": false,
+        "addressLine": "5307 N Main St, Suite 120",
+        "city": "Houston",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "77009",
+        "phone": "281-742-0993",
+        "lat": 29.8032,
+        "lng": -95.3877
+      }
+    ],
+
+    "website": "https://ways2well.com",
+    "social": {
+      "instagram": "https://www.instagram.com/ways2well/",
+      "facebook": "https://www.facebook.com/WAYS2WELL/",
+      "linkedin": "https://www.linkedin.com/company/ways2well",
+      "youtube": "https://www.youtube.com/@Ways2Well"
+    },
+
+    "highlights": [
+      "Two Texas clinics: the Longevity Lab on Bee Caves Road in Austin and a Houston clinic on North Main",
+      "Cell therapy given in Texas, not through an offshore partner or a travel package",
+      "Donated perinatal tissue from screened US donors, processed by CLIA-certified partner labs",
+      "Given as a targeted injection, an IV infusion, or a nebulized dose",
+      "Telehealth bloodwork membership at $599 a year, with providers licensed in 45 states",
+      "Immersion, a three-day Austin package with hotel, meals and ground transport included"
+    ],
+    "faqs": [
+      {
+        "question": "Where is the treatment actually done?",
+        "answer": "At the two Ways2Well clinics in Texas: the Longevity Lab at 8226 Bee Caves Rd in Austin, and 5307 N Main St, Suite 120 in Houston. The three-day Immersion package runs in Austin only. Patients are not sent abroad."
+      },
+      {
+        "question": "What cells do you use?",
+        "answer": "Donated perinatal tissue, meaning amniotic fluid, placenta and umbilical cord, collected at pre-planned live-birth C-sections. Donors are US-based and screened, and the material is processed by CLIA-certified partner labs. These are donor cells, not the patient's own."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell and exosome therapies are investigational and are not approved by the FDA for the uses offered here. Ways2Well's own site disclaimer describes some of its treatments as experimental or alternative. They are elective procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "How is it administered?",
+        "answer": "By site-specific injection, IV infusion, or nebulizer, and sometimes more than one route in a visit. Injections are guided by ultrasound or fluoroscopy when that is appropriate. Eligibility is decided by clinician review and a health questionnaire before anything is scheduled."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "Cell therapy is quoted after a phone consult; the consult is listed at $30 and has been offered free. Dezawa MuseCell, an IV option, is listed starting at $5,900. Payment plans run through United Credit. Ways2Well takes no insurance but accepts HSA and FSA."
+      },
+      {
+        "question": "What is it used for?",
+        "answer": "Back and neck, shoulder and elbow, knees, arthritic and chronic pain, sports and orthopedic injuries, autoimmune conditions, hair and skin, and general anti-aging work."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "ways2well"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "ways2well reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]

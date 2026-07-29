@@ -5,7 +5,9 @@ import { dbConnect } from "@/lib/db";
 import { fail, ok, parseBody, withRole } from "@/lib/admin/api";
 import { recordAuditFromRequest } from "@/lib/audit";
 import { getTaxonomyConfig } from "@/lib/admin/taxonomy-config";
+import { sanitizeBlocks } from "@/lib/blocks/server";
 import { reviewEditorialWrite } from "@/lib/content-review";
+import { blocksSchema } from "@/lib/validation/block";
 
 export const dynamic = "force-dynamic";
 
@@ -24,12 +26,19 @@ export async function POST(
     if ("error" in parsed) return parsed.error;
     const data = parsed.data as Record<string, unknown>;
 
+    // Section blocks are validated by the schema above; HTML inside them is
+    // never trusted from the client, so it is sanitized before it is stored.
+    if (data.blocks !== undefined) {
+      data.blocks = sanitizeBlocks(blocksSchema.parse(data.blocks));
+    }
+
     await dbConnect();
     if (await config.model.exists({ slug: data.slug as string })) {
       return fail("That slug is already taken.", 409);
     }
 
-    // YMYL review gate: recompute content flags + block unreviewed approvals.
+    // YMYL review gate: recompute content flags (including block prose) + block
+    // unreviewed approvals.
     const gate = reviewEditorialWrite(null, data);
     if (gate.error) return fail(gate.error, 422);
 
