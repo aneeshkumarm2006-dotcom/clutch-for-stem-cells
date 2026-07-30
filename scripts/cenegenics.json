@@ -1,0 +1,392 @@
+[
+  {
+    "name": "Cenegenics",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Physician-led age management with 20 US centers and openly published program pricing",
+    "description": "Cenegenics runs a physician-led age management program built around heavy up-front diagnostic testing. New members start with the Performance Health Assessment, which covers biomarker panels, VO2 max, DEXA body composition, CIMT, advanced coronary CT and cognitive testing. The onboarding blood draw is done by a phlebotomist who comes to your home or office. From there a physician and a dedicated health coach build an ongoing plan across nutrition, exercise, nutraceuticals and, where clinically indicated, hormone therapy.\n\nRegenerative treatment is not offered at every center. The Jacksonville practice, led by Earl H. Eye, MD, FACCP, lists Wharton's jelly derived stem cells and exosomes alongside sexual health therapies. Miami lists PRP as a named service. In New York City, Joseph Bosiljevac, Jr. MD, PhD, FACS came out of cardiovascular surgery and regenerative medicine and brings those therapies into his longevity work. The other US centers stay with diagnostics, hormone optimization and lifestyle programming.\n\nThe company was founded in 1997 and is based in Las Vegas, with 20 US centers listed on its locations page and seven more abroad. Pricing is published rather than quoted privately. The initial assessment runs $4,495 to $13,000 depending on how much testing the physician orders, and Cenegenics puts the ongoing annual cost at $14,000 to $21,000 once the monthly program fee and supplement supply are counted. Insurance is not accepted, though FSA and HSA funds can be used, and no long-term contract is required.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435600/library/vjtzqrjbbnu2h3u2guhc.webp",
+      "publicId": "library/vjtzqrjbbnu2h3u2guhc",
+      "width": 270,
+      "height": 270,
+      "alt": "Cenegenics droplet logo mark"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435602/library/n64laupx0dtagasqp7hw.webp",
+      "publicId": "library/n64laupx0dtagasqp7hw",
+      "width": 2000,
+      "height": 1125,
+      "alt": "Cenegenics droplet and wordmark on a teal background"
+    },
+    "treatmentTypes": [
+      "exosome-therapy",
+      "prp",
+      "allogeneic-therapy",
+      "msc-therapy"
+    ],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "sexual-health",
+      "joint-pain",
+      "sports-injuries",
+      "cardiovascular"
+    ],
+    "cellSources": [
+      "placental-whartons-jelly",
+      "exosomes",
+      "allogeneic",
+      "autologous"
+    ],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "currency": "USD",
+    "priceModel": "package",
+    "priceMin": 14000,
+    "priceMax": 21000,
+    "priceNote": "Cenegenics publishes its own pricing, which is unusual in this category. Per the company FAQ, the Performance Health Assessment runs $4,495 to $13,000 depending on how much testing the physician orders. After that the program fee is $550 to $750 a month, and nutraceuticals and medications are $350 to $600 a month, which Cenegenics totals at an average of $14,000 to $21,000 a year. Insurance is not accepted, though FSA and HSA funds can be used. Regenerative treatment prices are set per center.",
+    "foundedYear": 1997,
+    "teamSize": "51-200",
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "team": [
+      {
+        "name": "Jeffrey Park Leake",
+        "title": "Senior Institute Physician and Director of Education",
+        "credentials": "MD",
+        "bio": "Based at the Las Vegas center and Director of Education for the Cenegenics Education and Research Foundation, the arm that trains physicians in the company's age management protocols. Cenegenics says he has trained more than 800 physicians and wrote the Textbook of Age Management Medicine."
+      },
+      {
+        "name": "Earl H. Eye",
+        "title": "President and Chief Medical Officer, Cenegenics Jacksonville",
+        "credentials": "MD, FACCP",
+        "bio": "More than four decades of clinical experience and board certification across five specialties. Graduated magna cum laude from West Virginia University School of Medicine and completed his Internal Medicine residency at the University of Florida, with fellowships in infectious diseases, pulmonary diseases and critical care. He led a pulmonary and infectious disease practice from 1975 to 2008 and moved into preventive and age management medicine in 2004. He is the physician behind the Wharton's jelly stem cell and exosome offering in Jacksonville."
+      },
+      {
+        "name": "Joseph Bosiljevac, Jr.",
+        "title": "Center Physician, Cenegenics New York City",
+        "credentials": "MD, PhD, FACS",
+        "bio": "Trained originally as a cardiovascular surgeon, with a career spanning five decades. He earned a doctorate in natural medicine alongside his surgical training and built his regenerative practice treating retired NFL and NBA athletes, then military special operations personnel, before relocating to New York City to work in age management medicine."
+      },
+      {
+        "name": "Beth Traylor",
+        "title": "Senior Institute Physician",
+        "credentials": "MD, AAFP, Fellow Diplomate ABFM",
+        "bio": "Past President of the Board of the Cenegenics Education and Research Foundation, with more than 40 years of clinical experience, based at the Las Vegas center."
+      },
+      {
+        "name": "Lloyd Camper",
+        "title": "Center Physician, Atlanta and Miami",
+        "credentials": "MD",
+        "bio": "Board certified in Family Medicine and Sports Medicine. Medical degree from USC, Family Medicine residency at the University of Miami and a Sports Medicine fellowship at Kaiser Permanente Fontana. Fluent in French and Spanish."
+      },
+      {
+        "name": "Bina Patel",
+        "title": "Center Physician, Las Vegas",
+        "credentials": "MD",
+        "bio": "Diplomate of the American Board of Internal Medicine, board certified in Integrative Medicine, and certified by the Institute for Functional Medicine."
+      },
+      {
+        "name": "Shahab Mokhtare",
+        "title": "Center Physician, Las Vegas",
+        "credentials": "MD",
+        "bio": "Board-trained Family Medicine physician at the Las Vegas center, with a focus on preventive care and performance optimization."
+      },
+      {
+        "name": "Graham Galka",
+        "title": "Chief Executive Officer"
+      }
+    ],
+    "locations": [
+      {
+        "addressLine": "330 S Rampart Blvd, Suite 350",
+        "city": "Las Vegas",
+        "region": "Nevada",
+        "postalCode": "89145",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "702-240-4200",
+        "isHQ": true,
+        "lat": 36.1447,
+        "lng": -115.2861
+      },
+      {
+        "addressLine": "2 Ravinia Drive NE, Suite 1210",
+        "city": "Atlanta",
+        "region": "Georgia",
+        "postalCode": "30346",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "770-500-3585",
+        "isHQ": false,
+        "lat": 33.92,
+        "lng": -84.34
+      },
+      {
+        "addressLine": "433 N Camden Drive, Suite 560",
+        "city": "Beverly Hills",
+        "region": "California",
+        "postalCode": "90210",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "323-951-0200",
+        "isHQ": false,
+        "lat": 34.0696,
+        "lng": -118.4022
+      },
+      {
+        "addressLine": "77 W Wacker Drive, Suite 4500",
+        "city": "Chicago",
+        "region": "Illinois",
+        "postalCode": "60601",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "312-283-8002",
+        "isHQ": false,
+        "lat": 41.8864,
+        "lng": -87.631
+      },
+      {
+        "addressLine": "2220 Superior Viaduct",
+        "city": "Cleveland",
+        "region": "Ohio",
+        "postalCode": "44113",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "614-437-6500",
+        "isHQ": false,
+        "lat": 41.4917,
+        "lng": -81.7038
+      },
+      {
+        "addressLine": "3811 Turtle Creek Blvd, Suite 225",
+        "city": "Dallas",
+        "region": "Texas",
+        "postalCode": "75219",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "214-651-6161",
+        "isHQ": false,
+        "lat": 32.8106,
+        "lng": -96.8072
+      },
+      {
+        "addressLine": "6400 S Fiddlers Green Circle, Suite 200",
+        "city": "Greenwood Village",
+        "region": "Colorado",
+        "postalCode": "80111",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "720-387-3681",
+        "isHQ": false,
+        "lat": 39.5986,
+        "lng": -104.8919
+      },
+      {
+        "addressLine": "2413 Robeson St, Suite 05",
+        "city": "Fayetteville",
+        "region": "North Carolina",
+        "postalCode": "28305",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "866-549-0370",
+        "isHQ": false,
+        "lat": 35.0393,
+        "lng": -78.92
+      },
+      {
+        "addressLine": "24 Greenway Plaza, Suite 1707",
+        "city": "Houston",
+        "region": "Texas",
+        "postalCode": "77046",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "832-583-5401",
+        "isHQ": false,
+        "lat": 29.7325,
+        "lng": -95.429
+      },
+      {
+        "addressLine": "11512 Lake Mead Ave, Suite 306",
+        "city": "Jacksonville",
+        "region": "Florida",
+        "postalCode": "32256",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "904-674-0404",
+        "isHQ": false,
+        "lat": 30.22,
+        "lng": -81.55
+      },
+      {
+        "addressLine": "1200 Ponce de Leon, Suite 1500",
+        "city": "Coral Gables",
+        "region": "Florida",
+        "postalCode": "33134",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "786-605-3124",
+        "isHQ": false,
+        "lat": 25.75,
+        "lng": -80.26
+      },
+      {
+        "addressLine": "725 5th Avenue, 17th Floor",
+        "city": "New York",
+        "region": "New York",
+        "postalCode": "10022",
+        "countryCode": "US",
+        "country": "United States",
+        "isHQ": false,
+        "lat": 40.764,
+        "lng": -73.974
+      },
+      {
+        "addressLine": "1441 W Ute Blvd, Suite 160",
+        "city": "Park City",
+        "region": "Utah",
+        "postalCode": "84098",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "435-214-5335",
+        "isHQ": false,
+        "lat": 40.72,
+        "lng": -111.53
+      },
+      {
+        "addressLine": "920 Cassatt Road, Suite 315",
+        "city": "Berwyn",
+        "region": "Pennsylvania",
+        "postalCode": "19312",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "484-532-7003",
+        "isHQ": false,
+        "lat": 40.047,
+        "lng": -75.445
+      },
+      {
+        "addressLine": "9060 E Via Linda Blvd, Suite 120",
+        "city": "Scottsdale",
+        "region": "Arizona",
+        "postalCode": "85258",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "480-454-2370",
+        "isHQ": false,
+        "lat": 33.57,
+        "lng": -111.88
+      },
+      {
+        "addressLine": "1333 N California Blvd, Suite 580",
+        "city": "Walnut Creek",
+        "region": "California",
+        "postalCode": "94596",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "412-525-3527",
+        "isHQ": false,
+        "lat": 37.906,
+        "lng": -122.064
+      },
+      {
+        "addressLine": "954 Ponce de Leon Ave, Suite 701",
+        "city": "San Juan",
+        "region": "Puerto Rico",
+        "postalCode": "00907",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "787-722-6030",
+        "isHQ": false,
+        "lat": 18.452,
+        "lng": -66.074
+      },
+      {
+        "addressLine": "35785 Edgington Rd",
+        "city": "Soldotna",
+        "region": "Alaska",
+        "postalCode": "99669",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "866-451-2975",
+        "isHQ": false,
+        "lat": 60.488,
+        "lng": -151.058
+      },
+      {
+        "addressLine": "7914 East 106th St S",
+        "city": "Tulsa",
+        "region": "Oklahoma",
+        "postalCode": "74133",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "918-392-8686",
+        "isHQ": false,
+        "lat": 36.025,
+        "lng": -95.908
+      },
+      {
+        "addressLine": "8201 Greensboro Drive, Suite 550",
+        "city": "McLean",
+        "region": "Virginia",
+        "postalCode": "22102",
+        "countryCode": "US",
+        "country": "United States",
+        "phone": "202-223-3449",
+        "isHQ": false,
+        "lat": 38.927,
+        "lng": -77.22
+      }
+    ],
+    "website": "https://cenegenics.com",
+    "contactEmail": "info@cenegenics.com",
+    "social": {
+      "facebook": "https://www.facebook.com/Cenegenics/",
+      "instagram": "https://www.instagram.com/cenegenics/",
+      "linkedin": "https://www.linkedin.com/company/cenegenics-medical-institute",
+      "youtube": "https://www.youtube.com/user/CenegenicsAMM/",
+      "x": "https://twitter.com/cenegenics"
+    },
+    "highlights": [
+      "Founded in 1997, head office in Las Vegas",
+      "20 US centers listed plus seven international",
+      "Program pricing published openly rather than quoted privately",
+      "Wharton's jelly stem cells and exosomes offered at the Jacksonville center",
+      "PRP listed as a named service at the Miami center",
+      "Board-certified physicians paired with a dedicated health coach"
+    ],
+    "faqs": [
+      {
+        "question": "Does every Cenegenics center offer stem cell therapy?",
+        "answer": "No. Regenerative treatment is location specific. Jacksonville lists Wharton's jelly derived stem cells and exosomes, Miami lists PRP, and the New York City physician folds regenerative therapies into his longevity practice. The remaining US centers focus on diagnostics, hormone optimization, nutrition and fitness. Ask the specific center before you assume it is available."
+      },
+      {
+        "question": "Are the cell and exosome therapies FDA approved?",
+        "answer": "No. Cell and exosome therapies are investigational and are not approved by the FDA for anti-aging or the other uses offered here. They are elective procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "What does the program cost?",
+        "answer": "The Performance Health Assessment runs $4,495 to $13,000 depending on how much testing your physician orders. After that the monthly program fee is $550 to $750 and the nutraceutical and medication supply is $350 to $600 per month. Cenegenics puts the yearly average at $14,000 to $21,000."
+      },
+      {
+        "question": "Does Cenegenics take insurance, and is there a contract?",
+        "answer": "Insurance is not accepted. Cenegenics describes itself as a private practice meant to supplement the care your primary care physician provides, and says FSA or HSA funds can be used to pay. On contracts, the company states there is no long-term commitment or contract required."
+      },
+      {
+        "question": "Is hormone therapy required?",
+        "answer": "No. The company says hormone therapy is used only if clinically indicated and describes it as one of several available therapies rather than the centerpiece of the program."
+      },
+      {
+        "question": "Where is the head office and how do I reach them?",
+        "answer": "330 S Rampart Blvd, Suite 350, Las Vegas, Nevada 89145. The national line is 866-240-0035 and the Las Vegas center line is 702-240-4200. General email is info@cenegenics.com."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "cenegenics"
+    },
+    "isClaimed": false
+  }
+]

@@ -1,0 +1,179 @@
+[
+  {
+    "name": "ThriveMD",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Fat and bone marrow cell procedures for joints and spine, plus concierge longevity care in Colorado",
+    "description": "ThriveMD runs two Colorado offices, one in Edwards in the Vail Valley and one in Centennial on the south side of Denver. The cell therapy side of the practice is orthopedic. Fat is taken from the patient's own abdomen by liposuction and bone marrow from the posterior iliac crest, then injected into knees, hips, shoulders, Achilles tendons, elbows and lumbar discs under live fluoroscopic or ultrasound guidance. The clinic says its protocol is built on mesenchymal cells prepared from adipose tissue, what it calls the stromal vascular fraction, combined with bone marrow concentrate.\n\nScott Brandt, M.D. started the practice in 2012 after moving full time to Vail, where he had been a part time resident since 2002. He is board certified by the American Board of Anesthesiology and specialized in interventional pain management during his anesthesiology residency. Long Vu, D.O. is dual board certified in anesthesiology and pain medicine, and Bethany Summers, DNP covers internal medicine, women's health and hormones. Alongside the cell work the clinic runs a concierge longevity program: hormone replacement, the Galleri cancer blood screen, IV nutrients, hyperbaric oxygen, red light therapy, therapeutic plasma exchange and medical weight loss.\n\nNothing is priced publicly. ThriveMD states that stem cell therapy is not covered by insurance and that the price per joint improves when several areas are treated in one visit, so the number comes out of a consultation. A procedure takes two to three hours under light oral sedation, and a booster injection follows roughly four weeks later, which may be PRP, bone marrow concentrate, placental exosomes or alpha 2 macroglobulin.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435608/library/ecz9bifgcgu54rldaedr.webp",
+      "publicId": "library/ecz9bifgcgu54rldaedr",
+      "width": 270,
+      "height": 270,
+      "alt": "ThriveMD interlocking blue and green hexagon logo mark"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435611/library/oksp8b3xxmmodzd4rgux.webp",
+      "publicId": "library/oksp8b3xxmmodzd4rgux",
+      "width": 1074,
+      "height": 806,
+      "alt": "ThriveMD office entrance and hanging sign at the Riverwalk in Edwards, Colorado"
+    },
+    "treatmentTypes": [
+      "autologous-therapy",
+      "adipose-derived-therapy",
+      "bone-marrow-derived-therapy",
+      "svf",
+      "msc-therapy",
+      "prp",
+      "exosome-therapy",
+      "regenerative-orthopedics"
+    ],
+    "conditionsTreated": [
+      "knee-osteoarthritis",
+      "back-and-spine",
+      "anti-aging-longevity",
+      "hip-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "joint-pain",
+      "sports-injuries",
+      "sexual-health"
+    ],
+    "cellSources": [
+      "autologous",
+      "adipose",
+      "bone-marrow",
+      "exosomes"
+    ],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "serviceFocus": [
+      {
+        "treatment": "regenerative-orthopedics",
+        "percent": 40
+      },
+      {
+        "treatment": "adipose-derived-therapy",
+        "percent": 20
+      },
+      {
+        "treatment": "bone-marrow-derived-therapy",
+        "percent": 15
+      },
+      {
+        "treatment": "prp",
+        "percent": 15
+      },
+      {
+        "treatment": "exosome-therapy",
+        "percent": 10
+      }
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No prices are published. ThriveMD states that stem cell therapy is not covered by insurance and that the price per joint improves when more than one area is treated during the same visit. Expect a figure only after a consultation.",
+    "foundedYear": 2012,
+    "teamSize": "1-10",
+    "physiciansCount": 2,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Scott Brandt",
+      "credentials": "M.D.",
+      "title": "Founder and Medical Director",
+      "bio": "Started ThriveMD in 2012 after moving full time to Vail, having been a part time resident there since 2002. Undergraduate at the University of Michigan, medical degree from Wake Forest School of Medicine, then an anesthesiology internship and residency at the University of Illinois and Michael Reese Hospitals in Chicago, where he specialized in interventional pain management. Board certified by the American Board of Anesthesiology. He has been an International Spinal Injection Society instructor and currently instructs for Boston Biolife. His interventional spine background is where the clinic's disc and facet joint work comes from."
+    },
+    "team": [
+      {
+        "name": "Scott Brandt",
+        "credentials": "M.D.",
+        "title": "Founder and Medical Director",
+        "bio": "Board certified by the American Board of Anesthesiology, with a residency focus on interventional pain management. Wake Forest School of Medicine, residency at the University of Illinois and Michael Reese Hospitals in Chicago. Founded the practice in 2012 and leads its stem cell and regenerative work."
+      },
+      {
+        "name": "Long Vu",
+        "credentials": "D.O., MS, D.ABA",
+        "title": "Physician, Pain Medicine and Anesthesiology",
+        "bio": "Dual board certified in pain medicine and anesthesiology with more than 20 years in the specialty. Doctor of Osteopathic Medicine from Midwestern University, Chicago College of Osteopathic Medicine, followed by residency and fellowship training at Beth Israel Deaconess Medical Center. Holds Level II accreditation from the Colorado Division of Worker's Compensation and licenses in Colorado and Florida."
+      },
+      {
+        "name": "Bethany Summers",
+        "credentials": "DNP",
+        "title": "Nurse Practitioner",
+        "bio": "Nurse practitioner working in internal medicine and women's health, with training in hormone management and preventative testing on the longevity side of the practice. Listed in the federal NPI registry as a family nurse practitioner in the Denver metro area."
+      }
+    ],
+    "locations": [
+      {
+        "addressLine": "7400 E. Caley Avenue, Suite 150",
+        "city": "Centennial",
+        "region": "Colorado",
+        "postalCode": "80111",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 720-575-7878",
+        "isHQ": true,
+        "lat": 39.5942,
+        "lng": -104.899
+      },
+      {
+        "addressLine": "280 Main Street, Suite C-104",
+        "city": "Edwards",
+        "region": "Colorado",
+        "postalCode": "81632",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 970-766-8245",
+        "isHQ": false,
+        "lat": 39.6436,
+        "lng": -106.5975
+      }
+    ],
+    "website": "https://thrivemdclinic.com",
+    "social": {
+      "facebook": "https://www.facebook.com/ThriveMDVail",
+      "youtube": "https://www.youtube.com/channel/UCkDL8mhDFJ5BydqtH8fyfYQ",
+      "linkedin": "https://www.linkedin.com/company/thrivemd"
+    },
+    "highlights": [
+      "Two Colorado offices, Edwards in the Vail Valley and Centennial near Denver",
+      "Founded in 2012 by Scott Brandt, M.D., board certified in anesthesiology",
+      "Same day procedure using the patient's own abdominal fat and iliac crest bone marrow",
+      "Injections placed under live fluoroscopic or ultrasound guidance",
+      "Booster visit about four weeks later using PRP, bone marrow, placental exosomes or A2M",
+      "Concierge longevity program with hormone therapy, cancer screening and plasma exchange"
+    ],
+    "faqs": [
+      {
+        "question": "Where does ThriveMD actually see patients?",
+        "answer": "Two offices, both in Colorado. The Vail Valley office is at 280 Main Street, Suite C-104 in Edwards, in the Riverwalk Quartz building between Starbucks and E Town. The Denver area office is at 7400 E. Caley Avenue, Suite 150 in Centennial, which is also the mailing address. Both run 8:30am to 5:00pm, Monday through Friday. Harvest and injection both happen on site."
+      },
+      {
+        "question": "Where do the cells come from?",
+        "answer": "From the patient. Fat is taken from the abdomen through liposuction and bone marrow is drawn from the posterior iliac crest. ThriveMD describes its protocol as built on mesenchymal cells prepared from adipose tissue, which it calls the stromal vascular fraction, mixed with bone marrow concentrate. Platelet rich plasma comes from an ordinary blood draw. The one donor derived product is the placental exosome injection used at the follow up visit."
+      },
+      {
+        "question": "Are these treatments FDA approved?",
+        "answer": "No. Cell and exosome therapies are investigational and are not approved by the FDA for anti-aging or the other uses offered here. They are elective procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "ThriveMD does not publish prices. The clinic says stem cell therapy is not covered by insurance and that the price per joint improves when more than one area is treated in the same visit. You get a number after a consultation. The concierge longevity side is billed as a prepaid annual fee, which is also not published."
+      },
+      {
+        "question": "How long does the procedure take and what is recovery like?",
+        "answer": "Harvest and injections are done in one visit, usually two to three hours, with light oral sedation rather than general anesthesia. The clinic says patients walk out of the office with minimal discomfort and need no braces or crutches, and may return to work the day after. A booster injection follows around four weeks later."
+      },
+      {
+        "question": "What do they treat besides joints?",
+        "answer": "Lumbar disc degeneration and facet joint pain, Achilles and elbow tendon problems, and erectile dysfunction using the same fat and bone marrow preparation. The rest of the practice is longevity and hormone work: bioidentical hormone replacement, the Galleri cancer blood screen, IV nutrients, hyperbaric oxygen, red light therapy, therapeutic plasma exchange and medical weight loss. Those are not cell therapies."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "thrivemd"
+    },
+    "isClaimed": false
+  }
+]

@@ -1,0 +1,127 @@
+[
+  {
+    "name": "Marek Health",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Telehealth hormone and longevity optimization run on lab data, available in all 50 states",
+    "description": "Marek Health is a telehealth optimization service built around bloodwork. The program starts with a one on one intake with a health coach, then diagnostic lab work, then a 25 minute video consultation with a licensed provider to review the plan. Hormone replacement and testosterone therapy are the best known part of it, alongside work on thyroid, metabolic markers, sleep, cognition, fertility, hair loss and cardiovascular risk. Prescriptions ship from partner and compounding pharmacies.\n\nThe company was co-founded in 2020 by Derek of More Plates More Dates and is registered as Marek Health LLC in Pontiac, Michigan. Dr. Steven Campbell, board certified in internal medicine, pulmonary medicine and critical care medicine, is medical director, working with a partnered provider roster of MDs, DOs, nurse practitioners and physician assistants plus a clinical advisory board. Care is delivered entirely online. Their FAQ states the offices they keep are administrative, with no physicians or coaches on site and no public access, and clients must complete an annual in person physical with their own outside provider.\n\nPricing is cash pay with no insurance billing and no CPT or ICD-10 codes issued. The Guided Optimization intake is $299 and requires a lab panel of at least $450, with medication, refills and follow-up labs charged separately. Marek Health does not offer stem cell, exosome, SVF or PRP therapy.",
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "sexual-health",
+      "hair-restoration",
+      "cardiovascular"
+    ],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "currency": "USD",
+    "priceModel": "package",
+    "priceMin": 299,
+    "priceNote": "The $299 Guided Optimization intake covers the one on one coach assessment and a 25 minute consultation with a licensed medical provider, and it requires the purchase of a lab panel of at least $450. Medication, follow-up labs and later provider visits are billed on top. No insurance is accepted, though the lab panels are listed as FSA and HSA eligible.",
+    "foundedYear": 2020,
+    "teamSize": "51-200",
+    "physiciansCount": 4,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Dr. Steven Campbell, Jr.",
+      "credentials": "MD",
+      "title": "Medical Director",
+      "bio": "Campbell earned his MD with honors from the University of Kentucky and completed a fellowship in pulmonary and critical care medicine at Ohio State University. He is board certified in internal medicine, pulmonary medicine and critical care medicine, and holds certifications from the Institute for Functional Medicine, Seeds Scientific and Performance Research, and the Academy of Preventive and Innovative Medicine. He has worked in telemedicine since 2021. His interest in functional medicine came out of career ending college football injuries and years of irritable bowel syndrome, and his clinical focus includes cardiopulmonary exercise testing and aerobic capacity."
+    },
+    "team": [
+      {
+        "name": "Dr. Steven Campbell, Jr.",
+        "credentials": "MD",
+        "title": "Medical Director",
+        "bio": "Board certified in internal medicine, pulmonary medicine and critical care medicine. MD with honors from the University of Kentucky, fellowship at Ohio State University, working in telemedicine since 2021."
+      },
+      {
+        "name": "Derek MPMD",
+        "title": "Co-Founder",
+        "bio": "Co-founder of Marek Health and the person behind the More Plates More Dates channel, where he covers hormones, pharmacology and performance. The company lists him under leadership rather than on its provider roster."
+      },
+      {
+        "name": "Dr. Mark Pimentel",
+        "credentials": "MD",
+        "title": "Clinical Advisory Board, Gastroenterology"
+      },
+      {
+        "name": "Dr. Andrew Y. Sun",
+        "credentials": "MD",
+        "title": "Clinical Advisory Board, Urology"
+      },
+      {
+        "name": "Dr. Michael Betler",
+        "credentials": "DO, MSBE, DipABLM",
+        "title": "Partnered Provider"
+      },
+      {
+        "name": "Dr. Milt Dupuy",
+        "credentials": "MD, MPH",
+        "title": "Partnered Provider and Clinical Advisory Board"
+      }
+    ],
+    "locations": [
+      {
+        "addressLine": "35 W. Huron Street, Suite 1000",
+        "city": "Pontiac",
+        "region": "Michigan",
+        "postalCode": "48342",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 877-572-2582",
+        "lat": 42.6382,
+        "lng": -83.291,
+        "isHQ": true
+      }
+    ],
+    "website": "https://marekhealth.com",
+    "contactEmail": "info@marekhealth.com",
+    "social": {
+      "instagram": "https://www.instagram.com/marekhealth/",
+      "facebook": "https://www.facebook.com/marekhealth/",
+      "x": "https://x.com/marekhealth",
+      "linkedin": "https://www.linkedin.com/company/marek-health"
+    },
+    "highlights": [
+      "Telehealth only, Guided Optimization available in all 50 states",
+      "Program starts with a one on one health coach intake, then diagnostic lab work",
+      "Medical director board certified in internal medicine, pulmonary and critical care",
+      "Co-founded in 2020 by Derek of More Plates More Dates",
+      "Cash pay with no insurance billing, lab panels FSA and HSA eligible",
+      "No stem cell, exosome or PRP treatment offered"
+    ],
+    "faqs": [
+      {
+        "question": "Does Marek Health offer stem cell or exosome therapy?",
+        "answer": "No. Marek Health works with lab diagnostics, hormones, prescription medication and supplements. Stem cell, exosome, SVF and PRP treatment are not on the service list, and since the company is online only there is no procedure room to deliver them in."
+      },
+      {
+        "question": "Can I visit a Marek Health office in person?",
+        "answer": "No. Their FAQ says the service is strictly online and that the offices they keep are administrative, with no physicians or health coaches present and no access for the public. Every provider visit is a video call."
+      },
+      {
+        "question": "Where do the blood draws happen?",
+        "answer": "You take a Marek requisition to an outside draw site. Their FAQ gives roughly 5 to 7 days for basic panels and 10 to 14 days or longer for comprehensive panels, because many of the tests use complex testing methodologies that take time to process."
+      },
+      {
+        "question": "What does it cost to get started?",
+        "answer": "The Guided Optimization intake is $299 and requires a lab panel of at least $450. Medication, refills, follow-up labs and later consults are billed separately. Marek does not bill insurance and cannot issue CPT or ICD-10 codes, so reimbursement is unlikely."
+      },
+      {
+        "question": "Which states are covered?",
+        "answer": "The Guided Optimization program runs in all 50 states, though specific medications and diagnostics can be restricted state by state. Marek only works with US residents, with a narrow exception for American citizens overseas who hold an APO box and ask their coach."
+      },
+      {
+        "question": "Do I still need my own doctor?",
+        "answer": "Yes. Clients have to complete an in person physical exam every 12 months with an outside MD, DO, PA or NP, then follow-up visits at 6 to 12 weeks and routine visits every 6 months with a Marek provider. Marek is not equipped for emergency medicine."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "marek health"
+    },
+    "isClaimed": false
+  }
+]

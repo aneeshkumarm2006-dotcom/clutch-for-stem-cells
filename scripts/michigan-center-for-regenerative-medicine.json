@@ -1,0 +1,197 @@
+[
+  {
+    "name": "Michigan Center for Regenerative Medicine",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Autologous bone marrow and PRP orthobiologics for spine and joints, with offices in Rochester Hills and Grand Rapids",
+    "description": "An orthopedic and pain practice that treats spine and joint problems with injections prepared from the patient's own tissue. The main procedures are platelet rich plasma, prolotherapy and bone marrow aspirate concentrate, plus intraosseous injections for pain at the bone level. Their stem cell page is direct about scope: they work with bone marrow rather than fat, and say this keeps them inside FDA limits on isolating fat cells. They do not sell exosomes or donor birth tissue products, and their own writing says marketing around those has outrun the data.\n\nDr. Thomas Nabity, MD, founded the practice in 2017 after several years in interventional pain medicine, and lists himself as founder and CEO. Five more physicians appear on the roster. Nabity, John Santa Ana and Robert Farhat publish full CVs showing board certification in physical medicine and rehabilitation alongside pain or electrodiagnostic medicine, and a nurse practitioner covers pelvic floor and aesthetic work. Rochester Hills is the home office and medical center, and a second office operates in Grand Rapids. Injectates are processed on site using Greyledge Technologies equipment.\n\nConsultations are free and treatment prices are quoted after the visit. The practice publishes no price list. Office visits and diagnostics such as EMG testing may run through insurance, and the site lists accepted carriers including Blue Cross Blue Shield, Aetna, Cigna, Humana, Priority Health, Tricare and Medicare Part B.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435604/library/nbrrfejnfyzhzejbo0z2.webp",
+      "publicId": "library/nbrrfejnfyzhzejbo0z2",
+      "width": 270,
+      "height": 270,
+      "alt": "Michigan Center for Regenerative Medicine logo mark"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435606/library/tm06vqlxnqtammemffmr.webp",
+      "publicId": "library/tm06vqlxnqtammemffmr",
+      "width": 900,
+      "height": 600,
+      "alt": "Physicians of Michigan Center for Regenerative Medicine in scrubs at their Rochester Hills office"
+    },
+    "treatmentTypes": [
+      "regenerative-orthopedics",
+      "prp",
+      "bone-marrow-derived-therapy",
+      "autologous-therapy",
+      "stem-cell-banking"
+    ],
+    "conditionsTreated": [
+      "joint-pain",
+      "back-and-spine",
+      "knee-osteoarthritis",
+      "hip-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "sports-injuries",
+      "neuropathy",
+      "hair-restoration",
+      "sexual-health",
+      "skin-aesthetic",
+      "anti-aging-longevity"
+    ],
+    "cellSources": [
+      "autologous",
+      "bone-marrow"
+    ],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "serviceFocus": [
+      {
+        "treatment": "regenerative-orthopedics",
+        "percent": 45
+      },
+      {
+        "treatment": "prp",
+        "percent": 25
+      },
+      {
+        "treatment": "bone-marrow-derived-therapy",
+        "percent": 20
+      },
+      {
+        "treatment": "autologous-therapy",
+        "percent": 5
+      },
+      {
+        "treatment": "stem-cell-banking",
+        "percent": 5
+      }
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Consultations are free and costs are quoted after the visit. The practice publishes no price list. The only figure on the site sits in its own article on PRP hair treatment, which puts the average at $1,500 to $3,500 for the initial three to four rounds, so read that as a general estimate rather than a quoted rate. Office visits and EMG testing may be billed to insurance, and patients are asked to check deductibles and co-payments first.",
+    "foundedYear": 2017,
+    "physiciansCount": 6,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Thomas Nabity, MD",
+      "title": "Founder and Chief Executive Officer",
+      "credentials": "MD, board certified by the American Board of Physical Medicine and Rehabilitation and the American Board of Pain Medicine, ARDMS certified in diagnostic musculoskeletal ultrasound",
+      "bio": "Nabity earned his MD at the University of Nebraska in 2004, completed a physical medicine and rehabilitation residency at William Beaumont Hospital in Royal Oak in 2009, and finished an interventional pain fellowship at Michigan Neurology Associates in 2010. He is board certified by the American Board of Physical Medicine and Rehabilitation (2010) and the American Board of Pain Medicine (2011), and has been ARDMS certified in diagnostic musculoskeletal ultrasound since 2013. His CV lists him as founder and CEO of Michigan Center for Regenerative Medicine from 2017, staff privileges at Corewell Health William Beaumont Hospital in Grosse Pointe and Henry Ford Ascension St. John Hospital in Detroit, and chief medical officer of Forever Labs from 2021."
+    },
+    "team": [
+      {
+        "name": "Thomas Nabity, MD",
+        "title": "Founder and Chief Executive Officer",
+        "credentials": "MD, board certified in Physical Medicine and Rehabilitation and in Pain Medicine",
+        "bio": "Founded the practice in 2017 and leads its orthobiologic program. ARDMS certified in diagnostic musculoskeletal ultrasound and holder of the IOF advanced regenerative injector certificate, with hip, knee and spine orthobiologic injection certifications."
+      },
+      {
+        "name": "John Santa Ana, DO",
+        "title": "Regenerative Medicine Specialist",
+        "credentials": "DO, Diplomate of the American Board of Physical Medicine and Rehabilitation and of the American Board of Electrodiagnostic Medicine",
+        "bio": "Earned his DO at the New York College of Osteopathic Medicine in 2006, then completed a transitional internship and a physical medicine and rehabilitation residency at Walter Reed Army Medical Center. He is a veteran who served as a US Army physician, a Diplomate of the American Board of Physical Medicine and Rehabilitation (2011) and of the American Board of Electrodiagnostic Medicine (2012), and holds advanced hip and knee orthobiologic injection certifications."
+      },
+      {
+        "name": "Robert Farhat, DO",
+        "title": "Regenerative Medicine Specialist",
+        "credentials": "DO, board certified in Physical Medicine and Rehabilitation and in Pain Medicine",
+        "bio": "Completed his physical medicine and rehabilitation residency in 2006 and a pain medicine fellowship in 2007, both at the University of Michigan in Ann Arbor. Board certified in physical medicine and rehabilitation and in pain medicine, with advanced hip and knee plus intermediate spine orthobiologic injection certifications, and registered in musculoskeletal sonography."
+      },
+      {
+        "name": "Kevin M. Nemeth, MD",
+        "title": "Regenerative Medicine Specialist",
+        "credentials": "MD"
+      },
+      {
+        "name": "John Steele, MD",
+        "title": "Regenerative Medicine Specialist",
+        "credentials": "MD"
+      },
+      {
+        "name": "Christopher Hannasch, DO",
+        "title": "Regenerative Medicine Specialist",
+        "credentials": "DO"
+      },
+      {
+        "name": "Ashley Loane, FNP-C",
+        "title": "Nurse Practitioner",
+        "credentials": "FNP-C, board certified family nurse practitioner",
+        "bio": "Board certified family nurse practitioner working with the practice on pelvic floor restoration, sexual wellness and aesthetic treatments. She is based at the Rochester Hills office."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Rochester Hills",
+        "region": "Michigan",
+        "country": "United States",
+        "countryCode": "US",
+        "addressLine": "355 Barclay Cir, Suite A",
+        "postalCode": "48307",
+        "phone": "+1 248-216-1008",
+        "lat": 42.6430987,
+        "lng": -83.1256303,
+        "isHQ": true
+      },
+      {
+        "city": "Grand Rapids",
+        "region": "Michigan",
+        "country": "United States",
+        "countryCode": "US",
+        "addressLine": "1000 East Paris Avenue SE, Suite 221",
+        "postalCode": "49546",
+        "phone": "+1 616-288-1109",
+        "lat": 42.9316,
+        "lng": -85.574,
+        "isHQ": false
+      }
+    ],
+    "website": "https://regenerativemedicinemichigan.com",
+    "social": {
+      "facebook": "https://www.facebook.com/regenerativemedicinemi/",
+      "instagram": "https://www.instagram.com/michiganregenerative/",
+      "linkedin": "https://www.linkedin.com/company/michigan-center-for-regenerative-medicine"
+    },
+    "highlights": [
+      "Six physicians on the roster, listed by the practice as board certified",
+      "Bone marrow aspirate concentrate and PRP, both drawn from the patient",
+      "Two offices, Rochester Hills and Grand Rapids",
+      "Injectates processed on site using Greyledge Technologies",
+      "Founded in 2017 by Dr. Thomas Nabity, MD",
+      "Free consultation, with discounts noted for veterans and first responders"
+    ],
+    "faqs": [
+      {
+        "question": "Are these therapies approved by the FDA?",
+        "answer": "No. Cell based therapies are investigational and are not approved by the FDA for anti-aging or the orthopedic uses offered here. They are elective procedures and are not a replacement for standard medical care. The practice says on its own site that it makes no claim its procedures will resolve any condition or injury."
+      },
+      {
+        "question": "Where do the cells come from?",
+        "answer": "From the patient. The practice concentrates cells from your own bone marrow and does not use donor, umbilical or birth tissue products. Its stem cell page states that it works with bone marrow rather than fat, and that avoiding fat cell isolation keeps it inside FDA limits."
+      },
+      {
+        "question": "What does treatment cost?",
+        "answer": "Most prices are quoted after a consultation, and the consultation is free. No price list is published. The single figure on the site appears in the practice's own article on PRP hair treatment, which cites an average of $1,500 to $3,500 for the initial three to four rounds."
+      },
+      {
+        "question": "Will insurance pay for it?",
+        "answer": "The insurance page lists accepted carriers including Blue Cross Blue Shield, Aetna, Cigna, Humana, Priority Health, Tricare, HAP PPO and Medicare Part B, and asks patients to check their own deductibles, co-payments and office visit coverage first. Call the office to confirm what applies to a specific procedure."
+      },
+      {
+        "question": "Which problems do they see most?",
+        "answer": "Spine and joint pain. The published condition list runs through spinal stenosis, herniated discs, degenerative disc disease, sciatica, sacroiliac joint dysfunction, knee cartilage lesions and meniscus tears, hip pain, shoulder pain, tennis elbow, plantar fasciitis and diabetic neuropathy."
+      },
+      {
+        "question": "Can patients travel in for treatment?",
+        "answer": "Yes. The office has a standing relationship with the Royal Park Hotel in downtown Rochester, can arrange transport between the hotel and the clinic, and offers virtual visits for introductory and follow-up appointments."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "michigan center for regenerative medicine"
+    },
+    "isClaimed": false
+  }
+]

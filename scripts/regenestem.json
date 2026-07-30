@@ -1,0 +1,193 @@
+[
+  {
+    "name": "Regenestem",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Adult stem cell therapy from bone marrow, blood or fat, run from a single clinic in Plantation near Fort Lauderdale",
+    "description": "Regenestem treats patients at a single US clinic on West Broward Boulevard in Plantation, a few miles west of Fort Lauderdale. The work centers on adult stem cells, with mesenchymal and hematopoietic cells named as the two types used in its protocols. Its main FAQ describes harvesting from the patient's own bone marrow, peripheral blood or fat, while the neurological page adds that screened donor cells are an option in some cases. Orthopedic and joint work dominates the treatment menu, and the clinic also publishes protocols for COPD, multiple sclerosis, autoimmune conditions, diabetes, autism, erectile dysfunction and hair loss.\n\nThe medical staff page lists two physicians. David Bohorquez, DO, trained in emergency medicine at Mount Sinai in Miami and holds a sports medicine fellowship. Dr. Olivero, whose first name the site does not publish, lists certifications in pain management, aesthetics, laser skin therapy and regenerative biological therapies. Maritza Novas, APRN, has taught physicians how to harvest and re-implant adipose derived cells since 2001, and Ana Hernandez, PhD, covers the cell biology side. Regenestem also runs clinics in Cancun and the Philippines, so confirm which site a quoted protocol belongs to before booking.\n\nNothing is priced publicly. Intake starts with a medical history form, a physician reviews it to decide candidacy, then a coordinator schedules the visit against a deposit. Follow-up appointments are set for three, six, nine and twelve months after treatment. Advance Care Card is the financing route the clinic points patients toward.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435624/library/ydjbxnrgbfns4sfoylde.webp",
+      "publicId": "library/ydjbxnrgbfns4sfoylde",
+      "width": 310,
+      "height": 56,
+      "alt": "Regenestem logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435627/library/roohkvj10s0hiajmn1y1.webp",
+      "publicId": "library/roohkvj10s0hiajmn1y1",
+      "width": 523,
+      "height": 365,
+      "alt": "Regenestem staff in scrubs standing under the Regenestem sign, from the clinic's About Us page"
+    },
+    "treatmentTypes": [
+      "autologous-therapy",
+      "adipose-derived-therapy",
+      "bone-marrow-derived-therapy",
+      "msc-therapy",
+      "regenerative-orthopedics",
+      "prp",
+      "iv-systemic-therapy",
+      "allogeneic-therapy"
+    ],
+    "conditionsTreated": [
+      "joint-pain",
+      "anti-aging-longevity",
+      "back-and-spine",
+      "knee-osteoarthritis",
+      "hip-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "sports-injuries",
+      "rheumatoid-arthritis",
+      "lupus",
+      "crohns-ibd",
+      "copd-pulmonary",
+      "multiple-sclerosis",
+      "neuropathy",
+      "parkinsons",
+      "stroke-recovery",
+      "spinal-cord-injury",
+      "diabetes-supportive",
+      "autism-supportive",
+      "sexual-health",
+      "hair-restoration",
+      "skin-aesthetic"
+    ],
+    "cellSources": [
+      "autologous",
+      "adipose",
+      "bone-marrow",
+      "allogeneic"
+    ],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "serviceFocus": [
+      {
+        "treatment": "regenerative-orthopedics",
+        "percent": 35
+      },
+      {
+        "treatment": "autologous-therapy",
+        "percent": 20
+      },
+      {
+        "treatment": "adipose-derived-therapy",
+        "percent": 15
+      },
+      {
+        "treatment": "bone-marrow-derived-therapy",
+        "percent": 10
+      },
+      {
+        "treatment": "prp",
+        "percent": 10
+      },
+      {
+        "treatment": "iv-systemic-therapy",
+        "percent": 5
+      }
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Regenestem does not publish prices for any of its therapies. A physician reviews your medical history first, then a patient care coordinator quotes the plan and takes a deposit to hold the appointment date. Advance Care Card financing is offered for treatments insurance will not cover.",
+    "teamSize": "1-10",
+    "physiciansCount": 2,
+    "languages": [
+      "English",
+      "Spanish",
+      "French"
+    ],
+    "team": [
+      {
+        "name": "David Bohorquez",
+        "title": "Physician",
+        "credentials": "DO, emergency medicine residency, sports medicine fellowship",
+        "bio": "Born in New York and raised in South Florida, Bohorquez earned his medical degree at the Philadelphia College of Osteopathic Medicine and completed his emergency medicine residency at Mount Sinai Medical Center in Miami. He has worked in trauma centers and stroke centers since 2001, and his sports medicine fellowship shapes the musculoskeletal and joint degeneration side of his regenerative practice. He has served as an emergency medicine medical director and as medical director for the Palm Beach Marathon. He speaks English, Spanish and French."
+      },
+      {
+        "name": "Dr. Olivero",
+        "title": "Physician",
+        "credentials": "Physician and Surgeon (UFM), MPH",
+        "bio": "Olivero graduated with honors from UFM in Guatemala as a physician and surgeon, then moved to the United States in 2004. He studied at the University of Miami and the University of South Florida, completed three years of general surgical and intensive care training, and took a master's degree in public health. He lists certifications in pain management, medical, dermatological and surgical aesthetics, laser skin therapy, regenerative biological therapies, autologous fat transfer and anti-aging medicine. The site does not publish his first name."
+      },
+      {
+        "name": "Maritza Novas",
+        "title": "Advanced Practice Registered Nurse",
+        "credentials": "APRN, Doctorate in Medicine, University of Havana",
+        "bio": "Novas has worked in cellular and regenerative medicine since 2001 and has trained physicians internationally in harvesting, isolating and re-implanting a patient's own adipose derived stem cells. She earned her medical doctorate at the University of Havana, completed an emergency medicine residency and a clinical research fellowship in genetic engineering and biotechnology. She belongs to the American Academy of Anti-Aging Medicine, the European Society of Gene and Cell Therapy and the International Society for Cellular Therapy."
+      },
+      {
+        "name": "Ana Hernandez",
+        "title": "Research Scientist",
+        "credentials": "PhD",
+        "bio": "Hernandez works in immunology, cellular and molecular biology. She began her PhD at Cancer Research in London studying BCR/ABL transcripts in chronic myeloid leukemia and finished at the University of Dusseldorf. Her postdoctoral work covered culturing human mesenchymal stem cells from bone marrow and cord blood and differentiating them into cardiomyocytes, followed by transplant immune tolerance research at the University of Miami."
+      },
+      {
+        "name": "Lorraine Antoni",
+        "title": "Advanced Registered Nurse Practitioner",
+        "credentials": "ARNP, board certified family nurse practitioner and neonatal nurse practitioner, certified wound care nurse",
+        "bio": "Antoni is a practicing neonatal nurse practitioner and certified wound care nurse who specializes in neonatal and pediatric patients while caring for people across the full life span. She separately owns Corpus Christi Regenerative Therapy, which offers stem cell and platelet rich plasma treatment for chronic conditions."
+      }
+    ],
+    "locations": [
+      {
+        "addressLine": "9633 W. Broward Blvd. Suite 1",
+        "city": "Plantation",
+        "region": "Florida",
+        "postalCode": "33324",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 305-224-1858",
+        "isHQ": true,
+        "lat": 26.1224,
+        "lng": -80.2685
+      }
+    ],
+    "website": "https://www.regenestem.com",
+    "contactEmail": "info@regenestem.com",
+    "social": {
+      "facebook": "https://www.facebook.com/regenestem",
+      "instagram": "https://www.instagram.com/regenestem/",
+      "linkedin": "https://www.linkedin.com/company/regenestem-llc/",
+      "x": "https://twitter.com/Regenestem"
+    },
+    "highlights": [
+      "Single US clinic at 9633 W Broward Blvd in Plantation, Florida",
+      "Cells harvested from bone marrow, peripheral blood or adipose tissue",
+      "Orthopedic and joint protocols make up most of the treatment menu",
+      "Two physicians and two nurse practitioners listed on the medical staff page",
+      "Sister clinics operate in Cancun and the Philippines",
+      "No published prices, a deposit holds the appointment date"
+    ],
+    "faqs": [
+      {
+        "question": "Are Regenestem's cell therapies FDA approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for anti-aging or the other uses offered here. They are elective procedures and are not a replacement for standard medical care. Regenestem says much the same on its own FAQ page, noting that not all of its cellular therapies are FDA approved and that results are never assured."
+      },
+      {
+        "question": "Where do the stem cells come from?",
+        "answer": "Mostly from the patient. The clinic's FAQ lists bone marrow, peripheral blood and adipose tissue as its harvest sites, and names mesenchymal and hematopoietic cells as the two types used in its protocols. The neurological page adds that cells may instead come from screened donor sources when that suits the case. Nothing on the site mentions umbilical cord, placental or exosome products."
+      },
+      {
+        "question": "Is the Plantation clinic the only US location?",
+        "answer": "Yes. The treatment centers page lists Plantation, Florida as the headquarters and the only US site. Cancun and the Philippines are separate international clinics under the same brand, and a European location is listed as coming."
+      },
+      {
+        "question": "What does treatment cost?",
+        "answer": "Regenestem does not publish prices. You send a medical history form, a physician reviews it to decide whether you are a candidate, and a coordinator then quotes the plan. A deposit is required to hold the appointment date. Advance Care Card financing is available."
+      },
+      {
+        "question": "Which conditions does the clinic actually work on?",
+        "answer": "Joint pain and arthritis, orthopedic injuries and back pain make up most of the menu. There are also dedicated pages for COPD, multiple sclerosis, autoimmune conditions including rheumatoid arthritis and lupus, diabetes, autism, erectile dysfunction, stroke and hair loss."
+      },
+      {
+        "question": "Do they offer anything besides cell therapy?",
+        "answer": "Yes. The clinic also runs PRP procedures including the O-Shot, IV vitamin infusions, ozone and UBI, bioidentical hormone replacement, functional medicine, Botox, and peptide and GLP-1 prescriptions such as semaglutide, tirzepatide and retatrutide."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "regenestem"
+    },
+    "isClaimed": false
+  }
+]

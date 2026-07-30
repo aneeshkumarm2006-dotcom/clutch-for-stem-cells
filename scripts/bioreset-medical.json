@@ -1,0 +1,233 @@
+[
+  {
+    "name": "BioReset Medical",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Ultrasound guided regenerative orthopedics and longevity medicine across three US clinics",
+    "description": "A concierge regenerative medicine practice run by Dr. Matt Cook, an anesthesiologist who moved into functional medicine and regenerative orthopedics, alongside co-founder and CEO Barbara Branaman. The main clinic sits on South Bascom Avenue in Campbell, a few miles southwest of downtown San Jose, with two further offices in Santa Monica and North Palm Beach, Florida.\n\nMost of the clinical work is orthopedic. The team uses ultrasound and fluoroscopy to place platelet rich plasma, mesenchymal cells taken from bone marrow or fat, exosomes, and a placental derived product they call Healing and Repair Factors into joints, tendons and nerve pathways. Nerve hydrodissection is used for entrapped or compressed nerves. Running alongside that is a longevity side of the practice: NAD+ and nutrient IVs, healthspan assessments, ketamine sessions, and PRP based aesthetics.\n\nNine clinicians and leaders are named on the team page across the three sites, including five MD or DO physicians, a chiropractor who teaches musculoskeletal ultrasound, a naturopathic doctor who handles complex chronic illness, and a nurse aesthetician. The site states that regenerative medicine treatments are not covered by insurance and that procedures are billed directly at the time of service. No prices are published, so cost comes out of the consultation.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435612/library/sgdqizlcpcbgmqyixcr9.webp",
+      "publicId": "library/sgdqizlcpcbgmqyixcr9",
+      "width": 500,
+      "height": 95,
+      "alt": "BioReset Medical logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435614/library/m5qbq4ayla44n4eggzov.webp",
+      "publicId": "library/m5qbq4ayla44n4eggzov",
+      "width": 2000,
+      "height": 1125,
+      "alt": "Treatment room at the BioReset Medical clinic in Campbell, California"
+    },
+    "treatmentTypes": [
+      "regenerative-orthopedics",
+      "prp",
+      "msc-therapy",
+      "bone-marrow-derived-therapy",
+      "adipose-derived-therapy",
+      "autologous-therapy",
+      "exosome-therapy",
+      "allogeneic-therapy",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "joint-pain",
+      "anti-aging-longevity",
+      "sports-injuries",
+      "knee-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "hip-osteoarthritis",
+      "back-and-spine",
+      "neuropathy",
+      "skin-aesthetic",
+      "post-covid-recovery"
+    ],
+    "cellSources": [
+      "autologous",
+      "bone-marrow",
+      "adipose",
+      "exosomes",
+      "allogeneic",
+      "placental-whartons-jelly"
+    ],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "serviceFocus": [
+      {
+        "treatment": "regenerative-orthopedics",
+        "percent": 35
+      },
+      {
+        "treatment": "prp",
+        "percent": 20
+      },
+      {
+        "treatment": "msc-therapy",
+        "percent": 15
+      },
+      {
+        "treatment": "exosome-therapy",
+        "percent": 10
+      },
+      {
+        "treatment": "iv-systemic-therapy",
+        "percent": 10
+      }
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No prices are published. The site states that regenerative medicine treatments are not covered by insurance and that all procedures are billed directly to you at the time of service, so a figure comes out of the consultation.",
+    "foundedYear": 2016,
+    "teamSize": "11-50",
+    "physiciansCount": 5,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Dr. Matt Cook",
+      "credentials": "MD, FAARM, ABAARM",
+      "title": "Founder",
+      "bio": "Studied at the University of Washington School of Medicine and completed an anesthesiology residency at UCSF. He spent his early career as an anesthesiologist and medical director of a sports medicine and orthopedic outpatient surgery center before shifting to functional and regenerative work, which he has now done for more than 20 years. He holds fellowship training in anti-aging, metabolic and functional medicine and in peptide therapy through the American Academy of Anti-Aging Medicine, and he founded BioReset University, which trains other physicians in ultrasound guided procedures."
+    },
+    "team": [
+      {
+        "name": "Dr. Matt Cook",
+        "credentials": "MD, FAARM, ABAARM",
+        "title": "Founder",
+        "bio": "Anesthesiology trained at UCSF, now focused on regenerative orthopedics, biologics and peptides. Leads the clinical approach across all three offices."
+      },
+      {
+        "name": "Barbara Branaman",
+        "credentials": "DMQ, MBA",
+        "title": "Co-Founder and CEO",
+        "bio": "Co-founder and CEO, overseeing operations across the practice and the growth of the BioReset Health and BioReset Supplement product divisions. She holds a bachelor's degree in Chinese Language and Literature from Oberlin College and an MBA from Thunderbird School of Global Management, and she is a yoga and medical qigong practitioner. She draws on her own experience as a multiple organ transplant survivor."
+      },
+      {
+        "name": "Dr. Adam Lustig",
+        "credentials": "DO, CAQSM, RMSK",
+        "title": "Physician, Sports and Regenerative Medicine",
+        "bio": "Dual board certified in family medicine and sports medicine. He completed a family medicine residency at New York-Presbyterian Columbia University and a sports medicine fellowship at the University of Miami. Works out of the Santa Monica and Silicon Valley offices on orthopedic injury, movement and exercise medicine."
+      },
+      {
+        "name": "Dr. Harry McIlroy",
+        "credentials": "MD, IFMCP",
+        "title": "Physician, Functional Medicine",
+        "bio": "Board certified in family medicine, with a degree from the University of Arizona College of Medicine and a master's in Oriental Medicine from Pacific College of Oriental Medicine. Over 25 years in integrative practice. At the Silicon Valley office he focuses on functional medicine, ketamine, and nutritional and plant based medicines."
+      },
+      {
+        "name": "Dr. Bronwyn Holmes",
+        "credentials": "MD, FAARFM",
+        "title": "Physician",
+        "bio": "Board certified physician with training in functional and regenerative medicine, currently completing a fellowship with the American Academy of Anti-Aging Medicine and the Metabolic Medical Institute. Based in Silicon Valley, she works on hormone optimization, longevity and pediatric regenerative therapies."
+      },
+      {
+        "name": "Dr. Jeffrey Wiegers",
+        "credentials": "MD, ABA-PM",
+        "title": "Physician, Pain Medicine",
+        "bio": "Board certified anesthesiologist and interventional pain specialist. He focuses on ultrasound guided injections, ketamine therapy and biologic interventions, and sees patients at the Santa Monica and Silicon Valley offices."
+      },
+      {
+        "name": "Dr. Shawn P. Tierney",
+        "credentials": "DC, RMSK",
+        "title": "Musculoskeletal Ultrasound and Regenerative Therapies",
+        "bio": "Musculoskeletal sonologist with more than 15 years in practice, specializing in ultrasound guided procedures including stem cell and PRP injections, spinal injections and nerve hydrodissection. He has assisted in the recovery of professional athletes including members of the US Water Polo and US Olympic Swim teams and MLB and NFL players, and he serves on the MSKUS faculty teaching physicians and sonographers. Sees patients in Silicon Valley and Santa Monica."
+      },
+      {
+        "name": "Dr. Alex Pereira",
+        "credentials": "ND",
+        "title": "Naturopathic Doctor",
+        "bio": "Naturopathic doctor working on complex chronic illness: neuroinflammation, immune dysregulation, chronic infections, mold and mycotoxin related illness, mast cell activation and dysautonomia. He also covers Lyme and tick borne illness, PANS and PANDAS, and long COVID. He sits on the California Board of Naturopathic Medicine and sees patients in Silicon Valley and Santa Monica."
+      },
+      {
+        "name": "Heather Lanier",
+        "credentials": "RN, Aesthetician",
+        "title": "Registered Nurse and Aesthetician",
+        "bio": "Registered nurse and aesthetician who has worked in aesthetics since 2004 and earned her nursing degree in 2013 from Mission College in Santa Clara. She runs microneedling with PRP, BBL facials, microdermabrasion and NAD IV drips at the Silicon Valley office."
+      }
+    ],
+    "locations": [
+      {
+        "addressLine": "3803 S Bascom Ave #203",
+        "city": "Campbell",
+        "region": "California",
+        "postalCode": "95008",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 650-888-7950",
+        "isHQ": true,
+        "lat": 37.2795,
+        "lng": -121.9322
+      },
+      {
+        "addressLine": "2811 Wilshire Blvd #785",
+        "city": "Santa Monica",
+        "region": "California",
+        "postalCode": "90403",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 650-888-7950",
+        "isHQ": false,
+        "lat": 34.0313,
+        "lng": -118.4731
+      },
+      {
+        "addressLine": "630 U.S. Hwy 1",
+        "city": "North Palm Beach",
+        "region": "Florida",
+        "postalCode": "33408",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 561-402-7600",
+        "isHQ": false,
+        "lat": 26.8175,
+        "lng": -80.0575
+      }
+    ],
+    "website": "https://www.bioresetmedical.com",
+    "contactEmail": "info@bioresetmedical.com",
+    "social": {
+      "facebook": "https://www.facebook.com/BioResetMedical/",
+      "instagram": "https://www.instagram.com/bioresetmedical/",
+      "linkedin": "https://www.linkedin.com/company/bioreset-medical/"
+    },
+    "highlights": [
+      "Co-founded by Dr. Matt Cook, MD, FAARM, ABAARM",
+      "Three US clinics in Campbell, Santa Monica and North Palm Beach",
+      "Bone marrow and adipose derived cells, exosomes and PRP",
+      "Injections placed under ultrasound or fluoroscopic guidance",
+      "Nerve hydrodissection for nerve entrapment and compression",
+      "Regenerative treatments billed at time of service, not covered by insurance"
+    ],
+    "faqs": [
+      {
+        "question": "Where does BioReset Medical actually see patients?",
+        "answer": "Three offices. The main one is at 3803 S Bascom Ave #203 in Campbell, California, just outside San Jose. The others are at 2811 Wilshire Blvd #785 in Santa Monica and 630 U.S. Hwy 1 in North Palm Beach, Florida. All three list the same regenerative and longevity services."
+      },
+      {
+        "question": "Are the stem cell and exosome treatments FDA approved?",
+        "answer": "No. Cell and exosome therapies are investigational and are not approved by the FDA for anti-aging or the other uses offered here. They are elective procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "Which cells do they use?",
+        "answer": "Mesenchymal cells taken from your own bone marrow or your own fat, according to their biologics page. Exosomes are offered alongside cell therapy, and there is a separate placental derived product they call Healing and Repair Factors. Which route you take depends on the evaluation."
+      },
+      {
+        "question": "What does treatment cost?",
+        "answer": "They do not publish prices. The site states that regenerative medicine treatments are not covered by insurance and that all procedures are billed directly to you at the time of service. You get a number after the consultation, once a plan exists."
+      },
+      {
+        "question": "What do they treat most often?",
+        "answer": "Orthopedic and pain work. Joint degeneration and arthritis, tendon and ligament injuries, sports injuries, nerve entrapment, and post surgical recovery. The longevity, IV and aesthetics services run alongside that rather than in place of it."
+      },
+      {
+        "question": "Who performs the procedures?",
+        "answer": "Dr. Matt Cook leads the clinical work. Four other MD or DO physicians work across the sites, along with a chiropractor certified in musculoskeletal ultrasound and a naturopathic doctor for complex chronic illness."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "bioreset medical"
+    },
+    "isClaimed": false
+  }
+]

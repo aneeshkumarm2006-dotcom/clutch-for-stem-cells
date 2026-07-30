@@ -1,0 +1,139 @@
+[
+  {
+    "name": "AgelessRx",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Online longevity prescriptions from Ann Arbor, shipped to all 50 states",
+    "description": "AgelessRx is a telehealth company in Ann Arbor, Michigan that prescribes longevity medications and ships them to patients at home. You fill in an online medical intake, a US licensed clinician reviews it, and some states require a short video visit before a prescription is written. Orders are filled by partner 503A compounding pharmacies and delivered by mail. There is no treatment room and no in person visit.\n\nThe catalog is prescriptions, compounded injectables, topicals, supplements and at home testing: rapamycin, metformin, acarbose, low dose naltrexone, methylene blue, NAD+ and glutathione injections, sermorelin, GLP-1 medications, tretinoin, GHK-Cu cream, plus blood panels and biological age tests. The company does not offer stem cell, exosome, SVF or PRP therapy. Jenell Decker, MD is Medical Director, and the company funds its own studies, including the PEARL trial of low dose rapamycin.\n\nPricing is per treatment on a monthly or quarterly subscription rather than a clinic visit fee. Metformin is listed at $25 a month billed quarterly, rapamycin starts at $65 a month, and NAD+ injections run $149 a month after an introductory rate. Insurance is not accepted, though HSA and FSA cards can be used at checkout.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435597/library/c65lotv6kgqpljpmcxv5.webp",
+      "publicId": "library/c65lotv6kgqpljpmcxv5",
+      "width": 146,
+      "height": 32,
+      "alt": "AgelessRx wordmark logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785435598/library/glokctwgvuh7wv0mtpbg.webp",
+      "publicId": "library/glokctwgvuh7wv0mtpbg",
+      "width": 596,
+      "height": 596,
+      "alt": "Jenell Decker, MD, Medical Director at AgelessRx, in an AgelessRx branded white coat"
+    },
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "diabetes-supportive",
+      "cardiovascular",
+      "skin-aesthetic",
+      "sexual-health",
+      "hair-restoration"
+    ],
+    "accreditations": [
+      "board-certified-physicians",
+      "clinical-trial-participation"
+    ],
+    "currency": "USD",
+    "priceModel": "per_treatment",
+    "priceMin": 25,
+    "priceNote": "Prices are per treatment on a monthly or quarterly subscription, with shipping included. Published examples: metformin $25 a month billed $75 quarterly, rapamycin from $65 a month, NAD+ injection $79 a month on a prepaid three month plan and $149 after, Powers Hair Solution $95 the first month then $120, and microdosed tirzepatide $159 a month. Lab panels and full dose GLP-1 programs are priced separately. Video consultations with the prescriber are free, and insurance is not accepted.",
+    "foundedYear": 2019,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Jenell Decker",
+      "title": "Medical Director",
+      "credentials": "MD",
+      "bio": "Board certified in family medicine and trained at the Marshall University Joan C. Edwards School of Medicine. Her listed affiliations include the Academy of Innovative and Preventive Medicine and the American Academy of Anti-Aging Medicine. She leads clinical oversight for the AgelessRx prescribing team."
+    },
+    "team": [
+      {
+        "name": "Anar Isman",
+        "title": "Co-founder and Chief Executive Officer",
+        "bio": "Describes a fifteen year career at investment funds before co-founding the company in Ann Arbor in 2019, after his mother was refused a metformin prescription for longevity."
+      },
+      {
+        "name": "Mirna Jadan",
+        "title": "Assistant Medical Director",
+        "credentials": "MD",
+        "bio": "Trained at the Oakland University William Beaumont School of Medicine, with listed affiliations at the Institute for Functional Medicine and A4M. Works in longevity, functional and metabolic medicine."
+      },
+      {
+        "name": "Aaron Stecker",
+        "title": "Telehealth Physician",
+        "credentials": "DO",
+        "bio": "Trained at Western University of Health Sciences and the University of New Mexico, with a background in hospital medicine, outpatient internal medicine and geriatrics. Reviews intakes and prescribes through the telehealth platform."
+      },
+      {
+        "name": "Stefanie Morgan",
+        "title": "Vice President of Operations and Applied Science",
+        "credentials": "PhD",
+        "bio": "Listed background at Stanford University School of Medicine, Harvard Medical School and Bridgewater State University. Oversees operations and the applied science work behind the treatment catalog."
+      },
+      {
+        "name": "Terry Grossman",
+        "title": "Medical Advisor",
+        "credentials": "MD",
+        "bio": "Trained at the University of Florida College of Medicine, with listed affiliations at A4M and the American College for Advancement in Medicine."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Ann Arbor",
+        "region": "Michigan",
+        "postalCode": "48104",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 650-503-9990",
+        "isHQ": true,
+        "lat": 42.2808,
+        "lng": -83.743
+      }
+    ],
+    "website": "https://agelessrx.com",
+    "contactEmail": "info@agelessrx.com",
+    "social": {
+      "facebook": "https://www.facebook.com/agelessrx1/",
+      "instagram": "https://www.instagram.com/agelessrx_/",
+      "linkedin": "https://www.linkedin.com/company/agelessrx",
+      "x": "https://x.com/agelessrx_"
+    },
+    "highlights": [
+      "Telehealth only, no clinic to visit in person",
+      "US licensed clinicians prescribing in all 50 states",
+      "Rapamycin, metformin, NAD+ and GLP-1 medications by mail",
+      "Runs its own studies, including the PEARL rapamycin trial",
+      "Compounded orders filled by partner 503A compounding pharmacies",
+      "Does not offer stem cell, exosome or PRP therapy"
+    ],
+    "faqs": [
+      {
+        "question": "Does AgelessRx offer stem cell or exosome therapy?",
+        "answer": "No. The catalog is prescription medication, compounded injectables, topicals, supplements and lab testing. There is no cell therapy, exosome therapy, SVF or PRP. Several drugs they prescribe for longevity, such as rapamycin and metformin, are used off label, which is legal but is not an FDA approved use for aging."
+      },
+      {
+        "question": "Can I visit AgelessRx in person?",
+        "answer": "No. The service is entirely online. The Ann Arbor address in the site footer is a mail drop at a shipping and mailbox store, not a treatment site, and patients are not seen there. Depending on your state you may need a video consultation with the prescriber, and the company says all video consultations are free of charge."
+      },
+      {
+        "question": "Which states does AgelessRx serve?",
+        "answer": "All 50 states, with limits on certain products. Cold shipped injectables cannot be sent reliably to Alaska or Hawaii, some treatments are restricted by regional law, and the company does not ship outside the United States."
+      },
+      {
+        "question": "Who fills the prescriptions?",
+        "answer": "US licensed clinicians review the intake and write the prescription, and partner 503A compounding pharmacies fill it. AgelessRx says those pharmacies are certified with their individual state pharmacy boards and hold voluntary credentials such as LegitScript certification, NABP accreditation or PCAB accreditation."
+      },
+      {
+        "question": "What does it cost and does insurance apply?",
+        "answer": "Costs are per treatment on a monthly or quarterly plan. Metformin is $25 a month billed quarterly, rapamycin starts at $65 a month, NAD+ injections are $149 a month after the intro plan, and microdosed tirzepatide is $159 a month. Insurance is not accepted and receipts cannot be submitted for out of network reimbursement, though HSA and FSA cards may work at checkout."
+      },
+      {
+        "question": "Does the company do its own research?",
+        "answer": "Yes. AgelessRx ran the PEARL trial on low dose rapamycin, published in 2025, and lists ongoing work on GLP-1 microdosing, rapamycin and oral health, sleep, and an X-Prize Healthspan randomized trial. It says its findings are published in peer reviewed journals."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "agelessrx"
+    },
+    "isClaimed": false
+  }
+]

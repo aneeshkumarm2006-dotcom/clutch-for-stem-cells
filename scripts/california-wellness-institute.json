@@ -1,0 +1,150 @@
+[
+  {
+    "name": "California Wellness Institute",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Urology-led anti-aging practice offering exosome therapy and PRP at two California offices",
+    "description": "A two office medical practice run by urologist Eugene Rajaratnam, MD, with wellness centers in Rancho Mirage and Palmdale. The regenerative service line is exosome therapy, listed on the site as Regenerative Stem Cell Therapy, plus platelet rich plasma spun from the patient's own blood. PRP also underpins their hair loss and skin work.\n\nDr. Raj founded the practice and is the only physician listed on it. Carol Christian, the managing director, co-leads the regenerative wellness division with him. Around that sits a much larger menu: urology care, prostate treatment with HIFU and TUMT, bioidentical hormones, medically supervised weight loss, IV nutrition, colon hydrotherapy and laser aesthetics.\n\nBoth centers run by appointment and Rancho Mirage takes no walk-ins. No prices appear anywhere on the site. Patients are quoted after a consultation, and the practice advertises CareCredit financing.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785436008/library/gk5hirzpybxzv8ifzppj.webp",
+      "publicId": "library/gk5hirzpybxzv8ifzppj",
+      "width": 100,
+      "height": 128,
+      "alt": "California Wellness Institute logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785436009/library/p9qlxgangtz7vhdp52zv.webp",
+      "publicId": "library/p9qlxgangtz7vhdp52zv",
+      "width": 360,
+      "height": 360,
+      "alt": "Dr. Eugene Rajaratnam of California Wellness Institute in Rancho Mirage"
+    },
+    "treatmentTypes": [
+      "exosome-therapy",
+      "prp"
+    ],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "joint-pain",
+      "sexual-health",
+      "hair-restoration",
+      "skin-aesthetic",
+      "knee-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "sports-injuries",
+      "back-and-spine"
+    ],
+    "cellSources": [
+      "exosomes",
+      "autologous"
+    ],
+    "accreditations": [
+      "board-certified-physicians",
+      "hospital-affiliation"
+    ],
+    "serviceFocus": [
+      {
+        "treatment": "prp",
+        "percent": 55
+      },
+      {
+        "treatment": "exosome-therapy",
+        "percent": 45
+      }
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No prices are published for any service, including exosome therapy and PRP. The practice quotes after a consultation with Dr. Rajaratnam and links to CareCredit for financing from its service pages.",
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "medicalDirector": {
+      "name": "Dr. Eugene Rajaratnam",
+      "title": "Founder & Medical Director, Urology Specialist",
+      "credentials": "MD, FACS, ABAARM",
+      "bio": "Board certified in India and the United States, with a separate certification in anti-aging and regenerative medicine. He trained at Stanley Medical College and the University of Madras, completed general surgery residency at Brookdale Hospital in Brooklyn and a urology residency at Maimonides Medical Center and Coney Island Hospital, and has practiced urology for more than 30 years. He holds hospital privileges at Antelope Valley Hospital, Antelope Valley Surgical Institute and Palmdale Regional Medical Center, and is listed as a provider on the exosome and PRP pages and at both centers."
+    },
+    "team": [
+      {
+        "name": "Dr. Eugene Rajaratnam",
+        "title": "Founder & Medical Director, Urology Specialist",
+        "credentials": "MD, FACS, ABAARM",
+        "bio": "Urologist who founded the practice and oversees its clinical work, from prostate procedures such as HIFU and TUMT through to the exosome and PRP services. Published in the Journal of Urology in the 1980s on bilateral synchronous renal cell carcinoma and nutritional support in urological patients."
+      },
+      {
+        "name": "Carol Christian",
+        "title": "Managing Director & Regenerative Wellness Practitioner",
+        "bio": "Began her healthcare career as a nurse working for a urologist in Anchorage, Alaska, then moved into wellness therapies, where the site credits her with more than 30 years of work. The practice describes her as a certified colon hydrotherapist of more than 25 years, a weight loss specialist, a clinical specialist in ThermiVa, and a certified advanced practitioner in ONDAMED biofeedback trained in Germany. She is listed as a provider at both centers and, with Dr. Rajaratnam, as co-lead of the regenerative wellness division. She is not a physician and no medical license is published for her."
+      }
+    ],
+    "locations": [
+      {
+        "addressLine": "39935 Vista Del Sol, Suite 204",
+        "city": "Rancho Mirage",
+        "region": "California",
+        "postalCode": "92270",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "(760) 565-6111",
+        "isHQ": true,
+        "lat": 33.7645,
+        "lng": -116.4038
+      },
+      {
+        "addressLine": "38921 Trade Center Drive",
+        "city": "Palmdale",
+        "region": "California",
+        "postalCode": "93551",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "(661) 945-0601",
+        "isHQ": false,
+        "lat": 34.5795,
+        "lng": -118.145
+      }
+    ],
+    "website": "https://cawellnessinstitute.com",
+    "social": {
+      "facebook": "https://www.facebook.com/cawellnessinstitute/",
+      "instagram": "https://www.instagram.com/californiawellnessinstitute/",
+      "youtube": "https://www.youtube.com/@CWIRanchoMirage"
+    },
+    "highlights": [
+      "Founded and directed by urologist Eugene Rajaratnam, MD, FACS, ABAARM",
+      "Exosome therapy and PRP available at both the Rancho Mirage and Palmdale offices",
+      "States on its own site that exosome therapy is experimental and not FDA approved",
+      "Hospital privileges at Antelope Valley Hospital and Palmdale Regional Medical Center",
+      "Appointment only at both centers, with no walk-ins at Rancho Mirage",
+      "CareCredit financing accepted, no prices published"
+    ],
+    "faqs": [
+      {
+        "question": "Does California Wellness Institute actually offer stem cell treatment?",
+        "answer": "The service is listed as Regenerative Stem Cell Therapy, but the page describes exosome therapy, which uses vesicles released by cells rather than the cells themselves. PRP made from your own blood is offered separately. The clinic names no cell source, donor tissue or processing lab, so ask directly what you would be receiving."
+      },
+      {
+        "question": "Are these therapies FDA approved?",
+        "answer": "No. Cell and exosome therapies are investigational and are not approved by the FDA for anti-aging or the other uses offered here. They are elective procedures and are not a replacement for standard medical care. The clinic states the same thing on its own exosome page."
+      },
+      {
+        "question": "What does treatment cost?",
+        "answer": "Nothing is priced publicly. You get a quote after a consultation, and the practice advertises CareCredit financing on its service pages."
+      },
+      {
+        "question": "Where are the offices and what are the hours?",
+        "answer": "Rancho Mirage at 39935 Vista Del Sol Suite 204, Monday to Saturday 9am to 5pm, and Palmdale at 38921 Trade Center Drive, weekdays 9am to 4pm. Both run by appointment, and Rancho Mirage does not take walk-ins."
+      },
+      {
+        "question": "Who performs the treatments?",
+        "answer": "Eugene Rajaratnam, MD, FACS, ABAARM, the founder and medical director, is the only physician listed. Carol Christian is listed as managing director and regenerative wellness practitioner. The site says the two of them lead the regenerative wellness division."
+      },
+      {
+        "question": "Is this primarily a stem cell clinic?",
+        "answer": "No. Regenerative work sits inside a broader practice built on urology, prostate treatment, hormone replacement, medical weight loss, IV nutrition and laser aesthetics. Treat the regenerative menu as one service line among many."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "california wellness institute"
+    },
+    "isClaimed": false
+  }
+]

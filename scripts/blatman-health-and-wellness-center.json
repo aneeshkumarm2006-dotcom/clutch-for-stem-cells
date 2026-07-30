@@ -1,0 +1,203 @@
+[
+  {
+    "name": "Blatman Health and Wellness Center",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Integrative pain medicine and regenerative injections in Cincinnati and Manhattan",
+    "description": "Hal Blatman, MD, has run this practice in Cincinnati since 1988, starting with myofascial pain and trigger point injection work he learned from Janet Travell, MD. The regenerative side grew out of that. The office now offers PRP, mesenchymal stem cell injections, exosomes and very small embryonic-like cell (VSEL) therapy alongside prolotherapy, prolozone, peptides, IV infusions and nutrition coaching.\n\nCell material comes either from the patient or from placenta and umbilical cord tissue donated after healthy live births, and the clinic states it never uses embryonic stem cells. Most of the injection work targets joints, tendons, ligaments and the spine, though Blatman also treats neurological conditions such as MS and Parkinson's using IV and laser-guided VSEL protocols. He performs the procedures himself; a nurse practitioner, a nutrition coach, a massage therapist and an acupuncturist round out the team.\n\nThe main office is at 8250 Kenwood Road in Cincinnati, open Monday through Thursday, with a second location on East 56th Street in Manhattan that Blatman visits about once a month. The practice does not bill insurance and issues a superbill on request. No prices are published, so the office quotes after a consultation, and a free discovery call is offered first.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785436004/library/nvkceqyvd7yrtgfo6cnb.webp",
+      "publicId": "library/nvkceqyvd7yrtgfo6cnb",
+      "width": 390,
+      "height": 115,
+      "alt": "Blatman Health and Wellness Center logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785436007/library/mfdyh9xbbxtaknaa2axc.webp",
+      "publicId": "library/mfdyh9xbbxtaknaa2axc",
+      "width": 600,
+      "height": 800,
+      "alt": "Dr. Hal Blatman of Blatman Health and Wellness Center in Cincinnati"
+    },
+    "treatmentTypes": [
+      "prp",
+      "msc-therapy",
+      "regenerative-orthopedics",
+      "exosome-therapy",
+      "iv-systemic-therapy",
+      "autologous-therapy",
+      "allogeneic-therapy",
+      "bone-marrow-derived-therapy"
+    ],
+    "conditionsTreated": [
+      "joint-pain",
+      "anti-aging-longevity",
+      "knee-osteoarthritis",
+      "back-and-spine",
+      "neuropathy",
+      "rotator-cuff-shoulder",
+      "sports-injuries",
+      "multiple-sclerosis",
+      "parkinsons",
+      "sexual-health",
+      "copd-pulmonary",
+      "rheumatoid-arthritis",
+      "skin-aesthetic",
+      "spinal-cord-injury",
+      "post-covid-recovery"
+    ],
+    "cellSources": [
+      "autologous",
+      "allogeneic",
+      "bone-marrow",
+      "umbilical-cord",
+      "placental-whartons-jelly",
+      "exosomes"
+    ],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "serviceFocus": [
+      {
+        "treatment": "prp",
+        "percent": 25
+      },
+      {
+        "treatment": "msc-therapy",
+        "percent": 25
+      },
+      {
+        "treatment": "regenerative-orthopedics",
+        "percent": 20
+      },
+      {
+        "treatment": "iv-systemic-therapy",
+        "percent": 15
+      },
+      {
+        "treatment": "exosome-therapy",
+        "percent": 10
+      }
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No prices are published. The clinic says cost depends on how many injections are needed and what is being treated, and the office will send a pricing sheet on request. Insurance is not billed, though a superbill is available for out-of-network claims.",
+    "foundedYear": 1988,
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Hal S. Blatman",
+      "title": "Founder and Medical Director",
+      "credentials": "MD, DAAPM, ABIHM",
+      "bio": "Blatman earned his medical degree from the Medical College of Pennsylvania in 1980, trained two years in orthopedic surgery, then completed a residency in occupational and environmental medicine at the University of Cincinnati Hospital. He studied myofascial pain under Janet Travell, MD, and in 1988 opened a Cincinnati clinic combining conventional and holistic pain care. He is credentialed in pain management, board certified in occupational and environmental medicine and in integrative holistic medicine, and is a past president of the American Holistic Medical Association. He also trained in peptide therapy through the Seeds Scientific Research Institute and in ReCODE and metabolic terrain protocols."
+    },
+    "team": [
+      {
+        "name": "Hal S. Blatman",
+        "title": "Founder and Medical Director",
+        "credentials": "MD, DAAPM, ABIHM",
+        "bio": "Performs the clinic's regenerative injections, including PRP, mesenchymal stem cell, exosome and VSEL treatments, and originated the trigger point technique the practice calls the Blatman Method."
+      },
+      {
+        "name": "Jennifer MacRae",
+        "title": "Family Nurse Practitioner",
+        "credentials": "APRN",
+        "bio": "Certified family nurse practitioner licensed in Ohio, Kentucky and New York, with a clinical background in both adult and pediatric care."
+      },
+      {
+        "name": "Rachel Sofferin",
+        "title": "Integrative Nutrition Health Coach and Brand Manager",
+        "bio": "Works directly with patients on diet and daily habits as part of their treatment plan."
+      },
+      {
+        "name": "Christina Wehmer",
+        "title": "Metabolic Health Advocate",
+        "bio": "Supports patients and families through integrative cancer care, cognitive and neurological concerns, chronic pain and other multisystem conditions."
+      },
+      {
+        "name": "Guanhu Yang",
+        "title": "Acupuncturist",
+        "bio": "Traditional Chinese medicine practitioner who earned a PhD in respiratory medicine in Japan and completed a postdoctoral fellowship at Cincinnati Children's Medical Center."
+      },
+      {
+        "name": "Debbie L. Henney",
+        "title": "Licensed Massage Therapist",
+        "credentials": "LMT"
+      }
+    ],
+    "locations": [
+      {
+        "addressLine": "8250 Kenwood Road, Suite E",
+        "city": "Cincinnati",
+        "region": "Ohio",
+        "postalCode": "45236",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 513-956-3200",
+        "isHQ": true,
+        "lat": 39.2069,
+        "lng": -84.3779
+      },
+      {
+        "addressLine": "120 East 56th Street, 12th Floor",
+        "city": "New York",
+        "region": "New York",
+        "postalCode": "10022",
+        "country": "United States",
+        "countryCode": "US",
+        "phone": "+1 212-304-8900",
+        "isHQ": false,
+        "lat": 40.7601,
+        "lng": -73.9694
+      }
+    ],
+    "website": "https://blatmanhealthandwellness.com",
+    "social": {
+      "facebook": "https://www.facebook.com/blatmanhealth",
+      "instagram": "https://www.instagram.com/blatmanhealth",
+      "youtube": "https://www.youtube.com/@blatmanhealth",
+      "linkedin": "https://www.linkedin.com/company/blatman-health-and-wellness-center"
+    },
+    "highlights": [
+      "Founded in Cincinnati in 1988 by Hal Blatman, MD",
+      "PRP, mesenchymal stem cell, exosome and VSEL injections performed by the medical director",
+      "Cells taken from the patient or from donated umbilical cord and placental tissue",
+      "Two offices, Kenwood Road in Cincinnati and East 56th Street in Manhattan",
+      "Cash-pay practice with a superbill for out-of-network reimbursement",
+      "Free discovery call before booking a first consultation"
+    ],
+    "faqs": [
+      {
+        "question": "Does Blatman Health and Wellness Center actually do stem cell therapy?",
+        "answer": "Yes. Their treatments list names mesenchymal stem cell therapy, exosome therapy, PRP and very small embryonic-like cell (VSEL) therapy, and Dr. Blatman performs the injections himself rather than delegating them."
+      },
+      {
+        "question": "Are these cell therapies approved by the FDA?",
+        "answer": "No. Cell and exosome therapies are investigational and are not approved by the FDA for anti-aging or the other uses offered here. They are elective procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "Where do the cells come from?",
+        "answer": "Either from the patient's own tissue or from placenta and umbilical cord products donated by mothers after healthy live births. The clinic states it never uses embryonic stem cells."
+      },
+      {
+        "question": "What does treatment cost?",
+        "answer": "The clinic does not publish prices. Cost depends on how many injections are needed and what is being treated, so you get a figure after a consultation. Ask the office for the pricing sheet when you call."
+      },
+      {
+        "question": "Do they take insurance?",
+        "answer": "No. The practice does not bill insurance but will provide a superbill for out-of-network reimbursement. Stem cell injections are rarely covered by any insurer."
+      },
+      {
+        "question": "Can I be treated in New York instead of Ohio?",
+        "answer": "Yes, at the Manhattan office on East 56th Street. Dr. Blatman is there roughly once a month, so appointment slots are tighter than in Cincinnati."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "blatman health and wellness center"
+    },
+    "isClaimed": false
+  }
+]
