@@ -50,10 +50,13 @@ async function main() {
     [Treatment, "/treatments/"],
     [Condition, "/conditions/"],
   ] as const) {
-    const docs = await (Model as any)
+    // `Model as any` erases the call signature, and TS rejects a type argument
+    // on an untyped call (TS2347) — so assert the result instead of `.lean<…>()`.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const docs = (await (Model as any)
       .find()
       .select("slug seo name")
-      .lean<any[]>();
+      .lean()) as any[];
     for (const d of docs)
       out[`${prefix}${d.slug}`] = {
         keywords: d.seo?.keywords ?? [],
