@@ -9,10 +9,7 @@ import {
   getTaxonomyTermBySlug,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
-import {
-  isThinDirectoryTerm,
-  shouldNoindexDirectory,
-} from "@/lib/seo-indexation";
+import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import {
   itemListJsonLd,
   medicalConditionJsonLd,
@@ -46,12 +43,12 @@ export async function generateMetadata({
       `Compare clinics treating ${term.name} and read verified patient reviews.`,
     path: `/conditions/${term.slug}`,
     seo: term.seo ?? null,
-    // A term with no clinics and no approved guide is a soft 404 waiting to
-    // happen — it renders, but stays out of the index (and the sitemap, which
-    // applies the same test) until it has inventory or editorial behind it.
-    noindex:
-      isThinDirectoryTerm(term) ||
-      shouldNoindexDirectory(searchParams, { locked: ["condition"] }),
+    // Clinic inventory is deliberately NOT an indexation gate: every active
+    // taxonomy term is indexable and in the sitemap whether or not any clinic
+    // matches it yet, because the term itself is the query we want to own. The
+    // trade-off (an empty term can read as a soft 404 to Google) is accepted.
+    // Only filtered/sorted/paged variants are withheld.
+    noindex: shouldNoindexDirectory(searchParams, { locked: ["condition"] }),
   });
 }
 

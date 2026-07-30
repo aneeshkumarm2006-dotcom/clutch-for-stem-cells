@@ -11,8 +11,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import {
-  hasTermEditorialContent,
-  isThinDirectoryTerm,
+  isMatrixIndexable,
   shouldNoindexDirectory,
 } from "@/lib/seo-indexation";
 
@@ -34,7 +33,10 @@ test("a route-locked dimension in the query does not make the page thin", () => 
   // `/conditions/parkinsons` pins the condition; seeing it again in the query
   // is the same page, not a user-applied facet.
   assert.equal(
-    shouldNoindexDirectory({ condition: "parkinsons" }, { locked: ["condition"] }),
+    shouldNoindexDirectory(
+      { condition: "parkinsons" },
+      { locked: ["condition"] },
+    ),
     false,
   );
   // A second, unlocked facet still demotes it.
@@ -47,41 +49,28 @@ test("a route-locked dimension in the query does not make the page thin", () => 
   );
 });
 
-// ── isThinDirectoryTerm ─────────────────────────────────────────────────────
+// ── isMatrixIndexable ───────────────────────────────────────────────────────
 
-test("a term with clinics is indexable, guide or no guide", () => {
-  assert.equal(isThinDirectoryTerm({ clinicCount: 3 }), false);
-  assert.equal(isThinDirectoryTerm({ clinicCount: 1, editorial: null }), false);
+test("an approved record is indexable", () => {
+  assert.equal(isMatrixIndexable({ reviewStatus: "approved" }), true);
 });
 
-test("a term with no clinics and no guide is withheld (soft-404 guard)", () => {
-  assert.equal(isThinDirectoryTerm({ clinicCount: 0 }), true);
-  assert.equal(isThinDirectoryTerm({}), true);
-  assert.equal(isThinDirectoryTerm({ clinicCount: 0, editorial: null }), true);
+test("an unapproved record is not", () => {
+  assert.equal(isMatrixIndexable({ reviewStatus: "draft" }), false);
+  assert.equal(isMatrixIndexable({ reviewStatus: "in_review" }), false);
 });
 
-test("an approved-but-blank editorial record does not rescue an empty term", () => {
-  // `buildTermEditorial` returns an object for any approved term, even one
-  // where nothing has been written yet — presence alone must not count.
+// ── emptiness is not a gate ─────────────────────────────────────────────────
+
+test("content depth never affects indexability", () => {
+  // Regression guard for a deliberate policy choice: thin pages are indexed.
+  // A page with no clinics, no FAQs, no body and no reviewer is still indexable
+  // once approved. If a soft-404 gate is ever reintroduced, it must be opt-in
+  // per record (`seo.noindex`), never inferred from emptiness.
   assert.equal(
-    isThinDirectoryTerm({
-      clinicCount: 0,
-      editorial: { body: "", blocks: [], faqs: [], keyFacts: [], sections: [] },
+    isMatrixIndexable({ reviewStatus: "approved" } as {
+      reviewStatus: string;
     }),
     true,
   );
-});
-
-test("a real guide keeps an empty term indexable, via any content field", () => {
-  const written = [
-    { body: "Long-form guide copy." },
-    { blocks: [{ type: "callout" }] },
-    { faqs: [{ question: "q", answer: "a" }] },
-    { keyFacts: [{ label: "l", value: "v" }] },
-    { sections: [{ title: "Overview", body: "…" }] },
-  ];
-  for (const editorial of written) {
-    assert.equal(hasTermEditorialContent({ editorial }), true);
-    assert.equal(isThinDirectoryTerm({ clinicCount: 0, editorial }), false);
-  }
 });

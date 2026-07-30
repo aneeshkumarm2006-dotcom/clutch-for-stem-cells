@@ -10,7 +10,7 @@ import "server-only";
 import { cache } from "react";
 
 import { dbConnect } from "@/lib/db";
-import { searchClinics, type ClinicSearchParams } from "@/lib/search";
+import type { ClinicSearchParams } from "@/lib/search";
 import type { SitemapEntry } from "@/lib/public-data";
 import type { FilterDimension } from "@/components/directory/directory-controls";
 import { ClinicLanding, type IClinicLanding, type ISeo } from "@/models";
@@ -89,30 +89,24 @@ export async function getClinicLandingSlugs(): Promise<string[]> {
 }
 
 /**
- * Sitemap entries — active pages that are actually worth crawling.
+ * Sitemap entries — every active landing page.
  *
- * Two exclusions, both mirroring what the page itself will render: an editor
- * `noindex`, and a page whose filters currently match no published clinic. The
- * emptiness check runs the same directory query the page runs, so the sitemap
- * can't claim a page the page's own robots tag denies — and a landing page
- * re-enters the sitemap by itself as soon as a matching clinic is published.
+ * One exclusion, mirroring what the page itself renders: the editor's explicit
+ * `noindex`. A landing whose filters currently match no published clinic is
+ * still submitted; emptiness is not an indexation gate anywhere on the site.
+ * That also drops the per-landing directory query this used to run.
  */
-export async function getClinicLandingSitemapEntries(): Promise<SitemapEntry[]> {
+export async function getClinicLandingSitemapEntries(): Promise<
+  SitemapEntry[]
+> {
   await dbConnect();
-  const rows = await ClinicLanding.find({ isActive: true })
-    .lean<LeanLanding[]>();
+  const rows = await ClinicLanding.find({ isActive: true }).lean<
+    LeanLanding[]
+  >();
 
-  const candidates = rows.map(toView).filter((l) => !l.seo?.noindex);
-  const counts = await Promise.all(
-    candidates.map((l) =>
-      searchClinics({ ...landingFilterOverrides(l), pageSize: 1 }).then(
-        (r) => r.total,
-      ),
-    ),
-  );
-
-  return candidates
-    .filter((_, i) => (counts[i] ?? 0) > 0)
+  return rows
+    .map(toView)
+    .filter((l) => !l.seo?.noindex)
     .map((l) => ({ path: l.path, lastModified: l.updatedAt }));
 }
 

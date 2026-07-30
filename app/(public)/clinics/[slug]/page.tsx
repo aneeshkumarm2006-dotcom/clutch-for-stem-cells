@@ -56,25 +56,19 @@ export async function generateMetadata({
   // `clinics/(index)/README.md`.
   if (!landing) notFound();
 
-  // A landing page whose filters currently match nothing is a thin page — it
-  // still renders (the copy and FAQs are useful, and the URL must not churn),
-  // but it stays `noindex, follow` until there is inventory behind it. The
-  // sitemap applies the same test, so the two can never disagree.
-  const { total } = await getDirectoryData({
-    ...landingFilterOverrides(landing),
-    pageSize: 1,
-  });
-
+  // Inventory is deliberately not a gate: a landing whose filters currently
+  // match nothing is still indexable and still in the sitemap. Its copy and
+  // FAQs are the page's reason to exist, and the editor's `seo.noindex` toggle
+  // is the way to withhold one. Only filtered/sorted/paged variants are held
+  // back, and the sitemap applies the same test so the two can never disagree.
   return pageMetadata({
     title: landing.heading,
     description: landing.intro,
     path: landing.path,
     seo: landing.seo,
-    noindex:
-      total === 0 ||
-      shouldNoindexDirectory(searchParams, {
-        locked: landingIndexationLocks(landing),
-      }),
+    noindex: shouldNoindexDirectory(searchParams, {
+      locked: landingIndexationLocks(landing),
+    }),
   });
 }
 

@@ -19,10 +19,6 @@ import { parseBlocks } from "@/lib/blocks/content";
 import { formatLocation } from "@/lib/format";
 import { getHomepageContent } from "@/lib/homepage";
 import { compareClinicsForListing } from "@/lib/ranking";
-import {
-  isThinDirectoryTerm,
-  type DirectoryTermIndexability,
-} from "@/lib/seo-indexation";
 import type { HomepageContent } from "@/config/homepage";
 import {
   searchClinics,
@@ -218,44 +214,11 @@ async function buildTermEditorial(
 }
 
 /**
- * Field projection for the sitemap's indexation test. Everything
- * {@link isThinDirectoryTerm} reads, and nothing else — no reviewer lookup, no
- * block parsing, one query per collection.
+ * Field projection for the sitemap. Now that indexation doesn't depend on a
+ * term's content, this is just what it takes to build the URL and its
+ * `lastModified` — no editorial fields, no block parsing.
  */
-const EDITORIAL_PRESENCE_SELECT = [
-  "slug",
-  "updatedAt",
-  "clinicCount",
-  "reviewStatus",
-  "body",
-  "blocks",
-  "faqs",
-  "keyFacts",
-  ...EDITORIAL_SECTION_FIELDS.map((f) => f.field),
-].join(" ");
-
-/**
- * The minimal `editorial` shape {@link isThinDirectoryTerm} needs. Mirrors
- * {@link buildTermEditorial}'s approval gate exactly (drafts and in-review terms
- * return `null`) so a term's sitemap presence and its own `generateMetadata` can
- * never disagree — without paying for the reviewer join the page render does.
- */
-function editorialPresence(
-  doc: Record<string, unknown>,
-): DirectoryTermIndexability["editorial"] {
-  if (doc.reviewStatus !== "approved") return null;
-  const sections = EDITORIAL_SECTION_FIELDS.filter(({ field }) => {
-    const value = doc[field];
-    return typeof value === "string" && value.trim().length > 0;
-  });
-  return {
-    body: typeof doc.body === "string" ? doc.body : null,
-    blocks: (doc.blocks as unknown[] | undefined) ?? [],
-    faqs: (doc.faqs as unknown[] | undefined) ?? [],
-    keyFacts: (doc.keyFacts as unknown[] | undefined) ?? [],
-    sections,
-  };
-}
+const SITEMAP_TERM_SELECT = "slug updatedAt";
 
 // ── Taxonomy (cached cross-request) ──────────────────────────────────────────
 // Taxonomy + language lists are stable reference data read on many pages,
@@ -1595,15 +1558,15 @@ export async function getClinicReviewSitemapEntries(): Promise<SitemapEntry[]> {
  * condition, country, and city term — countries/cities resolved to their
  * `/locations/[country]([/city])` paths.
  *
- * Terms that would render `noindex` are withheld. Submitting a "Clinics treating
- * X" page with zero clinics and no approved guide is what earns a **Soft 404**
- * in Search Console, and a sitemap that lists self-`noindex`ing URLs contradicts
- * itself — so the exact test the term routes run ({@link isThinDirectoryTerm})
- * runs here too, over the same denormalized `clinicCount`.
+ * Every active term is submitted, with or without clinics behind it: the term
+ * routes no longer gate on inventory, and the sitemap must never disagree with
+ * the page (see `lib/seo-indexation.ts`). `isActive` remains the one gate — an
+ * inactive term is editorially retired, which is a different question from an
+ * empty one.
  */
 export async function getTaxonomySitemapEntries(): Promise<SitemapEntry[]> {
   await dbConnect();
-  const select = EDITORIAL_PRESENCE_SELECT;
+  const select = SITEMAP_TERM_SELECT;
   const [treatments, conditions, countries, cities] = await Promise.all([
     Treatment.find({ isActive: true }).select(select).lean(),
     Condition.find({ isActive: true }).select(select).lean(),
@@ -1617,15 +1580,12 @@ export async function getTaxonomySitemapEntries(): Promise<SitemapEntry[]> {
     countries.map((c) => [id(c._id), c.slug] as const),
   );
 
-  /** Drop terms whose page self-`noindex`es (nothing to list, nothing to read). */
-  const indexable = (docs: unknown[]) =>
-    (docs as Record<string, unknown>[]).filter(
-      (d) =>
-        !isThinDirectoryTerm({
-          clinicCount: d.clinicCount as number | undefined,
-          editorial: editorialPresence(d),
-        }),
-    );
+  /**
+   * Every active term ships. Kept as a named pass-through rather than inlined
+   * so the shape of this function still reads as "filter, then map", and a
+   * future gate has one obvious place to go.
+   */
+  const indexable = (docs: unknown[]) => docs as Record<string, unknown>[];
 
   const entries: SitemapEntry[] = [
     ...indexable(treatments).map((t) => ({

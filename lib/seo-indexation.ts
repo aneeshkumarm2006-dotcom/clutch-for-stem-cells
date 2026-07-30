@@ -3,19 +3,22 @@
  * indexed?", shared by page `generateMetadata` and the sitemap so they can
  * never disagree (a page that self-`noindex`es must not appear in the sitemap).
  *
- * Three concerns:
- *  - {@link shouldNoindexDirectory} — thin/filtered/paginated *directory* URLs
- *    (`/clinics`, `/treatments/[slug]`, …). The clean base path is the one
+ * Two concerns:
+ *  - {@link shouldNoindexDirectory} — filtered/sorted/paginated *directory*
+ *    URLs (`/clinics`, `/treatments/[slug]`, …). The clean base path is the one
  *    canonical, indexable URL; every faceted/sorted/paged variant canonicalizes
  *    back to it (see `lib/seo.ts` `buildMetadata`) and is `noindex, follow`.
- *  - {@link isThinDirectoryTerm} — a taxonomy *term* landing page with nothing
- *    behind it. A "Clinics treating X" page that lists zero clinics and carries
- *    no approved editorial reads as a soft 404 to Google, so it stays out of
- *    both the index and the sitemap until it has inventory or a guide.
- *  - {@link isMatrixIndexable} — a programmatic *combination* page is indexable
- *    only when its content record is approved AND content-complete. Combination
- *    URLs are authored-into-existence (generated only from approved records), so
- *    this is a defensive second gate, not the primary one.
+ *  - {@link isMatrixIndexable} — an authored page is indexable once its content
+ *    record is approved.
+ *
+ * What is deliberately NOT a gate anywhere here: how much content a page has.
+ * Taxonomy terms with zero clinics, clinic landings matching nothing, and
+ * clinics with no reviews are all indexable and all in the sitemap. The URL
+ * itself is the query we want to own, and emptiness is treated as a temporary
+ * state rather than a reason to hide. The accepted trade-off is that Google may
+ * file some of these as Soft 404 / "Crawled - currently not indexed" until they
+ * fill in; the editor's per-record `seo.noindex` toggle is the way to withhold
+ * a specific page.
  *
  * Pure & dependency-free (mongoose-free) so it runs in server components, the
  * sitemap route, and unit tests alike.
@@ -96,90 +99,23 @@ export function shouldNoindexDirectory(
 }
 
 /**
- * The structural shape {@link isThinDirectoryTerm} needs. Structural (not a
- * `TaxonomyTerm` import) so the sitemap can pass a `.lean()` projection and the
- * page routes can pass the fully-hydrated term, without either widening this
- * module's dependencies.
- */
-export interface DirectoryTermIndexability {
-  /** Denormalized published-clinic count (kept fresh by the nightly cron). */
-  clinicCount?: number | null;
-  /** The approved editorial view, if any — `null`/absent when not approved. */
-  editorial?: {
-    body?: string | null;
-    blocks?: readonly unknown[] | null;
-    faqs?: readonly unknown[] | null;
-    keyFacts?: readonly unknown[] | null;
-    sections?: readonly unknown[] | null;
-  } | null;
-}
-
-/** `true` when a term carries approved editorial that is actually written. */
-export function hasTermEditorialContent(
-  term: DirectoryTermIndexability,
-): boolean {
-  const e = term.editorial;
-  if (!e) return false;
-  return Boolean(
-    e.body?.trim() ||
-    (e.blocks?.length ?? 0) > 0 ||
-    (e.sections?.length ?? 0) > 0 ||
-    (e.faqs?.length ?? 0) > 0 ||
-    (e.keyFacts?.length ?? 0) > 0,
-  );
-}
-
-/**
- * `true` when a taxonomy term's landing page has nothing worth indexing: no
- * clinics match it AND no approved editorial has been written for it. Such a
- * page still renders (the URL must not churn, and the empty state links onward),
- * but it is `noindex, follow` and is withheld from the sitemap — otherwise
- * Google crawls a "Clinics treating X" page whose only content is an empty state
- * and files it as a **Soft 404**.
- *
- * A term with an approved guide but zero clinics stays indexable: the listing is
- * empty, but the page is a real guide, not a dead end.
- *
- * Reads the denormalized `clinicCount` rather than running the directory query,
- * so `generateMetadata` and the sitemap apply the identical test at identical
- * cost. `/api/cron/recompute` refreshes that field nightly.
- */
-export function isThinDirectoryTerm(term: DirectoryTermIndexability): boolean {
-  return (term.clinicCount ?? 0) === 0 && !hasTermEditorialContent(term);
-}
-
-/**
  * The structural shape {@link isMatrixIndexable} needs — kept as a local
  * interface (not a model import) so this module stays mongoose-free.
  */
 export interface IndexableContentRecord {
   reviewStatus: string;
-  intro?: string | null;
-  body?: string | null;
-  faqs?: readonly unknown[] | null;
-  keyFacts?: readonly unknown[] | null;
-  reviewedBy?: unknown;
-}
-
-/** Minimum content depth a combination page needs to be worth indexing. */
-export function isContentComplete(record: IndexableContentRecord): boolean {
-  const hasFaqs = (record.faqs?.length ?? 0) >= 3;
-  const hasFacts = (record.keyFacts?.length ?? 0) >= 3;
-  return Boolean(
-    record.intro?.trim() &&
-    record.body?.trim() &&
-    (hasFaqs || hasFacts) &&
-    record.reviewedBy,
-  );
 }
 
 /**
- * `true` when a combination page may be `index, follow`. Requires an approved
- * record (which the CMS approval gate only grants once `reviewedBy` is set and
- * every content flag is acknowledged) AND content completeness. An approved but
- * thin record renders `noindex, follow`; a non-approved record is never
- * generated as a URL at all.
+ * `true` when an authored page (combination page, composed CMS page) may be
+ * `index, follow`.
+ *
+ * Editorial approval is the only test. Content depth deliberately is not one:
+ * a published page is indexable however thin it is, matching the directory
+ * routes, which no longer gate on clinic inventory either. A non-approved
+ * record is never generated as a URL at all, so this stays a defensive second
+ * gate rather than the primary one.
  */
 export function isMatrixIndexable(record: IndexableContentRecord): boolean {
-  return record.reviewStatus === "approved" && isContentComplete(record);
+  return record.reviewStatus === "approved";
 }

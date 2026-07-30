@@ -9,10 +9,7 @@ import {
   getDirectoryData,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
-import {
-  isThinDirectoryTerm,
-  shouldNoindexDirectory,
-} from "@/lib/seo-indexation";
+import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import { itemListJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
 import { editorialJsonLd } from "@/lib/editorial-schema";
 import { Directory } from "@/components/directory/directory";
@@ -45,12 +42,9 @@ export async function generateMetadata({
       `Compare accredited regenerative-medicine clinics in ${city.name}, ${country.name} and read verified patient reviews.`,
     path: `/locations/${country.slug}/${city.slug}`,
     seo: city.seo ?? null,
-    // A city with no clinics and no approved guide is a soft 404 (see the note
-    // on the condition route). Cities are the thinnest taxonomy, so this gate
-    // matters most here.
-    noindex:
-      isThinDirectoryTerm(city) ||
-      shouldNoindexDirectory(searchParams, { locked: ["country"] }),
+    // Inventory is deliberately not a gate — see the note on the condition
+    // route. Only filtered/sorted/paged variants are withheld.
+    noindex: shouldNoindexDirectory(searchParams, { locked: ["country"] }),
   });
 }
 

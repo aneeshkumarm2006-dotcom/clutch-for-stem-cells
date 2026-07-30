@@ -10,7 +10,7 @@ import "server-only";
 
 import { dbConnect } from "@/lib/db";
 import { parseBlocks } from "@/components/blocks/block-renderer";
-import { isContentComplete } from "@/lib/seo-indexation";
+import { isMatrixIndexable } from "@/lib/seo-indexation";
 import type { ContentReviewStatus } from "@/lib/enums";
 import type { BlockInput } from "@/lib/validation/block";
 import { MedicalReviewer, Page, type IPage } from "@/models";
@@ -131,17 +131,9 @@ async function toView(doc: LeanPage): Promise<PageView> {
     updatedAt: doc.updatedAt,
     lastReviewedAt: doc.lastReviewedAt ?? null,
     reviewer,
-    // Reuse the same "is it worth indexing?" bar the combination pages use, so a
-    // thin page never enters the index or the sitemap.
-    indexable: isContentComplete({
-      reviewStatus: doc.reviewStatus,
-      intro: doc.intro,
-      // A composed page's "body" is its blocks; treat any block as body content.
-      body: blocks.length ? "blocks" : "",
-      faqs: blocks.filter((b) => b.type === "faq"),
-      keyFacts: [],
-      reviewedBy: doc.reviewedBy,
-    }),
+    // Same bar as the combination pages: approval, not content depth. A thin
+    // published page is still indexable — see `lib/seo-indexation.ts`.
+    indexable: isMatrixIndexable({ reviewStatus: doc.reviewStatus }),
   };
 }
 
@@ -192,10 +184,12 @@ export interface AdminPageRow {
   updatedAt: string;
 }
 
-export async function getAdminPages(opts: {
-  q?: string;
-  status?: string;
-} = {}): Promise<AdminPageRow[]> {
+export async function getAdminPages(
+  opts: {
+    q?: string;
+    status?: string;
+  } = {},
+): Promise<AdminPageRow[]> {
   await dbConnect();
 
   const filter: Record<string, unknown> = {};

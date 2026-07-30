@@ -173,7 +173,7 @@ async function main() {
     .lean<any[]>();
   for (const m of matrix) {
     const path = matrixPagePath(m.kind, m.slugA, m.slugB);
-    const indexable = m.reviewStatus === "approved" && isMatrixIndexable(m);
+    const indexable = isMatrixIndexable(m);
     rows.push({
       path,
       name: m.title || `${m.slugA} x ${m.slugB}`,
