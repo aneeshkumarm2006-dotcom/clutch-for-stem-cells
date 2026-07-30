@@ -39,8 +39,11 @@ async function loadEnv(): Promise<void> {
   const mod = await import("@next/env");
   (
     mod.loadEnvConfig ??
-    (mod as unknown as { default?: { loadEnvConfig?: typeof mod.loadEnvConfig } })
-      .default?.loadEnvConfig
+    (
+      mod as unknown as {
+        default?: { loadEnvConfig?: typeof mod.loadEnvConfig };
+      }
+    ).default?.loadEnvConfig
   )?.(process.cwd());
 }
 
@@ -53,7 +56,9 @@ async function main() {
   // ── Clinics ───────────────────────────────────────────────────────────────
   const clinics = await Clinic.find({ isDeleted: false })
     .select("slug name status reviewCount")
-    .lean<{ slug: string; name: string; status: string; reviewCount?: number }[]>();
+    .lean<
+      { slug: string; name: string; status: string; reviewCount?: number }[]
+    >();
   for (const c of clinics) {
     const live = c.status === "published";
     rows.push({
@@ -63,23 +68,13 @@ async function main() {
       live,
       note: live ? "" : `status=${c.status}`,
     });
-    if ((c.reviewCount ?? 0) > 0) {
-      rows.push({
-        path: `/clinic/${c.slug}/reviews`,
-        name: `${c.name} reviews`,
-        kind: "clinic-reviews",
-        live,
-        note: live ? `${c.reviewCount} approved` : `status=${c.status}`,
-      });
-    } else {
-      rows.push({
-        path: `/clinic/${c.slug}/reviews`,
-        name: `${c.name} reviews`,
-        kind: "clinic-reviews",
-        live: false,
-        note: "0 approved reviews (self-noindex, not in sitemap)",
-      });
-    }
+    rows.push({
+      path: `/clinic/${c.slug}/reviews`,
+      name: `${c.name} reviews`,
+      kind: "clinic-reviews",
+      live,
+      note: live ? `${c.reviewCount ?? 0} approved` : `status=${c.status}`,
+    });
   }
 
   // ── Taxonomy ──────────────────────────────────────────────────────────────

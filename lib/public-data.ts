@@ -1403,7 +1403,10 @@ export async function getHomeData(): Promise<HomeData> {
     getTreatments(),
     getConditions(),
     getCountries(),
-    getFeaturedClinics(settings.featuredClinicIds ?? [], content.featured.limit),
+    getFeaturedClinics(
+      settings.featuredClinicIds ?? [],
+      content.featured.limit,
+    ),
     Clinic.countDocuments({ status: "published", isDeleted: false }),
     Clinic.countDocuments({
       status: "published",
@@ -1568,8 +1571,9 @@ export async function getClinicSitemapEntries(): Promise<SitemapEntry[]> {
 }
 
 /**
- * The dedicated `/clinic/[slug]/reviews` URLs. Emitted only for clinics that
- * actually have approved reviews — an empty reviews page self-`noindex`es, and
+ * The dedicated `/clinic/[slug]/reviews` URLs — one per published clinic,
+ * review count irrelevant. The page is indexable from the day the clinic goes
+ * live (see the header of `app/(public)/clinic/[slug]/reviews/page.tsx`), and
  * the sitemap must never disagree with the page (see `lib/seo-indexation.ts`).
  */
 export async function getClinicReviewSitemapEntries(): Promise<SitemapEntry[]> {
@@ -1577,7 +1581,6 @@ export async function getClinicReviewSitemapEntries(): Promise<SitemapEntry[]> {
   const docs = await Clinic.find({
     status: "published",
     isDeleted: false,
-    reviewCount: { $gt: 0 },
   })
     .select("slug updatedAt")
     .lean();

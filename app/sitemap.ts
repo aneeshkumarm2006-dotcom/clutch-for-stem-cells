@@ -98,8 +98,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "weekly" as const,
         priority: 0.8,
       })),
-      // Dedicated per-clinic reviews pages — only clinics that actually have
-      // approved reviews (an empty one self-`noindex`es).
+      // Dedicated per-clinic reviews pages — one per published clinic, whether
+      // or not it has approved reviews yet.
       ...clinicReviews.map((e) => ({
         url: absoluteUrl(e.path),
         lastModified: e.lastModified ?? now,

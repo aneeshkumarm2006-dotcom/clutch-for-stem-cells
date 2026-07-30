@@ -12,8 +12,11 @@
  *
  * Indexation follows the site-wide directory convention (`lib/seo-indexation.ts`):
  * the clean path is canonical and indexable; sorted/filtered/paged variants are
- * `noindex, follow`. A clinic with no approved reviews is `noindex` too, and is
- * excluded from the sitemap, so we never submit an empty page to the index.
+ * `noindex, follow`. Review count is deliberately *not* a gate — every published
+ * clinic's reviews URL is indexable and in the sitemap, empty or not, because
+ * "<clinic> reviews" is a query we want to own from the day the clinic goes
+ * live. The only remaining suppressions are the editor's `reviewsPage.seo`
+ * toggle and the filtered/paged variants.
  *
  * Every piece of copy here has an editor override on `Clinic.reviewsPage`
  * (admin → clinic → "Reviews page"): heading, both intro variants, a Markdown
@@ -119,8 +122,9 @@ export async function generateMetadata({
     // profile, and reusing it would point this page's canonical at the profile.
     seo: seo ?? null,
     // OR-ed with `seo.noindex` inside `buildMetadata`: the editor toggle can add
-    // a noindex, never remove the automatic one on an empty/filtered page.
-    noindex: clinic.reviewCount === 0 || shouldNoindexDirectory(searchParams),
+    // a noindex, never remove the automatic one on a filtered/paged variant.
+    // No `reviewCount` test — see the note at the top of this file.
+    noindex: shouldNoindexDirectory(searchParams),
   });
 }
 
