@@ -9,7 +9,10 @@ import {
   getTaxonomyTermBySlug,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
-import { shouldNoindexDirectory } from "@/lib/seo-indexation";
+import {
+  isThinDirectoryTerm,
+  shouldNoindexDirectory,
+} from "@/lib/seo-indexation";
 import {
   itemListJsonLd,
   medicalConditionJsonLd,
@@ -43,7 +46,12 @@ export async function generateMetadata({
       `Compare clinics treating ${term.name} and read verified patient reviews.`,
     path: `/conditions/${term.slug}`,
     seo: term.seo ?? null,
-    noindex: shouldNoindexDirectory(searchParams, { locked: ["condition"] }),
+    // A term with no clinics and no approved guide is a soft 404 waiting to
+    // happen — it renders, but stays out of the index (and the sitemap, which
+    // applies the same test) until it has inventory or editorial behind it.
+    noindex:
+      isThinDirectoryTerm(term) ||
+      shouldNoindexDirectory(searchParams, { locked: ["condition"] }),
   });
 }
 

@@ -19,6 +19,10 @@ import { parseBlocks } from "@/lib/blocks/content";
 import { formatLocation } from "@/lib/format";
 import { getHomepageContent } from "@/lib/homepage";
 import { compareClinicsForListing } from "@/lib/ranking";
+import {
+  isThinDirectoryTerm,
+  type DirectoryTermIndexability,
+} from "@/lib/seo-indexation";
 import type { HomepageContent } from "@/config/homepage";
 import {
   searchClinics,
@@ -210,6 +214,46 @@ async function buildTermEditorial(
     updatedAt: doc.updatedAt
       ? new Date(doc.updatedAt as Date).toISOString()
       : null,
+  };
+}
+
+/**
+ * Field projection for the sitemap's indexation test. Everything
+ * {@link isThinDirectoryTerm} reads, and nothing else — no reviewer lookup, no
+ * block parsing, one query per collection.
+ */
+const EDITORIAL_PRESENCE_SELECT = [
+  "slug",
+  "updatedAt",
+  "clinicCount",
+  "reviewStatus",
+  "body",
+  "blocks",
+  "faqs",
+  "keyFacts",
+  ...EDITORIAL_SECTION_FIELDS.map((f) => f.field),
+].join(" ");
+
+/**
+ * The minimal `editorial` shape {@link isThinDirectoryTerm} needs. Mirrors
+ * {@link buildTermEditorial}'s approval gate exactly (drafts and in-review terms
+ * return `null`) so a term's sitemap presence and its own `generateMetadata` can
+ * never disagree — without paying for the reviewer join the page render does.
+ */
+function editorialPresence(
+  doc: Record<string, unknown>,
+): DirectoryTermIndexability["editorial"] {
+  if (doc.reviewStatus !== "approved") return null;
+  const sections = EDITORIAL_SECTION_FIELDS.filter(({ field }) => {
+    const value = doc[field];
+    return typeof value === "string" && value.trim().length > 0;
+  });
+  return {
+    body: typeof doc.body === "string" ? doc.body : null,
+    blocks: (doc.blocks as unknown[] | undefined) ?? [],
+    faqs: (doc.faqs as unknown[] | undefined) ?? [],
+    keyFacts: (doc.keyFacts as unknown[] | undefined) ?? [],
+    sections,
   };
 }
 
@@ -1547,17 +1591,22 @@ export async function getClinicReviewSitemapEntries(): Promise<SitemapEntry[]> {
  * Programmatic taxonomy landing-page URLs (Stage 7.1): every active treatment,
  * condition, country, and city term — countries/cities resolved to their
  * `/locations/[country]([/city])` paths.
+ *
+ * Terms that would render `noindex` are withheld. Submitting a "Clinics treating
+ * X" page with zero clinics and no approved guide is what earns a **Soft 404**
+ * in Search Console, and a sitemap that lists self-`noindex`ing URLs contradicts
+ * itself — so the exact test the term routes run ({@link isThinDirectoryTerm})
+ * runs here too, over the same denormalized `clinicCount`.
  */
 export async function getTaxonomySitemapEntries(): Promise<SitemapEntry[]> {
   await dbConnect();
+  const select = EDITORIAL_PRESENCE_SELECT;
   const [treatments, conditions, countries, cities] = await Promise.all([
-    Treatment.find({ isActive: true }).select("slug updatedAt").lean(),
-    Condition.find({ isActive: true }).select("slug updatedAt").lean(),
-    Location.find({ kind: "country", isActive: true })
-      .select("slug updatedAt")
-      .lean(),
+    Treatment.find({ isActive: true }).select(select).lean(),
+    Condition.find({ isActive: true }).select(select).lean(),
+    Location.find({ kind: "country", isActive: true }).select(select).lean(),
     Location.find({ kind: "city", isActive: true })
-      .select("slug updatedAt parentId")
+      .select(`${select} parentId`)
       .lean(),
   ]);
 
@@ -1565,29 +1614,39 @@ export async function getTaxonomySitemapEntries(): Promise<SitemapEntry[]> {
     countries.map((c) => [id(c._id), c.slug] as const),
   );
 
+  /** Drop terms whose page self-`noindex`es (nothing to list, nothing to read). */
+  const indexable = (docs: unknown[]) =>
+    (docs as Record<string, unknown>[]).filter(
+      (d) =>
+        !isThinDirectoryTerm({
+          clinicCount: d.clinicCount as number | undefined,
+          editorial: editorialPresence(d),
+        }),
+    );
+
   const entries: SitemapEntry[] = [
-    ...treatments.map((t) => ({
-      path: `/treatments/${t.slug}`,
-      lastModified: t.updatedAt,
+    ...indexable(treatments).map((t) => ({
+      path: `/treatments/${t.slug as string}`,
+      lastModified: t.updatedAt as Date | undefined,
     })),
-    ...conditions.map((c) => ({
-      path: `/conditions/${c.slug}`,
-      lastModified: c.updatedAt,
+    ...indexable(conditions).map((c) => ({
+      path: `/conditions/${c.slug as string}`,
+      lastModified: c.updatedAt as Date | undefined,
     })),
-    ...countries.map((c) => ({
-      path: `/locations/${c.slug}`,
-      lastModified: c.updatedAt,
+    ...indexable(countries).map((c) => ({
+      path: `/locations/${c.slug as string}`,
+      lastModified: c.updatedAt as Date | undefined,
     })),
   ];
 
-  for (const city of cities) {
+  for (const city of indexable(cities)) {
     const countrySlug = city.parentId
       ? countrySlugById.get(id(city.parentId))
       : undefined;
     if (!countrySlug) continue; // skip orphan cities (no crawlable URL)
     entries.push({
-      path: `/locations/${countrySlug}/${city.slug}`,
-      lastModified: city.updatedAt,
+      path: `/locations/${countrySlug}/${city.slug as string}`,
+      lastModified: city.updatedAt as Date | undefined,
     });
   }
 

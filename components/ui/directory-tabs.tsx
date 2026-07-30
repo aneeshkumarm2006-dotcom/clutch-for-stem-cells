@@ -16,6 +16,13 @@ export interface DirectoryTab {
   href: string;
   /** Stable id compared against `activeValue` to mark the active tab. */
   value: string;
+  /**
+   * `rel` for the anchor. Set `"nofollow"` on a tab whose URL is a *view* of the
+   * canonical page rather than a page of its own (e.g. `?view=top`, which is
+   * `noindex, follow` and canonicalizes back to the base path): the tab stays
+   * clickable, but crawlers stop queueing a URL they can only discard.
+   */
+  rel?: string;
 }
 
 export interface DirectoryTabsProps {
@@ -41,6 +48,7 @@ export function DirectoryTabs({
             <li key={tab.value} className="shrink-0">
               <Link
                 href={tab.href}
+                rel={tab.rel}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "inline-flex whitespace-nowrap border-b-2 px-0.5 pb-2.5 text-sm font-semibold transition-colors",

@@ -151,6 +151,50 @@ function escapeRegex(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/** Base letter → every accented form that must match it. */
+const DIACRITIC_FORMS: Record<string, string> = {
+  a: "aàáâãäåāăą",
+  c: "cçćĉċč",
+  d: "dďđ",
+  e: "eèéêëēĕėęě",
+  g: "gĝğġģ",
+  i: "iìíîïĩīĭįı",
+  l: "lĺļľłŀ",
+  n: "nñńņň",
+  o: "oòóôõöøōŏő",
+  r: "rŕŗř",
+  s: "sśŝşš",
+  t: "tţťŧ",
+  u: "uùúûüũūŭůűų",
+  y: "yýÿŷ",
+  z: "zźżž",
+};
+
+/**
+ * Anchored, case- AND accent-insensitive equality regex for a place name.
+ *
+ * Place names reach us from two sides that spell accents inconsistently: the
+ * Location taxonomy stores the correct form ("Cancún", "Bogotá") while a clinic
+ * record imported from the clinic's own site usually stores the ASCII one
+ * ("Cancun"). A plain `^…$/i` regex therefore matched nothing, so
+ * `/locations/mexico/cancun` listed zero clinics despite having one — an empty
+ * directory page, which is exactly what Google files as a **Soft 404**.
+ *
+ * Folds the pattern to base letters, then expands each back into a character
+ * class covering its accented forms, so either spelling on either side matches.
+ * Strictly widening: it can only add results, never drop them.
+ */
+function placeNameRegex(value: string): RegExp {
+  const folded = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  // `escapeRegex` only escapes non-letters, so no letter here follows a
+  // backslash and this substitution can't corrupt an escape sequence.
+  const pattern = escapeRegex(folded).replace(/[a-z]/gi, (ch) => {
+    const forms = DIACRITIC_FORMS[ch.toLowerCase()];
+    return forms ? `[${forms}]` : ch;
+  });
+  return new RegExp(`^${pattern}$`, "i");
+}
+
 /** Resolve a mix of slugs and ids to ObjectIds for a taxonomy collection. */
 async function resolveIds<TDoc extends { _id: Types.ObjectId; slug: string }>(
   model: Model<TDoc>,
@@ -297,13 +341,11 @@ export const mongoSearchProvider: SearchProvider = {
       sel.languages = { languages: { $in: params.languages } };
     if (params.country || params.city || params.region) {
       const loc: Record<string, unknown> = {};
-      if (params.city)
-        loc.city = new RegExp(`^${escapeRegex(params.city)}$`, "i");
-      if (params.region)
-        loc.region = new RegExp(`^${escapeRegex(params.region)}$`, "i");
+      if (params.city) loc.city = placeNameRegex(params.city);
+      if (params.region) loc.region = placeNameRegex(params.region);
       if (params.country)
         loc.$or = [
-          { country: new RegExp(`^${escapeRegex(params.country)}$`, "i") },
+          { country: placeNameRegex(params.country) },
           { countryCode: params.country.toUpperCase() },
         ];
       sel.location = { locations: { $elemMatch: loc } };

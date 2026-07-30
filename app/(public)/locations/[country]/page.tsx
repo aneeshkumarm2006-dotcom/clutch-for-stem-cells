@@ -9,7 +9,10 @@ import {
   getDirectoryData,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
-import { shouldNoindexDirectory } from "@/lib/seo-indexation";
+import {
+  isThinDirectoryTerm,
+  shouldNoindexDirectory,
+} from "@/lib/seo-indexation";
 import { itemListJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
 import { editorialJsonLd } from "@/lib/editorial-schema";
 import { getApprovedComboLinks } from "@/lib/seoteam/matrix-data";
@@ -39,7 +42,11 @@ export async function generateMetadata({
       `Compare accredited regenerative-medicine clinics in ${country.name} and read verified patient reviews.`,
     path: `/locations/${country.slug}`,
     seo: country.seo ?? null,
-    noindex: shouldNoindexDirectory(searchParams, { locked: ["country"] }),
+    // See the note on the condition route: no clinics + no approved guide is a
+    // soft 404, so the page renders but stays unindexed until one exists.
+    noindex:
+      isThinDirectoryTerm(country) ||
+      shouldNoindexDirectory(searchParams, { locked: ["country"] }),
   });
 }
 

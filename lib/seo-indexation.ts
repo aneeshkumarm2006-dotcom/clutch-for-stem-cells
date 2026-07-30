@@ -3,11 +3,15 @@
  * indexed?", shared by page `generateMetadata` and the sitemap so they can
  * never disagree (a page that self-`noindex`es must not appear in the sitemap).
  *
- * Two concerns:
+ * Three concerns:
  *  - {@link shouldNoindexDirectory} — thin/filtered/paginated *directory* URLs
  *    (`/clinics`, `/treatments/[slug]`, …). The clean base path is the one
  *    canonical, indexable URL; every faceted/sorted/paged variant canonicalizes
  *    back to it (see `lib/seo.ts` `buildMetadata`) and is `noindex, follow`.
+ *  - {@link isThinDirectoryTerm} — a taxonomy *term* landing page with nothing
+ *    behind it. A "Clinics treating X" page that lists zero clinics and carries
+ *    no approved editorial reads as a soft 404 to Google, so it stays out of
+ *    both the index and the sitemap until it has inventory or a guide.
  *  - {@link isMatrixIndexable} — a programmatic *combination* page is indexable
  *    only when its content record is approved AND content-complete. Combination
  *    URLs are authored-into-existence (generated only from approved records), so
@@ -89,6 +93,59 @@ export function shouldNoindexDirectory(
     if (FILTER_QUERY_KEYS.has(key)) return true;
   }
   return false;
+}
+
+/**
+ * The structural shape {@link isThinDirectoryTerm} needs. Structural (not a
+ * `TaxonomyTerm` import) so the sitemap can pass a `.lean()` projection and the
+ * page routes can pass the fully-hydrated term, without either widening this
+ * module's dependencies.
+ */
+export interface DirectoryTermIndexability {
+  /** Denormalized published-clinic count (kept fresh by the nightly cron). */
+  clinicCount?: number | null;
+  /** The approved editorial view, if any — `null`/absent when not approved. */
+  editorial?: {
+    body?: string | null;
+    blocks?: readonly unknown[] | null;
+    faqs?: readonly unknown[] | null;
+    keyFacts?: readonly unknown[] | null;
+    sections?: readonly unknown[] | null;
+  } | null;
+}
+
+/** `true` when a term carries approved editorial that is actually written. */
+export function hasTermEditorialContent(
+  term: DirectoryTermIndexability,
+): boolean {
+  const e = term.editorial;
+  if (!e) return false;
+  return Boolean(
+    e.body?.trim() ||
+    (e.blocks?.length ?? 0) > 0 ||
+    (e.sections?.length ?? 0) > 0 ||
+    (e.faqs?.length ?? 0) > 0 ||
+    (e.keyFacts?.length ?? 0) > 0,
+  );
+}
+
+/**
+ * `true` when a taxonomy term's landing page has nothing worth indexing: no
+ * clinics match it AND no approved editorial has been written for it. Such a
+ * page still renders (the URL must not churn, and the empty state links onward),
+ * but it is `noindex, follow` and is withheld from the sitemap — otherwise
+ * Google crawls a "Clinics treating X" page whose only content is an empty state
+ * and files it as a **Soft 404**.
+ *
+ * A term with an approved guide but zero clinics stays indexable: the listing is
+ * empty, but the page is a real guide, not a dead end.
+ *
+ * Reads the denormalized `clinicCount` rather than running the directory query,
+ * so `generateMetadata` and the sitemap apply the identical test at identical
+ * cost. `/api/cron/recompute` refreshes that field nightly.
+ */
+export function isThinDirectoryTerm(term: DirectoryTermIndexability): boolean {
+  return (term.clinicCount ?? 0) === 0 && !hasTermEditorialContent(term);
 }
 
 /**

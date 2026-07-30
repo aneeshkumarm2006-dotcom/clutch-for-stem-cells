@@ -8,8 +8,16 @@ import { SearchBar } from "@/components/search/search-bar";
 import { ReviewForm } from "@/components/review/review-form";
 import { EmptyState } from "@/components/ui/empty-state";
 
+/**
+ * `noindex, follow`. This is a submission form, not a destination: it has no
+ * standalone search intent, and the `?clinic=` variant every clinic profile
+ * links to is the same form pre-filled — which is why Search Console files it as
+ * "Alternate page with proper canonical". The canonical still points at
+ * `/reviews/new`, so the page keeps its identity and passes equity onward; it
+ * just stops competing for a slot in the index.
+ */
 export const generateMetadata = (): Promise<Metadata> =>
-  pageMetadata({ path: "/reviews/new" });
+  pageMetadata({ path: "/reviews/new", noindex: true });
 
 export default async function NewReviewPage({
   searchParams,

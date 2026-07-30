@@ -107,7 +107,16 @@ export function Directory({
           activeValue={activeView}
           tabs={[
             { label: "All clinics", href: tabHref("all"), value: "all" },
-            { label: "Top clinics", href: tabHref("top"), value: "top" },
+            // `?view=top` is a filtered view of this same page — it renders
+            // `noindex, follow` and canonicalizes back to `basePath`. `nofollow`
+            // keeps visitors' access unchanged while stopping crawlers from
+            // queueing a URL they can only discard as "Excluded by noindex".
+            {
+              label: "Top clinics",
+              href: tabHref("top"),
+              value: "top",
+              rel: "nofollow",
+            },
           ]}
         />
       </div>

@@ -9,7 +9,10 @@ import {
   getDirectoryData,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
-import { shouldNoindexDirectory } from "@/lib/seo-indexation";
+import {
+  isThinDirectoryTerm,
+  shouldNoindexDirectory,
+} from "@/lib/seo-indexation";
 import { itemListJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
 import { editorialJsonLd } from "@/lib/editorial-schema";
 import { Directory } from "@/components/directory/directory";
@@ -42,7 +45,12 @@ export async function generateMetadata({
       `Compare accredited regenerative-medicine clinics in ${city.name}, ${country.name} and read verified patient reviews.`,
     path: `/locations/${country.slug}/${city.slug}`,
     seo: city.seo ?? null,
-    noindex: shouldNoindexDirectory(searchParams, { locked: ["country"] }),
+    // A city with no clinics and no approved guide is a soft 404 (see the note
+    // on the condition route). Cities are the thinnest taxonomy, so this gate
+    // matters most here.
+    noindex:
+      isThinDirectoryTerm(city) ||
+      shouldNoindexDirectory(searchParams, { locked: ["country"] }),
   });
 }
 

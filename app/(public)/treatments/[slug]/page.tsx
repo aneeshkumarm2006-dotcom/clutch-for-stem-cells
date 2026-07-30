@@ -20,7 +20,10 @@ import {
   getTaxonomyTermBySlug,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
-import { shouldNoindexDirectory } from "@/lib/seo-indexation";
+import {
+  isThinDirectoryTerm,
+  shouldNoindexDirectory,
+} from "@/lib/seo-indexation";
 import {
   itemListJsonLd,
   medicalTherapyJsonLd,
@@ -69,7 +72,12 @@ export async function generateMetadata({
       `Compare clinics offering ${term.name} and read verified patient reviews.`,
     path: `/treatments/${term.slug}`,
     seo: term.seo ?? null,
-    noindex: shouldNoindexDirectory(searchParams, { locked: ["treatment"] }),
+    // See the note on the condition route: no clinics + no approved guide is a
+    // soft 404, so the page renders but stays unindexed until one of the two
+    // exists. The sitemap applies the same test.
+    noindex:
+      isThinDirectoryTerm(term) ||
+      shouldNoindexDirectory(searchParams, { locked: ["treatment"] }),
   });
 }
 
