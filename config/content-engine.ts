@@ -76,7 +76,15 @@ export const CONTENT_ENGINE = {
     /** entity / listing — the central directory record. */
     clinic: defineContentType({
       label: "Clinic profile",
-      nodes: ["MedicalClinic", "AggregateRating", "Review"],
+      // Also covers the clinic's child URLs: `/reviews` adds more `Review`
+      // nodes, `/cost` adds the nested `OfferCatalog` and an `FAQPage`.
+      nodes: [
+        "MedicalClinic",
+        "AggregateRating",
+        "OfferCatalog",
+        "Review",
+        "FAQPage",
+      ],
       build: buildClinicNodes,
     }),
 

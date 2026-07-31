@@ -267,6 +267,45 @@ export async function getAdminClinicFormData(
         noindex: c.reviewsPage?.seo?.noindex ?? false,
       },
     },
+    costPage: {
+      heading: c.costPage?.heading ?? "",
+      intro: c.costPage?.intro ?? "",
+      introEmpty: c.costPage?.introEmpty ?? "",
+      items: (c.costPage?.items ?? []).map((i) => ({
+        label: i.label,
+        priceMin: i.priceMin,
+        priceMax: i.priceMax,
+        currency: i.currency ?? "",
+        unit: i.unit ?? "",
+        note: i.note ?? "",
+      })),
+      includes: c.costPage?.includes ?? [],
+      excludes: c.costPage?.excludes ?? [],
+      insuranceNote: c.costPage?.insuranceNote ?? "",
+      financingNote: c.costPage?.financingNote ?? "",
+      bodyMarkdown: c.costPage?.bodyMarkdown ?? "",
+      faqs: (c.costPage?.faqs ?? []).map((f) => ({
+        question: f.question,
+        answer: f.answer,
+      })),
+      sources: (c.costPage?.sources ?? []).map((s) => ({
+        label: s.label,
+        url: s.url ?? "",
+      })),
+      // `<input type="date">` wants `YYYY-MM-DD`; Zod coerces it back on save.
+      lastVerifiedAt: c.costPage?.lastVerifiedAt
+        ? new Date(c.costPage.lastVerifiedAt).toISOString().slice(0, 10)
+        : "",
+      ctaHeading: c.costPage?.ctaHeading ?? "",
+      ctaBody: c.costPage?.ctaBody ?? "",
+      seo: {
+        metaTitle: c.costPage?.seo?.metaTitle ?? "",
+        metaDescription: c.costPage?.seo?.metaDescription ?? "",
+        ogImage: c.costPage?.seo?.ogImage ?? "",
+        canonicalUrl: c.costPage?.seo?.canonicalUrl ?? "",
+        noindex: c.costPage?.seo?.noindex ?? false,
+      },
+    },
   };
 
   return { id: id(c._id), values };

@@ -326,7 +326,7 @@ const DB_SOURCES: {
       ["name", "title"],
       ["tagline", "description"],
     ],
-    seoPaths: ["seo", "reviewsPage.seo"],
+    seoPaths: ["seo", "reviewsPage.seo", "costPage.seo"],
   },
   {
     collection: "cliniclandings",

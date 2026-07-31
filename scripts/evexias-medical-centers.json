@@ -1,0 +1,164 @@
+[
+  {
+    "name": "EVEXIAS Medical Centers",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "The Dallas-Fort Worth clinics behind the EvexiPEL hormone pellet method, combining pellet therapy with peptides, IV work, PRP aesthetics and sexual health",
+    "description": "EVEXIAS Medical Centers is the clinic side of the EvexiPEL story, and the two are worth separating. EvexiPEL is a branded pellet method rather than a place: a patented hormone pellet, a dosing algorithm and an insertion technique, licensed out to certified providers across the country by a separate corporate company. EVEXIAS Medical Centers is where the founder actually treats patients, from two clinics in Texas, in Southlake and Rockwall. A third clinic in Lone Tree, Colorado carries the EVEXIAS name but is independently owned by a Denver vein surgeon.\n\nTerri DeNeui opened the practice in 2008. She is a doctorally prepared nurse practitioner, board certified in adult acute care, who came out of emergency nursing, wrote the book Hormone Havoc, teaches at A4M's world congress and created the EvexiPEL method in 2018. Worth being precise about, since press releases often blur it: her doctorate is a DNP in nursing, not a medical degree. The Texas practice is nurse-practitioner led, with one board-certified OB/GYN listed as collaborating physician and every treating clinician a board-certified APRN.\n\nWhat sets the pellet apart is what is in it. FarmaKeio, a related 503B outsourcing facility in the same town, holds a US patent covering a testosterone pellet combined with triamcinolone, an anti-inflammatory steroid, and supplies it only to EvexiPEL-certified providers. Insertion takes minutes under local anaesthetic through a small incision at the upper hip, and women are typically re-dosed every three to four months.\n\nThe rest of the menu is broad for a hormone clinic. Peptide therapy, compounded semaglutide and tirzepatide, IV vitamin drips, IV ozone and EBOO, a gut mapping programme, at-home DUTCH hormone testing, sexual health work including TriMix and acoustic wave therapy, and a full aesthetics arm. Their regenerative work is PRP drawn from your own blood and spun in-clinic, used for microneedling, scalp injections for thinning hair, under-eye treatment and P-Shot style injections. Their pages also use the word exosome, but the process they describe is a blood draw and centrifuge, which is PRP, and no exosome product or manufacturer is ever named. There is no stem cell therapy here, and none is claimed. Compounded hormone pellets are not FDA-approved products.",
+    "treatmentTypes": [
+      "prp",
+      "autologous-therapy"
+    ],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "sexual-health",
+      "skin-aesthetic",
+      "hair-restoration"
+    ],
+    "cellSources": [
+      "autologous"
+    ],
+    "accreditations": [],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "The Texas clinics publish almost nothing. The one posted price is an Essential Care membership at $150 a month or $1,500 a year, which buys telemedicine for minor acute problems plus 20 percent off select labs and IV therapies and 10 percent off supplements. Pellets, peptides, GLP-1 medication, PRP and aesthetics are all quoted after a consultation. Insurance is not accepted for membership. For scale, the independently owned Denver clinic publishes hormone packages from $139.65 a month.",
+    "foundedYear": 2008,
+    "teamSize": "11-50",
+    "physiciansCount": 1,
+    "languages": [
+      "English"
+    ],
+    "team": [
+      {
+        "name": "Terri DeNeui",
+        "title": "Founder and Creator of the EvexiPEL Method",
+        "credentials": "DNP, APRN, ACNP-BC",
+        "bio": "Opened the practice in 2008 after years in emergency nursing. She took her BSN at Texas Woman's University and her MSN and DNP at UT Arlington, graduating summa cum laude, and is board certified as an adult acute care nurse practitioner with further certification in hormone therapy and functional medicine. She created the EvexiPEL method in 2018, wrote Hormone Havoc in 2023, was primary author of a 2019 paper on menopausal care in the Journal of the American Association of Nurse Practitioners and lead author on a 2025 paper on hormone therapy and brain health in the Journal of Women's Health, and is lead teaching faculty at the A4M World Congress. Her doctorate is in nursing practice, not medicine."
+      },
+      {
+        "name": "Amy Lungren",
+        "title": "Collaborating Physician",
+        "credentials": "MD, FACOG",
+        "bio": "The board-certified obstetrician-gynecologist listed as collaborating physician for the Texas clinics. She is the only MD attached to the Texas practice; day-to-day care is delivered by the nurse practitioner team."
+      },
+      {
+        "name": "Samantha Pailes",
+        "title": "Nurse Practitioner, Southlake",
+        "credentials": "MSN, APRN, ANP-BC",
+        "bio": "Board-certified adult nurse practitioner with more than ten years of experience, working in functional and integrative medicine and certified in the EvexiPEL method."
+      },
+      {
+        "name": "Sondra Bell",
+        "title": "Nurse Practitioner, Southlake",
+        "credentials": "APRN, FNP-C",
+        "bio": "Board-certified family nurse practitioner with decades behind her across paediatric, family, geriatric and critical care nursing."
+      },
+      {
+        "name": "Kelly Wedel",
+        "title": "Nurse Practitioner, Rockwall",
+        "credentials": "MSN, APRN, AGACNP-BC",
+        "bio": "Board-certified adult-gerontology acute care nurse practitioner with around twenty years in healthcare, including flight nursing and service in the Army Reserve."
+      },
+      {
+        "name": "Tricia Lawler",
+        "title": "Nurse Practitioner, Rockwall and Southlake",
+        "credentials": "MSN, APRN, FNP-C",
+        "bio": "Board-certified family nurse practitioner working across both Texas clinics, with a focus on integrative and preventive medicine."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "920 S Kimball Ave, Suite 140",
+        "city": "Southlake",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "76092",
+        "phone": "817-328-8376",
+        "lat": 32.93029,
+        "lng": -97.11612
+      },
+      {
+        "isHQ": false,
+        "addressLine": "1207 Arista Dr, Suite 103",
+        "city": "Rockwall",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "75032",
+        "phone": "469-402-1877"
+      }
+    ],
+    "website": "https://www.evexiasmedical.com",
+    "social": {
+      "facebook": "https://www.facebook.com/EVEXIASMedicalCenters/",
+      "instagram": "https://www.instagram.com/evexiasmedical/",
+      "youtube": "https://www.youtube.com/@evexiasmedicalcenters9790"
+    },
+    "highlights": [
+      "Two clinics in the Dallas-Fort Worth area, Southlake and Rockwall, both seeing patients in person",
+      "Founded in 2008 by Terri DeNeui, who went on to create the EvexiPEL pellet method",
+      "The pellet is patented and combines testosterone with triamcinolone, made at a related 503B facility",
+      "Nurse-practitioner led, with one collaborating OB/GYN and board-certified APRNs treating",
+      "Southlake has four consultation rooms, two aesthetic rooms and a dedicated IV therapy room",
+      "PRP from your own blood, used for microneedling, hair thinning, under-eye and sexual health",
+      "IV ozone and EBOO on the menu, which is unusual for a hormone practice",
+      "At-home DUTCH hormone testing available before you come in",
+      "No stem cell therapy of any kind"
+    ],
+    "faqs": [
+      {
+        "question": "Is EvexiPEL a clinic I can book?",
+        "answer": "Not exactly. EvexiPEL is a method and a product, a patented pellet plus a dosing algorithm and an insertion technique, owned by a corporate company that trains and supplies independent providers nationwide. The clinics you can actually book are EVEXIAS Medical Centers in Southlake and Rockwall, Texas, which are where the founder practises. The corporate office is in the same Southlake building on a different floor and sees no patients. The EVEXIAS clinic in Lone Tree, Colorado is a separately owned partner practice with its own pricing."
+      },
+      {
+        "question": "What makes the pellet different from other pellets?",
+        "answer": "Triamcinolone. FarmaKeio, a 503B outsourcing facility in Southlake related to the same family, holds a US patent with 23 claims covering a subcutaneous pellet that combines testosterone with that anti-inflammatory steroid, and it is only supplied to EvexiPEL-certified providers. The method also includes a proprietary dosing algorithm the company says weighs more than 25 data points, and a specific insertion technique taught during certification."
+      },
+      {
+        "question": "Are hormone pellets FDA-approved?",
+        "answer": "No. Pellets are compounded preparations, made here at an FDA-registered 503B outsourcing facility, which means the facility is regulated but the product itself is not reviewed for safety or effectiveness the way an approved drug is. Compounded hormone pellets are a contested category more broadly: the FDA has flagged estradiol and testosterone pellets as difficult to compound, and a dose cannot be adjusted downwards once the pellet is in. The clinic's own site carries the standard note that its educational content is not a substitute for professional diagnosis and advice."
+      },
+      {
+        "question": "How often would I need re-pelleting?",
+        "answer": "Women are typically re-dosed every three to four months depending on metabolism and dose, so three or four visits a year. Men are generally on a longer cycle, and the partner clinic's men's package is built around two insertions a year. The procedure itself takes minutes: local anaesthetic, a small incision at the upper hip or buttock, pellets placed under the skin, then a dressing or skin glue."
+      },
+      {
+        "question": "What regenerative treatments do they actually do?",
+        "answer": "PRP, drawn from your own blood and concentrated in a medical-grade centrifuge on site by board-certified nurse practitioners and licensed phlebotomists. It is used for microneedling, for scalp injections in thinning hair, for under-eye work and for P-Shot style sexual health injections, typically three to six sessions four to six weeks apart with annual top-ups. Their pages also use the word exosome, sometimes interchangeably with PRP, but no exosome product or manufacturer is ever named and the process described is a blood draw and spin. There is no stem cell therapy, and no orthopaedic or neurological regenerative work."
+      },
+      {
+        "question": "Who would be treating me?",
+        "answer": "A board-certified nurse practitioner, in almost every case. The Texas practice describes itself as NP-led and the Southlake site alone runs five nurse practitioners and an RN injector. One board-certified OB/GYN is listed as collaborating physician. The founder holds a doctorate in nursing practice rather than a medical degree, despite being widely styled as a doctor in press coverage."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "Texas publishes very little. The Essential Care membership is $150 a month or $1,500 a year and covers telemedicine for minor acute issues plus discounts on labs, IVs and supplements, but pellet insertion, peptides, GLP-1s, PRP and aesthetics are all quoted after a consultation. Insurance is not accepted for membership, though some basic labs may be billable through it. CareCredit and Cherry financing are available."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "evexipel"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "evexipel reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510326/library/h5t1x7z2xguz0fonrmrf.webp",
+      "publicId": "library/h5t1x7z2xguz0fonrmrf",
+      "width": 1546,
+      "height": 427,
+      "alt": "EVEXIAS Medical Centers logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510211/library/loifewkikumgbitoqapc.webp",
+      "publicId": "library/loifewkikumgbitoqapc",
+      "width": 1808,
+      "height": 1808,
+      "alt": "EVEXIAS Medical Centers clinic in Rockwall, Texas"
+    }
+  }
+]

@@ -489,6 +489,17 @@ export default async function ClinicProfilePage({
               {clinic.priceNote ? (
                 <p className="mt-3 text-[13.5px] text-text-secondary">{clinic.priceNote}</p>
               ) : null}
+              {/* The keyword-bearing internal link into the cost page, which
+                  carries the itemised price table, what a quote covers, and the
+                  insurance/financing position this snapshot has no room for. */}
+              <div className="mt-4">
+                <Button asChild variant="secondary" size="sm">
+                  <Link href={`/clinic/${clinic.slug}/cost`}>
+                    See full {clinic.name} cost breakdown
+                    <ArrowRight className="size-[18px]" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </div>
               <DisclaimerNote variant="pricing" className="mt-4" />
             </div>
           </section>

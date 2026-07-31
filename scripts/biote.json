@@ -1,0 +1,149 @@
+[
+  {
+    "name": "Biote",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "A Texas hormone pellet company that trains independent clinics, with one patient-facing training clinic of its own in Irving",
+    "description": "Biote trains other people's clinics to do hormone pellet therapy. It is not a chain. About 9,200 certified practitioners work out of roughly 5,300 independently owned practices, and Biote's own annual report compares the arrangement to a franchise: the company supplies the two-day certification course, the dosing software, access to compounded pellets and a supplement line, and the individual clinic bills the patient. If you book with a Biote provider in your city, you are booking with a separate business that pays Biote for training and supply.\n\nThe one exception is the Irving headquarters. The building on West Walnut Hill Lane holds the corporate offices, the call center and the National Training Center, and it also holds a working patient clinic operating as Resurge under Kris Wusterhausen, DO. Trainee clinicians perform supervised insertions there on real patients, which is how the certification course ends.\n\nThe therapy is bioidentical estradiol or testosterone pressed into a pellet and placed under the skin of the upper buttocks during a short office visit. Dosing comes out of comprehensive lab work and a symptom questionnaire run through Biote's clinical decision software. Pellets dissolve over three to six months, so most patients return two to four times a year, and Biote's own FAQ warns it can take two insertions before the effect settles. The company counted around 400,000 active patients at the end of 2025 and says its providers have performed roughly 6 million procedures since 2012. About 85 percent of those procedures were for women.\n\nThe pellets are compounded rather than FDA-approved, and they come from 503B outsourcing facilities including Biote's own subsidiary Asteria Health. That subsidiary recalled estradiol and testosterone pellets shipped between May 2025 and January 2026 over possible metal particulate, which the FDA classified as a Class II recall in February 2026. Compounded hormone pellets are also a contested category: a 2020 National Academies review found the evidence does not support them being as safe or effective as approved hormone products, and ACOG advises against prescribing them routinely where an approved formulation exists. Biote does not do stem cell, exosome or PRP work of any kind.",
+    "treatmentTypes": [],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "sexual-health"
+    ],
+    "cellSources": [],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Biote publishes no patient prices, because it does not bill patients. Each certified clinic sets its own fee for an insertion and its own retail price on Biote supplements. Expect to get a number from the individual practice, not from Biote, and expect compounded pellets to sit outside insurance coverage.",
+    "foundedYear": 2012,
+    "teamSize": "200+",
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "medicalDirector": {
+      "name": "Komal Bajaj",
+      "title": "Chief Medical Officer",
+      "credentials": "MD, MS",
+      "bio": "An OB/GYN and clinical geneticist who still sees patients, appointed Biote's chief medical officer in June 2026. She was the first chief quality officer for NYC Health + Hospitals at Jacobi and North Central Bronx, a two-campus system covering about a million patients, and is a professor of obstetrics and gynecology at Albert Einstein College of Medicine. She has advised the Secretary of Health and Human Services through the AHRQ National Advisory Council and sat on The Joint Commission's chief physician council. MD from Northwestern, master's in health professions education from the MGH Institute."
+    },
+    "team": [
+      {
+        "name": "Mickey Karram",
+        "title": "Chair, Medical Advisory Board",
+        "credentials": "MD",
+        "bio": "Director of urogynecology at The Christ Hospital in Cincinnati and a volunteer professor of OB/GYN at the University of Cincinnati. Board certified in obstetrics and gynecology and in female pelvic medicine and reconstructive surgery. Past president of the American Urogynecology Society, honorary editor-in-chief of the International Urogynecology Journal, and co-author of two standard texts on pelvic anatomy and reconstructive pelvic surgery."
+      },
+      {
+        "name": "Cory Rice",
+        "title": "Chief Clinical Advisor",
+        "credentials": "DO",
+        "bio": "Trained in internal medicine at Methodist Medical Center of Dallas, where he was chief resident, after a forensic science degree at Baylor and a DO from the Arizona College of Osteopathic Medicine. He founded Modern Medicine, a group of outpatient practices, holds certifications through the Institute for Functional Medicine and A4M, and says he has personally done more than 20,000 pellet procedures."
+      },
+      {
+        "name": "Bruce Dorr",
+        "title": "Senior Medical Advisor",
+        "credentials": "MD",
+        "bio": "OB/GYN subspecialised in female pelvic medicine and reconstructive surgery. Medical school at Wayne State, residency at the University of Colorado, where he later ran the urogynecology division and the urodynamics lab as an assistant professor. He leads the OB/GYN department and robotic surgery at Littleton Hospital in Colorado and has been with Biote since 2013."
+      },
+      {
+        "name": "Kris Wusterhausen",
+        "title": "Physician, Biote Training Clinic",
+        "credentials": "DO",
+        "bio": "The doctor patients actually see at the Irving site. Family medicine residency at the University of North Texas Health Science Center in Fort Worth, finishing as co-chief resident in 2001, and board certified through the American Osteopathic Board of Family Physicians. He ran the Campbell Clinic in Parker County from 2002 to 2019, trained with Cenegenics, opened the Resurge Clinic in 2008, and is certified in peptide therapy through the International Peptide Society."
+      },
+      {
+        "name": "Lisa Jukes",
+        "title": "Medical Advisory Board",
+        "credentials": "MD",
+        "bio": "Board-certified OB/GYN, UT Southwestern medical school in 1996 and residency there through 2000. She opened Modern Women's Health in Austin in 2004 and has been a Biote provider since the company started. She proctors for the Texas Institute of Robotic Surgery and speaks nationally for AbbVie."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "1875 W. Walnut Hill Ln, Suite 100",
+        "city": "Irving",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "75038",
+        "phone": "877-992-4683",
+        "lat": 32.8875,
+        "lng": -96.9686
+      }
+    ],
+    "website": "https://biote.com",
+    "social": {
+      "instagram": "https://www.instagram.com/biotemedical/",
+      "facebook": "https://www.facebook.com/BioTEMedical/",
+      "linkedin": "https://www.linkedin.com/company/biotemedical",
+      "youtube": "https://www.youtube.com/user/BioTEMedical"
+    },
+    "highlights": [
+      "A training and supply company, not a clinic chain: about 5,300 partner practices are independently owned",
+      "One patient-facing site of its own, the training clinic at the Irving headquarters",
+      "Bioidentical estradiol and testosterone pellets placed under the skin in a short office visit",
+      "Dosing set from comprehensive lab work plus a symptom questionnaire, not from a fixed protocol",
+      "Pellets last three to six months, so most patients return two to four times a year",
+      "Roughly 400,000 active patients at the end of 2025, about 85 percent of procedures for women",
+      "Compounded pellets sourced from 503B outsourcing facilities, including Biote's own Asteria Health",
+      "No stem cell, exosome or PRP services"
+    ],
+    "faqs": [
+      {
+        "question": "Is Biote a clinic I can book an appointment with?",
+        "answer": "Only in Irving, Texas. Everywhere else, Biote is a badge on an independently owned practice that completed Biote's certification course and buys its pellets and software. Those practices set their own prices, keep their own records and answer to their own state boards. The Irving headquarters is the exception: it runs a working patient clinic as Resurge, staffed by Kris Wusterhausen, DO, partly so clinicians in training can do supervised insertions."
+      },
+      {
+        "question": "Is pellet therapy FDA-approved?",
+        "answer": "No. The pellets are compounded by 503B outsourcing facilities, which are FDA-registered but whose products are not reviewed for safety or effectiveness the way an approved drug is. In 2020 the FDA added estradiol and testosterone pellets to its list of drugs presenting demonstrable difficulties for compounding, and a National Academies review the same year found the evidence does not support compounded bioidentical hormones being as safe or effective as approved hormone therapy. ACOG advises against prescribing them routinely where an approved formulation exists."
+      },
+      {
+        "question": "What happened with the 2026 recall?",
+        "answer": "Asteria Health, the 503B facility Biote owns, recalled hormone pellets shipped between 20 May 2025 and 20 January 2026 over possible metal particulate matter. The FDA classified it as Class II in February 2026. It covered more than 118,000 estradiol pellets plus a separate testosterone pellet recall, distributed nationwide, and no injuries were reported when it was announced. If you were pelleted in that window, ask your provider to check the lot numbers."
+      },
+      {
+        "question": "What does the procedure involve?",
+        "answer": "Comprehensive lab work and a symptom questionnaire come first, and the results are run through Biote's dosing software. The insertion itself takes a few minutes in the office: the site is numbed, a small incision is made in the upper buttocks, the pellet goes in and a bandage goes over it. No fasting beforehand. For about a week afterwards, skip lower-body exercise and strenuous activity, and stay out of baths, pools and hot tubs. Showers are fine."
+      },
+      {
+        "question": "How often do I need it redone?",
+        "answer": "Pellets dissolve over three to six months, which works out to two to four insertions a year. How fast depends on your weight, absorption rate and how depleted you were to begin with. Biote's own FAQ says it can take two insertions before you feel the full effect. One thing worth knowing before you start: once a pellet is in, the dose cannot be adjusted downwards, which is a large part of why ACOG is cautious about the format."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "Biote does not set the patient price and does not publish one. The individual certified clinic decides what to charge for an insertion, and also sets its own retail markup on Biote supplements. Because compounded pellets are not FDA-approved, insurance generally does not cover them. Get a written quote from the practice itself."
+      },
+      {
+        "question": "Do they offer stem cell or regenerative therapy?",
+        "answer": "No. Biote's product range is bioidentical hormone pellets, a supplement line and some prescription peptide training for providers. There is no stem cell, exosome, PRP or SVF service anywhere in the company."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "biote"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "biote reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510188/library/zsetgqgejnminpmigbtk.webp",
+      "publicId": "library/zsetgqgejnminpmigbtk",
+      "width": 600,
+      "height": 315,
+      "alt": "Biote logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510192/library/wp8oefockthhpydwmtmn.webp",
+      "publicId": "library/wp8oefockthhpydwmtmn",
+      "width": 2000,
+      "height": 1184,
+      "alt": "Biote staff at the company's Irving, Texas office"
+    }
+  }
+]

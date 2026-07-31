@@ -20,12 +20,14 @@ import {
   itemListJsonLd,
   medicalClinicJsonLd,
   medicalWebPageJsonLd,
+  offerCatalogJsonLd,
   personJsonLd,
   reviewJsonLd,
   webPageJsonLd,
   type BlogPostingSeoInput,
   type ItemListEntry,
   type MedicalWebPageSeoInput,
+  type OfferItemInput,
   type PersonSeoInput,
   type WebPageSeoInput,
 } from "@/lib/seo";
@@ -48,18 +50,35 @@ export interface ClinicSchemaData {
   clinic: ClinicNodeInput;
   /** Approved reviews to nest as standalone `Review` nodes (cap at ~5). */
   reviews?: ReviewNodeInput[];
+  /**
+   * Published price lines → an `OfferCatalog` nested on the clinic. Passed only
+   * by the cost page: the profile carries a `priceRange`, and repeating the
+   * whole catalogue on a URL that doesn't show it would describe a page that
+   * isn't there.
+   */
+  priceItems?: OfferItemInput[];
+  /** Page-scoped Q&A → `FAQPage`. The cost page's cost questions. */
+  faqs?: FaqEntry[];
 }
 
 /**
- * `MedicalClinic` — the entity/listing role. `AggregateRating` is embedded by
- * `medicalClinicJsonLd` when the clinic has reviews, so it is not a separate
- * node here (it is still listed in the config's `nodes` so the admin panel can
- * toggle it — see `stripNestedNode` in the engine).
+ * `MedicalClinic` — the entity/listing role. `AggregateRating` and
+ * `OfferCatalog` are embedded on that node rather than emitted standalone, so
+ * they are not separate entries here (both are still listed in the config's
+ * `nodes` so the admin panel can toggle them — see `NESTED_NODES` in the
+ * engine).
  */
 export function buildClinicNodes(data: ClinicSchemaData): NodeList {
+  const catalog = data.priceItems?.length
+    ? offerCatalogJsonLd(data.priceItems, data.clinic.currency)
+    : undefined;
+
   return [
-    medicalClinicJsonLd(data.clinic),
+    catalog
+      ? { ...medicalClinicJsonLd(data.clinic), hasOfferCatalog: catalog }
+      : medicalClinicJsonLd(data.clinic),
     ...(data.reviews ?? []).map((r) => reviewJsonLd(r)),
+    data.faqs?.length ? faqPageJsonLd(data.faqs) : null,
   ];
 }
 

@@ -378,6 +378,62 @@ export function medicalClinicJsonLd(clinic: ClinicSeoInput): JsonLd {
   });
 }
 
+/** One priced line of a clinic's cost page. Structural, not a model import. */
+export interface OfferItemInput {
+  label: string;
+  priceMin?: number;
+  priceMax?: number;
+  currency?: string;
+  unit?: string;
+}
+
+/**
+ * `OfferCatalog` for the clinic's published price list — attached to the
+ * `MedicalClinic` node as `hasOfferCatalog` on the cost page only.
+ *
+ * A row with both bounds becomes a `PriceSpecification` carrying `minPrice`/
+ * `maxPrice`; a row with one figure becomes a plain `price`, which is the form
+ * schema.org (and every consumer of it) reads most reliably. Rows the clinic
+ * quotes privately carry no figure at all and are skipped — an `Offer` without
+ * a price is invalid, and inventing one would misstate what the clinic charges.
+ *
+ * Returns `undefined` when nothing is priced, so the caller can drop the key.
+ */
+export function offerCatalogJsonLd(
+  items: OfferItemInput[],
+  defaultCurrency = "USD",
+  catalogName = "Published prices",
+): JsonLd | undefined {
+  const offers = items
+    .filter((i) => i.priceMin != null || i.priceMax != null)
+    .map((i) => {
+      const currency = i.currency || defaultCurrency;
+      const both = i.priceMin != null && i.priceMax != null;
+      return compact({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: i.label },
+        priceCurrency: currency,
+        price: both ? undefined : (i.priceMin ?? i.priceMax),
+        priceSpecification: both
+          ? {
+              "@type": "PriceSpecification",
+              minPrice: i.priceMin,
+              maxPrice: i.priceMax,
+              priceCurrency: currency,
+            }
+          : undefined,
+        unitText: i.unit,
+      });
+    });
+
+  if (!offers.length) return undefined;
+  return {
+    "@type": "OfferCatalog",
+    name: catalogName,
+    itemListElement: offers,
+  };
+}
+
 function priceRange(
   clinic: Pick<IClinic, "priceMin" | "priceMax" | "currency">,
 ): string | undefined {

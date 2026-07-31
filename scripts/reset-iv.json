@@ -1,0 +1,119 @@
+[
+  {
+    "name": "Reset IV",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Mobile IV vitamin drips and NAD+ brought to your hotel room, home or office by an RN, in five metros across Nevada, California and Florida",
+    "description": "Reset IV has no clinic. There is no drip lounge and no waiting room. You book online, by phone or by text, and a registered nurse drives to wherever you are with the bag and the pole. Typical arrival is 45 to 60 minutes, the service runs 8am to 10pm seven days a week, and a standard infusion takes 30 to 45 minutes. The Las Vegas office on Hillwood Drive is where dispatch and admin sit, not somewhere patients go.\n\nThe menu is priced à la carte and posted openly, which is unusual in this corner of the market. Bags run from $189 for Still Spinning, saline plus one medication, up to $1,500 for the Gold Drip. NAD+ is sold in four separate doses from 250mg at $299 to 1000mg at $999, each with its published infusion time, and the longer ones genuinely take three to four hours or more. Prices are the same in every market, there are no travel fees, and payment is taken after treatment rather than upfront. Insurance is not accepted, though HSA and FSA cards are.\n\nEvery nurse is a licensed RN, and the company says it hires four or five out of every hundred who apply, with at least a year of IV insertion experience required. Clinical oversight is remote: the site describes a physician or nurse practitioner who is on call to approve treatment, and Reset IV does not name a medical director anywhere on its site, its LinkedIn, or in its press coverage. If knowing who signs off on your care matters to you, ask before you book.\n\nAlongside the drips there is a separate telehealth arm that ships compounded semaglutide, tirzepatide and peptides for self-injection after labs and a virtual consult. That side of the business drew an FDA warning letter in September 2025 over how the compounded weight loss drugs were described. Reset IV does no stem cell, exosome or PRP work of any kind, and the IV therapy here is vitamins and hydration rather than anything cellular.",
+    "treatmentTypes": [],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "skin-aesthetic",
+      "sexual-health"
+    ],
+    "cellSources": [],
+    "accreditations": [],
+    "currency": "USD",
+    "priceModel": "per_treatment",
+    "priceMin": 189,
+    "priceMax": 1500,
+    "priceNote": "Every drip is priced individually and the full menu is published. The floor is $189 for Still Spinning and the ceiling $1,500 for the Gold Drip, with most bags between $199 and $369. Standalone NAD+ runs $299 for 250mg up to $999 for 1000mg, and add-ons are $25 to $119. No travel fee, no booking fee, no deposit, and you pay after treatment. Shipped medication is billed monthly: semaglutide $349, tirzepatide $449, peptides $299. No insurance, but HSA and FSA work. Group rates on request.",
+    "foundedYear": 2017,
+    "teamSize": "11-50",
+    "languages": [
+      "English"
+    ],
+    "team": [
+      {
+        "name": "Daniel Rubenstein",
+        "title": "Founder and Chief Executive Officer",
+        "bio": "Started Reset IV in Las Vegas in 2017. He has had migraines his whole life and had gone to the emergency room repeatedly just to get a drip, and built the company around the idea that the bag could come to you instead. He is a business founder rather than a clinician and does not hold published medical credentials."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "9501 Hillwood Drive, Suite 200",
+        "city": "Las Vegas",
+        "region": "Nevada",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "89134",
+        "phone": "844-387-4870",
+        "lat": 36.19,
+        "lng": -115.304
+      }
+    ],
+    "website": "https://www.resetiv.com",
+    "contactEmail": "customercare@resetiv.com",
+    "social": {
+      "instagram": "https://www.instagram.com/reset_iv/",
+      "facebook": "https://www.facebook.com/ResetIV/",
+      "linkedin": "https://www.linkedin.com/company/reset-iv"
+    },
+    "highlights": [
+      "Fully mobile: a nurse comes to your home, hotel room, office or event, and there is no clinic to visit",
+      "Five metros across three states: Las Vegas, Los Angeles, Orange County, Miami, and Fort Lauderdale with Hollywood",
+      "Nurse arrival usually 45 to 60 minutes from booking, 8am to 10pm every day",
+      "The whole price list is published, and rates are identical in all five markets",
+      "NAD+ sold in four doses from 250mg to 1000mg, each with its infusion time stated up front",
+      "No travel fees, no deposit, and payment is collected after treatment",
+      "Every provider is a licensed RN with at least a year of IV experience",
+      "HSA and FSA accepted, insurance is not",
+      "No stem cell, exosome or PRP services"
+    ],
+    "faqs": [
+      {
+        "question": "Is there a clinic I can walk into?",
+        "answer": "No. Reset IV is mobile only. Every treatment happens where you are, whether that is a hotel room, your house, an office or an event. The Hillwood Drive address in Las Vegas is the corporate and dispatch office, and patients are not seen there, so do not turn up expecting a drip. Some third-party listing sites display that address as though it were a venue, which is misleading."
+      },
+      {
+        "question": "Who is actually overseeing the treatment?",
+        "answer": "A licensed registered nurse administers the drip in person. Above that, the site describes a physician or nurse practitioner who is on call to approve your treatment and advise the nurse, but Reset IV does not publish the name or credentials of a medical director anywhere. That is worth knowing before you book, and it is a fair question to ask them directly."
+      },
+      {
+        "question": "Is IV vitamin therapy FDA-approved?",
+        "answer": "No. These are elective wellness infusions, not approved treatments for any medical condition, and Reset IV carries the standard disclaimer that its services have not been evaluated by the FDA and are not intended to diagnose, treat or prevent disease. The individual drugs used as add-ons, such as anti-nausea and anti-inflammatory medications, are approved products used at the discretion of the on-call provider. Reset IV also states plainly that it makes no promises about outcomes."
+      },
+      {
+        "question": "Did Reset IV get an FDA warning letter?",
+        "answer": "Yes. On 9 September 2025 the FDA wrote to Reset IV about how its compounded semaglutide and tirzepatide were described online, objecting to wording that implied the compounded versions were the same as the approved brands. It was part of a sweep of more than 50 letters sent to GLP-1 compounders and telehealth sellers that month, so Reset IV was not singled out. The letter concerned marketing language for the shipped weight loss medication, not the mobile IV service."
+      },
+      {
+        "question": "What does it cost and are there hidden fees?",
+        "answer": "The listed price is what you pay. Bags start at $189 and most sit between $199 and $369, with NAD+ from $299 to $999 and the Gold Drip at $1,500. There is no travel charge, no service charge, no booking fee and no deposit, and payment is collected once the treatment is finished. Insurance is not accepted, including Medicare and Medicaid, but HSA and FSA cards are."
+      },
+      {
+        "question": "Who is not eligible?",
+        "answer": "Reset IV does not treat minors or anyone over 65. People who are pregnant or breastfeeding can be treated, though some vitamins and medications are off the table, and there is a dedicated prenatal drip at $219. Everyone else is cleared at the discretion of the on-call physician or nurse practitioner."
+      },
+      {
+        "question": "Do they offer stem cell or regenerative therapy?",
+        "answer": "No. The full menu is IV hydration and vitamins, NAD+, and a telehealth line shipping compounded GLP-1 medication and peptides such as sermorelin and PT-141. There is no stem cell, exosome, PRP or SVF service, and the IV work here is nutrient infusion rather than cell therapy."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "reset iv"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "reset iv reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510195/library/gh8ijrpreqxumnizsbxp.webp",
+      "publicId": "library/gh8ijrpreqxumnizsbxp",
+      "width": 596,
+      "height": 60,
+      "alt": "Reset IV logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510197/library/oiqbutjuyokjouew3xhg.webp",
+      "publicId": "library/oiqbutjuyokjouew3xhg",
+      "width": 864,
+      "height": 1080,
+      "alt": "A Reset IV nurse starting an IV drip for a client"
+    }
+  }
+]

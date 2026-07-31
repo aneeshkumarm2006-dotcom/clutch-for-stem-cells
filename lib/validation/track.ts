@@ -7,8 +7,19 @@
  */
 import { z } from "zod";
 
-/** Event names a browser may report (subset of the server-side allowlist). */
-export const TRACKABLE_CLIENT_EVENTS = ["profile_view", "filter_use"] as const;
+/**
+ * Event names a browser may report (subset of the server-side allowlist).
+ *
+ * `search` covers typeahead outcomes the server never sees: which kind of
+ * suggestion got picked, and which queries returned nothing. Only the shape of
+ * the result travels, never the search term, since a search here can name a
+ * medical condition.
+ */
+export const TRACKABLE_CLIENT_EVENTS = [
+  "profile_view",
+  "filter_use",
+  "search",
+] as const;
 
 const OBJECT_ID_RE = /^[a-f\d]{24}$/i;
 

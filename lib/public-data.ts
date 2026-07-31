@@ -1554,6 +1554,28 @@ export async function getClinicReviewSitemapEntries(): Promise<SitemapEntry[]> {
 }
 
 /**
+ * The dedicated `/clinic/[slug]/cost` URLs — one per published clinic, whether
+ * or not it has a price table. A clinic that quotes everything privately is
+ * itself the answer to "how much does it cost", so the page is indexable from
+ * the day the clinic goes live (see the header of
+ * `app/(public)/clinic/[slug]/cost/page.tsx`), and the sitemap must never
+ * disagree with the page (see `lib/seo-indexation.ts`).
+ */
+export async function getClinicCostSitemapEntries(): Promise<SitemapEntry[]> {
+  await dbConnect();
+  const docs = await Clinic.find({
+    status: "published",
+    isDeleted: false,
+  })
+    .select("slug updatedAt")
+    .lean();
+  return docs.map((d) => ({
+    path: `/clinic/${d.slug}/cost`,
+    lastModified: d.updatedAt,
+  }));
+}
+
+/**
  * Programmatic taxonomy landing-page URLs (Stage 7.1): every active treatment,
  * condition, country, and city term — countries/cities resolved to their
  * `/locations/[country]([/city])` paths.

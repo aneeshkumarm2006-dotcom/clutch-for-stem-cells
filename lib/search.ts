@@ -18,8 +18,9 @@ import { Types, type Model, type PipelineStage } from "mongoose";
 import { z } from "zod";
 
 import { dbConnect } from "@/lib/db";
+import { formatLocation } from "@/lib/format";
 import { LISTING_SORT, listingRankAddFields } from "@/lib/ranking";
-import { CellSource, Clinic, Condition, Treatment } from "@/models";
+import { CellSource, Clinic, Condition, Location, Treatment } from "@/models";
 import type { IClinic } from "@/models";
 
 // ── Public types ─────────────────────────────────────────────────────────────
@@ -126,17 +127,54 @@ export interface ClinicSearchResult {
   facets: ClinicFacets;
 }
 
-export type SuggestionType = "clinic" | "treatment" | "condition";
+export const SUGGESTION_TYPES = [
+  "clinic",
+  "treatment",
+  "condition",
+  "location",
+] as const;
+export type SuggestionType = (typeof SUGGESTION_TYPES)[number];
+
+/**
+ * The directory filter a suggestion stands for. Lets a two-field search combine
+ * a term with a place ("MSC therapy" + "Mexico" → one filtered `/clinics` URL)
+ * instead of dropping half of what the visitor typed.
+ */
+export interface SuggestionFilter {
+  key: "treatment" | "condition" | "country" | "city";
+  value: string;
+}
+
 export interface Suggestion {
   type: SuggestionType;
   label: string;
   slug: string;
+  /**
+   * Ready-made destination. Resolved server-side because a city's URL needs its
+   * parent country (`/locations/mexico/cancun`), which the client can't derive
+   * from the slug alone.
+   */
+  href: string;
+  /** Second line: a clinic's city, or "12 clinics" for a term. */
+  sublabel?: string;
+  /** Published clinics behind the term (omitted for clinics). */
+  count?: number;
+  /** Emoji flag, for country suggestions that have one. */
+  flag?: string;
+  filter?: SuggestionFilter;
+}
+
+export interface SuggestOptions {
+  /** Max suggestions returned overall (not per type). */
+  limit?: number;
+  /** Restrict to certain kinds — e.g. only places for a location field. */
+  types?: readonly SuggestionType[];
 }
 
 export interface SearchProvider {
   searchClinics(params: ClinicSearchParams): Promise<ClinicSearchResult>;
   /** Header typeahead across clinics + taxonomy (PRD §6.6). */
-  suggest(query: string, limit?: number): Promise<Suggestion[]>;
+  suggest(query: string, opts?: SuggestOptions): Promise<Suggestion[]>;
 }
 
 // ── Defaults / helpers ───────────────────────────────────────────────────────
@@ -185,14 +223,72 @@ const DIACRITIC_FORMS: Record<string, string> = {
  * Strictly widening: it can only add results, never drop them.
  */
 function placeNameRegex(value: string): RegExp {
+  return new RegExp(`^${diacriticPattern(value)}$`, "i");
+}
+
+/** Strip accents and lowercase, so the two spellings of "Cancun" compare equal. */
+export function foldForMatch(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+/** Regex source that matches `value` ignoring case and accents (see above). */
+function diacriticPattern(value: string): string {
   const folded = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   // `escapeRegex` only escapes non-letters, so no letter here follows a
   // backslash and this substitution can't corrupt an escape sequence.
-  const pattern = escapeRegex(folded).replace(/[a-z]/gi, (ch) => {
+  return escapeRegex(folded).replace(/[a-z]/gi, (ch) => {
     const forms = DIACRITIC_FORMS[ch.toLowerCase()];
     return forms ? `[${forms}]` : ch;
   });
-  return new RegExp(`^${pattern}$`, "i");
+}
+
+/** Unanchored accent-insensitive *contains* regex \u2014 the typeahead's candidate filter. */
+function containsNameRegex(value: string): RegExp {
+  return new RegExp(diacriticPattern(value), "i");
+}
+
+// \u2500\u2500 Typeahead ranking \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+
+/** Hard ceiling on suggestions per request, whatever the caller asks for. */
+export const MAX_SUGGESTIONS = 12;
+
+/**
+ * Per-type slots in one menu. Without these, a query like "stem" that matches
+ * thirty clinic names returns thirty clinics and hides the treatment page the
+ * visitor actually wanted.
+ */
+const TYPE_CAP: Record<SuggestionType, number> = {
+  clinic: 4,
+  treatment: 3,
+  condition: 3,
+  location: 3,
+};
+
+/**
+ * How well `label` answers `query`, highest first.
+ *
+ * Mongo's regex only tells us *that* a row matched, not *where* \u2014 so an exact
+ * hit ranked below an incidental mid-word one ("Cell" matching "Excellence
+ * Medical" above "Cell therapy"). Position decides the tier; popularity only
+ * breaks ties within it, so a well-reviewed clinic can never outrank a
+ * better-matching term.
+ */
+function relevance(query: string, label: string, popularity = 0): number {
+  const q = foldForMatch(query.trim());
+  const name = foldForMatch(label);
+
+  let tier = 10; // matched somewhere in the middle of a word
+  if (name === q) tier = 100;
+  else if (name.startsWith(q)) tier = 70;
+  else if (new RegExp(`\\b${escapeRegex(q)}`).test(name)) tier = 40;
+
+  // Shorter labels are the more precise match for the same tier ("MSC therapy"
+  // over "MSC therapy for knee osteoarthritis").
+  const brevity = Math.max(0, 6 - name.length / 12);
+  return tier * 100 + Math.min(popularity, 60) + brevity;
 }
 
 /** Resolve a mix of slugs and ids to ObjectIds for a taxonomy collection. */
@@ -442,44 +538,153 @@ export const mongoSearchProvider: SearchProvider = {
     };
   },
 
-  async suggest(query: string, limit = 5): Promise<Suggestion[]> {
+  async suggest(
+    query: string,
+    opts: SuggestOptions = {},
+  ): Promise<Suggestion[]> {
     const q = query.trim();
     if (!q) return [];
-    await dbConnect();
-    const rx = new RegExp(escapeRegex(q), "i");
 
-    const [clinics, treatments, conditions] = await Promise.all([
-      Clinic.find({ status: "published", isDeleted: false, name: rx })
-        .select("name slug")
-        .limit(limit)
-        .lean(),
-      Treatment.find({ isActive: true, name: rx })
-        .select("name slug")
-        .limit(limit)
-        .lean(),
-      Condition.find({ isActive: true, name: rx })
-        .select("name slug")
-        .limit(limit)
-        .lean(),
+    const limit = Math.min(Math.max(opts.limit ?? 8, 1), MAX_SUGGESTIONS);
+    const wants = (type: SuggestionType): boolean =>
+      !opts.types?.length || opts.types.includes(type);
+
+    await dbConnect();
+    // Accent-insensitive so "cancun" finds "Cancún" and "sao paulo" finds
+    // "São Paulo" — the old plain-substring regex missed both.
+    const rx = containsNameRegex(q);
+    // Over-fetch per collection: the pool is re-ranked in JS below, so the DB's
+    // arbitrary order can't decide which few rows survive.
+    const pool = limit * 2;
+
+    const [clinics, treatments, conditions, places] = await Promise.all([
+      wants("clinic")
+        ? Clinic.find({ status: "published", isDeleted: false, name: rx })
+            .select("name slug locations reviewCount ratingAvg")
+            .sort({ sortScore: -1 })
+            .limit(pool)
+            .lean()
+        : [],
+      wants("treatment")
+        ? Treatment.find({ isActive: true, name: rx })
+            .select("name slug clinicCount")
+            .limit(pool)
+            .lean()
+        : [],
+      wants("condition")
+        ? Condition.find({ isActive: true, name: rx })
+            .select("name slug clinicCount")
+            .limit(pool)
+            .lean()
+        : [],
+      wants("location")
+        ? Location.find({ isActive: true, name: rx })
+            .select("name slug clinicCount kind parentId flag")
+            .limit(pool)
+            .lean()
+        : [],
     ]);
 
-    return [
-      ...clinics.map((c) => ({
-        type: "clinic" as const,
-        label: c.name,
-        slug: c.slug,
-      })),
-      ...treatments.map((t) => ({
-        type: "treatment" as const,
+    // A city's URL lives under its country (`/locations/mexico/cancun`), so
+    // resolve the parents in one extra query rather than one per row.
+    const parentIds = places
+      .filter((p) => p.kind === "city" && p.parentId)
+      .map((p) => p.parentId as Types.ObjectId);
+    const countrySlugs = new Map<string, string>();
+    if (parentIds.length) {
+      const parents = await Location.find({ _id: { $in: parentIds } })
+        .select("slug")
+        .lean();
+      for (const p of parents)
+        countrySlugs.set(String(p._id), p.slug as string);
+    }
+
+    /** `popularity` only feeds ranking; it is stripped before returning. */
+    type Candidate = Suggestion & { popularity: number };
+
+    const candidates: Candidate[] = [
+      ...clinics.map((c): Candidate => {
+        const hq = c.locations?.find((l) => l.isHQ) ?? c.locations?.[0];
+        return {
+          type: "clinic" as const,
+          label: c.name,
+          slug: c.slug,
+          href: `/clinic/${c.slug}`,
+          sublabel:
+            formatLocation({ city: hq?.city, country: hq?.country }) ||
+            undefined,
+          // Reviewed clinics break ties ahead of empty listings.
+          popularity: c.reviewCount ?? 0,
+        };
+      }),
+      ...treatments.map((t): Candidate => ({
+        type: "treatment",
         label: t.name,
         slug: t.slug,
+        href: `/treatments/${t.slug}`,
+        count: t.clinicCount ?? 0,
+        filter: { key: "treatment", value: t.slug },
+        popularity: t.clinicCount ?? 0,
       })),
-      ...conditions.map((c) => ({
-        type: "condition" as const,
+      ...conditions.map((c): Candidate => ({
+        type: "condition",
         label: c.name,
         slug: c.slug,
+        href: `/conditions/${c.slug}`,
+        count: c.clinicCount ?? 0,
+        filter: { key: "condition", value: c.slug },
+        popularity: c.clinicCount ?? 0,
       })),
+      ...places.map((p): Candidate => {
+        const isCity = p.kind === "city";
+        const parentSlug = p.parentId
+          ? countrySlugs.get(String(p.parentId))
+          : undefined;
+        return {
+          type: "location",
+          label: p.name,
+          flag: p.flag || undefined,
+          slug: p.slug,
+          // An orphaned city has no country page to link to; send it to the
+          // filtered directory instead of a URL that would 404.
+          href:
+            isCity && parentSlug
+              ? `/locations/${parentSlug}/${p.slug}`
+              : isCity
+                ? `/clinics?city=${encodeURIComponent(p.name)}`
+                : `/locations/${p.slug}`,
+          count: p.clinicCount ?? 0,
+          // Filter by NAME, not slug: the directory matches these against
+          // `locations.city` / `locations.country` strings on the clinic.
+          filter: { key: isCity ? "city" : "country", value: p.name },
+          popularity: p.clinicCount ?? 0,
+        };
+      }),
     ];
+
+    // Rank globally, then cap each type so one crowded group can't fill the menu.
+    const ranked = candidates
+      .map((s) => ({ s, score: relevance(q, s.label, s.popularity) }))
+      .sort((a, b) => b.score - a.score || a.s.label.localeCompare(b.s.label));
+
+    const taken: Record<SuggestionType, number> = {
+      clinic: 0,
+      treatment: 0,
+      condition: 0,
+      location: 0,
+    };
+    const out: Suggestion[] = [];
+    for (const { s } of ranked) {
+      if (out.length >= limit) break;
+      if (taken[s.type] >= TYPE_CAP[s.type]) continue;
+      taken[s.type] += 1;
+      // `popularity` was only ever a ranking input; it does not belong on the
+      // wire.
+      const suggestion: Suggestion = { ...s };
+      delete (suggestion as Partial<Candidate>).popularity;
+      out.push(suggestion);
+    }
+    return out;
   },
 };
 
@@ -495,8 +700,8 @@ export const searchClinics = (
 
 export const suggestClinics = (
   query: string,
-  limit?: number,
-): Promise<Suggestion[]> => searchProvider.suggest(query, limit);
+  opts?: SuggestOptions,
+): Promise<Suggestion[]> => searchProvider.suggest(query, opts);
 
 // ── URL ↔ params (so the directory page can hydrate from the query string) ────
 

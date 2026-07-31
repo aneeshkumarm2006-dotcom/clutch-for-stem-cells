@@ -1,0 +1,199 @@
+[
+  {
+    "name": "SottoPelle",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Four Arizona hormone pellet clinics, operating as Tutera Medical, behind the SottoPelle dosing method licensed to certified providers nationwide",
+    "description": "SottoPelle is two things at once, and it helps to separate them before you book. One is a training and licensing company that certifies independent doctors elsewhere in the country to use its pellet dosing method, and it says plainly in its own footer that it neither endorses nor takes responsibility for those providers. The other is the clinic group that actually sees patients, which trades as Tutera Medical and runs four offices in Arizona: Scottsdale, Chandler, Glendale, and a Page office open one Monday morning a month. The Scottsdale suite is both the flagship clinic and the corporate address.\n\nGino Tutera, a board-certified OB/GYN, came across pellet therapy in 1992 and spent the following decade replacing its standard one-size dose with an individualised calculation, which he put online in 2002. That calculator, now trademarked as Dosaggio, is the actual product: the company licenses it to outside practices for $265 to $495 a month, and it sets the dose for a patient in Scottsdale the same way it does for one at a certified practice in another state. The company says the platform is covered by six patents but publishes no patent numbers. Tutera died in 2015 and his widow CarolAnn Tutera, who is not a clinician, has run both companies since.\n\nThe clinic side goes well beyond pellets. Testosterone injections, medically supervised weight loss including GLP-1 medication at around $450 a month, peptide therapy, IV drips and NAD+, ThermiVa radiofrequency for vaginal rejuvenation, and a full aesthetics menu of neurotoxins, fillers, microneedling and peels. There are three named hormone programmes, for women, men and transgender patients, and bloodwork runs through Sonora Quest.\n\nTwo caveats worth carrying into a consultation. The pellets are compounded, and neither company's site says anywhere that compounded pellets are not FDA-approved, which is a notable omission given that ACOG, the Endocrine Society and the Menopause Society all advise using approved formulations where they exist. And the brand markets hormone therapy for Parkinson's, Alzheimer's, dementia and traumatic brain injury, including a page aimed at former NFL players, without citing peer-reviewed evidence on those pages. SottoPelle does no stem cell or exosome work, and the PRP pages still on the site date from 2021 and 2022 and are no longer part of the menu.",
+    "treatmentTypes": [],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "sexual-health",
+      "skin-aesthetic"
+    ],
+    "cellSources": [],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "currency": "USD",
+    "priceModel": "per_treatment",
+    "priceMin": 355,
+    "priceMax": 890,
+    "priceNote": "There is no published price list, but the clinic's own membership maths discloses the numbers: an insertion runs $355 to $410 for women, who average about 3.5 a year, and $620 to $890 for men, who average two. GLP-1 weight loss is around $450 a month and red light therapy $49 a session. The Elevate membership is $49.99 or $99.99 a month on a 12-month commitment and buys discounts only, not treatment. Insurance, HSA and FSA policy is not stated anywhere, so ask.",
+    "foundedYear": 1992,
+    "teamSize": "11-50",
+    "physiciansCount": 2,
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "team": [
+      {
+        "name": "CarolAnn Tutera",
+        "title": "President and Chief Executive Officer",
+        "credentials": "MA",
+        "bio": "Runs both the clinic group and the training company, and has done since her husband's death in 2015. She is not a clinician: her degrees are a master's from the University of Santa Monica and a bachelor's from the University of Arizona. She has been a patient of the method herself since 1993, built the provider core-competency programme, and was named the face of hormone replacement therapy in PHOENIX Magazine's 2026 Best of the Valley issue."
+      },
+      {
+        "name": "Shary Borhan",
+        "title": "Physician, Scottsdale, Chandler and Glendale",
+        "credentials": "MD, FACOG",
+        "bio": "Board certified in obstetrics and gynecology and a Fellow of ACOG. Medical degree from St George's University in 2002, OB/GYN residency at Albany Medical Center in New York, and in private practice since 2006. She also teaches as an adjunct professor at Midwestern University School of Medicine and the A.T. Still School of Osteopathic Medicine."
+      },
+      {
+        "name": "Karem P. Colindres",
+        "title": "Physician, Glendale",
+        "credentials": "DO",
+        "bio": "Osteopathic physician, trained at the New York College of Osteopathic Medicine in 2007, and formerly an attending at Banner Thunderbird Medical Center. She works across family medicine, emergency medicine, aesthetic medicine and medically supervised weight loss, is a certified SottoPelle provider, and practises in both English and Spanish."
+      },
+      {
+        "name": "Stephen Nunn",
+        "title": "Director of Provider Training",
+        "credentials": "MPAS, PA-C, DFAAPA",
+        "bio": "The most senior clinician on staff, with 42 years in continuous practice as a physician assistant, 22 of them in OB/GYN and infertility, including a role in the first successful IVF programme in Arizona. He spent eleven years as a clinical instructor at the Arizona School of Health Sciences PA programme and was vice chairman of Arizona's regulatory board for physician assistants. He joined in 2007 and now runs provider training as well as seeing patients."
+      },
+      {
+        "name": "Carol Helvig",
+        "title": "Nurse Practitioner, Scottsdale and Chandler",
+        "credentials": "RN, MSN, FNP-C",
+        "bio": "Board-certified family nurse practitioner who has been nursing since 1993 across emergency, intensive care, orthopedics and labour and delivery, and took her master's in 2015. She is also certified in aesthetics through the National Laser Institute."
+      },
+      {
+        "name": "Melanie Ferreira",
+        "title": "Nurse Practitioner, Scottsdale, Glendale and Chandler",
+        "credentials": "RN, MSN, FNP-C",
+        "bio": "Board-certified family nurse practitioner. Degrees from Grand Canyon University and Arizona State, and in healthcare since 2006 across urology, surgical oncology, geriatrics and primary care. Her focus is hormone therapy, IV therapy and nutrition."
+      },
+      {
+        "name": "Satinder Dhillon-Dougher",
+        "title": "Nurse Practitioner, Scottsdale and Glendale",
+        "credentials": "MSN, APRN, AGNP-C",
+        "bio": "Board-certified adult-gerontology nurse practitioner with more than 26 years in nursing, including roughly two decades of acute care across perioperative, cardiovascular and critical care. Certified in medical aesthetics and advanced injectables, and works on hormone therapy, GLP-1 medication, peptides and IV therapy."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "8412 E Shea Blvd, Suite 101",
+        "city": "Scottsdale",
+        "region": "Arizona",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "85260",
+        "phone": "480-874-1515",
+        "lat": 33.582,
+        "lng": -111.904
+      },
+      {
+        "isHQ": false,
+        "addressLine": "215 S Dobson Rd, Suite 3, Building J",
+        "city": "Chandler",
+        "region": "Arizona",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "85224",
+        "phone": "480-874-1515",
+        "lat": 33.302,
+        "lng": -111.876
+      },
+      {
+        "isHQ": false,
+        "addressLine": "20325 N 51st Ave, Suite 106, Building 1",
+        "city": "Glendale",
+        "region": "Arizona",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "85308",
+        "phone": "480-874-1515",
+        "lat": 33.671,
+        "lng": -112.17
+      },
+      {
+        "isHQ": false,
+        "addressLine": "906 Vista",
+        "city": "Page",
+        "region": "Arizona",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "86040",
+        "phone": "480-874-1515",
+        "lat": 36.913,
+        "lng": -111.459
+      }
+    ],
+    "website": "https://tuteramedical.com",
+    "contactEmail": "info@tuteramedical.com",
+    "social": {
+      "facebook": "https://www.facebook.com/TuteraMedical/",
+      "instagram": "https://www.instagram.com/tuteramedicalaz/",
+      "x": "https://twitter.com/TuteraMedical",
+      "linkedin": "https://www.linkedin.com/company/tutera-medical",
+      "youtube": "https://www.youtube.com/channel/UCET-20s_XgxbqoptnGl8pZQ"
+    },
+    "highlights": [
+      "Four Arizona clinics trading as Tutera Medical, in Scottsdale, Chandler, Glendale and Page",
+      "The Page office opens one Monday morning a month, so plan around it",
+      "Dosing set by Dosaggio, the trademarked calculator the company also licenses to outside practices",
+      "One insertion lasts three to six months, so roughly two visits a year for men and three or four for women",
+      "Separate named programmes for women, men and transgender patients",
+      "Two physicians on staff plus a physician assistant with 42 years in practice and three nurse practitioners",
+      "Bloodwork runs through Sonora Quest, with published lab hours",
+      "GLP-1 weight loss, peptides, IV therapy and NAD+ alongside the hormone work",
+      "A full aesthetics menu including ThermiVa, neurotoxins, fillers and microneedling",
+      "No stem cell or exosome services, and PRP is no longer on the menu"
+    ],
+    "faqs": [
+      {
+        "question": "Is SottoPelle the clinic, or something else?",
+        "answer": "Both, which is the confusing part. SottoPelle is a training and licensing company that certifies independent practices around the country to use its dosing method, and its own site footer states that it does not recommend or endorse any of those providers and disclaims responsibility for the care they give. The clinics you can actually book with are the four Arizona offices trading as Tutera Medical, which are listed in SottoPelle's own directory as its flagship practice. If you found a SottoPelle provider outside Arizona, that is a separate independent business."
+      },
+      {
+        "question": "What is the method, exactly?",
+        "answer": "It is the dose calculation rather than the pellet. Gino Tutera moved away from the standard fixed pellet dose in the 1990s and built an individualised protocol, then put it online in 2002 as what is now the trademarked Dosaggio platform. The company licenses that calculator to certified providers for $265 to $495 a month and does not publish how it works. It claims six patents but gives no patent numbers anywhere, so that claim cannot be checked."
+      },
+      {
+        "question": "Are the pellets FDA-approved?",
+        "answer": "No, and this is worth raising directly because neither of their sites says so. Compounded hormone pellets are not FDA-approved products. ACOG, the Endocrine Society and the Menopause Society all take the position that compounded bioidentical hormone therapy lacks adequate supporting evidence and that FDA-approved formulations should be used where they exist, and that patients should be told plainly the compounded product is not approved. The clinic also does not disclose which pharmacy compounds its pellets or whether it is a 503A or 503B facility."
+      },
+      {
+        "question": "What should I make of the brain health claims?",
+        "answer": "Read them sceptically. The brand markets hormone therapy for Parkinson's disease, Alzheimer's, dementia, concussion and traumatic brain injury, including a page aimed at former NFL players, on the basis that the founder used the method for those patients with positive results. No peer-reviewed citations appear on those pages. A separate claim, that pellets raise bone density four times more than oral estrogen and two and a half times more than patches, is also published without a source. Ask what evidence sits behind any of it before making a decision."
+      },
+      {
+        "question": "Who runs it now that the founder has died?",
+        "answer": "Gino Tutera died in November 2015. His widow CarolAnn Tutera has been president and chief executive of both companies since, and she is a business executive rather than a clinician. No one is currently named publicly as medical director of either entity. The senior clinical figure on staff is Stephen Nunn, a physician assistant with 42 years in practice who also directs provider training."
+      },
+      {
+        "question": "What does an insertion cost?",
+        "answer": "The clinic does not publish a price list, but the numbers appear in the footnotes of its own membership page: $355 to $410 per insertion for women and $620 to $890 for men. At the typical cadence that works out to roughly $1,250 to $1,450 a year for women and $1,240 to $1,780 for men, before labs or the consultation, neither of which has a published fee. The Elevate membership at $49.99 or $99.99 a month gets you discounts rather than treatment, and commits you for twelve months."
+      },
+      {
+        "question": "Do they offer stem cell, exosome or PRP therapy?",
+        "answer": "No. There is no stem cell or exosome service, and the word does not appear anywhere on either site. Four PRP pages are still reachable but were last touched in 2021 and 2022, are absent from the current navigation and services page, and PRP appears nowhere on the 2026 homepage. Their current vaginal rejuvenation offering is ThermiVa radiofrequency, not a PRP shot. The closest thing to regenerative work on the live menu is peptide therapy and NAD+, which are neither cell nor blood derived."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "sottopelle"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "sottopelle reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510332/library/jad6w2urqvg6cgzhhtcy.webp",
+      "publicId": "library/jad6w2urqvg6cgzhhtcy",
+      "width": 1200,
+      "height": 252,
+      "alt": "SottoPelle logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510336/library/lifewj73b1773zmbrrya.webp",
+      "publicId": "library/lifewj73b1773zmbrrya",
+      "width": 1400,
+      "height": 349,
+      "alt": "Tutera Medical clinical staff in Scottsdale, Arizona"
+    }
+  }
+]

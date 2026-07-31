@@ -50,5 +50,22 @@ export function emptyClinic(): ClinicFormValues {
       ctaBody: "",
       seo: {},
     },
+    costPage: {
+      heading: "",
+      intro: "",
+      introEmpty: "",
+      items: [],
+      includes: [],
+      excludes: [],
+      insuranceNote: "",
+      financingNote: "",
+      bodyMarkdown: "",
+      faqs: [],
+      sources: [],
+      lastVerifiedAt: "",
+      ctaHeading: "",
+      ctaBody: "",
+      seo: {},
+    },
   };
 }

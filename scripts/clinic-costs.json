@@ -1,0 +1,2213 @@
+[
+  {
+    "slug": "10x-health-system",
+    "costPage": {
+      "introEmpty": "10X Health System publishes no price list. Testing, IV drips, peptides and supplements are billed separately, and a wellness concierge quotes the protocol once a provider has read your results. PRP and extracellular vesicle treatments at the affiliated HealthGAINS clinic are quoted the same way, so the number you get depends on what the panel finds rather than on a menu.",
+      "items": [
+        {
+          "label": "Diagnostic testing and gene panel",
+          "unit": "one time",
+          "note": "Billed on its own before any protocol is designed. Ask which panels are in the quote, since this is where the first invoice usually lands."
+        },
+        {
+          "label": "IV drips and nutrient therapy",
+          "unit": "per session",
+          "note": "Priced per drip. Members and package buyers pay a different rate to walk-ins, so ask for both."
+        },
+        {
+          "label": "Peptides and supplements",
+          "unit": "per month",
+          "note": "Ongoing monthly cost on top of the protocol fee, and the part people underestimate."
+        },
+        {
+          "label": "PRP and extracellular vesicle treatment (HealthGAINS)",
+          "unit": "per treatment",
+          "note": "Quoted by the affiliated clinic, not by 10X Health directly."
+        }
+      ],
+      "includes": [
+        "Provider review of your test results",
+        "A written protocol built from those results",
+        "Concierge follow-up while you are on the protocol"
+      ],
+      "excludes": [
+        "Lab and gene testing",
+        "Supplements and peptides",
+        "IV drips",
+        "Any regenerative procedure at HealthGAINS"
+      ],
+      "insuranceNote": "This is a cash-pay wellness programme, so insurance does not apply to the testing, the protocol or the drips. Ask whether an itemised receipt is available if you intend to try an HSA or FSA claim.",
+      "financingNote": "No published financing programme. Packages and memberships are the usual way the cost is spread, so ask what the difference is between paying per visit and paying up front.",
+      "faqs": [
+        {
+          "question": "How much does 10X Health System cost?",
+          "answer": "There is no published figure. Testing, drips, peptides and supplements are each billed separately, and the total depends entirely on what the provider recommends after reading your panel. Ask for the quote itemised by line rather than as one number."
+        },
+        {
+          "question": "Is the first consultation free?",
+          "answer": "Ask before you book. The pattern here is that the diagnostic panel is the paid first step, and the consultation is the conversation about its results, so the first real cost is usually the testing."
+        },
+        {
+          "question": "Does insurance cover any of it?",
+          "answer": "No. Nothing in this programme is billed to insurance. Some patients recover part of the lab cost through an HSA or FSA, so ask for an itemised receipt."
+        }
+      ],
+      "sources": [
+        { "label": "10X Health System website", "url": "https://10xhealthsystem.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "agerejuvenation",
+    "costPage": {
+      "introEmpty": "AgeRejuvenation does not run a set price list. Regenerative and exosome protocols are quoted per plan after an assessment, and the first consultation is free, so you can get a number before you commit to anything. Hormone, weight loss and IV programmes are billed separately from the cell work.",
+      "items": [
+        {
+          "label": "Initial consultation and assessment",
+          "priceMin": 0,
+          "unit": "one time",
+          "note": "Free. This is where the quote for everything else comes from."
+        },
+        {
+          "label": "Exosome therapy",
+          "unit": "per treatment",
+          "note": "Quoted per plan. Cost moves with the number of sites treated and how many sessions are scheduled."
+        },
+        {
+          "label": "Mesenchymal cell and umbilical cord protocols",
+          "unit": "per treatment",
+          "note": "Quoted after the assessment. Ask how many vials the quote covers, since that is the variable that moves the price most."
+        },
+        {
+          "label": "Platelet-rich plasma (PRP)",
+          "unit": "per session",
+          "note": "The lower-cost option here, and usually the one recommended first for joints."
+        },
+        {
+          "label": "Hormone, weight loss and IV programmes",
+          "unit": "per month",
+          "note": "Priced and billed apart from the regenerative work."
+        }
+      ],
+      "includes": [
+        "The free initial consultation",
+        "A written treatment plan",
+        "The procedure itself as quoted"
+      ],
+      "excludes": [
+        "Hormone therapy",
+        "Weight loss programmes",
+        "IV therapy",
+        "Repeat sessions beyond the quoted plan"
+      ],
+      "insuranceNote": "Regenerative treatment is not covered by insurance and is paid out of pocket. Parts of the diagnostic work may be claimable on your own plan, so ask the front desk what they can code before you assume otherwise.",
+      "financingNote": "Ask about payment plans at the consultation. Nothing is published, and the answer tends to depend on the size of the protocol.",
+      "faqs": [
+        {
+          "question": "How much does AgeRejuvenation cost?",
+          "answer": "There is no published price. Regenerative and exosome protocols are quoted per plan after an assessment, and the consultation that produces the quote is free."
+        },
+        {
+          "question": "Is the consultation really free?",
+          "answer": "Yes, the first consultation is offered at no cost. That is the visit where you get a figure, so it is a low-risk way to find out what your case would run."
+        },
+        {
+          "question": "Are hormone and weight loss programmes included?",
+          "answer": "No. Those are separate programmes on their own monthly pricing and are billed apart from any regenerative treatment."
+        }
+      ],
+      "sources": [
+        { "label": "AgeRejuvenation website", "url": "https://agerejuvenation.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "agelessrx",
+    "costPage": {
+      "intro": "AgelessRx is one of the few names in this category that puts its prices on the page. Everything is a monthly or quarterly subscription with shipping included, from $25 a month at the entry end to $159 a month for microdosed tirzepatide. Video consultations with the prescriber are free, insurance is not accepted, and lab panels and full-dose GLP-1 programmes are priced on their own.",
+      "items": [
+        {
+          "label": "Metformin",
+          "priceMin": 25,
+          "unit": "per month",
+          "note": "Billed $75 quarterly. The cheapest way in, and the one most people start on."
+        },
+        {
+          "label": "Rapamycin",
+          "priceMin": 65,
+          "unit": "per month",
+          "note": "Prescribed on assessment. Dosing schedules vary, so confirm what the monthly figure covers."
+        },
+        {
+          "label": "NAD+ injection",
+          "priceMin": 79,
+          "priceMax": 149,
+          "unit": "per month",
+          "note": "$79 a month on a prepaid three month plan, $149 a month after that. The introductory rate is the one advertised."
+        },
+        {
+          "label": "Powers Hair Solution",
+          "priceMin": 95,
+          "priceMax": 120,
+          "unit": "per month",
+          "note": "$95 for the first month, $120 a month after."
+        },
+        {
+          "label": "Microdosed tirzepatide",
+          "priceMin": 159,
+          "unit": "per month",
+          "note": "Microdosing programme. Full-dose GLP-1 programmes are priced separately and cost more."
+        },
+        {
+          "label": "Lab panels",
+          "unit": "per panel",
+          "note": "Priced individually and not bundled into any subscription."
+        },
+        {
+          "label": "Prescriber video consultation",
+          "priceMin": 0,
+          "unit": "per visit",
+          "note": "Free, and required before a prescription is issued."
+        }
+      ],
+      "includes": [
+        "The medication itself",
+        "Shipping",
+        "Free video consultations with the prescriber"
+      ],
+      "excludes": [
+        "Lab panels",
+        "Full-dose GLP-1 programmes",
+        "Anything requiring an in-person procedure"
+      ],
+      "insuranceNote": "Insurance is not accepted. Every subscription is cash pay, which is part of why the published prices are as low as they are.",
+      "financingNote": "No financing as such. The quarterly and prepaid plans are the discount mechanism here, so paying further ahead is what lowers the monthly figure.",
+      "faqs": [
+        {
+          "question": "How much does AgelessRx cost per month?",
+          "answer": "It depends entirely on the medication. Metformin is $25 a month at the low end, NAD+ injections run $79 to $149, and microdosed tirzepatide is $159. Shipping is included in the subscription price."
+        },
+        {
+          "question": "Do I pay for a consultation?",
+          "answer": "No. Video consultations with the prescriber are free. You pay for medication and for any lab panel you order."
+        },
+        {
+          "question": "Why is NAD+ two different prices?",
+          "answer": "$79 a month is the prepaid three month rate. After that block the price goes to $149 a month, so budget on the higher figure if you plan to stay on it."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "No. AgelessRx does not accept insurance for any of its programmes."
+        }
+      ],
+      "sources": [
+        { "label": "AgelessRx published subscription pricing", "url": "https://agelessrx.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "bioreset-medical",
+    "costPage": {
+      "introEmpty": "BioReset Medical publishes no prices. The practice states that regenerative medicine treatments are not covered by insurance and that procedures are billed directly to you at the time of service, so the figure comes out of the consultation rather than off a page.",
+      "items": [
+        {
+          "label": "Regenerative orthopaedic procedures",
+          "unit": "per procedure",
+          "note": "Quoted after examination and imaging review. Cost tracks the joint, the number of sites and the cell source used."
+        },
+        {
+          "label": "Platelet-rich plasma (PRP)",
+          "unit": "per session",
+          "note": "Typically the lowest-cost option in the range offered here."
+        },
+        {
+          "label": "Bone marrow and adipose derived procedures",
+          "unit": "per procedure",
+          "note": "Harvest, processing and delivery all sit inside one procedure fee. Ask for that fee itemised."
+        },
+        {
+          "label": "Exosome and IV protocols",
+          "unit": "per treatment",
+          "note": "Priced per protocol rather than per visit."
+        }
+      ],
+      "includes": [
+        "The procedure as quoted",
+        "Same-day processing and delivery of your own cells where that is the plan"
+      ],
+      "excludes": [
+        "Imaging obtained elsewhere",
+        "Repeat procedures",
+        "Any medication or supplement prescribed alongside"
+      ],
+      "insuranceNote": "Regenerative treatments are not covered by insurance and are billed directly to you at the time of service. Ask for a superbill if you intend to try an out-of-network claim.",
+      "financingNote": "Nothing published. Ask at the consultation whether the practice works with a third-party financing partner, since most clinics in this bracket do.",
+      "faqs": [
+        {
+          "question": "How much does BioReset Medical cost?",
+          "answer": "No prices are published. Regenerative procedures are quoted after a consultation and billed directly to you at the time of service."
+        },
+        {
+          "question": "Does insurance cover regenerative treatment here?",
+          "answer": "No. The practice is explicit that these treatments are not covered and that you pay at the time of service."
+        },
+        {
+          "question": "What moves the price up or down?",
+          "answer": "The joint being treated, how many sites are injected in one visit, and which cell source is used. PRP sits at the lower end and bone marrow work at the higher end."
+        }
+      ],
+      "sources": [
+        { "label": "BioReset Medical website", "url": "https://www.bioresetmedical.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "biote",
+    "costPage": {
+      "introEmpty": "Biote publishes no patient prices, and the reason is structural: it does not bill patients at all. Each certified clinic sets its own fee for an insertion and its own retail price on Biote supplements, so the number you pay comes from the individual practice, not from Biote. Expect compounded pellets to sit outside insurance coverage wherever you go.",
+      "items": [
+        {
+          "label": "Pellet insertion",
+          "unit": "per insertion",
+          "note": "Set by the certified clinic you attend, not by Biote. Prices vary widely between practices in the same city, so it is worth calling two."
+        },
+        {
+          "label": "Biote supplements",
+          "unit": "per month",
+          "note": "Retail price set by the clinic. Ask whether they are optional or built into the programme."
+        },
+        {
+          "label": "Lab work and follow-up",
+          "unit": "per visit",
+          "note": "Billed by the clinic. Ask how many panels a year the protocol expects."
+        }
+      ],
+      "includes": [
+        "Whatever the individual certified clinic bundles into its insertion fee"
+      ],
+      "excludes": [
+        "Anything the clinic chooses to bill separately, which commonly means labs and supplements"
+      ],
+      "insuranceNote": "Compounded hormone pellets generally sit outside insurance coverage. Some clinics can bill the office visit or the lab work to insurance even when the pellet itself is cash pay, so ask that question specifically.",
+      "financingNote": "Any financing is the individual clinic's, not Biote's. Ask the practice, not the brand.",
+      "faqs": [
+        {
+          "question": "How much do Biote pellets cost?",
+          "answer": "Biote does not set or publish a patient price. Each certified clinic sets its own insertion fee, so the only reliable figure comes from calling the practice you plan to attend."
+        },
+        {
+          "question": "Why can Biote not tell me the price?",
+          "answer": "Because it does not bill patients. Biote certifies and supplies clinics; the clinic is the one that charges you."
+        },
+        {
+          "question": "Will insurance pay for it?",
+          "answer": "Usually not for the pellets themselves. Ask your clinic whether the consultation and lab work can be billed even when the pellet cannot."
+        }
+      ],
+      "sources": [
+        { "label": "Biote website", "url": "https://biote.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "blatman-health-and-wellness-center",
+    "costPage": {
+      "introEmpty": "Blatman Health and Wellness Center publishes no prices, but it will send you one. The clinic says cost depends on how many injections are needed and what is being treated, and the office provides a pricing sheet on request, which is more than most practices in this category offer before a visit.",
+      "items": [
+        {
+          "label": "Platelet-rich plasma (PRP) injections",
+          "unit": "per session",
+          "note": "Priced by the number of injection sites rather than as a flat session fee."
+        },
+        {
+          "label": "Cell and exosome therapy",
+          "unit": "per treatment",
+          "note": "Quoted from the pricing sheet once the clinic knows what is being treated."
+        },
+        {
+          "label": "IV protocols",
+          "unit": "per session",
+          "note": "Billed separately from any injection work."
+        },
+        {
+          "label": "Office pricing sheet",
+          "priceMin": 0,
+          "unit": "on request",
+          "note": "Free. Ask the office to send it before you book, and you will have real figures going into the consultation."
+        }
+      ],
+      "includes": [
+        "The injections in the quoted plan",
+        "The consultation that produces the plan"
+      ],
+      "excludes": [
+        "Additional injection sites added later",
+        "IV protocols",
+        "Supplements"
+      ],
+      "insuranceNote": "The clinic does not bill insurance, though a superbill is available so you can submit an out-of-network claim yourself. Whether anything comes back depends entirely on your plan.",
+      "financingNote": "Nothing published. Ask when you request the pricing sheet.",
+      "faqs": [
+        {
+          "question": "How much does Blatman Health and Wellness Center charge?",
+          "answer": "No prices are published, but the office will send a pricing sheet on request. Cost depends on how many injections are needed and what is being treated."
+        },
+        {
+          "question": "Can I get the prices before I book a visit?",
+          "answer": "Yes. Ask the office to email the pricing sheet. That is unusual in this category and worth using."
+        },
+        {
+          "question": "Does the clinic bill insurance?",
+          "answer": "No, but it provides a superbill so you can file an out-of-network claim yourself."
+        }
+      ],
+      "sources": [
+        { "label": "Blatman Health and Wellness Center website", "url": "https://blatmanhealthandwellness.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "boulder-biologics",
+    "costPage": {
+      "introEmpty": "Boulder Biologics quotes at the consultation rather than from a list. Price depends on the joint, the number of sites and the formulation used. Everything is self-pay because most plans class autologous biologic procedures as investigational, but the clinic works with HSA and FSA funds and offers 0% APR payment plans, which is the practical difference between a $6,000 invoice and a monthly figure.",
+      "items": [
+        {
+          "label": "Bone marrow concentrate procedure",
+          "unit": "per joint",
+          "note": "Harvest, processing and image-guided injection. The number of joints treated in one visit is the main variable."
+        },
+        {
+          "label": "Adipose derived procedure",
+          "unit": "per procedure",
+          "note": "Quoted after examination. Ask how the fee changes if a second site is added on the day."
+        },
+        {
+          "label": "Platelet-rich plasma (PRP)",
+          "unit": "per session",
+          "note": "The lower-cost tier, and often the recommended starting point."
+        },
+        {
+          "label": "Consultation and imaging review",
+          "unit": "one time",
+          "note": "Where the quote comes from. Ask for it in writing before you leave."
+        }
+      ],
+      "includes": [
+        "Image-guided delivery",
+        "Itemised documentation you can submit to an HSA or FSA administrator"
+      ],
+      "excludes": [
+        "Imaging obtained elsewhere",
+        "Repeat procedures",
+        "Physical therapy after the procedure"
+      ],
+      "insuranceNote": "Most plans class autologous biologic procedures as investigational and do not cover them, so treat this as self-pay. HSA and FSA funds usually work, and the clinic provides itemised documentation for exactly that purpose.",
+      "financingNote": "Payment plans at 0% APR are available. Ask what term is offered and whether the rate holds for the whole term.",
+      "faqs": [
+        {
+          "question": "How much does Boulder Biologics cost?",
+          "answer": "There is no published price. Cost depends on the joint, the number of sites and the formulation, and is quoted at the consultation."
+        },
+        {
+          "question": "Can I use HSA or FSA money?",
+          "answer": "Usually yes. The clinic provides itemised documentation specifically so you can submit it, though your administrator makes the final call."
+        },
+        {
+          "question": "Is there a payment plan?",
+          "answer": "Yes. Payment plans at 0% APR are offered. Confirm the term and whether the rate applies for its full length."
+        },
+        {
+          "question": "Will insurance pay for any of it?",
+          "answer": "Most plans will not. Autologous biologic procedures are generally classed as investigational, which is the wording that leads to a denial."
+        }
+      ],
+      "sources": [
+        { "label": "Boulder Biologics website", "url": "https://boulderbiologics.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "cellaxys",
+    "costPage": {
+      "introEmpty": "CELLAXYS has no set price list. Cost is quoted after a consultation and a look at your imaging, because it depends on the joint being treated and which cell source is used. The gap between a PRP session and a bone marrow procedure here is large enough that a number quoted before anyone has seen your scans would be meaningless.",
+      "items": [
+        {
+          "label": "Bone marrow derived procedure",
+          "unit": "per procedure",
+          "note": "Harvest, same-day processing and image-guided injection. Priced by joint."
+        },
+        {
+          "label": "Adipose derived procedure",
+          "unit": "per procedure",
+          "note": "Quoted after imaging review. Ask whether a second joint on the same day is discounted."
+        },
+        {
+          "label": "Platelet-rich plasma (PRP)",
+          "unit": "per session",
+          "note": "The entry tier. Often used as a first step before a cell procedure is considered."
+        },
+        {
+          "label": "Consultation and imaging review",
+          "unit": "one time",
+          "note": "The visit that produces your quote."
+        }
+      ],
+      "includes": [
+        "Image-guided delivery",
+        "Same-day harvest and processing where that is the plan"
+      ],
+      "excludes": [
+        "Imaging obtained elsewhere",
+        "Follow-up procedures",
+        "Bracing or rehabilitation"
+      ],
+      "insuranceNote": "Regenerative procedures of this kind are not covered by US insurance and are paid out of pocket. Ask whether the office visit itself can be billed, which is sometimes possible even when the procedure cannot.",
+      "financingNote": "Nothing published. Ask at the consultation which financing partners the clinic works with.",
+      "faqs": [
+        {
+          "question": "How much does CELLAXYS cost?",
+          "answer": "There is no set price list. Cost is quoted after a consultation and a review of your imaging, since it depends on the joint and the cell source used."
+        },
+        {
+          "question": "Why does the cell source change the price?",
+          "answer": "Bone marrow and adipose procedures involve a harvest and same-day processing, which PRP does not. That work is the difference in the invoice."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "No. Expect to pay out of pocket for the procedure itself."
+        }
+      ],
+      "sources": [
+        { "label": "CELLAXYS website", "url": "https://cellaxys.com/" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "california-wellness-institute",
+    "costPage": {
+      "introEmpty": "California Wellness Institute publishes no prices for any service, exosome therapy and PRP included. The practice quotes after a consultation with Dr. Rajaratnam, and it links to CareCredit from its service pages, which is the clearest signal you have that treatments here are financed rather than paid on the day.",
+      "items": [
+        {
+          "label": "Exosome therapy",
+          "unit": "per treatment",
+          "note": "Quoted after consultation. Cost moves with the area treated and the number of sessions planned."
+        },
+        {
+          "label": "Platelet-rich plasma (PRP)",
+          "unit": "per session",
+          "note": "Used for joints, hair and aesthetics here, and the price differs by application. Ask which one your quote covers."
+        },
+        {
+          "label": "Consultation with Dr. Rajaratnam",
+          "unit": "one time",
+          "note": "The visit that produces the quote. Confirm whether it carries a fee when you book."
+        }
+      ],
+      "includes": [
+        "The treatment as quoted at the consultation"
+      ],
+      "excludes": [
+        "Repeat sessions",
+        "Supplements or aftercare products",
+        "Anything added after the original plan"
+      ],
+      "insuranceNote": "Aesthetic and regenerative work of this kind is not covered by insurance. Treat the whole quote as out of pocket unless the office tells you otherwise in writing.",
+      "financingNote": "CareCredit is linked from the practice's own service pages, so third-party financing is the expected route. Check the promotional term and what rate applies once it ends.",
+      "faqs": [
+        {
+          "question": "How much does California Wellness Institute cost?",
+          "answer": "No prices are published for any service. You get a figure after a consultation with Dr. Rajaratnam."
+        },
+        {
+          "question": "Can I finance the treatment?",
+          "answer": "The practice links to CareCredit from its service pages, so financing is the expected route. Read the promotional period terms carefully."
+        },
+        {
+          "question": "Does the price change by body area?",
+          "answer": "Yes. PRP for hair, skin and joints are different treatments with different quantities involved, and they are quoted separately."
+        }
+      ],
+      "sources": [
+        { "label": "California Wellness Institute website", "url": "https://cawellnessinstitute.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "cenegenics",
+    "costPage": {
+      "intro": "Cenegenics publishes its own pricing, which is unusual in this category and worth crediting. The Performance Health Assessment runs $4,495 to $13,000 depending on how much testing the physician orders, the programme fee is then $550 to $750 a month, and nutraceuticals and medications add $350 to $600 a month. Cenegenics totals that at an average of $14,000 to $21,000 a year. Insurance is not accepted, though FSA and HSA funds can be used.",
+      "items": [
+        {
+          "label": "Performance Health Assessment",
+          "priceMin": 4495,
+          "priceMax": 13000,
+          "unit": "one time",
+          "note": "The range is entirely down to how much testing your physician orders. Ask which tier you are being quoted and what it adds."
+        },
+        {
+          "label": "Programme fee",
+          "priceMin": 550,
+          "priceMax": 750,
+          "unit": "per month",
+          "note": "Covers physician access, coaching, phlebotomy and lab work."
+        },
+        {
+          "label": "Nutraceuticals and medications",
+          "priceMin": 350,
+          "priceMax": 600,
+          "unit": "per month",
+          "note": "Prescribed as clinically indicated, and billed on top of the programme fee."
+        },
+        {
+          "label": "Total annual cost",
+          "priceMin": 14000,
+          "priceMax": 21000,
+          "unit": "per year",
+          "note": "Cenegenics' own stated average once the assessment, programme fee and medications are added together."
+        },
+        {
+          "label": "Regenerative treatments",
+          "unit": "per treatment",
+          "note": "Set by each individual centre rather than nationally, so the figure comes from your local location."
+        }
+      ],
+      "includes": [
+        "Physician access",
+        "Health coaching",
+        "Phlebotomy and lab work",
+        "The assessment as quoted"
+      ],
+      "excludes": [
+        "Nutraceuticals and prescribed medications",
+        "Regenerative treatments, which each centre prices itself",
+        "Anything ordered beyond the assessment tier you bought"
+      ],
+      "insuranceNote": "Cenegenics does not accept insurance. FSA and HSA funds can be used for treatments and medications, which for a programme in this bracket is worth planning a year ahead for.",
+      "financingNote": "No published financing programme. The monthly structure is itself the spread, since only the assessment is a large single payment.",
+      "faqs": [
+        {
+          "question": "How much does Cenegenics cost per year?",
+          "answer": "Cenegenics puts the average at $14,000 to $21,000 a year. That is the Performance Health Assessment of $4,495 to $13,000, plus $550 to $750 a month in programme fees, plus $350 to $600 a month in nutraceuticals and medications."
+        },
+        {
+          "question": "Why is the assessment price such a wide range?",
+          "answer": "Because the amount of testing is set by your physician. The low end is the standard panel; the high end reflects a much fuller workup."
+        },
+        {
+          "question": "Does insurance cover Cenegenics?",
+          "answer": "No. Insurance is not accepted, though FSA and HSA funds can be used for treatments and medications."
+        },
+        {
+          "question": "Are regenerative treatments part of the programme fee?",
+          "answer": "No. Those are priced by each individual centre and billed separately from the programme."
+        }
+      ],
+      "sources": [
+        { "label": "Cenegenics published FAQ pricing", "url": "https://cenegenics.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "centeno-schultz-clinic",
+    "costPage": {
+      "intro": "Centeno-Schultz quotes after evaluation rather than from a menu, but the spread is known: roughly $2,000 at the PRP end to about $12,000 for the more involved bone marrow concentrate work. The gap is the procedure, not the clinic. PRP is a draw and an injection; a bone marrow concentrate procedure adds a harvest, processing and precise image-guided placement, sometimes across several structures in one visit.",
+      "items": [
+        {
+          "label": "Platelet-rich plasma (PRP) procedure",
+          "priceMin": 2000,
+          "unit": "per procedure",
+          "note": "The lower end of the range. Priced by the structure treated and the number of sites."
+        },
+        {
+          "label": "Bone marrow concentrate procedure",
+          "priceMax": 12000,
+          "unit": "per procedure",
+          "note": "The upper end. Includes the marrow harvest, same-day processing and image-guided placement."
+        },
+        {
+          "label": "Full range across procedures",
+          "priceMin": 2000,
+          "priceMax": 12000,
+          "unit": "per procedure",
+          "note": "Where quoted cases generally land. Complex multi-level spine work sits at the top of it."
+        },
+        {
+          "label": "Evaluation and imaging review",
+          "unit": "one time",
+          "note": "Candidacy and the quote both come out of this visit."
+        }
+      ],
+      "includes": [
+        "Image-guided placement",
+        "Same-day harvest and processing on cell procedures",
+        "The procedure as quoted after evaluation"
+      ],
+      "excludes": [
+        "Imaging obtained elsewhere",
+        "Repeat procedures",
+        "Rehabilitation"
+      ],
+      "insuranceNote": "Interventional orthobiologic procedures are not covered by US insurance and are paid out of pocket. Ask whether the evaluation visit itself can be billed to your plan, which is sometimes possible.",
+      "financingNote": "Nothing published. Ask at the evaluation which financing partners the clinic works with, particularly for the multi-level cases at the top of the range.",
+      "faqs": [
+        {
+          "question": "How much does Centeno-Schultz cost?",
+          "answer": "Roughly $2,000 to $12,000 depending on the procedure. PRP sits at the lower end and bone marrow concentrate work at the higher end. The exact figure is quoted after evaluation."
+        },
+        {
+          "question": "Why is bone marrow concentrate so much more than PRP?",
+          "answer": "It adds a marrow harvest, same-day processing in a lab, and precise image-guided placement, often across several structures in one visit. PRP is a blood draw and an injection."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "No. These procedures are paid out of pocket."
+        }
+      ],
+      "sources": [
+        { "label": "Centeno-Schultz Clinic website", "url": "https://centenoschultz.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "docere-clinics",
+    "costPage": {
+      "intro": "Docere Clinics sits at the top end of the US market and does not hide it. Treatments start around $25,000 and rise with complexity, the average case runs $40,000 to $65,000, and top-end procedures reach about $100,000, with sedation by a board-certified anesthesiologist included. Insurance does not cover any of it. For patients who cannot reach those numbers the clinic points to its affiliated Humanaut Health.",
+      "items": [
+        {
+          "label": "Entry-level treatment",
+          "priceMin": 25000,
+          "unit": "per treatment",
+          "note": "Where pricing starts. Cost rises from here with the number of sites and the complexity of the procedure."
+        },
+        {
+          "label": "Typical case",
+          "priceMin": 40000,
+          "priceMax": 65000,
+          "unit": "per treatment",
+          "note": "The clinic's own stated average, and the range most patients should plan against."
+        },
+        {
+          "label": "Full-body procedures",
+          "priceMax": 100000,
+          "unit": "per treatment",
+          "note": "The top end, for the most extensive multi-site work."
+        },
+        {
+          "label": "Anaesthesia",
+          "priceMin": 0,
+          "unit": "included",
+          "note": "Sedation by a board-certified anesthesiologist is inside the quoted price, not billed on top."
+        }
+      ],
+      "includes": [
+        "Sedation by a board-certified anesthesiologist",
+        "Harvest, processing and delivery in one procedure",
+        "The full multi-site procedure as quoted"
+      ],
+      "excludes": [
+        "Travel and accommodation in Park City",
+        "Follow-up procedures",
+        "Anything referred to the affiliated Humanaut Health"
+      ],
+      "insuranceNote": "These are elective procedures and insurance does not cover them. Every quoted figure is out of pocket.",
+      "financingNote": "For patients who want the same category of treatment at a lower price, Docere points to its affiliated Humanaut Health rather than to a financing product. Ask about both at the consultation.",
+      "faqs": [
+        {
+          "question": "How much does Docere Clinics cost?",
+          "answer": "Treatments start around $25,000. The average case runs $40,000 to $65,000, and the most extensive procedures reach about $100,000. Sedation by a board-certified anesthesiologist is included."
+        },
+        {
+          "question": "Why is it more expensive than other US clinics?",
+          "answer": "The clinic attributes it to the volume of product used and the complexity of its multi-site procedures, which are done under sedation in one sitting rather than split across visits."
+        },
+        {
+          "question": "Is there a cheaper option?",
+          "answer": "Docere refers patients looking for lower-cost treatment to its affiliated Humanaut Health."
+        },
+        {
+          "question": "Does insurance cover any of this?",
+          "answer": "No. These are elective procedures and are paid entirely out of pocket."
+        }
+      ],
+      "sources": [
+        { "label": "Docere Clinics published pricing page", "url": "https://www.docereclinics.com/pricing/" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "evexias-medical-centers",
+    "costPage": {
+      "intro": "The EVEXIAS Texas clinics publish almost nothing. The one posted price is an Essential Care membership at $150 a month or $1,500 a year, which buys telemedicine for minor acute problems plus 20 percent off select labs and IV therapies and 10 percent off supplements. Pellets, peptides, GLP-1 medication, PRP and aesthetics are all quoted after a consultation. For scale, the independently owned Denver clinic publishes hormone packages from $139.65 a month.",
+      "items": [
+        {
+          "label": "Essential Care membership",
+          "priceMin": 150,
+          "unit": "per month",
+          "note": "Or $1,500 a year. Covers telemedicine for minor acute issues plus discounts, not treatment itself."
+        },
+        {
+          "label": "Essential Care membership, annual",
+          "priceMin": 1500,
+          "unit": "per year",
+          "note": "The prepaid version of the same membership, at two months' saving."
+        },
+        {
+          "label": "Hormone pellets",
+          "unit": "per insertion",
+          "note": "Quoted after consultation. For scale, the independently owned Denver clinic publishes hormone packages from $139.65 a month."
+        },
+        {
+          "label": "Peptides and GLP-1 medication",
+          "unit": "per month",
+          "note": "Quoted individually and billed apart from the membership."
+        },
+        {
+          "label": "PRP and aesthetics",
+          "unit": "per treatment",
+          "note": "Quoted after consultation."
+        }
+      ],
+      "includes": [
+        "Telemedicine visits for minor acute problems, on the membership",
+        "20 percent off select labs and IV therapies",
+        "10 percent off supplements"
+      ],
+      "excludes": [
+        "Hormone pellets",
+        "Peptides and GLP-1 medication",
+        "PRP and aesthetic treatments",
+        "Labs and IV therapy, which are discounted rather than covered"
+      ],
+      "insuranceNote": "Insurance is not accepted for the membership. Treatments are cash pay, so ask specifically whether any part of your lab work can be billed to your own plan instead.",
+      "financingNote": "Nothing published. The annual membership at $1,500 against $150 a month is the only stated saving.",
+      "faqs": [
+        {
+          "question": "What does the EVEXIAS membership actually buy?",
+          "answer": "Telemedicine for minor acute problems, 20 percent off select labs and IV therapies, and 10 percent off supplements. It is a discount and access membership, not a treatment plan."
+        },
+        {
+          "question": "How much do hormone pellets cost at EVEXIAS?",
+          "answer": "The Texas clinics do not publish a figure. It is quoted after a consultation. For a sense of scale, the independently owned Denver clinic lists hormone packages from $139.65 a month."
+        },
+        {
+          "question": "Is the membership required to be treated?",
+          "answer": "Ask when you book. The membership and the treatments are priced separately, so confirm whether one is a condition of the other."
+        }
+      ],
+      "sources": [
+        { "label": "EVEXIAS Medical Centers website", "url": "https://www.evexiasmedical.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "forever-labs",
+    "costPage": {
+      "intro": "Forever Labs prices two published memberships and nothing else, because it banks cells rather than treating with them. $3,000 covers collection, processing and the first year of storage, then $300 a year after that. $10,000 covers collection, processing and storage for life with no annual fee. Both are HSA and FSA eligible, and financing runs through Klarna and Affirm. Neither price includes any future treatment.",
+      "items": [
+        {
+          "label": "Collection, processing and first year of storage",
+          "priceMin": 3000,
+          "unit": "one time",
+          "note": "The entry membership. Storage then renews annually."
+        },
+        {
+          "label": "Annual storage after the first year",
+          "priceMin": 300,
+          "unit": "per year",
+          "note": "The recurring cost on the $3,000 plan. Over roughly 23 years it passes the lifetime price."
+        },
+        {
+          "label": "Lifetime membership",
+          "priceMin": 10000,
+          "unit": "one time",
+          "note": "Collection, processing and storage for life, with no annual fee at all."
+        }
+      ],
+      "includes": [
+        "Cell collection",
+        "Processing",
+        "Storage for the term you bought"
+      ],
+      "excludes": [
+        "Any future treatment using the banked cells",
+        "Retrieval and shipping when you want to use them",
+        "Annual storage after year one on the $3,000 plan"
+      ],
+      "insuranceNote": "Not an insurance product, but both memberships are HSA and FSA eligible, which is the practical way most people offset part of the cost.",
+      "financingNote": "Financing is offered through Klarna and Affirm. Check the rate after any promotional period before you choose the lifetime plan on credit.",
+      "faqs": [
+        {
+          "question": "How much does Forever Labs cost?",
+          "answer": "$3,000 for collection, processing and the first year of storage, then $300 a year. Or $10,000 once for collection, processing and lifetime storage with no annual fee."
+        },
+        {
+          "question": "Which plan works out cheaper?",
+          "answer": "At $300 a year, the annual plan takes just over 23 years to reach the $10,000 lifetime price. Below that horizon the annual plan costs less."
+        },
+        {
+          "question": "Does the price include treatment later?",
+          "answer": "No. Both prices cover banking only. Any future treatment using the cells is a separate cost at a separate clinic."
+        },
+        {
+          "question": "Can I use HSA or FSA funds?",
+          "answer": "Yes, both memberships are HSA and FSA eligible."
+        }
+      ],
+      "sources": [
+        { "label": "Forever Labs published membership pricing", "url": "https://www.foreverlabs.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "fountain-life",
+    "costPage": {
+      "introEmpty": "Fountain Life has no published price list, and the structure matters more than the number: access runs through an annual membership sold in tiers, and regenerative treatments are billed on top of that fee rather than inside it. Restorative biologics at the Naples centre are open only to APEX and EPIC members, so the membership tier you buy decides what you can even be quoted for.",
+      "items": [
+        {
+          "label": "CORE membership",
+          "unit": "per year",
+          "note": "The entry tier. Diagnostics-led, and the base on which everything else is billed."
+        },
+        {
+          "label": "APEX membership",
+          "unit": "per year",
+          "note": "The tier that opens restorative biologics at the Naples centre."
+        },
+        {
+          "label": "APEX Family membership",
+          "unit": "per year",
+          "note": "The multi-person version of APEX."
+        },
+        {
+          "label": "Regenerative treatments",
+          "unit": "per treatment",
+          "note": "Billed on top of the membership, not covered by it. Restricted to APEX and EPIC members at Naples."
+        }
+      ],
+      "includes": [
+        "The diagnostic programme at the tier you buy",
+        "Membership access to the centre"
+      ],
+      "excludes": [
+        "All regenerative treatments",
+        "Anything outside your membership tier",
+        "Travel to the centre"
+      ],
+      "insuranceNote": "Membership and regenerative treatment are both cash pay. Some of the diagnostic imaging may be claimable on your own plan depending on the indication, so ask what can be coded.",
+      "financingNote": "Nothing published. Ask how the annual membership is billed, since paying monthly against annually is usually the only lever.",
+      "faqs": [
+        {
+          "question": "How much does Fountain Life cost?",
+          "answer": "No prices are published. Access is by annual membership sold in tiers, and regenerative treatments are billed separately on top of the membership fee."
+        },
+        {
+          "question": "Does membership include stem cell treatment?",
+          "answer": "No. Regenerative treatments are billed on top, and at the Naples centre restorative biologics are open only to APEX and EPIC members."
+        },
+        {
+          "question": "Which tier do I need?",
+          "answer": "That depends on what you want access to. If restorative biologics at Naples are the goal, CORE will not reach them."
+        }
+      ],
+      "sources": [
+        { "label": "Fountain Life website", "url": "https://www.fountainlife.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "innovations-stem-cell-center",
+    "costPage": {
+      "intro": "Innovations Stem Cell Center publishes a flat figure, which almost nobody in this category does. The first treatment is $14,500 and covers everything from the evaluation to the first follow-up, including the fat harvest, cell processing and SVF deployment. Any additional treatment after that is $7,000. There is no per-joint or per-vial arithmetic to do.",
+      "items": [
+        {
+          "label": "First treatment",
+          "priceMin": 14500,
+          "unit": "one time",
+          "note": "Covers the evaluation, the fat harvest, cell processing, SVF deployment and the first follow-up."
+        },
+        {
+          "label": "Each additional treatment",
+          "priceMin": 7000,
+          "unit": "per treatment",
+          "note": "The repeat rate once you are an existing patient."
+        },
+        {
+          "label": "First treatment plus one repeat",
+          "priceMin": 21500,
+          "unit": "total",
+          "note": "What a two-treatment course comes to at the published rates."
+        }
+      ],
+      "includes": [
+        "Evaluation",
+        "Fat harvest",
+        "Cell processing",
+        "SVF deployment",
+        "The first follow-up visit"
+      ],
+      "excludes": [
+        "Travel to Dallas",
+        "Additional treatments beyond the first",
+        "Any medication prescribed alongside"
+      ],
+      "insuranceNote": "Not covered by insurance. The published price is what you pay out of pocket.",
+      "financingNote": "Nothing published. Ask whether the repeat-treatment rate can be locked in when you book the first.",
+      "faqs": [
+        {
+          "question": "How much does Innovations Stem Cell Center cost?",
+          "answer": "$14,500 for the first treatment, which covers everything from evaluation to the first follow-up. Each additional treatment after that is $7,000."
+        },
+        {
+          "question": "What does the $14,500 actually include?",
+          "answer": "The evaluation, the fat harvest, cell processing, SVF deployment and the first follow-up. It is a single fee rather than a set of line items."
+        },
+        {
+          "question": "Why are repeat treatments cheaper?",
+          "answer": "The evaluation work has already been done. The $7,000 covers the procedure itself."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "No. This is paid out of pocket."
+        }
+      ],
+      "sources": [
+        { "label": "Innovations Stem Cell Center website", "url": "https://innovationsstemcellcenter.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "invigor-medical",
+    "costPage": {
+      "intro": "Invigor Medical prices everything as a monthly subscription, cash pay, with a flat $29.50 shipping charge on every order. The range runs from $75 a month for enclomiphene to $350 for GLP-1 with GIP. Bloodwork is $49 quarterly on the testosterone plans unless you bring your own, and no insurance, Medicare or Medicaid is accepted anywhere in the programme.",
+      "items": [
+        {
+          "label": "Enclomiphene",
+          "priceMin": 75,
+          "unit": "per month",
+          "note": "The lowest-priced plan on the menu."
+        },
+        {
+          "label": "Vitamin B12",
+          "priceMin": 90,
+          "unit": "per month"
+        },
+        {
+          "label": "Tadalafil or sildenafil",
+          "priceMin": 100,
+          "unit": "per month",
+          "note": "The standard sexual health plans."
+        },
+        {
+          "label": "Testosterone",
+          "priceMin": 125,
+          "unit": "per month",
+          "note": "Starting price on a three-month plan. Add $49 of bloodwork quarterly unless you supply your own."
+        },
+        {
+          "label": "GLP-1 weight loss, micro-dose",
+          "priceMin": 149,
+          "unit": "per month",
+          "note": "The entry point of the weight loss range."
+        },
+        {
+          "label": "Sermorelin",
+          "priceMin": 220,
+          "unit": "per month"
+        },
+        {
+          "label": "Trimix",
+          "priceMin": 229,
+          "unit": "per vial",
+          "note": "Priced per vial rather than per month."
+        },
+        {
+          "label": "Passion+",
+          "priceMin": 300,
+          "unit": "per month"
+        },
+        {
+          "label": "NAD+ injections",
+          "priceMin": 340,
+          "unit": "per month"
+        },
+        {
+          "label": "GLP-1 with GIP",
+          "priceMin": 350,
+          "unit": "per month",
+          "note": "The top of the weight loss range."
+        },
+        {
+          "label": "Quarterly bloodwork",
+          "priceMin": 49,
+          "unit": "per quarter",
+          "note": "Required on testosterone plans unless you bring your own results."
+        },
+        {
+          "label": "Shipping",
+          "priceMin": 29.5,
+          "unit": "per order",
+          "note": "Flat, and charged on every order regardless of size."
+        }
+      ],
+      "includes": [
+        "The medication",
+        "Provider oversight on the plan",
+        "Ongoing prescription management"
+      ],
+      "excludes": [
+        "Shipping, at a flat $29.50 an order",
+        "Quarterly bloodwork on testosterone plans",
+        "Anything outside the plan you subscribed to"
+      ],
+      "insuranceNote": "No insurance, Medicare or Medicaid is accepted. Every plan is cash pay.",
+      "financingNote": "No financing. The three-month plans are where the lower monthly rates come from, so committing further ahead is the only discount mechanism.",
+      "faqs": [
+        {
+          "question": "How much does Invigor Medical cost per month?",
+          "answer": "It depends on the plan. Enclomiphene is $75, testosterone starts at $125 on a three-month plan, and GLP-1 with GIP is $350. Every order also carries a flat $29.50 shipping charge."
+        },
+        {
+          "question": "Is bloodwork included?",
+          "answer": "No. Testosterone plans need $49 of bloodwork quarterly unless you bring your own recent results."
+        },
+        {
+          "question": "Does Invigor take insurance?",
+          "answer": "No. Insurance, Medicare and Medicaid are all declined. Everything is cash pay."
+        },
+        {
+          "question": "Why is testosterone cheaper on a three-month plan?",
+          "answer": "The lower monthly rate is the commitment discount. Month-to-month costs more."
+        }
+      ],
+      "sources": [
+        { "label": "Invigor Medical website", "url": "https://tryinvigor.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "male-excel",
+    "costPage": {
+      "intro": "Male Excel bills in three separate charges, and they only make sense read together. The online consultation is $99 once and includes the at-home test kit. Membership is then $99 a month. Medication is billed every second month on top of that, from about $120 for injectable testosterone. A realistic first-year figure is well above the $99 the advertising leads with, so plan against all three lines.",
+      "items": [
+        {
+          "label": "Online consultation and at-home test kit",
+          "priceMin": 99,
+          "unit": "one time",
+          "note": "Paid once at the start. The test kit is inside this price."
+        },
+        {
+          "label": "Medical membership",
+          "priceMin": 99,
+          "unit": "per month",
+          "note": "Unlimited messaging and e-visits, a 60-day check-in and a full panel every six months."
+        },
+        {
+          "label": "Injectable testosterone",
+          "priceMin": 120,
+          "unit": "per two months",
+          "note": "From about $120 depending on dose, billed every second month rather than monthly."
+        },
+        {
+          "label": "Testosterone Lipoderm cream",
+          "priceMin": 132,
+          "unit": "per two months",
+          "note": "From $132 at a typical starting dose. Varies with what is prescribed."
+        },
+        {
+          "label": "Oral Triclozene",
+          "priceMin": 95,
+          "unit": "per two months"
+        },
+        {
+          "label": "ED generics",
+          "priceMin": 65,
+          "priceMax": 89,
+          "unit": "per month"
+        }
+      ],
+      "includes": [
+        "Unlimited messaging and e-visits, on the membership",
+        "A 60-day check-in",
+        "A full panel every six months",
+        "The at-home test kit, inside the $99 consultation"
+      ],
+      "excludes": [
+        "All medication, billed every second month",
+        "Shipping and handling",
+        "Anything outside the membership's included visits"
+      ],
+      "insuranceNote": "Insurance is not accepted. FSA and HSA funds may work, so ask for an itemised receipt if you plan to submit one.",
+      "financingNote": "No financing and no contract, so you can stop at any time. The commitment risk here is low; the cost stacking is the thing to watch.",
+      "faqs": [
+        {
+          "question": "How much does Male Excel actually cost?",
+          "answer": "Three charges. $99 once for the consultation and test kit, $99 a month for membership, and medication on top from about $120 billed every second month. The advertised $99 is the membership line only."
+        },
+        {
+          "question": "Is medication included in the membership?",
+          "answer": "No. Membership buys visits, messaging and panels. Medication is billed separately every second month."
+        },
+        {
+          "question": "Is there a contract?",
+          "answer": "No contract, and insurance is not accepted. FSA and HSA funds may be usable, so keep the receipts."
+        }
+      ],
+      "sources": [
+        { "label": "Male Excel published HRT cost page", "url": "https://maleexcel.com/treatments/hrt-costs/" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "marek-health",
+    "costPage": {
+      "intro": "Marek Health publishes one figure and then bills everything else on top. The $299 Guided Optimization intake covers a one-to-one coach assessment and a 25 minute consultation with a licensed medical provider, and it requires the purchase of a lab panel of at least $450. Medication, follow-up labs and later provider visits are all billed separately, so $749 is the realistic floor rather than $299.",
+      "items": [
+        {
+          "label": "Guided Optimization intake",
+          "priceMin": 299,
+          "unit": "one time",
+          "note": "Coach assessment plus a 25 minute consultation with a licensed medical provider."
+        },
+        {
+          "label": "Required lab panel",
+          "priceMin": 450,
+          "unit": "one time",
+          "note": "A panel of at least $450 must be purchased alongside the intake. This is not optional."
+        },
+        {
+          "label": "Minimum to get started",
+          "priceMin": 749,
+          "unit": "one time",
+          "note": "The intake and the minimum required panel added together."
+        },
+        {
+          "label": "Medication",
+          "unit": "per month",
+          "note": "Billed separately once prescribed. Not part of the intake fee."
+        },
+        {
+          "label": "Follow-up labs and later provider visits",
+          "unit": "per visit",
+          "note": "Billed on top as they occur."
+        }
+      ],
+      "includes": [
+        "A one-to-one coach assessment",
+        "A 25 minute consultation with a licensed medical provider"
+      ],
+      "excludes": [
+        "The required lab panel of $450 or more",
+        "All medication",
+        "Follow-up labs",
+        "Provider visits after the intake"
+      ],
+      "insuranceNote": "No insurance is accepted. The lab panels are listed as FSA and HSA eligible, which is the one place you can offset part of the cost.",
+      "financingNote": "Nothing published. Because the largest single charge is the intake and its panel, the cost is front-loaded rather than spread.",
+      "faqs": [
+        {
+          "question": "How much does Marek Health cost to start?",
+          "answer": "$299 for the Guided Optimization intake, plus a required lab panel of at least $450. That makes $749 the practical starting figure, before any medication."
+        },
+        {
+          "question": "Is the lab panel optional?",
+          "answer": "No. The intake requires the purchase of a panel of at least $450, so the two go together."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "No insurance is accepted. The lab panels are listed as FSA and HSA eligible."
+        }
+      ],
+      "sources": [
+        { "label": "Marek Health website", "url": "https://marekhealth.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "michigan-center-for-regenerative-medicine",
+    "costPage": {
+      "introEmpty": "Consultations here are free and costs are quoted after the visit. The practice publishes no price list. The only figure anywhere on its site sits inside its own article on PRP hair treatment, which puts the average at $1,500 to $3,500 for the initial three to four rounds, and that is written as a general estimate rather than a quoted rate. Office visits and EMG testing may be billed to insurance, which is unusual in this category.",
+      "items": [
+        {
+          "label": "Consultation",
+          "priceMin": 0,
+          "unit": "one time",
+          "note": "Free. The quote for everything else comes out of this visit."
+        },
+        {
+          "label": "PRP for hair, initial course",
+          "priceMin": 1500,
+          "priceMax": 3500,
+          "unit": "for 3 to 4 rounds",
+          "note": "A general industry estimate the practice cites in its own article, not a quoted rate. Treat it as a bracket to check your quote against."
+        },
+        {
+          "label": "Regenerative orthopaedic procedures",
+          "unit": "per procedure",
+          "note": "Quoted after the free consultation."
+        },
+        {
+          "label": "Office visits and EMG testing",
+          "unit": "per visit",
+          "note": "May be billed to insurance. Check your deductible and co-payment first."
+        }
+      ],
+      "includes": [
+        "The free consultation",
+        "The procedure as quoted"
+      ],
+      "excludes": [
+        "Repeat rounds beyond the quoted course",
+        "Imaging obtained elsewhere"
+      ],
+      "insuranceNote": "Office visits and EMG testing may be billable to insurance, which is worth knowing because most clinics in this category bill nothing. Patients are asked to check deductibles and co-payments first. The regenerative procedures themselves are not covered.",
+      "financingNote": "Nothing published. Ask at the free consultation.",
+      "faqs": [
+        {
+          "question": "How much does Michigan Center for Regenerative Medicine cost?",
+          "answer": "No price list is published. Consultations are free and costs are quoted after the visit."
+        },
+        {
+          "question": "Is the $1,500 to $3,500 PRP figure a quote?",
+          "answer": "No. It is a general estimate the practice cites in its own article about PRP for hair, covering an initial three to four rounds. Use it as a sanity check on the quote you receive, not as the price."
+        },
+        {
+          "question": "Can anything be billed to insurance?",
+          "answer": "Office visits and EMG testing may be. The regenerative procedures are not. Check your deductible and co-payment before the visit."
+        }
+      ],
+      "sources": [
+        { "label": "Michigan Center for Regenerative Medicine website", "url": "https://regenerativemedicinemichigan.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "next-health",
+    "costPage": {
+      "introEmpty": "Next Health posts prices for IV drips, lab panels, NAD+ and therapeutic plasma exchange, but not for stem cells or exosomes. Those are quoted after a consultation with one of its providers, and the consultation itself is free. Memberships and packages are billed separately from the cell work, so read the two as different purchases.",
+      "items": [
+        {
+          "label": "Provider consultation",
+          "priceMin": 0,
+          "unit": "one time",
+          "note": "Free, and the route to a quote for cell and exosome work."
+        },
+        {
+          "label": "Stem cell therapy",
+          "unit": "per treatment",
+          "note": "Not published. Quoted after the consultation."
+        },
+        {
+          "label": "Exosome therapy",
+          "unit": "per treatment",
+          "note": "Not published. Quoted after the consultation."
+        },
+        {
+          "label": "IV drips",
+          "unit": "per session",
+          "note": "Priced on the menu, unlike the cell work. Ask for the current list when you book."
+        },
+        {
+          "label": "NAD+ and therapeutic plasma exchange",
+          "unit": "per session",
+          "note": "Also priced on the published menu."
+        },
+        {
+          "label": "Membership",
+          "unit": "per month",
+          "note": "Billed separately from any treatment, and changes what you pay per session."
+        }
+      ],
+      "includes": [
+        "The free provider consultation",
+        "The session or treatment you booked"
+      ],
+      "excludes": [
+        "Membership fees",
+        "Lab panels",
+        "Any cell or exosome treatment, which is quoted separately"
+      ],
+      "insuranceNote": "Cash pay throughout. Ask for itemised receipts if you intend to try an HSA or FSA claim on the lab work.",
+      "financingNote": "Memberships and packages are the mechanism for lowering the per-session cost. Ask what a membership changes about the quoted price before you buy one.",
+      "faqs": [
+        {
+          "question": "How much does stem cell therapy cost at Next Health?",
+          "answer": "It is not published. Next Health prices its IV drips, lab panels, NAD+ and plasma exchange openly, but cell and exosome work is quoted after a free provider consultation."
+        },
+        {
+          "question": "Is the consultation free?",
+          "answer": "Yes. That is the visit where you get a figure for the cell work."
+        },
+        {
+          "question": "Does membership include treatment?",
+          "answer": "No. Memberships and packages are billed separately from the cell work."
+        }
+      ],
+      "sources": [
+        { "label": "Next Health website", "url": "https://www.next-health.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "optimal-bio",
+    "costPage": {
+      "introEmpty": "No price is published anywhere on Optimal Bio's site, so the number comes at consultation. What the practice does commit to is more useful than a headline figure: the quote is given upfront, it includes the initial comprehensive lab panel, and follow-up appointments are part of the care rather than billed separately. HSA and FSA funds are accepted and Cherry financing is available.",
+      "items": [
+        {
+          "label": "Hormone pellet therapy",
+          "unit": "per insertion",
+          "note": "Quoted upfront at the consultation, with the initial comprehensive lab panel inside the price."
+        },
+        {
+          "label": "Initial comprehensive lab panel",
+          "priceMin": 0,
+          "unit": "included",
+          "note": "Part of the quoted price rather than a separate invoice."
+        },
+        {
+          "label": "Follow-up appointments",
+          "priceMin": 0,
+          "unit": "included",
+          "note": "Part of the care, not billed on top. Worth confirming how many are covered."
+        }
+      ],
+      "includes": [
+        "The initial comprehensive lab panel",
+        "Follow-up appointments",
+        "An upfront quote before you commit"
+      ],
+      "excludes": [
+        "Repeat insertions beyond the quoted plan",
+        "Supplements"
+      ],
+      "insuranceNote": "Insurance does not cover the therapy itself, though your own plan may cover some of the lab work case by case. HSA and FSA funds are accepted.",
+      "financingNote": "Cherry financing is available. Check the term and the rate that applies after any promotional period.",
+      "faqs": [
+        {
+          "question": "How much does Optimal Bio cost?",
+          "answer": "No price is published. You get an upfront quote at the consultation, and that quote includes the initial comprehensive lab panel."
+        },
+        {
+          "question": "Are follow-up appointments extra?",
+          "answer": "No. The practice treats follow-ups as part of the care rather than as separate billing."
+        },
+        {
+          "question": "Can I finance it?",
+          "answer": "Yes, through Cherry. HSA and FSA funds are also accepted."
+        }
+      ],
+      "sources": [
+        { "label": "Optimal Bio website", "url": "https://optimalbio.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "primehealth-denver",
+    "costPage": {
+      "intro": "PrimeHealth Denver publishes one price and withholds two. The Women's Health Group Program is $1,200, or two payments of $650, and the page lists exactly what that buys. The two individual care plans, Foundations and Optimize and Thrive, have no published figure at all, so you get those numbers on the free 20 minute intake call. Insurance is not accepted for anything.",
+      "items": [
+        {
+          "label": "Women's Health Group Program",
+          "priceMin": 1200,
+          "unit": "one time",
+          "note": "Or two payments of $650. Covers eight group sessions, about 30 blood markers, adrenal testing, two months of supplements, a cooking class, three sauna sessions and a loaner HeartMath device."
+        },
+        {
+          "label": "Foundations care plan",
+          "unit": "per programme",
+          "note": "No published price. Quoted on the free intake call."
+        },
+        {
+          "label": "Optimize and Thrive care plan",
+          "unit": "per programme",
+          "note": "No published price. Quoted on the free intake call."
+        },
+        {
+          "label": "Intake call",
+          "priceMin": 0,
+          "unit": "20 minutes",
+          "note": "Free, and the only way to get a figure for the two individual plans."
+        }
+      ],
+      "includes": [
+        "Eight group sessions, on the Women's Health programme",
+        "About 30 blood markers and adrenal testing",
+        "Two months of supplements",
+        "A cooking class, three sauna sessions and a loaner HeartMath device"
+      ],
+      "excludes": [
+        "Supplements beyond the included two months",
+        "Anything in the individual care plans, which are priced separately"
+      ],
+      "insuranceNote": "Insurance is not accepted for anything, including the group programme. Everything is cash pay.",
+      "financingNote": "The Women's Health programme can be split into two payments of $650. Supplements are discounted through Fullscript.",
+      "faqs": [
+        {
+          "question": "How much does PrimeHealth Denver cost?",
+          "answer": "The Women's Health Group Program is $1,200, or two payments of $650. The Foundations and Optimize and Thrive care plans have no published price and are quoted on the free 20 minute intake call."
+        },
+        {
+          "question": "What does the $1,200 include?",
+          "answer": "Eight group sessions, about 30 blood markers, adrenal testing, two months of supplements, a cooking class, three sauna sessions and a loaner HeartMath device."
+        },
+        {
+          "question": "Does insurance cover any of it?",
+          "answer": "No. Insurance is not accepted for anything here."
+        }
+      ],
+      "sources": [
+        { "label": "PrimeHealth Denver website", "url": "https://primehealthdenver.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "r3-stem-cell",
+    "costPage": {
+      "intro": "R3 Stem Cell publishes its prices rather than quoting them privately, and it prices the Mexico protocols by cell count, which makes them directly comparable. In the US, one extremity joint such as a knee with umbilical cord allograft starts around $5,500 and more involved cases run to about $15,000. At the Mexico clinics the range is $3,999 for 25 million cells up to $18,499 for 250 million, with exosome-only IV protocols between $4,999 and $7,999. The first consultation is free and insurance covers none of it.",
+      "items": [
+        {
+          "label": "US, one extremity joint with umbilical cord allograft",
+          "priceMin": 5500,
+          "unit": "per joint",
+          "note": "The published US starting point, for a single joint such as a knee."
+        },
+        {
+          "label": "US, more involved cases",
+          "priceMax": 15000,
+          "unit": "per treatment",
+          "note": "Where multi-site or more complex US cases land."
+        },
+        {
+          "label": "Mexico, 25 million cells",
+          "priceMin": 3999,
+          "unit": "per protocol",
+          "note": "The entry protocol at the Mexico clinics."
+        },
+        {
+          "label": "Mexico, 50 million cells",
+          "priceMin": 5499,
+          "unit": "per protocol",
+          "note": "Includes 25 billion exosomes plus PRP and a multivitamin IV drip."
+        },
+        {
+          "label": "Mexico, 100 million cells",
+          "priceMin": 9499,
+          "unit": "per protocol",
+          "note": "The clinic describes 100 million as its maximum recommendation in a single session."
+        },
+        {
+          "label": "Mexico, 250 million cells",
+          "priceMin": 18499,
+          "unit": "per protocol",
+          "note": "The top of the published cell-count range, delivered across a course rather than one sitting."
+        },
+        {
+          "label": "Exosome-only IV protocol",
+          "priceMin": 4999,
+          "priceMax": 7999,
+          "unit": "per protocol",
+          "note": "No cell component. Priced separately from the cell protocols."
+        },
+        {
+          "label": "First consultation",
+          "priceMin": 0,
+          "unit": "one time",
+          "note": "Free."
+        }
+      ],
+      "includes": [
+        "The cells at the count you paid for",
+        "Exosomes, PRP and a multivitamin IV drip on the 50 million protocol and above",
+        "The free first consultation"
+      ],
+      "excludes": [
+        "Travel and accommodation for the Mexico clinics",
+        "Repeat protocols",
+        "Imaging obtained elsewhere"
+      ],
+      "insuranceNote": "Insurance covers none of it, in the US or Mexico. Every published figure is out of pocket.",
+      "financingNote": "Nothing published as a financing product. The cell-count tiers are themselves the lever: a lower count is a lower price, so ask the physician what count your case actually calls for before buying up.",
+      "faqs": [
+        {
+          "question": "How much does R3 Stem Cell cost?",
+          "answer": "In the US, from about $5,500 for one extremity joint up to roughly $15,000 for more involved cases. At the Mexico clinics, $3,999 for 25 million cells, $5,499 for 50 million, $9,499 for 100 million and $18,499 for 250 million."
+        },
+        {
+          "question": "Why is Mexico cheaper than the US?",
+          "answer": "Different regulatory framework and different cost base, which is why the Mexico protocols are priced by cell count while the US work is priced per joint."
+        },
+        {
+          "question": "What does the 50 million cell protocol include?",
+          "answer": "The cells plus 25 billion exosomes, PRP and a multivitamin IV drip."
+        },
+        {
+          "question": "Is the consultation free?",
+          "answer": "Yes, the first consultation costs nothing."
+        }
+      ],
+      "sources": [
+        { "label": "R3 Stem Cell Mexico published cost page", "url": "https://stemcellmexico.com/cost/" },
+        { "label": "R3 Stem Cell website", "url": "https://r3stemcell.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "regeneration-clinic-of-panama",
+    "costPage": {
+      "intro": "Regeneration Clinic of Panama quotes each protocol after an intake review, so there is no fixed list, but the bracket is published: roughly $5,000 to $30,000 depending on the protocol. What is worth noting is how much sits inside that figure. Bloodwork, IV therapy, the cell infusions and airport transfers are all covered by the quote, which is not the norm for medical travel. Insurance does not apply and the clinic does not offer financing.",
+      "items": [
+        {
+          "label": "Treatment protocol",
+          "priceMin": 5000,
+          "priceMax": 30000,
+          "unit": "per protocol",
+          "note": "The published bracket. Where you land depends on the condition and the number of infusions in the plan."
+        },
+        {
+          "label": "Bloodwork",
+          "priceMin": 0,
+          "unit": "included",
+          "note": "Inside the protocol price."
+        },
+        {
+          "label": "IV therapy",
+          "priceMin": 0,
+          "unit": "included",
+          "note": "Inside the protocol price."
+        },
+        {
+          "label": "Airport transfers",
+          "priceMin": 0,
+          "unit": "included",
+          "note": "Inside the protocol price, which removes one of the usual hidden costs of treating abroad."
+        }
+      ],
+      "includes": [
+        "Bloodwork",
+        "IV therapy",
+        "The stem cell infusions",
+        "Airport transfers"
+      ],
+      "excludes": [
+        "Flights",
+        "Accommodation",
+        "Repeat protocols",
+        "Anything added after the intake review"
+      ],
+      "insuranceNote": "Not covered by insurance. Everything is paid out of pocket.",
+      "financingNote": "The clinic does not offer financing, so the protocol is paid directly. Ask about the deposit schedule when you book, since medical travel usually involves paying before you fly.",
+      "faqs": [
+        {
+          "question": "How much does Regeneration Clinic of Panama cost?",
+          "answer": "Published costs run from about $5,000 to $30,000 depending on the protocol. The exact figure is quoted after an intake review of your case."
+        },
+        {
+          "question": "What is included in the price?",
+          "answer": "Bloodwork, IV therapy, the stem cell infusions and airport transfers. Flights and accommodation are not."
+        },
+        {
+          "question": "Is financing available?",
+          "answer": "No. The clinic does not offer financing, and insurance does not apply."
+        }
+      ],
+      "sources": [
+        { "label": "Regeneration Clinic of Panama published protocol pricing" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "regenestem",
+    "costPage": {
+      "introEmpty": "Regenestem does not publish prices for any of its therapies. The sequence is fixed: a physician reviews your medical history first, then a patient care coordinator quotes the plan and takes a deposit to hold your appointment date. Advance Care Card financing is offered for treatments insurance will not cover, which in practice means all of them.",
+      "items": [
+        {
+          "label": "Medical history review",
+          "unit": "one time",
+          "note": "A physician reviews your records before any quote is given. Ask whether this step carries a fee."
+        },
+        {
+          "label": "Treatment plan",
+          "unit": "per plan",
+          "note": "Quoted by a patient care coordinator after the physician review."
+        },
+        {
+          "label": "Booking deposit",
+          "unit": "one time",
+          "note": "Taken to hold the appointment date. Ask what it is, whether it comes off the total, and whether it is refundable."
+        },
+        {
+          "label": "Regenerative and orthopaedic procedures",
+          "unit": "per procedure",
+          "note": "Priced inside the quoted plan rather than individually."
+        }
+      ],
+      "includes": [
+        "The treatment plan as quoted",
+        "The physician review that precedes it"
+      ],
+      "excludes": [
+        "Travel to the clinic",
+        "Repeat plans",
+        "Anything added after the quote"
+      ],
+      "insuranceNote": "Insurance does not cover these treatments, which is the stated reason the clinic offers financing at all.",
+      "financingNote": "Advance Care Card financing is offered specifically for treatments insurance will not cover. Check the rate and term, and ask how the booking deposit interacts with a financed balance.",
+      "faqs": [
+        {
+          "question": "How much does Regenestem cost?",
+          "answer": "No prices are published. A physician reviews your history, then a patient care coordinator quotes the plan and takes a deposit to hold your date."
+        },
+        {
+          "question": "Is the deposit refundable?",
+          "answer": "Ask before you pay it. The deposit holds your appointment date, so its terms are worth having in writing."
+        },
+        {
+          "question": "Can I finance the treatment?",
+          "answer": "Yes. Advance Care Card financing is offered for treatments insurance will not cover."
+        }
+      ],
+      "sources": [
+        { "label": "Regenestem website", "url": "https://www.regenestem.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "reset-iv",
+    "costPage": {
+      "intro": "Reset IV publishes its entire menu and prices every drip individually, which makes it one of the easier services in this directory to budget for. The floor is $189 for Still Spinning and the ceiling $1,500 for the Gold Drip, with most bags between $199 and $369. There is no travel fee, no booking fee and no deposit, and you pay after treatment rather than before.",
+      "items": [
+        {
+          "label": "Still Spinning",
+          "priceMin": 189,
+          "unit": "per drip",
+          "note": "The lowest-priced bag on the menu."
+        },
+        {
+          "label": "The Revival",
+          "priceMin": 199,
+          "unit": "per drip"
+        },
+        {
+          "label": "Modified Myers cocktail",
+          "priceMin": 289,
+          "unit": "per drip"
+        },
+        {
+          "label": "The Fortress",
+          "priceMin": 369,
+          "unit": "per drip",
+          "note": "The top of the range most bags sit in."
+        },
+        {
+          "label": "The Longevity",
+          "priceMin": 549,
+          "unit": "per drip"
+        },
+        {
+          "label": "The Gold Drip",
+          "priceMin": 1500,
+          "unit": "per drip",
+          "note": "The most expensive item on the published menu."
+        },
+        {
+          "label": "Standalone NAD+",
+          "priceMin": 299,
+          "priceMax": 999,
+          "unit": "per drip",
+          "note": "$299 for 250mg up to $999 for 1000mg. Higher doses take considerably longer to infuse."
+        },
+        {
+          "label": "Add-ons",
+          "priceMin": 25,
+          "priceMax": 119,
+          "unit": "per add-on",
+          "note": "Anti-nausea, glutathione, magnesium, B12 and the rest are priced individually on top of a bag."
+        },
+        {
+          "label": "Semaglutide",
+          "priceMin": 349,
+          "unit": "per month",
+          "note": "Shipped medication, billed monthly rather than per visit."
+        },
+        {
+          "label": "Tirzepatide",
+          "priceMin": 449,
+          "unit": "per month",
+          "note": "Shipped medication, billed monthly."
+        },
+        {
+          "label": "Peptides",
+          "priceMin": 299,
+          "unit": "per month",
+          "note": "Shipped medication, billed monthly."
+        },
+        {
+          "label": "Travel, booking and deposit",
+          "priceMin": 0,
+          "unit": "per visit",
+          "note": "None of the three are charged. Mobile service comes to you at the listed price."
+        }
+      ],
+      "includes": [
+        "The drip as listed",
+        "Mobile service to your location",
+        "Payment after treatment rather than up front"
+      ],
+      "excludes": [
+        "Add-ons, at $25 to $119 each",
+        "Standalone NAD+",
+        "Shipped medication, which is billed monthly"
+      ],
+      "insuranceNote": "No insurance is accepted, but HSA and FSA funds work. Ask for the itemised receipt at the end of the visit.",
+      "financingNote": "No financing, and none needed at these amounts. Group rates are available on request, which is the one discount worth asking about if several of you are being treated together.",
+      "faqs": [
+        {
+          "question": "How much does Reset IV cost?",
+          "answer": "From $189 for Still Spinning to $1,500 for the Gold Drip, with most bags between $199 and $369. Standalone NAD+ runs $299 for 250mg up to $999 for 1000mg."
+        },
+        {
+          "question": "Is there a travel or booking fee?",
+          "answer": "No. There is no travel fee, no booking fee and no deposit, and you pay after treatment."
+        },
+        {
+          "question": "Are add-ons included in the drip price?",
+          "answer": "No. Add-ons are $25 to $119 each on top of the bag you choose."
+        },
+        {
+          "question": "Can I use HSA or FSA funds?",
+          "answer": "Yes. Insurance is not accepted, but HSA and FSA both work."
+        }
+      ],
+      "sources": [
+        { "label": "Reset IV published drip menu", "url": "https://www.resetiv.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "sottopelle",
+    "costPage": {
+      "intro": "SottoPelle publishes no price list, but its own membership maths discloses the numbers anyway. An insertion runs $355 to $410 for women, who average about 3.5 a year, and $620 to $890 for men, who average two. That works out at roughly $1,240 to $1,435 a year for women and $1,240 to $1,780 for men. The Elevate membership buys discounts only, not treatment.",
+      "items": [
+        {
+          "label": "Pellet insertion, women",
+          "priceMin": 355,
+          "priceMax": 410,
+          "unit": "per insertion",
+          "note": "Women average about 3.5 insertions a year on the clinic's own figures."
+        },
+        {
+          "label": "Pellet insertion, men",
+          "priceMin": 620,
+          "priceMax": 890,
+          "unit": "per insertion",
+          "note": "Men average two insertions a year, so the annual cost lands close to the women's total despite the higher unit price."
+        },
+        {
+          "label": "GLP-1 weight loss",
+          "priceMin": 450,
+          "unit": "per month",
+          "note": "Around $450 a month, billed separately from any hormone work."
+        },
+        {
+          "label": "Red light therapy",
+          "priceMin": 49,
+          "unit": "per session"
+        },
+        {
+          "label": "Elevate membership",
+          "priceMin": 49.99,
+          "priceMax": 99.99,
+          "unit": "per month",
+          "note": "On a 12 month commitment. Buys discounts only. It does not include any treatment, so work out whether your usage justifies it."
+        }
+      ],
+      "includes": [
+        "The insertion itself",
+        "Discounts, on the Elevate membership"
+      ],
+      "excludes": [
+        "Any treatment, on the Elevate membership",
+        "GLP-1 weight loss",
+        "Red light therapy",
+        "Lab work"
+      ],
+      "insuranceNote": "Insurance, HSA and FSA policy is not stated anywhere on the clinic's materials, so ask directly before you assume any of the three applies.",
+      "financingNote": "The Elevate membership at $49.99 or $99.99 a month is a discount programme on a 12 month commitment, not financing. Check the discount against your expected number of insertions before committing for a year.",
+      "faqs": [
+        {
+          "question": "How much does SottoPelle cost a year?",
+          "answer": "On the clinic's own averages, roughly $1,240 to $1,435 a year for women at about 3.5 insertions, and $1,240 to $1,780 for men at two insertions."
+        },
+        {
+          "question": "Why do men pay more per insertion?",
+          "answer": "Higher dose means more pellets. Men need fewer insertions a year, so the annual totals end up closer than the per-insertion prices suggest."
+        },
+        {
+          "question": "Does the Elevate membership include treatment?",
+          "answer": "No. It buys discounts only, on a 12 month commitment."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "The clinic does not state its insurance, HSA or FSA policy anywhere, so ask before you book."
+        }
+      ],
+      "sources": [
+        { "label": "SottoPelle membership pricing disclosure", "url": "https://tuteramedical.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "stemedix",
+    "costPage": {
+      "intro": "Stemedix prices per treatment after a records review, and its published figures are thin. Hair restoration starts around $3,900, and the clinic pegs typical US stem cell therapy at roughly $5,000 to $15,000, which is a market bracket rather than a quote for your case. Nothing is covered by insurance, so it is out of pocket, though financing is available.",
+      "items": [
+        {
+          "label": "Hair restoration",
+          "priceMin": 3900,
+          "unit": "per treatment",
+          "note": "The lowest published starting figure at the clinic."
+        },
+        {
+          "label": "Typical US stem cell therapy",
+          "priceMin": 5000,
+          "priceMax": 15000,
+          "unit": "per treatment",
+          "note": "The clinic's own stated bracket for US treatment generally. Read it as context for your quote, not as your quote."
+        },
+        {
+          "label": "Records review and quote",
+          "unit": "one time",
+          "note": "Your figure comes out of this review. Ask what the review itself costs, if anything."
+        }
+      ],
+      "includes": [
+        "The treatment as quoted after the records review"
+      ],
+      "excludes": [
+        "Travel to St. Petersburg",
+        "Repeat treatments",
+        "Any medication prescribed alongside"
+      ],
+      "insuranceNote": "Not covered by insurance, so it is paid out of pocket in full.",
+      "financingNote": "Financing is available. Ask which partner, what the term is, and what rate applies after any promotional period.",
+      "faqs": [
+        {
+          "question": "How much does Stemedix cost?",
+          "answer": "Hair restoration starts around $3,900. For everything else, the clinic pegs typical US stem cell therapy at roughly $5,000 to $15,000, with your own figure quoted after a records review."
+        },
+        {
+          "question": "Is the $5,000 to $15,000 range a quote?",
+          "answer": "No. It is the clinic's stated bracket for US stem cell therapy generally. Use it to sanity-check what you are quoted."
+        },
+        {
+          "question": "Is financing available?",
+          "answer": "Yes. Insurance covers nothing, but the clinic offers financing."
+        }
+      ],
+      "sources": [
+        { "label": "Stemedix website", "url": "https://stemedix.com/" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "stemulus-innovative-healthcare",
+    "costPage": {
+      "introEmpty": "Stemulus does not publish prices. Cost depends on the condition, the number of cells and how many sessions are planned, and is quoted after a consultation. As with every clinic in this category, US health insurance does not cover the therapy, so plan on paying the whole quoted figure yourself.",
+      "items": [
+        {
+          "label": "Mesenchymal cell protocol",
+          "unit": "per protocol",
+          "note": "Priced by the condition, the cell count and the number of sessions in the plan."
+        },
+        {
+          "label": "IV and systemic protocols",
+          "unit": "per session",
+          "note": "Where a course is planned, ask for the total rather than the per-session figure."
+        },
+        {
+          "label": "Umbilical cord derived protocols",
+          "unit": "per protocol",
+          "note": "Quoted after consultation."
+        },
+        {
+          "label": "Platelet-rich plasma (PRP)",
+          "unit": "per session",
+          "note": "The lower-cost option here."
+        },
+        {
+          "label": "Consultation",
+          "unit": "one time",
+          "note": "The visit that produces your quote. Confirm whether it carries a fee when you book."
+        }
+      ],
+      "includes": [
+        "The protocol as quoted at consultation"
+      ],
+      "excludes": [
+        "Additional sessions beyond the quoted plan",
+        "Lab work",
+        "Travel to Phoenix"
+      ],
+      "insuranceNote": "US health insurance does not cover this therapy. The whole quoted figure is out of pocket.",
+      "financingNote": "Nothing published. Ask at the consultation whether the clinic works with a financing partner, particularly if the plan runs to several sessions.",
+      "faqs": [
+        {
+          "question": "How much does Stemulus Innovative Healthcare cost?",
+          "answer": "No prices are published. Cost depends on the condition, the number of cells and how many sessions are planned, and is quoted after a consultation."
+        },
+        {
+          "question": "What makes the price go up?",
+          "answer": "Cell count and session count, mainly. A single IV session and a multi-session course are very different invoices."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "No. US health insurance does not cover this therapy."
+        }
+      ],
+      "sources": [
+        { "label": "Stemulus Innovative Healthcare website", "url": "https://stemulushealth.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "trt-nation",
+    "costPage": {
+      "intro": "TRT Nation runs monthly subscriptions with minimum terms, and it publishes the figures. Testosterone cypionate and enclomiphene are both $99.99 a month, testosterone with HCG is $180 and HCG alone is $80. Bloodwork is never included: $129 for the TRT panel, $179 for both panels, or bring your own. Testosterone carries a two and a half month minimum, no insurance is taken, and the policy is no refunds and no returns.",
+      "items": [
+        {
+          "label": "Testosterone cypionate",
+          "priceMin": 99.99,
+          "unit": "per month",
+          "note": "Two and a half month minimum term. California pricing can differ."
+        },
+        {
+          "label": "Enclomiphene",
+          "priceMin": 99.99,
+          "unit": "per month"
+        },
+        {
+          "label": "Testosterone with HCG",
+          "priceMin": 180,
+          "unit": "per month"
+        },
+        {
+          "label": "HCG alone",
+          "priceMin": 80,
+          "unit": "per month"
+        },
+        {
+          "label": "Tirzepatide",
+          "priceMin": 219,
+          "unit": "per month",
+          "note": "The same price at any dose, on a three month minimum."
+        },
+        {
+          "label": "Peptides",
+          "priceMin": 80,
+          "priceMax": 233,
+          "unit": "per month"
+        },
+        {
+          "label": "TRT bloodwork panel",
+          "priceMin": 129,
+          "unit": "per panel",
+          "note": "Never included in a subscription. You can bring your own results instead."
+        },
+        {
+          "label": "TRT and weight loss panels together",
+          "priceMin": 179,
+          "unit": "per panel set",
+          "note": "Cheaper than buying the two separately."
+        }
+      ],
+      "includes": [
+        "The medication",
+        "Supplies and shipping",
+        "Provider consultations on the plan"
+      ],
+      "excludes": [
+        "All bloodwork",
+        "Anything outside your subscribed plan"
+      ],
+      "insuranceNote": "No insurance is accepted. Every plan is cash pay.",
+      "financingNote": "No financing. Note the policy instead: no refunds and no returns, with a two and a half month minimum on testosterone and three months on tirzepatide, so the real commitment is larger than one month's price.",
+      "faqs": [
+        {
+          "question": "How much does TRT Nation cost per month?",
+          "answer": "Testosterone cypionate and enclomiphene are $99.99 a month, testosterone with HCG is $180, and HCG alone is $80. Bloodwork is separate at $129, or $179 for both panels."
+        },
+        {
+          "question": "What is the minimum commitment?",
+          "answer": "Two and a half months on testosterone and three months on tirzepatide. The policy is no refunds and no returns, so treat the minimum as the real price of trying it."
+        },
+        {
+          "question": "Is bloodwork included?",
+          "answer": "No, never. It is $129 for the TRT panel or $179 for both, and you can bring your own results instead."
+        },
+        {
+          "question": "Does the price differ by state?",
+          "answer": "California pricing can differ. Confirm your state's figure before you subscribe."
+        }
+      ],
+      "sources": [
+        { "label": "TRT Nation published pricing", "url": "https://trtnation.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "thrivemd",
+    "costPage": {
+      "introEmpty": "ThriveMD publishes no prices. It states that stem cell therapy is not covered by insurance, and that the price per joint improves when more than one area is treated during the same visit, which is the one concrete thing to plan around. Expect a figure only after a consultation.",
+      "items": [
+        {
+          "label": "Single joint procedure",
+          "unit": "per joint",
+          "note": "Quoted after consultation. This is the baseline the multi-area discount applies against."
+        },
+        {
+          "label": "Additional joint, same visit",
+          "unit": "per joint",
+          "note": "Cheaper per joint than treating one area alone. If you have two problem joints, ask for both quoted together."
+        },
+        {
+          "label": "Adipose and bone marrow derived procedures",
+          "unit": "per procedure",
+          "note": "Quoted after examination and imaging review."
+        },
+        {
+          "label": "Platelet-rich plasma (PRP)",
+          "unit": "per session",
+          "note": "The lower-cost tier."
+        }
+      ],
+      "includes": [
+        "Harvest, processing and image-guided delivery in one procedure"
+      ],
+      "excludes": [
+        "Imaging obtained elsewhere",
+        "Repeat procedures",
+        "Rehabilitation"
+      ],
+      "insuranceNote": "Stem cell therapy is not covered by insurance here. The full quoted figure is out of pocket.",
+      "financingNote": "Nothing published. The stated multi-area discount is the practical lever: treating two joints in one visit costs less per joint than two separate visits.",
+      "faqs": [
+        {
+          "question": "How much does ThriveMD cost?",
+          "answer": "No prices are published. You get a figure after a consultation. The clinic does say the price per joint improves when more than one area is treated in the same visit."
+        },
+        {
+          "question": "Is it cheaper to treat two joints at once?",
+          "answer": "Yes, per joint. ThriveMD states the per-joint price improves when several areas are treated during the same visit."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "No. ThriveMD is explicit that stem cell therapy is not covered."
+        }
+      ],
+      "sources": [
+        { "label": "ThriveMD website", "url": "https://thrivemdclinic.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  },
+  {
+    "slug": "ways2well",
+    "costPage": {
+      "intro": "Ways2Well publishes some figures and withholds the one most people want. Dezawa MuseCell given by IV is listed starting at $5,900, and the telehealth bloodwork membership is $599 a year covering two panels and two clinician reports. Cell therapy more broadly has no published price list and is quoted after a phone consult, listed at $30 and at times offered free. Payment plans run through United Credit, and no insurance is taken.",
+      "items": [
+        {
+          "label": "Dezawa MuseCell, IV",
+          "priceMin": 5900,
+          "unit": "per treatment",
+          "note": "The one published cell therapy figure. Listed as a starting price."
+        },
+        {
+          "label": "Telehealth bloodwork membership",
+          "priceMin": 599,
+          "unit": "per year",
+          "note": "Covers two panels plus two clinician reports."
+        },
+        {
+          "label": "Video consult, 20 minutes",
+          "priceMin": 49,
+          "unit": "per consult"
+        },
+        {
+          "label": "Video consult, 40 minutes",
+          "priceMin": 99,
+          "unit": "per consult"
+        },
+        {
+          "label": "Phone consult for cell therapy",
+          "priceMin": 30,
+          "unit": "one time",
+          "note": "Listed at $30 and has been offered free. This is the route to a cell therapy quote."
+        },
+        {
+          "label": "Other cell therapy protocols",
+          "unit": "per treatment",
+          "note": "No published price list. Quoted after the phone consult."
+        }
+      ],
+      "includes": [
+        "Two panels and two clinician reports a year, on the membership",
+        "The treatment as quoted"
+      ],
+      "excludes": [
+        "Video consults, which are billed separately from the membership",
+        "Cell therapy, which is separate from the bloodwork membership",
+        "Any medication prescribed alongside"
+      ],
+      "insuranceNote": "Ways2Well takes no insurance. HSA and FSA funds are accepted, which is the one way to offset part of the bloodwork cost.",
+      "financingNote": "Payment plans go through United Credit. Check the rate and term before you commit, particularly on the $5,900 MuseCell line.",
+      "faqs": [
+        {
+          "question": "How much does Ways2Well cost?",
+          "answer": "Dezawa MuseCell by IV is listed starting at $5,900. The telehealth bloodwork membership is $599 a year. Other cell therapy has no published price and is quoted after a phone consult listed at $30."
+        },
+        {
+          "question": "What does the $599 membership include?",
+          "answer": "Two blood panels a year plus two clinician reports. Video consults are billed separately at $49 for 20 minutes and $99 for 40."
+        },
+        {
+          "question": "Can I pay in instalments?",
+          "answer": "Yes, through United Credit. No insurance is accepted, though HSA and FSA funds are."
+        }
+      ],
+      "sources": [
+        { "label": "Ways2Well website", "url": "https://ways2well.com" }
+      ],
+      "lastVerifiedAt": "2026-07-31"
+    }
+  }
+]

@@ -52,6 +52,10 @@ export type {
   IFaq,
   IRatingBreakdown,
   ITopMention,
+  IClinicReviewsPage,
+  IClinicCostPage,
+  IClinicPriceItem,
+  IPriceSource,
 } from "@/models/clinic";
 
 export { Review, default as ReviewModel } from "@/models/review";

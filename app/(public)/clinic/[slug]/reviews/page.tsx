@@ -539,7 +539,13 @@ export default async function ClinicReviewsPage({
               href={`/clinic/${clinic.slug}`}
               className="mt-3 inline-block text-[13px] font-semibold text-text-link hover:underline"
             >
-              See treatments, pricing &amp; accreditations
+              See treatments, team &amp; accreditations
+            </Link>
+            <Link
+              href={`/clinic/${clinic.slug}/cost`}
+              className="mt-1.5 inline-block text-[13px] font-semibold text-text-link hover:underline"
+            >
+              How much {clinic.name} costs
             </Link>
           </div>
 

@@ -78,6 +78,19 @@ interface FaqValue {
   question: string;
   answer: string;
 }
+/** One row of the cost page's price table. */
+interface PriceItemValue {
+  label: string;
+  priceMin?: number;
+  priceMax?: number;
+  currency?: string;
+  unit?: string;
+  note?: string;
+}
+interface PriceSourceValue {
+  label: string;
+  url?: string;
+}
 
 export interface ClinicFormValues {
   name: string;
@@ -151,6 +164,31 @@ export interface ClinicFormValues {
       noindex?: boolean;
     };
   };
+  /** Price data + copy for the child `/clinic/[slug]/cost` page. */
+  costPage: {
+    heading?: string;
+    intro?: string;
+    introEmpty?: string;
+    items: PriceItemValue[];
+    includes: string[];
+    excludes: string[];
+    insuranceNote?: string;
+    financingNote?: string;
+    bodyMarkdown?: string;
+    faqs: FaqValue[];
+    sources: PriceSourceValue[];
+    /** `YYYY-MM-DD` from `<input type="date">`; Zod coerces it on save. */
+    lastVerifiedAt?: string;
+    ctaHeading?: string;
+    ctaBody?: string;
+    seo: {
+      metaTitle?: string;
+      metaDescription?: string;
+      ogImage?: string;
+      canonicalUrl?: string;
+      noindex?: boolean;
+    };
+  };
 }
 
 export interface ClinicFormOptions {
@@ -176,6 +214,7 @@ const SECTIONS = [
   ["ownership", "Ownership"],
   ["seo", "SEO overrides"],
   ["reviews-page", "Reviews page"],
+  ["cost-page", "Cost page"],
 ] as const;
 
 const opt = (vals: readonly string[]) =>
@@ -420,6 +459,9 @@ export function ClinicForm({
   const locationsArray = useFieldArray({ control, name: "locations" });
   const caseStudiesArray = useFieldArray({ control, name: "caseStudies" });
   const faqsArray = useFieldArray({ control, name: "faqs" });
+  const costItemsArray = useFieldArray({ control, name: "costPage.items" });
+  const costFaqsArray = useFieldArray({ control, name: "costPage.faqs" });
+  const costSourcesArray = useFieldArray({ control, name: "costPage.sources" });
 
   // Warn before leaving with unsaved changes (tab close / refresh).
   React.useEffect(() => {
@@ -506,6 +548,24 @@ export function ClinicForm({
       })),
       serviceFocus: (v.serviceFocus ?? []).filter((f) => f.percent > 0),
       ownerUserId: v.ownerUserId || undefined,
+      costPage: {
+        ...v.costPage,
+        // Same treatment as the top-level price fields: `<input type="number">`
+        // hands back a string, and a blank one must become `undefined` rather
+        // than `NaN`. A row with neither bound is kept — that is the clinic
+        // offering the line but quoting it privately.
+        items: (v.costPage?.items ?? [])
+          .filter((i) => i.label?.trim())
+          .map((i) => ({
+            ...i,
+            priceMin: num(i.priceMin),
+            priceMax: num(i.priceMax),
+          })),
+        faqs: (v.costPage?.faqs ?? []).filter(
+          (f) => f.question?.trim() || f.answer?.trim(),
+        ),
+        sources: (v.costPage?.sources ?? []).filter((s) => s.label?.trim()),
+      },
     };
   };
 
@@ -1442,6 +1502,333 @@ export function ClinicForm({
                   A clinic with no published reviews is no-indexed automatically
                   and kept out of the sitemap. This toggle only ever adds
                   no-index, it can&apos;t force one on.
+                </p>
+              </div>
+            </div>
+          </Section>
+
+          <Section
+            id="cost-page"
+            title="Cost page"
+            description="Price table and copy for /clinic/…/cost, the clinic's own pricing URL. The table is the page's reason to exist; the copy fields are all optional and fall back to derived text."
+          >
+            {mode === "edit" && existingSlug ? (
+              <a
+                href={`/clinic/${existingSlug}/cost`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-text-link hover:underline"
+              >
+                <Eye className="size-3.5" aria-hidden="true" />
+                Open the live cost page
+              </a>
+            ) : null}
+
+            <TextField
+              label="Heading (H1)"
+              placeholder={`${watch("name") || "Clinic name"} cost`}
+              hint="Defaults to “<clinic name> cost”, the phrase people search."
+              {...register("costPage.heading")}
+            />
+            <TextareaField
+              label="Intro paragraph"
+              rows={3}
+              hint="Shown when there is a price table. Answer-first: lead with the figure, because this is the sentence an AI answer engine lifts."
+              {...register("costPage.intro")}
+            />
+            <TextareaField
+              label="Intro paragraph (no published prices)"
+              rows={2}
+              hint="Used instead of the above while the price table is empty."
+              {...register("costPage.introEmpty")}
+            />
+            <ContentFlagWarning
+              texts={[
+                watch("costPage.intro"),
+                watch("costPage.introEmpty"),
+                watch("costPage.bodyMarkdown"),
+                watch("costPage.insuranceNote"),
+                watch("costPage.ctaBody"),
+              ]}
+            />
+
+            {/* Price table */}
+            <div className="pt-2 text-[13px] font-semibold text-text-secondary">
+              Price table
+            </div>
+            {costItemsArray.fields.map((f, i) => (
+              <div key={f.id} className="rounded-lg border border-border p-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="text-[13px] font-semibold text-text-secondary">
+                    Row {i + 1}
+                  </span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => costItemsArray.remove(i)}
+                  >
+                    <Trash2 className="size-4" />
+                    Remove
+                  </Button>
+                </div>
+                <div className="space-y-3">
+                  <TextField
+                    label="Treatment or service"
+                    placeholder="Knee, bone marrow concentrate"
+                    {...register(`costPage.items.${i}.label` as const)}
+                  />
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    <TextField
+                      label="Price min"
+                      type="number"
+                      {...register(`costPage.items.${i}.priceMin` as const)}
+                    />
+                    <TextField
+                      label="Price max"
+                      type="number"
+                      {...register(`costPage.items.${i}.priceMax` as const)}
+                    />
+                    <TextField
+                      label="Currency"
+                      placeholder={watch("currency") || "USD"}
+                      hint="Blank uses the clinic's currency."
+                      {...register(`costPage.items.${i}.currency` as const)}
+                    />
+                    <TextField
+                      label="Billed"
+                      placeholder="per joint"
+                      {...register(`costPage.items.${i}.unit` as const)}
+                    />
+                  </div>
+                  <TextareaField
+                    label="Note"
+                    rows={2}
+                    hint="Shown under the row. Leave both prices blank for a line the clinic only quotes privately."
+                    {...register(`costPage.items.${i}.note` as const)}
+                  />
+                </div>
+              </div>
+            ))}
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={() => costItemsArray.append({ label: "" })}
+            >
+              <Plus className="size-4" />
+              Add price row
+            </Button>
+
+            {/* What the quote covers */}
+            <div className="grid gap-4 pt-2 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label>Included in the price</Label>
+                <Controller
+                  control={control}
+                  name="costPage.includes"
+                  render={({ field }) => (
+                    <TagInput
+                      value={field.value ?? []}
+                      onChange={field.onChange}
+                      placeholder="Consultation, imaging review…"
+                    />
+                  )}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label>Billed separately</Label>
+                <Controller
+                  control={control}
+                  name="costPage.excludes"
+                  render={({ field }) => (
+                    <TagInput
+                      value={field.value ?? []}
+                      onChange={field.onChange}
+                      placeholder="Travel, lab work, follow-up…"
+                    />
+                  )}
+                />
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <TextareaField
+                label="Insurance"
+                rows={3}
+                placeholder="Whether insurance, Medicare, HSA or FSA apply."
+                {...register("costPage.insuranceNote")}
+              />
+              <TextareaField
+                label="Financing"
+                rows={3}
+                placeholder="Payment plans, deposits, financing partners."
+                {...register("costPage.financingNote")}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label>Body content</Label>
+              <Controller
+                control={control}
+                name="costPage.bodyMarkdown"
+                render={({ field }) => (
+                  <MarkdownEditor
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                    placeholder="Optional editorial section under the tables: how the quote is built, how it compares, what to ask before paying a deposit…"
+                  />
+                )}
+              />
+            </div>
+
+            {/* Cost FAQs — rendered on the page and emitted as FAQPage. */}
+            <div className="pt-2 text-[13px] font-semibold text-text-secondary">
+              Cost FAQs
+            </div>
+            {costFaqsArray.fields.map((f, i) => (
+              <div key={f.id} className="rounded-lg border border-border p-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="text-[13px] font-semibold text-text-secondary">
+                    FAQ {i + 1}
+                  </span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => costFaqsArray.remove(i)}
+                  >
+                    <Trash2 className="size-4" />
+                    Remove
+                  </Button>
+                </div>
+                <div className="space-y-3">
+                  <TextField
+                    label="Question"
+                    placeholder="Does insurance cover it?"
+                    {...register(`costPage.faqs.${i}.question` as const)}
+                  />
+                  <TextareaField
+                    label="Answer"
+                    rows={2}
+                    {...register(`costPage.faqs.${i}.answer` as const)}
+                  />
+                </div>
+              </div>
+            ))}
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={() => costFaqsArray.append({ question: "", answer: "" })}
+            >
+              <Plus className="size-4" />
+              Add cost FAQ
+            </Button>
+
+            {/* Provenance */}
+            <div className="pt-2 text-[13px] font-semibold text-text-secondary">
+              Where the figures came from
+            </div>
+            {costSourcesArray.fields.map((f, i) => (
+              <div
+                key={f.id}
+                className="flex items-end gap-3 rounded-lg border border-border p-4"
+              >
+                <div className="grid flex-1 gap-3 sm:grid-cols-2">
+                  <TextField
+                    label="Source"
+                    placeholder="Clinic pricing page"
+                    {...register(`costPage.sources.${i}.label` as const)}
+                  />
+                  <TextField
+                    label="URL"
+                    {...register(`costPage.sources.${i}.url` as const)}
+                  />
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => costSourcesArray.remove(i)}
+                >
+                  <Trash2 className="size-4" />
+                </Button>
+              </div>
+            ))}
+            <div className="flex flex-wrap items-end gap-4">
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                onClick={() => costSourcesArray.append({ label: "", url: "" })}
+              >
+                <Plus className="size-4" />
+                Add source
+              </Button>
+              <TextField
+                label="Prices last checked"
+                type="date"
+                hint="Shown on the page. Re-check when a clinic changes its list."
+                {...register("costPage.lastVerifiedAt")}
+              />
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <TextField
+                label="Sidebar card heading"
+                placeholder={`Get a price from ${watch("name") || "this clinic"}`}
+                {...register("costPage.ctaHeading")}
+              />
+              <TextareaField
+                label="Sidebar card text"
+                rows={2}
+                placeholder="Send your case and ask for the quote in writing, itemised."
+                {...register("costPage.ctaBody")}
+              />
+            </div>
+
+            <div className="rounded-lg border border-border p-4">
+              <div className="mb-3 text-[13px] font-semibold text-text-secondary">
+                Meta overrides (cost page only)
+              </div>
+              <div className="space-y-4">
+                <TextField
+                  label="Meta title"
+                  {...register("costPage.seo.metaTitle")}
+                />
+                <TextareaField
+                  label="Meta description"
+                  rows={2}
+                  {...register("costPage.seo.metaDescription")}
+                />
+                <TextField
+                  label="OG image URL"
+                  {...register("costPage.seo.ogImage")}
+                />
+                <TextField
+                  label="Canonical URL"
+                  hint={`Leave blank to canonicalise to /clinic/${existingSlug || "your-slug"}/cost.`}
+                  {...register("costPage.seo.canonicalUrl")}
+                />
+                <label className="flex items-center gap-2 text-[13.5px] text-text-secondary">
+                  <Controller
+                    control={control}
+                    name="costPage.seo.noindex"
+                    render={({ field }) => (
+                      <Toggle
+                        checked={field.value ?? false}
+                        onCheckedChange={field.onChange}
+                        label="No-index"
+                      />
+                    )}
+                  />
+                  Exclude the cost page from search engines (noindex)
+                </label>
+                <p className="text-[12.5px] text-text-muted">
+                  A clinic with no price table is still indexed: &ldquo;prices
+                  are quoted privately&rdquo; is itself the answer to the query.
+                  Use this toggle to withhold a specific page.
                 </p>
               </div>
             </div>

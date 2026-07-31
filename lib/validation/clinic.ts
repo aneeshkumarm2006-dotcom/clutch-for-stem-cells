@@ -96,6 +96,66 @@ const reviewsPageSchema = z
   })
   .partial();
 
+/**
+ * Price data + copy for the child `/clinic/[slug]/cost` page. Same all-optional
+ * contract as `reviewsPageSchema` — a blank field means "fall back to the
+ * derived copy", so the form can submit empty strings freely.
+ *
+ * A price row with neither bound is legal and meaningful: it is a line the
+ * clinic offers but only quotes privately, which the page renders as "On
+ * consultation" rather than inventing a figure.
+ */
+const priceItemSchema = z.object({
+  label: z.string().min(1).max(200),
+  priceMin: z.number().min(0).optional(),
+  priceMax: z.number().min(0).optional(),
+  currency: z.preprocess(
+    blankToUndefined,
+    z.string().length(3).toUpperCase().optional(),
+  ),
+  unit: z.preprocess(blankToUndefined, z.string().max(60).optional()),
+  note: z.preprocess(blankToUndefined, z.string().max(500).optional()),
+});
+
+const priceSourceSchema = z.object({
+  label: z.string().min(1).max(200),
+  url: z.string().url().optional().or(z.literal("")),
+});
+
+const costPageSchema = z
+  .object({
+    heading: z.preprocess(blankToUndefined, z.string().max(200).optional()),
+    intro: z.preprocess(blankToUndefined, z.string().max(2000).optional()),
+    introEmpty: z.preprocess(blankToUndefined, z.string().max(2000).optional()),
+    items: z.array(priceItemSchema).default([]),
+    includes: z.array(z.string().max(300)).default([]),
+    excludes: z.array(z.string().max(300)).default([]),
+    insuranceNote: z.preprocess(
+      blankToUndefined,
+      z.string().max(1000).optional(),
+    ),
+    financingNote: z.preprocess(
+      blankToUndefined,
+      z.string().max(1000).optional(),
+    ),
+    bodyMarkdown: z.preprocess(
+      blankToUndefined,
+      z.string().max(20_000).optional(),
+    ),
+    faqs: z.array(faqSchema).default([]),
+    sources: z.array(priceSourceSchema).default([]),
+    // The form submits `""` for "not set"; `z.coerce.date()` would turn that
+    // into an Invalid Date, so blank it out before coercion.
+    lastVerifiedAt: z.preprocess(
+      blankToUndefined,
+      z.coerce.date().nullish(),
+    ),
+    ctaHeading: z.preprocess(blankToUndefined, z.string().max(200).optional()),
+    ctaBody: z.preprocess(blankToUndefined, z.string().max(1000).optional()),
+    seo: seoSchema.optional(),
+  })
+  .partial();
+
 const clinicObjectSchema = z.object({
   name: z.string().min(1, "Name is required").max(200),
   slug: slugSchema,
@@ -144,11 +204,16 @@ const clinicObjectSchema = z.object({
   isClaimed: z.boolean().default(false),
   seo: seoSchema.optional(),
   reviewsPage: reviewsPageSchema.optional(),
+  costPage: costPageSchema.optional(),
 });
 
 // Cross-field invariants shared by create + update.
 const priceOrderOk = (c: { priceMin?: number; priceMax?: number }) =>
   c.priceMax == null || c.priceMin == null || c.priceMax >= c.priceMin;
+/** Same rule, applied row by row to the cost page's price table. */
+const costRowsOk = (c: {
+  costPage?: { items?: { priceMin?: number; priceMax?: number }[] };
+}) => (c.costPage?.items ?? []).every(priceOrderOk);
 const focusSumOk = (c: { serviceFocus?: { percent: number }[] }) =>
   (c.serviceFocus ?? []).reduce((sum, f) => sum + f.percent, 0) <= 100;
 
@@ -156,6 +221,10 @@ export const clinicCreateSchema = clinicObjectSchema
   .refine(priceOrderOk, {
     message: "priceMax must be ≥ priceMin",
     path: ["priceMax"],
+  })
+  .refine(costRowsOk, {
+    message: "Each cost row's max price must be ≥ its min price",
+    path: ["costPage", "items"],
   })
   .refine(focusSumOk, {
     message: "Service focus percentages cannot exceed 100%",
@@ -168,6 +237,10 @@ export const clinicUpdateSchema = clinicObjectSchema
   .refine(priceOrderOk, {
     message: "priceMax must be ≥ priceMin",
     path: ["priceMax"],
+  })
+  .refine(costRowsOk, {
+    message: "Each cost row's max price must be ≥ its min price",
+    path: ["costPage", "items"],
   })
   .refine(focusSumOk, {
     message: "Service focus percentages cannot exceed 100%",

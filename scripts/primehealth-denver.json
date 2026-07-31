@@ -1,0 +1,159 @@
+[
+  {
+    "name": "PrimeHealth Denver",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Cash-pay functional medicine in Lakewood built around 90-minute visits and deep lab work, with gut, thyroid, hormone and autoimmune problems as the core of the practice",
+    "description": "PrimeHealth is a single clinic in Lakewood, on the western edge of the Denver metro, run by the two people who founded it in 2018: Soyona Rafatjah, a board-certified family medicine physician who came from Parsley Health in New York, and Luke Schmidt, who handles the business side. The care team is small, ten people, and mixes an MD with physician associates, nurse practitioners, a registered dietitian and a health coach.\n\nThe model is membership rather than per-visit. You start with a free 20-minute call, then a 90-minute first appointment, then a wide panel of functional lab testing that they deliberately take up to three weeks to process. Their reasoning, stated on their own FAQ, is that ordering fewer tests would be faster but would tell them less. From there you sit on one of two care plans, Foundations or Optimize and Thrive, both of which bundle provider visits, a written plan, messaging access and unlimited use of the infrared sauna at the clinic.\n\nWhat they actually work on is gut, thyroid, hormones and autoimmunity. The digestive side is the biggest piece and leans toward IBS and SIBO rather than the more severe inflammatory bowel diagnoses, though Crohn's and ulcerative colitis are on their list. The autoimmune page covers Hashimoto's, rheumatoid arthritis, lupus, MS and celiac. Hormonal work spans perimenopause, PCOS, low testosterone and prostate health, and bioidentical hormone therapy and peptide therapy are used where indicated. There is a separate Women's Health Group Program that runs as eight group sessions.\n\nTwo practical things to know. Insurance is not accepted at all, by choice, and they say so bluntly. And only three days a week are in person: Tuesday, Wednesday and Thursday in Lakewood, with Monday and Friday run virtually for Colorado patients. PrimeHealth does no stem cell, exosome or PRP work, and does not offer vitamin IV drips despite what some third-party directory listings claim.",
+    "treatmentTypes": [],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "crohns-ibd",
+      "rheumatoid-arthritis",
+      "lupus",
+      "sexual-health",
+      "diabetes-supportive",
+      "multiple-sclerosis"
+    ],
+    "cellSources": [],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "currency": "USD",
+    "priceModel": "package",
+    "priceNote": "The two care plans, Foundations and Optimize and Thrive, have no published price, so you get the number on the free 20-minute intake call. The one figure they publish is the Women's Health Group Program at $1,200, or two payments of $650, covering eight group sessions, about 30 blood markers, adrenal testing, two months of supplements, a cooking class, three sauna sessions and a loaner HeartMath device. Insurance is not accepted for anything. Supplements are discounted through Fullscript.",
+    "foundedYear": 2018,
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Soyona Rafatjah",
+      "title": "Medical Director and Co-Founder",
+      "credentials": "MD, board-certified in family medicine",
+      "bio": "Board-certified family medicine physician, Colorado licence DR.0061686. She did a biomedical engineering degree at Michigan summa cum laude, medical school at the University of Miami, and residency at Jackson Memorial in Miami. Before starting PrimeHealth she practised at Parsley Health in New York during its growth years, and trained under Frank Lipman at Eleven Eleven Wellness, at Mount Sinai Beth Israel's Center for Health and Healing, and with Robert Rountree at Boulder Wellcare. She was principal investigator on three IRB-approved trials looking at herbal supplements for tension headaches, upset stomach and the common cold."
+    },
+    "team": [
+      {
+        "name": "Luke Schmidt",
+        "title": "Chief Executive Officer and Co-Founder",
+        "bio": "Runs the business side; he is not a clinician. Before PrimeHealth he worked on technology-led medical startups in New York, as VP of business development at FriendHealth and operations manager at Parsley Health. Studied at the Wisconsin School of Business and Columbia."
+      },
+      {
+        "name": "Abby McPherson",
+        "title": "Physician Associate",
+        "credentials": "MPH, PA-C, IFMCP",
+        "bio": "Board-certified physician associate with years in primary care, allergy and immunology behind her. She trained through the Institute for Functional Medicine with extra work in gut dysfunction and environmental health, is a certified integrative nutrition health coach, and holds an undergraduate degree in nutritional sciences. Her focus is metabolic dysfunction and long-term health."
+      },
+      {
+        "name": "Savannah Young",
+        "title": "Nurse Practitioner",
+        "credentials": "MSN, FNP-C",
+        "bio": "Came to functional medicine from the neonatal ICU. Public health degree from the University of Georgia, nursing degree from Emory, then training through the Institute for Functional Medicine. She moved to Denver from Atlanta in 2023 and is also a yoga teacher and triathlete. Patients name her often in the practice's digestive health testimonials."
+      },
+      {
+        "name": "Lexi Johnson",
+        "title": "Nurse Practitioner",
+        "credentials": "FNP",
+        "bio": "Board-certified family nurse practitioner. She worked in adult acute care at the University of Rochester Medical Center, took her MSN at Vanderbilt in 2018, then practised at a rural health clinic outside Nashville and taught as a clinical instructor in Vanderbilt's nursing programme before moving to Denver."
+      },
+      {
+        "name": "Katlyn Higley",
+        "title": "Nurse Practitioner",
+        "credentials": "FNP",
+        "bio": "Board-certified family nurse practitioner and NASM certified personal trainer, the newest clinician on the team. Nursing degree from Loyola University Chicago, MSN from Chamberlain University. She folds the training background into the exercise side of patients' plans."
+      },
+      {
+        "name": "Nicole Stamatakos",
+        "title": "Health Coach",
+        "credentials": "RD",
+        "bio": "Registered dietitian trained in integrative and functional nutrition. Nutrition science degree from the University of Illinois at Chicago and a dual MBA coordinated in dietetics at Dominican University."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "6001 W. 16th Ave",
+        "city": "Lakewood",
+        "region": "Colorado",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "80214",
+        "phone": "303-335-9092",
+        "lat": 39.7424,
+        "lng": -105.0631
+      }
+    ],
+    "website": "https://primehealthdenver.com",
+    "social": {
+      "instagram": "https://www.instagram.com/primehealthdenver/",
+      "facebook": "https://www.facebook.com/PrimeHealthDenver/",
+      "linkedin": "https://www.linkedin.com/company/primehealth-denver"
+    },
+    "highlights": [
+      "One clinic, in Lakewood, seeing patients Tuesday through Thursday and running virtual visits Monday and Friday",
+      "Free 20-minute intake call, then a 90-minute first appointment",
+      "Wide functional lab panels with a stated turnaround of up to three weeks",
+      "Two membership care plans, both including unlimited infrared sauna use at the clinic",
+      "Small team of ten covering MD, physician associate, nurse practitioner, dietitian and health coach",
+      "Insurance is not accepted, by choice, for any service",
+      "Women's Health Group Program at $1,200, the one price they publish",
+      "Rated 4.9 across more than 200 reviews, and named best specialized health in ColoradoBiz's Best of Colorado 2025",
+      "No stem cell, exosome or PRP services"
+    ],
+    "faqs": [
+      {
+        "question": "Do they take insurance?",
+        "answer": "No, and they are direct about it. Their FAQ says insurance covers only surface-level testing and that they would rather work for the patient than for an insurer. Everything is cash pay, including the labs. Budget accordingly, and ask on the intake call what the plan costs and what the testing adds on top, because neither figure is published."
+      },
+      {
+        "question": "What happens at the first appointment?",
+        "answer": "It runs 90 minutes with a functional medicine trained practitioner, after a free 20-minute call to see whether the practice fits. Comprehensive testing follows, and results take up to three weeks because of how many markers they run. You then get a written plan covering nutrition, movement, stress, supplements and, where the clinician thinks it is warranted, hormone therapy or peptide therapy."
+      },
+      {
+        "question": "Is this a TRT clinic?",
+        "answer": "Not really. They treat low or high testosterone as one hormonal condition among many, and offer bioidentical hormone therapy where it is indicated, but there is no standalone testosterone programme, no pellets and no published TRT pricing. The practice skews toward women's hormonal health, and the group programme they run is a women's health one."
+      },
+      {
+        "question": "Can they replace my specialist?",
+        "answer": "They say no, and that is the honest answer. Their own autoimmune page states that PrimeHealth is a functional medicine practice rather than a rheumatology clinic, and that many patients keep working with a rheumatologist for diagnosis and medication while using PrimeHealth alongside it. They also refer out to primary care physicians in the area when that is what someone needs."
+      },
+      {
+        "question": "Do I need a diagnosis before booking?",
+        "answer": "No. They say some of their better outcomes come from patients who have symptoms but no diagnosis, and they run a page specifically for people in that position. Most patients are told to expect meaningful change in three to six months rather than immediately."
+      },
+      {
+        "question": "Do they offer stem cell, exosome or PRP therapy?",
+        "answer": "No. There is no cell-based or regenerative service of any kind here, and no vitamin IV drips either, despite what a few third-party directory listings say. The tools are lab testing, nutrition, lifestyle work, supplements, prescription medication, bioidentical hormones and peptide therapy."
+      },
+      {
+        "question": "How reliable are the outcome numbers on their site?",
+        "answer": "Treat them as internal. The figures they publish, such as 87.5 percent of members improving gut health within three months and 87 percent reaching optimal TSH, come from their own analysis of their own patients, in one case a group of 80. That is not peer-reviewed evidence, and functional medicine testing and treatment generally sits outside conventional guidelines. Their patient review record is separately verifiable at 4.9 across roughly 220 reviews."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "primehealth denver"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "primehealth denver reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510200/library/vhpczqrhlo3fvg6djw6t.webp",
+      "publicId": "library/vhpczqrhlo3fvg6djw6t",
+      "width": 633,
+      "height": 80,
+      "alt": "PrimeHealth Denver logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510204/library/htt2ikryegqmcvbousee.webp",
+      "publicId": "library/htt2ikryegqmcvbousee",
+      "width": 1536,
+      "height": 1024,
+      "alt": "The PrimeHealth Denver practitioner team"
+    }
+  }
+]

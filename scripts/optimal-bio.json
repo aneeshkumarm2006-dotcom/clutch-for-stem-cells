@@ -1,0 +1,278 @@
+[
+  {
+    "name": "Optimal Bio",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Ten in-person clinics across the Southeast and Texas doing one thing only: bioidentical hormone pellets, dosed off comprehensive bloodwork",
+    "description": "Optimal Bio does hormone pellets and nothing else. No injections, no patches, no creams, no telehealth. Their treatments page lists three things: hormone therapy for women, hormone therapy for men, and a nutrition and supplement programme. Testosterone, estradiol and progesterone pellets, about the size of a grain of rice, are placed under the skin of the buttocks or lower back in the office. Women come back every three to four months, men every four to six.\n\nThe intake is published and short. A 15-minute call with a patient coordinator, then a 30-minute consultation with a provider, then comprehensive bloodwork. You return about a week later to go through the results, and in most cases the first pellet goes in at that same visit. A four-week recheck follows to see where levels landed and adjust. No referral needed. Their argument for going outside insurance is that insurance dictates standardised dosing, and their pitch to patients whose labs came back normal is that normal is not the same as optimal.\n\nGreg Brannon, an OB/GYN who had practised in Cary for three decades, founded the company in 2012 and retired from clinical work in 2020. He died in July 2025, though parts of the company's own website have not yet been updated to reflect that. His daughter Tylar Brannon has run the business as CEO since 2018 and took it from a single office to ten. Cary Fishburne, MD, is now listed as medical director.\n\nOne thing worth knowing about staffing: no physician is listed at any individual clinic. Day-to-day care at all ten sites is delivered by nurse practitioners and physician assistants, most of them nationally certified, and the company says providers train for several months before treating anyone alone. The pellets are compounded preparations rather than FDA-approved products, and the compounding pharmacy is not named publicly. Optimal Bio does no stem cell, exosome, PRP or IV work, and does not offer GLP-1 weight loss medication.",
+    "treatmentTypes": [],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "sexual-health"
+    ],
+    "cellSources": [],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No price is published anywhere on their site, so the number comes at consultation. What they do commit to is that the quote is upfront and includes the initial comprehensive lab panel, and that follow-up appointments are part of the care rather than billed separately. Insurance does not cover the therapy itself, though your own plan may cover some of the lab work case by case. HSA and FSA funds are accepted, and Cherry financing is available.",
+    "foundedYear": 2012,
+    "teamSize": "11-50",
+    "physiciansCount": 1,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Cary Fishburne",
+      "title": "Medical Director",
+      "credentials": "MD, FACOG, FACS",
+      "bio": "Listed as medical director from July 2026. Optimal Bio publishes no biography for him, but he is externally verifiable as an obstetrician-gynecologist board certified by the American Board of Obstetrics and Gynecology in both OB/GYN and female pelvic medicine and reconstructive surgery, and a Fellow of the American College of Surgeons. He is licensed in North Carolina and South Carolina and practises in the Charleston area, where Optimal Bio has its Mount Pleasant clinic."
+    },
+    "team": [
+      {
+        "name": "Tylar Brannon",
+        "title": "Chief Executive Officer",
+        "credentials": "JD, MBA",
+        "bio": "Took over as CEO in 2018 and grew the practice from a handful of offices to ten across the Southeast and Texas. She grew up in Cary, studied at NC State, took a joint law and business degree at the University of South Carolina and worked in Washington before joining the family business. Not a clinician."
+      },
+      {
+        "name": "Greg Brannon",
+        "title": "Founder",
+        "credentials": "MD",
+        "bio": "Founded Optimal Bio in 2012 after roughly thirty years as a board-certified obstetrician-gynecologist in Cary, North Carolina, having trained at Chicago Medical School and done his residency at USC Women's Hospital. He wrote two books on bioidentical hormones, Restore and The Hormone Health Handbook, and hosted the practice's podcast. He retired from clinical practice in 2020 and died in July 2025."
+      },
+      {
+        "name": "Tanya Nix",
+        "title": "Nurse Practitioner, Greenville",
+        "credentials": "DNP",
+        "bio": "Took her nursing degrees all the way to a doctorate at the University of Alabama at Birmingham and spent more than 25 years at UAB's University Hospital across orthopedics, geriatrics, intensive care, research and management. She also teaches nurse practitioner students as an adjunct."
+      },
+      {
+        "name": "Johnny Moody",
+        "title": "Nurse Practitioner, Charlotte",
+        "credentials": "MSN, NP",
+        "bio": "A Marine Corps and Army veteran who worked as a professional firefighter before qualifying as a nurse practitioner in 2013. ANCC board certified in North Carolina, with a background in emergency medicine, urgent care and primary care."
+      },
+      {
+        "name": "Candi Brown",
+        "title": "Nurse Practitioner, Wilmington",
+        "credentials": "NP",
+        "bio": "Board-certified family nurse practitioner, certified nationally through the AANP. Nursing degree from Winston-Salem State, master's from UNC Wilmington, and more than eleven years in adult and paediatric emergency nursing behind her."
+      },
+      {
+        "name": "Sabrina Kelley",
+        "title": "Nurse Practitioner, 30A",
+        "credentials": "DNP, CRNP",
+        "bio": "Twenty years in women's health. Nurse practitioner training at the University of South Alabama and a doctorate from Chatham University."
+      },
+      {
+        "name": "Irene Burns",
+        "title": "Physician Assistant, Pinehurst",
+        "credentials": "PA",
+        "bio": "Spent more than fifteen years as a certified medical assistant in women's health before going to PA school, and took both her degrees at Campbell University. She specialises in OB/GYN and works closely with the military community around Fort Bragg."
+      },
+      {
+        "name": "Misty Khandjian",
+        "title": "Physician Assistant, Cary",
+        "credentials": "MPAS, PA-C",
+        "bio": "Trained in Florida, including at Florida State University, with a background in women's health. Based at the Cary flagship."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "115 Kildaire Park Drive, Suite 301",
+        "city": "Cary",
+        "region": "North Carolina",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "27518",
+        "phone": "919-977-3231",
+        "lat": 35.75,
+        "lng": -78.79
+      },
+      {
+        "isHQ": false,
+        "addressLine": "7940 Williams Pond Lane, Suite 275",
+        "city": "Charlotte",
+        "region": "North Carolina",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "28277",
+        "phone": "980-819-7371",
+        "lat": 35.05,
+        "lng": -80.85
+      },
+      {
+        "isHQ": false,
+        "addressLine": "6 Regional Drive, Suite B",
+        "city": "Pinehurst",
+        "region": "North Carolina",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "28374",
+        "phone": "910-725-0565",
+        "lat": 35.19,
+        "lng": -79.47
+      },
+      {
+        "isHQ": false,
+        "addressLine": "5725 Oleander Drive, Unit C-1",
+        "city": "Wilmington",
+        "region": "North Carolina",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "28403",
+        "phone": "910-769-7031",
+        "lat": 34.21,
+        "lng": -77.89
+      },
+      {
+        "isHQ": false,
+        "addressLine": "590 Lone Tree Dr., Suite 103",
+        "city": "Mount Pleasant",
+        "region": "South Carolina",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "29464",
+        "phone": "843-972-8134",
+        "lat": 32.82,
+        "lng": -79.83
+      },
+      {
+        "isHQ": false,
+        "addressLine": "429 Roper Mountain Rd., Building 100, Suite 150",
+        "city": "Greenville",
+        "region": "South Carolina",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "29615",
+        "phone": "864-274-9994",
+        "lat": 34.85,
+        "lng": -82.31
+      },
+      {
+        "isHQ": false,
+        "addressLine": "675 Peter Jefferson Parkway, Suite 240",
+        "city": "Charlottesville",
+        "region": "Virginia",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "22911",
+        "phone": "434-296-9596",
+        "lat": 38.03,
+        "lng": -78.44
+      },
+      {
+        "isHQ": false,
+        "addressLine": "12117 Bee Caves Road, Suite 280",
+        "city": "Austin",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "78738",
+        "phone": "737-325-2320",
+        "lat": 30.31,
+        "lng": -97.94
+      },
+      {
+        "isHQ": false,
+        "addressLine": "12805 US-98 East, Suite H201",
+        "city": "Inlet Beach",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "32461",
+        "phone": "850-732-8600",
+        "lat": 30.28,
+        "lng": -86.03
+      },
+      {
+        "isHQ": false,
+        "addressLine": "11641 Kew Gardens Ave, Suite 211",
+        "city": "Palm Beach Gardens",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "33410",
+        "phone": "561-363-0675",
+        "lat": 26.85,
+        "lng": -80.09
+      }
+    ],
+    "website": "https://optimalbio.com",
+    "contactEmail": "office@optimalbio.com",
+    "social": {
+      "instagram": "https://www.instagram.com/optimalbio/",
+      "facebook": "https://www.facebook.com/OptimalBioBHRT",
+      "linkedin": "https://www.linkedin.com/company/optimal-bio/",
+      "x": "https://x.com/OptimalBio",
+      "youtube": "https://www.youtube.com/channel/UCRWEkzCUh_CHIBGB5dae5rw"
+    },
+    "highlights": [
+      "Ten in-person clinics across North Carolina, South Carolina, Virginia, Texas and Florida",
+      "Pellets only, by choice: no injections, patches, creams or telehealth",
+      "First pellet is usually placed at the same visit where you review your lab results",
+      "Four-week recheck built into the protocol, with follow-ups included rather than billed separately",
+      "Women re-pelleted every three to four months, men every four to six",
+      "Independently owned, and explicit that it is neither a franchise nor private-equity backed",
+      "Walk-in lab draws at the Cary flagship, by appointment at most other sites",
+      "Corporate and military wellness programme alongside the individual practice",
+      "No stem cell, exosome, PRP or IV services, and no GLP-1 weight loss programme"
+    ],
+    "faqs": [
+      {
+        "question": "Why pellets and nothing else?",
+        "answer": "It is a deliberate position. Their argument is that a pellet releases steadily over months, where an injection every week or two produces peaks and troughs, and where creams and patches have to be applied daily with absorption that varies between people. Whether that trade-off suits you is worth discussing, because the flip side of a pellet is that once it is in, the dose cannot be dialled back down."
+      },
+      {
+        "question": "How often would I go in?",
+        "answer": "Women are typically re-pelleted every three to four months and men every four to six, so roughly two to four visits a year once you are settled. Getting started takes three appointments: a 15-minute call with a coordinator, a 30-minute consultation with a provider, and then a results visit about a week after your bloodwork, where the first pellet usually goes in. A recheck follows four weeks later."
+      },
+      {
+        "question": "Who will actually treat me?",
+        "answer": "A nurse practitioner or a physician assistant. No physician is listed at any of the ten clinics; the one MD named by the company is the medical director, Cary Fishburne. Most of the clinicians hold national certification through the AANP or ANCC, and the company says every provider trains for several months before treating patients alone, with weekly training after that."
+      },
+      {
+        "question": "Are the pellets FDA-approved?",
+        "answer": "No. They are compounded preparations, and Optimal Bio does not name the compounding pharmacy. Compounded hormone pellets sit outside the approval process that reviews a drug for safety and effectiveness, and the FDA has separately flagged estradiol and testosterone pellets as difficult to compound consistently. That is a reasonable thing to raise at the consultation."
+      },
+      {
+        "question": "Will insurance pay for it?",
+        "answer": "Not for the therapy. Their own explanation is that bioidentical hormones cannot be patented the way synthetic ones can, so they fall outside standard coverage, and that billing insurance would mean accepting standardised dosing. Some of your lab work may be partially covered depending on your plan. They take HSA and FSA funds and offer Cherry financing."
+      },
+      {
+        "question": "What does their own data show?",
+        "answer": "The figures they publish are their own and unaudited: more than 7,000 patients treated, 97 percent continuing after the first treatment, and 96 percent reporting symptom relief. Their site also makes some strong preventive claims about hormone therapy and dementia, heart attacks and bone loss that go further than the research they cite supports, so read those as marketing rather than settled evidence."
+      },
+      {
+        "question": "Do they do stem cell, PRP or peptide therapy?",
+        "answer": "No. The current catalogue is hormone pellets for women, hormone pellets for men, and a nutrition and supplement programme run through Metagenics and Fullscript. There is no PRP, no exosome, no stem cell work, no IV therapy and no GLP-1 weight loss medication. An older 2023 podcast episode discussed peptides, but peptide therapy is not listed as a current service."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "optimal bio"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "optimal bio reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510214/library/qrvcn1kp4zif041xyzyy.webp",
+      "publicId": "library/qrvcn1kp4zif041xyzyy",
+      "width": 1728,
+      "height": 450,
+      "alt": "Optimal Bio logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510223/library/tef9e9mfs0enprkpa5lm.webp",
+      "publicId": "library/tef9e9mfs0enprkpa5lm",
+      "width": 900,
+      "height": 1177,
+      "alt": "Optimal Bio staff at the front desk of one of the clinics"
+    }
+  }
+]

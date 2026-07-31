@@ -1,0 +1,104 @@
+[
+  {
+    "name": "TRT Nation",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Low-cost online testosterone therapy, peptides and GLP-1 medication shipped to your door, with the unusual option of bringing your own bloodwork",
+    "description": "TRT Nation sells testosterone therapy by subscription, entirely online. There is no clinic. You fill in an intake form, get bloodwork done at a Labcorp or Quest near you, speak to a provider by video or phone, and the medication arrives by FedEx in plain packaging with the pharmacy's return address on it rather than theirs. Most people can start within about ten business days of the consultation. The Tampa address is an office with weekday phone hours, not a place to be seen.\n\nPrice is the pitch. Testosterone cypionate is $99.99 a month with a two and a half month minimum, enclomiphene the same, HCG $80, and the two combined $180. Compounded tirzepatide is $219 a month whatever the dose, which is unusual, and they add B12 to it. Peptides sit alongside: NAD+, glutathione, sermorelin, tesamorelin, IGF1-LR3. Tadalafil and sildenafil round it out. Bloodwork is charged separately at $129, or $179 for the combined panel.\n\nThe genuinely useful differentiator is that they accept outside lab work, which most online TRT services refuse. Labs need to be under six months old and cover total testosterone, CBC, CMP, estradiol and PSA, with PSA required over 40. Several complaints on the record allege this policy has been applied inconsistently, so get written confirmation your panel qualifies before paying. Monitoring after that is published: repeat bloodwork at ten weeks, again at six months, then yearly. Refills are never automatic, and the company operates a blanket no refund policy.\n\nOne thing to weigh. TRT Nation names no clinician anywhere. There is no medical director, no physician, no provider page and no reviewed-by byline across the 66 pages and 227 blog posts on its site, only unnamed licensed providers. They do hold a current LegitScript certification, which is a real credential and checks out. Their peer-reviewed badge points to a genuine 2022 Journal of Sexual Medicine paper that included them as one of three platforms studied, though that paper named no winner and its main finding was that direct-to-consumer testosterone costs more than a hospital clinic. The company does no stem cell, exosome or PRP work.",
+    "treatmentTypes": [],
+    "conditionsTreated": [
+      "sexual-health",
+      "anti-aging-longevity"
+    ],
+    "cellSources": [],
+    "accreditations": [],
+    "currency": "USD",
+    "priceModel": "package",
+    "priceMin": 80,
+    "priceMax": 233,
+    "priceNote": "Monthly subscriptions with minimum terms. Testosterone cypionate and enclomiphene are both $99.99 a month, testosterone with HCG $180, HCG alone $80. Testosterone carries a two and a half month minimum, and California pricing can differ. Tirzepatide is $219 at any dose on a three-month minimum. Peptides run $80 to $233. Bloodwork is never included: $129 for the TRT panel, $179 for both panels, or bring your own. No insurance, and the policy is no refunds and no returns.",
+    "foundedYear": 2019,
+    "languages": [
+      "English"
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "12602 Telecom Drive",
+        "city": "Tampa",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "33637",
+        "phone": "813-413-1000",
+        "lat": 28.0612,
+        "lng": -82.3795
+      }
+    ],
+    "website": "https://trtnation.com",
+    "contactEmail": "info@trtnation.com",
+    "social": {
+      "instagram": "https://www.instagram.com/trt_nation/",
+      "facebook": "https://www.facebook.com/TRTNation/",
+      "x": "https://x.com/trtnationclinic",
+      "youtube": "https://www.youtube.com/@trtnation/shorts"
+    },
+    "highlights": [
+      "Entirely online: video or phone consult, third-party blood draw, medication shipped to you",
+      "Testosterone from $99.99 a month, with a two and a half month minimum purchase",
+      "Accepts outside lab work, which most online testosterone services will not",
+      "Compounded tirzepatide at a flat $219 a month regardless of dose",
+      "Published monitoring schedule: bloodwork at ten weeks, six months, then annually",
+      "Ships by FedEx in plain unmarked packaging with the pharmacy as the return address",
+      "LegitScript certified, seal 14914193",
+      "Patients must be 24 or older, and testosterone therapy is offered to men only",
+      "No stem cell, exosome or PRP services"
+    ],
+    "faqs": [
+      {
+        "question": "Who would I actually be treated by?",
+        "answer": "The company does not say. No medical director, physician, nurse practitioner or physician assistant is named anywhere on the site, there is no team page, and blog posts are attributed to the company rather than a clinician. Their FAQ describes providers who specialise exclusively in hormone optimisation and men's health, but you cannot check that against a name or a licence number until you are in the consultation. If knowing your prescriber's credentials up front matters to you, ask before paying."
+      },
+      {
+        "question": "Which states do they cover?",
+        "answer": "Their FAQ says every state except Alabama, Alaska, Arkansas, Hawaii and Missouri, which is 45. Their own lab-order form contradicts that by listing Missouri as available, so treat Missouri as uncertain and confirm during intake. Patients must be 24 or older for hormone therapy and 25 or older for the weight loss programme."
+      },
+      {
+        "question": "Can I use bloodwork I already have?",
+        "answer": "Yes, and it is one of the few services that allows it. The panel has to be no more than six months old, though a second page on their site says 120 days, and it must include total testosterone, CBC, CMP, estradiol and PSA, with PSA mandatory if you are over 40. Bloodwork is not optional in any case: they will not prescribe testosterone without it. Several formal complaints allege outside labs were rejected after payment, so get their confirmation in writing first."
+      },
+      {
+        "question": "What is the refund position?",
+        "answer": "There isn't one. The cancellation policy states the company reserves a no refund and no return policy on all purchases, and that a patient who has bought a course of treatment will be charged for the full two and a half month period. Refills are patient-initiated rather than automatic, so nothing renews unless you ask, but what you have already paid for is not coming back."
+      },
+      {
+        "question": "Is the medication FDA-approved?",
+        "answer": "Partly. Testosterone cypionate is an approved Schedule III controlled substance, which is why bloodwork and monitoring are required. The tirzepatide is compounded rather than the branded product, and compounded copies of commercially available GLP-1 medicines sit in contested regulatory territory. Peptides such as sermorelin, tesamorelin and IGF1-LR3 are compounded preparations too. Medication is dispensed from US pharmacies, though the pharmacy partner is not named."
+      },
+      {
+        "question": "How do their reviews stack up?",
+        "answer": "It depends heavily where you look, and the spread is wide enough to mention. The Google rating shown on their own site is about 4.9 from roughly 2,000 reviews. Their Trustpilot profile, which is unclaimed, sits at 2.1 from 25 reviews, and the Better Business Bureau grades them F with five complaints on file, four of which went unanswered. The complaints cluster around outside labs being refused and refunds being declined. Read a spread of sources rather than the number on the homepage."
+      },
+      {
+        "question": "Do they offer stem cell or regenerative therapy?",
+        "answer": "No. Their range is testosterone and HCG, enclomiphene, GLP-1 weight loss medication, ED generics, and injectable peptides such as NAD+, glutathione and sermorelin. There is no PRP, no exosome, no stem cell and no SVF work. Some of the peptide marketing talks about cellular repair, but these are peptide and coenzyme injectables, not cell therapy."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "trt nation"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "trt nation reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510322/library/ob73fqqs4e2h6x5lxvji.webp",
+      "publicId": "library/ob73fqqs4e2h6x5lxvji",
+      "width": 600,
+      "height": 200,
+      "alt": "TRT Nation logo"
+    }
+  }
+]

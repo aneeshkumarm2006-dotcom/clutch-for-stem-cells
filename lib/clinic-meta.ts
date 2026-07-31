@@ -1,9 +1,9 @@
 /**
- * The meta-tag formula for a clinic's two public URLs — `/clinic/[slug]` and
- * `/clinic/[slug]/reviews`.
+ * The meta-tag formula for a clinic's three public URLs — `/clinic/[slug]`,
+ * `/clinic/[slug]/reviews` and `/clinic/[slug]/cost`.
  *
- * Both routes read from here rather than composing their own strings, so every
- * clinic in the directory carries the same shape:
+ * All three routes read from here rather than composing their own strings, so
+ * every clinic in the directory carries the same shape:
  *
  *   profile   title  `<Clinic> | <Condition> Stem Cell Therapy in <City>, <State>`
  *             desc   **<Clinic> is a stem cell clinic in <City>, <State>** treating …
@@ -11,6 +11,9 @@
  *   reviews   title  `<Clinic> Reviews | <Site name>`
  *             desc   **Patient reviews of <Clinic> in <City>, <State>.** Read …
  *             keys   `<clinic> reviews`
+ *   cost      title  `<Clinic> Cost | <Site name>`
+ *             desc   **Treatment at <Clinic> in <City>, <State> costs $X to $Y.** See …
+ *             keys   `<clinic> cost`, `<clinic> prices`, `how much does <clinic> cost`
  *
  * Titles and descriptions are prose and stay in the taxonomy's own casing.
  * Keywords are the exception: they mirror a typed query, so they are lower case
@@ -40,6 +43,10 @@ export interface ClinicMetaInput {
   locations?: ClinicMetaLocation[];
   /** Conditions treated, in the clinic's own priority order. */
   conditions?: { name: string }[];
+  /** Headline price range. Only the cost-page formula reads these. */
+  priceMin?: number;
+  priceMax?: number;
+  currency?: string;
 }
 
 /**
@@ -259,4 +266,93 @@ export function clinicReviewsMetaDescription(clinic: ClinicMetaInput): string {
 /** The brand plus "reviews", as it would be typed. */
 export function clinicReviewsKeywords(clinic: ClinicMetaInput): string[] {
   return [`${keywordText(clinic.name)} reviews`];
+}
+
+// ── Cost page (/clinic/[slug]/cost) ──────────────────────────────────────────
+
+/**
+ * `<Clinic> Cost` — brand suffix left to the Settings title template, exactly
+ * like the reviews title.
+ *
+ * "Cost" rather than "pricing" or "prices": it is the word the query is typed
+ * with ("<clinic> cost", "how much does <clinic> cost", "stem cell therapy
+ * cost"), and it keeps the last path segment equal to the query the way
+ * `/reviews` does. The plural and the "pricing" variant are carried in the
+ * keywords instead, where they cost nothing.
+ */
+export function clinicCostMetaTitle(clinic: ClinicMetaInput): string {
+  return `${clinic.name} Cost`;
+}
+
+/**
+ * The headline range as a description reads it: "$5,000 to $15,000", "from
+ * $5,900", or `""` when the clinic publishes no figure at all.
+ *
+ * `Intl` is asked for whole units — a meta description quoting "$5,000.00"
+ * wastes characters on a decimal nobody typed.
+ */
+function priceClause(clinic: ClinicMetaInput): string {
+  const currency = clinic.currency || "USD";
+  const money = (amount: number) => {
+    try {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency,
+        maximumFractionDigits: 0,
+      }).format(amount);
+    } catch {
+      // An unknown/misspelled currency code throws rather than degrading.
+      return `${amount} ${currency}`;
+    }
+  };
+
+  const { priceMin: min, priceMax: max } = clinic;
+  if (min != null && max != null && max > min)
+    return `${money(min)} to ${money(max)}`;
+  if (min != null) return `from ${money(min)}`;
+  if (max != null) return `up to ${money(max)}`;
+  return "";
+}
+
+/**
+ * The bold lead of the cost description — a full sentence, like the reviews
+ * one. Quotes the range when the clinic has one on file and names the subject
+ * plainly when it does not, so the snippet never implies a published price list
+ * that isn't there.
+ */
+export function clinicCostMetaBoldPrefix(clinic: ClinicMetaInput): string {
+  const place = clinicPlace(clinic);
+  const at = place
+    ? `${clinic.name} in ${place}`
+    : clinic.name;
+  const price = priceClause(clinic);
+  return price
+    ? `Treatment at ${at} costs ${price}.`
+    : `Treatment costs at ${at}.`;
+}
+
+/**
+ * Unlike the reviews description, this one *does* quote a number — the price
+ * range is the answer to the query, and a cost snippet without one is worth
+ * little. The trade-off is accepted deliberately: `priceMin`/`priceMax` are
+ * editorial fields that change on a records review, not on every new review the
+ * way a rating average does, so the drift risk that kept numbers out of the
+ * reviews description does not apply here.
+ */
+export function clinicCostMetaDescription(clinic: ClinicMetaInput): string {
+  const lead = clinicCostMetaBoldPrefix(clinic);
+  const tail = priceClause(clinic)
+    ? "See the price list, what a quote covers, and the insurance and financing position."
+    : "See how the clinic quotes a price, what it covers, and the insurance and financing position.";
+  return `${lead} ${tail}`;
+}
+
+/**
+ * Three phrasings of the same intent. The plural ("prices") and the long-form
+ * question are how the query is typed about half the time, and unlike a title
+ * a keywords list has room for all three.
+ */
+export function clinicCostKeywords(clinic: ClinicMetaInput): string[] {
+  const brand = keywordText(clinic.name);
+  return [`${brand} cost`, `${brand} prices`, `how much does ${brand} cost`];
 }

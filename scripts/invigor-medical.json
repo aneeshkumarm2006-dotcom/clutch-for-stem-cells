@@ -1,0 +1,127 @@
+[
+  {
+    "name": "Invigor Medical",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Nationwide telehealth subscriptions for compounded weight loss medication, testosterone, peptides and sexual health, shipped from partner pharmacies",
+    "description": "Invigor Medical, which now trades on its website as Try Invigor, sells prescriptions by subscription and ships them. There is no clinic and no appointment to book. You pick a plan, fill in medical forms, a practitioner licensed in your state reviews the order, and one of five named partner pharmacies dispenses and posts the medication. Their published turnaround is seven to fourteen business days end to end, with most approvals inside the first day or two. Shipping is a flat $29.50.\n\nThe catalogue runs to 26 plans across three areas. Weight loss is the biggest: compounded GLP-1 and GLP-1 plus GIP injections, now sold under those generic descriptions rather than by drug name, plus newer micro-dose versions at roughly two-thirds the price. Longevity covers testosterone therapy, NAD+, sermorelin, enclomiphene, glutathione, methylene blue, B12 and finasteride. Sexual health covers tadalafil and sildenafil, and then the part they have gone deepest on, Trimix, with a structured programme of adjustment and custom vials, alongside PT-141 and oxytocin.\n\nTestosterone is the one line with real gatekeeping: bloodwork is required to start, billed at $49 every three months and drawn at Quest, or you can bring your own labs and skip the fee. Plans then run from $125 a month on a three-month subscription. Some products are unavailable in certain states, notably enclomiphene in Hawaii, New Jersey and New York, and B12 injections and oral sermorelin in California.\n\nTwo things to go in with your eyes open about. Refunds are tightly limited: once an order reaches practitioner review the company will not cancel or refund it, and renewal cancellations have to be made by phone rather than online. And the most persistent complaint across both Trustpilot and the Better Business Bureau is from patients who say they were prescribed and charged without ever speaking to a clinician, so if a conversation matters to you, ask for one before paying. The company holds an A+ rating and accreditation with the BBB and around 4.4 on Trustpilot across roughly 1,800 reviews. Invigor does no stem cell, exosome or PRP work.",
+    "treatmentTypes": [],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "sexual-health",
+      "hair-restoration"
+    ],
+    "cellSources": [],
+    "accreditations": [],
+    "currency": "USD",
+    "priceModel": "package",
+    "priceMin": 75,
+    "priceMax": 350,
+    "priceNote": "Monthly subscriptions, cash pay, with a flat $29.50 shipping charge on every order. Weight loss runs from $149 for a micro-dose GLP-1 up to $350 for GLP-1 with GIP. Testosterone starts at $125 a month on a three-month plan, plus $49 of bloodwork quarterly unless you bring your own. Enclomiphene is $75, B12 $90, sermorelin $220, NAD+ injections $340. Sexual health is $100 for tadalafil or sildenafil, $229 a vial for Trimix, $300 for Passion+. No insurance, Medicare or Medicaid.",
+    "foundedYear": 2018,
+    "teamSize": "11-50",
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Andrew Hamilton",
+      "title": "Medical Director",
+      "credentials": "DO",
+      "bio": "Family medicine physician based in Michigan, not Washington, who provides clinical oversight for the prescribing group. He trained at Michigan State University College of Osteopathic Medicine and did his residency at Ascension Macomb-Oakland, and has been core faculty on a residency programme at Ascension Genesys since 2021, where he teaches residents and medical students. His clinical interests include men's health, dermatology and office procedures. The company describes him as both medical director and medical spokesperson, and does not publish a board certification for him."
+    },
+    "team": [
+      {
+        "name": "Derek Berkey",
+        "title": "Chief Executive Officer",
+        "bio": "Chief executive since 2021, based in Pasco, Washington, with a degree from Western Governors University. He co-hosts the company's podcast, which is filmed in their own studio. Not a clinician."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "5226 Outlet Dr",
+        "city": "Pasco",
+        "region": "Washington",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "99301",
+        "phone": "888-966-4854",
+        "lat": 46.24,
+        "lng": -119.13
+      }
+    ],
+    "website": "https://tryinvigor.com",
+    "contactEmail": "support@invigormedical.com",
+    "social": {
+      "facebook": "https://www.facebook.com/invigormedical1/",
+      "instagram": "https://www.instagram.com/invigormedical/",
+      "linkedin": "https://www.linkedin.com/company/invigor-medical",
+      "youtube": "https://www.youtube.com/@InvigorMedical",
+      "x": "https://twitter.com/invigorm"
+    },
+    "highlights": [
+      "Telehealth only: no clinic, no appointment, and the Washington address is an office",
+      "26 treatment plans across weight loss, longevity and hormones, and sexual health",
+      "Five named partner pharmacies dispense and ship: Strive, Tailor Made, Belmar, Olympia and Gogomeds",
+      "Seven to fourteen business days from sign-up to delivery, flat $29.50 shipping",
+      "Testosterone requires bloodwork, at $49 a quarter through Quest, or bring your own labs",
+      "An unusually deep Trimix programme, including adjustment and custom vials",
+      "States they will not ship certain products to: enclomiphene excluded in HI, NJ and NY, B12 and oral sermorelin in CA",
+      "Explicitly will not prescribe for bodybuilding, athletic performance or cosmetic goals",
+      "No stem cell, exosome or PRP services"
+    ],
+    "faqs": [
+      {
+        "question": "Will I actually speak to a doctor?",
+        "answer": "This is the question worth pressing them on. Their own process page says an order is evaluated by a practitioner licensed in your state, who will contact you if they have further questions, while the homepage says a doctor will contact you to discuss your goals. Those are not quite the same promise. The most frequent substantive complaint on both Trustpilot and the BBB comes from patients who say they were prescribed and billed without any clinician contact at all. Ask for a consultation up front and confirm it before you pay."
+      },
+      {
+        "question": "Are they Invigor Medical or Try Invigor?",
+        "answer": "Both, and they are mid-rebrand. Their site now carries Try Invigor branding and every page points there as the canonical address, while Invigor Medical survives in the email addresses, help centre, patient portal, every social handle, and the Trustpilot and BBB profiles. There has been no public announcement. Worth knowing separately that the original Invigor Medical LLC was dissolved in 2022 and the entity behind the terms of service is now Ikon Health LLC."
+      },
+      {
+        "question": "Is the weight loss medication FDA-approved?",
+        "answer": "No. Their own disclaimer says it plainly: they do not supply FDA-approved branded products, only compounded alternatives prepared by licensed 503A pharmacies, and that compounded drugs are not FDA-approved and are not reviewed for safety, effectiveness or manufacturing quality. Since the GLP-1 shortages ended and the compounding rules tightened, they have removed the drug names from the product pages and moved everyone off three-month plans onto monthly ones, which they explain in a notice on their own site."
+      },
+      {
+        "question": "What does testosterone therapy involve here?",
+        "answer": "Bloodwork first, which is not optional. Labs cost $49 and are billed quarterly, drawn at your nearest Quest, though you can supply your own recent panel and skip the fee. Plans start at $125 a month on a three-month subscription and include the consultation and supplies. The medication is injectable and self-administered at home."
+      },
+      {
+        "question": "How do refunds and cancellations work?",
+        "answer": "Restrictively. You can cancel a new order only before the prescription reaches the practitioner's queue. After that point the company states it cannot cancel or refund, because the provider has already been paid for reviewing it. Cancelling a renewal has to be done by phone on their support line, not through your account. Several BBB complaints involve orders paid for but not delivered, which were refunded after the customer escalated."
+      },
+      {
+        "question": "Who oversees the prescribing?",
+        "answer": "Andrew Hamilton, DO, a family medicine physician and residency faculty member in Michigan, is named as medical director, and prescriptions are written through a medical group called Dr Telx LLC. Only one other clinician is named publicly, and their credentials are given three different ways in three places on the company's own site, so treat that one as unverified. The eleven contributors listed elsewhere on the site are blog content reviewers, several licensed outside the United States, not the people prescribing your medication."
+      },
+      {
+        "question": "Do they offer stem cell or regenerative therapy?",
+        "answer": "No. All 26 plans are prescription drugs or compounded injectables shipped to your door. There is no stem cell, exosome, PRP or SVF service. Their peptide range is limited to sermorelin, PT-141 and oxytocin, and they do not sell BPC-157 despite it being common elsewhere in this market."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "invigor medical"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "invigor medical reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510328/library/ouviuoug2v5r3su3eq01.webp",
+      "publicId": "library/ouviuoug2v5r3su3eq01",
+      "width": 300,
+      "height": 98,
+      "alt": "Invigor Medical logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510225/library/ful2fnokvscmgwboenky.webp",
+      "publicId": "library/ful2fnokvscmgwboenky",
+      "width": 1024,
+      "height": 683,
+      "alt": "Invigor Medical chief executive in the company's podcast studio"
+    }
+  }
+]

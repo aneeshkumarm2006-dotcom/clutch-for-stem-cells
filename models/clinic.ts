@@ -132,6 +132,75 @@ export interface IClinicReviewsPage {
   seo?: ISeo;
 }
 
+/** One row of the cost page's price table. */
+export interface IClinicPriceItem {
+  _id?: Types.ObjectId;
+  /** What is being priced, e.g. "Knee, bone marrow concentrate". */
+  label: string;
+  /** Low end. Omit both bounds for a line the clinic only quotes privately. */
+  priceMin?: number;
+  priceMax?: number;
+  /** Per-row currency override. Defaults to the clinic's `currency`. */
+  currency?: string;
+  /** What the figure is per, e.g. "per joint", "per month", "one time". */
+  unit?: string;
+  /** Caveat shown under the row. */
+  note?: string;
+}
+
+/** A published source a price was taken from, for the "where this came from" list. */
+export interface IPriceSource {
+  label: string;
+  url?: string;
+}
+
+/**
+ * Editor-authored copy + price data for the clinic's child cost page
+ * (`/clinic/[slug]/cost`).
+ *
+ * Same seam as {@link IClinicReviewsPage}: its own `seo` (reusing `Clinic.seo`
+ * would canonicalize this URL at the profile) and every copy field optional so
+ * an unset one keeps the derived default. The difference is that this page also
+ * owns *data* the profile has nowhere to put — `Clinic.priceMin`/`priceMax` are
+ * a single headline range, while a real cost answer is a table of lines plus
+ * what the number does and does not cover.
+ *
+ * `items` is the page's reason to exist: an empty array is a valid state (the
+ * clinic quotes everything privately) and the page then answers "how the quote
+ * works" instead of "what it costs".
+ */
+export interface IClinicCostPage {
+  /** H1 override. Default: "<name> cost". */
+  heading?: string;
+  /** Intro paragraph shown when there is a price table. */
+  intro?: string;
+  /** Intro paragraph shown when there is not. */
+  introEmpty?: string;
+  /** The price table. */
+  items?: IClinicPriceItem[];
+  /** What a quoted price covers. */
+  includes?: string[];
+  /** What it does not, and is billed on top. */
+  excludes?: string[];
+  /** Insurance / HSA / FSA position. */
+  insuranceNote?: string;
+  /** Payment plans, deposits, financing partners. */
+  financingNote?: string;
+  /** Markdown section rendered under the tables (editorial context). */
+  bodyMarkdown?: string;
+  /** Cost-specific Q&A — rendered on the page and emitted as `FAQPage`. */
+  faqs?: IFaq[];
+  /** Where the figures came from. */
+  sources?: IPriceSource[];
+  /** When the figures were last checked against those sources. */
+  lastVerifiedAt?: Date | null;
+  /** Sidebar card copy. */
+  ctaHeading?: string;
+  ctaBody?: string;
+  /** Meta overrides for this URL only — never inherited from `Clinic.seo`. */
+  seo?: ISeo;
+}
+
 export interface IClinic extends TimestampFields, SoftDeleteFields {
   _id: Types.ObjectId;
   name: string;
@@ -177,6 +246,8 @@ export interface IClinic extends TimestampFields, SoftDeleteFields {
   seo?: ISeo;
   /** Copy + meta for the child `/clinic/[slug]/reviews` page. */
   reviewsPage?: IClinicReviewsPage;
+  /** Price data + copy for the child `/clinic/[slug]/cost` page. */
+  costPage?: IClinicCostPage;
   /** Per-page control over the auto-generated JSON-LD (schema engine). */
   schemaOverrides?: ISchemaOverrides;
   sortScore: number;
@@ -278,6 +349,44 @@ const clinicReviewsPageSchema = new Schema<IClinicReviewsPage>(
   { _id: false },
 );
 
+const priceItemSchema = new Schema<IClinicPriceItem>({
+  label: { type: String, required: true, trim: true, maxlength: 200 },
+  priceMin: { type: Number, min: 0 },
+  priceMax: { type: Number, min: 0 },
+  currency: { type: String, uppercase: true, trim: true },
+  unit: { type: String, trim: true, maxlength: 60 },
+  note: { type: String, trim: true, maxlength: 500 },
+});
+
+const priceSourceSchema = new Schema<IPriceSource>(
+  {
+    label: { type: String, required: true, trim: true, maxlength: 200 },
+    url: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
+const clinicCostPageSchema = new Schema<IClinicCostPage>(
+  {
+    heading: { type: String, trim: true, maxlength: 200 },
+    intro: { type: String, trim: true, maxlength: 2000 },
+    introEmpty: { type: String, trim: true, maxlength: 2000 },
+    items: { type: [priceItemSchema], default: [] },
+    includes: { type: [String], default: [] },
+    excludes: { type: [String], default: [] },
+    insuranceNote: { type: String, trim: true, maxlength: 1000 },
+    financingNote: { type: String, trim: true, maxlength: 1000 },
+    bodyMarkdown: { type: String },
+    faqs: { type: [faqSchema], default: [] },
+    sources: { type: [priceSourceSchema], default: [] },
+    lastVerifiedAt: { type: Date, default: null },
+    ctaHeading: { type: String, trim: true, maxlength: 200 },
+    ctaBody: { type: String, trim: true, maxlength: 1000 },
+    seo: { type: seoSchema, default: undefined },
+  },
+  { _id: false },
+);
+
 // ── Clinic schema ───────────────────────────────────────────────────────────
 
 const ClinicSchema = new Schema<IClinic>(
@@ -367,6 +476,7 @@ const ClinicSchema = new Schema<IClinic>(
     isClaimed: { type: Boolean, default: false },
     seo: { type: seoSchema, default: undefined },
     reviewsPage: { type: clinicReviewsPageSchema, default: undefined },
+    costPage: { type: clinicCostPageSchema, default: undefined },
     schemaOverrides: { type: schemaOverrideSchema, default: undefined },
 
     // Computed — see /lib/ranking.ts (Stage 3.1).

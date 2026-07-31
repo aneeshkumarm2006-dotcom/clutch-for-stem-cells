@@ -57,7 +57,13 @@ export default async function NewReviewPage({
             description="Search for the clinic you visited, open its profile, and choose “Write a review”."
           />
           <div className="mt-2 flex justify-center">
-            <SearchBar showLocation={false} queryPlaceholder="Search clinics by name" />
+            {/* Clinics only: the visitor is picking the one they visited, so a
+                treatment or destination suggestion would be a dead end here. */}
+            <SearchBar
+              showLocation={false}
+              suggestTypes={["clinic"]}
+              queryPlaceholder="Search clinics by name"
+            />
           </div>
           <p className="mt-4 text-center text-[13px] text-text-muted">
             Or{" "}

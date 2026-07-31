@@ -40,6 +40,7 @@ function nodeType(node: JsonLd): string {
  */
 const NESTED_NODES: Record<string, { parent: string; key: string }> = {
   AggregateRating: { parent: "MedicalClinic", key: "aggregateRating" },
+  OfferCatalog: { parent: "MedicalClinic", key: "hasOfferCatalog" },
 };
 
 /**

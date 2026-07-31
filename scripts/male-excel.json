@@ -1,0 +1,145 @@
+[
+  {
+    "name": "Male Excel",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Subscription men's hormone therapy by telehealth in 41 states, built on a finger-prick lab kit and daily testosterone microdosing",
+    "description": "Male Excel is a telehealth business, not a clinic. Nobody is seen in person anywhere. You fill in a symptom questionnaire, buy a $99 online consultation, and a finger-prick blood spot kit arrives in the post. Their own CLIA lab in Mooresville, North Carolina runs five markers off it, testosterone, estradiol, DHEA-S, free T3 and PSA, and results come back about five business days after the kit lands. A licensed provider reviews them with you and writes a protocol if you qualify. Medication is compounded by two outside pharmacies in Florida and shipped in 60-day supplies.\n\nThe protocol is what they sell on. Instead of the weekly intramuscular shot most online TRT services use, Male Excel doses testosterone daily, either as a small subcutaneous injection or as a twice-daily Lipoderm cream, and they do not routinely prescribe estrogen blockers. Thyroid tablets are bundled with the testosterone options. There is also an oral route, Triclozene, which is clomiphene citrate combined with thyroid. Around it sit generic sildenafil and tadalafil for erectile dysfunction, and GLP-1 medication for weight, including semaglutide by injection or tablet and tirzepatide. Peptides and NAD+ are advertised as coming soon rather than sold.\n\nThe company started in 2019, grew out of Peter Fotinos's earlier hormone practice in Charlotte, and now sits under the parent Excel Medical alongside a women's brand, Fem Excel, and the lab. Excel Medical says it has passed 100,000 members and close to $100 million a year in revenue without outside investment, and made the Inc. 5000 in both 2024 and 2025. Roughly 35 clinicians are named on the site, four of them physicians and the rest nurse practitioners.\n\nA few things to check before signing up. The service is not available in Alaska, Arkansas, Connecticut, Hawaii, Idaho, Louisiana, Mississippi, New Hampshire or Rhode Island. Insurance is not accepted. Compounded testosterone is not an FDA-approved product and testosterone is a Schedule III controlled substance, so monitoring is part of the deal, and depending on your state you may still need an in-person physical elsewhere. Male Excel does no stem cell, exosome or PRP work.",
+    "treatmentTypes": [],
+    "conditionsTreated": [
+      "sexual-health",
+      "anti-aging-longevity",
+      "diabetes-supportive"
+    ],
+    "cellSources": [],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "currency": "USD",
+    "priceModel": "package",
+    "priceMin": 99,
+    "priceNote": "Three separate charges, so read them together. The online consultation is $99 once and includes the at-home test kit. Membership is then $99 a month, covering unlimited messaging and e-visits, a 60-day check-in and a full panel every six months. Medication is billed every second month on top, from about $120 for injectable testosterone with thyroid, $132 for the cream and $95 for oral Triclozene. ED generics are $65 to $89. No insurance, though FSA and HSA funds may work, and no contract.",
+    "foundedYear": 2019,
+    "teamSize": "51-200",
+    "physiciansCount": 4,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Lorna A. Brudie",
+      "title": "Medical Director",
+      "credentials": "DO, FACOG, FACS",
+      "bio": "Double board-certified obstetrician-gynecologist and gynecologic oncologist, and the one clinician here whose board certification is independently verifiable. She graduated from the New York College of Osteopathic Medicine in 1998 and did her OB/GYN residency at the University of Kansas School of Medicine, then spent decades doing complex cancer surgery. She practises gynecologic oncology in Florida alongside her work directing the Male Excel and Fem Excel protocols."
+    },
+    "team": [
+      {
+        "name": "Peter Fotinos",
+        "title": "Chief Medical Officer and Clinical Founder",
+        "credentials": "MD",
+        "bio": "Took both his science degree and his medical degree at UNC Chapel Hill and trained in residency at Carolinas Medical Center in Charlotte, now Atrium. His background is urgent care, pediatrics and family medicine, and he moved into hormone work through the Academy for Preventive and Innovative Medicine at Worldlink and Neal Rouzier's advanced bioidentical hormone certification. He ran Revita Medical, the in-person practice the Male Excel protocol came out of, and has around 13 years in hormone therapy. The company does not publish a board certification for him."
+      },
+      {
+        "name": "Craig Larsen",
+        "title": "Co-Founder and Chief Executive Officer",
+        "bio": "Came from Revita Medical, the Charlotte hormone practice, and worked with Peter Fotinos on the protocol before taking it online. He runs the parent company, Excel Medical, and is not a clinician."
+      },
+      {
+        "name": "Leif Wombwell",
+        "title": "Co-Founder and Chief Strategy Officer",
+        "bio": "The digital half of the founding team. He joined Fotinos and Larsen to move a bricks-and-mortar hormone practice onto a telehealth platform, and handles strategy for Excel Medical. Not a clinician."
+      },
+      {
+        "name": "Andrew Abraham",
+        "title": "Physician",
+        "credentials": "MD",
+        "bio": "One of four physicians on the clinical roster. Male Excel publishes only a short statement of his approach, centred on patient empowerment, and no training or board detail."
+      },
+      {
+        "name": "Jonathan Figg",
+        "title": "Physician",
+        "credentials": "MD",
+        "bio": "One of four physicians on the clinical roster, working in bioidentical hormone replacement. As with most of the roster, the site publishes a brief philosophy statement rather than training or board detail."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "809 Westmere Ave, Suite A",
+        "city": "Charlotte",
+        "region": "North Carolina",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "28208",
+        "phone": "833-625-3392",
+        "lat": 35.234,
+        "lng": -80.858
+      }
+    ],
+    "website": "https://maleexcel.com",
+    "contactEmail": "support@maleexcel.com",
+    "social": {
+      "facebook": "https://www.facebook.com/MaleExcel",
+      "instagram": "https://www.instagram.com/MaleExcel/",
+      "x": "https://x.com/maleexcelonline",
+      "linkedin": "https://www.linkedin.com/company/male-excel",
+      "youtube": "https://www.youtube.com/@maleexcel7204"
+    },
+    "highlights": [
+      "Fully remote: no clinic, no exam room, and no patients seen at any Male Excel address",
+      "At-home finger-prick blood spot kit instead of a lab visit, run by their own CLIA lab in North Carolina",
+      "Daily testosterone microdosing by subcutaneous injection or cream, rather than a weekly intramuscular shot",
+      "Thyroid tablets bundled with the testosterone protocols, plus an oral clomiphene option",
+      "Provider check-in every 60 days and a full hormone panel every six months",
+      "Available in 41 states, with nine excluded",
+      "Around 35 named clinicians, four of them physicians and the rest nurse practitioners",
+      "Parent company Excel Medical reports more than 100,000 members and two Inc. 5000 listings",
+      "No stem cell, exosome or PRP services"
+    ],
+    "faqs": [
+      {
+        "question": "Is there anywhere I can be seen in person?",
+        "answer": "No. Male Excel is entirely online. Their website has a page listing dozens of addresses under a heading about finding a location near you, but those are serviced offices and virtual mail suites rather than clinics, and no patient is treated at any of them. The Charlotte address is corporate, and the Mooresville site is the lab that processes your test kit. Worth knowing separately: depending on your state and DEA rules, your provider may still require you to get an in-person physical, which you would arrange elsewhere."
+      },
+      {
+        "question": "Which states are excluded?",
+        "answer": "Alaska, Arkansas, Connecticut, Hawaii, Idaho, Louisiana, Mississippi, New Hampshire and Rhode Island. That leaves 41 states for both hormone therapy and the ED medication. Some third-party press has claimed all 50 states, which contradicts the company's own FAQ."
+      },
+      {
+        "question": "Is compounded testosterone FDA-approved?",
+        "answer": "No. Male Excel's own informed consent says the compounded product is not an Orange Book item and has not been through FDA therapeutic equivalency testing. Testosterone itself is a Schedule III controlled substance, which is why ongoing monitoring is required. Their consent document also lists the real risks, including a possible increase in heart attack, stroke and blood clots in the legs or lungs, and warns that desiccated thyroid should not be used for weight loss. They do no stem cell or regenerative work at all."
+      },
+      {
+        "question": "What is the refund policy really worth?",
+        "answer": "Read the small print. If you follow the plan for 90 days and your symptoms do not improve, they will refund three months of membership fees, which is $297. That refund does not extend to medication or lab costs, prescription sales are final, you have to have attended appointments and documented adherence, and the claim has to be made within 30 days of the 90 days ending."
+      },
+      {
+        "question": "How does billing work and are there complaints about it?",
+        "answer": "Membership is monthly and medication is billed every second month, with a 48-hour window to change or cancel a refill after they contact you. It is worth being deliberate about that window. Male Excel holds an A+ BBB rating and accreditation, but also 36 complaints closed in three years, 20 of them in the most recent year, and the recurring themes are unexpected membership charges, dosage or fulfilment errors, and persistent outbound sales calls."
+      },
+      {
+        "question": "How good are the outcome numbers?",
+        "answer": "The headline claim is that 96 percent of patients see life-changing results within six months, footnoted to 32,795 members responding to symptom reviews with their providers. That is a large self-reported symptom survey run by the company on its own customers, not a controlled trial, so treat it as a satisfaction figure rather than clinical evidence. Their Trustpilot score sits around 4.6 across several thousand reviews."
+      },
+      {
+        "question": "What actually arrives in the post?",
+        "answer": "For the injectable protocol, a 60-day supply of bioidentical testosterone cypionate with 60 insulin-type syringes and needles, plus daily thyroid tablets. For the topical, 60 days of testosterone Lipoderm cream taken twice daily, again with thyroid. The oral option is 60 once-daily Triclozene tablets. Compounding and shipping are handled by Anazao Health in Tampa and WellDyneRx in Lakeland, both named on the company's FAQ."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "male excel"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "male excel reviews"
+      }
+    },
+    "isClaimed": false,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785510207/library/ux6ovyu8v2zbd33yg8gp.webp",
+      "publicId": "library/ux6ovyu8v2zbd33yg8gp",
+      "width": 1024,
+      "height": 222,
+      "alt": "Male Excel logo"
+    }
+  }
+]

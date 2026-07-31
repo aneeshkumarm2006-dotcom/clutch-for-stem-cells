@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { SearchTypeahead } from "@/components/search/search-typeahead";
+import { MobileSearch } from "@/components/search/mobile-search";
 import {
   Sheet,
   SheetContent,
@@ -90,7 +91,11 @@ export function Navbar({
       )}
     >
       <div className="container flex h-[68px] items-center gap-7">
-        <Logo size="md" />
+        {/* The search field grows on focus; without this the wordmark is the
+            first thing flexbox squeezes, and it wraps to two lines. */}
+        <div className="shrink-0">
+          <Logo size="md" className="whitespace-nowrap" />
+        </div>
 
         <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
           {links.map((link) => {
@@ -115,7 +120,12 @@ export function Navbar({
 
         <div className="ml-auto flex items-center gap-3">
           {searchInNav ? (
-            <SearchTypeahead className="hidden w-[230px] lg:block" />
+            <>
+              {/* Widens on focus: small at rest so the nav links keep their
+                  space, roomy once someone is actually typing into it. */}
+              <SearchTypeahead className="hidden w-[230px] transition-[width] duration-200 focus-within:w-[300px] lg:block" />
+              <MobileSearch className="lg:hidden" />
+            </>
           ) : null}
 
           <div className="hidden items-center gap-3.5 lg:flex">
