@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Star } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { formatCount } from "@/lib/format";
+import { STAR_SYMBOL_ID } from "@/components/ui/icon-sprite";
 import type { SubRatingKey } from "@/lib/enums";
 
 /**
@@ -24,20 +24,43 @@ export interface RatingStarsProps {
   className?: string;
 }
 
+/** Gap between stars, in px. Was `gap-px` on the old flex row. */
+const STAR_GAP = 1;
+
+/**
+ * Five stars as a single `<svg>` of `<use>` references (see
+ * `components/ui/icon-sprite.tsx` for why they are not five icon components).
+ *
+ * `fill` and `stroke` are set on this element and inherit through each `<use>`
+ * into the shared symbol, which is what still lets one row render grey and the
+ * row clipped on top of it render gold.
+ */
 function StarRow({ size, filled }: { size: number; filled: boolean }) {
+  const width = size * 5 + STAR_GAP * 4;
   return (
-    <span className="flex gap-px">
+    <svg
+      width={width}
+      height={size}
+      viewBox={`0 0 ${width} ${size}`}
+      stroke="currentColor"
+      className={cn(
+        "shrink-0",
+        filled ? "fill-star text-star" : "fill-slate-300 text-slate-300",
+      )}
+      aria-hidden="true"
+      focusable="false"
+    >
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star
+        <use
           key={i}
-          style={{ width: size, height: size }}
-          className={cn(
-            "shrink-0",
-            filled ? "fill-star text-star" : "fill-slate-300 text-slate-300",
-          )}
+          href={`#${STAR_SYMBOL_ID}`}
+          x={i * (size + STAR_GAP)}
+          y={0}
+          width={size}
+          height={size}
         />
       ))}
-    </span>
+    </svg>
   );
 }
 

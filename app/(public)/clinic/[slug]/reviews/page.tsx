@@ -68,6 +68,7 @@ import {
   REVIEWS_PAGE_PARAMS,
 } from "@/components/clinic/review-controls";
 import { RatingHistogram } from "@/components/clinic/rating-histogram";
+import { ReviewsContext } from "@/components/clinic/reviews-context";
 import { ConsultationDialog } from "@/components/lead/consultation-dialog";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 
@@ -471,7 +472,9 @@ export default async function ClinicReviewsPage({
             ) : null}
           </section>
 
-          {/* Editorial context under the list — admin-authored, optional.
+          {/* Editorial context under the list. An editor's own copy wins;
+              otherwise `<ReviewsContext>` derives the same job from the clinic
+              record, so the page is never just a widget and a list.
               `renderMarkdown` escapes HTML before rendering its subset, so the
               stored string can't smuggle markup into the page (PRD §13). */}
           {bodyMarkdown ? (
@@ -480,7 +483,9 @@ export default async function ClinicReviewsPage({
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: renderMarkdown(bodyMarkdown) }}
             />
-          ) : null}
+          ) : (
+            <ReviewsContext clinic={clinic} stats={stats} />
+          )}
         </div>
 
         {/* Rail */}

@@ -26,6 +26,9 @@ export const DEFAULT_FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: "Browse clinics", href: "/clinics" },
       { label: "Find a clinic", href: "/find-a-clinic" },
+      { label: "Treatments", href: "/treatments" },
+      { label: "Conditions", href: "/conditions" },
+      { label: "Destinations", href: "/locations" },
       { label: "Write a review", href: "/reviews/new" },
       { label: "Blog", href: "/blog" },
     ],
@@ -43,6 +46,9 @@ export const DEFAULT_FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: "About", href: "/about" },
       { label: "Methodology", href: "/methodology" },
+      // Sitewide, because the homepage was the only page linking to it and a
+      // single inbound link reads as a page nobody rates.
+      { label: "FAQ", href: "/faq" },
       { label: "Contact", href: "/contact" },
       { label: "Medical disclaimer", href: "/medical-disclaimer" },
     ],

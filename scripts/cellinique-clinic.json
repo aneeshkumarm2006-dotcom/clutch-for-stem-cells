@@ -1,0 +1,120 @@
+[
+  {
+    "name": "Cellinique Clinic",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "A one-doctor Gangnam clinic built around SVF and stem-cell-enriched fat grafting.",
+    "description": "Cellinique is a small, appointment-only aesthetic clinic on Dosan-daero in Gangnam-gu, Seoul, spread over a basement floor and the second floor of the Yeonseung Building. It is registered in Korea under surgery, dermatology and diagnostic laboratory medicine, which is an unusual combination and reflects how its founder came to the work. Everything is done by one physician, and the clinic is explicit that it would rather see fewer patients properly than run volume. Treatment happens in named private suites, the largest of them 45 square metres with its own oxygen system.\n\nThe founder, Chris Gunwoo Kim, is a board-certified specialist in diagnostic laboratory medicine rather than a dermatologist or plastic surgeon, so he came into cell therapy through the lab rather than the operating theatre. He sits on the boards of the Korean Society of Stem Cell Therapy, the Korean Filler Medical Association and the Korean Society of Aesthetic Surgery, teaches as IFAAS faculty on SVF and LAMS, and trains internationally for Juvelook. The clinic's signature work is stromal vascular fraction and stem-cell-enriched fat grafting, alongside NovaStem, a concentrated autologous blood protocol, and exosome and NK cell treatments. All of it is autologous apart from the exosome product: nothing here uses donor, cord blood or placental material.",
+
+    "treatmentTypes": [
+      "svf",
+      "adipose-derived-therapy",
+      "autologous-therapy",
+      "exosome-therapy",
+      "prp",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "skin-aesthetic",
+      "anti-aging-longevity",
+      "hair-restoration"
+    ],
+    "cellSources": ["adipose", "autologous", "exosomes"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "svf", "percent": 35 },
+      { "treatment": "adipose-derived-therapy", "percent": 25 },
+      { "treatment": "exosome-therapy", "percent": 20 },
+      { "treatment": "prp", "percent": 20 }
+    ],
+
+    "priceModel": "consult_to_quote",
+    "priceNote": "No price list is published. The clinic says cost depends on skin condition, the scope of treatment and the products used, and that the figure is given in a direct consultation with the director. Enquiries go through the phone line, KakaoTalk, WhatsApp or an online form that asks about visa status and travel dates. Ask what a quote covers before you fly.",
+
+    "physiciansCount": 1,
+    "teamSize": "1-10",
+    "languages": ["Korean", "English"],
+
+    "medicalDirector": {
+      "name": "Chris Gunwoo Kim",
+      "title": "CEO and Medical Director",
+      "credentials": "MD, board-certified in Diagnostic Laboratory Medicine",
+      "bio": "Trained in laboratory medicine at Korea University Guro Hospital after medical school at Kyungpook National University, with a business degree from Korea University alongside it. Sits on the boards of the Korean Society of Stem Cell Therapy, the Korean Filler Medical Association and the Korean Society of Aesthetic Surgery. Teaches as IFAAS faculty on LAMS and SVF stem cell technique and trains internationally for VAIM Juvelook. Previously medical director at Le Diamant Cheongdam and worked at EHL-BIO Stemcell Clinic. His line for the practice is that skin is a mirror of health rather than a matter of appearance."
+    },
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "B1 and 2F, Yeonseung Building, 228 Dosan-daero, Gangnam-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "postalCode": "06048",
+        "phone": "+82 2-6203-3434",
+        "lat": 37.5178,
+        "lng": 127.0367
+      }
+    ],
+
+    "website": "https://www.cellinique.com",
+    "social": {
+      "instagram": "https://www.instagram.com/cellinique.clinic/"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785608981/library/rjyj7meaji37q9la72cq.webp",
+      "publicId": "library/rjyj7meaji37q9la72cq",
+      "width": 1196,
+      "height": 779,
+      "alt": "Cellinique Clinic logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785608983/library/u56dr6olpbtnnxiyxp1f.webp",
+      "publicId": "library/u56dr6olpbtnnxiyxp1f",
+      "width": 2000,
+      "height": 1122,
+      "alt": "Private treatment suite at Cellinique Clinic in Seoul"
+    },
+
+    "highlights": [
+      "Single-physician, appointment-only practice: the director performs every consultation and procedure himself",
+      "Director is board-certified in diagnostic laboratory medicine, a lab route into cell therapy rather than dermatology",
+      "Sits on the boards of the Korean Society of Stem Cell Therapy and the Korean Society of Aesthetic Surgery",
+      "IFAAS faculty for SVF and LAMS technique, and a global trainer for Juvelook",
+      "Signature procedures are stromal vascular fraction and stem-cell-enriched fat grafting",
+      "Named private suites, the largest 45 square metres with a medical-grade oxygen system",
+      "Registered Korean medical institution on Dosan-daero, a short walk from Apgujeong and Hakdong stations"
+    ],
+    "faqs": [
+      {
+        "question": "Where do the cells come from?",
+        "answer": "From you, in almost every case. SVF and stem-cell-enriched fat grafting use your own adipose tissue, NovaStem uses concentrated autologous blood, and the NK cell work uses your own immune cells. The one exception is the exosome treatment, which uses a stem-cell-derived lyophilised product. No donor tissue, cord blood or placental material is used."
+      },
+      {
+        "question": "What is the regulatory position, and is any of it FDA-approved?",
+        "answer": "Cellinique is a licensed Korean medical institution and its director is a board-certified specialist. Several of the injectables it uses, including Rejuran, Radiesse and Juvelook, are approved by Korea's MFDS for aesthetic indications. The cell procedures are different: SVF, stem-cell-enriched fat grafting, NK cell therapy and exosome application are practised under physician discretion for minimally manipulated autologous cells. They are not MFDS-approved drug products and none of them are approved by the US FDA. The clinic's own safety page makes no regulatory claims either way."
+      },
+      {
+        "question": "How is SVF different from a stem cell injection I could get elsewhere?",
+        "answer": "SVF is a fraction separated from your own fat on the day, not a culture-expanded cell line grown in a lab over weeks. That makes it a same-visit procedure with no external culture step, and it also means the cell content varies from patient to patient rather than being standardised. If a clinic is offering you a fixed cell count, it is doing something different from this."
+      },
+      {
+        "question": "What does treatment cost?",
+        "answer": "The clinic does not publish prices. It quotes after a consultation, on the basis of skin condition, scope and products used. If you are travelling, get the quote and what it includes in writing before booking flights, and ask whether follow-up visits are counted in."
+      },
+      {
+        "question": "Who should not have these procedures?",
+        "answer": "The clinic reviews medications, allergies and implants before treating, and flags pregnancy and breastfeeding, active infection, autoimmune disease, metal implants near the treatment area, a tendency to keloid scarring, and the period immediately after major surgery as reasons to wait or reconsider. Follow-up is scheduled at one week and one month."
+      },
+      {
+        "question": "What are the opening hours?",
+        "answer": "Weekdays 10:00 to 19:00, plus the last Saturday of each month from 10:00 to 16:30. Closed Sundays and public holidays, and appointment-only throughout, so turning up without a booking will not work. Valet parking is provided."
+      }
+    ],
+
+    "seo": { "focusKeyword": "cellinique clinic" },
+    "reviewsPage": { "seo": { "focusKeyword": "cellinique clinic reviews" } },
+
+    "isClaimed": false
+  }
+]

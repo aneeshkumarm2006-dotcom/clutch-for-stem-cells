@@ -62,22 +62,39 @@ export interface ClinicSchemaData {
 }
 
 /**
- * `MedicalClinic` — the entity/listing role. `AggregateRating` and
- * `OfferCatalog` are embedded on that node rather than emitted standalone, so
- * they are not separate entries here (both are still listed in the config's
+ * `MedicalClinic` — the entity/listing role. `AggregateRating`, `OfferCatalog`
+ * and `Review` are embedded on that node rather than emitted standalone, so they
+ * are not separate entries here (all three are still listed in the config's
  * `nodes` so the admin panel can toggle them — see `NESTED_NODES` in the
  * engine).
+ *
+ * Reviews nest for a correctness reason, not a stylistic one. A top-level
+ * `Review` has to name what it reviews, and the only thing available is a stub
+ * `{"@type":"MedicalClinic","name":…}` — a second, address-less clinic node that
+ * validators reject for missing the fields a `LocalBusiness` requires. Nesting
+ * them under `review` makes the fully-described clinic on the same page the
+ * reviewed item, which is also the shape Google documents for a business
+ * carrying both `aggregateRating` and individual reviews.
  */
 export function buildClinicNodes(data: ClinicSchemaData): NodeList {
   const catalog = data.priceItems?.length
     ? offerCatalogJsonLd(data.priceItems, data.clinic.currency)
     : undefined;
 
+  // Nested nodes sit outside `dropInvalidNodes`, which only walks the top level,
+  // so the required-field check a standalone `Review` used to get happens here:
+  // a review with no rating on file would nest as a `Review` without
+  // `reviewRating`, which is exactly the invalid node that guard exists to stop.
+  const reviews = (data.reviews ?? [])
+    .map((r) => reviewJsonLd(r, false))
+    .filter((r) => r.author && r.reviewRating);
+
   return [
-    catalog
-      ? { ...medicalClinicJsonLd(data.clinic), hasOfferCatalog: catalog }
-      : medicalClinicJsonLd(data.clinic),
-    ...(data.reviews ?? []).map((r) => reviewJsonLd(r)),
+    {
+      ...medicalClinicJsonLd(data.clinic),
+      ...(catalog ? { hasOfferCatalog: catalog } : {}),
+      ...(reviews.length ? { review: reviews } : {}),
+    },
     data.faqs?.length ? faqPageJsonLd(data.faqs) : null,
   ];
 }

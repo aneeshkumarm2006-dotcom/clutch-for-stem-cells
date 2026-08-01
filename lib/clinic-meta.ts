@@ -27,6 +27,7 @@
  * input type is structural so a `ClinicProfile` (lib/public-data.ts), a lean
  * `IClinic`, or a plain object from a script all satisfy it.
  */
+import { fitMetaTitle } from "@/lib/meta-text";
 
 /** Enough of a clinic location to place it. */
 export interface ClinicMetaLocation {
@@ -178,23 +179,58 @@ export function conditionList(
 // ── Profile page (/clinic/[slug]) ────────────────────────────────────────────
 
 /**
- * `<Clinic> | <Condition> Stem Cell Therapy in <City>, <State>`.
+ * `<Clinic> | <Condition> Stem Cell Therapy in <City>, <State>`, shortened until
+ * it fits the title-length cap.
  *
  * No brand suffix: the clinic name already opens the title, and the site name
  * on the end would only push the location out of the SERP. Routes pass this
  * with `titleAbsolute` so `buildMetadata` skips the Settings template.
+ *
+ * The full form runs long for a clinic with a four-word name in a two-word city
+ * ("Blatman Health and Wellness Center | Joint Pain Stem Cell Therapy in
+ * Cincinnati, Ohio" is 85 characters), so the formula sheds detail in order of
+ * what a searcher can most afford to lose:
+ *
+ *   1. the state, which the city already implies for anyone searching it;
+ *   2. the condition, which the profile ranks for through its `<h1>` and body
+ *      copy rather than through the title alone;
+ *   3. the city;
+ *   4. everything but the brand, which is the query the profile must win.
+ *
+ * The condition outranks the state deliberately: "Stem Cell Therapy in
+ * Broomfield, Colorado" and "Knee Osteoarthritis Stem Cell Therapy in
+ * Broomfield" cost the same characters, and the second names what the clinic
+ * treats.
  */
 export function clinicMetaTitle(clinic: ClinicMetaInput): string {
   const condition = primaryCondition(clinic);
   const place = clinicPlace(clinic);
-  const subject = [condition, "Stem Cell Therapy"].filter(Boolean).join(" ");
-  const right = place ? `${subject} in ${place}` : subject;
+  // "Broomfield, Colorado" → "Broomfield". The city alone is the half a reader
+  // recognizes; the state is what `clinicPlace` adds for disambiguation.
+  const city = place.split(",")[0]?.trim() ?? "";
   // A separator immediately after a full stop is redundant punctuation, so
   // `normalizeMetaText` drops it — which would swallow the pipe entirely for a
   // clinic whose name ends in one ("Stemedix, Inc."). Trim the trailing stop and
   // keep the separator, which is the half that carries structure in a SERP.
   const name = clinic.name.replace(/\.+$/, "");
-  return `${name} | ${right}`;
+
+  const subject = (withCondition: boolean) =>
+    [withCondition ? condition : "", "Stem Cell Therapy"]
+      .filter(Boolean)
+      .join(" ");
+  const titled = (right: string) => (right ? `${name} | ${right}` : name);
+  const at = (subj: string, where: string) =>
+    where ? `${subj} in ${where}` : subj;
+
+  return fitMetaTitle([
+    titled(at(subject(true), place)),
+    titled(at(subject(true), city)),
+    titled(at(subject(false), place)),
+    titled(at(subject(false), city)),
+    titled(at("Stem Cell Clinic", city)),
+    titled("Stem Cell Clinic"),
+    name,
+  ]);
 }
 
 /** The bold lead of the profile description. Also its opening clause. */

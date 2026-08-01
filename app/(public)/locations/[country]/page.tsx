@@ -7,6 +7,7 @@ import {
   getCountries,
   getCountryBySlug,
   getDirectoryData,
+  hasEditorialContent,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
@@ -19,6 +20,7 @@ import {
   clinicCountMeta,
 } from "@/components/directory/related-links";
 import { EditorialArticle } from "@/components/content/editorial-article";
+import { DestinationContext } from "@/components/taxonomy/destination-context";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 import { JsonLd } from "@/components/seo/json-ld";
 
@@ -119,9 +121,16 @@ export default async function CountryDirectoryPage({
         activeView={isTopView(searchParams) ? "top" : "all"}
         afterResults={
           <>
-            {editorial ? (
+            {hasEditorialContent(editorial) ? (
               <EditorialArticle data={editorial} className="mb-12" />
-            ) : null}
+            ) : (
+              <DestinationContext
+                country={country}
+                data={data}
+                cities={cities}
+                elsewhere={otherCountries.filter((c) => c.clinicCount > 0)}
+              />
+            )}
             <RelatedLinks
               groups={[
                 {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { RemoteImage } from "@/components/common/remote-image";
 import type { Metadata } from "next";
 import {
   ArrowRight,
@@ -286,7 +286,7 @@ export default async function ClinicProfilePage({
           <section id="overview" className="scroll-mt-32">
             {clinic.coverUrl ? (
               <div className="relative mb-5 aspect-[16/7] overflow-hidden rounded-xl border border-border bg-tint">
-                <Image
+                <RemoteImage
                   src={clinic.coverUrl}
                   alt={clinic.coverAlt ?? `${clinic.name} facility`}
                   fill
@@ -346,7 +346,7 @@ export default async function ClinicProfilePage({
                     key={i}
                     className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border bg-tint"
                   >
-                    <Image
+                    <RemoteImage
                       src={g.url}
                       alt={g.alt ?? `${clinic.name} photo ${i + 1}`}
                       fill

@@ -1,0 +1,181 @@
+[
+  {
+    "name": "Nanoori Hospital",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Korea's spine specialty hospital group, licensed since 2025 for advanced regenerative medicine.",
+    "description": "Nanoori opened in September 2003 in Nonhyeon-dong and has grown into a four-hospital group, with the founding Gangnam branch on Eonju-ro still the flagship. Spine is the identity here rather than a sideline: Korea's Ministry of Health and Welfare has designated it a Spine Specialty Hospital for five consecutive terms, most recently in January 2024, and it holds ministry accreditation through December 2027. It opened a Spine Endoscopy Center in 2025, has run seven spine endoscopy symposia since 2016, and partnered academically with Stanford University Medical Center from 2005. Its International Healthcare Center had treated 12,113 foreign patients as of June 2025, with coordinators working in English, Russian and Mongolian.\n\nThe regenerative side is real but narrower than the hospital's size might suggest, and it is worth knowing the shape of it before travelling. In May 2025 the Ministry of Health and Welfare designated the Gangnam and Juan branches as Advanced Regenerative Medicine Institutions, the licence a Korean hospital must hold before it may carry out advanced regenerative cell therapy or research. What the hospital publishes on its own treatment menu, though, is joint-focused: an autologous bone marrow aspirate concentrate injection for knee osteoarthritis at ₩2,800,000, a stem cell cartilage regeneration procedure delivered into microfractured cartilage, and PRP. For the spine itself the published regenerative options are prolotherapy, epidural neuroplasty and disc decompression rather than cell therapy. Founder Il Tae Jang, a neurosurgeon, had performed over 8,000 spine operations by 2004 and introduced Korea's first bone cement procedure in 1997.",
+
+    "treatmentTypes": [
+      "regenerative-orthopedics",
+      "bone-marrow-derived-therapy",
+      "autologous-therapy",
+      "msc-therapy",
+      "allogeneic-therapy",
+      "prp"
+    ],
+    "conditionsTreated": [
+      "back-and-spine",
+      "joint-pain",
+      "knee-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "sports-injuries",
+      "hip-osteoarthritis"
+    ],
+    "cellSources": ["bone-marrow", "autologous", "allogeneic"],
+    "accreditations": [
+      "board-certified-physicians",
+      "hospital-affiliation",
+      "health-authority-registration",
+      "clinical-trial-participation"
+    ],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 45 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 25 },
+      { "treatment": "prp", "percent": 20 },
+      { "treatment": "msc-therapy", "percent": 10 }
+    ],
+
+    "priceMin": 250000,
+    "priceMax": 6000000,
+    "currency": "KRW",
+    "priceModel": "per_treatment",
+    "priceNote": "Korean law requires published non-covered fees and Nanoori posts a nine-page schedule. Relevant items: bone marrow injection for knee osteoarthritis ₩2,800,000 with materials, allogeneic hyaline cartilage microfracture ₩6,000,000, intraoperative PRP ₩1,000,000, plantar fasciitis PRP ₩250,000, epidural neuroplasty ₩1,200,000 before the catheter. The stem cell cartilage regeneration procedure and international packages are not priced publicly and are quoted case by case.",
+
+    "foundedYear": 2003,
+    "physiciansCount": 15,
+    "languages": ["Korean", "English", "Russian", "Mongolian"],
+
+    "medicalDirector": {
+      "name": "Il Tae Jang",
+      "title": "Chairman of the Board and Founder",
+      "credentials": "MD, PhD, Neurosurgery",
+      "bio": "Founded Nanoori in 2003 after training in neurosurgery at Ewha Womans University Hospital and taking a doctorate at Korea University. Had performed more than 8,000 spine operations between 1993 and 2004, introduced Korea's first bone cement procedure in 1997, and began same-day-discharge cervical disc surgery in Korea the same year. Visiting professor of neurosurgery at Yonsei University College of Medicine and special executive director of both the Korean Neurosurgical Society and the Korean Society of Spine Neurosurgery. Received the Distinguished Neurosurgeon Award at the Korean Neurosurgical Society's 2025 autumn congress."
+    },
+    "team": [
+      {
+        "name": "Jae Hyeon Lim",
+        "title": "Hospital Director, Neurosurgery",
+        "credentials": "MD",
+        "bio": "A founding member of the hospital in 2003 and a founding member of the Asia-Pacific Cervical Spine Society. Introduced and popularised cervical spinal foraminotomy in Korea and developed the hospital's minimally invasive fusion and post-operative pain protocols. Trained at the Exercise Science Center, University of Florida."
+      },
+      {
+        "name": "Seong Cheol Moon",
+        "title": "Director, Orthopedic Surgery",
+        "credentials": "MD",
+        "bio": "The regenerative name on the joint side. Trained in orthopedics with a shoulder and elbow fellowship at Kyung Hee University Hospital, where he is a visiting professor. A member of the Korean Stem Cell Therapy Society and clinical advisor for umbilical cord stem cell therapy. Also a member of the AAOS, ISAKOS, the Korean Arthroscopy Society and the Korean Society of Sports Medicine."
+      },
+      {
+        "name": "Yun Kyo Jung",
+        "title": "Deputy Director, Neurosurgery",
+        "credentials": "MD",
+        "bio": "Spine clinical instructor at Asan Medical Center Seoul and visiting professor at the Catholic University College of Medicine. Academic director of the Korean Society for Shockwave Therapy and Regenerative Medicine, certified in musculoskeletal ultrasound, and published in Operative Neurosurgery and Neurologia Medico-Chirurgica."
+      },
+      {
+        "name": "Seung Bum Kim",
+        "title": "Director, Neurosurgery",
+        "credentials": "MD",
+        "bio": "Trained at Hanyang University with a spine neurosurgery fellowship at Gangnam Severance Hospital. Former head and professor of neurosurgery at Kyung Hee University Hospital, and vice president of the Korean Osteoporotic Spine Society. Works mainly on degenerative spinal disease in older patients and osteoporotic compression fractures."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "731 Eonju-ro, Gangnam-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "postalCode": "06048",
+        "phone": "+82 2-3446-9797",
+        "lat": 37.5203,
+        "lng": 127.034
+      },
+      {
+        "addressLine": "156 Jangje-ro, Bupyeong-gu",
+        "city": "Incheon",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "phone": "+82 32-505-9797"
+      },
+      {
+        "addressLine": "295 Jungbu-daero, Yeongtong-gu",
+        "city": "Suwon",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "phone": "+82 31-8065-9797"
+      },
+      {
+        "addressLine": "485 Inju-daero, Michuhol-gu",
+        "city": "Incheon",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "phone": "+82 32-721-9797"
+      }
+    ],
+
+    "website": "https://ihc.nanoori.co.kr/",
+    "contactEmail": "ihc_info@gnnanoori.co.kr",
+    "social": {
+      "instagram": "https://www.instagram.com/nanoori_eng",
+      "facebook": "https://www.facebook.com/internationalnanoori",
+      "youtube": "https://www.youtube.com/@nanooritv"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785608987/library/rsfspja2zfdmbrbz9glf.webp",
+      "publicId": "library/rsfspja2zfdmbrbz9glf",
+      "width": 121,
+      "height": 59,
+      "alt": "Nanoori Hospital logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785608988/library/mcgjt3el1rwgac0jdqwd.webp",
+      "publicId": "library/mcgjt3el1rwgac0jdqwd",
+      "width": 320,
+      "height": 340,
+      "alt": "Nanoori Hospital Gangnam building in Seoul at dusk"
+    },
+
+    "highlights": [
+      "Designated an Advanced Regenerative Medicine Institution by Korea's health ministry in May 2025",
+      "Ministry-designated Spine Specialty Hospital for a fifth consecutive term in January 2024",
+      "Ministry-accredited medical institution through December 2027, assessed against more than 500 criteria",
+      "Opened September 2003 and now runs four hospitals; Gangnam is the founding flagship",
+      "12,113 international patients treated through its International Healthcare Center as of June 2025",
+      "Designated an MFDS clinical trial institution for drugs and medical devices in November 2013",
+      "Publishes its full non-covered fee schedule, including ₩2,800,000 for a bone marrow injection for knee osteoarthritis"
+    ],
+    "faqs": [
+      {
+        "question": "What regenerative options does Nanoori actually publish?",
+        "answer": "Two cell-based ones on its own treatment menu: an autologous bone marrow aspirate concentrate injection for knee osteoarthritis, and a stem cell cartilage regeneration procedure delivered into microfractured cartilage. PRP is offered for plantar fasciitis and during surgery, and prolotherapy for both spine and limb joints. Adipose or SVF, exosome and systemic IV cell therapy are not offered."
+      },
+      {
+        "question": "Does the hospital do cell therapy for the spine specifically?",
+        "answer": "Not as an advertised service, and this matters given the hospital is spine-led. The published cell therapies are joint and cartilage procedures. For the spine, the regenerative-adjacent options are prolotherapy, percutaneous epidural neuroplasty, disc decompression, nerve branch blocks and ligament or tendon injection in the pain clinic. The 2025 regenerative designation covers the hospital, but no spine-specific cell therapy is listed. Ask the international desk directly if that is what you are travelling for."
+      },
+      {
+        "question": "What is approved in Korea, and is any of it FDA-approved?",
+        "answer": "Korea and the United States regulate separately. The health ministry designated Gangnam an Advanced Regenerative Medicine Institution in May 2025 under the Advanced Regenerative Bio Act, which is the licence a Korean hospital needs before performing advanced regenerative cell therapy or research. The bone marrow knee injection is listed by Korean authorities as a new medical technology and appears on the statutory fee schedule as temporarily non-reimbursed, meaning recognised but patient-paid. None of this is US FDA approval, and the FDA has not approved these therapies."
+      },
+      {
+        "question": "What does treatment cost?",
+        "answer": "Published figures include ₩2,800,000 for the bone marrow knee injection with materials, ₩6,000,000 for allogeneic hyaline cartilage biomaterial microfracture, ₩1,000,000 for intraoperative autologous PRP, ₩250,000 for plantar fasciitis PRP, ₩300,000 for spinal prolotherapy across two or more regions, and ₩1,200,000 for epidural neuroplasty before the catheter. The stem cell cartilage regeneration procedure is not priced publicly."
+      },
+      {
+        "question": "How do international patients book?",
+        "answer": "Through the International Healthcare Center: submit a request, get an answer within 24 hours with a treatment plan and reservation, then travel, with interpretation and escort support during treatment and follow-up after discharge. Coordinators work in English, Russian and Mongolian alongside Korean, reachable by email, phone or WhatsApp."
+      },
+      {
+        "question": "Which branch should I go to?",
+        "answer": "Gangnam, in most cases. It is the founding hospital, hosts the International Healthcare Center and the Spine Endoscopy Center, and is one of the two branches carrying the 2025 regenerative medicine designation, the other being Juan. The nearest stations are Hakdong and Gangnam-gu Office on Line 7 and Sinsa on Line 3, with free shuttle buses."
+      }
+    ],
+
+    "seo": { "focusKeyword": "nanoori hospital" },
+    "reviewsPage": { "seo": { "focusKeyword": "nanoori hospital reviews" } },
+
+    "isClaimed": false
+  }
+]

@@ -16,18 +16,18 @@ export default function AboutPage() {
     >
       <h2>Why we exist</h2>
       <p>
-        Researching stem cell and regenerative treatments is hard. Information is
-        scattered, claims are often unsubstantiated, and pricing is opaque. We
-        bring clinics into one place with consistent profiles, accreditation
+        Researching stem cell and regenerative treatments is hard. Information
+        is scattered, claims are often unsubstantiated, and pricing is opaque.
+        We bring clinics into one place with consistent profiles, accreditation
         details, transparent pricing ranges, and verified patient reviews, so
         you can make a more informed decision.
       </p>
       <h2>What we are, and what we aren&apos;t</h2>
       <p>
         We are an informational directory. We are <strong>not</strong> a medical
-        provider, and we do not deliver care, give medical advice, or endorse the
-        safety or efficacy of any treatment. Always consult a licensed physician.
-        Individual results vary and no outcome is guaranteed.
+        provider, and we do not deliver care, give medical advice, or endorse
+        the safety or efficacy of any treatment. Always consult a licensed
+        physician. Individual results vary and no outcome is guaranteed.
       </p>
       <h2>How clinics are listed</h2>
       <p>
@@ -36,10 +36,46 @@ export default function AboutPage() {
         exactly how we rank and verify on our{" "}
         <Link href="/methodology">methodology page</Link>.
       </p>
+      <p>
+        No clinic can buy its way into a review score or edit what a patient
+        wrote about it. We build profiles from a clinic&apos;s own published
+        material, public registries and accreditation records, then check that
+        against what the clinic tells us directly. When we cannot confirm a
+        detail, we leave it out and say so. When a clinic disputes something, we
+        look again, and we fix whatever turns out to be wrong.
+      </p>
+      <h2>How we make money</h2>
+      <p>
+        Clinics pay us for featured placement and for verification review.
+        Patients pay nothing. Requesting a consultation is free, we do not sell
+        patient data, and your details go only to the clinics you pick. Paid
+        placement moves where a clinic appears. It never touches what the
+        profile says, what the clinic scores, or which reviews go up. Every paid
+        position is labelled.
+      </p>
+      <h2>What we cannot tell you</h2>
+      <p>
+        Whether a treatment works. Most of the therapies described here have not
+        been through the trials that would settle that for any given condition,
+        and several are legal in one country and not the next. Verification
+        confirms a clinic is who it says it is, and stops there. We would rather
+        be blunt about that limit than imply a certainty the field has not
+        earned.
+      </p>
+      <p>
+        What we can do is line up the comparable facts: who runs the clinic,
+        what it is accredited for, which therapies it uses, what it charges, and
+        what patients who went there have said. Our{" "}
+        <Link href="/editorial-policy">editorial policy</Link> covers how that
+        content gets made and moderated. Read the{" "}
+        <Link href="/medical-disclaimer">medical disclaimer</Link> before you
+        act on any of it.
+      </p>
       <h2>Get in touch</h2>
       <p>
         Questions, corrections, or a clinic to add? Visit our{" "}
-        <Link href="/contact">contact page</Link>.
+        <Link href="/contact">contact page</Link>. Clinics looking to be listed
+        can start on the <Link href="/for-clinics">for clinics</Link> page.
       </p>
     </ProsePage>
   );

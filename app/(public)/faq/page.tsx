@@ -39,6 +39,36 @@ const FAQS: { question: string; answer: string }[] = [
     answer:
       "Clinics are curated by our team. If you represent a clinic or spot an error, reach out through our contact page.",
   },
+  {
+    question: "Does a listing mean the treatment works?",
+    answer:
+      "No. It means a clinic accepts patients for a condition and has a profile here. Most therapies described on this site have not been through the trials that would make them standard care for the conditions patients ask about, and some are legal in one country and not the next. We compare clinics. Whether a treatment is effective is not something we assess.",
+  },
+  {
+    question: "Why do clinics abroad offer treatments my country does not?",
+    answer:
+      "Countries disagree on how much may be done to cells before they go back in. In the United States, culturing or expanding them crosses into drug territory, so domestic clinics mostly stick to minimally manipulated tissue. Several other countries allow expanded-cell protocols. The difference is regulatory rather than evidential, and it is the main reason people get on planes.",
+  },
+  {
+    question: "What does the verified badge actually check?",
+    answer:
+      "The credentials and accreditations a clinic gives us, checked against the issuing bodies and public records, plus basic business and licensing details. It does not look at clinical outcomes and it is not an endorsement. The methodology page lists what is checked and what is not.",
+  },
+  {
+    question: "How are clinics ordered in the directory?",
+    answer:
+      "The default order weighs verification status, how complete a profile is, published patient reviews, and how closely a clinic matches whatever filters you set. Paid placement is labelled Featured wherever it appears, and it changes nothing about a clinic's reviews, score or profile. You can re-sort any directory page yourself.",
+  },
+  {
+    question: "Can a clinic remove a bad review?",
+    answer:
+      "No. Clinics get no approval, edit or veto over reviews. One that believes a review is false can raise it with us and we will look at the evidence, but disagreeing with a review is not grounds for pulling it. The reviews we do remove are the ones that break our content rules or that nobody can substantiate.",
+  },
+  {
+    question: "What should I ask a clinic before booking?",
+    answer:
+      "Which cell source and preparation they would use for your condition. Who performs the procedure and what they are licensed to do. What the quoted total covers. What follow-up comes with it. Who is responsible if a complication develops once you are home. And what evidence supports that protocol for your diagnosis, rather than for the field in general.",
+  },
 ];
 
 export default function FaqPage() {
@@ -56,7 +86,10 @@ export default function FaqPage() {
           </h1>
           <p className="mt-3 text-[16px] text-text-secondary">
             Can&apos;t find what you&apos;re looking for?{" "}
-            <Link href="/contact" className="font-medium text-text-link hover:underline">
+            <Link
+              href="/contact"
+              className="font-medium text-text-link hover:underline"
+            >
               Contact our team
             </Link>
             .
@@ -65,7 +98,10 @@ export default function FaqPage() {
 
         <div className="divide-y divide-border rounded-xl border border-border bg-surface">
           {FAQS.map((faq) => (
-            <details key={faq.question} className="group p-5 [&_summary]:list-none">
+            <details
+              key={faq.question}
+              className="group p-5 [&_summary]:list-none"
+            >
               <summary className="flex cursor-pointer items-center justify-between gap-4 font-display text-[15.5px] font-semibold text-text-primary">
                 {faq.question}
                 <ChevronDown
@@ -79,6 +115,29 @@ export default function FaqPage() {
             </details>
           ))}
         </div>
+
+        <section className="prose-article mt-12 border-t border-border pt-10">
+          <h2>Still deciding where to start</h2>
+          <p>
+            Know your diagnosis? Start from{" "}
+            <Link href="/conditions">the condition list</Link> and see who
+            accepts patients for it. Know the procedure instead? Start from{" "}
+            <Link href="/treatments">the treatment list</Link>. If cost or
+            travel is what decides it, browse{" "}
+            <Link href="/locations">by destination</Link>, or answer a few
+            questions in the <Link href="/find-a-clinic">guided match</Link> and
+            let it cut the directory down for you.
+          </p>
+          <p>
+            Before you lean on any ordering here, read how we{" "}
+            <Link href="/methodology">rank and verify clinics</Link> and how we{" "}
+            <Link href="/editorial-policy">produce and moderate content</Link>.
+            The <Link href="/medical-disclaimer">medical disclaimer</Link> is
+            worth five minutes too. It spells out what this site is not: not
+            medical advice, not an endorsement of anyone listed, and no promise
+            that an outcome described here will be yours.
+          </p>
+        </section>
       </div>
     </>
   );

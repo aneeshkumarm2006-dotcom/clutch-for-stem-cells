@@ -111,6 +111,32 @@ export interface TermEditorial {
   updatedAt?: string | null;
 }
 
+/**
+ * `true` when a term's editorial record has something to render.
+ *
+ * Approval and content are separate states. A term can be marked approved with
+ * every field still blank, and `loadTermEditorial` returns an object for it
+ * because approval is what it gates on. Callers that branch on `editorial ? A :
+ * B` then take the editorial branch and render an empty `<EditorialArticle>`,
+ * which is how a page ends up with a fallback that never runs and no content
+ * where the editorial was supposed to be.
+ *
+ * The reviewer byline and dates are deliberately not counted: a byline over an
+ * empty article is provenance for nothing.
+ */
+export function hasEditorialContent(
+  editorial: TermEditorial | null | undefined,
+): editorial is TermEditorial {
+  if (!editorial) return false;
+  return Boolean(
+    editorial.body?.trim() ||
+      editorial.blocks?.length ||
+      editorial.sections?.length ||
+      editorial.faqs?.length ||
+      editorial.keyFacts?.length,
+  );
+}
+
 function toTerm(doc: ITaxonomyBase & { category?: string }): TaxonomyTerm {
   return {
     id: id(doc._id),
@@ -1146,7 +1172,22 @@ export async function getRelatedClinics(
 // term is orphaned and link equity flows across the treatment/condition/location
 // matrix. All are DB-backed like the directory query these pages already run.
 
-/** Sibling terms in the same `category`, ranked by clinic coverage (self excluded). */
+/**
+ * Sibling terms in the same `category`, as a rotating window rather than a
+ * top-N (self excluded).
+ *
+ * Taking the `limit` siblings with the most clinics looks right and quietly
+ * orphans the tail: every page in a category links to the same busy handful, so
+ * a term like stem-cell banking, which carries almost no inventory, ends up with
+ * exactly one inbound link in the whole site (the hub that lists it). One link
+ * is what a crawler treats as a page nobody rates.
+ *
+ * So the window *starts* after this term in the category's own ranking and wraps
+ * around. Term i links to i+1 … i+limit, which makes the category a ring: every
+ * member is linked by at least one sibling however little inventory it has, the
+ * busiest terms still surface most often because they sit at the front of the
+ * ranking, and the result stays deterministic, so it caches like any other read.
+ */
 export async function getRelatedTerms(
   kind: "treatment" | "condition",
   slug: string,
@@ -1159,17 +1200,27 @@ export async function getRelatedTerms(
     .select("category")
     .lean<{ category?: string } | null>();
   if (!term) return [];
-  const query: Record<string, unknown> = {
-    slug: { $ne: slug },
-    isActive: true,
-  };
+
+  const query: Record<string, unknown> = { isActive: true };
   if (term.category) query.category = term.category;
+
+  // The whole category, self included, so the window has a position to start
+  // from. Categories hold tens of terms, not thousands, so this is one small
+  // indexed read rather than the `.limit(limit)` it replaces.
   const docs = await model
     .find(query)
     .sort({ clinicCount: -1, order: 1, name: 1 })
-    .limit(limit)
     .lean();
-  return docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
+
+  const terms = docs.map((d) => toTerm(d as unknown as ITaxonomyBase));
+  const self = terms.findIndex((t) => t.slug === slug);
+  if (self < 0) return terms.slice(0, limit);
+
+  const ring: TaxonomyTerm[] = [];
+  for (let step = 1; step < terms.length && ring.length < limit; step += 1) {
+    ring.push(terms[(self + step) % terms.length]);
+  }
+  return ring;
 }
 
 /**

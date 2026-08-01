@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Gangnam JS Hospital",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "The Seoul orthopedic hospital that implants cord blood stem cells into worn knee cartilage.",
+    "description": "Gangnam JS Hospital is a 100-bed orthopedic hospital in southern Seoul. It opened in November 2013 and is known for one procedure above all others: implanting mesenchymal stem cells taken from donated umbilical cord blood into damaged knee cartilage. Its first well-known patient was Guus Hiddink, who coached South Korea to the 2002 World Cup semi-finals and had been told by surgeons in the United States and Germany that a knee replacement was his remaining option. He had the cell implant in Seoul in late 2013 instead.\n\nChief director Song Jun-seop has performed the procedure on roughly 3,000 patients since, and the hospital has published eight SCI(E)-indexed papers on its cartilage results. The rest of the practice is ordinary orthopedics: arthroscopic knee and shoulder surgery, spine endoscopy, sports injury work, and inpatient rehabilitation, run by about 55 staff that includes doctors who have covered Korean national football squads. Imaging, operating theatres and rehab are all in the same building, so a foreign patient is not being routed between facilities. International enquiries go through a separate English-language desk, and the hospital is listed as a medical travel destination by the Korea Tourism Organization.",
+
+    "treatmentTypes": [
+      "cord-blood-therapy",
+      "msc-therapy",
+      "allogeneic-therapy",
+      "regenerative-orthopedics",
+      "prp",
+      "exosome-therapy"
+    ],
+    "conditionsTreated": [
+      "knee-osteoarthritis",
+      "sports-injuries",
+      "joint-pain",
+      "back-and-spine",
+      "rotator-cuff-shoulder",
+      "hip-osteoarthritis"
+    ],
+    "cellSources": [
+      "umbilical-cord",
+      "cord-blood",
+      "allogeneic",
+      "exosomes"
+    ],
+    "accreditations": ["board-certified-physicians", "hospital-affiliation"],
+    "serviceFocus": [
+      { "treatment": "cord-blood-therapy", "percent": 45 },
+      { "treatment": "regenerative-orthopedics", "percent": 30 },
+      { "treatment": "prp", "percent": 15 },
+      { "treatment": "exosome-therapy", "percent": 10 }
+    ],
+
+    "priceModel": "consult_to_quote",
+    "priceNote": "No prices are published. The hospital quotes after MRI review, because the figure depends on the size of the cartilage defect and whether other work is done in the same operation. Korean national insurance covers part of the bill for residents; foreign patients pay privately and should ask what the quote covers beyond the implant itself, including the inpatient stay, imaging and follow-up.",
+
+    "foundedYear": 2013,
+    "teamSize": "51-200",
+    "physiciansCount": 5,
+    "languages": ["Korean", "English"],
+
+    "medicalDirector": {
+      "name": "Song Jun-seop",
+      "title": "Chief Director",
+      "credentials": "MD, Orthopedic Surgery",
+      "bio": "Song opened the hospital in 2013 and implanted cord blood mesenchymal stem cells in Guus Hiddink's knee later that year. He has carried out the procedure on around 3,000 patients since and has published eight SCI(E)-indexed papers on the cartilage outcomes. He has also worked as a team physician to Korean national football squads, and takes referrals from the Gulf, China, Europe and North America."
+    },
+    "team": [
+      {
+        "name": "Kim Na-min",
+        "title": "Hospital Director",
+        "credentials": "MD, Orthopedic Surgery",
+        "bio": "Handles sports injuries, arthritis and knee correction surgery, including osteotomy for bow-legged alignment before or alongside cartilage work."
+      },
+      {
+        "name": "Hwang Yoon-ha",
+        "title": "Clinical Director",
+        "credentials": "MD, Neurosurgery",
+        "bio": "Board-certified neurosurgeon covering the spine side of the practice: herniated discs, stenosis and endoscopic decompression."
+      },
+      {
+        "name": "Lee Sun-yong",
+        "title": "Clinical Director",
+        "credentials": "MD, Radiology",
+        "bio": "Board-certified radiologist. Reads the MRI that decides whether a knee has a focal cartilage defect worth implanting into."
+      },
+      {
+        "name": "Koh Kyung-hee",
+        "title": "Director of Anesthesiology",
+        "credentials": "MD, Anesthesiology and Pain Medicine",
+        "bio": "Runs anesthesia and post-operative pain management for the hospital's surgical cases."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "122 Dogok-ro, Gangnam-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "phone": "+82 2-533-3600",
+        "lat": 37.4856,
+        "lng": 127.0347
+      }
+    ],
+
+    "website": "https://www.gnjshospital.com/",
+    "contactEmail": "gnjs.int@gmail.com",
+    "social": {
+      "instagram": "https://www.instagram.com/gangnamjs_hospital/",
+      "youtube": "https://www.youtube.com/channel/UCiYUqxocfdD0NRhhWVUvbtA",
+      "facebook": "https://www.facebook.com/gnjshospital/"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785607146/library/scm5dj8ipmmfxvha5hl5.webp",
+      "publicId": "library/scm5dj8ipmmfxvha5hl5",
+      "width": 236,
+      "height": 80,
+      "alt": "Gangnam JS Hospital logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785607148/library/qjdbn1jitax8hod7qpiy.webp",
+      "publicId": "library/qjdbn1jitax8hod7qpiy",
+      "width": 1200,
+      "height": 795,
+      "alt": "Reception area at Gangnam JS Hospital in Seoul"
+    },
+
+    "highlights": [
+      "About 3,000 cord blood stem cell cartilage procedures since 2013",
+      "Treated Guus Hiddink's knee in 2013, the case that made the procedure widely known in Korea",
+      "Uses CARTISTEM, the cord blood cell product licensed by Korea's MFDS in 2012",
+      "Eight SCI(E)-indexed papers published on its cartilage results",
+      "100 beds, five specialist physicians, with MRI, theatres and rehab in one building",
+      "Doctors have served as team physicians to Korean national football squads",
+      "English-language desk for international patients; listed on VisitKorea's medical travel directory"
+    ],
+    "faqs": [
+      {
+        "question": "Is cord blood stem cell cartilage treatment approved?",
+        "answer": "In Korea, yes. CARTISTEM, the umbilical cord blood mesenchymal stem cell product used for knee cartilage defects, was licensed by Korea's Ministry of Food and Drug Safety in 2012 and is prescribed under that licence. It has no FDA approval, so a patient travelling from the United States is going abroad for something not available at home. Ask for the operative note and imaging in English before you fly back; your own orthopedist will want them."
+      },
+      {
+        "question": "How is this different from a stem cell injection or PRP?",
+        "answer": "PRP is your own blood, spun down and injected in an outpatient visit. This is surgery. The cells come from a donated cord blood line, are mixed with a hyaluronic acid carrier, and are placed directly into the cartilage defect during an arthroscopic or mini-open procedure. You are admitted, and you spend weeks afterwards on limited weight-bearing."
+      },
+      {
+        "question": "What should I realistically expect?",
+        "answer": "The goal is to fill a cartilage defect and postpone a knee replacement, not to undo arthritis throughout the joint. Improvement is gradual: rehabilitation runs three to six months, and most of the change shows up over six to twelve. Some patients still go on to a replacement later. Nobody at the hospital should promise you otherwise."
+      },
+      {
+        "question": "Who is a candidate?",
+        "answer": "Screening is done on MRI. The procedure suits a focal cartilage defect with reasonable surrounding joint structure, in a patient whose knee pain has not settled with physiotherapy or injections and who wants to keep the joint. Diffuse end-stage arthritis is usually better served by a replacement, and the hospital will say so."
+      },
+      {
+        "question": "How long do I need to stay in Korea?",
+        "answer": "Longer than for an injection clinic. Plan on imaging and consultation first, an inpatient stay around the operation, then several weeks of restricted weight-bearing. Agree the schedule with the international desk before you book flights, and ask what rehabilitation you can do at home versus what needs to happen in Seoul."
+      },
+      {
+        "question": "Does insurance cover it?",
+        "answer": "Korean national health insurance covers part of the cost for residents. Foreign patients generally pay out of pocket. The hospital says it works with international insurers, but coverage for a therapy that is unapproved in your home country is uncommon, so confirm in writing with your insurer before you travel."
+      }
+    ],
+
+    "seo": { "focusKeyword": "gangnam js hospital" },
+    "reviewsPage": { "seo": { "focusKeyword": "gangnam js hospital reviews" } },
+
+    "isClaimed": false
+  }
+]

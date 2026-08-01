@@ -21,6 +21,7 @@ import {
   SOCIAL_LINKS,
 } from "@/config/site";
 import {
+  MAX_META_TITLE_LENGTH,
   META_SEPARATOR,
   boldMetaPrefix,
   normalizeMetaText,
@@ -52,6 +53,32 @@ export function applyTitleTemplate(title?: string, template?: string): string {
   if (!title) return SITE_NAME;
   if (!template) return title;
   return template.includes("%s") ? template.replace("%s", title) : title;
+}
+
+/**
+ * The brand suffix, dropped when it is what pushes the title over the length
+ * cap.
+ *
+ * A page title is written for the query; the brand on the end is a courtesy that
+ * earns its place only while there is room for it. "Is Stem Cell Therapy Safe
+ * for Arthritis? Benefits, Risks, and What to Know" is a good title at 74
+ * characters and a truncated one at 95 once " | My Stem Cell Guide" is appended,
+ * and the 21 characters a SERP drops to make room are the ones a reader was
+ * going to use.
+ *
+ * Only the *suffix* is negotiable. Authored copy is never cut: a bare title that
+ * is itself over the cap goes out whole and is reported by
+ * `npm run check:meta`, because shortening someone's headline is an editorial
+ * decision and not one to make silently in a metadata builder.
+ */
+function brandedTitle(title: string | undefined, template?: string): string {
+  const bare = normalizeMetaText(title, "title");
+  const branded = normalizeMetaText(
+    applyTitleTemplate(title, template),
+    "title",
+  );
+  if (branded.length <= MAX_META_TITLE_LENGTH || !bare) return branded;
+  return bare.length < branded.length ? bare : branded;
 }
 
 // ── Metadata builder ─────────────────────────────────────────────────────────
@@ -125,16 +152,14 @@ export function buildMetadata(input: BuildMetadataInput = {}): Metadata {
   // source — a route file, the static-page registry, or a CMS record an editor
   // typed. On-page copy is untouched; only what reaches the `<head>` is
   // rewritten. See `lib/meta-text.ts`.
-  const title = normalizeMetaText(
-    titleOverride ||
-      (input.titleAbsolute
-        ? (input.title ?? SITE_NAME)
-        : applyTitleTemplate(
-            input.title,
-            defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
-          )),
-    "title",
-  );
+  const title =
+    normalizeMetaText(titleOverride, "title") ||
+    (input.titleAbsolute
+      ? normalizeMetaText(input.title ?? SITE_NAME, "title")
+      : brandedTitle(
+          input.title,
+          defaults?.titleTemplate ?? DEFAULT_TITLE_TEMPLATE,
+        ));
   const description = normalizeMetaText(
     seo?.metaDescription ??
       input.description ??
@@ -371,7 +396,12 @@ export function medicalClinicJsonLd(clinic: ClinicSeoInput): JsonLd {
       hq?.lat != null && hq?.lng != null
         ? { "@type": "GeoCoordinates", latitude: hq.lat, longitude: hq.lng }
         : undefined,
-    availableLanguage: clinic.languages?.length ? clinic.languages : undefined,
+    // `knowsLanguage`, not `availableLanguage`: the latter is only defined on
+    // `ContactPoint`/`ServiceChannel`/`LodgingBusiness`, so a validator reads it
+    // on a `MedicalClinic` as an inapplicable property and rejects the node.
+    // `knowsLanguage` is declared on `Organization`, which `MedicalClinic`
+    // inherits from through `MedicalOrganization`.
+    knowsLanguage: clinic.languages?.length ? clinic.languages : undefined,
     priceRange: priceRange(clinic),
     aggregateRating:
       clinic.reviewCount > 0 ? aggregateRatingJsonLd(clinic, false) : undefined,
@@ -439,8 +469,11 @@ function priceRange(
 ): string | undefined {
   if (clinic.priceMin == null && clinic.priceMax == null) return undefined;
   const cur = clinic.currency ?? "USD";
+  // A hyphen, not an en dash: the site's text policy keeps dashes out of
+  // anything rendered (lib/meta-text.ts), and this string is rendered — it goes
+  // into the page's JSON-LD and gets read back by whatever consumes it.
   if (clinic.priceMin != null && clinic.priceMax != null)
-    return `${clinic.priceMin}–${clinic.priceMax} ${cur}`;
+    return `${clinic.priceMin}-${clinic.priceMax} ${cur}`;
   return `${clinic.priceMin ?? clinic.priceMax} ${cur}`;
 }
 
@@ -467,8 +500,20 @@ type ReviewSeoInput = Pick<
   "reviewer" | "ratingOverall" | "headline" | "body" | "createdAt"
 > & { clinicName: string };
 
-/** `Review` node — reviewer is anonymized to "Verified Patient" (PRD §14). */
-export function reviewJsonLd(review: ReviewSeoInput): JsonLd {
+/**
+ * `Review` node — reviewer is anonymized to "Verified Patient" (PRD §14).
+ *
+ * Standalone by default; pass `false` for the bare node to nest inside the type
+ * being reviewed (see {@link medicalClinicJsonLd} / `buildClinicNodes`). The
+ * nested form drops `itemReviewed` along with `@context`: the parent *is* the
+ * reviewed item, and a stub `{"@type":"MedicalClinic","name":…}` standing in for
+ * it is a second, address-less copy of the clinic that a validator rejects for
+ * missing the fields a `LocalBusiness` needs.
+ */
+export function reviewJsonLd(
+  review: ReviewSeoInput,
+  standalone = true,
+): JsonLd {
   const authorName =
     review.reviewer?.isAnonymous || !review.reviewer?.displayName
       ? "Verified Patient"
@@ -479,16 +524,23 @@ export function reviewJsonLd(review: ReviewSeoInput): JsonLd {
     review.body?.treatmentDescription;
 
   return compact({
-    "@context": "https://schema.org",
+    ...(standalone
+      ? {
+          "@context": "https://schema.org",
+          itemReviewed: { "@type": "MedicalClinic", name: review.clinicName },
+        }
+      : {}),
     "@type": "Review",
-    itemReviewed: { "@type": "MedicalClinic", name: review.clinicName },
     author: { "@type": "Person", name: authorName },
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: review.ratingOverall,
-      bestRating: 5,
-      worstRating: 1,
-    },
+    reviewRating:
+      review.ratingOverall != null
+        ? {
+            "@type": "Rating",
+            ratingValue: review.ratingOverall,
+            bestRating: 5,
+            worstRating: 1,
+          }
+        : undefined,
     name: review.headline,
     reviewBody,
     datePublished: review.createdAt?.toISOString?.() ?? undefined,

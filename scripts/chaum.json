@@ -1,0 +1,163 @@
+[
+  {
+    "name": "Chaum",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "CHA Bio Group's Cheongdam life center, where the cell bank sits inside the clinic.",
+    "description": "Chaum opened in 2010 on floors two and three of the P&Polus building in Cheongdam-dong, Seoul, as the consumer-facing clinic of CHA Bio Group. CHA is a listed Korean cell-therapy company, and that parentage is the whole point of the place: the cell bank is physically in the building rather than contracted out. The clinic runs a premium screening centre, ten outpatient departments and eight specialist clinics under one roof, and in 2025 it restyled itself from an anti-aging centre to a longevity centre. Its own framing is the \"gray zone\", the stretch between being well and being ill, which it argues is better managed by screening and prevention than by waiting for a diagnosis.\n\nWhat Chaum actually delivers in Seoul is narrower than the marketing suggests, and worth understanding before you book. The cell services on offer here are storage and autologous fat work: CHA Biotech's Bio Insurance banks your own immune cells for 35 years and adipose-derived stem cells for 20, and the CHAdiForm procedure separates a cell fraction from your own fat and grafts it back into your skin and fat tissue. Culture-expanded cell infusions are not offered in Korea. CHA's immune-cell therapy for cancer patients runs instead through a sister facility in Tokyo, opened in 2014, because Japanese law permits clinic-level cell therapy that Korean law does not. The staff list runs to 34 physicians, many of them CHA University professors or former department heads from Severance, Yonsei and Asan, and the International Healthcare Center staffs separate English, Chinese and Russian lines.",
+
+    "treatmentTypes": [
+      "stem-cell-banking",
+      "adipose-derived-therapy",
+      "svf",
+      "autologous-therapy",
+      "prp",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "skin-aesthetic",
+      "hair-restoration",
+      "sexual-health",
+      "joint-pain",
+      "back-and-spine",
+      "diabetes-supportive",
+      "cardiovascular"
+    ],
+    "cellSources": ["adipose", "autologous"],
+    "accreditations": ["board-certified-physicians", "hospital-affiliation"],
+    "serviceFocus": [
+      { "treatment": "stem-cell-banking", "percent": 30 },
+      { "treatment": "adipose-derived-therapy", "percent": 30 },
+      { "treatment": "iv-systemic-therapy", "percent": 20 },
+      { "treatment": "prp", "percent": 20 }
+    ],
+
+    "priceMin": 110000,
+    "priceMax": 3520000,
+    "currency": "KRW",
+    "priceModel": "per_treatment",
+    "priceNote": "Korean law requires clinics to publish their non-covered fees, and Chaum does. Published items run from ₩110,000 for a partial-area PRP or an IV vitamin infusion up to ₩3,520,000 for a full-face fat graft with stem cells; a basic stem-cell fat graft is ₩220,000 and an NK cell activity test ₩150,000. Cell banking and the premium checkup packages are the exception and are quoted individually by phone.",
+
+    "foundedYear": 2010,
+    "teamSize": "51-200",
+    "physiciansCount": 34,
+    "languages": ["Korean", "English", "Chinese", "Russian"],
+
+    "medicalDirector": {
+      "name": "Kim Jae-hwa",
+      "title": "Chief Director",
+      "bio": "Signs the director's greeting on Chaum's own site, where he frames the clinic around Thomas Edison's line that the doctor of the future will give no medicine but interest patients in diet, the human frame, and the prevention of disease. He describes Chaum as a triple system combining Western, Korean and alternative medicine, with the next phase weighted toward health promotion rather than detection alone. Chaum publishes his name, title and greeting but no CV, so his specialty board is not on record."
+    },
+    "team": [
+      {
+        "name": "Han Kwang-hyub",
+        "title": "Professor, Gastroenterology",
+        "credentials": "MD, MS",
+        "bio": "Liver disease and the Healthy Longevity Clinic. Formerly professor at Yonsei University College of Medicine, director of the Liver Center at Severance Hospital and chief professor of internal medicine at Yonsei. Past president of the International Association for the Study of the Liver and a founding president of the Asia-Pacific Primary Liver Cancer Expert Association."
+      },
+      {
+        "name": "Choi Joong-eon",
+        "title": "Professor, Neurosurgery",
+        "credentials": "MD",
+        "bio": "Runs the Neuro-Musculoskeletal Clinic. Dean of CHA University's Graduate School of Integrative Medicine and formerly hospital director at CHA Bundang Medical Center, chief of pediatric neurosurgery at Severance Children's Hospital and chair professor of neurosurgery at Yonsei. Trained at the Hospital for Sick Children in Toronto and the Institute of Neurology in London."
+      },
+      {
+        "name": "Kim Jong-seok",
+        "title": "Professor, Power Aging Clinic",
+        "credentials": "MD, board-certified in Family Medicine",
+        "bio": "Works in functional and integrative medicine, immune testing and anti-aging. Dean of CHA University's Graduate School of Integrative Medicine and an executive committee member of the Korean Stem Cell Society. Has published on vitamin D, DHEA-S and metabolic markers between 2012 and 2021."
+      },
+      {
+        "name": "Lee Young-soo",
+        "title": "Professor, Geriatric Medicine",
+        "credentials": "MD",
+        "bio": "Manages degenerative conditions and functional decline in the Power Aging Clinic. Former professor and department chair of geriatric medicine at Asan Medical Center Seoul, past president of the Korean Geriatrics Society, and a board member of the International Association of Gerontology and Geriatrics."
+      },
+      {
+        "name": "Kim Young-tak",
+        "title": "Professor, Immune Enhancement Clinic",
+        "credentials": "MD",
+        "bio": "Listed by the clinic for cancer care, immune cell therapy and stem cell therapy. Chaum publishes his specialty fields but no education or career detail."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "2F-3F, P&Polus Building, 442 Dosan-daero, Gangnam-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "postalCode": "06062",
+        "phone": "+82 2-3015-5300",
+        "lat": 37.5233,
+        "lng": 127.044
+      }
+    ],
+
+    "website": "https://www.chaum.net/",
+    "contactEmail": "ihc.chaum@chamc.co.kr",
+    "social": {
+      "instagram": "https://www.instagram.com/chaumofficial/",
+      "facebook": "https://www.facebook.com/CHAUMLife/",
+      "youtube": "https://www.youtube.com/@chahospital"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785608977/library/fj04mnqzxsz7tabs4w4m.webp",
+      "publicId": "library/fj04mnqzxsz7tabs4w4m",
+      "width": 600,
+      "height": 71,
+      "alt": "Chaum logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785608979/library/jatdiovac29bwqeoad8i.webp",
+      "publicId": "library/jatdiovac29bwqeoad8i",
+      "width": 800,
+      "height": 450,
+      "alt": "Private consultation and screening room at Chaum in Seoul"
+    },
+
+    "highlights": [
+      "Opened 2010 as CHA Bio Group's Cheongdam life center; restyled from anti-aging to longevity in 2025",
+      "CHA Biotech's cell bank runs from the same building: own immune cells stored 35 years, adipose stem cells 20",
+      "Publishes its full statutory non-covered fee schedule, from ₩110,000 PRP to ₩3,520,000 full-face fat grafting",
+      "34 physicians, including CHA University professors and former department chairs from Severance, Yonsei and Asan",
+      "Ten outpatient departments and eight specialist clinics on two floors of the P&Polus building",
+      "International Healthcare Center runs separate English, Chinese and Russian lines with bilingual nurse interpreters",
+      "Premium screening happens in private rooms where staff and equipment come to the patient"
+    ],
+    "faqs": [
+      {
+        "question": "What stem cell services does Chaum actually provide in Seoul?",
+        "answer": "Two things. Storage, through CHA Biotech's Bio Insurance service in the same building, which banks your own immune cells and adipose-derived stem cells. And autologous fat work, billed as stem cell fat grafting and marketed as CHAdiForm, where a cell fraction separated from your own fat is grafted back into your skin and fat tissue. Chaum does not advertise a culture-expanded cell infusion in Korea."
+      },
+      {
+        "question": "Why does CHA operate a clinic in Tokyo as well?",
+        "answer": "Because the two countries regulate differently. Japan's 2014 Regenerative Medicine Safety Act allows clinic-level cell therapy that Korean law restricts much more tightly, so CHA's immune cell therapy for cancer patients is delivered largely through Total Cell Clinic Tokyo, certified in Japan in June 2015. If you are enquiring about immune cell therapy specifically, ask which country you would be treated in."
+      },
+      {
+        "question": "What is the regulatory position in Korea, and is any of this FDA-approved?",
+        "answer": "Chaum is a licensed Korean clinic under the Seongkwang Medical Foundation and discloses its non-covered fees as the Medical Service Act requires. That is ordinary licensing, not an approval of any cell therapy. Under Korea's Advanced Regenerative Bio Act, only institutions specifically designated by the Minister of Health and Welfare may carry out advanced regenerative treatment or research, and we could not confirm that Chaum holds that designation. Nothing offered here is approved by the US FDA. Ask the clinic directly what designation it holds before you commit."
+      },
+      {
+        "question": "What can banked cells actually be used for later?",
+        "answer": "Storage is a storage service. Banking your own cells does not come with authorisation to treat any particular disease, and no specific future therapy is promised by the act of storing them. Chaum's marketing associates banked cells with a list of chronic conditions; treat that as forward-looking, not as a treatment on offer. The process is a blood test, a consultation, collection of fat or blood, separation, cryostorage and a certificate."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "The published schedule covers most aesthetic and injection items: PRP ₩110,000 to ₩770,000, stem cell fat grafting ₩220,000 to ₩3,520,000, NK cell activity testing ₩150,000, IV vitamin infusions ₩110,000 to ₩165,000. Cell banking and the premium checkup packages are not priced publicly and are quoted case by case, through the checkup centre, the Bio Insurance line, or the international desk."
+      },
+      {
+        "question": "How do international patients book?",
+        "answer": "Through the International Healthcare Center, which staffs bilingual nurse interpreters and separate phone lines for English, Chinese and Russian, plus an email address. The website is published in all four languages. Consultation hours are weekdays 08:30 to 17:30 and Saturday mornings; the dermatology clinic runs later on weekdays."
+      }
+    ],
+
+    "seo": { "focusKeyword": "chaum" },
+    "reviewsPage": { "seo": { "focusKeyword": "chaum reviews" } },
+
+    "isClaimed": false
+  }
+]

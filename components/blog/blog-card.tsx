@@ -1,6 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { RemoteImage } from "@/components/common/remote-image";
 import { ArrowRight, Clock } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -43,7 +43,7 @@ export function BlogCard({
           single accessible name (WCAG 2.4.4). */}
       <div className="relative aspect-[16/9] overflow-hidden bg-tint">
         {post.coverUrl ? (
-          <Image
+          <RemoteImage
             src={post.coverUrl}
             alt={post.coverAlt ?? ""}
             fill

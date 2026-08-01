@@ -7,6 +7,7 @@ import {
   getCityBySlug,
   getCountryBySlug,
   getDirectoryData,
+  hasEditorialContent,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
@@ -119,7 +120,7 @@ export default async function CityDirectoryPage({
         activeView={isTopView(searchParams) ? "top" : "all"}
         afterResults={
           <>
-            {editorial ? (
+            {hasEditorialContent(editorial) ? (
               <EditorialArticle data={editorial} className="mb-12" />
             ) : null}
             <RelatedLinks

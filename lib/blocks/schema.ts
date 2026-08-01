@@ -19,6 +19,37 @@ import type {
 } from "@/lib/validation/block";
 
 /**
+ * One entry of an `ItemList` whose members are named things rather than links.
+ *
+ * A `ListItem` has to identify what it lists — either a `url` pointing at the
+ * item's own page (the "summary page" form `itemListJsonLd` in `lib/seo.ts`
+ * uses for clinics) or a nested `item` describing it inline (the "all-in-one
+ * page" form). A comparison row or a process step has no page of its own, so
+ * `name` alone leaves the entry identifying nothing and validators reject the
+ * whole list. `item` carries the description too, which the flat form has
+ * nowhere to put.
+ */
+function namedListItem(
+  position: number,
+  name: string,
+  extra?: { description?: string; url?: string },
+): JsonLd {
+  const url = extra?.url ? absoluteUrl(extra.url) : undefined;
+  return {
+    "@type": "ListItem",
+    position,
+    name,
+    ...(url ? { url } : {}),
+    item: {
+      "@type": "Thing",
+      name,
+      ...(extra?.description ? { description: extra.description } : {}),
+      ...(url ? { url } : {}),
+    },
+  };
+}
+
+/**
  * `ItemList` of the rows in a comparison block. Distinct from `itemListJsonLd`
  * in `lib/seo.ts` (which lists linked clinics by path) because a comparison row
  * is a *named* item whose link is optional — we emit `url` only when present
@@ -33,12 +64,9 @@ function comparisonItemListJsonLd(block: ComparisonBlock): JsonLd | null {
     "@type": "ItemList",
     ...(block.title ? { name: block.title } : {}),
     numberOfItems: rows.length,
-    itemListElement: rows.map((row, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: row.label,
-      ...(row.url ? { url: absoluteUrl(row.url) } : {}),
-    })),
+    itemListElement: rows.map((row, i) =>
+      namedListItem(i + 1, row.label, { url: row.url }),
+    ),
   };
 }
 
@@ -67,12 +95,9 @@ function stepsItemListJsonLd(block: StepsBlock): JsonLd | null {
     ...(block.title ? { name: block.title } : {}),
     itemListOrder: "https://schema.org/ItemListOrderAscending",
     numberOfItems: steps.length,
-    itemListElement: steps.map((step, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: step.title,
-      ...(step.description ? { description: step.description } : {}),
-    })),
+    itemListElement: steps.map((step, i) =>
+      namedListItem(i + 1, step.title, { description: step.description }),
+    ),
   };
 }
 

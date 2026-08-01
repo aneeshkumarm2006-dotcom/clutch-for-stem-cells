@@ -7,6 +7,7 @@ import {
   getDirectoryData,
   getRelatedTerms,
   getTaxonomyTermBySlug,
+  hasEditorialContent,
 } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
@@ -125,7 +126,7 @@ export default async function ConditionDirectoryPage({
         activeView={isTopView(searchParams) ? "top" : "all"}
         afterResults={
           <>
-            {editorial ? (
+            {hasEditorialContent(editorial) ? (
               <EditorialArticle data={editorial} className="mb-12" />
             ) : null}
             <RelatedLinks

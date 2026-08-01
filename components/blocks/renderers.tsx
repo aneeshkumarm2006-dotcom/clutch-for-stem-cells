@@ -12,7 +12,7 @@
  */
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { RemoteImage } from "@/components/common/remote-image";
 import {
   ArrowRight,
   Check,
@@ -562,7 +562,7 @@ export function MediaRenderer({ data }: { data: MediaBlock }) {
   return (
     <figure>
       <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-border bg-tint">
-        <Image
+        <RemoteImage
           src={data.image.url}
           alt={data.image.alt ?? ""}
           fill

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
+import { RemoteImage } from "@/components/common/remote-image";
 import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
 
@@ -78,7 +78,7 @@ export default async function ReviewerBioPage({
         <div className="flex items-start gap-5">
           <span className="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-tint font-display text-xl font-bold text-azure-700">
             {r.photoUrl ? (
-              <Image
+              <RemoteImage
                 src={r.photoUrl}
                 alt={r.name}
                 width={80}

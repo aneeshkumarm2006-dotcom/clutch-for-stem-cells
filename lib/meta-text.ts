@@ -88,6 +88,54 @@ export function boldMetaPrefix(
 /** The only separator symbol allowed in a meta tag. */
 export const META_SEPARATOR = "|";
 
+// ── Length ───────────────────────────────────────────────────────────────────
+
+/**
+ * The longest a `<title>` may be. Past this, site auditors report the tag as
+ * too long and a SERP shows a truncated version of it either way.
+ *
+ * 75 is the threshold the site's own audit uses, and it is a cliff rather than a
+ * gradient: a 75-character title passes and a 76-character one does not.
+ */
+export const MAX_META_TITLE_LENGTH = 75;
+
+/**
+ * What a *generated* title aims for. Below the cap on purpose — a formula that
+ * lands exactly on 75 has no room for the longer clinic name or city that the
+ * next import brings, and Google truncates a desktop SERP title somewhere near
+ * 60 characters anyway, so the tail of a 75-character title is rarely read.
+ *
+ * Authored copy (a blog post's own title) is not held to this: see
+ * {@link fitMetaTitle} for what applies where.
+ */
+export const META_TITLE_TARGET_LENGTH = 70;
+
+/**
+ * Pick the longest title that fits, from candidates ordered **most informative
+ * first**.
+ *
+ * This is how a formula sheds detail under pressure rather than being cut
+ * mid-word: a clinic title offers "<name> | <condition> Stem Cell Therapy in
+ * <city>, <state>" first and keeps dropping the least load-bearing part until
+ * one fits. Truncation is never the answer — "…Stem Cell Therapy in Rancho Mi"
+ * is worse than a shorter title that still reads as a sentence.
+ *
+ * Candidates are measured **after** {@link normalizeMetaText}, because that is
+ * what actually reaches the `<head>` and it can change the length (`&` becomes
+ * "and", a dash becomes " | "). Falls back to the last candidate — the shortest
+ * form the caller offered — when nothing fits.
+ */
+export function fitMetaTitle(
+  candidates: (string | null | undefined)[],
+  max: number = META_TITLE_TARGET_LENGTH,
+): string {
+  const normalized = candidates
+    .map((c) => normalizeMetaText(c, "title"))
+    .filter(Boolean);
+  if (!normalized.length) return "";
+  return normalized.find((c) => c.length <= max) ?? normalized[normalized.length - 1];
+}
+
 /**
  * Characters allowed alongside letters, digits and whitespace.
  *

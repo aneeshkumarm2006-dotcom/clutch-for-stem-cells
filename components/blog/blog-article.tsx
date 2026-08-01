@@ -1,5 +1,5 @@
 import * as React from "react";
-import Image from "next/image";
+import { RemoteImage } from "@/components/common/remote-image";
 import { Clock } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -93,7 +93,7 @@ export function BlogArticle({
 
       {coverUrl ? (
         <div className="relative mt-6 aspect-[16/8] overflow-hidden rounded-xl border border-border bg-tint">
-          <Image
+          <RemoteImage
             src={coverUrl}
             alt={coverAlt ?? title}
             fill

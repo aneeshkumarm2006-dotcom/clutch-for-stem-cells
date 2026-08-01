@@ -4,6 +4,7 @@ import { inter, jakarta } from "./fonts";
 import "./globals.css";
 import { AuthSessionProvider } from "@/components/auth/session-provider";
 import SmoothScroll from "@/components/smooth-scroll";
+import { IconSprite } from "@/components/ui/icon-sprite";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
       <body>
+        <IconSprite />
         <SmoothScroll />
         <AuthSessionProvider>
           <TooltipProvider delayDuration={200}>

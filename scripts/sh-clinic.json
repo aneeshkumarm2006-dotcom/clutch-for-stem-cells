@@ -1,0 +1,160 @@
+[
+  {
+    "name": "SH Clinic",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "A Seoul women's health clinic that publishes its stem cell prices openly.",
+    "description": "SH Clinic, registered in Korea as She's Hill Clinic, occupies four floors of the Wooil Building on Gangnam-daero, a couple of minutes from Sinsa Station. It started as a women's health practice and still runs gynecology and female genital plastic surgery alongside dermatology, plastic surgery and a stem cell clinic. Ten board-certified doctors work across those departments, and the roster is stronger than the clinic's size suggests: the internal medicine director, Han In-kwon, is a former professor at Sungkyunkwan University School of Medicine, a Mayo Clinic research fellow in osteoporosis, and the author of more than 180 papers.\n\nWhat sets it apart in this directory is that it publishes its stem cell prices, which almost no Korean clinic does. The Wellness and Anti-aging programme is a menu of seven named autologous protocols, each with a listed figure: V-Shot for female sexual function, P-Shot for erectile function, M-Shot for knee and joint work, H-Shot for hair loss, F-Shot for skin, I-Shot for immune and rheumatic conditions, and B-Shot for neurological ones. All are point-of-care and autologous, either stromal vascular fraction separated from your own fat by centrifuge or bone marrow aspirate concentrate drawn from the pelvis, with no external culture step. The knee pages are the most careful thing on the site: the clinic publishes candidacy criteria by cartilage grade and says plainly that grade 1 and grade 4 patients may not see much benefit.",
+
+    "treatmentTypes": [
+      "adipose-derived-therapy",
+      "svf",
+      "bone-marrow-derived-therapy",
+      "autologous-therapy",
+      "msc-therapy",
+      "regenerative-orthopedics",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "sexual-health",
+      "knee-osteoarthritis",
+      "joint-pain",
+      "hair-restoration",
+      "anti-aging-longevity",
+      "skin-aesthetic",
+      "back-and-spine",
+      "rotator-cuff-shoulder",
+      "sports-injuries",
+      "rheumatoid-arthritis",
+      "lupus",
+      "crohns-ibd",
+      "stroke-recovery",
+      "parkinsons",
+      "multiple-sclerosis"
+    ],
+    "cellSources": ["adipose", "autologous", "bone-marrow"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "svf", "percent": 35 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 25 },
+      { "treatment": "regenerative-orthopedics", "percent": 25 },
+      { "treatment": "iv-systemic-therapy", "percent": 15 }
+    ],
+
+    "priceMin": 1000000,
+    "priceMax": 10000000,
+    "currency": "KRW",
+    "priceModel": "per_treatment",
+    "priceNote": "Prices are published per protocol and tier, which is unusual for Korea. They run from ₩1,000,000 for a Gold V-Shot to ₩10,000,000 for a Premium bone-marrow P-Shot or B-Shot; the knee M-Shot is ₩5,500,000 for one knee and ₩8,800,000 for both. Read the recommended courses before budgeting, since several protocols are designed as multiple sessions rather than one. Quotes come by email or WhatsApp after a free online consultation.",
+
+    "physiciansCount": 10,
+    "teamSize": "11-50",
+    "languages": ["Korean", "English"],
+
+    "medicalDirector": {
+      "name": "Kim Yun-hyung",
+      "title": "CEO and Director, Obstetrics and Gynecology",
+      "credentials": "MD, PhD, board-certified obstetrician and gynecologist",
+      "bio": "Former director general of Uljin Medical Center and former head of obstetrics and gynecology at Eulji University Hospital. President of the Implant Vaginoplasty Research Association and adjunct professor of obstetrics and gynecology at Inje, Eulji and Hanyang universities. Holds a Minister of Health and Welfare citation. The clinic credits him with developing its combination vaginoplasty technique and states he has performed it more than 3,000 times."
+    },
+    "team": [
+      {
+        "name": "Han In-kwon",
+        "title": "Director, Internal Medicine",
+        "credentials": "MD, PhD",
+        "bio": "Seoul National University College of Medicine, with a doctorate from Kyung Hee University and an osteoporosis research fellowship at the Mayo Clinic. Former full professor of internal medicine at Sungkyunkwan University and chief of internal medicine at Samsung Cheil Hospital. Past president of the Korean Society for Women's Health, editorial board member of the Journal of Clinical Densitometry, and author of more than 180 papers."
+      },
+      {
+        "name": "Heo Kyoung-eun",
+        "title": "Director, Obstetrics and Gynecology",
+        "credentials": "MD, MS, board-certified",
+        "bio": "Trained at Soonchunhyang University with an obstetrics fellowship at Bundang CHA Hospital. Full member of the International Society for Sexual Medicine, the International Society for the Study of Women's Sexual Health, and the Korean Society of Female Perineal Plastic Surgery."
+      },
+      {
+        "name": "Kim Dong-il",
+        "title": "Director, Plastic Surgery",
+        "credentials": "MD, PhD, board-certified",
+        "bio": "Former adjunct professor at Ajou University and former director of the Gangnam Sion Plastic Surgery Seminar Center. Currently president of the Korean Facial Plastic Surgery Research Association, and the developer of a deep plane face lift technique that carries his name."
+      },
+      {
+        "name": "Kim Chang-joo",
+        "title": "Director, Plastic Surgery and Hair Transplantation",
+        "credentials": "MD, board-certified",
+        "bio": "Completed a fellowship at the Kyungpook National University Hair Transplantation Center and serves as clinical professor there. Previously chief director of Muto SMC Clinic and representative director of Mobest Clinic and Hair Plus Clinic."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "B1F, 1F, 2F and 7F, Wooil Building, 623 Gangnam-daero, Seocho-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "postalCode": "06524",
+        "phone": "+82 2-546-0807",
+        "lat": 37.5172,
+        "lng": 127.0195
+      }
+    ],
+
+    "website": "https://www.shclinic.co",
+    "contactEmail": "consultation@shclinic.co",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785608984/library/cqxwqezkhstxpstq1dlc.webp",
+      "publicId": "library/cqxwqezkhstxpstq1dlc",
+      "width": 298,
+      "height": 79,
+      "alt": "SH Clinic logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785608986/library/yd9jiiop9psquazxwkpc.webp",
+      "publicId": "library/yd9jiiop9psquazxwkpc",
+      "width": 1100,
+      "height": 600,
+      "alt": "Treatment room at SH Clinic in Seoul"
+    },
+
+    "highlights": [
+      "Publishes stem cell prices openly, from ₩1,000,000 for a V-Shot to ₩10,000,000 for a Premium bone-marrow protocol",
+      "Seven named autologous protocols under one Wellness and Anti-aging programme, each separately priced",
+      "Offers both routes for the knee: bone marrow aspirate concentrate and adipose stromal vascular fraction",
+      "Publishes candidacy criteria by cartilage grade and says grade 1 and grade 4 patients may not benefit",
+      "Ten board-certified doctors across gynecology, plastic surgery, dermatology, ENT and internal medicine",
+      "Internal medicine director Han In-kwon is a former Sungkyunkwan professor and Mayo Clinic research fellow",
+      "Four floors of the Wooil Building, 244 metres from Exit 5 of Sinsa Station on Line 3"
+    ],
+    "faqs": [
+      {
+        "question": "Which cells does SH Clinic use?",
+        "answer": "Your own, either way. One route takes a small volume of fat from the abdomen or thighs and separates a stromal vascular fraction in a centrifuge. The other draws bone marrow from the pelvis and concentrates it. Neither is cultured outside the body, so treatment happens in a single visit rather than across weeks."
+      },
+      {
+        "question": "What is approved in Korea, and is any of this FDA-approved?",
+        "answer": "Autologous adipose SVF injection carries a Korean government new medical technology designation for stage 2 to 3 arthritis or cartilage damage over 50 percent, and the associated hospitalisation is reimbursable domestically. That designation is a Korean pathway and nothing more. It is not an MFDS drug approval, and none of these protocols are approved by the US FDA. The clinic publishes no GMP, ISO or clinical trial credentials."
+      },
+      {
+        "question": "Are the neurological and autoimmune protocols proven?",
+        "answer": "No, and this is worth being blunt about. The B-Shot for stroke, dementia and Parkinson's and the I-Shot for lupus, rheumatic disease and Crohn's are sold with prices attached, but they carry no regulatory approval for those indications and the evidence base does not support them. The clinic's own neurological page goes further than the science does in places. Treat the orthopedic and sexual health protocols as the grounded part of the menu and press hard for evidence on the rest."
+      },
+      {
+        "question": "Am I a candidate for the knee injection?",
+        "answer": "The clinic assesses on MRI or X-ray using KL grades for arthritis severity and ICRS grades for cartilage damage. It treats KL 2 to 3 and ICRS 3 to 4, and says openly that mild grade 1 patients and advanced grade 4 patients may not see a meaningful result, directing grade 4 toward joint replacement instead. That is a more honest gate than most clinics publish."
+      },
+      {
+        "question": "What does the procedure involve and how fast is recovery?",
+        "answer": "For SVF, about an hour under sedation including the fat harvest, then one or two days of rest. For bone marrow, harvesting is done under local anaesthetic with no incision and you can return to normal activity straight after. The clinic says bone-marrow pain relief typically lasts one to two years and that results vary between individuals."
+      },
+      {
+        "question": "Can international patients be seen, and in what language?",
+        "answer": "Yes. There is a full English site, an English consultation form that asks for nationality, visa type and travel dates, and an English WhatsApp line. Hours are weekdays 10:00 to 19:00 and Saturday 10:00 to 17:00, closed Sundays, with gynecology closed on Thursdays. Book ahead; same-day appointments are hard to get."
+      }
+    ],
+
+    "seo": { "focusKeyword": "sh clinic" },
+    "reviewsPage": { "seo": { "focusKeyword": "sh clinic reviews" } },
+
+    "isClaimed": false
+  }
+]
