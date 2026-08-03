@@ -1,0 +1,115 @@
+[
+  {
+    "name": "Yonsei BH Clinic",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "A Gangnam clinic run by an endovascular specialist who delivers cells through an artery rather than a drip.",
+    "description": "Yonsei BH occupies the second floor of a building on Eonju-ro, a few minutes' walk from Seolleung station in Gangnam. The Korean name is 연세BH의원, the BH standing for Beautiful Health. It is a one-doctor clinic, and the doctor is the reason it exists in this form.\n\nLee Byung-hee spent his career inside blood vessels. He worked at Sinchon Severance Hospital and as a university professor, and the clinic's own figures put him at more than 45,000 vascular examinations and over 10,000 procedures performed inside vessels, along with several catheter techniques he was first in Korea to publish. He now applies that catheter work to cell therapy: instead of running cells into a vein and letting them circulate, he threads a catheter and delivers them into the artery supplying the organ or joint he is treating. He presents this as his own approach rather than as standard practice, and no health authority has approved it as a treatment for any of the conditions below.\n\nThe clinic is organised into programmes rather than a single menu. There is a brain group covering Parkinson's, dementia and the aftermath of a cerebral infarction; a chronic disease and allergy group for diabetes, hepatitis and cirrhosis, kidney failure and atopic skin conditions; a men's and women's group for erectile dysfunction and vaginal dryness; an anti-aging and insomnia group that also covers skin and immune work; a joint and pain group for knee and finger arthritis, spinal stenosis, disc problems and rotator cuff injuries; and a vascular group for cerebrovascular disease and varicose veins.\n\nIt runs small. Weekday office hours only, closed weekends and holidays, a website in Korean, and case write-ups posted on the clinic's own board for knees, erectile dysfunction and immunity. Patients arriving from abroad generally come through a medical travel partner that arranges interpreters and transfers.",
+
+    "treatmentTypes": ["msc-therapy", "autologous-therapy"],
+    "conditionsTreated": [
+      "anti-aging-longevity",
+      "sexual-health",
+      "parkinsons",
+      "knee-osteoarthritis",
+      "joint-pain",
+      "stroke-recovery",
+      "diabetes-supportive",
+      "back-and-spine",
+      "rotator-cuff-shoulder",
+      "skin-aesthetic",
+      "cardiovascular"
+    ],
+    "cellSources": ["autologous"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "msc-therapy", "percent": 70 },
+      { "treatment": "autologous-therapy", "percent": 30 }
+    ],
+
+    "priceModel": "consult_to_quote",
+    "priceNote": "No prices appear on the clinic's site, and the non-covered item list is published only in Korean. Cost is settled at consultation and varies by programme, since a single joint is a different proposition from a course aimed at a neurological condition. If you are booking through a medical travel agency, ask for a split between the clinic's own fee and the agency's coordination charge before you pay a deposit.",
+
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "languages": ["Korean", "English"],
+
+    "medicalDirector": {
+      "name": "Lee Byung-hee",
+      "title": "Director",
+      "credentials": "MD, Endovascular and Neurointervention",
+      "bio": "Lee trained at Yonsei University College of Medicine and built his career in endovascular and neurointerventional work, first at Sinchon Severance Hospital and then as a university professor. The clinic credits him with more than 45,000 vascular examinations and over 10,000 procedures performed inside blood vessels, and with publishing several catheter techniques ahead of anyone else in Korea, including carotid stenting in 1997 and stent-assisted coil embolisation for aneurysms in 2002. He opened Yonsei BH to apply the same catheter access to cell delivery, and he sees patients one at a time rather than running a volume practice."
+    },
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "2F, 520 Eonju-ro, Gangnam-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "phone": "+82 2-6956-7227",
+        "lat": 37.5075,
+        "lng": 127.0466
+      }
+    ],
+
+    "website": "https://www.bhclinic.co.kr/",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785788708/library/hfl4anzo9sonocg2sdbt.webp",
+      "publicId": "library/hfl4anzo9sonocg2sdbt",
+      "width": 250,
+      "height": 61,
+      "alt": "Yonsei BH Clinic logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785788709/library/hbixiv6g6pbpk30diryz.webp",
+      "publicId": "library/hbixiv6g6pbpk30diryz",
+      "width": 1920,
+      "height": 850,
+      "alt": "Dr Lee Byung-hee in the angiography suite at Yonsei BH Clinic in Seoul"
+    },
+
+    "highlights": [
+      "Cells delivered through an arterial catheter rather than an intravenous drip",
+      "Director spent his hospital career in endovascular and neurointerventional work at Sinchon Severance",
+      "Clinic reports over 45,000 vascular examinations and 10,000 procedures inside vessels by the director",
+      "Separate programmes for brain, chronic disease, sexual health, anti-aging, joints and vascular conditions",
+      "Two minutes from Seolleung station, exit 5, in Gangnam",
+      "Small single-doctor practice with weekday hours only",
+      "Overseas patients usually arrive through a medical travel partner that supplies interpreters"
+    ],
+    "faqs": [
+      {
+        "question": "Is arterial stem cell delivery an approved treatment?",
+        "answer": "No. Korea allows licensed clinics to give autologous cell treatments under its advanced regenerative medicine framework, but that is a permission to practise, not a marketing authorisation for a specific disease. Nothing here is FDA approved, and delivering cells through an artery is this doctor's own approach rather than an established protocol. Treat it as investigational, and be sceptical of any figure quoted to you about how much better arterial delivery works than a drip."
+      },
+      {
+        "question": "What does the clinic actually treat?",
+        "answer": "It groups its work into brain conditions such as Parkinson's, dementia and recovery after a cerebral infarction; chronic disease including diabetes, hepatitis, cirrhosis and kidney failure; erectile dysfunction and vaginal dryness; anti-aging, skin and immune programmes; knee, finger and spinal arthritis; and vascular problems including varicose veins. That is a wide list for a single doctor, and it is fair to ask at consultation how many cases like yours he has actually done."
+      },
+      {
+        "question": "Is a catheter procedure riskier than an injection?",
+        "answer": "It is a bigger procedure than a joint injection or a drip. Arterial access carries the usual catheter risks: bleeding at the puncture site, vessel injury, and clot or embolic events depending on the vessel involved. The counterweight here is that the doctor's whole background is endovascular work. Ask directly which artery is being accessed, what the complication rate has been in his hands, and what happens if something goes wrong out of hours, given the clinic closes at six and does not open weekends."
+      },
+      {
+        "question": "Can I be seen if I do not speak Korean?",
+        "answer": "The clinic's website and paperwork are in Korean, and it is not set up as an international department. Most overseas patients come through a medical travel partner that provides interpreters and handles transfers and accommodation. Arrange that before you fly rather than assuming English support will be waiting at the desk."
+      },
+      {
+        "question": "How many visits does a course take?",
+        "answer": "It depends on the programme, and the clinic does not publish a standard schedule. Neurological and chronic disease programmes are described as courses rather than single appointments, so ask for the number of sessions, the interval between them, and what the follow-up looks like once you are home, before you book anything."
+      },
+      {
+        "question": "Will my insurer cover this?",
+        "answer": "Almost certainly not. Korean national insurance does not cover these procedures, which is why they sit on the clinic's non-covered item list, and overseas insurers do not usually reimburse treatments that are unapproved in the policyholder's own country. Assume you are paying privately and get the total in writing first."
+      }
+    ],
+
+    "seo": { "focusKeyword": "yonsei bh clinic" },
+    "reviewsPage": { "seo": { "focusKeyword": "yonsei bh clinic reviews" } },
+
+    "isClaimed": false
+  }
+]

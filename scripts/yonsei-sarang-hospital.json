@@ -1,0 +1,158 @@
+[
+  {
+    "name": "Yonsei Sarang Hospital",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Seoul's joint specialty hospital with its own stem cell laboratory and a long publication record on knee cartilage.",
+    "description": "Yonsei Sarang opened in 2003, started by joint and spine specialists who had trained at Yonsei University Severance, and moved to Bangbae-dong in Seocho-gu in 2008. It is a hospital rather than a clinic: inpatient wards, its own operating theatres, and five departments covering orthopedics, neurosurgery, anesthesiology and pain medicine, radiology and internal medicine, spread across two sites in Seocho. Korea's Ministry of Health and Welfare has designated it a joint specialty hospital.\n\nMost of the volume is knee work, including a large artificial joint practice that uses 3D planning and custom instruments. The regenerative side runs out of a dedicated stem cell laboratory under hospital director Koh Yong-gon, and it is the reason the hospital is known outside Korea. Koh has published a long run of peer-reviewed work on fat-derived mesenchymal cells and stromal vascular fraction implanted into damaged knee cartilage, including randomised comparisons against microfracture alone and second-look arthroscopy showing what the repair tissue actually looked like a year or two later. The autologous fat stem cell procedure was selected by the Ministry of Health and Welfare as a limited medical technology, with Koh named as the physician responsible for carrying it out.\n\nThat research posture is the thing that separates it from the injection clinics in Gangnam. Cells here are usually implanted during an arthroscopic procedure rather than injected in an outpatient room, which means an operation, an admission and a rehabilitation plan. There is also a clinical trial centre on site.\n\nFor overseas patients the hospital keeps a separate stem cell website with English and Russian versions and an enquiry form, though the detailed clinical material is mostly in Korean and the main call centre operates in Korean.",
+
+    "treatmentTypes": [
+      "regenerative-orthopedics",
+      "adipose-derived-therapy",
+      "msc-therapy",
+      "autologous-therapy",
+      "svf",
+      "prp"
+    ],
+    "conditionsTreated": [
+      "knee-osteoarthritis",
+      "joint-pain",
+      "hip-osteoarthritis",
+      "sports-injuries",
+      "rotator-cuff-shoulder",
+      "back-and-spine",
+      "rheumatoid-arthritis"
+    ],
+    "cellSources": ["autologous", "adipose"],
+    "accreditations": [
+      "board-certified-physicians",
+      "health-authority-registration",
+      "clinical-trial-participation"
+    ],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 45 },
+      { "treatment": "adipose-derived-therapy", "percent": 25 },
+      { "treatment": "svf", "percent": 20 },
+      { "treatment": "prp", "percent": 10 }
+    ],
+
+    "priceModel": "consult_to_quote",
+    "priceNote": "Nothing is published in English, and non-covered charges are listed in Korean only. The hospital quotes after imaging, because cost depends on the size of the cartilage lesion and whether the cell work is combined with an osteotomy in the same operation. Korean national insurance covers part of the bill for residents. Overseas patients pay privately, and should ask whether the quote includes the admission, theatre time and rehabilitation, not just the cells.",
+
+    "foundedYear": 2003,
+    "teamSize": "51-200",
+    "languages": ["Korean", "English", "Russian"],
+
+    "medicalDirector": {
+      "name": "Koh Yong-gon",
+      "title": "Hospital Director",
+      "credentials": "MD, Orthopedic Surgery",
+      "bio": "Koh runs the hospital and its stem cell research laboratory, and he is the reason the name turns up in orthopedic journals rather than only in Korean media. His published work follows fat-derived mesenchymal cells and stromal vascular fraction implanted into knee cartilage defects, including a randomised trial against microfracture alone with two-year follow-up, and second-look arthroscopy studies that report what the repair tissue looked like on re-entry. When Korea's Ministry of Health and Welfare listed the autologous fat stem cell procedure as a limited medical technology, he was named the responsible physician. He also fronts the hospital's public health broadcasting and its YouTube channel."
+    },
+    "team": [
+      {
+        "name": "Kim Sung-jae",
+        "title": "Honorary Director",
+        "credentials": "MD, Professor of Orthopedic Surgery",
+        "bio": "Emeritus academic on the joint side of the hospital, brought in from university practice."
+      },
+      {
+        "name": "Kang Ho-jung",
+        "title": "Honorary Director",
+        "credentials": "MD, Professor of Orthopedic Surgery",
+        "bio": "Second honorary director, covering upper limb and hand surgery."
+      },
+      {
+        "name": "Jung Sung-hoon",
+        "title": "Representative Director",
+        "credentials": "MD, Orthopedic Surgery",
+        "bio": "Runs day-to-day clinical operations alongside Koh."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "2205 Nambusunhwan-ro, Seocho-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "postalCode": "06702",
+        "phone": "+82 1577-0050",
+        "lat": 37.476,
+        "lng": 126.9887
+      },
+      {
+        "addressLine": "10 Hyeoryeong-ro, Seocho-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "phone": "+82 1577-0050",
+        "lat": 37.4788,
+        "lng": 126.9835
+      }
+    ],
+
+    "website": "http://www.yonserang.com/",
+    "social": {
+      "instagram": "https://instagram.com/yeonses_hospital",
+      "youtube": "https://www.youtube.com/user/yonsesarang"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785788711/library/xgkdq6kdw4zdrl3ugcl1.webp",
+      "publicId": "library/xgkdq6kdw4zdrl3ugcl1",
+      "width": 309,
+      "height": 73,
+      "alt": "Yonsei Sarang Hospital logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785788713/library/h2dysaexxc9xhowcc4hq.webp",
+      "publicId": "library/h2dysaexxc9xhowcc4hq",
+      "width": 884,
+      "height": 455,
+      "alt": "Reception and waiting area at Yonsei Sarang Hospital in Seoul"
+    },
+
+    "highlights": [
+      "Designated a joint specialty hospital by Korea's Ministry of Health and Welfare",
+      "In-house stem cell laboratory and an on-site clinical trial centre",
+      "Peer-reviewed work on fat-derived cells and stromal vascular fraction for knee cartilage, including second-look arthroscopy",
+      "Autologous fat stem cell procedure listed by the health ministry as a limited medical technology",
+      "Cells usually implanted during arthroscopic surgery rather than injected in an outpatient room",
+      "Open since 2003, in Seocho-gu since 2008, across two Seoul sites",
+      "Separate stem cell website with English and Russian versions for overseas enquiries"
+    ],
+    "faqs": [
+      {
+        "question": "What does the hospital actually do with the cells?",
+        "answer": "Fat is harvested, processed into stromal vascular fraction or cultured mesenchymal cells, and placed into the cartilage lesion, in most cases during an arthroscopic operation rather than as a walk-in injection. That distinction matters: you are consenting to surgery, an admission and a rehabilitation programme, not to an appointment you walk out of."
+      },
+      {
+        "question": "Is this approved treatment or research?",
+        "answer": "It sits in between. Korea's Ministry of Health and Welfare listed the autologous fat stem cell procedure as a limited medical technology, which is a regulated permission to perform it under conditions, not a full endorsement of effectiveness. It has no FDA approval. The hospital's own published trials are the honest source on what to expect, and they report improvement in pain and cartilage status rather than a joint restored to new."
+      },
+      {
+        "question": "Who is a candidate?",
+        "answer": "Screening runs on MRI. The published work is strongest in focal cartilage lesions with reasonable surrounding joint structure, and lesion size is one of the variables the hospital's own papers identify as influencing the outcome. Diffuse end-stage arthritis is generally a knee replacement conversation, and this hospital does a lot of those too, so it is well placed to tell you which side of the line you are on."
+      },
+      {
+        "question": "How long is the recovery?",
+        "answer": "Longer than an injection clinic will quote you. There is an inpatient stay around the operation, a period of restricted weight-bearing, and structured rehabilitation after that. The hospital publishes its own post-operative exercise programmes. Improvement is measured over months, and some patients still go on to a replacement later."
+      },
+      {
+        "question": "Can I be treated here if I do not speak Korean?",
+        "answer": "Partly. There is a separate stem cell site in English and Russian with an enquiry form aimed at patients abroad, but the main hospital site, the call centre and most clinical material are Korean. Write to the English enquiry form first and confirm what interpretation is available for the consultation, the consent discussion and the ward stay before you commit to dates."
+      },
+      {
+        "question": "What will it cost?",
+        "answer": "The hospital quotes after imaging and does not publish figures in English. Residents get partial coverage from Korean national insurance; overseas patients pay privately. Ask for a written quote covering admission, theatre, the cell work and follow-up separately, so you can see what is being charged for what."
+      }
+    ],
+
+    "seo": { "focusKeyword": "yonsei sarang hospital" },
+    "reviewsPage": { "seo": { "focusKeyword": "yonsei sarang hospital reviews" } },
+
+    "isClaimed": false
+  }
+]

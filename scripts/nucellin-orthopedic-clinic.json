@@ -1,0 +1,115 @@
+[
+  {
+    "name": "Nucellin Orthopedic Clinic",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "A one-doctor orthopedic practice in Hannam-dong that runs the whole visit in English.",
+    "description": "Nucellin sits on the fourth floor of a building in Hannam-dong, on the Yongsan side of Seoul rather than in the Gangnam clinic belt where most of the city's regenerative medicine is clustered. It is a single-doctor practice built around Kim Hee-jun, who spent his hospital years as a clinical professor of joint surgery at Yonsei University Severance Hospital before opening here.\n\nThe daily work is ordinary orthopedics: ultrasound-guided joint injections, nerve blocks, prolotherapy, shockwave, and supervised rehabilitation for knees, shoulders, backs and feet. The regenerative side sits on top of that rather than replacing it. Kim works with bone marrow and fat-derived mesenchymal cells alongside PRP, for knee osteoarthritis, meniscus wear, tendon injuries, partial ligament sprains and chronic synovitis, and he screens on imaging before agreeing to any of it. Physical therapy, occupational therapy and hyperbaric oxygen are in the same rooms, so rehabilitation is not outsourced to another address.\n\nWhat the clinic is known for among foreign residents and visitors is language. The consultation, the procedure and the follow-up all happen in English, and enquiries come in over WhatsApp rather than a Korean booking system. The site publishes a recovery timeline instead of a before-and-after gallery: swelling settles over the first fortnight, pain usually starts easing between weeks three and six, strength work follows, and whatever improvement is coming has generally arrived by three to six months.",
+
+    "treatmentTypes": [
+      "regenerative-orthopedics",
+      "msc-therapy",
+      "autologous-therapy",
+      "adipose-derived-therapy",
+      "bone-marrow-derived-therapy",
+      "prp"
+    ],
+    "conditionsTreated": [
+      "knee-osteoarthritis",
+      "joint-pain",
+      "sports-injuries",
+      "rotator-cuff-shoulder",
+      "back-and-spine",
+      "hip-osteoarthritis",
+      "hair-restoration",
+      "skin-aesthetic",
+      "anti-aging-longevity"
+    ],
+    "cellSources": ["autologous", "adipose", "bone-marrow"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 45 },
+      { "treatment": "msc-therapy", "percent": 25 },
+      { "treatment": "prp", "percent": 20 },
+      { "treatment": "adipose-derived-therapy", "percent": 10 }
+    ],
+
+    "priceModel": "consult_to_quote",
+    "priceNote": "Nothing is published. The clinic quotes after it has looked at your imaging, because the figure moves with which cells are used, how many sites are treated, and whether rehabilitation is bundled in. It tells international patients its pricing is disclosed up front, so get the quote in writing and check it covers the imaging, the procedure and the follow-up visits rather than the injection alone.",
+
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "languages": ["Korean", "English"],
+
+    "medicalDirector": {
+      "name": "Kim Hee-jun",
+      "title": "Director",
+      "credentials": "MD, Board-Certified Orthopedic Surgeon",
+      "bio": "Kim read medicine at Yonsei University College of Medicine in Sinchon and did his orthopedic residency at Yonsei University Severance Hospital, where he later worked as a clinical professor of joint surgery. He belongs to the Korean Orthopaedic Association, the Korean Arthroscopy Society, the Korean Knee Society, the Korean Shoulder and Elbow Society, the Korean Society for Stem Cell Therapy and the Korean Association for Regenerative Medicine, and has trained through cadaver workshops and international arthroscopy courses. He sees every patient himself, which is the trade-off of a one-doctor clinic: continuity, but a limited diary."
+    },
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "4th Floor, 71 Dokseodang-ro, Yongsan-gu",
+        "city": "Seoul",
+        "country": "South Korea",
+        "countryCode": "KR",
+        "phone": "+82 10-4184-2600",
+        "lat": 37.5342,
+        "lng": 127.0035
+      }
+    ],
+
+    "website": "https://www.seoulorthoclinic.com/",
+
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1785788704/library/djagwniwm0zopvia0fps.webp",
+      "publicId": "library/djagwniwm0zopvia0fps",
+      "width": 1158,
+      "height": 1182,
+      "alt": "Procedure room at Nucellin Orthopedic Clinic in Seoul"
+    },
+
+    "highlights": [
+      "Run by a former clinical professor of joint surgery at Yonsei Severance",
+      "Consultation, procedure and follow-up all conducted in English; enquiries over WhatsApp",
+      "Bone marrow and fat-derived mesenchymal cells used alongside PRP and prolotherapy",
+      "Candidacy decided on imaging and examination before any cell procedure is offered",
+      "Physical therapy, occupational therapy, shockwave and hyperbaric oxygen on the same floor",
+      "In Hannam-dong, Yongsan-gu, away from the Gangnam clinic cluster",
+      "Airport limousine 6010 from Incheon stops nearby; valet parking on site"
+    ],
+    "faqs": [
+      {
+        "question": "Is stem cell treatment for a knee approved in Korea?",
+        "answer": "Korea regulates cell therapy under its advanced regenerative medicine legislation, and a licensed clinic can give autologous treatments within that framework. That is not the same as an approved drug for osteoarthritis, and none of this has FDA approval, so a patient flying in from the United States or Europe is choosing something they cannot get at home. Treat it as investigational, ask what specifically is being injected, and take your imaging and procedure notes home for your own doctor."
+      },
+      {
+        "question": "What is realistic to expect from a knee injection here?",
+        "answer": "The clinic's own timeline is the fair answer: two weeks of settling, pain easing somewhere between weeks three and six, strength returning after that, and the ceiling around three to six months. It is aimed at mild to moderate osteoarthritis, meniscus wear and tendon problems. A knee with advanced, joint-wide arthritis is usually a replacement conversation, and Kim will tell you that at the consultation rather than after you have paid."
+      },
+      {
+        "question": "How is this different from PRP?",
+        "answer": "PRP is your own blood, spun down and injected the same day. The cell procedures involve harvesting either bone marrow or fat first, which is a bigger appointment with a small wound and a longer visit. The clinic uses both, and which one you are offered depends on what the imaging shows rather than on what you ask for."
+      },
+      {
+        "question": "Do I have to speak Korean?",
+        "answer": "No. This is the clinic's main draw for foreign patients: the doctor consults in English, and scheduling runs over WhatsApp in English. You will not be handed to an interpreter partway through, which is the usual friction at larger Seoul hospitals."
+      },
+      {
+        "question": "How long should I stay in Seoul?",
+        "answer": "Less than for a surgical hospital, but do not fly in and out the same day. Plan for imaging and consultation, the procedure itself, and at least one follow-up before you leave. Message the clinic with your imaging and your dates before booking flights, because a fat or marrow harvest is not something to schedule the morning of a departure."
+      },
+      {
+        "question": "Does insurance pay for it?",
+        "answer": "Korean national insurance covers residents for standard orthopedic care, not for regenerative add-ons. Foreign patients pay privately. Overseas insurers rarely reimburse a therapy that is unapproved in the policyholder's own country, so confirm in writing before you travel rather than after."
+      }
+    ],
+
+    "seo": { "focusKeyword": "nucellin orthopedic clinic" },
+    "reviewsPage": { "seo": { "focusKeyword": "nucellin orthopedic clinic reviews" } },
+
+    "isClaimed": false
+  }
+]
