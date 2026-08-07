@@ -74,7 +74,8 @@ const NAV: NavEntry[][] = [
       basePath: "/admin/content",
       children: [
         { label: "Homepage", href: "/admin/content/homepage" },
-        { label: "Site content", href: "/admin/content/pages" },
+        { label: "Site pages", href: "/admin/content/site-pages" },
+        { label: "Shared content", href: "/admin/content/pages" },
         { label: "Clinic landing pages", href: "/admin/content/clinic-landings" },
       ],
     },

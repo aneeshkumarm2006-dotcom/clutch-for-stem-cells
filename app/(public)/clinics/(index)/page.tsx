@@ -7,6 +7,8 @@ import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import { itemListJsonLd } from "@/lib/seo";
 import { Directory } from "@/components/directory/directory";
 import { JsonLd } from "@/components/seo/json-ld";
+import { BlockRenderer } from "@/components/blocks/block-renderer";
+import { getPageContent } from "@/lib/page-content";
 
 export const generateMetadata = async ({
   searchParams,
@@ -29,7 +31,10 @@ export default async function ClinicsPage({
   searchParams: Record<string, string | string[] | undefined>;
 }) {
   const params = directoryParamsFrom(searchParams);
-  const data = await getDirectoryData(params);
+  const [data, content] = await Promise.all([
+    getDirectoryData(params),
+    getPageContent("/clinics"),
+  ]);
 
   const jsonLd = data.cards.length
     ? [
@@ -43,9 +48,14 @@ export default async function ClinicsPage({
     <>
       {jsonLd.length ? <JsonLd data={jsonLd} /> : null}
       <Directory
-        heading="Stem cell & regenerative-medicine clinics"
-        intro="Compare accredited clinics worldwide. Filter by treatment, condition, cell source, location, price, and verified patient reviews. Every result is ranked by our published methodology."
+        heading={content.title}
+        introHtml={content.lead}
         basePath="/clinics"
+        afterResults={
+          content.blocks.length ? (
+            <BlockRenderer blocks={content.blocks} className="max-w-3xl" />
+          ) : null
+        }
         searchParams={searchParams}
         data={data}
         filterLabels={data.filterLabels}

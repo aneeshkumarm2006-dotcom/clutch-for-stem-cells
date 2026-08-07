@@ -106,6 +106,12 @@ export type { IMatrixPage } from "@/models/matrix-page";
 export { Page, default as PageModel } from "@/models/page";
 export type { IPage } from "@/models/page";
 
+export {
+  PageContent,
+  default as PageContentModel,
+} from "@/models/page-content";
+export type { IPageContent } from "@/models/page-content";
+
 export { Redirect, default as RedirectModel } from "@/models/redirect";
 export type { IRedirect } from "@/models/redirect";
 

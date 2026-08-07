@@ -7,7 +7,9 @@ import { BlogCard } from "@/components/blog/blog-card";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { Pagination } from "@/components/ui/pagination";
 import { EmptyState } from "@/components/ui/empty-state";
-import { SITE_NAME } from "@/config/site";
+import { BlockRenderer } from "@/components/blocks/block-renderer";
+import { PageLead } from "@/components/common/page-lead";
+import { getPageContent } from "@/lib/page-content";
 
 export const revalidate = 60;
 
@@ -42,7 +44,10 @@ export default async function BlogIndexPage({
   searchParams: Record<string, string | string[] | undefined>;
 }) {
   const page = pageNumber(searchParams);
-  const data = await getPublishedBlogPosts({ page });
+  const [data, content] = await Promise.all([
+    getPublishedBlogPosts({ page }),
+    getPageContent("/blog"),
+  ]);
 
   return (
     <div className="container py-10 md:py-14">
@@ -57,11 +62,9 @@ export default async function BlogIndexPage({
       />
       <header className="max-w-2xl">
         <h1 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[32px]">
-          Blog
+          {content.title}
         </h1>
-        <p className="mt-2 text-[15px] leading-relaxed text-text-secondary">
-          Guides, updates, and insights from the {SITE_NAME} team.
-        </p>
+        <PageLead html={content.lead} className="mt-2" />
       </header>
 
       {data.posts.length ? (
@@ -75,8 +78,8 @@ export default async function BlogIndexPage({
         <EmptyState
           className="mt-10"
           icon={BookOpen}
-          title="No posts yet"
-          description="New articles are on the way. Check back soon."
+          title={content.extra("emptyTitle")}
+          description={content.extra("emptyDescription")}
         />
       )}
 
@@ -88,6 +91,11 @@ export default async function BlogIndexPage({
           hrefFor={(p) => (p > 1 ? `/blog?page=${p}` : "/blog")}
         />
       ) : null}
+
+      <BlockRenderer
+        blocks={content.blocks}
+        className="mt-14 max-w-3xl border-t border-border pt-10"
+      />
     </div>
   );
 }

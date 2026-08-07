@@ -9,6 +9,9 @@ import { SearchBar } from "@/components/search/search-bar";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { formatCount } from "@/lib/format";
+import { BlockRenderer } from "@/components/blocks/block-renderer";
+import { PageLead } from "@/components/common/page-lead";
+import { getPageContent } from "@/lib/page-content";
 
 export const generateMetadata = ({
   searchParams,
@@ -36,9 +39,12 @@ export default async function SearchPage({
 }) {
   const raw = searchParams.q;
   const query = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
-  const results = query
-    ? await globalSearch(query)
-    : { clinics: [], clinicTotal: 0 };
+  const [results, content] = await Promise.all([
+    query
+      ? globalSearch(query)
+      : Promise.resolve({ clinics: [], clinicTotal: 0 }),
+    getPageContent("/search"),
+  ]);
 
   if (query) {
     // Track searches (incl. zero-result) without PII — PRD §15.
@@ -55,11 +61,9 @@ export default async function SearchPage({
     <div className="container py-10 md:py-14">
       <header className="max-w-2xl">
         <h1 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-text-primary">
-          {query ? `Results for “${query}”` : "Search"}
+          {query ? `Results for “${query}”` : content.title}
         </h1>
-        <p className="mt-2 text-[15px] text-text-secondary">
-          Search across clinics, treatments, and conditions.
-        </p>
+        <PageLead html={content.lead} className="mt-2" />
         <div className="mt-5">
           <SearchBar
             action="/search"
@@ -74,8 +78,8 @@ export default async function SearchPage({
         <div className="mt-10">
           <EmptyState
             icon={SearchX}
-            title="No results found"
-            description="Try a different term, or browse clinics by treatment, condition, or destination."
+            title={content.extra("emptyTitle")}
+            description={content.extra("emptyDescription")}
             action={
               <Link
                 href="/clinics"
@@ -109,6 +113,11 @@ export default async function SearchPage({
           ) : null}
         </div>
       )}
+
+      <BlockRenderer
+        blocks={content.blocks}
+        className="mt-14 max-w-3xl border-t border-border pt-10"
+      />
     </div>
   );
 }

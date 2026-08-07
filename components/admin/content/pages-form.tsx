@@ -72,8 +72,8 @@ export function PagesForm({ settings }: { settings: SettingsView }) {
   return (
     <>
       <PageHeader
-        title="Site content"
-        description="Shared content that isn't owned by a single page."
+        title="Shared content"
+        description="Content reused across pages rather than owned by one. Individual pages are edited in Site pages."
       >
         <Button size="sm" onClick={save} disabled={saving}>
           Save changes
@@ -88,6 +88,18 @@ export function PagesForm({ settings }: { settings: SettingsView }) {
           <Button asChild variant="secondary" size="sm">
             <Link href="/admin/content/homepage">
               Open the homepage editor
+              <ArrowUpRight className="size-4" />
+            </Link>
+          </Button>
+        </SectionCard>
+
+        <SectionCard
+          title="Every other page"
+          description="About, methodology, FAQ, contact, the legal pages, the directory hubs: headline, intro, and body for each."
+        >
+          <Button asChild variant="secondary" size="sm">
+            <Link href="/admin/content/site-pages">
+              Open site pages
               <ArrowUpRight className="size-4" />
             </Link>
           </Button>

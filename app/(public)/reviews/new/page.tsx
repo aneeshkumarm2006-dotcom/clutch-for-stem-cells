@@ -7,6 +7,9 @@ import { getReviewClinic } from "@/lib/public-data";
 import { SearchBar } from "@/components/search/search-bar";
 import { ReviewForm } from "@/components/review/review-form";
 import { EmptyState } from "@/components/ui/empty-state";
+import { BlockRenderer } from "@/components/blocks/block-renderer";
+import { PageLead } from "@/components/common/page-lead";
+import { getPageContent } from "@/lib/page-content";
 
 /**
  * `noindex, follow`. This is a submission form, not a destination: it has no
@@ -28,18 +31,18 @@ export default async function NewReviewPage({
     Array.isArray(v) ? v[0] : v;
   const clinicSlug = single(searchParams.clinic);
 
-  const clinic = clinicSlug ? await getReviewClinic(clinicSlug) : null;
+  const [clinic, content] = await Promise.all([
+    clinicSlug ? getReviewClinic(clinicSlug) : Promise.resolve(null),
+    getPageContent("/reviews/new"),
+  ]);
 
   return (
     <div className="container max-w-2xl py-10 md:py-14">
       <header className="mb-6">
         <h1 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-text-primary">
-          Write a review
+          {content.title}
         </h1>
-        <p className="mt-2 text-[15px] text-text-secondary">
-          Your honest experience helps other patients. Reviews are checked by our
-          team before they go live.
-        </p>
+        <PageLead html={content.lead} className="mt-2" />
       </header>
 
       {clinic ? (
@@ -53,8 +56,8 @@ export default async function NewReviewPage({
         <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
           <EmptyState
             icon={Star}
-            title="Which clinic would you like to review?"
-            description="Search for the clinic you visited, open its profile, and choose “Write a review”."
+            title={content.extra("pickerTitle")}
+            description={content.extra("pickerDescription")}
           />
           <div className="mt-2 flex justify-center">
             {/* Clinics only: the visitor is picking the one they visited, so a
@@ -74,6 +77,11 @@ export default async function NewReviewPage({
           </p>
         </div>
       )}
+
+      <BlockRenderer
+        blocks={content.blocks}
+        className="mt-12 border-t border-border pt-8"
+      />
     </div>
   );
 }

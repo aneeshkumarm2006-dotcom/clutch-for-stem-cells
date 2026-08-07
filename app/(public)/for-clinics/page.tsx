@@ -1,13 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Check, ShieldCheck, TrendingUp, Users } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { pageMetadata } from "@/lib/page-metadata";
 import { getActivePlans } from "@/lib/public-data";
+import { getPageContent } from "@/lib/page-content";
 import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/common/section";
+import { BlockRenderer } from "@/components/blocks/block-renderer";
+import { PageLead } from "@/components/common/page-lead";
 
 export const revalidate = 3600;
 
@@ -15,7 +18,10 @@ export const generateMetadata = (): Promise<Metadata> =>
   pageMetadata({ path: "/for-clinics" });
 
 export default async function ForClinicsPage() {
-  const plans = await getActivePlans();
+  const [plans, content] = await Promise.all([
+    getActivePlans(),
+    getPageContent("/for-clinics"),
+  ]);
 
   return (
     <>
@@ -29,51 +35,40 @@ export default async function ForClinicsPage() {
       >
         <div className="container max-w-3xl py-16 text-center md:py-20">
           <h1 className="font-display text-[clamp(28px,5vw,40px)] font-bold leading-[1.1] tracking-[-0.025em] text-text-primary">
-            Reach patients researching regenerative medicine
+            {content.title}
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-[17px] leading-relaxed text-text-secondary">
-            List your clinic, build trust with verification, and receive
-            qualified consultation requests from patients who are ready to
-            connect.
-          </p>
+          <PageLead
+            html={content.lead}
+            className="mx-auto mt-4 max-w-xl text-[17px]"
+          />
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
-              <Link href="/contact?topic=listing">Get listed</Link>
+              <Link href="/contact?topic=listing">
+                {content.extra("ctaPrimaryLabel")}
+              </Link>
             </Button>
             <Button asChild size="lg" variant="secondary">
-              <Link href="#pricing">See pricing</Link>
+              <Link href="#pricing">{content.extra("ctaSecondaryLabel")}</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Value props */}
-      <Section className="border-b border-border">
-        <div className="container grid gap-6 md:grid-cols-3">
-          <ValueProp
-            icon={<Users className="size-5" />}
-            title="Qualified inquiries"
-            body="Receive consultation requests and matched leads from patients filtered by condition, treatment, and budget."
-          />
-          <ValueProp
-            icon={<ShieldCheck className="size-5" />}
-            title="Verified trust signals"
-            body="Showcase accreditations and earn a verified badge so patients can shortlist you with confidence."
-          />
-          <ValueProp
-            icon={<TrendingUp className="size-5" />}
-            title="Discoverability"
-            body="Appear across treatment, condition, and destination pages built to rank in search."
-          />
-        </div>
-      </Section>
+      {/* Value props — a feature grid by default, but the slot takes any block. */}
+      {content.blocks.length ? (
+        <Section className="border-b border-border">
+          <div className="container max-w-5xl">
+            <BlockRenderer blocks={content.blocks} />
+          </div>
+        </Section>
+      ) : null}
 
-      {/* Pricing */}
+      {/* Pricing. The plans themselves are edited in /admin/plans. */}
       <Section id="pricing">
         <div className="container">
           <SectionHeader
-            title="Listing plans"
-            description="Start free and upgrade as you grow. Plans are display-only today, and our team activates your tier when you get listed."
+            title={content.extra("pricingTitle")}
+            description={content.extra("pricingDescription")}
             className="mx-auto max-w-2xl text-center [&>div]:mx-auto"
           />
           <div className="mt-10 grid items-stretch gap-5 md:grid-cols-3">
@@ -138,59 +133,22 @@ export default async function ForClinicsPage() {
               </div>
             ))}
           </div>
-          <p className="mt-6 text-center text-[12.5px] text-text-muted">
-            Pricing is indicative and shown for planning. Billing is handled by
-            our team, and no payment is collected on this site.
-          </p>
+          {content.extra("pricingNote") ? (
+            <p className="mt-6 text-center text-[12.5px] text-text-muted">
+              {content.extra("pricingNote")}
+            </p>
+          ) : null}
         </div>
       </Section>
 
-      {/* CTA band */}
-      <Section className="bg-ink">
-        <div className="container">
-          <div className="flex flex-col items-start justify-between gap-5 rounded-2xl bg-gradient-to-br from-azure-700 to-azure-600 p-8 md:flex-row md:items-center md:p-10">
-            <div className="max-w-xl">
-              <h2 className="font-display text-[24px] font-bold leading-tight tracking-[-0.02em] text-white">
-                Ready to get listed?
-              </h2>
-              <p className="mt-2 text-[15px] leading-relaxed text-white/85">
-                Tell us about your clinic and our team will set up your profile
-                and confirm your accreditation details.
-              </p>
-            </div>
-            <Button asChild size="lg" variant="secondary" className="shrink-0">
-              <Link href="/contact?topic=listing">
-                Contact our team
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </Button>
+      {/* Closing CTA band. */}
+      {content.blocksAfter.length ? (
+        <Section className="bg-ink">
+          <div className="container max-w-5xl">
+            <BlockRenderer blocks={content.blocksAfter} />
           </div>
-        </div>
-      </Section>
+        </Section>
+      ) : null}
     </>
-  );
-}
-
-function ValueProp({
-  icon,
-  title,
-  body,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  body: string;
-}) {
-  return (
-    <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
-      <span className="flex size-10 items-center justify-center rounded-md bg-tint text-azure-700">
-        {icon}
-      </span>
-      <h3 className="mt-4 font-display text-lg font-semibold text-text-primary">
-        {title}
-      </h3>
-      <p className="mt-1.5 text-[14px] leading-relaxed text-text-secondary">
-        {body}
-      </p>
-    </div>
   );
 }

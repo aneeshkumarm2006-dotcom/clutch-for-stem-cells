@@ -2,6 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
+import { PageLead } from "@/components/common/page-lead";
 import { DirectoryTabs } from "@/components/ui/directory-tabs";
 import { type FilterDimension } from "@/components/directory/directory-controls";
 import { ClinicResults } from "@/components/directory/clinic-results";
@@ -18,7 +19,13 @@ export interface DirectoryBreadcrumb {
 
 export interface DirectoryProps {
   heading: string;
+  /** Plain-text intro. Escaped on render. */
   intro?: string;
+  /**
+   * Sanitized inline HTML intro, used where the copy comes from `PageContent`
+   * and may hold a link. Wins over `intro` when both are set.
+   */
+  introHtml?: string;
   /** Route pathname (no query) — used for "Clear all", tabs, and pagination. */
   basePath: string;
   /** Raw incoming query params (preserved when building pagination links). */
@@ -47,6 +54,7 @@ export interface DirectoryProps {
 export function Directory({
   heading,
   intro,
+  introHtml,
   basePath,
   searchParams,
   data,
@@ -84,7 +92,13 @@ export function Directory({
         <h1 className="font-display text-[28px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[32px]">
           {heading}
         </h1>
-        {intro ? (
+        {/* `introHtml` is the CMS-backed intro on `/clinics`, sanitized on save
+            so it can carry a link. `intro` stays plain text for the taxonomy
+            routes, whose stored intros were never HTML and must keep being
+            escaped. */}
+        {introHtml ? (
+          <PageLead html={introHtml} className="mt-3" />
+        ) : intro ? (
           <p className="mt-3 text-[15px] leading-relaxed text-text-secondary">
             {intro}
           </p>
