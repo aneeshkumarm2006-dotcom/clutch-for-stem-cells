@@ -9,7 +9,12 @@ import { toast } from "sonner";
 import { PageHeader } from "@/components/admin/page-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { TextField, TextareaField, Label } from "@/components/ui/form-field";
+import {
+  TextField,
+  TextareaField,
+  SelectField,
+  Label,
+} from "@/components/ui/form-field";
 import { Toggle } from "@/components/admin/toggle";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { BlockEditor } from "@/components/blocks/block-editor";
@@ -17,11 +22,14 @@ import { ContentFlagWarning } from "@/components/content/editorial-fields";
 import { adminFetch } from "@/lib/admin/client";
 import { blocksScanText } from "@/lib/blocks/content";
 import { findFlaggedPhrases } from "@/lib/content-flags";
+import { cn } from "@/lib/utils";
 import { CONTENT_ENGINE } from "@/config/content-engine";
+import { TWITTER_CARD_TYPES, type TwitterCardType } from "@/lib/enums";
 import type {
   EditablePage,
   EditablePageDefaults,
 } from "@/config/editable-pages";
+import type { PageSeoView } from "@/lib/admin/page-content";
 import type { BlockInput } from "@/lib/validation/block";
 
 /**
@@ -37,7 +45,17 @@ import type { BlockInput } from "@/lib/validation/block";
  * be a placeholder: the editor loads the shipped blocks and edits them in place.
  * Emptying the list restores the shipped composition rather than blanking the
  * body, which matters most on the legal pages nobody wants accidentally cleared.
+ *
+ * The meta block follows the same override model but lands in a different
+ * store — `SiteSetting.pageSeo`, which `/admin/seo` also writes — so the two
+ * screens are two views of one title tag rather than competing copies. A
+ * variant page gets no meta block at all: it renders under its parent's URL and
+ * has no metadata of its own.
  */
+
+/** Google truncates around these; past them the counter turns amber, not invalid. */
+const TITLE_SOFT_LIMIT = 60;
+const DESCRIPTION_SOFT_LIMIT = 160;
 
 interface StoredValues {
   title: string;
@@ -48,6 +66,25 @@ interface StoredValues {
   blocksAfter: BlockInput[];
   extras: Record<string, string>;
 }
+
+export interface SitePageSeo {
+  stored: PageSeoView;
+  defaults: { title: string; description: string };
+}
+
+/** Every meta field cleared — what "reset" leaves behind. */
+const BLANK_SEO: PageSeoView = {
+  metaTitle: "",
+  metaDescription: "",
+  ogTitle: "",
+  ogDescription: "",
+  ogImage: "",
+  canonicalUrl: "",
+  twitterCard: "",
+  focusKeyword: "",
+  noindex: false,
+  follow: undefined,
+};
 
 function Panel({
   title,
@@ -77,24 +114,34 @@ export function SitePageForm({
   entry,
   defaults,
   stored,
+  seo,
 }: {
   entry: EditablePage;
   defaults: EditablePageDefaults;
   stored: StoredValues;
+  /** `null` for a variant page, which has no metadata of its own. */
+  seo: SitePageSeo | null;
 }) {
   const router = useRouter();
   const [v, setV] = React.useState<StoredValues>(stored);
+  const [s, setS] = React.useState<PageSeoView | null>(seo?.stored ?? null);
   const [saving, setSaving] = React.useState(false);
   const [resetting, setResetting] = React.useState(false);
   const [confirmReset, setConfirmReset] = React.useState(false);
 
   const dirty = React.useMemo(
-    () => JSON.stringify(v) !== JSON.stringify(stored),
-    [v, stored],
+    () =>
+      JSON.stringify([v, s]) !== JSON.stringify([stored, seo?.stored ?? null]),
+    [v, s, stored, seo],
   );
 
   const set = (patch: Partial<StoredValues>) =>
     setV((cur) => ({ ...cur, ...patch }));
+
+  // Guarded rather than null-checked at every call site: the meta panel only
+  // renders when there is meta to edit, so a patch with none is a no-op.
+  const setSeo = (patch: Partial<PageSeoView>) =>
+    setS((cur) => (cur ? { ...cur, ...patch } : cur));
 
   // Live cure/guarantee scan, same rules the /seoteam editors run. The server
   // does not gate saves here (these are admin-owned routes, not authored
@@ -107,8 +154,10 @@ export function SitePageForm({
         blocksScanText(v.blocks),
         blocksScanText(v.blocksAfter),
         ...Object.values(v.extras),
+        s?.metaTitle ?? "",
+        s?.metaDescription ?? "",
       ]),
-    [v],
+    [v, s],
   );
 
   const apiPath = `/api/admin/page-content${entry.path}`;
@@ -126,6 +175,25 @@ export function SitePageForm({
           ...(entry.hasBlocks ? { blocks: v.blocks } : {}),
           ...(entry.hasBlocksAfter ? { blocksAfter: v.blocksAfter } : {}),
           extras: v.extras,
+          ...(s
+            ? {
+                seo: {
+                  metaTitle: s.metaTitle,
+                  metaDescription: s.metaDescription,
+                  ogTitle: s.ogTitle,
+                  ogDescription: s.ogDescription,
+                  ogImage: s.ogImage,
+                  canonicalUrl: s.canonicalUrl,
+                  // A blank is "inherit the site default", which the schema
+                  // spells `undefined` rather than an empty enum value.
+                  twitterCard: s.twitterCard || undefined,
+                  focusKeyword: s.focusKeyword,
+                  noindex: s.noindex,
+                  robots:
+                    s.follow === undefined ? undefined : { follow: s.follow },
+                },
+              }
+            : {}),
         },
       });
       toast.success("Saved");
@@ -141,6 +209,19 @@ export function SitePageForm({
     setResetting(true);
     try {
       await adminFetch(apiPath, { method: "DELETE" });
+      // `router.refresh()` re-renders the server component but does not remount
+      // this one, so the form would otherwise keep showing the values that were
+      // just deleted — and re-save them on the next click.
+      setV({
+        title: "",
+        lead: "",
+        updated: "",
+        legalReview: null,
+        blocks: defaults.blocks,
+        blocksAfter: defaults.blocksAfter,
+        extras: Object.fromEntries(entry.extras.map((e) => [e.key, ""])),
+      });
+      setS((cur) => (cur ? BLANK_SEO : cur));
       toast.success("Restored the shipped copy");
       setConfirmReset(false);
       router.refresh();
@@ -297,17 +378,207 @@ export function SitePageForm({
             />
           </div>
         ) : null}
+
+        {s && seo ? (
+          <SeoPanel
+            path={entry.path}
+            note={entry.notes.seo}
+            value={s}
+            defaults={seo.defaults}
+            onChange={setSeo}
+          />
+        ) : null}
       </div>
 
       <ConfirmDialog
         open={confirmReset}
         onOpenChange={setConfirmReset}
         title="Restore the shipped copy?"
-        description={`Every override on ${entry.path} is deleted and the page goes back to the text it shipped with. This cannot be undone.`}
+        description={`Every override on ${entry.path}, meta included, is deleted and the page goes back to the text it shipped with. This cannot be undone.`}
         confirmLabel="Restore"
         destructive
         onConfirm={reset}
       />
     </div>
+  );
+}
+
+/**
+ * The route's meta. Same override model as the copy above it — the shipped
+ * string is the placeholder and clearing a field restores it — but stored in
+ * `SiteSetting.pageSeo`, which is why the link out to `/admin/seo` matters:
+ * that screen is the same values in a list, for comparing pages side by side.
+ */
+function SeoPanel({
+  path,
+  note,
+  value,
+  defaults,
+  onChange,
+}: {
+  path: string;
+  /** Set where the route's code already decides part of its indexation. */
+  note?: string;
+  value: PageSeoView;
+  defaults: { title: string; description: string };
+  onChange: (patch: Partial<PageSeoView>) => void;
+}) {
+  const effectiveTitle = value.metaTitle || defaults.title;
+  const effectiveDescription = value.metaDescription || defaults.description;
+
+  return (
+    <section className="rounded-xl border border-border bg-surface p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 className="font-display text-sm font-semibold text-text-primary">
+          SEO &amp; meta
+        </h2>
+        <Link
+          href="/admin/seo"
+          className="text-[12px] text-text-muted hover:text-text-secondary"
+        >
+          Compare every page
+        </Link>
+      </div>
+      <p className="mt-1 text-[12.5px] leading-relaxed text-text-muted">
+        What search engines and social cards show for {path}. Blank means the
+        copy the site shipped with. Titles are used verbatim, brand suffix
+        included, with two house rules applied on save: no em dashes, and
+        <strong> |</strong> is the only separator symbol.
+      </p>
+      {note ? (
+        <p className="mt-2 rounded-lg bg-surface-alt px-3 py-2 text-[12.5px] leading-relaxed text-text-secondary">
+          {note}
+        </p>
+      ) : null}
+
+      <div className="mt-4 space-y-4">
+        <TextField
+          label="Meta title"
+          placeholder={defaults.title}
+          value={value.metaTitle}
+          labelAccessory={
+            <Counter value={effectiveTitle} limit={TITLE_SOFT_LIMIT} />
+          }
+          onChange={(e) => onChange({ metaTitle: e.target.value })}
+        />
+        <TextareaField
+          label="Meta description"
+          rows={3}
+          placeholder={defaults.description}
+          value={value.metaDescription}
+          labelAccessory={
+            <Counter
+              value={effectiveDescription}
+              limit={DESCRIPTION_SOFT_LIMIT}
+            />
+          }
+          onChange={(e) => onChange({ metaDescription: e.target.value })}
+        />
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <TextField
+            label="OG title"
+            hint="Falls back to the meta title."
+            value={value.ogTitle}
+            onChange={(e) => onChange({ ogTitle: e.target.value })}
+          />
+          <TextField
+            label="OG image URL"
+            hint="Falls back to the site default."
+            value={value.ogImage}
+            onChange={(e) => onChange({ ogImage: e.target.value })}
+          />
+        </div>
+        <TextareaField
+          label="OG description"
+          rows={2}
+          hint="Falls back to the meta description."
+          value={value.ogDescription}
+          onChange={(e) => onChange({ ogDescription: e.target.value })}
+        />
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <TextField
+            label="Canonical URL"
+            hint="Full URL. Blank means the page's own address."
+            value={value.canonicalUrl}
+            onChange={(e) => onChange({ canonicalUrl: e.target.value })}
+          />
+          <SelectField
+            label="Twitter card"
+            options={[
+              // A Radix select item can't carry an empty value, so "inherit"
+              // stands in for "nothing stored".
+              { value: "inherit", label: "Site default" },
+              ...TWITTER_CARD_TYPES.map((t) => ({ value: t, label: t })),
+            ]}
+            value={value.twitterCard || "inherit"}
+            onValueChange={(raw) =>
+              onChange({
+                twitterCard:
+                  raw === "inherit" ? "" : (raw as TwitterCardType),
+              })
+            }
+          />
+        </div>
+
+        <TextField
+          label="Focus keyword"
+          hint="Editorial only. Never emitted."
+          value={value.focusKeyword}
+          onChange={(e) => onChange({ focusKeyword: e.target.value })}
+        />
+
+        <div className="flex items-start justify-between gap-4 rounded-lg bg-surface-alt px-4 py-3">
+          <div>
+            <Label>Hide from search engines</Label>
+            <p className="mt-0.5 text-[12.5px] leading-relaxed text-text-muted">
+              Adds noindex, so the page drops out of search results.
+            </p>
+          </div>
+          <Toggle
+            checked={value.noindex}
+            onCheckedChange={(noindex) => onChange({ noindex })}
+            label={`noindex ${path}`}
+          />
+        </div>
+
+        <SelectField
+          label="Link following"
+          hint="Whether crawlers follow the links on this page."
+          options={[
+            { value: "inherit", label: "Inherit (follow)" },
+            { value: "follow", label: "Follow" },
+            { value: "nofollow", label: "Nofollow" },
+          ]}
+          value={
+            value.follow === undefined
+              ? "inherit"
+              : value.follow
+                ? "follow"
+                : "nofollow"
+          }
+          onValueChange={(raw) =>
+            onChange({
+              follow: raw === "inherit" ? undefined : raw === "follow",
+            })
+          }
+        />
+      </div>
+    </section>
+  );
+}
+
+function Counter({ value, limit }: { value: string; limit: number }) {
+  if (!value) return null;
+  return (
+    <span
+      className={cn(
+        "text-[12px] tabular-nums",
+        value.length > limit ? "text-warning-fg" : "text-text-muted",
+      )}
+    >
+      {value.length}/{limit}
+    </span>
   );
 }

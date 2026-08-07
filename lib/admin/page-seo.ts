@@ -11,7 +11,7 @@
 import "server-only";
 
 import { dbConnect } from "@/lib/db";
-import { SiteSetting } from "@/models";
+import { SiteSetting, toPlainObject, type IPageSeoOverride } from "@/models";
 import {
   STATIC_PAGES,
   normalizePagePath,
@@ -76,6 +76,45 @@ export const PAGE_SEO_POINTERS: PageSeoPointer[] = [
     href: "/admin/content/pages",
   },
 ];
+
+// ── Single-row writes ───────────────────────────────────────────────────────
+//
+// `/admin/seo` posts the whole list and replaces it wholesale. Every other
+// screen that owns one route's meta — the homepage editor, the site-page
+// editors — has to touch only its own row and carry the rest through
+// untouched. These two helpers are that operation.
+
+/** True once an override carries something worth storing. */
+export function hasSeoValue(seo: Record<string, unknown>): boolean {
+  return Object.entries(seo).some(([key, value]) => {
+    if (value === undefined || value === "") return false;
+    if (key === "path") return false;
+    if (key === "noindex") return value === true;
+    if (key === "robots" && value && typeof value === "object") {
+      return Object.values(value).some((v) => v !== undefined);
+    }
+    return true;
+  });
+}
+
+/**
+ * The `pageSeo` list with `path`'s row replaced by `seo`. Pass `null` (or an
+ * override with nothing set) to drop the row instead of storing an empty
+ * document — a cleared form is a deletion, not a blank override.
+ */
+export function withPageSeoRow(
+  list: IPageSeoOverride[] | undefined,
+  path: string,
+  seo: Record<string, unknown> | null,
+): Record<string, unknown>[] {
+  const key = normalizePagePath(path);
+  const others = (list ?? [])
+    .filter((row) => row?.path && normalizePagePath(row.path) !== key)
+    .map((row) => toPlainObject(row) as Record<string, unknown>);
+
+  if (!seo || !hasSeoValue(seo)) return others;
+  return [...others, { ...seo, path: key }];
+}
 
 export async function getPageSeoRows(): Promise<PageSeoRow[]> {
   await dbConnect();

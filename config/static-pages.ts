@@ -50,10 +50,12 @@ export const STATIC_PAGES: StaticPageMeta[] = [
     label: "Clinic directory",
     group: "Directory",
     // Keyword-aligned with the target "stem cell clinics" and the on-page H1,
-    // giving a strong, non-thin title tag for the main directory.
-    title: "Stem Cell Clinics",
+    // giving a strong, non-thin title tag for the main directory. At 60
+    // characters the brand suffix would push it past the 75-char cap, so
+    // `brandedTitle` drops the suffix and this string ships verbatim.
+    title: "Stem Cell Clinics | Browse Clinics by Treatment and Location",
     description:
-      "Browse and compare verified stem cell clinics and stem cell treatment clinics worldwide by treatment, condition, location, and patient reviews.",
+      "Browse stem cell clinics worldwide by treatment, location, conditions treated, pricing, and patient reviews to find the right clinic for your needs.",
   },
   {
     path: "/treatments",

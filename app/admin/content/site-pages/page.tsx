@@ -82,11 +82,16 @@ export default async function AdminSitePagesPage() {
                           {row.title}
                         </td>
                         <td className="px-4 py-3">
-                          {row.customized ? (
-                            <Badge variant="success">Edited</Badge>
-                          ) : (
-                            <Badge variant="neutral">Shipped copy</Badge>
-                          )}
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            {row.customized ? (
+                              <Badge variant="success">Edited</Badge>
+                            ) : (
+                              <Badge variant="neutral">Shipped copy</Badge>
+                            )}
+                            {row.seoCustomized ? (
+                              <Badge variant="info">Meta</Badge>
+                            ) : null}
+                          </div>
                         </td>
                         <td className="hidden px-4 py-3 text-text-muted md:table-cell">
                           {row.updatedAt
@@ -122,20 +127,22 @@ export default async function AdminSitePagesPage() {
         })}
 
         <p className="text-[13px] text-text-muted">
-          Clearing a field restores the copy the site shipped with. The landing
-          page has its own screen at{" "}
-          <Link
-            href="/admin/content/homepage"
-            className="font-medium text-text-link hover:underline"
-          >
-            Homepage
-          </Link>
-          , and meta titles and descriptions live in{" "}
+          Clearing a field restores the copy the site shipped with. Each page
+          carries its own meta title, description, social card and robots
+          settings, edited alongside its copy; the{" "}
           <Link
             href="/admin/seo"
             className="font-medium text-text-link hover:underline"
           >
             Page SEO
+          </Link>{" "}
+          screen is the same titles and descriptions in one list, for comparing
+          pages side by side. The landing page has its own screen at{" "}
+          <Link
+            href="/admin/content/homepage"
+            className="font-medium text-text-link hover:underline"
+          >
+            Homepage
           </Link>
           .
         </p>

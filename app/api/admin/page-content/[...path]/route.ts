@@ -9,6 +9,13 @@
  * `PATCH /api/admin/page-content/about`. Only paths the registry declares are
  * writable: an unknown one is a 404 rather than a row nothing will ever read.
  *
+ * A page's copy and its meta have separate homes, and this writes both: the
+ * body fields go to the `PageContent` overlay, while `seo` is merged into this
+ * path's row in `SiteSetting.pageSeo` — the store `/admin/seo` owns — so a
+ * fixed route has exactly one title tag whichever screen edits it. Variants
+ * (`/contact/listing`) render under their parent's URL and so have no metadata
+ * of their own; sending `seo` for one is an error rather than a silent no-op.
+ *
  * Both handlers revalidate the shared `page-content` tag plus the affected
  * route, so an edit is live on the next request rather than after the 5-minute
  * cache window.
@@ -21,16 +28,39 @@ import { recordAuditFromRequest } from "@/lib/audit";
 import { sanitizeBlocks } from "@/lib/blocks/server";
 import { sanitizeBlogHtml } from "@/lib/seoteam/sanitize";
 import { PAGE_CONTENT_TAG } from "@/lib/page-content";
+import { withPageSeoRow } from "@/lib/admin/page-seo";
 import { pageContentUpdateSchema } from "@/lib/validation/page-content";
 import { editablePage } from "@/config/editable-pages";
-import { normalizePagePath } from "@/config/static-pages";
-import { PageContent } from "@/models";
+import { normalizePagePath, staticPageMeta } from "@/config/static-pages";
+import { PageContent, SiteSetting, GLOBAL_SETTINGS_KEY } from "@/models";
 
 export const dynamic = "force-dynamic";
 
 /** `["reviews","new"]` → `/reviews/new`, normalized the way the registry keys. */
 function pathFrom(segments: string[]): string {
   return normalizePagePath("/" + segments.join("/"));
+}
+
+/**
+ * Whether this route's metadata is editable here. It needs an entry in
+ * `config/static-pages.ts` (that entry is what `pageMetadata` reads the
+ * override back through) and it must not be a variant of another route.
+ */
+function ownsMetadata(path: string, variantOf?: string): boolean {
+  return !variantOf && Boolean(staticPageMeta(path));
+}
+
+/** Replace this path's row in `SiteSetting.pageSeo`, leaving every other alone. */
+async function savePageSeo(
+  path: string,
+  seo: Record<string, unknown>,
+): Promise<void> {
+  const settings = await SiteSetting.getGlobal();
+  await SiteSetting.updateOne(
+    { key: GLOBAL_SETTINGS_KEY },
+    { $set: { pageSeo: withPageSeoRow(settings.pageSeo, path, seo) } },
+    { upsert: true },
+  );
 }
 
 /** Refresh the caches an edit to `path` can affect. */
@@ -77,12 +107,19 @@ export async function PATCH(
       );
     }
 
+    if ("seo" in data && !ownsMetadata(path, entry.variantOf)) {
+      return fail(`"${path}" has no metadata of its own.`, 422);
+    }
+
     await dbConnect();
     await PageContent.updateOne(
       { path },
       { $set: { ...update, path } },
       { upsert: true },
     );
+    if ("seo" in data) {
+      await savePageSeo(path, (data.seo ?? {}) as Record<string, unknown>);
+    }
 
     revalidateFor(path, entry.variantOf);
 
@@ -91,7 +128,9 @@ export async function PATCH(
       action: "content.page.update",
       entityType: "PageContent",
       entityId: path,
-      after: { fields: Object.keys(update) },
+      after: {
+        fields: [...Object.keys(update), ...("seo" in data ? ["seo"] : [])],
+      },
     });
 
     return ok({ ok: true });
@@ -109,6 +148,9 @@ export async function DELETE(
 
     await dbConnect();
     await PageContent.deleteOne({ path });
+    // "Restore the shipped copy" covers the meta too, so the reset button puts
+    // the whole page back rather than leaving an orphan title tag behind.
+    if (ownsMetadata(path, entry.variantOf)) await savePageSeo(path, {});
 
     revalidateFor(path, entry.variantOf);
 

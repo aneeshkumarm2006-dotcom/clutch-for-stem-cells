@@ -22,9 +22,10 @@ const KNOWN_PATHS = new Set(STATIC_PAGES.map((p) => p.path));
 
 /**
  * Fields this screen doesn't show. They're written elsewhere — the homepage
- * editor sets OG, canonical, Twitter and robots for `/` — so a save here has to
- * carry them across rather than drop them. Everything this form *does* edit is
- * taken from the request, blanks included, so clearing still deletes.
+ * editor and the site-page editors each set OG, canonical, Twitter and robots
+ * for their own route — so a save here has to carry them across rather than
+ * drop them. Everything this form *does* edit is taken from the request, blanks
+ * included, so clearing still deletes.
  */
 const PRESERVED = [
   "ogTitle",

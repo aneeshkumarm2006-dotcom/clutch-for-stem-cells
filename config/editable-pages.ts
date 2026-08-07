@@ -74,6 +74,11 @@ export interface EditablePage {
     lead: string;
     blocks?: string;
     blocksAfter?: string;
+    /**
+     * Set where the route's own code already decides part of its indexation,
+     * so the meta panel doesn't imply a control it doesn't fully have.
+     */
+    seo?: string;
   };
   hasUpdated: boolean;
   hasLegalReview: boolean;
@@ -633,6 +638,7 @@ export const EDITABLE_PAGES: EditablePage[] = [
       title: "The page H1.",
       lead: "The paragraph under the H1. Links are allowed.",
       blocks: "Rendered below the form.",
+      seo: "This page is noindex in code either way, so the toggle below changes nothing here.",
     },
     hasUpdated: false,
     hasLegalReview: false,
@@ -666,6 +672,7 @@ export const EDITABLE_PAGES: EditablePage[] = [
       title: "The page H1.",
       lead: "The paragraph under the H1. Links are allowed.",
       blocks: "Rendered below the results and pagination.",
+      seo: "Applies to the clean /clinics URL. Filtered views (?treatment=, ?page=) are already noindex in code.",
     },
     hasUpdated: false,
     hasLegalReview: false,
@@ -737,6 +744,7 @@ export const EDITABLE_PAGES: EditablePage[] = [
       title: "The H1 shown before a query is typed. With a query the H1 becomes the query itself.",
       lead: "The paragraph under the H1. Links are allowed.",
       blocks: "Rendered below the results.",
+      seo: "Applies to the bare /search landing. Every ?q= results page is already noindex in code.",
     },
     hasUpdated: false,
     hasLegalReview: false,
@@ -767,6 +775,7 @@ export const EDITABLE_PAGES: EditablePage[] = [
       title: "The page H1.",
       lead: "The paragraph under the H1. Links are allowed.",
       blocks: "Rendered below the post grid and pagination.",
+      seo: "Applies to page 1. Paginated pages (?page=2) keep their own generated title.",
     },
     hasUpdated: false,
     hasLegalReview: false,

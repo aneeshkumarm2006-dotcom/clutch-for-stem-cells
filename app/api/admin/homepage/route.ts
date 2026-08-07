@@ -16,8 +16,8 @@ import { dbConnect } from "@/lib/db";
 import { ok, parseBody, withRole } from "@/lib/admin/api";
 import { recordAuditFromRequest } from "@/lib/audit";
 import { homepageUpdateSchema } from "@/lib/validation/homepage";
-import { normalizePagePath } from "@/config/static-pages";
-import { SiteSetting, GLOBAL_SETTINGS_KEY, toPlainObject } from "@/models";
+import { withPageSeoRow } from "@/lib/admin/page-seo";
+import { SiteSetting, GLOBAL_SETTINGS_KEY } from "@/models";
 
 export const dynamic = "force-dynamic";
 
@@ -31,18 +31,6 @@ const ALLOWED = [
   "featuredClinicIds",
   "testimonials",
 ] as const;
-
-/** True once the override carries anything worth storing. */
-function hasMeaning(seo: Record<string, unknown>): boolean {
-  return Object.entries(seo).some(([key, value]) => {
-    if (value === undefined || value === "") return false;
-    if (key === "noindex") return value === true;
-    if (key === "robots" && value && typeof value === "object") {
-      return Object.values(value).some((v) => v !== undefined);
-    }
-    return true;
-  });
-}
 
 export async function PATCH(req: Request): Promise<Response> {
   return withRole("editor", async (user) => {
@@ -63,15 +51,11 @@ export async function PATCH(req: Request): Promise<Response> {
     // whole list, this screen must not.
     if ("seo" in parsed.data) {
       const settings = await SiteSetting.getGlobal();
-      const others = (settings.pageSeo ?? [])
-        .filter((row) => row?.path && normalizePagePath(row.path) !== HOME_PATH)
-        .map((row) => toPlainObject(row));
-
-      const seo = { ...(parsed.data.seo ?? {}) } as Record<string, unknown>;
-      // A cleared override is a deletion, not an empty document.
-      update.pageSeo = hasMeaning(seo)
-        ? [...others, { ...seo, path: HOME_PATH }]
-        : others;
+      update.pageSeo = withPageSeoRow(
+        settings.pageSeo,
+        HOME_PATH,
+        (parsed.data.seo ?? {}) as Record<string, unknown>,
+      );
     }
 
     await SiteSetting.updateOne(

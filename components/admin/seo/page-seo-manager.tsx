@@ -100,6 +100,18 @@ export function PageSeoManager({
           a dash, colon or <strong>&amp;</strong> you type is converted before
           it reaches the page.
         </p>
+        <p className="text-[13px] leading-relaxed text-text-muted">
+          This screen is the list view, for comparing titles across the site.
+          The same fields, plus the social card, canonical URL and robots
+          settings, sit on each page&rsquo;s own editor under{" "}
+          <Link
+            href="/admin/content/site-pages"
+            className="font-medium text-text-link hover:underline"
+          >
+            Site pages
+          </Link>
+          . Both write the same values.
+        </p>
 
         {grouped.map(([group, items]) => (
           <section

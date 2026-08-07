@@ -30,6 +30,7 @@ export default async function AdminSitePageEditor({
       entry={data.entry}
       defaults={data.defaults}
       stored={data.stored}
+      seo={data.seo}
     />
   );
 }
