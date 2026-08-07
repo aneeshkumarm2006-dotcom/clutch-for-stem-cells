@@ -1,0 +1,117 @@
+[
+  {
+    "name": "Regenerative Medicine LA",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Autologous cell procedures and IV therapy on Sunset Boulevard, built around fluoroquinolone toxicity and other drug-injury recovery",
+    "description": "Mark Ghalili was a young internal medicine physician when a course of ciprofloxacin left him unable to walk. He recovered through regenerative and integrative treatment, found that a large number of people were dealing with the same thing and getting nowhere in conventional clinics, and opened Regenerative Medicine LA at 9201 Sunset Boulevard to treat them.\n\nFluoroquinolone toxicity is still the practice's centre of gravity, and it draws patients from outside California for it. The wider caseload runs to peripheral neuropathy, long COVID, multiple sclerosis, Crohn's disease, psoriasis, Parkinson's, dementia, chronic fatigue, fibromyalgia, and Lyme. The clinic's own framing is mitochondrial: treat the cellular machinery rather than chase symptoms one at a time.\n\nOn cells the practice is narrow and says so. Material comes from the patient's own tissue during an in-office procedure and is prepared in a physician-led setting. No donor cells. Around that sit IV nutrient infusions, peptide therapy, hormone replacement, PRP, LED light therapy, hair treatments, and a skincare line the clinic developed under the name Regen Labs.\n\nThe disclaimers are worth reading because they are unusually direct. The site states that Regenerative Medicine LA does not claim autologous cell procedures diagnose, treat, or prevent any specific disease, does not present them as FDA approved, does not promise results, and does not advertise them for named conditions. Not everyone is a candidate, a physician consultation comes first, and the listed risks are soreness, bruising, swelling, bleeding, and infection."
+    ,
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786138065/library/jd1vznooddbs40bsmfjm.webp",
+      "publicId": "library/jd1vznooddbs40bsmfjm",
+      "width": 218,
+      "height": 65,
+      "alt": "Regenerative Medicine LA logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786138067/library/y1mirhpjdor6q5iyegap.webp",
+      "publicId": "library/y1mirhpjdor6q5iyegap",
+      "width": 600,
+      "height": 400,
+      "alt": "Regenerative Medicine LA clinic interior in Los Angeles"
+    },
+
+    "treatmentTypes": ["autologous-therapy", "iv-systemic-therapy", "prp"],
+    "conditionsTreated": ["neuropathy", "post-covid-recovery", "multiple-sclerosis", "crohns-ibd", "parkinsons", "anti-aging-longevity", "skin-aesthetic", "hair-restoration", "joint-pain"],
+    "cellSources": ["autologous"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "autologous-therapy", "percent": 45 },
+      { "treatment": "iv-systemic-therapy", "percent": 30 },
+      { "treatment": "prp", "percent": 25 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Cost depends on the consultation, the evaluation that follows, and whether a procedure is recommended at all. The clinic does not publish a price list and quotes after the physician visit. These procedures are not covered by insurance.",
+
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Mark Ghalili",
+      "title": "Founder and Medical Director",
+      "credentials": "DO, board certified in internal medicine",
+      "bio": "Ghalili trained in internal medicine and was practising when ciprofloxacin toxicity left him severely disabled. Conventional care had little to offer, and he rebuilt his health through regenerative and integrative treatment. He founded Regenerative Medicine LA to work with patients in the same position, particularly those injured by fluoroquinolone antibiotics, and was named a Los Angeles Top Doctor in 2019. He also developed the clinic's Regen Labs skincare line."
+    },
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "9201 Sunset Blvd, Suite 912",
+        "city": "Los Angeles",
+        "region": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "90069",
+        "phone": "310-295-9403",
+        "lat": 34.0904,
+        "lng": -118.3878
+      }
+    ],
+
+    "website": "https://regenerativemedicinela.com",
+    "social": {
+      "facebook": "https://www.facebook.com/regenerativemedicinela/",
+      "instagram": "https://www.instagram.com/drmarkghalili/",
+      "youtube": "https://www.youtube.com/channel/UCELLt1o11vdtFrm7pITXLZA"
+    },
+
+    "highlights": [
+      "One of the few US practices built specifically around fluoroquinolone and Cipro toxicity recovery",
+      "Autologous cells only, taken from the patient in an in-office procedure, no donor material",
+      "Founder Mark Ghalili was himself disabled by ciprofloxacin and treats from that experience",
+      "Also runs IV nutrient infusions, peptide therapy, hormone replacement, and PRP",
+      "States plainly on its own site that the procedures are not FDA approved and results are not promised",
+      "Sunset Boulevard office in Los Angeles, open Monday to Friday"
+    ],
+    "faqs": [
+      {
+        "question": "Is this an FDA-approved treatment?",
+        "answer": "No. The clinic says so directly: it does not present autologous regenerative cell procedures as FDA approved, and it does not claim they diagnose, treat, or prevent any specific disease. Everything is offered after a physician consultation and informed consent."
+      },
+      {
+        "question": "Do you use donor or umbilical cord cells?",
+        "answer": "No. In the clinic's words, the cellular material comes from your own body and is used only for you. It is collected during an in-office procedure and prepared in a physician-led setting."
+      },
+      {
+        "question": "Why is fluoroquinolone toxicity such a focus here?",
+        "answer": "Because the founder lived it. Mark Ghalili was severely disabled by ciprofloxacin, recovered through regenerative and integrative care, and built the practice around patients with the same injury after finding how few clinics took it seriously."
+      },
+      {
+        "question": "Will it work for me?",
+        "answer": "The clinic does not promise results and says outright that not every patient is a candidate. That determination is made at the consultation, not before it."
+      },
+      {
+        "question": "What are the risks?",
+        "answer": "The ones the clinic lists are soreness, bruising, swelling, bleeding, and infection at the collection or injection site."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "There is no published price. Cost depends on the consultation, the evaluation, and whether a procedure is recommended. Insurance does not cover it."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "regenerative medicine la"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "regenerative medicine la reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]

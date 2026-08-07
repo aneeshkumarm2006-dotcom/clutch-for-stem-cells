@@ -1,0 +1,199 @@
+[
+  {
+    "name": "Bluetail Medical Group",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Ultrasound-guided PRP and bone marrow concentrate for orthopedic injury, across seven clinics in six states",
+    "description": "David Crane opened Bluetail Medical Group in 2008, three years after starting Crane Clinic Sports Medicine in St. Louis. The practice does non-operative sports medicine and orthopedics: platelet-rich plasma, bone marrow aspirate concentrate, and prolotherapy, placed with ultrasound or fluoroscopic guidance rather than by landmark.\n\nWhat makes the group unusual for this corner of the market is the paperwork. Bluetail holds an active investigational new drug application with the FDA, IND #27390, covering bone marrow concentrate for knee osteoarthritis, and says it is pursuing more INDs for other orthopedic conditions. Its own site carries the FDA's June 2021 warning about stem cell clinics making unsupported claims, and the physicians have published outcome data on knee osteoarthritis and on elbow ligament injuries in throwing athletes.\n\nThe workup starts before you see a doctor. Imaging of the damaged area is ordered up front so the physician can judge whether they can help at all. Labs follow: complete blood count, testosterone, vitamin D, all read as markers of how well you are likely to heal. Procedures run one to two hours. Most patients need one or two treatments, spaced twelve to sixteen weeks apart, and rarely a third. The clinic's stated target is eighty to ninety percent improvement in pain and function, and it tells patients that damaged collagen takes nine to twelve months to remodel even when symptoms ease at four to six weeks.\n\nSeven offices run out of Chesterfield, Missouri: Columbia and Farmington in the same state, plus Naples in Florida, De Pere in Wisconsin, Thousand Oaks in California, and Westfield in Indiana.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786138064/library/dmgdogarpartimvk0jnz.webp",
+      "publicId": "library/dmgdogarpartimvk0jnz",
+      "width": 456,
+      "height": 228,
+      "alt": "Bluetail Medical Group logo"
+    },
+
+    "treatmentTypes": ["prp", "bone-marrow-derived-therapy", "autologous-therapy", "regenerative-orthopedics"],
+    "conditionsTreated": ["knee-osteoarthritis", "joint-pain", "back-and-spine", "rotator-cuff-shoulder", "hip-osteoarthritis", "sports-injuries", "neuropathy", "sexual-health", "hair-restoration", "skin-aesthetic"],
+    "cellSources": ["bone-marrow", "autologous"],
+    "accreditations": ["board-certified-physicians", "clinical-trial-participation"],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 35 },
+      { "treatment": "prp", "percent": 30 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 25 },
+      { "treatment": "autologous-therapy", "percent": 10 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Priced at the consultation once the physician knows the site and the number of treatments. Most insurers classify PRP and bone marrow aspirate as investigational and will not pay, so plan on self-pay. CareCredit financing is available. Imaging and lab work are ordered before the first visit and are billed separately.",
+
+    "foundedYear": 2008,
+    "teamSize": "11-50",
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. David Crane",
+      "title": "Founder",
+      "credentials": "MD, board certified in sports medicine and emergency medicine",
+      "bio": "Crane earned his MD at the University of Missouri School of Medicine, did an emergency medicine residency at Maricopa Medical Center in Phoenix, then a dual fellowship in emergency medicine and primary care sports medicine at Allegheny General Hospital in Pittsburgh. He was on staff at Barnes Jewish Hospital and St. John's Mercy Medical Center, founded Crane Clinic Sports Medicine in 2005 and Bluetail in 2008. He works mainly in diagnostic musculoskeletal ultrasound and needle-guided injection, and teaches those techniques to physicians in the US and abroad. Missouri native, orienteering and adventure racing on the weekends."
+    },
+    "team": [
+      {
+        "name": "Dr. Chris Wolf",
+        "title": "Physician",
+        "credentials": "DO, board certified in physical medicine and rehabilitation and in brain injury medicine",
+        "bio": "Wolf trained at Kirksville College of Osteopathic Medicine and did his PM&R residency at the University of Missouri with a brain injury subspecialty, plus a teaching fellowship in osteopathic manipulative medicine. He was an associate professor at Missouri and ran its brain injury and concussion program before joining Bluetail. He handles back and pelvic pain, pregnancy-related musculoskeletal problems, and ultrasound-guided injection, and teaches at CME programs nationally."
+      },
+      {
+        "name": "Christine Schroeder",
+        "title": "Physician Assistant",
+        "credentials": "PA-C",
+        "bio": "Schroeder finished the University of Wisconsin PA program in 1987 and came to Bluetail in May 2017 from cardiovascular surgery, hematology and oncology, and OB/GYN. She holds certifications in biologics for sexual wellness, aesthetics, and hair restoration, and trains physicians in regenerative technique around the country."
+      },
+      {
+        "name": "Raquel Russo",
+        "title": "Physician Assistant",
+        "credentials": "MPH, MMS, PA-C",
+        "bio": "Russo grew up in St. Louis and scribed for Dr. Crane before graduate school. She finished at Saint Louis University in 2021, was inducted into Pi Alpha, and joined the practice in February 2022."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "13353 Olive Blvd",
+        "city": "Chesterfield",
+        "region": "Missouri",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "63017",
+        "phone": "636-778-2900",
+        "lat": 38.6684,
+        "lng": -90.5093
+      },
+      {
+        "addressLine": "1400 Forum Blvd, Suite 1D",
+        "city": "Columbia",
+        "region": "Missouri",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "65203",
+        "phone": "573-446-4000",
+        "lat": 38.9385,
+        "lng": -92.3663
+      },
+      {
+        "addressLine": "160 Westmount Dr",
+        "city": "Farmington",
+        "region": "Missouri",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "63640",
+        "phone": "636-778-2900",
+        "lat": 37.7847,
+        "lng": -90.4218
+      },
+      {
+        "addressLine": "1875 Veteran's Park Drive, Suite 2201",
+        "city": "Naples",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "34109",
+        "phone": "239-631-1960",
+        "lat": 26.2626,
+        "lng": -81.7756
+      },
+      {
+        "addressLine": "3852 Creamery Road",
+        "city": "De Pere",
+        "region": "Wisconsin",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "54115",
+        "phone": "636-778-2805",
+        "lat": 44.4269,
+        "lng": -88.1288
+      },
+      {
+        "addressLine": "101 Hodencamp Rd, Suite 102",
+        "city": "Thousand Oaks",
+        "region": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "91360",
+        "phone": "239-631-1960",
+        "lat": 34.1866,
+        "lng": -118.8712
+      },
+      {
+        "addressLine": "17300 Westfield Blvd, Suite 340",
+        "city": "Westfield",
+        "region": "Indiana",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "46074",
+        "phone": "636-778-2805",
+        "lat": 40.0428,
+        "lng": -86.1275
+      }
+    ],
+
+    "website": "https://www.bluetailmedicalgroup.com",
+    "social": {
+      "facebook": "https://www.facebook.com/bluetailmedical/"
+    },
+
+    "highlights": [
+      "Active FDA investigational new drug application, IND #27390, for bone marrow concentrate in knee osteoarthritis",
+      "Seven offices across Missouri, Florida, Wisconsin, California, and Indiana",
+      "Injections placed under ultrasound or fluoroscopic guidance",
+      "Published outcome data on knee osteoarthritis and elbow ligament injury in throwing athletes",
+      "Founder David Crane is board certified in sports medicine and teaches regenerative technique internationally",
+      "Imaging and blood work required before the first physician visit"
+    ],
+    "faqs": [
+      {
+        "question": "Is any of this FDA approved?",
+        "answer": "No. PRP and bone marrow aspirate concentrate are not approved therapies, and most insurers classify them as investigational. Bluetail's route to changing that is an open IND with the FDA, number 27390, for bone marrow concentrate in knee osteoarthritis. The clinic also reprints the FDA's 2021 caution about stem cell clinics on its own site."
+      },
+      {
+        "question": "PRP or bone marrow, how is that decided?",
+        "answer": "By the physician, after imaging and labs, based on how bad the injury is and what your history looks like. There is no menu to pick from."
+      },
+      {
+        "question": "Why do I need an X-ray and blood work before I even see a doctor?",
+        "answer": "The imaging tells the physician how much damage there is and whether the practice can realistically help. The labs check platelet count, testosterone, and vitamin D, all of which affect how well tissue repairs."
+      },
+      {
+        "question": "How long does a procedure take and how sore will I be?",
+        "answer": "One to two hours in the office. The injected area is usually quite painful for the first 24 to 72 hours, then most people have one to three days of manageable discomfort. Tylenol rather than anti-inflammatories, which the clinic asks you to stop a week beforehand."
+      },
+      {
+        "question": "When do results show up?",
+        "answer": "Patients often report less pain around four weeks, with more solid gains near twelve weeks. Damaged collagen takes nine to twelve months to remodel fully, so the clinic frames improvement over that longer window."
+      },
+      {
+        "question": "How many treatments will I need?",
+        "answer": "One or two for most people, occasionally three, spaced twelve to sixteen weeks apart. The practice works toward eighty to ninety percent improvement in pain and function and sets that goal with you at the first visit."
+      },
+      {
+        "question": "When can I go back to work and training?",
+        "answer": "Most people are back at work the next day, some take a day or two. Daily activity resumes at two to three days. Workouts wait about two weeks, then restart at roughly half intensity."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "bluetail medical group"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "bluetail medical group reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]

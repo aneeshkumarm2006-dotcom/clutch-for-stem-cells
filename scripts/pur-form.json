@@ -1,0 +1,116 @@
+[
+  {
+    "name": "PUR-FORM",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Joseph Purita's Boca Raton clinic, pairing orthobiologic injection with EBO2, hyperbaric oxygen, and hormone work under one roof",
+    "description": "Joseph Purita has been injecting orthobiologics since before most of the field existed. He was among the first orthopedic surgeons in the United States to use platelet-rich plasma for musculoskeletal injury, served as the inaugural president of the American Academy and Board of Regenerative Medicine, and has treated athletes out of the major American leagues and abroad. PUR-FORM is the clinic he built in Boca Raton around that work, co-founded with the Doran family.\n\nThe orthopedic side is what Purita is known for: PRP, cell therapy, and shockwave for osteoarthritis, tendinitis, bursitis, muscle tears, ligament and labral injury. He also runs protocols for autoimmune conditions including fibromyalgia, Lyme, Hashimoto's, lupus, and Crohn's, and for recovery after orthopedic or plastic surgery. His more recent interest is oxygenation and cellular stress, and PUR-FORM offers EBO2 ozone therapy, hyperbaric oxygen, intermittent hypoxia training, and plasmapheresis alongside the injection work. Purita lectures internationally on heat and cold shock proteins and intermittent hypoxia, and gave his 200th conference talk recently.\n\nAround that sits a longevity practice: testosterone and bioidentical hormone therapy, peptides, NAD+, medical weight loss, cryotherapy, contrast therapy, infrared sauna, red light, vitamin IVs. Roughly two dozen modalities in one 3600 FAU Boulevard building, sold either à la carte or through a monthly membership.\n\nThe clinic's own disclaimer is blunt: it is not presenting regenerative cell therapy as a fix for any condition, disease, or injury, and nothing on its site has been evaluated or approved by the FDA.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786138068/library/tiful0spxic1uvng8jjp.webp",
+      "publicId": "library/tiful0spxic1uvng8jjp",
+      "width": 512,
+      "height": 512,
+      "alt": "PUR-FORM logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786138070/library/pi4lg8buqcr977ysqjl9.webp",
+      "publicId": "library/pi4lg8buqcr977ysqjl9",
+      "width": 974,
+      "height": 824,
+      "alt": "PUR-FORM clinic building in Boca Raton, Florida"
+    },
+
+    "treatmentTypes": ["prp", "regenerative-orthopedics", "msc-therapy", "autologous-therapy", "iv-systemic-therapy"],
+    "conditionsTreated": ["joint-pain", "anti-aging-longevity", "knee-osteoarthritis", "sports-injuries", "rheumatoid-arthritis", "lupus", "crohns-ibd", "sexual-health", "cardiovascular"],
+    "cellSources": ["autologous"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 35 },
+      { "treatment": "prp", "percent": 25 },
+      { "treatment": "msc-therapy", "percent": 20 },
+      { "treatment": "iv-systemic-therapy", "percent": 20 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "Membership runs $159 to $529 a month depending on how much treatment is included, and covers the wellness side rather than the cell work. Regenerative and orthobiologic procedures are quoted individually after the consultation. None of it is billed to insurance.",
+
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Joseph Purita",
+      "title": "Founder and Medical Director",
+      "credentials": "MD, board certified in orthopedic surgery, pain management, and regenerative medicine",
+      "bio": "Purita did his undergraduate and medical training at Georgetown, then orthopedic training through the University of Florida and Jackson Memorial in Miami. He was among the first orthopedic surgeons in the country to use platelet-rich plasma and cell therapy for musculoskeletal problems, and was the inaugural president of the American Academy and Board of Regenerative Medicine. He is licensed in Florida and California, holds a professorship in regenerative medicine at the University of Max Planck in Indaiatuba, Brazil, and has published widely in journals and book chapters. Castle Connolly has named him a Top Doctor every year since 2010. He lectures internationally on cell therapy, heat and cold shock proteins, and intermittent hypoxia, and recently delivered his 200th conference presentation."
+    },
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "3600 FAU Blvd, Suite 101",
+        "city": "Boca Raton",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "33431",
+        "phone": "561-368-1880",
+        "lat": 26.3836,
+        "lng": -80.1049
+      }
+    ],
+
+    "website": "https://purformhealth.com",
+    "social": {
+      "facebook": "https://www.facebook.com/purformhealth/",
+      "instagram": "https://www.instagram.com/purformhealth/",
+      "linkedin": "https://www.linkedin.com/company/pur-form"
+    },
+
+    "highlights": [
+      "Founded by Joseph Purita, among the first US orthopedic surgeons to use PRP for musculoskeletal injury",
+      "Inaugural president of the American Academy and Board of Regenerative Medicine",
+      "Orthopedic, autoimmune, surgical recovery, and anti-aging protocols run separately",
+      "EBO2 ozone therapy, hyperbaric oxygen, intermittent hypoxia training, and plasmapheresis alongside the injection work",
+      "Castle Connolly Top Doctor every year since 2010",
+      "Monthly membership from $159 to $529, open six days a week"
+    ],
+    "faqs": [
+      {
+        "question": "Is the cell therapy FDA approved?",
+        "answer": "No. PUR-FORM states on its own site that it is not presenting regenerative cell therapy as a fix for any condition, disease, or injury, and that no statements or implied treatments on the site have been evaluated or approved by the FDA."
+      },
+      {
+        "question": "What does the orthopedic protocol cover?",
+        "answer": "Osteoarthritis, tendinitis, bursitis, muscle tears, ligament injuries, and labral injuries. It is the part of the practice closest to Purita's surgical background."
+      },
+      {
+        "question": "What are Muse cells and VSELs?",
+        "answer": "Both are subpopulations of cells the clinic works with, and both are areas of active research rather than settled practice. The consultation is where a physician explains what is being proposed for your case and on what basis."
+      },
+      {
+        "question": "What is EBO2?",
+        "answer": "Extracorporeal blood oxygenation and ozonation, a filtration and ozonation of blood outside the body. Purita is one of the physicians who pushed the technique forward and lectures on it internationally."
+      },
+      {
+        "question": "Do I need a membership?",
+        "answer": "No. Membership runs $159 to $529 a month and bundles the wellness modalities such as sauna, cryotherapy, red light, and IVs. Regenerative and orthobiologic procedures are priced separately after the consultation."
+      },
+      {
+        "question": "Does insurance pay for any of this?",
+        "answer": "No. The clinic operates on self-pay across both the regenerative and the wellness side."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "pur-form"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "pur-form reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]
