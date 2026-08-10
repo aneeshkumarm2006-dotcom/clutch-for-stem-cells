@@ -463,7 +463,9 @@ export default async function ClinicReviewsPage({
                   description={
                     isFiltered
                       ? "Try a different treatment or condition, or clear the filters to see every review."
-                      : `Be the first to share what treatment at ${clinic.name} was actually like.`
+                      : `No patient reviews have been published for ${clinic.name}${
+                          hqLabel ? ` in ${hqLabel}` : ""
+                        } yet. If you were treated here, your account is the one that helps the next patient.`
                   }
                   action={
                     <Button asChild>

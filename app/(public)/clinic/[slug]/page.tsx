@@ -613,7 +613,9 @@ export default async function ClinicProfilePage({
                 <EmptyState
                   icon={Quote}
                   title="No reviews yet"
-                  description="Be the first to share your experience with this clinic."
+                  description={`No patient reviews have been published for ${clinic.name}${
+                    hqLabel ? ` in ${hqLabel}` : ""
+                  } yet. If you were treated here, your account is the one that helps the next patient.`}
                   action={
                     <Button asChild>
                       <Link href={`/reviews/new?clinic=${clinic.slug}`}>
