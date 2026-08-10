@@ -306,7 +306,35 @@ export async function getAdminClinicFormData(
         noindex: c.costPage?.seo?.noindex ?? false,
       },
     },
+    externalReviews: {
+      google: {
+        // Left as `undefined` rather than `0`: a blank rating field must stay
+        // blank, and `0` would render as a real one-star average.
+        rating: c.externalReviews?.google?.rating,
+        reviewCount: c.externalReviews?.google?.reviewCount,
+        summary: c.externalReviews?.google?.summary ?? "",
+        themes: c.externalReviews?.google?.themes ?? [],
+        url: c.externalReviews?.google?.url ?? "",
+        checkedAt: dateInput(c.externalReviews?.google?.checkedAt),
+      },
+      reddit: {
+        summary: c.externalReviews?.reddit?.summary ?? "",
+        threadCount: c.externalReviews?.reddit?.threadCount,
+        sentiment: c.externalReviews?.reddit?.sentiment ?? "",
+        themes: c.externalReviews?.reddit?.themes ?? [],
+        sources: (c.externalReviews?.reddit?.sources ?? []).map((s) => ({
+          label: s.label,
+          url: s.url ?? "",
+        })),
+        checkedAt: dateInput(c.externalReviews?.reddit?.checkedAt),
+      },
+    },
   };
 
   return { id: id(c._id), values };
+}
+
+/** `<input type="date">` wants `YYYY-MM-DD`; Zod coerces it back on save. */
+function dateInput(d: Date | null | undefined): string {
+  return d ? new Date(d).toISOString().slice(0, 10) : "";
 }

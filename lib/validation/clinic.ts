@@ -9,6 +9,7 @@ import { z } from "zod";
 import {
   CLINIC_STATUSES,
   CLINIC_TIERS,
+  EXTERNAL_SENTIMENTS,
   PRICE_MODELS,
   TEAM_SIZES,
   VERIFICATION_BADGES,
@@ -146,13 +147,55 @@ const costPageSchema = z
     sources: z.array(priceSourceSchema).default([]),
     // The form submits `""` for "not set"; `z.coerce.date()` would turn that
     // into an Invalid Date, so blank it out before coercion.
-    lastVerifiedAt: z.preprocess(
-      blankToUndefined,
-      z.coerce.date().nullish(),
-    ),
+    lastVerifiedAt: z.preprocess(blankToUndefined, z.coerce.date().nullish()),
     ctaHeading: z.preprocess(blankToUndefined, z.string().max(200).optional()),
     ctaBody: z.preprocess(blankToUndefined, z.string().max(1000).optional()),
     seo: seoSchema.optional(),
+  })
+  .partial();
+
+/**
+ * Third-party reception (Google listing + Reddit discussion).
+ *
+ * All-optional throughout, and that is load-bearing rather than lazy: the
+ * research that fills this in frequently comes back with a Google rating and no
+ * Reddit thread, or a Reddit thread and no listing. Requiring either branch
+ * would push whoever is importing toward inventing the missing half.
+ *
+ * `rating` is capped at 5 to match Google's scale, and `reviewCount` is an
+ * integer because a fractional count means the number was guessed.
+ */
+const externalSourceSchema = z.object({
+  label: z.string().min(1).max(200),
+  url: z.string().url().optional().or(z.literal("")),
+});
+
+const externalReviewSummarySchema = z
+  .object({
+    rating: z.number().min(0).max(5).optional(),
+    reviewCount: z.number().int().min(0).optional(),
+    summary: z.preprocess(blankToUndefined, z.string().max(1200).optional()),
+    themes: z.array(z.string().max(80)).default([]),
+    url: z.string().url().optional().or(z.literal("")),
+    checkedAt: z.preprocess(blankToUndefined, z.coerce.date().nullish()),
+  })
+  .partial();
+
+const redditDiscussionSchema = z
+  .object({
+    summary: z.preprocess(blankToUndefined, z.string().max(1200).optional()),
+    threadCount: z.number().int().min(0).optional(),
+    sentiment: z.enum(EXTERNAL_SENTIMENTS).optional(),
+    themes: z.array(z.string().max(80)).default([]),
+    sources: z.array(externalSourceSchema).default([]),
+    checkedAt: z.preprocess(blankToUndefined, z.coerce.date().nullish()),
+  })
+  .partial();
+
+const externalReviewsSchema = z
+  .object({
+    google: externalReviewSummarySchema.optional(),
+    reddit: redditDiscussionSchema.optional(),
   })
   .partial();
 
@@ -205,6 +248,7 @@ const clinicObjectSchema = z.object({
   seo: seoSchema.optional(),
   reviewsPage: reviewsPageSchema.optional(),
   costPage: costPageSchema.optional(),
+  externalReviews: externalReviewsSchema.optional(),
 });
 
 // Cross-field invariants shared by create + update.

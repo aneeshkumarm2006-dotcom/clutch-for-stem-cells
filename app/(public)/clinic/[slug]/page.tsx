@@ -43,7 +43,10 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { ConsultationDialog } from "@/components/lead/consultation-dialog";
 import { SaveButton } from "@/components/shortlist/save-button";
 import { ShareButton } from "@/components/clinic/share-button";
-import { ProfileSubnav, type SubnavItem } from "@/components/clinic/profile-subnav";
+import {
+  ProfileSubnav,
+  type SubnavItem,
+} from "@/components/clinic/profile-subnav";
 import { ReviewItem } from "@/components/clinic/review-item";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
@@ -138,7 +141,9 @@ export default async function ClinicProfilePage({
       : null,
     { id: "pricing", label: "Pricing" },
     { id: "reviews", label: "Reviews" },
-    clinic.caseStudies.length ? { id: "case-studies", label: "Case studies" } : null,
+    clinic.caseStudies.length
+      ? { id: "case-studies", label: "Case studies" }
+      : null,
     clinic.medicalDirector || clinic.team.length
       ? { id: "team", label: "Team" }
       : null,
@@ -308,7 +313,10 @@ export default async function ClinicProfilePage({
             {clinic.highlights.length ? (
               <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
                 {clinic.highlights.map((h) => (
-                  <li key={h} className="flex items-start gap-2 text-[14px] text-text-secondary">
+                  <li
+                    key={h}
+                    className="flex items-start gap-2 text-[14px] text-text-secondary"
+                  >
                     <CheckCircle2
                       className="mt-0.5 size-4 shrink-0 text-success"
                       aria-hidden="true"
@@ -321,16 +329,28 @@ export default async function ClinicProfilePage({
 
             {/* Quick facts */}
             <dl className="mt-6 grid grid-cols-2 gap-3 rounded-xl border border-border bg-surface-alt p-4 sm:grid-cols-4">
-              <Fact icon={<Building2 className="size-4" />} label="Team size" value={clinic.teamSize} />
+              <Fact
+                icon={<Building2 className="size-4" />}
+                label="Team size"
+                value={clinic.teamSize}
+              />
               <Fact
                 icon={<Stethoscope className="size-4" />}
                 label="Physicians"
-                value={clinic.physiciansCount ? String(clinic.physiciansCount) : undefined}
+                value={
+                  clinic.physiciansCount
+                    ? String(clinic.physiciansCount)
+                    : undefined
+                }
               />
               <Fact
                 icon={<Languages className="size-4" />}
                 label="Languages"
-                value={clinic.languages.length ? clinic.languages.join(", ") : undefined}
+                value={
+                  clinic.languages.length
+                    ? clinic.languages.join(", ")
+                    : undefined
+                }
               />
               <Fact
                 icon={<MapPin className="size-4" />}
@@ -369,7 +389,7 @@ export default async function ClinicProfilePage({
               <div className="mt-4 space-y-2.5">
                 {clinic.serviceFocus.map((f) => (
                   <div key={f.name} className="flex items-center gap-3">
-                    <span className="w-28 sm:w-44 shrink-0 truncate text-[13.5px] text-text-secondary">
+                    <span className="w-28 shrink-0 truncate text-[13.5px] text-text-secondary sm:w-44">
                       {f.name}
                     </span>
                     <span className="h-2 flex-1 overflow-hidden rounded-full bg-tint">
@@ -396,7 +416,9 @@ export default async function ClinicProfilePage({
 
             {clinic.cellSources.length ? (
               <div className="mt-5">
-                <h3 className="text-[13px] font-semibold text-text-primary">Cell sources</h3>
+                <h3 className="text-[13px] font-semibold text-text-primary">
+                  Cell sources
+                </h3>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {clinic.cellSources.map((c) => (
                     <Chip key={c.id} size="sm">
@@ -409,11 +431,15 @@ export default async function ClinicProfilePage({
 
             {clinic.conditions.length ? (
               <div className="mt-5">
-                <h3 className="text-[13px] font-semibold text-text-primary">Conditions treated</h3>
+                <h3 className="text-[13px] font-semibold text-text-primary">
+                  Conditions treated
+                </h3>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {clinic.conditions.map((c) => (
                     <Link key={c.id} href={`/conditions/${c.slug}`}>
-                      <Chip className="hover:border-border-strong">{c.name}</Chip>
+                      <Chip className="hover:border-border-strong">
+                        {c.name}
+                      </Chip>
                     </Link>
                   ))}
                 </div>
@@ -433,13 +459,18 @@ export default async function ClinicProfilePage({
                     key={a.id}
                     className="flex items-start gap-3 rounded-lg border border-border bg-surface p-4"
                   >
-                    <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
+                    <ShieldCheck
+                      className="mt-0.5 size-5 shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
                     <div>
                       <p className="font-display text-[14px] font-semibold text-text-primary">
                         {a.name}
                       </p>
                       {a.issuingBody ? (
-                        <p className="text-[12.5px] text-text-muted">{a.issuingBody}</p>
+                        <p className="text-[12.5px] text-text-muted">
+                          {a.issuingBody}
+                        </p>
                       ) : null}
                     </div>
                   </div>
@@ -466,7 +497,8 @@ export default async function ClinicProfilePage({
                   </p>
                   {clinic.priceModel ? (
                     <p className="text-[12.5px] text-text-muted">
-                      {PRICE_MODEL_LABELS[clinic.priceModel] ?? clinic.priceModel}
+                      {PRICE_MODEL_LABELS[clinic.priceModel] ??
+                        clinic.priceModel}
                     </p>
                   ) : null}
                 </div>
@@ -474,20 +506,34 @@ export default async function ClinicProfilePage({
                   <div>
                     <p className="text-[12px] text-text-muted">Typical range</p>
                     <p className="font-display text-lg font-semibold text-text-primary">
-                      {formatPrice(clinic.priceMin ?? 0, { currency: clinic.currency })} –{" "}
-                      {formatPrice(clinic.priceMax, { currency: clinic.currency })}
+                      {/* "to", not an en dash. Same site-wide copy rule as
+                          everywhere else, and it matches how the cost page
+                          already renders a range. */}
+                      {formatPrice(clinic.priceMin ?? 0, {
+                        currency: clinic.currency,
+                      })}{" "}
+                      to{" "}
+                      {formatPrice(clinic.priceMax, {
+                        currency: clinic.currency,
+                      })}
                     </p>
                   </div>
                 ) : null}
                 {clinic.ratingBreakdown?.value ? (
                   <div>
                     <p className="text-[12px] text-text-muted">Value rating</p>
-                    <RatingStars value={clinic.ratingBreakdown.value} showValue size={15} />
+                    <RatingStars
+                      value={clinic.ratingBreakdown.value}
+                      showValue
+                      size={15}
+                    />
                   </div>
                 ) : null}
               </div>
               {clinic.priceNote ? (
-                <p className="mt-3 text-[13.5px] text-text-secondary">{clinic.priceNote}</p>
+                <p className="mt-3 text-[13.5px] text-text-secondary">
+                  {clinic.priceNote}
+                </p>
               ) : null}
               {/* The keyword-bearing internal link into the cost page, which
                   carries the itemised price table, what a quote covers, and the
@@ -513,7 +559,9 @@ export default async function ClinicProfilePage({
                 Patient reviews
               </h2>
               <Button asChild variant="secondary" size="sm">
-                <Link href={`/reviews/new?clinic=${clinic.slug}`}>Write a review</Link>
+                <Link href={`/reviews/new?clinic=${clinic.slug}`}>
+                  Write a review
+                </Link>
               </Button>
             </div>
 
@@ -568,7 +616,9 @@ export default async function ClinicProfilePage({
                   description="Be the first to share your experience with this clinic."
                   action={
                     <Button asChild>
-                      <Link href={`/reviews/new?clinic=${clinic.slug}`}>Write a review</Link>
+                      <Link href={`/reviews/new?clinic=${clinic.slug}`}>
+                        Write a review
+                      </Link>
                     </Button>
                   }
                 />
@@ -601,7 +651,10 @@ export default async function ClinicProfilePage({
               </h2>
               <div className="mt-4 space-y-4">
                 {clinic.caseStudies.map((cs, i) => (
-                  <div key={i} className="rounded-xl border border-border bg-surface p-5 shadow-card">
+                  <div
+                    key={i}
+                    className="rounded-xl border border-border bg-surface p-5 shadow-card"
+                  >
                     <h3 className="font-display text-[15px] font-semibold text-text-primary">
                       {cs.title}
                     </h3>
@@ -617,7 +670,9 @@ export default async function ClinicProfilePage({
                     ) : null}
                     {cs.outcome ? (
                       <p className="mt-2 text-[14px] leading-relaxed text-text-secondary">
-                        <span className="font-semibold text-text-primary">Outcome: </span>
+                        <span className="font-semibold text-text-primary">
+                          Outcome:{" "}
+                        </span>
                         {cs.outcome}
                       </p>
                     ) : null}
@@ -650,10 +705,14 @@ export default async function ClinicProfilePage({
                           {p.name}
                         </p>
                         {p.title ? (
-                          <p className="text-[12.5px] text-text-secondary">{p.title}</p>
+                          <p className="text-[12.5px] text-text-secondary">
+                            {p.title}
+                          </p>
                         ) : null}
                         {p.credentials ? (
-                          <p className="text-[12px] text-text-muted">{p.credentials}</p>
+                          <p className="text-[12px] text-text-muted">
+                            {p.credentials}
+                          </p>
                         ) : null}
                         {p.bio ? (
                           <p className="mt-1.5 text-[13px] leading-relaxed text-text-secondary">
@@ -675,7 +734,11 @@ export default async function ClinicProfilePage({
             <div className="mt-4 rounded-xl border border-border bg-surface p-5 shadow-card">
               <div className="flex items-start gap-3">
                 <ShieldCheck
-                  className={clinic.isVerified ? "size-6 text-primary" : "size-6 text-text-muted"}
+                  className={
+                    clinic.isVerified
+                      ? "size-6 text-primary"
+                      : "size-6 text-text-muted"
+                  }
                   aria-hidden="true"
                 />
                 <div>
@@ -686,18 +749,24 @@ export default async function ClinicProfilePage({
                   </p>
                   <p className="mt-1 text-[13.5px] text-text-secondary">
                     {clinic.isVerified
-                      ? clinic.verificationMethod ??
-                        "Verification is based on accreditation and record checks."
+                      ? (clinic.verificationMethod ??
+                        "Verification is based on accreditation and record checks.")
                       : "This clinic has not completed verification. Listings are still curated, but accreditation hasn't been confirmed."}
                   </p>
                   <ul className="mt-3 space-y-1.5 text-[13.5px] text-text-secondary">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="size-4 text-success" aria-hidden="true" />
+                      <CheckCircle2
+                        className="size-4 text-success"
+                        aria-hidden="true"
+                      />
                       {clinic.accreditations.length} accreditation
                       {clinic.accreditations.length === 1 ? "" : "s"} on file
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="size-4 text-success" aria-hidden="true" />
+                      <CheckCircle2
+                        className="size-4 text-success"
+                        aria-hidden="true"
+                      />
                       {formatCount(clinic.reviewCount)} verified-eligible review
                       {clinic.reviewCount === 1 ? "" : "s"}
                     </li>
@@ -728,7 +797,13 @@ export default async function ClinicProfilePage({
               </h2>
               <div className="mt-4 space-y-4">
                 {clinic.locations.map((loc, i) => {
-                  const addr = [loc.addressLine, loc.city, loc.region, loc.country, loc.postalCode]
+                  const addr = [
+                    loc.addressLine,
+                    loc.city,
+                    loc.region,
+                    loc.country,
+                    loc.postalCode,
+                  ]
                     .filter(Boolean)
                     .join(", ");
                   const mapQuery =
@@ -736,7 +811,10 @@ export default async function ClinicProfilePage({
                       ? `${loc.lat},${loc.lng}`
                       : addr || `${clinic.name}`;
                   return (
-                    <div key={i} className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
+                    <div
+                      key={i}
+                      className="overflow-hidden rounded-xl border border-border bg-surface shadow-card"
+                    >
                       <iframe
                         title={`Map of ${clinic.name}${loc.city ? ` in ${loc.city}` : ""}`}
                         src={`https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=12&output=embed`}
@@ -746,7 +824,10 @@ export default async function ClinicProfilePage({
                       />
                       <div className="flex flex-wrap items-center justify-between gap-3 p-4">
                         <div className="flex items-start gap-2 text-[13.5px] text-text-secondary">
-                          <MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+                          <MapPin
+                            className="mt-0.5 size-4 shrink-0 text-primary"
+                            aria-hidden="true"
+                          />
                           <span>
                             {addr || "Address available on request"}
                             {loc.isHQ ? (
@@ -778,8 +859,8 @@ export default async function ClinicProfilePage({
               Request a consultation
             </h2>
             <p className="mt-2 text-[14px] text-text-secondary">
-              Share a few details and {clinic.name} will reach out by email. Your
-              information is never shown publicly.
+              Share a few details and {clinic.name} will reach out by email.
+              Your information is never shown publicly.
             </p>
             <div className="mt-4 rounded-xl border border-border bg-surface p-5 shadow-card">
               <ConsultationInline
@@ -821,7 +902,10 @@ export default async function ClinicProfilePage({
                 source={`profile-rail:${clinic.slug}`}
                 trigger={
                   <Button className="w-full">
-                    <MessageSquareText className="size-[18px]" aria-hidden="true" />
+                    <MessageSquareText
+                      className="size-[18px]"
+                      aria-hidden="true"
+                    />
                     Request a consultation
                   </Button>
                 }
@@ -838,7 +922,11 @@ export default async function ClinicProfilePage({
                   </a>
                 </Button>
               ) : null}
-              <SaveButton slug={clinic.slug} name={clinic.name} className="w-full" />
+              <SaveButton
+                slug={clinic.slug}
+                name={clinic.name}
+                className="w-full"
+              />
             </div>
           </div>
           <DisclaimerNote variant="medical" className="mt-4" />
@@ -863,8 +951,12 @@ function Fact({
         <span className="text-text-muted">{icon}</span>
         {label}
       </dt>
+      {/* Plain hyphen, not an en dash: the site-wide copy rule in
+          `lib/meta-text.ts` covers every string that reaches the page, and a
+          placeholder is one. This renders whenever a clinic leaves a stat
+          unset. */}
       <dd className="mt-0.5 font-display text-[14px] font-semibold text-text-primary">
-        {value ?? "–"}
+        {value ?? "-"}
       </dd>
     </div>
   );

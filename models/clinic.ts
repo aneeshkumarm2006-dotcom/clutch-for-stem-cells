@@ -10,6 +10,7 @@ import { Schema, type Types } from "mongoose";
 import {
   CLINIC_STATUSES,
   CLINIC_TIERS,
+  EXTERNAL_SENTIMENTS,
   PRICE_MODELS,
   TEAM_SIZES,
   VERIFICATION_BADGES,
@@ -17,6 +18,7 @@ import {
 import type {
   ClinicStatus,
   ClinicTier,
+  ExternalSentiment,
   PriceModel,
   TeamSize,
   VerificationBadge,
@@ -201,6 +203,78 @@ export interface IClinicCostPage {
   seo?: ISeo;
 }
 
+/** A place a reader can go and check an external summary for themselves. */
+export interface IExternalSource {
+  label: string;
+  url?: string;
+}
+
+/**
+ * What a clinic's Google Business Profile says, as of the last time we looked.
+ *
+ * `rating`/`reviewCount` are Google's numbers, restated, not ours — they are
+ * deliberately kept out of `ratingAvg`/`reviewCount` and out of the page's
+ * `aggregateRating` JSON-LD. Blending a directory's own moderated reviews with
+ * a number we cannot audit would misstate both, and marking up a rating this
+ * site did not collect is exactly the review-snippet abuse Google penalises.
+ *
+ * `summary` is written in our own words. Never paste a reviewer's text: it is
+ * their copyright, it goes stale silently, and one lifted sentence is not a
+ * fair reading of two hundred ratings.
+ */
+export interface IExternalReviewSummary {
+  /** Google's published 1-5 average. */
+  rating?: number;
+  /** How many ratings that average is computed from. */
+  reviewCount?: number;
+  /** Two or three sentences characterising what reviewers report. */
+  summary?: string;
+  /** Recurring themes as short noun phrases, strongest first. */
+  themes?: string[];
+  /** The listing itself, so the claim is checkable. */
+  url?: string;
+  /** When the figures were last read off the source. */
+  checkedAt?: Date | null;
+}
+
+/**
+ * What people say about the clinic on Reddit, where there is no star rating and
+ * the useful signal is whether anyone has reported an actual outcome.
+ *
+ * Separate from {@link IExternalReviewSummary} because the shape of the
+ * evidence is different: threads instead of ratings, and a sentiment read
+ * instead of an average. A clinic with no discussion gets `limited`, which the
+ * page renders as "not enough to characterise" rather than silence.
+ */
+export interface IRedditDiscussionSummary {
+  /** Two or three sentences on what patients report, hedged where thin. */
+  summary?: string;
+  /** Distinct threads the summary draws on. */
+  threadCount?: number;
+  /** How the discussion reads on balance. */
+  sentiment?: ExternalSentiment;
+  /** Recurring themes as short noun phrases. */
+  themes?: string[];
+  /** The threads themselves, so a reader can judge the source. */
+  sources?: IExternalSource[];
+  /** When the threads were last read. */
+  checkedAt?: Date | null;
+}
+
+/**
+ * Third-party reception, shown on `/clinic/[slug]/reviews` beside this site's
+ * own reviews and always labelled as coming from somewhere else.
+ *
+ * This is data, not copy, so it lives on the clinic rather than on
+ * `reviewsPage` — same split as `costPage.items`. Every branch is optional: a
+ * clinic with no Google listing and no Reddit thread renders exactly what it
+ * rendered before this field existed.
+ */
+export interface IExternalReviews {
+  google?: IExternalReviewSummary;
+  reddit?: IRedditDiscussionSummary;
+}
+
 export interface IClinic extends TimestampFields, SoftDeleteFields {
   _id: Types.ObjectId;
   name: string;
@@ -248,6 +322,8 @@ export interface IClinic extends TimestampFields, SoftDeleteFields {
   reviewsPage?: IClinicReviewsPage;
   /** Price data + copy for the child `/clinic/[slug]/cost` page. */
   costPage?: IClinicCostPage;
+  /** Google + Reddit reception, summarised. Never folded into `ratingAvg`. */
+  externalReviews?: IExternalReviews;
   /** Per-page control over the auto-generated JSON-LD (schema engine). */
   schemaOverrides?: ISchemaOverrides;
   sortScore: number;
@@ -387,6 +463,46 @@ const clinicCostPageSchema = new Schema<IClinicCostPage>(
   { _id: false },
 );
 
+const externalSourceSchema = new Schema<IExternalSource>(
+  {
+    label: { type: String, required: true, trim: true, maxlength: 200 },
+    url: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
+const externalReviewSummarySchema = new Schema<IExternalReviewSummary>(
+  {
+    rating: { type: Number, min: 0, max: 5 },
+    reviewCount: { type: Number, min: 0 },
+    summary: { type: String, trim: true, maxlength: 1200 },
+    themes: { type: [String], default: [] },
+    url: { type: String, trim: true },
+    checkedAt: { type: Date, default: null },
+  },
+  { _id: false },
+);
+
+const redditDiscussionSummarySchema = new Schema<IRedditDiscussionSummary>(
+  {
+    summary: { type: String, trim: true, maxlength: 1200 },
+    threadCount: { type: Number, min: 0 },
+    sentiment: { type: String, enum: EXTERNAL_SENTIMENTS },
+    themes: { type: [String], default: [] },
+    sources: { type: [externalSourceSchema], default: [] },
+    checkedAt: { type: Date, default: null },
+  },
+  { _id: false },
+);
+
+const externalReviewsSchema = new Schema<IExternalReviews>(
+  {
+    google: { type: externalReviewSummarySchema, default: undefined },
+    reddit: { type: redditDiscussionSummarySchema, default: undefined },
+  },
+  { _id: false },
+);
+
 // ── Clinic schema ───────────────────────────────────────────────────────────
 
 const ClinicSchema = new Schema<IClinic>(
@@ -477,6 +593,7 @@ const ClinicSchema = new Schema<IClinic>(
     seo: { type: seoSchema, default: undefined },
     reviewsPage: { type: clinicReviewsPageSchema, default: undefined },
     costPage: { type: clinicCostPageSchema, default: undefined },
+    externalReviews: { type: externalReviewsSchema, default: undefined },
     schemaOverrides: { type: schemaOverrideSchema, default: undefined },
 
     // Computed — see /lib/ranking.ts (Stage 3.1).

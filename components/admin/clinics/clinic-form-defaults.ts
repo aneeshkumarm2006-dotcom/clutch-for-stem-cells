@@ -67,5 +67,15 @@ export function emptyClinic(): ClinicFormValues {
       ctaBody: "",
       seo: {},
     },
+    externalReviews: {
+      google: { summary: "", themes: [], url: "", checkedAt: "" },
+      reddit: {
+        summary: "",
+        sentiment: "",
+        themes: [],
+        sources: [],
+        checkedAt: "",
+      },
+    },
   };
 }

@@ -35,6 +35,22 @@ export type PriceModel = (typeof PRICE_MODELS)[number];
 export const TEAM_SIZES = ["1-10", "11-50", "51-200", "200+"] as const;
 export type TeamSize = (typeof TEAM_SIZES)[number];
 
+/**
+ * How off-platform discussion of a clinic reads on balance.
+ *
+ * `limited` is not a weaker `mixed`: it is the honest answer when a clinic has
+ * two passing mentions and nobody has actually reported an outcome, and it must
+ * stay distinct so the page can say "too little to characterise" instead of
+ * implying a verdict nobody reached.
+ */
+export const EXTERNAL_SENTIMENTS = [
+  "positive",
+  "mixed",
+  "negative",
+  "limited",
+] as const;
+export type ExternalSentiment = (typeof EXTERNAL_SENTIMENTS)[number];
+
 // ── Review (PRD §5.2) ───────────────────────────────────────────────────────
 export const REVIEW_STATUSES = [
   "pending",

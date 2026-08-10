@@ -47,7 +47,7 @@ import {
   type ISeo,
   type ITaxonomyBase,
 } from "@/models";
-import type { EvidenceLevel } from "@/lib/enums";
+import type { EvidenceLevel, ExternalSentiment } from "@/lib/enums";
 import type { BlockInput } from "@/lib/validation/block";
 import type { ReviewerByline } from "@/components/content/reviewed-by-byline";
 
@@ -130,10 +130,10 @@ export function hasEditorialContent(
   if (!editorial) return false;
   return Boolean(
     editorial.body?.trim() ||
-      editorial.blocks?.length ||
-      editorial.sections?.length ||
-      editorial.faqs?.length ||
-      editorial.keyFacts?.length,
+    editorial.blocks?.length ||
+    editorial.sections?.length ||
+    editorial.faqs?.length ||
+    editorial.keyFacts?.length,
   );
 }
 
@@ -693,8 +693,79 @@ export interface ClinicProfile {
   }[];
   faqs: { question: string; answer: string }[];
   highlights: string[];
+  /**
+   * Third-party reception, kept in its own field rather than folded into
+   * `ratingAvg`/`reviewCount` — those are this site's own moderated numbers and
+   * blending an unaudited Google average into them would misstate both. Dates
+   * are serialised to ISO here like every other date on this shape.
+   */
+  externalReviews: ExternalReviewsView | null;
   /** Raw clinic for SEO JSON-LD builders (lean). */
   raw: IClinic;
+}
+
+/** `IExternalReviews` with `Date`s flattened for the client boundary. */
+export interface ExternalReviewsView {
+  google: {
+    rating?: number;
+    reviewCount?: number;
+    summary?: string;
+    themes: string[];
+    url?: string;
+    checkedAt: string | null;
+  } | null;
+  reddit: {
+    summary?: string;
+    threadCount?: number;
+    sentiment?: ExternalSentiment;
+    themes: string[];
+    sources: { label: string; url?: string }[];
+    checkedAt: string | null;
+  } | null;
+}
+
+/**
+ * A source branch is only worth rendering if it carries something a reader can
+ * act on. A record that survived import with nothing but an empty `themes`
+ * array would otherwise draw a heading over blank space.
+ */
+function externalReviewsView(doc: IClinic): ExternalReviewsView | null {
+  const ext = doc.externalReviews;
+  if (!ext) return null;
+
+  const iso = (d: Date | null | undefined) =>
+    d ? new Date(d).toISOString() : null;
+
+  const g = ext.google;
+  const google =
+    g && (g.rating != null || g.summary || (g.themes ?? []).length)
+      ? {
+          rating: g.rating,
+          reviewCount: g.reviewCount,
+          summary: g.summary,
+          themes: g.themes ?? [],
+          url: g.url,
+          checkedAt: iso(g.checkedAt),
+        }
+      : null;
+
+  const r = ext.reddit;
+  const reddit =
+    r && (r.summary || (r.sources ?? []).length || (r.themes ?? []).length)
+      ? {
+          summary: r.summary,
+          threadCount: r.threadCount,
+          sentiment: r.sentiment,
+          themes: r.themes ?? [],
+          sources: (r.sources ?? []).map((s) => ({
+            label: s.label,
+            url: s.url,
+          })),
+          checkedAt: iso(r.checkedAt),
+        }
+      : null;
+
+  return google || reddit ? { google, reddit } : null;
 }
 
 type PopulatedRef = {
@@ -836,6 +907,7 @@ export async function getClinicProfile(
       answer: f.answer,
     })),
     highlights: doc.highlights ?? [],
+    externalReviews: externalReviewsView(doc),
     raw: doc,
   };
 }

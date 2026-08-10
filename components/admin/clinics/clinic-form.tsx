@@ -38,6 +38,7 @@ import { cn } from "@/lib/utils";
 import {
   CLINIC_STATUSES,
   CLINIC_TIERS,
+  EXTERNAL_SENTIMENTS,
   PRICE_MODELS,
   TEAM_SIZES,
   VERIFICATION_BADGES,
@@ -189,6 +190,29 @@ export interface ClinicFormValues {
       noindex?: boolean;
     };
   };
+  /**
+   * Third-party reception shown on the reviews page. Data, not copy, so it sits
+   * beside `reviewsPage` rather than inside it — same split as `costPage.items`.
+   */
+  externalReviews: {
+    google: {
+      rating?: number;
+      reviewCount?: number;
+      summary?: string;
+      themes: string[];
+      url?: string;
+      /** `YYYY-MM-DD` from `<input type="date">`; Zod coerces it on save. */
+      checkedAt?: string;
+    };
+    reddit: {
+      summary?: string;
+      threadCount?: number;
+      sentiment?: string;
+      themes: string[];
+      sources: PriceSourceValue[];
+      checkedAt?: string;
+    };
+  };
 }
 
 export interface ClinicFormOptions {
@@ -214,6 +238,7 @@ const SECTIONS = [
   ["ownership", "Ownership"],
   ["seo", "SEO overrides"],
   ["reviews-page", "Reviews page"],
+  ["external-reviews", "Off-site reception"],
   ["cost-page", "Cost page"],
 ] as const;
 
@@ -462,6 +487,10 @@ export function ClinicForm({
   const costItemsArray = useFieldArray({ control, name: "costPage.items" });
   const costFaqsArray = useFieldArray({ control, name: "costPage.faqs" });
   const costSourcesArray = useFieldArray({ control, name: "costPage.sources" });
+  const redditSourcesArray = useFieldArray({
+    control,
+    name: "externalReviews.reddit.sources",
+  });
 
   // Warn before leaving with unsaved changes (tab close / refresh).
   React.useEffect(() => {
@@ -565,6 +594,25 @@ export function ClinicForm({
           (f) => f.question?.trim() || f.answer?.trim(),
         ),
         sources: (v.costPage?.sources ?? []).filter((s) => s.label?.trim()),
+      },
+      // Same string-from-`<input type="number">` problem as the price fields.
+      // An empty sentiment is submitted as `""` by the select, which is not a
+      // member of the enum, so it has to become `undefined` rather than fail
+      // validation for a field the editor simply left alone.
+      externalReviews: {
+        google: {
+          ...v.externalReviews?.google,
+          rating: num(v.externalReviews?.google?.rating),
+          reviewCount: num(v.externalReviews?.google?.reviewCount),
+        },
+        reddit: {
+          ...v.externalReviews?.reddit,
+          threadCount: num(v.externalReviews?.reddit?.threadCount),
+          sentiment: v.externalReviews?.reddit?.sentiment || undefined,
+          sources: (v.externalReviews?.reddit?.sources ?? []).filter((s) =>
+            s.label?.trim(),
+          ),
+        },
       },
     };
   };
@@ -1503,6 +1551,182 @@ export function ClinicForm({
                   and kept out of the sitemap. This toggle only ever adds
                   no-index, it can&apos;t force one on.
                 </p>
+              </div>
+            </div>
+          </Section>
+
+          <Section
+            id="external-reviews"
+            title="Off-site reception"
+            description="What this clinic looks like on Google and Reddit, shown on the reviews page above our own reviews. Leave a half blank and it doesn't render — a clinic with no Google listing or no Reddit discussion is a normal state, not a gap to fill in."
+          >
+            <p className="rounded-lg border border-border bg-surface-alt p-3 text-[12.5px] leading-relaxed text-text-secondary">
+              These numbers are never added to the clinic&apos;s own rating and
+              are never emitted as structured data. Write the summaries in your
+              own words: pasting a reviewer&apos;s text is their copyright, and
+              one lifted sentence is not a fair reading of a whole listing.
+            </p>
+
+            <div className="rounded-lg border border-border p-4">
+              <div className="mb-3 text-[13px] font-semibold text-text-secondary">
+                Google
+              </div>
+              <div className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextField
+                    label="Rating"
+                    type="number"
+                    step="0.1"
+                    min="0"
+                    max="5"
+                    placeholder="4.7"
+                    hint="Google's average, restated. Needs a review count."
+                    {...register("externalReviews.google.rating")}
+                  />
+                  <TextField
+                    label="Number of Google ratings"
+                    type="number"
+                    min="0"
+                    placeholder="110"
+                    {...register("externalReviews.google.reviewCount")}
+                  />
+                </div>
+                <TextareaField
+                  label="Summary"
+                  rows={3}
+                  placeholder="Two or three sentences characterising what reviewers report — in your words, not theirs."
+                  {...register("externalReviews.google.summary")}
+                />
+                <div className="space-y-1.5">
+                  <Label>Recurring themes</Label>
+                  <Controller
+                    control={control}
+                    name="externalReviews.google.themes"
+                    render={({ field }) => (
+                      <TagInput
+                        value={field.value ?? []}
+                        onChange={field.onChange}
+                        placeholder="staff communication"
+                      />
+                    )}
+                  />
+                  <p className="text-[12.5px] text-text-muted">
+                    Short noun phrases, strongest first.
+                  </p>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextField
+                    label="Listing URL"
+                    placeholder="https://www.google.com/maps/place/…"
+                    {...register("externalReviews.google.url")}
+                  />
+                  <TextField
+                    label="Last checked"
+                    type="date"
+                    hint="Shown on the page. An undated third-party rating implies a freshness we can't promise."
+                    {...register("externalReviews.google.checkedAt")}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-border p-4">
+              <div className="mb-3 text-[13px] font-semibold text-text-secondary">
+                Reddit
+              </div>
+              <div className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <SelectField
+                    label="Overall sentiment"
+                    placeholder="Not set"
+                    hint="“Limited” means too little discussion to characterise, not a lukewarm verdict."
+                    options={opt(EXTERNAL_SENTIMENTS)}
+                    {...register("externalReviews.reddit.sentiment")}
+                  />
+                  <TextField
+                    label="Threads read"
+                    type="number"
+                    min="0"
+                    {...register("externalReviews.reddit.threadCount")}
+                  />
+                </div>
+                <TextareaField
+                  label="Summary"
+                  rows={3}
+                  placeholder="What patients actually report, hedged where the evidence is thin."
+                  {...register("externalReviews.reddit.summary")}
+                />
+                <ContentFlagWarning
+                  texts={[
+                    watch("externalReviews.google.summary"),
+                    watch("externalReviews.reddit.summary"),
+                  ]}
+                />
+                <div className="space-y-1.5">
+                  <Label>Recurring points</Label>
+                  <Controller
+                    control={control}
+                    name="externalReviews.reddit.themes"
+                    render={({ field }) => (
+                      <TagInput
+                        value={field.value ?? []}
+                        onChange={field.onChange}
+                        placeholder="cost vs. results"
+                      />
+                    )}
+                  />
+                </div>
+
+                <div className="text-[13px] font-semibold text-text-secondary">
+                  Threads read
+                </div>
+                {redditSourcesArray.fields.map((f, i) => (
+                  <div
+                    key={f.id}
+                    className="flex items-end gap-3 rounded-lg border border-border p-4"
+                  >
+                    <div className="grid flex-1 gap-3 sm:grid-cols-2">
+                      <TextField
+                        label="Thread title"
+                        {...register(
+                          `externalReviews.reddit.sources.${i}.label` as const,
+                        )}
+                      />
+                      <TextField
+                        label="URL"
+                        {...register(
+                          `externalReviews.reddit.sources.${i}.url` as const,
+                        )}
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => redditSourcesArray.remove(i)}
+                    >
+                      <Trash2 className="size-4" />
+                    </Button>
+                  </div>
+                ))}
+                <div className="flex flex-wrap items-end gap-4">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    onClick={() =>
+                      redditSourcesArray.append({ label: "", url: "" })
+                    }
+                  >
+                    <Plus className="size-4" />
+                    Add thread
+                  </Button>
+                  <TextField
+                    label="Last checked"
+                    type="date"
+                    {...register("externalReviews.reddit.checkedAt")}
+                  />
+                </div>
               </div>
             </div>
           </Section>

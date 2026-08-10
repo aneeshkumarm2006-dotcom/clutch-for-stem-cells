@@ -1,0 +1,1628 @@
+[
+  {
+    "slug": "bluetail-medical-group",
+    "costPage": {
+      "intro": "Bluetail Medical Group does not publish a price list, so any figure attached to it comes from patients rather than from the clinic. The rows below are gathered from public sources and should be read as rough market context for a US orthopaedic injection practice, not as a quote and not as anything the clinic has confirmed. What you actually pay is set at consultation and written up in a Good Faith Estimate, which the clinic will issue on request. Read it as context for your quote, not as your quote.",
+      "introEmpty": "Bluetail Medical Group publishes no prices. Not on the services pages, not on the platelet rich plasma or bone marrow aspirate concentrate pages, and not on the FAQ, which discusses insurance and financing without naming a single figure. The quote is built at consultation and turns on which procedure the physician recommends, platelet rich plasma being the cheaper option and a bone marrow concentrate injection the dearer one, on how many sites are being injected, and on how many treatments are planned, since the clinic says the average patient has one or two and occasionally three, spaced 12 to 16 weeks apart. Before that consultation the clinic requires an X ray or MRI, which you obtain and pay for elsewhere unless you are seen at the St. Louis office, and it usually orders blood work. Ask for a written Good Faith Estimate covering the whole course rather than a single visit, and ask separately what the imaging, labs and any brace add.",
+      "items": [],
+      "includes": [
+        "Nothing is itemised publicly, so the only document that will tell you what your money buys is the Good Faith Estimate. By law it has to cover the procedure plus related costs such as medical tests, prescription drugs and supplies, so ask for it in writing before you commit.",
+        "Ultrasound or fluoroscopic guidance during the injection, which the clinic describes as its standard technique. It does not say whether that is billed separately.",
+        "The procedure visit itself, which the clinic says runs 1 to 2 hours."
+      ],
+      "excludes": [
+        "Imaging. The clinic requires an X ray or MRI before your first visit and says you must obtain it elsewhere and send it in, unless you are being seen at the St. Louis office, which can take an X ray on site.",
+        "Blood work. The clinic says it will most likely order labs at the initial evaluation, covering complete blood count, testosterone and vitamin D.",
+        "Supplements. If your testosterone or vitamin D reads low the physician is likely to suggest supplementing it. The clinic calls this optional and not required for treatment, so treat it as a line you can decline.",
+        "A knee brace, which the clinic says may be prescribed during the evaluation for knee patients.",
+        "Repeat treatments. The clinic says the average patient has one or two and rarely three, spaced 12 to 16 weeks apart, so a per treatment figure is not the course total.",
+        "Travel. The group runs sites in Missouri, Florida, California and Indiana, and nothing on the site suggests travel or accommodation is priced in."
+      ],
+      "insuranceNote": "Assume you are paying yourself. The clinic states plainly that most insurance companies do not cover these procedures and consider them investigational, which is the standard US position on platelet rich plasma and bone marrow concentrate injections. Nothing on the site mentions HSA or FSA eligibility either way, so check that with your plan administrator rather than the front desk. Because this is self pay care, the federal No Surprises rules apply and the clinic publishes its Good Faith Estimate policy: you can ask for a written estimate before scheduling, you are meant to receive it at least one business day ahead, and a final bill that comes in at least 400 USD above the estimate can be disputed. That 400 USD is a legal threshold, not a fee.",
+      "financingNote": "The clinic offers patient financing through CareCredit and names no other partner. There is no published deposit policy, no payment plan detail, no cancellation terms and no statement on whether the consultation is charged separately from the procedure, so all of that has to come out of the phone call. The number for estimates is 636-778-2900. Worth asking for the whole course to be costed on one document, since the clinic's own FAQ points at one to three treatments rather than one, and worth asking what happens to your money if the physician decides at the evaluation that you are not a candidate.",
+      "faqs": [
+        {
+          "question": "How much does Bluetail Medical Group cost?",
+          "answer": "Bluetail Medical Group does not publish prices, so there is no list price to quote. The only figures in circulation come from patients writing public reviews, who have described paying around 3,200 USD for a course of stem cell and platelet rich plasma injections and around 11,000 USD for a back procedure combining bone marrow cells with platelet rich plasma. Those are one person's bill each, unverified and possibly years old, so treat them as a rough sense of scale rather than a price. Your own number comes from the consultation, and you can ask for it in writing as a Good Faith Estimate before you schedule anything."
+        },
+        {
+          "question": "What actually drives the quote?",
+          "answer": "Four things, on the clinic's own account. Which procedure is recommended, since platelet rich plasma is drawn from blood and a bone marrow aspirate concentrate injection is a bigger procedure that costs more. How many sites are being injected. How many treatments are planned, and the clinic says the average patient has one or two, rarely three, spaced 12 to 16 weeks apart. And what the workup adds, meaning the X ray or MRI you have to bring, the blood work the clinic orders, and any brace or supplement suggested afterwards."
+        },
+        {
+          "question": "Will insurance cover it?",
+          "answer": "Almost certainly not, and the clinic says so itself: most insurers do not cover these procedures and treat them as investigational. It offers CareCredit financing instead, which tells you the same thing. If you want to try an HSA or FSA card, confirm eligibility with your plan administrator first, because the clinic's site takes no position on it."
+        },
+        {
+          "question": "What should I ask before booking?",
+          "answer": "Ask for a written Good Faith Estimate that covers the full recommended course rather than one visit, since the clinic itself expects one to three treatments. Ask whether the consultation is billed separately from the procedure, and what it costs if you decide not to proceed. Ask what the imaging and lab work cost, and whether you can get them done cheaper through your own physician. And ask what the estimate assumes about the number of joints or sites, because that is the easiest line for a quote to grow on."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Bluetail Medical Group, frequently asked questions, insurance and financing",
+          "url": "https://www.bluetailmedicalgroup.com/contents/patient-resources/faqs"
+        },
+        {
+          "label": "Bluetail Medical Group, Good Faith Estimate policy",
+          "url": "https://www.bluetailmedicalgroup.com/contents/patient-resources/good-faith-estimate"
+        },
+        {
+          "label": "Bluetail Medical Group, services list",
+          "url": "https://www.bluetailmedicalgroup.com/services"
+        },
+        {
+          "label": "Bluetail Medical Group, FDA compliance statement",
+          "url": "https://www.bluetailmedicalgroup.com/contents/about/fda-compliance"
+        },
+        {
+          "label": "Patient reviews reporting amounts paid, Yelp",
+          "url": "https://www.yelp.com/biz/bluetail-medical-group-chesterfield"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "cellinique-clinic",
+    "costPage": {
+      "intro": "Cellinique does not put a price on any of its cell based programs. Its own pricing page says quotes are given only after a consultation with Dr. Kim Gun Woo, and the clinic points to Korea's medical advertising rules as the reason it will not post figures publicly. The numbers below are the only Cellinique prices we could find stated anywhere, and they come from the clinic's listings on the Korean booking platform Cashdoc, which notes the prices were set by the clinic itself. Read them as a sense of where this clinic sits, not as your quote.",
+      "introEmpty": "Cellinique does not publish prices. Its pricing page carries no figures at all, and both the NovaStem and SVF treatment pages send you to the non reimbursed fee disclosure or to a consultation instead of naming an amount. The clinic states that under Korea's Medical Service Act it will not advertise non reimbursed fees or discounts, so the amount is set case by case after Dr. Kim Gun Woo reviews your skin condition, medical history and treatment goals. What moves the number is the treatment category, whether fat harvesting is involved, how much area and volume are treated, how many sessions are planned, and whether other procedures are bundled in. Ask for the quote in writing, split into harvest, processing, application and aftercare, and ask which of those four stages the total already covers.",
+      "items": [
+        {
+          "label": "NovaStem, autologous cell program",
+          "unit": "per session",
+          "note": "No price published. The treatment page lists the price range as \"see the non covered treatment pricing page or discussed during consultation\"."
+        },
+        {
+          "label": "SVF, adipose derived stromal vascular fraction",
+          "unit": "per session",
+          "note": "No price published. The clinic puts the session at roughly 120 to 240 minutes including fat harvesting and processing, and quotes only after a health assessment."
+        },
+        {
+          "label": "Face Cell, DermaCell, NK Cell and PRF",
+          "unit": "per session",
+          "note": "No price published for any of the other signature programs. Cellinique groups them as cell based programs that often include a harvest, blood draw or processing step."
+        },
+        {
+          "label": "VolumeCell and WrinkleCell fat grafting",
+          "priceMin": 1650000,
+          "priceMax": 1900000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Listed at 1,900,000 KRW with a 1,650,000 KRW event price on Cashdoc. The listing states VAT and the anaesthesia fee are included, and describes fat being harvested then separated into fat and a cell fraction before injection into areas such as the glabella, forehead, under eye, nasolabial folds, cheeks and neck."
+        },
+        {
+          "label": "LipCell lip fat grafting",
+          "priceMin": 1650000,
+          "priceMax": 1900000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Same structure and same listed prices as the VolumeCell and WrinkleCell listing, applied to the lips."
+        },
+        {
+          "label": "Titanium laser lifting, full face 80kJ",
+          "priceMin": 1100000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Cashdoc listing states 1,100,000 KRW with VAT included for a full face 80kJ session."
+        },
+        {
+          "label": "Rejuran Healer, 2cc",
+          "priceMin": 550000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Cashdoc listing states 550,000 KRW with VAT included. The same listing prices Rejuran Eye at 330,000 KRW for 1cc."
+        }
+      ],
+      "includes": [
+        "For the fat grafting listings, VAT and the anaesthesia fee, according to the clinic set listing",
+        "A pre treatment consultation with Dr. Kim Gun Woo, who the clinic says handles consultation, treatment and aftercare himself",
+        "For SVF, the clinic describes the session as covering fat harvesting, cell processing and application in one visit",
+        "Aftercare instructions and a follow up schedule, with the number of covered visits confirmed in your quote"
+      ],
+      "excludes": [
+        "Consultation fee, which the clinic says varies by consultation type and is only quoted by phone or KakaoTalk",
+        "Repeat sessions, since several programs are planned as a course rather than a single visit",
+        "Companion or combination procedures added to a plan, such as boosters or lifting alongside a cell program",
+        "Follow up visits beyond whatever number your written quote states, and donor site aftercare items for fat harvesting",
+        "Travel, accommodation and any interpreting arrangements for international patients"
+      ],
+      "insuranceNote": "Cellinique states that its main treatments, including the cell based programs, lifting and skin boosters, are non reimbursed under Korea's national health insurance, and that only parts of basic evaluation or diagnosis may sometimes fall under covered care. There is no cover for overseas patients and no US insurance, HSA or FSA arrangement. Because these are non reimbursed items, each Korean clinic sets its own fee, and the clinic's own cost guide suggests checking the Health Insurance Review and Assessment Service published non covered fee data as a baseline before you compare quotes.",
+      "financingNote": "No financing partner or payment plan is advertised. The clinic says it takes card, cash and bank transfer, that some procedures require a deposit when booked in advance, and that receipts or invoices are issued on request. Overseas cards and cash are accepted from international patients. Refunds before treatment follow the policy explained at consultation, and the clinic says refunds may be limited once part of a treatment has been carried out. Cellinique also runs periodic promotions on its events page, which in mid 2026 carried discounted prices on lasers, boosters and filler, so it is worth asking what is running when you book.",
+      "faqs": [
+        {
+          "question": "How much does Cellinique Clinic cost?",
+          "answer": "There is no published price for the cell based programs, so the honest answer is that you will not know until you have had a consultation. The only Cellinique figures stated publicly are on the Korean platform Cashdoc, where the clinic lists fat grafting at 1,650,000 KRW against a 1,900,000 KRW list price, a full face Titanium laser session at 1,100,000 KRW, and Rejuran Healer 2cc at 550,000 KRW, all with VAT included. NovaStem, SVF, Face Cell, DermaCell, NK Cell and PRF carry no public number at all."
+        },
+        {
+          "question": "Why will the clinic not publish a price for NovaStem or SVF?",
+          "answer": "Cellinique gives two reasons. The first is legal: it says Korea's Medical Service Act restricts advertising discounts or waivers on non reimbursed fees, so it does not post amounts or discount rates on public pages. The second is that the quote depends on the treatment area and scope, the volume used, the number of sessions and whether other procedures are combined. It says the detailed non reimbursed fee disclosure can be reviewed in the clinic or requested on 02 6203 3434."
+        },
+        {
+          "question": "What should I ask for so the quote can be compared?",
+          "answer": "The clinic's own cost guide gives a useful checklist, so hold it to that. Ask for the total split into four lines, fat harvest, separation and processing, application, and aftercare, and ask which of those the figure already covers. Then pin down whether the price is per session or for a course, which areas and what volume are being treated, whether the anaesthesia fee is inside the total, how many follow up visits are included, and what happens to the fee if the plan changes after the health assessment. Get it in writing rather than as a verbal total."
+        },
+        {
+          "question": "Is a stem cell quote in Seoul comparable across clinics?",
+          "answer": "Not directly, and Cellinique says so itself. Clinics bundle the same named procedure differently, and quotes that both say stem cells may be pricing very different things, for example a same day fat derived cell fraction against a pathway that involves culturing cells. Match the process description to the price before you compare totals, and treat any single advertised number as a starting point rather than the cost of your plan."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Cellinique pricing and consultation page",
+          "url": "https://www.cellinique.com/en/pricing"
+        },
+        {
+          "label": "Cellinique NovaStem treatment page",
+          "url": "https://www.cellinique.com/en/treatment/novastem"
+        },
+        {
+          "label": "Cellinique SVF treatment page",
+          "url": "https://www.cellinique.com/en/treatment/svf"
+        },
+        {
+          "label": "Cellinique SVF cost guide",
+          "url": "https://www.cellinique.com/en/blog/stemcell-regenerative-treatment-cost-guide"
+        },
+        {
+          "label": "Cellinique Re2O price guide, on why fees are not advertised",
+          "url": "https://www.cellinique.com/en/blog/re2o-price-guide"
+        },
+        {
+          "label": "Cashdoc clinic listing with clinic set prices",
+          "url": "https://cashdoc.me/hospital/A1123653/%EC%85%80%EB%A6%AC%EB%8B%89%EC%9D%98%EC%9B%90"
+        },
+        {
+          "label": "Cashdoc listing, VolumeCell and WrinkleCell fat grafting",
+          "url": "https://cashdoc.me/hospitalevent/eventdetail/4188"
+        },
+        {
+          "label": "Cashdoc listing, LipCell lip fat grafting",
+          "url": "https://cashdoc.me/hospitalevent/eventdetail/4187"
+        },
+        {
+          "label": "Cashdoc listing, Titanium laser",
+          "url": "https://cashdoc.me/hospitalevent/eventdetail/5335"
+        },
+        {
+          "label": "Cashdoc listing, Rejuran",
+          "url": "https://cashdoc.me/hospitalevent/eventdetail/5327"
+        },
+        {
+          "label": "Cellinique events page, June 2026 promotion prices",
+          "url": "https://www.cellinique.com/events/june-event-summer"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "chaum",
+    "costPage": {
+      "intro": "Chaum publishes more pricing than most clinics in this directory, because Korean law requires hospitals to post a schedule of non-covered (비급여) fees. Two of its own pages carry real numbers: the fee schedule at chaum.net/guide/charges.cha, dated 1 June 2026, which lists single line items, and the personal check-up page, which lists whole screening programs with prices. Everything below is in Korean won and comes from those pages. Read it as context for your quote, not as your quote, because the fee list states that materials and drugs are billed on top and that several rows vary by dose and by how much area is treated.",
+      "introEmpty": "Chaum does not post a price for its anti-aging, immune and cell therapy programs. Those are built after a consultation and a round of testing, so the number you are quoted depends on which tests are run, which clinic inside the building takes you, and how many sessions the plan runs to. The clinic does publish a legally required schedule of non-covered fees and a list of health check-up program prices, so the closest thing to a price you can get before contacting them is the individual line items on those pages. Ask for a written itemised quote, ask whether materials, drugs, sedation and contrast are inside or outside the figure, and ask how many sessions the plan assumes.",
+      "items": [
+        {
+          "label": "Stem cell fat graft, A line, base session",
+          "priceMin": 220000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "A top-up session and each additional area are listed at 550,000 KRW each."
+        },
+        {
+          "label": "Fat graft with stem cells, face, S line",
+          "priceMin": 2200000,
+          "priceMax": 3520000,
+          "currency": "KRW",
+          "unit": "one facial area up to full face",
+          "note": "Two areas 2,640,000 KRW, three areas 3,080,000 KRW, one extra area 440,000 KRW."
+        },
+        {
+          "label": "Fat graft with stem cells, face, standard line",
+          "priceMin": 3000000,
+          "priceMax": 4500000,
+          "currency": "KRW",
+          "unit": "one to four or more facial areas",
+          "note": "A second, dearer tier on the same fee list. Ask which line your quote is written against."
+        },
+        {
+          "label": "Fat graft with stem cells, body",
+          "priceMin": 4950000,
+          "priceMax": 6050000,
+          "currency": "KRW",
+          "unit": "per area",
+          "note": "Hip 4,950,000 KRW, chest 6,050,000 KRW. Other sites are listed at 550,000 KRW."
+        },
+        {
+          "label": "Evercell skin therapy",
+          "priceMin": 165000,
+          "priceMax": 330000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Evercell 30 is 330,000 KRW, the CHA-7 therapy 275,000 KRW, an add-on vial 165,000 KRW."
+        },
+        {
+          "label": "PRP skin treatment",
+          "priceMin": 110000,
+          "priceMax": 770000,
+          "currency": "KRW",
+          "unit": "partial area up to full face",
+          "note": "The fee list flags this row as varying with the area treated."
+        },
+        {
+          "label": "Vitamin and nutrient IV drip",
+          "priceMin": 110000,
+          "priceMax": 165000,
+          "currency": "KRW",
+          "unit": "per infusion",
+          "note": "The list says the figure moves with the dose."
+        },
+        {
+          "label": "Prolotherapy, limb joint",
+          "priceMin": 70000,
+          "currency": "KRW",
+          "unit": "per joint",
+          "note": "Each additional joint is listed at 30,000 KRW."
+        },
+        {
+          "label": "NK cell activity blood test",
+          "priceMin": 150000,
+          "currency": "KRW",
+          "unit": "per test",
+          "note": "Sold on its own and also bundled into most of the check-up programs below."
+        },
+        {
+          "label": "Knee or shoulder MRI",
+          "priceMin": 625000,
+          "currency": "KRW",
+          "unit": "per scan",
+          "note": "Contrast agent is billed separately."
+        },
+        {
+          "label": "Basic health check-up program",
+          "priceMin": 960000,
+          "priceMax": 1090000,
+          "currency": "KRW",
+          "unit": "per person",
+          "note": "960,000 KRW for men, 1,090,000 KRW for women. Sedation for endoscopy adds 183,000 KRW."
+        },
+        {
+          "label": "Major cancer screening program",
+          "priceMin": 2570000,
+          "priceMax": 3470000,
+          "currency": "KRW",
+          "unit": "per person",
+          "note": "Men under 50 pay 2,570,000 KRW, men 50 and over 2,860,000 KRW, women 3,470,000 KRW."
+        },
+        {
+          "label": "Premium S check-up program",
+          "priceMin": 4920000,
+          "priceMax": 5790000,
+          "currency": "KRW",
+          "unit": "per person",
+          "note": "Price steps up at age 50 for men. Women are quoted a single figure."
+        },
+        {
+          "label": "Noble check-up program",
+          "priceMin": 6220000,
+          "priceMax": 7090000,
+          "currency": "KRW",
+          "unit": "per person",
+          "note": "The whole body MRI version runs 6,740,000 to 7,610,000 KRW."
+        },
+        {
+          "label": "Noble two day, one night check-up",
+          "priceMin": 7380000,
+          "priceMax": 8260000,
+          "currency": "KRW",
+          "unit": "per person",
+          "note": "The clinic states this figure covers limousine transfer and the hotel night, which it values at 500,000 KRW."
+        }
+      ],
+      "includes": [
+        "The tests named in each check-up program, run inside a private single patient suite",
+        "A pre-screening interview with a doctor and a results consultation afterwards",
+        "Nutrition and exercise consultation on the Noble tier programs",
+        "Limousine transfer and one hotel night on the two day Noble program, which Chaum values at 500,000 KRW"
+      ],
+      "excludes": [
+        "Sedation for gastroscopy or colonoscopy, listed as 183,000 KRW extra",
+        "Contrast agent for MRI, billed separately on every MRI row",
+        "Materials and drugs, which the fee page says are calculated on top of the procedure fee",
+        "Anything not named in the program, since add-on tests are priced as separate line items",
+        "Tax position on cosmetic rows, which the fee list flags as taxable without saying whether the figure shown already includes it",
+        "Flights, visas and interpreting"
+      ],
+      "insuranceNote": "Everything on the published schedule sits in Korea's non-covered (비급여) bracket, meaning the national health insurance scheme does not pay for it, which is precisely why the hospital has to post the prices. Foreign visitors should assume they pay in full at the time of service and claim back from their own insurer afterwards, if their policy covers screening or cosmetic work at all, which most do not. Chaum's site does not mention billing overseas insurers directly.",
+      "financingNote": "Chaum publishes no financing terms, no deposit policy and no instalment plan. The check-up pages give a price and a booking form and nothing about how you settle it, so confirm accepted payment methods, deposit size and cancellation terms when you book, particularly if you are travelling in for a dated program slot.",
+      "faqs": [
+        {
+          "question": "How much does Chaum cost?",
+          "answer": "Published line items start at 110,000 KRW for a vitamin drip and reach 6,050,000 KRW for a fat graft with stem cells to the chest, while whole health check-up programs run from 960,000 KRW for the basic screen to 8,260,000 KRW for the two day Noble program. Those figures come from Chaum's own fee schedule dated 1 June 2026 and its personal check-up page. Your bill will differ, because materials, drugs, sedation and contrast are added on top and several rows change with dose and area treated."
+        },
+        {
+          "question": "Does Chaum publish a price for stem cell therapy?",
+          "answer": "Only for cosmetic fat grafting with stem cells and for its Evercell skin line. There is no published figure for an intravenous or joint stem cell injection at Chaum, and its immune, power aging and detox clinic pages carry no prices at all. If you are asking about anything other than the cosmetic rows, you are in private quote territory."
+        },
+        {
+          "question": "Why do men and women pay different prices for the same check-up?",
+          "answer": "Chaum prices each screening program separately by sex, and for men it also steps the price up at age 50. The women's version of most programs adds breast, pelvic and ovarian tests, and the men's version adds a prostate scan from 50. The gap runs to roughly 700,000 KRW on the Premium S tier."
+        },
+        {
+          "question": "Is the published range what I will actually be charged?",
+          "answer": "No. The fee page states plainly that a listed procedure fee is the cost of one individual item, that it can change with how many times and how widely the procedure is performed, and that treatment materials and drugs are calculated separately. Treat the list as a floor and ask for a written itemised quote before you commit."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Chaum non-covered fee schedule, fee basis 1 June 2026",
+          "url": "https://chaum.net/guide/charges.cha"
+        },
+        {
+          "label": "Chaum personal health check-up program prices",
+          "url": "https://chaum.net/checkup/Personal.cha"
+        },
+        {
+          "label": "Chaum immune clinic page, no prices published",
+          "url": "https://chaum.net/antiaging/immunity.cha"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "gangnam-js-hospital",
+    "costPage": {
+      "intro": "Gangnam JS Hospital publishes guide ranges for its injection and IV services on its English language site, all in Korean won, and labels them as a guide rather than a quote. The procedure it is best known for, the cord blood cell surgery for knee cartilage, carries no published figure at all. The bands below are wide, and the hospital says the final number follows an imaging review and the plan you agree on. Read them as context for your quote, not as your quote.",
+      "introEmpty": "Gangnam JS Hospital does not publish a price for treatment. The Korean hospital site carries no fee list, and the international pages ask you to message the hospital on WhatsApp or by email for a quote after a consultation and an imaging review. What you are quoted turns on which procedure is proposed, whether one knee or both are treated, whether a bow leg correction is done at the same time, and how long you stay as an inpatient. Ask for the quote in writing, itemised, before you book travel.",
+      "items": [
+        {
+          "label": "Cord blood cell surgery for knee cartilage",
+          "currency": "KRW",
+          "unit": "per knee",
+          "note": "The operation the hospital built its reputation on, and the one it does not price publicly. No figure appears on the Korean site, the English site or the dedicated knee page. Ask for it in writing, and ask what the inpatient stay adds."
+        },
+        {
+          "label": "Image guided injection, single joint",
+          "priceMin": 550000,
+          "priceMax": 950000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Guide band shown on the cartilage and joint pages. Covers one joint in one session."
+        },
+        {
+          "label": "Image guided injection, spine or disc, single region",
+          "priceMin": 550000,
+          "priceMax": 950000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Same band as the joint injection. More than one target is quoted separately."
+        },
+        {
+          "label": "Image guided injection, sports injury, single site",
+          "priceMin": 450000,
+          "priceMax": 850000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "The general orthopaedics page gives a slightly wider band of 450,000 to 950,000 won for a single site, so expect your figure to land somewhere inside that spread."
+        },
+        {
+          "label": "Staged combination, or several sites in one plan",
+          "currency": "KRW",
+          "unit": "per plan",
+          "note": "Listed only as a custom quotation, set after imaging review and plan selection."
+        },
+        {
+          "label": "Wellness or longevity IV session",
+          "priceMin": 250000,
+          "priceMax": 550000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Infusion blended with vitamins, minerals and antioxidants. Four session packages are quoted individually."
+        },
+        {
+          "label": "Express energy IV",
+          "priceMin": 250000,
+          "priceMax": 390000,
+          "currency": "KRW",
+          "unit": "per session"
+        },
+        {
+          "label": "Performance IV with NAD+",
+          "priceMin": 380000,
+          "priceMax": 650000,
+          "currency": "KRW",
+          "unit": "per session"
+        },
+        {
+          "label": "IV add-on: NAD+, glutathione, B12 or carnitine",
+          "priceMin": 80000,
+          "priceMax": 200000,
+          "currency": "KRW",
+          "unit": "each",
+          "note": "Billed on top of the session, so a headline IV price is rarely the whole bill."
+        },
+        {
+          "label": "Optional lab panel",
+          "priceMin": 150000,
+          "priceMax": 380000,
+          "currency": "KRW",
+          "unit": "per panel",
+          "note": "Offered on the longevity page as a quarterly option. The figure moves with the tests ordered."
+        },
+        {
+          "label": "Scalp session, full scalp",
+          "priceMin": 450000,
+          "priceMax": 790000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Same band on the hair loss and alopecia pages. A course of four to six sessions is quoted after consultation."
+        },
+        {
+          "label": "Scalp add-on, targeted area",
+          "priceMin": 180000,
+          "priceMax": 320000,
+          "currency": "KRW",
+          "unit": "each"
+        },
+        {
+          "label": "Full face skin session",
+          "priceMin": 350000,
+          "priceMax": 650000,
+          "currency": "KRW",
+          "unit": "per session"
+        },
+        {
+          "label": "Face course, three sessions",
+          "priceMin": 930000,
+          "priceMax": 1560000,
+          "currency": "KRW",
+          "unit": "per course"
+        },
+        {
+          "label": "Erectile dysfunction micro injection",
+          "priceMin": 650000,
+          "priceMax": 1200000,
+          "currency": "KRW",
+          "unit": "per session"
+        },
+        {
+          "label": "Shockwave session",
+          "priceMin": 350000,
+          "priceMax": 600000,
+          "currency": "KRW",
+          "unit": "per session"
+        }
+      ],
+      "includes": [
+        "One session of the named procedure, at the guide band published for that service",
+        "The pre-treatment check in and vitals review the IV pages describe, including a screen for anything that rules you out",
+        "Image guided delivery, which the orthopaedic pages present as part of the injection rather than a separate line",
+        "English speaking coordination for overseas patients, which the hospital advertises but does not price"
+      ],
+      "excludes": [
+        "IV add-ons such as NAD+, glutathione, B12 or carnitine, listed separately at 80,000 to 200,000 won each",
+        "X-ray, MRI or ultrasound used to assess the joint before a plan is set",
+        "Optional lab panels, listed at 150,000 to 380,000 won",
+        "The cord blood cell surgery for knee cartilage, the inpatient stay that goes with it, and any bow leg correction done in the same operation, none of which carry a published figure",
+        "Flights, accommodation, and any interpreting you arrange outside the hospital"
+      ],
+      "insuranceNote": "None of the pages that carry prices mention insurance, HSA or FSA, and the hospital gives no guidance for overseas policies. Treat every figure here as self pay. If you intend to claim at home, ask for an itemised receipt and an English operative or treatment record before you leave Korea, because chasing paperwork afterwards from another country is much harder.",
+      "financingNote": "No payment plan, deposit schedule or financing partner is named anywhere on the Korean hospital site or on either of its English sites. Multi session courses of three to six sessions are quoted individually after a consultation, so ask what is payable at booking, what is payable on the day, and whether the quote is held for any length of time. Payment is arranged directly with the hospital, whose international contact is a WhatsApp number and an email address rather than an online checkout.",
+      "faqs": [
+        {
+          "question": "How much does Gangnam JS Hospital cost?",
+          "answer": "Its English site publishes guide bands of roughly 450,000 to 950,000 won for a single site image guided injection and 250,000 to 650,000 won for an IV session, but the cord blood cell knee cartilage surgery it is best known for has no published price and is quoted only after a consultation and imaging. So a wellness or injection visit can be budgeted from the site, and the knee operation cannot."
+        },
+        {
+          "question": "Why is there no price for the knee cartilage surgery?",
+          "answer": "The hospital simply does not publish one. Its Korean pages, its English pages and its dedicated knee page all describe the procedure at length and none of them names a figure. Korean price aggregators list other hospitals for the same product but not this one, so there is no published number to compare against either. Expect a private quote and ask what it covers."
+        },
+        {
+          "question": "What should I ask when I request a quote?",
+          "answer": "Ask for the figure in writing and itemised. Confirm whether it covers one knee or both, whether a bow leg correction is being done in the same operation, how many nights of inpatient stay are assumed and what an extra night costs, whether imaging and follow up visits are inside the number or billed separately, and what happens to the price if the plan changes after the imaging review. For injections and IVs, ask which add-ons the quoted session already includes."
+        },
+        {
+          "question": "Are the published ranges the price I will pay?",
+          "answer": "No. The hospital labels them as a guide and states that the final quote follows an imaging review and the plan you select. The bands are wide, roughly double from bottom to top on several services, and add-ons and labs sit outside them. Use them to work out whether this hospital is in your budget bracket, then get a written quote."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Gangnam JS Hospital, Korean site",
+          "url": "https://www.gnjshospital.com/"
+        },
+        {
+          "label": "Gangnam JS Hospital, regenerative orthopaedics, pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-regenerative-orthopedics"
+        },
+        {
+          "label": "Gangnam JS Hospital, cartilage injection pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-cartilage-repair"
+        },
+        {
+          "label": "Gangnam JS Hospital, joint injection pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-joint-regeneration"
+        },
+        {
+          "label": "Gangnam JS Hospital, spine and disc pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-spine-disc-therapy"
+        },
+        {
+          "label": "Gangnam JS Hospital, sports injury pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-sport-injuries"
+        },
+        {
+          "label": "Gangnam JS Hospital, knee page with no price",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-therapy-for-knees"
+        },
+        {
+          "label": "Gangnam JS Hospital, wellness IV pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-wellness-iv-therapy-seoul"
+        },
+        {
+          "label": "Gangnam JS Hospital, energy IV pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell/energy-boost-seoul"
+        },
+        {
+          "label": "Gangnam JS Hospital, longevity IV and lab panel pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-longevity-therapy"
+        },
+        {
+          "label": "Gangnam JS Hospital, hair and alopecia pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-alopecia-therapy"
+        },
+        {
+          "label": "Gangnam JS Hospital, skin session pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-skin-rejuvenation"
+        },
+        {
+          "label": "Gangnam JS Hospital, erectile dysfunction pricing guide",
+          "url": "https://www.seoulregenerativemedicine.com/stem-cell-seoul/stem-cell-ed-treatment"
+        },
+        {
+          "label": "Gangnam JS Hospital knee microsite, no prices published",
+          "url": "https://www.kneestemcelltreatment.com/"
+        },
+        {
+          "label": "Gangnam district medical tourism listing for the hospital",
+          "url": "https://medicaltour.gangnam.go.kr/medical/clinic/view.do?medical_seq=763&cid=20&lang=ko"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "nanoori-hospital",
+    "costPage": {
+      "intro": "Nanoori Hospital publishes a line by line price list because Korean law requires hospitals to post their non covered fees, and the Gangnam branch keeps that list searchable on its Korean site. Everything below is copied from that filing, in Korean won, and each figure is the single session or single procedure rate the hospital declares rather than a quote for your case. The English international healthcare centre pages carry no prices at all, so overseas patients are sent through an enquiry form and get a figure by email. Read the table as market context for your quote, not as your quote.",
+      "introEmpty": "Nanoori Hospital does not publish treatment prices on its English international healthcare centre site. Overseas patients submit an enquiry with imaging and a history, a coordinator replies with a treatment plan, and the cost arrives with that plan. What drives the number is which procedure is proposed, whether it is an injection in clinic or a theatre procedure with admission, how many joints or spinal levels are involved, and how much imaging the hospital wants before it will proceed. Ask for the quote broken into the procedure fee, materials, imaging, anaesthesia and any inpatient nights, and ask whether the figure is per session or per course.",
+      "items": [
+        {
+          "label": "Knee osteoarthritis, bone marrow aspirate concentrate injected into the joint, materials included",
+          "priceMin": 2800000,
+          "priceMax": 2800000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "This is the closest thing Nanoori lists to a stem cell price. Filed as a new medical technology on temporary non covered status. Materials are in the figure, drugs are not."
+        },
+        {
+          "label": "Femoral condyle cartilage damage, modified microfracture using an allogeneic hyaline cartilage biomaterial, materials included",
+          "priceMin": 6000000,
+          "priceMax": 6000000,
+          "currency": "KRW",
+          "unit": "per procedure",
+          "note": "The most expensive item on the hospital's filing and a theatre procedure, so theatre time, anaesthesia and any nights on the ward sit outside this number. Rate last changed 1 April 2025."
+        },
+        {
+          "label": "Autologous platelet rich plasma treatment carried out during surgery, kit and materials included",
+          "priceMin": 1000000,
+          "priceMax": 1000000,
+          "currency": "KRW",
+          "unit": "per procedure",
+          "note": "Added on top of whatever operation you are already having. The hospital records a rate increase effective January 2026."
+        },
+        {
+          "label": "Plantar fasciitis, autologous platelet rich plasma injection, kit included",
+          "priceMin": 250000,
+          "priceMax": 250000,
+          "currency": "KRW",
+          "unit": "per session, one side",
+          "note": "The cheapest injectable on the filing and the floor of the hospital's published range. Both feet means two of these. Rate last changed 7 May 2026."
+        },
+        {
+          "label": "Prolotherapy, limb joints",
+          "priceMin": 100000,
+          "priceMax": 200000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "100,000 KRW is billed per small joint area, 200,000 KRW covers two joint areas in one sitting. Materials and drugs are not included."
+        },
+        {
+          "label": "Prolotherapy, spine",
+          "priceMin": 100000,
+          "priceMax": 300000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "100,000 KRW per spinal region, 150,000 KRW for two regions, 300,000 KRW where two or more regions are treated under the higher code. Materials and drugs are not included."
+        },
+        {
+          "label": "Knee MRI, both knees",
+          "priceMin": 1200000,
+          "priceMax": 1200000,
+          "currency": "KRW",
+          "unit": "per scan",
+          "note": "Imaging is billed separately from any injection or operation. A limited extremity MRI is filed at 300,000 KRW and an extra spinal region at 150,000 KRW, so the imaging bill depends entirely on what is ordered."
+        },
+        {
+          "label": "Stem cell therapy for knees or arthritis, agency listing",
+          "unit": "per treatment",
+          "note": "The agency Bookimed advertises about 20,000 USD for this, which is roughly ten times the hospital's own filed figure above. That gap is the reason to ask the hospital directly. Listed for Nanoori by the medical travel agency Bookimed, last updated 29 March 2025, and not published by the hospital. It is several times the 2,800,000 KRW the hospital itself files for its bone marrow concentrate knee injection, so treat it as an agency package figure and ask in writing what it actually contains."
+        }
+      ],
+      "includes": [
+        "For the injectable items, the kit or the cell processing materials, since the hospital marks those rows as materials included",
+        "For the cartilage procedure, the biomaterial itself, which the filing states is inside the 6,000,000 KRW",
+        "Interpreting and coordinator support for overseas patients through the international healthcare centre, which is offered across consultation, appointments, treatment, admission and discharge"
+      ],
+      "excludes": [
+        "Drugs, which every regenerative row on the filing marks as not included",
+        "MRI and ultrasound, billed per scan, from 150,000 KRW for an extra spinal region up to 1,200,000 KRW for both knees",
+        "Ultrasound guided injection, filed at 80,000 KRW for a small area and 100,000 KRW for a large one",
+        "Anaesthesia, theatre and any inpatient nights around the cartilage procedure",
+        "Repeat sessions, since every regenerative row is priced as a single session",
+        "Flights, accommodation and any agency or facilitator fee if you book through a medical travel platform"
+      ],
+      "insuranceNote": "Every item above sits on the hospital's non covered list, which is precisely the set of services Korean National Health Insurance does not pay for, so they are out of pocket in Korea. The bone marrow concentrate knee injection is flagged as temporary non covered, a status that can change, so confirm it still applies on the day. Korean residents with private indemnity cover sometimes claim part of these back, but that is a matter for your own policy. Overseas patients should assume their home insurer, HSA or FSA will not cover elective treatment abroad unless they have written confirmation in advance.",
+      "financingNote": "Nanoori publishes no payment plan, deposit schedule or financing partner. Bookimed, which lists the hospital, states that no payment is taken at booking and that you are charged directly at the clinic on arrival, and it also marks the hospital as not accepting new requests through that platform. If you are travelling, ask the international healthcare centre what has to be paid before admission, what card and currency they accept, and whether the quote is held for a fixed period.",
+      "faqs": [
+        {
+          "question": "How much does Nanoori Hospital cost?",
+          "answer": "On the hospital's own published non covered fee list, its regenerative items run from 250,000 KRW for a platelet rich plasma injection for plantar fasciitis to 6,000,000 KRW for the modified microfracture procedure using an allogeneic hyaline cartilage biomaterial, with the bone marrow concentrate knee injection at 2,800,000 KRW. Those are single session rates for the procedure and its materials, and imaging, drugs, anaesthesia and any inpatient stay are billed on top."
+        },
+        {
+          "question": "Does Nanoori publish a stem cell price?",
+          "answer": "Not under that name. The nearest item on the filing is the intra articular bone marrow aspirate concentrate injection for knee osteoarthritis at 2,800,000 KRW, materials included. Nothing on the list is described as cultured or expanded cells, and there is no cord blood or adipose item, so if a coordinator offers you something outside that list, ask which line of the non covered filing it is billed under."
+        },
+        {
+          "question": "Why does an agency quote 20,000 US dollars when the hospital files 2,800,000 KRW?",
+          "answer": "Because they are not the same product. The hospital's figure is a single declared procedure rate under Korean fee disclosure rules. The 20,000 US dollar figure comes from Bookimed's listing for the hospital and behaves like a travel package number, which can bundle imaging, multiple sessions, admission and the agency's own margin. Get the agency to itemise it against the hospital's filing before you accept it."
+        },
+        {
+          "question": "Are the published prices what an overseas patient actually pays?",
+          "answer": "Treat them as the starting point rather than the invoice. The filing is a legal disclosure of single item rates at the Gangnam branch, and a real course of treatment usually adds imaging, drugs and sometimes repeat sessions. The English international healthcare centre site carries no prices at all, so ask for a written itemised quote in Korean won and ask what would make it change."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Nanoori Hospital Gangnam, non covered fee disclosure",
+          "url": "https://gn.nanoori.co.kr/policy/policy4.php"
+        },
+        {
+          "label": "Nanoori International Healthcare Center",
+          "url": "https://ihc.nanoori.co.kr/"
+        },
+        {
+          "label": "Nanoori International Healthcare Center, treatment process",
+          "url": "https://ihc.nanoori.co.kr/contact/treatment-process"
+        },
+        {
+          "label": "Bookimed listing for Nanoori Hospital",
+          "url": "https://us-uk.bookimed.com/clinic/nanoori-hospital/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "nucellin-orthopedic-clinic",
+    "costPage": {
+      "intro": "Nucellin posts the non covered fee schedule that Korean clinics are required to publish, the list of services National Health Insurance does not pay for. It is real and itemised, in Korean won, and it covers injections, shockwave, manual therapy, supports and paperwork. What it does not contain is a line for stem cell treatment, which is the thing most international patients arrive for. The clinic says on its own homepage that treatment plans and costs are set by the doctor after an in person examination, so read the rows below as context for your quote, not as your quote.",
+      "introEmpty": "Nucellin does not publish a price for stem cell treatment. The clinic states plainly on its homepage that every plan is customised after a consultation and examination, and that the doctor sets the cost at that point. Its published fee schedule, the non covered list Korean clinics must post, prices injections, shockwave, manual therapy and documents, but carries no stem cell or PRP line at all. The quote depends on which joint or region is treated, how much damage the imaging shows, whether cells are taken from your own fat or bone marrow, and whether rehabilitation or shockwave sessions are bundled in. Ask for the estimate in writing, itemised in Korean won, before you commit to travel.",
+      "items": [
+        {
+          "label": "Stem cell treatment, joint or spine",
+          "currency": "KRW",
+          "unit": "per plan",
+          "note": "Not on the published fee schedule and not priced anywhere on the clinic's Korean or English sites. Quoted by the doctor after an in person examination."
+        },
+        {
+          "label": "PRP injection",
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Listed as a treatment the clinic offers, but absent from the published fee schedule. Ask for it in writing."
+        },
+        {
+          "label": "Prolotherapy injection",
+          "priceMin": 200000,
+          "priceMax": 600000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Listed on the fee schedule as proliferation therapy. The range is wide, so ask which end your plan sits at and how many sessions it assumes."
+        },
+        {
+          "label": "Extracorporeal shockwave therapy",
+          "priceMin": 200000,
+          "priceMax": 600000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Same published range as prolotherapy. Often stacked alongside injections in a plan, which is where costs add up."
+        },
+        {
+          "label": "Manual therapy session",
+          "priceMin": 200000,
+          "priceMax": 300000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Billed per session, so a rehabilitation block is a multiple of this, not a one off."
+        },
+        {
+          "label": "Ultrasound examination",
+          "priceMin": 100000,
+          "currency": "KRW",
+          "unit": "per scan",
+          "note": "The schedule gives a minimum only and no ceiling."
+        },
+        {
+          "label": "Hirax injection",
+          "priceMin": 150000,
+          "priceMax": 200000,
+          "currency": "KRW",
+          "unit": "per injection",
+          "note": "Listed under injection fees without any description of the product. Ask what it is before you agree to it."
+        },
+        {
+          "label": "Nutritional IV infusion",
+          "priceMin": 120000,
+          "priceMax": 150000,
+          "currency": "KRW",
+          "unit": "per infusion",
+          "note": "A separate line item, not part of any joint treatment price."
+        },
+        {
+          "label": "Cryotherapy",
+          "priceMin": 30000,
+          "priceMax": 60000,
+          "currency": "KRW",
+          "unit": "per session"
+        },
+        {
+          "label": "Medical certificate in English",
+          "priceMin": 20000,
+          "priceMax": 50000,
+          "currency": "KRW",
+          "unit": "per document",
+          "note": "This is the paperwork a foreign insurer usually asks for. The Korean language version is 20,000 KRW flat."
+        },
+        {
+          "label": "Injury certificate",
+          "priceMin": 100000,
+          "priceMax": 150000,
+          "currency": "KRW",
+          "unit": "per document",
+          "note": "100,000 KRW where recovery is stated as under three weeks, 150,000 KRW at three weeks or more."
+        },
+        {
+          "label": "Private room",
+          "priceMin": 300000,
+          "currency": "KRW",
+          "unit": "per stay as listed",
+          "note": "The schedule gives a minimum of 300,000 KRW and does not say whether that is per night."
+        }
+      ],
+      "includes": [
+        "An upfront estimate, which the clinic says it gives international patients before treatment",
+        "An itemised receipt you can submit to your own insurer",
+        "English language support for scheduling and explanations, which is not billed as a separate line on the fee schedule",
+        "Ultrasound or fluoroscopy guidance during an injection, described as part of the procedure rather than a separate charge"
+      ],
+      "excludes": [
+        "A consultation fee, which the published schedule does not list at all, so ask what a first visit costs if you are not on Korean National Health Insurance",
+        "MRI and X ray imaging, which the schedule does not price",
+        "Ultrasound examination, charged separately from 100,000 KRW",
+        "Braces, splints, collars and other supports, listed at 15,000 to 40,000 KRW each",
+        "Certificates, opinion letters and record copies, 1,000 to 150,000 KRW depending on the document",
+        "A private room, listed from 300,000 KRW",
+        "Flights, accommodation and any rehabilitation beyond the manual therapy sessions you are quoted for"
+      ],
+      "insuranceNote": "Every item on the published list sits in Korea's non covered category, meaning National Health Insurance does not pay for it and you settle in full at the clinic. Nucellin says it provides upfront estimates and itemised receipts so patients can try to claim at home, and it sells an English medical certificate for 20,000 to 50,000 KRW, which is the document most foreign insurers want. Whether anything comes back is between you and your policy, and the clinic tells patients to check that themselves before travelling.",
+      "financingNote": "Nucellin publishes nothing about instalments, deposits or financing partners on either its Korean or its English site, and there is no online prepayment step in its booking flow. Appointments run through Naver booking, KakaoTalk, WhatsApp on +82 10 4184 2600, or the clinic line on 02 749 8880. If you are flying in for a large regenerative package, confirm in advance which payment methods and which currency the clinic accepts, and get the estimate in writing first.",
+      "faqs": [
+        {
+          "question": "How much does Nucellin Orthopedic Clinic cost?",
+          "answer": "For stem cell treatment there is no published figure, so the honest answer is that you will not know until the doctor has examined you. What the clinic does publish, on its legally required non covered fee list, is the supporting work: prolotherapy and shockwave at 200,000 to 600,000 KRW per session each, manual therapy at 200,000 to 300,000 KRW per session, ultrasound from 100,000 KRW, and a nutritional IV infusion at 120,000 to 150,000 KRW. Those are line items, not a package, and a plan is usually several of them together."
+        },
+        {
+          "question": "Does Nucellin publish a price for stem cell treatment?",
+          "answer": "No. The fee schedule on both nucellin.com and en.nucellin.com carries no stem cell row and no PRP row, and the English marketing site describes the treatment in detail without ever naming a figure. The homepage says treatment plans and associated costs are determined by the doctor after an in person evaluation, which is the clinic's position rather than an oversight."
+        },
+        {
+          "question": "What decides the quote?",
+          "answer": "The clinic's own pages point at which joint or region is being treated and how extensive the damage is, and its process description adds the cell source, either your own fat or your own bone marrow, plus the imaging needed to plan the injection. Whether shockwave, manual therapy or follow up sessions are bundled into the plan will move the total as much as the injection itself, since each of those is priced per session on the published list."
+        },
+        {
+          "question": "What should I ask before booking?",
+          "answer": "Ask for a written estimate in Korean won, itemised so you can see the consultation, imaging, cell collection, laboratory processing, the injection itself, and every follow up visit as separate lines. Ask how many sessions the plan assumes and what a repeat costs, because the published per session prices tell you the plan is additive. Confirm the first visit fee for a patient without Korean National Health Insurance, and confirm the English certificate and receipt are included if you intend to claim at home."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Nucellin non covered fee schedule (English)",
+          "url": "https://en.nucellin.com/en/nonPay.php"
+        },
+        {
+          "label": "Nucellin non covered fee schedule (Korean)",
+          "url": "https://nucellin.com/nonPay.php"
+        },
+        {
+          "label": "Nucellin Orthopedic Clinic homepage",
+          "url": "https://www.seoulorthoclinic.com/"
+        },
+        {
+          "label": "International patients, pricing and booking",
+          "url": "https://www.seoulorthoclinic.com/orthopedic-treatments-seoul/international-patients"
+        },
+        {
+          "label": "MSC treatment page",
+          "url": "https://www.seoulorthoclinic.com/stem-cell-seoul/msc-treatment"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "pur-form",
+    "costPage": {
+      "intro": "PUR-FORM publishes a price for most of its wellness menu and for none of its regenerative work. Every stem cell line on the site, from the Muse cell and VSELs infusions to the MiniStem and MaxxStem orthopedic protocols, is listed as Varies against both the member and the non-member rate, so that figure only lands after a consultation. What the clinic does price is the surrounding menu, and those rows are still worth reading because PUR-FORM runs a two tier system where anyone holding a monthly membership pays the lower of the two numbers on every service. Read the published rows as context for your quote, not as your quote.",
+      "introEmpty": "PUR-FORM does not publish a price for this treatment. Its site lists both the member and the non-member rate for every regenerative line as Varies, which means the number is set at consultation rather than read off a list. What moves it is the cell source, since the clinic offers both autologous cells taken from your own bone marrow or fat and donor derived allogenic cells, along with how many sites are being injected and which of the PRP, MiniStem or MaxxStem protocols the surgeon recommends. Ask for the figure in writing, ask whether it buys one session or a course, and ask separately what the harvest, the imaging and any follow up injections add.",
+      "items": [
+        {
+          "label": "Stem cell therapy, autologous or allogenic",
+          "note": "No published figure. The site shows Varies for both the member and the non-member rate. It does say the cell source is decided at evaluation, either harvested from your own body, commonly bone marrow, or taken from pre screened donor cells, which is the main thing the quote turns on."
+        },
+        {
+          "label": "PRP injection",
+          "note": "No published figure. PRP is the entry point of the clinic's orthopedic ladder and the base that MiniStem and MaxxStem build on, so it should be the cheapest of the three. The clinic says most patients have one to three sessions but does not price a course."
+        },
+        {
+          "label": "MiniStem, adipose tissue plus PRP",
+          "note": "No published figure. The clinic describes this as PRP combined with the patient's own fat tissue, so it adds an adipose harvest to the PRP price. The site never states what that step adds."
+        },
+        {
+          "label": "MaxxStem, bone marrow plus adipose plus PRP",
+          "note": "No published figure. Described as the most comprehensive of the orthopedic options, combining PRP, adipose tissue and bone marrow cells, so it carries two harvests rather than one. Expect it to sit at the top of the orthopedic range."
+        },
+        {
+          "label": "Muse cell therapy",
+          "unit": "per session",
+          "note": "No published figure. Listed at 60 minutes. The clinic says it uses licensed Dezawa MuseCells sourced through the MuseCell Innovations network with a certificate of analysis, and that cells may be given by IV or injected locally, both of which are worth pinning to a price separately."
+        },
+        {
+          "label": "VSELs infusion",
+          "note": "No published figure. The protocol described is a blood or bone marrow draw, isolation and activation of the cells, then an IV infusion. No consultation or lab fee is priced."
+        },
+        {
+          "label": "Exosome therapy",
+          "note": "No published figure. The clinic frames this as part of its VSELs therapy rather than a standalone product, and its page mentions Cherry financing on eligible packages without saying which packages qualify."
+        },
+        {
+          "label": "Plasmapheresis",
+          "unit": "per session",
+          "note": "No published figure, unusually for a service the clinic markets heavily. Listed at 90 to 180 minutes. Worth asking whether the quote is per session, since the clinic's own blog discusses pairing it with EBO2, which is priced at $2,300 for a non-member."
+        },
+        {
+          "label": "Shockwave therapy",
+          "note": "No published figure, although this is a non-cellular service that most clinics do price per session. Ask for a per session rate and a package rate."
+        },
+        {
+          "label": "Hair restoration",
+          "note": "No published figure. The clinic lists exosomes among its options for hair thinning and scalp concerns, so the quote will depend on which product is used and over how many visits."
+        },
+        {
+          "label": "EBO2 ozone therapy",
+          "priceMin": 1955,
+          "priceMax": 2300,
+          "unit": "per session",
+          "note": "The clinic's most expensive published line. $1,955 with a membership, $2,300 without. Listed at 2 to 3 hours. This is the only four figure price anywhere on the site."
+        },
+        {
+          "label": "Hyperbaric oxygen therapy",
+          "priceMin": 170,
+          "priceMax": 315,
+          "unit": "per session",
+          "note": "Published as a band at both tiers: $170 to $268 for members, $199 to $315 for non-members. Listed at 60 to 90 minutes. The site does not say what moves you within the band, so ask what the top of it buys."
+        },
+        {
+          "label": "NAD+ IV",
+          "priceMin": 200,
+          "unit": "per session",
+          "note": "Published as $200 plus for members and $250 plus for non-members, both open ended, so there is no upper bound to quote. Listed at 2 hours plus. The plus almost certainly tracks dose, which the site does not publish."
+        },
+        {
+          "label": "Niagen IV",
+          "priceMin": 449,
+          "priceMax": 499,
+          "unit": "per session",
+          "note": "$449 with a membership, $499 without. Listed at 60 minutes. Note the small gap between the two tiers here compared with other rows."
+        },
+        {
+          "label": "Level 1 IV drip",
+          "priceMin": 169,
+          "priceMax": 209,
+          "unit": "per drip",
+          "note": "$169 for members, $209 for non-members. Covers the Myers drip and the other entry level formulas."
+        },
+        {
+          "label": "Level 2 IV drip",
+          "priceMin": 215,
+          "priceMax": 299,
+          "unit": "per drip",
+          "note": "$215 for members, $299 for non-members. Covers the higher dose formulas and the custom base plus add ons."
+        },
+        {
+          "label": "Level 3 IV drip",
+          "unit": "per drip",
+          "note": "No published figure. The only IV tier the clinic leaves as Varies. It covers the curcumin and Niagen drips, and Niagen is separately priced at $449 to $499, so ask which the tier actually bills at."
+        },
+        {
+          "label": "Methylene blue IV",
+          "priceMin": 140,
+          "priceMax": 199,
+          "unit": "per session",
+          "note": "$140 for members, $199 for non-members. Listed at 45 minutes."
+        },
+        {
+          "label": "Level 1 vitamin shot",
+          "priceMin": 25,
+          "priceMax": 35,
+          "unit": "per shot",
+          "note": "$25 for members, $35 for non-members. Covers B-12 and the other basic shots. One of these is included each month in all three membership tiers."
+        },
+        {
+          "label": "Level 2 vitamin shot",
+          "priceMin": 40,
+          "priceMax": 50,
+          "unit": "per shot",
+          "note": "$40 for members, $50 for non-members. Covers the NAD+ shot and similar."
+        },
+        {
+          "label": "Intermittent hypoxia training",
+          "priceMin": 40,
+          "priceMax": 90,
+          "unit": "per session",
+          "note": "Published as a band at both tiers: $40 to $80 for members, $45 to $90 for non-members. Listed at 30 minutes."
+        },
+        {
+          "label": "Pur-Wellness membership",
+          "priceMin": 159,
+          "priceMax": 159,
+          "unit": "per month",
+          "note": "Includes 5 monthly wellness treatments and one level 1 vitamin shot, plus member pricing on everything else. The clinic claims this saves over $335 a month on the included services."
+        },
+        {
+          "label": "Pur-Lifestyle membership",
+          "priceMin": 269,
+          "priceMax": 269,
+          "unit": "per month",
+          "note": "Includes 10 monthly wellness treatments, one level 1 shot and one level 1 IV. Marked as the most popular tier. The clinic claims this saves over $845 a month on the included services."
+        },
+        {
+          "label": "Pur-Elite membership",
+          "priceMin": 529,
+          "priceMax": 529,
+          "unit": "per month",
+          "note": "Includes 30 monthly wellness treatments, one level 1 shot, one level 1 IV and gym access. The clinic claims this saves over $2,045 a month on the included services."
+        }
+      ],
+      "includes": [
+        "The named service and nothing beyond it. PUR-FORM prices service by service rather than as a package, so an orthopedic figure will not carry the IV, hyperbaric or plasmapheresis sessions the clinic tends to pair with it.",
+        "Member pricing, but only if you hold a membership. Every published row shows two figures and the lower one is gated on a monthly plan that starts at $159.",
+        "A consultation on the peptide line, which the site lists as a free 60 minute appointment. No other service says the same, so confirm whether an orthopedic or stem cell consultation is chargeable."
+      ],
+      "excludes": [
+        "Everything labelled Varies, which is all of the regenerative work. Stem cell therapy, PRP, MiniStem, MaxxStem, Muse cells, VSELs, exosomes, plasmapheresis, shockwave and hair restoration all carry no published figure.",
+        "Repeat sessions. The PRP page says most patients have one to three treatments and the stem cell page describes a response measured over weeks to months, but no course price appears anywhere on the site.",
+        "Imaging. The clinic says it reviews imaging if available and gates candidacy on the evaluation, and it prices neither the evaluation nor any scan.",
+        "Physical therapy. The clinic highly recommends it after a regenerative procedure and refers out to partner therapists, so that cost sits with a third party.",
+        "The membership fee itself, if you were quoted the member rate. That is a separate monthly charge on top of the treatment.",
+        "Supplements. The clinic sells supplement stacks and builds post procedure supplement plans, both priced separately."
+      ],
+      "insuranceNote": "Treat this as self pay. PUR-FORM publishes no insurance policy, no billing page and no HSA or FSA guidance anywhere on its site, and its own footer disclaimer states that nothing on the site has been evaluated or approved by the FDA and describes participation in its protocols as patient funded and voluntary. That is the clinic telling you not to expect a payer to reimburse. If you intend to submit a claim yourself, ask for an itemised receipt with procedure codes before you pay rather than after.",
+      "financingNote": "PUR-FORM partners with Cherry for payment plans and links to it from the navigation on every page. Cherry's PUR-FORM page advertises 0% APR plans subject to eligibility and says applying does not affect your credit, with the loans issued by Cherry's lending partners rather than by the clinic. The exosome and peptide pages both say financing applies to eligible packages without saying which packages qualify, so ask whether your specific procedure is one of them before you assume it is. No deposit policy and no cancellation terms are published. Memberships and gift cards are sold through the clinic's Mindbody account.",
+      "faqs": [
+        {
+          "question": "How much does PUR-FORM cost?",
+          "answer": "PUR-FORM does not publish a price for any of its stem cell or regenerative procedures. Stem cell therapy, Muse cells, VSELs, exosomes, PRP and the MiniStem and MaxxStem orthopedic protocols are all listed as Varies against both the member and the non-member rate, so the figure only comes out of a consultation. The rest of the menu is priced. EBO2 ozone therapy is $2,300 for a non-member and $1,955 for a member, a Niagen IV is $499 or $449, a hyperbaric session runs $199 to $315, an entry level IV drip is $209 or $169, and a basic vitamin shot is $35 or $25. Memberships are $159, $269 or $529 a month."
+        },
+        {
+          "question": "Why is there no price for stem cell therapy?",
+          "answer": "Because the clinic builds the procedure per patient and the components stack. It offers both autologous cells, harvested from your own bone marrow or fat, and allogenic donor cells, and its orthopedic ladder runs PRP, then MiniStem which adds an adipose harvest, then MaxxStem which adds bone marrow on top of that. Each step adds a harvest and lab processing, which is the usual reason a clinic quotes privately rather than listing. What the site never says is how much any one of those steps adds, so the only way to compare the three is to ask for all three quoted on the same document."
+        },
+        {
+          "question": "What is the difference between the member and the non-member price?",
+          "answer": "Every published row carries two figures and the lower one requires a monthly membership. The tiers are $159, $269 and $529 a month, bundling 5, 10 or 30 wellness treatments plus member pricing across the menu, and the clinic claims monthly savings of over $335, $845 and $2,045 on the included services. Whether that pays back on a one off regenerative procedure is impossible to work out from the site, because the regenerative rows show Varies at both tiers with no member discount stated. Ask what the membership actually takes off a stem cell quote before you sign up for one to get it."
+        },
+        {
+          "question": "What should I ask for in writing?",
+          "answer": "Ask for the recommended protocol named explicitly, whether that is PRP, MiniStem, MaxxStem, Muse cells or VSELs, with a total against it. Ask whether the figure is per session or per course, and how many sessions the surgeon expects. Ask whether both sides or multiple joints are included or billed separately. Ask what the harvest, the evaluation and any imaging add. And ask whether Cherry financing is available on that specific procedure, since the clinic only says financing covers eligible packages without listing them."
+        }
+      ],
+      "sources": [
+        {
+          "label": "PUR-FORM, stem cell therapy",
+          "url": "https://purformhealth.com/treatments/stem-cell-therapy/"
+        },
+        {
+          "label": "PUR-FORM, regenerative orthopedics, PRP, MiniStem and MaxxStem",
+          "url": "https://purformhealth.com/treatments/regenerative-orthopedics/"
+        },
+        {
+          "label": "PUR-FORM, Muse cells",
+          "url": "https://purformhealth.com/treatments/muse-cells/"
+        },
+        {
+          "label": "PUR-FORM, VSELs",
+          "url": "https://purformhealth.com/treatments/vsels/"
+        },
+        {
+          "label": "PUR-FORM, exosome therapy",
+          "url": "https://purformhealth.com/treatments/exosome-therapy/"
+        },
+        {
+          "label": "PUR-FORM, plasmapheresis",
+          "url": "https://purformhealth.com/treatments/plasmapheresis/"
+        },
+        {
+          "label": "PUR-FORM, EBO2 ozone therapy",
+          "url": "https://purformhealth.com/treatments/ebo2/"
+        },
+        {
+          "label": "PUR-FORM, hyperbaric oxygen therapy",
+          "url": "https://purformhealth.com/treatments/hyperbaric-oxygen-therapy-hbot/"
+        },
+        {
+          "label": "PUR-FORM, NAD+",
+          "url": "https://purformhealth.com/treatments/nad/"
+        },
+        {
+          "label": "PUR-FORM, Niagen IV therapy",
+          "url": "https://purformhealth.com/treatments/niagen-iv-therapy/"
+        },
+        {
+          "label": "PUR-FORM, vitamin IVs and shots price tiers",
+          "url": "https://purformhealth.com/treatments/vitamins-ivs-shots/"
+        },
+        {
+          "label": "PUR-FORM, wellness membership plans",
+          "url": "https://purformhealth.com/membership/"
+        },
+        {
+          "label": "Cherry, PUR-FORM financing page",
+          "url": "https://pay.withcherry.com/pur-form"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "regenerative-medicine-la",
+    "costPage": {
+      "intro": "Regenerative Medicine LA publishes exactly one price. Its own FAQ says IV vitamin therapy starts at $250 a bag and up. Everything else on the menu, from the autologous cell procedure to the fluoroquinolone toxicity program and the VIP Concierge Elite Program, is quoted only after a consultation with Dr Mark Ghalili, so the rows below are deliberately blank where the clinic states no figure. Read the one published number as a floor for that single service, not as your quote.",
+      "introEmpty": "Regenerative Medicine LA does not publish a price list. There is no pricing, cost or fees page on the site, and the clinic's own stem cell page says only that cost depends on the consultation, the evaluation and whether a procedure is recommended at all, and that pricing is reviewed with the patient before anything is scheduled. Your number is produced at the first visit, so treat the consultation as the pricing step: ask for the full protocol in writing, how many treatment days it assumes, and what is billed separately.",
+      "items": [
+        {
+          "label": "IV vitamin therapy",
+          "priceMin": 250,
+          "unit": "per bag",
+          "note": "The clinic's FAQ says IV vitamin therapy starts at $250 a bag and up. The blend and the dose set the final figure, so treat 250 as a floor for a single bag rather than a typical bill."
+        },
+        {
+          "label": "Consultation with Dr Ghalili",
+          "note": "No fee published. A consultation is required before any procedure is considered, and the clinic says pricing is reviewed with the patient at that point. Ask whether the visit itself is charged and whether it is credited against treatment."
+        },
+        {
+          "label": "Autologous regenerative cell procedure",
+          "note": "No figure published. The clinic says the cellular material comes from the patient, that it does not use donor cells for this procedure, and that cost depends on the consultation, the evaluation and whether a procedure is recommended."
+        },
+        {
+          "label": "Fluoroquinolone toxicity treatment program",
+          "note": "No figure published. The clinic describes a 5 day intensive program, a minimum stay of around two weeks, a minimum of 5 treatment sessions and roughly 3 hours in the office per treatment day. That is the scope a quote would need to cover, so ask for it priced per day and in total."
+        },
+        {
+          "label": "Biohacking Longevity Program",
+          "note": "No figure published. The clinic says the investment varies with the personalized protocol and that detailed pricing is given during the consultation."
+        },
+        {
+          "label": "VIP Concierge Elite Program, 12 months",
+          "note": "No program price published. The page lists program investment as something to arrange with the office and caps the program at 10 members a year. It does attach figures to two inclusions, a Regen Labs supplement membership described as a $6,000 annual value and a first time starter kit described as a $3,500 value. Those are the clinic's stated values for bundled items, not the cost of the program."
+        },
+        {
+          "label": "Peptide therapy",
+          "note": "No figure published. The clinic says most insurers class peptide therapy as elective and that patients commonly pay with HSA or FSA funds."
+        }
+      ],
+      "includes": [
+        "A consultation and medical review with Dr Ghalili, which the clinic requires before any procedure is recommended",
+        "Physician oversight of IV infusions, with registered nurses administering them",
+        "In the VIP Concierge Elite Program only: 10 treatment sessions, adipose derived cell harvest and storage or exosome therapy, genetic and biomarker testing, low level laser sessions, 12 months of concierge access and the Regen Labs supplement membership"
+      ],
+      "excludes": [
+        "Supplements and take home protocols, which the clinic runs through a separate brand, Regen Labs, and bundles into the VIP program at a stated value rather than free of charge",
+        "Additional IV bags, since IV therapy is quoted per bag",
+        "Travel and accommodation, which matter here because the fluoroquinolone program expects a stay of around two weeks in Los Angeles",
+        "Anything the consultation adds to your protocol after the first quote is given"
+      ],
+      "insuranceNote": "The clinic states that regenerative treatments are typically not covered by insurance, and that most insurers class peptide therapy as elective with no direct coverage. The one exception it names is IV vitamin therapy, which it says is FSA and HSA eligible when prescribed for a specific condition or deficiency, with the office providing documentation for reimbursement. Assume cell based work is paid out of pocket.",
+      "financingNote": "The clinic says it offers flexible financing and several payment options, but it does not name a lender, a deposit, a term or an interest rate anywhere on the site. Ask which financing partner is used, what the APR is, how much is due before the first treatment day and what happens to the balance if you stop the program early.",
+      "faqs": [
+        {
+          "question": "How much does Regenerative Medicine LA cost?",
+          "answer": "Only one figure is published: the clinic's FAQ says IV vitamin therapy starts at $250 a bag and up. Nothing else carries a price. The autologous cell procedure, the fluoroquinolone toxicity program, the Biohacking Longevity Program and the VIP Concierge Elite Program are all quoted at consultation, so there is no published total for a course of treatment and no figure you can budget against before you speak to the office."
+        },
+        {
+          "question": "Does the clinic publish a price list?",
+          "answer": "No. There is no pricing, cost or fees page on the site, and the treatment pages carry no dollar figures apart from the IV bag. The stem cell page says cost depends on the consultation, the evaluation and whether a procedure is recommended, and that pricing is reviewed with the patient before anything is scheduled."
+        },
+        {
+          "question": "What does the VIP Concierge Elite Program cost?",
+          "answer": "The page does not say. It lists program investment as something to arrange with the office and limits the program to 10 members a year. It does attach numbers to two inclusions, a supplement membership described as a $6,000 annual value and a starter kit described as a $3,500 value, but those are the clinic's own values for bundled items and not the price of the program itself."
+        },
+        {
+          "question": "Will insurance or my HSA pay for any of it?",
+          "answer": "The clinic says regenerative treatments are typically not covered by insurance. It does say IV vitamin therapy is FSA and HSA eligible when prescribed for a specific condition or deficiency, and that its team supplies documentation for reimbursement. Get the coding and the paperwork confirmed in writing before you assume a claim or a reimbursement will go through."
+        }
+      ],
+      "sources": [
+        {
+          "label": "IV vitamin therapy page, the $250 a bag figure and the FSA and HSA answer",
+          "url": "https://regenerativemedicinela.com/treatments/iv-vitamin-therapy/"
+        },
+        {
+          "label": "Concierge doctor page, repeats the $250 a bag figure",
+          "url": "https://regenerativemedicinela.com/treatments/concierge-doctor/"
+        },
+        {
+          "label": "VIP Concierge Elite Program, program investment and the $6,000 and $3,500 inclusion values",
+          "url": "https://regenerativemedicinela.com/vip-concierge-elite-program/"
+        },
+        {
+          "label": "Stem cell therapy page, cost reviewed at consultation",
+          "url": "https://regenerativemedicinela.com/treatments/stem-cell-therapy/"
+        },
+        {
+          "label": "Biohacking Longevity Program, investment varies by protocol",
+          "url": "https://regenerativemedicinela.com/treatments/biohacking-longevity-program/"
+        },
+        {
+          "label": "Fluoroquinolone toxicity treatment, program length and session count",
+          "url": "https://regenerativemedicinela.com/treatments/fluoroquinolone-toxicity-treatment/"
+        },
+        {
+          "label": "Long haul COVID page, insurance and payment options",
+          "url": "https://regenerativemedicinela.com/treatments/long-haul-covid/"
+        },
+        {
+          "label": "Stem cell banking guide, insurance coverage and financing",
+          "url": "https://regenerativemedicinela.com/blog/stem-cell-banking-guide/"
+        },
+        {
+          "label": "Peptide therapy page, insurance and HSA or FSA position",
+          "url": "https://regenerativemedicinela.com/treatments/peptide-therapy/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "sh-clinic",
+    "costPage": {
+      "intro": "SH Clinic publishes a full price list for its stem cell WA program, which is unusual for a Gangnam clinic and makes it easier to compare than most of its neighbours. Everything is quoted in Korean won and the tiers step on the cell source, with hematopoietic tiers at the bottom and bone marrow or adipose tiers at the top. One thing the list does not settle is whether a figure buys a single treatment or the whole recommended course of 3 to 8, so that is the first question to ask. Read it as context for your quote, not as your quote.",
+      "introEmpty": "SH Clinic does not publish a price for this treatment. What you pay is driven by which cell source is used, hematopoietic cells being the cheaper option and bone marrow or adipose cells the dearer one, by how many treatments the clinic recommends, and by whether one site or several are being injected. The figure only lands after a consultation, and the clinic offers a free online consultation as the route to one. Ask for the per treatment price and the full course price in writing, in Korean won, and ask separately what the consultation, imaging and any hospital admission add.",
+      "items": [
+        {
+          "label": "V-Shot, women's genital and sexual health, Gold",
+          "priceMin": 1000000,
+          "priceMax": 1000000,
+          "currency": "KRW",
+          "note": "Hematopoietic cells. This is the cheapest line on the clinic's published list. Recommended frequency is 3 treatments at 1 month intervals."
+        },
+        {
+          "label": "V-Shot, women's genital and sexual health, Premium",
+          "priceMin": 3000000,
+          "priceMax": 3000000,
+          "currency": "KRW",
+          "note": "Bone marrow or adipose cells. Recommended frequency is 3 treatments at 1 month intervals."
+        },
+        {
+          "label": "P-Shot, men's sexual function, Gold",
+          "priceMin": 5000000,
+          "priceMax": 5000000,
+          "currency": "KRW",
+          "note": "Hematopoietic cells. Note that the same cell source is priced at 1,000,000 KRW on the women's V-Shot and 5,000,000 KRW here, so the clinic is pricing by program rather than by cells alone. Recommended frequency is 3 treatments every 2 months."
+        },
+        {
+          "label": "P-Shot, men's sexual function, Premium",
+          "priceMin": 10000000,
+          "priceMax": 10000000,
+          "currency": "KRW",
+          "note": "Bone marrow cells. Joint top of the published list. Recommended frequency is 3 treatments every 2 months."
+        },
+        {
+          "label": "H-Shot, hair loss, Gold",
+          "priceMin": 2000000,
+          "priceMax": 2000000,
+          "currency": "KRW",
+          "note": "Hematopoietic cells. The recommended schedule here is 8 treatments at 2 week intervals, far more than any other program, so the course total could be several times this figure. Confirm which before you budget."
+        },
+        {
+          "label": "H-Shot, hair loss, Premium",
+          "priceMin": 4000000,
+          "priceMax": 4000000,
+          "currency": "KRW",
+          "note": "Hematopoietic cells plus scalp care. Same 8 treatment, 2 week interval schedule as the Gold tier."
+        },
+        {
+          "label": "F-Shot, skin and cosmetic, Gold",
+          "priceMin": 2000000,
+          "priceMax": 2000000,
+          "currency": "KRW",
+          "note": "Hematopoietic cells. This is the only tier the clinic publishes for the skin program, so there is no Premium option listed. Recommended frequency is 3 treatments every 2 months."
+        },
+        {
+          "label": "M-Shot, knee joint, Gold, one knee",
+          "priceMin": 5500000,
+          "priceMax": 5500000,
+          "currency": "KRW",
+          "note": "Bone marrow or adipose cells. Worth cross checking: the clinic's separate BMAC page says conventional cartilage surgery runs about 10,000,000 KRW and that its bone marrow injection costs roughly a third of that, which does not line up with this figure. Ask which procedure your quote actually covers."
+        },
+        {
+          "label": "M-Shot, knee joint, Gold, both knees",
+          "priceMin": 8800000,
+          "priceMax": 8800000,
+          "currency": "KRW",
+          "note": "Bone marrow or adipose cells, priced as a pair rather than at twice the single knee figure. Recommended frequency is 3 treatments every 2 months."
+        },
+        {
+          "label": "M-Shot, back, disc, muscle and ligament, frozen shoulder",
+          "priceMin": 2000000,
+          "priceMax": 6000000,
+          "currency": "KRW",
+          "note": "The one line where the clinic publishes a band rather than a fixed figure. Which end you land on tracks the cell source, hematopoietic at the low end and bone marrow or adipose at the high end. The site does not say what else moves it, so expect the number to firm up only at consultation."
+        },
+        {
+          "label": "I-Shot, immune and rheumatic conditions, Gold",
+          "priceMin": 2000000,
+          "priceMax": 2000000,
+          "currency": "KRW",
+          "note": "Hematopoietic cells. Recommended frequency is 3 treatments every 2 months."
+        },
+        {
+          "label": "I-Shot, immune and rheumatic conditions, Premium",
+          "priceMin": 4000000,
+          "priceMax": 4000000,
+          "currency": "KRW",
+          "note": "Bone marrow or adipose cells. Recommended frequency is 3 treatments every 2 months."
+        },
+        {
+          "label": "B-Shot, neurological conditions, Bronze",
+          "priceMin": 2000000,
+          "priceMax": 2000000,
+          "currency": "KRW",
+          "note": "The B-Shot is the only program with four tiers, and it is also the only one where the clinic does not say which cell source each tier uses. Since cell source is what the other programs price on, ask what separates Bronze from Premium here. Recommended frequency is 3 treatments every 2 months."
+        },
+        {
+          "label": "B-Shot, neurological conditions, Silver",
+          "priceMin": 4000000,
+          "priceMax": 4000000,
+          "currency": "KRW",
+          "note": "Cell source not stated for this tier."
+        },
+        {
+          "label": "B-Shot, neurological conditions, Gold",
+          "priceMin": 6000000,
+          "priceMax": 6000000,
+          "currency": "KRW",
+          "note": "Cell source not stated for this tier."
+        },
+        {
+          "label": "B-Shot, neurological conditions, Premium",
+          "priceMin": 10000000,
+          "priceMax": 10000000,
+          "currency": "KRW",
+          "note": "Cell source not stated for this tier. Joint top of the published list, alongside the P-Shot Premium."
+        }
+      ],
+      "includes": [
+        "The cell source named against the tier. That is what the price steps on, and the clinic says as much: hematopoietic tiers sit below bone marrow and adipose tiers throughout.",
+        "One program only. The shot names map to one area each, so a knee figure does not carry the skin or hair program, and combining them means adding the rows."
+      ],
+      "excludes": [
+        "Repeat treatments, if the listed figure turns out to be per treatment. Every program carries a recommended course of 3 to 8, and the price list does not say which the figure buys.",
+        "Consultation and imaging. The knee programs are gated on an MRI or X-ray grade, and no fee for that assessment appears anywhere on the site.",
+        "Any hospital admission. The clinic's own SVF page notes that Korean insurers expect at least 6 hours of admission for the fat derived injection, and no room charge is published.",
+        "Travel, accommodation and interpreting, none of which the clinic prices."
+      ],
+      "insuranceNote": "This matters more for Korean residents than for overseas patients. The clinic states that stem cell treatment for knee arthritis has been designated a new medical technology and is covered, and separately that Korean actual loss insurers are pushing back on the 6 hour admission rule that payment for the fat derived injection depends on. By the clinic's own account that argument is live, so treat cover as something to get in writing from your insurer rather than something the clinic can settle for you. Nothing on the site mentions US insurance, HSA or FSA, and overseas patients should assume self pay.",
+      "financingNote": "The clinic publishes no payment plan, no deposit policy and no financing partner. Prices appear in Korean won only, with no international payment terms and no note on cards, cash or wire, so ask which currency you will actually be billed in, what deposit holds a date, and what happens if you cancel after flying. The free online consultation the site offers is the route to a written quote, and getting the whole course costed on one document is worth the extra email.",
+      "faqs": [
+        {
+          "question": "How much does SH Clinic cost?",
+          "answer": "SH Clinic publishes its stem cell prices, and they run from 1,000,000 KRW for the entry level V-Shot tier to 10,000,000 KRW for the top P-Shot and B-Shot tiers. Knee work is listed at 5,500,000 KRW for one knee and 8,800,000 KRW for both. Most other programs sit between 2,000,000 and 6,000,000 KRW depending on which cell source the tier uses. These are the clinic's own published figures, not a quote, and the site does not price consultation or imaging."
+        },
+        {
+          "question": "Is the published price for one treatment or the whole course?",
+          "answer": "The clinic does not say, and this is the single biggest gap in the list. Each program shows a price and, separately, a recommended frequency: 3 treatments at 1 to 2 month intervals for most, and 8 treatments at 2 week intervals for hair loss. Whether 2,000,000 KRW buys one of those or all eight changes the real cost by a factor of eight, so pin it down in writing before you book anything."
+        },
+        {
+          "question": "Why do the tiers cost different amounts?",
+          "answer": "The clinic ties the tier to the cell source. Hematopoietic cell tiers are the cheapest and tiers using bone marrow or adipose cells cost more. Its own page attributes price variation to the type and technology of cells used, the number of administrations, and whether the cells are the patient's own or donated. The exception is the B-Shot, where four tiers are priced and no cell source is named for any of them."
+        },
+        {
+          "question": "What is not covered by the published figure?",
+          "answer": "Consultation, imaging, any hospital admission and travel. The knee programs are gated on an MRI or X-ray grade and the clinic publishes no fee for that assessment, nor for the admission its own page says Korean insurers expect for the fat derived injection. Ask for those as line items rather than assuming they are folded in."
+        }
+      ],
+      "sources": [
+        {
+          "label": "SH Clinic, stem cell WA program price list",
+          "url": "https://www.shclinic.co/stem-cell-therapy-in-korea/"
+        },
+        {
+          "label": "SH Clinic, BMAC injection for knee osteoarthritis",
+          "url": "https://www.shclinic.co/autologous-bone-marrow-stem-cell-injection/"
+        },
+        {
+          "label": "SH Clinic, SVF injection for knee arthritis",
+          "url": "https://www.shclinic.co/svf-injection-for-knee-arthritis-in-korea/"
+        },
+        {
+          "label": "SH Clinic, stem cell treatment overview",
+          "url": "https://www.shclinic.co/stem-cell-treatment-in-korea/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "yonsei-bh-clinic",
+    "costPage": {
+      "intro": "Yonsei BH Clinic publishes no prices of its own. The only figures that exist for it come from PlacidWay, a medical travel agency, and they are set out in the questions below rather than in this table, because they are the agency's numbers and not the clinic's. Read them as context for your quote, not as your quote.",
+      "introEmpty": "Yonsei BH Clinic does not publish prices. Its own non-covered items page, the fee disclosure Korean clinics are expected to carry, renders as an empty table with column headings and no line items, and none of the condition pages on the site names a figure. What you pay is set at consultation and turns on which condition is being treated, how many infusions the clinic plans, and what imaging and pre-treatment testing it wants first. Ask for the total in Korean won, in writing, broken out into the procedure, the cells, the imaging and any repeat sessions, and ask plainly whether the figure quoted is per session or for a whole course.",
+      "items": [
+        {
+          "label": "Stem cell therapy, any single condition on the agency list",
+          "unit": "per procedure",
+          "note": "A medical travel agency lists 22,000 USD for this, not the clinic. See the questions below. PlacidWay shows this same figure against every one of the 33 stem cell procedures it lists for the clinic, including knee arthritis, spinal stenosis, Parkinson's disease, diabetes, liver cirrhosis and stroke. Read it as one baseline number the agency has applied across the board, not as 33 separately costed treatments."
+        },
+        {
+          "label": "Erectile dysfunction, non-surgical vascular procedure with stem cell treatment",
+          "unit": "per procedure",
+          "note": "A medical travel agency lists 22,000 USD for this, not the clinic. See the questions below. The only row on the agency list carrying its own description rather than just repeating its title, which suggests the clinic supplied the wording. The price is still the same $22,000 as every other row."
+        },
+        {
+          "label": "Anti-aging stem cell package, booked through a medical travel agency",
+          "unit": "per package",
+          "note": "A medical travel agency lists 33,000 USD for this, not the clinic. See the questions below. The one figure PlacidWay treats as a real package price, and the number its directory listing quotes as the clinic's starting price. It bundles travel logistics rather than being a bare procedure fee, so it is not directly comparable to the $22,000 rows. The listing adds that prices may vary based on patient condition."
+        },
+        {
+          "label": "Any treatment quoted direct with the clinic in Seoul",
+          "note": "No price. The clinic quotes privately after consultation and publishes nothing on its own site, so a direct booking may not land anywhere near the agency figures. Worth pricing both routes before you commit."
+        }
+      ],
+      "includes": [
+        "For the $33,000 package only, as listed by the agency: accommodation near the clinic, airport transfers and local transport, medical evaluation before treatment, the initial consultation with the medical team, and post-treatment check-ups.",
+        "Nothing is stated about what the $22,000 procedure figure covers. The agency gives no inclusions for those rows at all, which is the first thing to pin down."
+      ],
+      "excludes": [
+        "Flights to and from Seoul, meals outside the package, personal spending during the trip, and travel or medical insurance. All four are listed as exclusions on the package.",
+        "Any treatment beyond the main package, so a second condition or a repeat infusion is billed on top.",
+        "Repeat sessions in general. Neither the clinic nor the agency says whether a figure buys one infusion or a course.",
+        "Imaging and pre-treatment testing when booking direct. No fee for these appears anywhere on the clinic's own site."
+      ],
+      "insuranceNote": "These treatments sit outside Korea's covered fee schedule, which is why the clinic carries a non-covered items page at all, though that page currently lists nothing. Overseas patients should assume self pay. Neither the clinic's site nor the agency listing mentions US insurance, HSA or FSA, and the package listing names travel and medical insurance as a patient cost rather than something it arranges. If you hold a policy that might reimburse any part of this, get the position from your insurer in writing before you fly, not from the clinic.",
+      "financingNote": "No payment plan, deposit policy or financing partner is published by the clinic or by the agency. The agency route is a free quote request and a chat window, so the real number arrives by email rather than off a page. Note that the agency quotes in USD while the clinic bills in Seoul and posts its own figures nowhere, so ask which currency you will actually be charged in, what the conversion is handled at, what deposit holds a date, and what is refundable if you cancel after booking flights.",
+      "faqs": [
+        {
+          "question": "How much does Yonsei BH Clinic cost?",
+          "answer": "There is no price from the clinic itself. A medical travel agency, PlacidWay, lists $22,000 for stem cell procedures at the clinic and $33,000 for an anti-aging package that also covers accommodation, transfers, evaluation and follow-up. The $22,000 is the same figure the agency shows against all 33 procedures it lists, so treat it as a rough baseline rather than the price of your specific treatment. A direct enquiry to the clinic in Seoul may return something different."
+        },
+        {
+          "question": "Does the clinic publish its own prices?",
+          "answer": "No. The non-covered items page on bhclinic.co.kr, which is where a Korean clinic's self-pay fees would normally be itemised, loads as a table with headings and no rows. The condition pages carry no figures either. The clinic's own Q&A board even runs a question along the lines of why the amount is expensive, but the answer sits behind a password gate, so the reasoning is not public."
+        },
+        {
+          "question": "Why is the same $22,000 shown for so many different treatments?",
+          "answer": "Because it is an agency listing, not a clinic price list. The same number appears against knee arthritis, rotator cuff, Parkinson's disease, diabetes, kidney failure, vision and roughly thirty other entries, which is not how a clinic prices work of that variety. The agency's own directory summary is inconsistent with it too, quoting the clinic's range as $33,000 rather than $22,000. Ask the clinic what your specific plan costs and how many sessions that figure covers."
+        },
+        {
+          "question": "Is RE:YOUTH the same thing as Yonsei BH Clinic?",
+          "answer": "No, and this matters if you are price shopping. RE:YOUTH is a separate brand that markets a programme in partnership with the clinic, and it carries its own listing on Bookimed with its own prices and a different address. Figures published under the RE:YOUTH name are that programme's, not the clinic's, so do not assume they are what Yonsei BH Clinic will quote you at its Gangnam address."
+        }
+      ],
+      "sources": [
+        {
+          "label": "PlacidWay, Yonsei BH Clinic price list",
+          "url": "https://www.placidway.com/price-list/325313/Yonsei-BH-Clinic"
+        },
+        {
+          "label": "PlacidWay, Anti Aging Stem Cell Treatment Package by Yonsei BH Clinic",
+          "url": "https://www.placidway.com/package/7466/Anti-Aging-Stem-Cell-Treatment-Package-in-Seoul-South-Korea-by-Yonsei-BH-Clinic"
+        },
+        {
+          "label": "PlacidWay, Yonsei BH Clinic profile",
+          "url": "https://www.placidway.com/profile/325313/Yonsei-BH-Clinic"
+        },
+        {
+          "label": "Yonsei BH Clinic, non-covered items disclosure",
+          "url": "https://www.bhclinic.co.kr/about/uninsured.php"
+        },
+        {
+          "label": "Yonsei BH Clinic, directions and contact",
+          "url": "https://www.bhclinic.co.kr/about/map.php"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  },
+  {
+    "slug": "yonsei-sarang-hospital",
+    "costPage": {
+      "intro": "Korean law requires hospitals to publish their non-covered fees, and Yonsei Sarang posts a long searchable schedule, so the figures below come from the hospital's own filing rather than from a brochure or an agency. Everything is in Korean won and every figure is a single line item, not a package. Several of the regenerative lines carry the note that materials are billed separately, which is where a quote grows once you get it in writing. Read it as the base your quote is built from, not as your quote.",
+      "introEmpty": "Yonsei Sarang Hospital does not publish a price for this and quotes it after an in person consultation. What you pay depends on which joint is treated, whether one side or both, which cell preparation or product is used, how much imaging has to be repeated in Seoul and whether you stay overnight. Ask for a written estimate broken out line by line, because Korean hospitals bill non-covered items separately rather than as one package figure.",
+      "items": [
+        {
+          "label": "Cartistem cell product, used in knee cartilage surgery",
+          "priceMin": 9000000,
+          "priceMax": 9000000,
+          "currency": "KRW",
+          "unit": "per product",
+          "note": "This is the product line only, filed under surgical materials. The operation itself, anaesthesia, theatre time and any inpatient nights are billed on separate lines. The entry was last changed in May 2021, so confirm it before you budget around it."
+        },
+        {
+          "label": "Knee osteoarthritis, bone marrow aspirate concentrate injection",
+          "priceMin": 1000000,
+          "priceMax": 1000000,
+          "currency": "KRW",
+          "unit": "per procedure",
+          "note": "Procedure fee only. The schedule says materials are separate and lists the Tricell BMC kit at 2,000,000 KRW, so the two lines together come to 3,000,000 KRW before imaging or a stay. The fee was reduced in January 2025."
+        },
+        {
+          "label": "Tricell BMC kit for the bone marrow injection",
+          "priceMin": 2000000,
+          "priceMax": 2000000,
+          "currency": "KRW",
+          "unit": "per procedure",
+          "note": "The disposable kit that goes with the bone marrow concentrate line above. It is filed separately, so it will appear as its own row on your bill."
+        },
+        {
+          "label": "Knee osteoarthritis, autologous adipose derived stromal vascular fraction injection",
+          "priceMin": 1700000,
+          "priceMax": 1700000,
+          "currency": "KRW",
+          "unit": "per procedure",
+          "note": "Procedure fee only, materials separate, and the schedule does not name the kit for this one, so ask what it adds. The hospital cut this line in January 2025 and raised it again in February 2026, which makes it the most recently repriced regenerative item on the list."
+        },
+        {
+          "label": "Modified microfracture using an allogeneic hyaline cartilage biomaterial, femoral condyle",
+          "priceMin": 2000000,
+          "priceMax": 2000000,
+          "currency": "KRW",
+          "unit": "per procedure",
+          "note": "Procedure fee only, materials separate. Filed in June 2024 under a health ministry notice for technologies whose assessment is deferred, which is worth knowing before you agree to it."
+        },
+        {
+          "label": "Chondro-Gide collagen membrane",
+          "priceMin": 2100000,
+          "priceMax": 2300000,
+          "currency": "KRW",
+          "unit": "per membrane",
+          "note": "Priced by size on the schedule, 2,100,000 KRW for 20x30mm through 2,300,000 KRW for 40x50mm. A materials line, so it lands on top of whichever cartilage procedure it is used in."
+        },
+        {
+          "label": "Knee PRP injection",
+          "priceMin": 150000,
+          "priceMax": 200000,
+          "currency": "KRW",
+          "unit": "one knee to both knees",
+          "note": "150,000 KRW for one knee and 200,000 KRW for both. Materials are separate and the blood separation kit is listed at 50,000 KRW. Both figures were cut in January 2026."
+        },
+        {
+          "label": "Shoulder PRP injection, rotator cuff",
+          "priceMin": 400000,
+          "priceMax": 400000,
+          "currency": "KRW",
+          "unit": "per procedure",
+          "note": "Materials separate. Added to the schedule in July 2026 under a health ministry notice. A separate line at the same fee covers PRP given during shoulder surgery."
+        },
+        {
+          "label": "Knee MRI",
+          "priceMin": 300000,
+          "priceMax": 540000,
+          "currency": "KRW",
+          "unit": "per scan",
+          "note": "540,000 KRW for a standard knee MRI, 400,000 KRW for a limited study and 300,000 KRW for a limited post operative scan. Contrast adds 100,000 KRW. If you arrive with outside films, reading them is billed at 50,000 KRW."
+        },
+        {
+          "label": "Single room, nursing care ward",
+          "priceMin": 300000,
+          "priceMax": 300000,
+          "currency": "KRW",
+          "unit": "per night",
+          "note": "The only room rate on the current schedule. Relevant if a cartilage procedure means an overnight stay rather than a same day injection."
+        },
+        {
+          "label": "Manual therapy session",
+          "priceMin": 120000,
+          "priceMax": 120000,
+          "currency": "KRW",
+          "unit": "per session",
+          "note": "Same fee for knee, shoulder, spine or other regions, charged per day. Rehab sessions add up quickly if you stay in Seoul afterwards, so count them into the trip cost."
+        },
+        {
+          "label": "Anti-aging injection, three tiers",
+          "priceMin": 1500000,
+          "priceMax": 4500000,
+          "currency": "KRW",
+          "unit": "per treatment",
+          "note": "Listed under cosmetic services as tiers P, B and S at 1,500,000, 3,000,000 and 4,500,000 KRW. The schedule does not state what is in any of them, so ask exactly what you would be given before you compare it with anything else."
+        }
+      ],
+      "includes": [
+        "The single item named on that line, at the fee the hospital has filed with Korean health authorities",
+        "An itemised Korean receipt, since non-covered items are billed and recorded line by line"
+      ],
+      "excludes": [
+        "Consultation and physician fees",
+        "Imaging. A standard knee MRI is a separate 540,000 KRW line",
+        "Disposable kits and materials. Most of the regenerative lines carry the note that materials are billed on top",
+        "Inpatient nights, billed at 300,000 KRW for a single room",
+        "Anaesthesia, medication and anything that falls under national insurance, which is billed on its own schedule",
+        "Flights, accommodation, interpreting and any medical tourism agency fee"
+      ],
+      "insuranceNote": "Every figure here sits on the hospital's non-covered schedule, which by definition means Korean National Health Insurance does not pay it. Some private Korean indemnity policies reimburse part of an injection line, so check your own wording rather than assuming. Foreign visitors settle in full at the counter, and a US or European insurer is unlikely to reimburse a cash paid procedure abroad. Ask for the itemised Korean receipt plus an English summary if you intend to try an HSA, FSA or out of network claim at home.",
+      "financingNote": "There is no published payment plan, deposit scheme or financing partner. The hospital bills item by item, so expect to settle the procedure, the materials, the imaging and any nights as separate charges rather than one package price. Card payment on the day is the norm for visiting patients. If you are booking through an agency, ask whether its fee sits on top of these figures, because the schedule is the hospital's own filing and carries no intermediary margin.",
+      "faqs": [
+        {
+          "question": "How much does Yonsei Sarang Hospital cost?",
+          "answer": "The regenerative lines on its published fee schedule run from 150,000 KRW for a single knee PRP injection to 9,000,000 KRW for the Cartistem cell product used in cartilage surgery. In between sit a bone marrow concentrate knee injection at 1,000,000 KRW plus a 2,000,000 KRW kit, and an adipose derived stromal vascular fraction knee injection at 1,700,000 KRW. Those are individual line items rather than packages, so a real invoice adds consultation, imaging, materials and any inpatient nights on top."
+        },
+        {
+          "question": "Why do so many of the prices say materials are billed separately?",
+          "answer": "Because that is how the Korean non-covered schedule is structured. The procedure fee and the disposable kit or implant are filed as different lines, and the hospital prints the caveat next to the procedure. The bone marrow injection is the clearest example: 1,000,000 KRW for the procedure and 2,000,000 KRW for the kit. Always ask which materials your case needs before you treat a procedure fee as the price."
+        },
+        {
+          "question": "Is the published schedule the price a foreign patient actually pays?",
+          "answer": "It is the price the hospital has filed for each item, in Korean won, and Korean hospitals are legally required to publish it. That makes it far more reliable than a brochure number, but it is still a base rather than a total. Read it as context for your quote, not as your quote."
+        },
+        {
+          "question": "What should I ask for before booking?",
+          "answer": "A written estimate broken out by line, naming the procedure, the kit or product, one joint or both, the imaging you will need repeated in Seoul, the number of nights and any rehab sessions. Also ask when the line was last repriced, because several of these changed in 2025 and 2026, and ask whether an interpreter is included or charged."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Yonsei Sarang Hospital published non-covered fee schedule",
+          "url": "http://www.yonserang.com/template/etc/non_pay_guide.php"
+        },
+        {
+          "label": "Fee schedule, procedures and surgery, temporarily non-covered items",
+          "url": "http://www.yonserang.com/template/etc/non_pay_guide.php?sc_code1=001&sc_code2=004&sc_code3=003"
+        },
+        {
+          "label": "Fee schedule, surgical materials including Cartistem",
+          "url": "http://www.yonserang.com/template/etc/non_pay_guide.php?sc_code1=002&sc_code2=002&sc_code3=001"
+        },
+        {
+          "label": "Fee schedule, MRI",
+          "url": "http://www.yonserang.com/template/etc/non_pay_guide.php?sc_code1=001&sc_code2=002&sc_code3=002"
+        },
+        {
+          "label": "Yonsei Sarang Hospital stem cell centre",
+          "url": "http://ysstemcell.com/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-10"
+    }
+  }
+]

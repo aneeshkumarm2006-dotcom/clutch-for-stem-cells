@@ -251,7 +251,9 @@ export default async function ClinicCostPage({
               {/* The answer-first paragraph. An AI answer engine lifts this, so
                   it states the figure (or its absence) in the first clause. */}
               <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-text-secondary">
-                {override(priced.length ? cms?.intro : (cms?.introEmpty ?? cms?.intro)) ??
+                {override(
+                  priced.length ? cms?.intro : (cms?.introEmpty ?? cms?.intro),
+                ) ??
                   (headlineRange ? (
                     <>
                       Treatment at {clinic.name}
@@ -414,8 +416,13 @@ export default async function ClinicCostPage({
                               </span>
                             )}
                           </td>
+                          {/* Plain hyphen, not an en dash. The site-wide copy
+                              rule (`lib/meta-text.ts`) bans em and en dashes in
+                              rendered text, and a placeholder is rendered text
+                              like any other. This only ever showed once a row
+                              arrived without a unit. */}
                           <td className="whitespace-nowrap px-4 py-3 align-top text-[13px] text-text-secondary">
-                            {item.unit ?? "–"}
+                            {item.unit ?? "-"}
                           </td>
                         </tr>
                       );
@@ -446,11 +453,7 @@ export default async function ClinicCostPage({
               </h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {includes.length ? (
-                  <ListCard
-                    title="Included"
-                    tone="included"
-                    items={includes}
-                  />
+                  <ListCard title="Included" tone="included" items={includes} />
                 ) : null}
                 {excludes.length ? (
                   <ListCard

@@ -69,6 +69,7 @@ import {
 } from "@/components/clinic/review-controls";
 import { RatingHistogram } from "@/components/clinic/rating-histogram";
 import { ReviewsContext } from "@/components/clinic/reviews-context";
+import { ExternalReviews } from "@/components/clinic/external-reviews";
 import { ConsultationDialog } from "@/components/lead/consultation-dialog";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 
@@ -397,6 +398,19 @@ export default async function ClinicReviewsPage({
 
               <DisclaimerNote variant="results" className="mt-6" />
             </section>
+          ) : null}
+
+          {/* Reception on other platforms. Sits between our rating summary and
+              our review list because that is the order a patient reads in: what
+              this site collected, what everywhere else says, then the reviews
+              themselves. It renders for clinics with no reviews of our own too,
+              where it is the only reception signal the page has. */}
+          {clinic.externalReviews ? (
+            <ExternalReviews
+              clinicName={clinic.name}
+              external={clinic.externalReviews}
+              className={stats.total > 0 ? "mt-10" : ""}
+            />
           ) : null}
 
           {/* Review list */}
