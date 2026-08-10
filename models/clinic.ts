@@ -210,6 +210,50 @@ export interface IExternalSource {
 }
 
 /**
+ * A single Google reviewer's own words, reproduced verbatim and attributed.
+ *
+ * Short excerpts under the reviewer's real display name, the way an editor
+ * quotes a source: the quote is checkable against `IExternalReviewSummary.url`,
+ * and `publishedAt` dates it so a two-year-old complaint isn't read as current.
+ *
+ * Three things a highlight is deliberately not:
+ *
+ *  - **Not a review on this site.** It never becomes a `Review` document, never
+ *    touches `ratingAvg`/`reviewCount`/`sortScore`, and never appears in the
+ *    clinic's `Review` or `aggregateRating` JSON-LD. Marking up review content
+ *    this site did not collect is the review-snippet abuse Google penalises.
+ *  - **Not a rewrite.** `text` is the reviewer's wording, trimmed at most to a
+ *    sentence boundary with an ellipsis. Paraphrasing someone's complaint into
+ *    softer prose and leaving their name on it misrepresents them.
+ *  - **Not a fair summary on its own.** Two quotes are not a reading of two
+ *    hundred ratings, which is what `summary` is for. Quote both directions
+ *    when the listing runs mixed.
+ */
+export interface IExternalReviewHighlight {
+  /** The reviewer's Google display name, as shown on the listing. */
+  author: string;
+  /** That reviewer's own 1-5 star rating, when the listing shows one. */
+  rating?: number;
+  /** The reviewer's wording, verbatim. */
+  text: string;
+  /** When they posted, so the excerpt can be dated rather than floating. */
+  publishedAt?: Date | null;
+  /**
+   * The source's own relative wording ("a month ago", "3 years ago") for when
+   * that is all it gives.
+   *
+   * Google Maps publishes relative dates only. Converting "3 years ago" into
+   * "August 2023" would invent a precision the source never stated, on a page
+   * whose whole claim is that these quotes are checkable, so the vaguer string
+   * is the more honest one. Set this OR `publishedAt`, not both; the renderer
+   * prefers the exact date when it has one.
+   */
+  publishedLabel?: string;
+  /** Deep link to the individual review, when the source exposes one. */
+  url?: string;
+}
+
+/**
  * What a clinic's Google Business Profile says, as of the last time we looked.
  *
  * `rating`/`reviewCount` are Google's numbers, restated, not ours — they are
@@ -218,9 +262,10 @@ export interface IExternalSource {
  * a number we cannot audit would misstate both, and marking up a rating this
  * site did not collect is exactly the review-snippet abuse Google penalises.
  *
- * `summary` is written in our own words. Never paste a reviewer's text: it is
- * their copyright, it goes stale silently, and one lifted sentence is not a
- * fair reading of two hundred ratings.
+ * `summary` is written in our own words and stays the primary signal.
+ * `highlights` carries verbatim reviewer quotes under the same rule: attributed
+ * to Google, dated, linked, and kept out of every number and every schema node
+ * this site publishes. See {@link IExternalReviewHighlight}.
  */
 export interface IExternalReviewSummary {
   /** Google's published 1-5 average. */
@@ -231,6 +276,8 @@ export interface IExternalReviewSummary {
   summary?: string;
   /** Recurring themes as short noun phrases, strongest first. */
   themes?: string[];
+  /** A few of the listing's top reviews, quoted and attributed. */
+  highlights?: IExternalReviewHighlight[];
   /** The listing itself, so the claim is checkable. */
   url?: string;
   /** When the figures were last read off the source. */
@@ -471,12 +518,27 @@ const externalSourceSchema = new Schema<IExternalSource>(
   { _id: false },
 );
 
+const externalReviewHighlightSchema = new Schema<IExternalReviewHighlight>(
+  {
+    author: { type: String, required: true, trim: true, maxlength: 120 },
+    rating: { type: Number, min: 1, max: 5 },
+    // Capped well below a full Google review. A highlight is an excerpt; if a
+    // quote needs more than this, the point belongs in `summary` instead.
+    text: { type: String, required: true, trim: true, maxlength: 600 },
+    publishedAt: { type: Date, default: null },
+    publishedLabel: { type: String, trim: true, maxlength: 60 },
+    url: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
 const externalReviewSummarySchema = new Schema<IExternalReviewSummary>(
   {
     rating: { type: Number, min: 0, max: 5 },
     reviewCount: { type: Number, min: 0 },
     summary: { type: String, trim: true, maxlength: 1200 },
     themes: { type: [String], default: [] },
+    highlights: { type: [externalReviewHighlightSchema], default: [] },
     url: { type: String, trim: true },
     checkedAt: { type: Date, default: null },
   },

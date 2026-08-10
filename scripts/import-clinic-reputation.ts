@@ -43,18 +43,24 @@ import { Clinic, User } from "@/models";
 type ReputationRecord = Record<string, unknown> & {
   slug?: string;
   externalReviews?: {
-    google?: Record<string, unknown>;
+    google?: Record<string, unknown> & { highlights?: unknown[] };
     reddit?: Record<string, unknown>;
   };
 };
 
+const strings = (v: unknown[]): string[] =>
+  v.filter((s): s is string => typeof s === "string" && s.trim().length > 0);
+
 /**
- * Every string a record renders as prose, for the compliance scan.
+ * Every string a record renders in OUR editorial voice.
  *
  * Themes are included alongside the summaries. They are the one place a claim
  * can slip in unnoticed — "cures arthritis" is just as much a medical claim as
  * a chip as it is in a sentence, and summarising someone else's post does not
  * make the claim ours to publish unqualified.
+ *
+ * Google `highlights` are deliberately absent: they are quoted, not authored,
+ * and the gates that apply to them differ. See {@link quotedOf}.
  */
 function proseOf(record: ReputationRecord): string[] {
   const ext = record.externalReviews ?? {};
@@ -73,8 +79,31 @@ function proseOf(record: ReputationRecord): string[] {
     ];
   };
 
-  return [...branch(ext.google), ...branch(ext.reddit)].filter(
-    (v): v is string => typeof v === "string" && v.trim().length > 0,
+  return strings([...branch(ext.google), ...branch(ext.reddit)]);
+}
+
+/**
+ * Verbatim reviewer text, which gets one gate rather than two.
+ *
+ * The compliance scan still applies. A reviewer writing "this cured my MS" is
+ * an unqualified medical claim on a clinic page whoever typed it, and the fix
+ * is for an editor to quote a different review, not to publish it and hope.
+ *
+ * The em/en dash gate does NOT apply, and that is the one deliberate exception
+ * to the site-wide rule in `lib/meta-text.ts`. Every other string on the site
+ * is ours to rewrite; a quote is not. Stripping a dash out of someone's
+ * sentence and leaving their real name under it is the worse of the two
+ * problems, so the dash stays.
+ */
+function quotedOf(record: ReputationRecord): string[] {
+  const raw = record.externalReviews?.google?.highlights;
+  if (!Array.isArray(raw)) return [];
+  return strings(
+    raw.map((h) =>
+      h && typeof h === "object"
+        ? (h as Record<string, unknown>).text
+        : undefined,
+    ),
   );
 }
 
@@ -82,10 +111,12 @@ function proseOf(record: ReputationRecord): string[] {
 function describe(ext: ReputationRecord["externalReviews"]): string {
   const parts: string[] = [];
   const g = ext?.google;
+  const quotes = Array.isArray(g?.highlights) ? g.highlights.length : 0;
+  const quoteNote = quotes ? `, ${quotes} quote(s)` : "";
   if (g?.rating != null) {
-    parts.push(`Google ${g.rating}★ (${g.reviewCount ?? "?"})`);
+    parts.push(`Google ${g.rating}★ (${g.reviewCount ?? "?"})${quoteNote}`);
   } else if (g?.summary) {
-    parts.push("Google prose only");
+    parts.push(`Google prose only${quoteNote}`);
   } else {
     parts.push("no Google");
   }
@@ -157,10 +188,12 @@ async function main() {
     }
 
     const prose = proseOf(raw);
+    const quoted = quotedOf(raw);
 
     // Compliance gate (PRD §8): the same cure/guarantee scan the admin panel
     // runs, applied here because a machine-authored batch never sees that UI.
-    const flags = findFlaggedPhrases(prose);
+    // Quotes are scanned too — see `quotedOf`.
+    const flags = findFlaggedPhrases([...prose, ...quoted]);
     if (flags.length) {
       const terms = [...new Set(flags)].join(", ");
       console.log(`✗ ${label}: content flags → ${terms}`);

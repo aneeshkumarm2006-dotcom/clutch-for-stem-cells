@@ -48,6 +48,7 @@ import {
   type SubnavItem,
 } from "@/components/clinic/profile-subnav";
 import { ReviewItem } from "@/components/clinic/review-item";
+import { ExternalReviews } from "@/components/clinic/external-reviews";
 import { ClinicCardGrid } from "@/components/clinic/savable-clinic-card";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 import { ReportDialog } from "@/components/compliance/report-dialog";
@@ -642,6 +643,21 @@ export default async function ClinicProfilePage({
                   </Link>
                 </Button>
               </div>
+            ) : null}
+
+            {/* Off-site reception, inside the Reviews section rather than as a
+                sibling of it: on a clinic with no reviews of our own this is
+                the only reception signal the profile has, and it reads as an
+                answer to the empty state directly above it. `compact` keeps it
+                subordinate to the section's own h2. */}
+            {clinic.externalReviews ? (
+              <ExternalReviews
+                clinicName={clinic.name}
+                external={clinic.externalReviews}
+                compact
+                headingId="external-reviews-profile"
+                className="mt-8 border-t border-border pt-6"
+              />
             ) : null}
           </section>
 

@@ -22,40 +22,63 @@ import type { ExternalSentiment } from "@/lib/enums";
  *     one implies a freshness we can't promise. Every panel carries the month it
  *     was last checked, and a panel with no `checkedAt` says "date not recorded"
  *     rather than quietly omitting it.
- *  3. **Never a quote.** Summaries are our own prose. The themes are short noun
- *     phrases, not sentences lifted from a reviewer.
+ *  3. **Our prose and their words, never blended.** Summaries and themes are
+ *     written by our editors. Verbatim reviewer text appears only inside
+ *     `Highlights`, under a heading that says whose words they are, with the
+ *     reviewer's name and the date attached to each one.
  *
  * Server-rendered plain markup, like `RatingHistogram` beside it, so the text
  * is in the HTML for crawlers and AI answer engines.
  *
- * Deliberately absent: any JSON-LD. Marking third-party ratings up as this
- * site's `aggregateRating` is the review-snippet abuse Google penalises, so
- * this block is presentational only — see `models/clinic.ts`.
+ * Deliberately absent: any JSON-LD. Marking third-party ratings or review text
+ * up as this site's `aggregateRating`/`Review` nodes is the review-snippet
+ * abuse Google penalises, so this block is presentational only — see
+ * `models/clinic.ts`.
+ *
+ * `compact` renders the same data for the clinic profile, where this sits under
+ * a "Reviews" heading that already exists: the section heading and intro drop
+ * to sub-heading size and the Reddit panel's thread list is suppressed, so the
+ * profile gets the reception signal without a second full-width review section
+ * competing with the page's own.
  */
 export function ExternalReviews({
   external,
   clinicName,
   className,
+  compact = false,
+  headingId = "external-reviews",
 }: {
   external: ExternalReviewsView;
   clinicName: string;
   className?: string;
+  compact?: boolean;
+  headingId?: string;
 }) {
   const { google, reddit } = external;
   if (!google && !reddit) return null;
 
+  const Heading = compact ? "h3" : "h2";
+
   return (
-    <section aria-labelledby="external-reviews" className={cn(className)}>
-      <h2
-        id="external-reviews"
-        className="font-display text-xl font-semibold text-text-primary"
+    <section aria-labelledby={headingId} className={cn(className)}>
+      <Heading
+        id={headingId}
+        className={cn(
+          "font-display font-semibold text-text-primary",
+          compact ? "text-[15px]" : "text-xl",
+        )}
       >
         What {clinicName} looks like elsewhere
-      </h2>
-      <p className="mt-1.5 max-w-2xl text-[13.5px] leading-relaxed text-text-secondary">
-        Summaries of third-party sources, written by our editors. These are not{" "}
-        {clinicName}&apos;s reviews on this site and are not counted in the
-        rating above.
+      </Heading>
+      <p
+        className={cn(
+          "mt-1.5 max-w-2xl leading-relaxed text-text-secondary",
+          compact ? "text-[13px]" : "text-[13.5px]",
+        )}
+      >
+        Third-party sources, summarised by our editors and quoted where a
+        reviewer said it best. These are not {clinicName}&apos;s reviews on this
+        site and are not counted in its rating here.
       </p>
 
       <div
@@ -65,7 +88,7 @@ export function ExternalReviews({
         )}
       >
         {google ? <GooglePanel google={google} /> : null}
-        {reddit ? <RedditPanel reddit={reddit} /> : null}
+        {reddit ? <RedditPanel reddit={reddit} compact={compact} /> : null}
       </div>
     </section>
   );
@@ -118,7 +141,89 @@ function GooglePanel({
           themes={google.themes}
         />
       ) : null}
+
+      {google.highlights.length ? (
+        <Highlights highlights={google.highlights} />
+      ) : null}
     </Panel>
+  );
+}
+
+/**
+ * Verbatim Google reviews, attributed.
+ *
+ * The heading does the work the markup can't: these are the only sentences in
+ * the whole block this site didn't write, and a reader skimming past a quote
+ * shouldn't come away thinking an editor endorsed it. Each `<blockquote>` names
+ * its reviewer and dates itself, and links back to the source where one exists,
+ * so the quote is checkable rather than merely asserted.
+ *
+ * No JSON-LD here either, for the same reason as the rest of the block: a
+ * `Review` node built from someone else's review is the thing that earns a
+ * manual action.
+ */
+function Highlights({
+  highlights,
+}: {
+  highlights: NonNullable<ExternalReviewsView["google"]>["highlights"];
+}) {
+  return (
+    <div className="mt-4">
+      <p className="text-[12px] font-semibold uppercase tracking-wide text-text-muted">
+        In reviewers&apos; own words
+      </p>
+      <p className="mt-0.5 text-[11.5px] leading-snug text-text-muted">
+        Quoted from Google, not written by us.
+      </p>
+      <ul className="mt-2.5 space-y-3">
+        {highlights.map((h, i) => (
+          <li key={`${h.author}-${i}`}>
+            <blockquote className="border-l-2 border-border-strong pl-3">
+              <p className="text-[13.5px] italic leading-relaxed text-text-secondary">
+                &ldquo;{h.text}&rdquo;
+              </p>
+              <footer className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[12px] text-text-muted">
+                <span className="font-semibold text-text-secondary">
+                  {h.author}
+                </span>
+                {h.rating != null ? (
+                  <span className="inline-flex items-center gap-0.5">
+                    <Star className="size-3 fill-current" aria-hidden="true" />
+                    {h.rating}
+                    <span className="sr-only"> out of 5</span>
+                  </span>
+                ) : null}
+                {/* An exact date when the source gave one, otherwise the
+                    source's own relative phrase. Never a date derived from
+                    "3 years ago" — see `IExternalReviewHighlight`. */}
+                {h.publishedAt ? (
+                  <time dateTime={h.publishedAt}>
+                    {new Date(h.publishedAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                    })}
+                  </time>
+                ) : h.publishedLabel ? (
+                  <span>{h.publishedLabel}</span>
+                ) : null}
+                {h.url ? (
+                  <a
+                    href={h.url}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow ugc"
+                    className="text-text-link hover:underline"
+                  >
+                    on Google
+                  </a>
+                ) : (
+                  <span>on Google</span>
+                )}
+              </footer>
+            </blockquote>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -144,8 +249,10 @@ const SENTIMENT_TONE: Record<ExternalSentiment, string> = {
 
 function RedditPanel({
   reddit,
+  compact = false,
 }: {
   reddit: NonNullable<ExternalReviewsView["reddit"]>;
+  compact?: boolean;
 }) {
   return (
     <Panel
@@ -185,7 +292,7 @@ function RedditPanel({
         <Themes label="Recurring points" themes={reddit.themes} />
       ) : null}
 
-      {reddit.sources.length ? (
+      {reddit.sources.length && !compact ? (
         <div className="mt-4">
           {/* The labels are the posters' own thread titles, reproduced exactly.
               Some are blunt ("<brand> is a scam"), and rewriting them to soften

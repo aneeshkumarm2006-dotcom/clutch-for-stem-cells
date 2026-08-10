@@ -711,6 +711,14 @@ export interface ExternalReviewsView {
     reviewCount?: number;
     summary?: string;
     themes: string[];
+    highlights: {
+      author: string;
+      rating?: number;
+      text: string;
+      publishedAt: string | null;
+      publishedLabel?: string;
+      url?: string;
+    }[];
     url?: string;
     checkedAt: string | null;
   } | null;
@@ -737,13 +745,30 @@ function externalReviewsView(doc: IClinic): ExternalReviewsView | null {
     d ? new Date(d).toISOString() : null;
 
   const g = ext.google;
+  // A highlight with no author or no text can't be attributed, and an
+  // unattributable quote is the one thing this block must never render.
+  const highlights = (g?.highlights ?? [])
+    .filter((h) => h.author?.trim() && h.text?.trim())
+    .map((h) => ({
+      author: h.author.trim(),
+      rating: h.rating,
+      text: h.text.trim(),
+      publishedAt: iso(h.publishedAt),
+      publishedLabel: h.publishedLabel,
+      url: h.url,
+    }));
   const google =
-    g && (g.rating != null || g.summary || (g.themes ?? []).length)
+    g &&
+    (g.rating != null ||
+      g.summary ||
+      (g.themes ?? []).length ||
+      highlights.length)
       ? {
           rating: g.rating,
           reviewCount: g.reviewCount,
           summary: g.summary,
           themes: g.themes ?? [],
+          highlights,
           url: g.url,
           checkedAt: iso(g.checkedAt),
         }

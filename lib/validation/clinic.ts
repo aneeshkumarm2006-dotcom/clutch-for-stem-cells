@@ -170,12 +170,29 @@ const externalSourceSchema = z.object({
   url: z.string().url().optional().or(z.literal("")),
 });
 
+/**
+ * A quoted Google review. `author` and `text` are both required: an unattributed
+ * quote is not checkable, and a name with no quote attached is just a stranger's
+ * name on a clinic page. Unlike the listing average, an individual reviewer's
+ * `rating` starts at 1 — Google has no zero-star review, so a 0 here means the
+ * field was left blank and coerced rather than read off the source.
+ */
+const externalReviewHighlightSchema = z.object({
+  author: z.string().min(1).max(120),
+  rating: z.number().min(1).max(5).optional(),
+  text: z.string().min(1).max(600),
+  publishedAt: z.preprocess(blankToUndefined, z.coerce.date().nullish()),
+  publishedLabel: z.preprocess(blankToUndefined, z.string().max(60).optional()),
+  url: z.string().url().optional().or(z.literal("")),
+});
+
 const externalReviewSummarySchema = z
   .object({
     rating: z.number().min(0).max(5).optional(),
     reviewCount: z.number().int().min(0).optional(),
     summary: z.preprocess(blankToUndefined, z.string().max(1200).optional()),
     themes: z.array(z.string().max(80)).default([]),
+    highlights: z.array(externalReviewHighlightSchema).default([]),
     url: z.string().url().optional().or(z.literal("")),
     checkedAt: z.preprocess(blankToUndefined, z.coerce.date().nullish()),
   })
