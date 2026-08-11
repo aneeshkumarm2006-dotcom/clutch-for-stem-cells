@@ -1,60 +1,63 @@
 [
   {
-    "slug": "fountain-life",
+    "slug": "biote",
     "externalReviews": {
       "google": {
-        "rating": 4.3,
-        "reviewCount": 22,
-        "summary": "Google shows 4.3 from 22 reviews. Google's own topic tally is led by mentions of the team and staff, plus the facility, testing and health information. On Birdeye, where the average is 4.2 across 19 reviews, write-ups describe multi-hour annual diagnostic visits, imaging, named physicians and membership cost.",
+        "rating": 3.7,
+        "reviewCount": 40,
+        "summary": "Google shows 3.7 from 40 reviews at Biote's Irving corporate address, and the listing carries no Google tally of review themes. No individual review text was retrievable. On BBB, two unanswered complaints concern supplement orders and refunds, while a single five star review discusses hormone pellet treatment received through a certified provider.",
         "themes": [
-          "clinical team",
-          "considerate staff",
-          "facility",
-          "diagnostic testing",
-          "health information"
+          "supplement order delivery",
+          "customer service responsiveness",
+          "refund requests",
+          "hormone pellet therapy"
         ],
-        "url": "https://www.google.com/maps/place/Fountain+Life+-+Naples/@26.2691523,-81.800267,17z/data=!4m8!3m7!1s0x88db1fd1e55900b1:0xcc974474af406762!9m1!1b1!16s%2Fg%2F11swt2h2mz",
+        "url": "https://www.google.com/maps/place/Biote/@32.8722839,-96.9714584,17z/data=!4m8!3m7!1s0x864e8264df8952f1:0xa9ca4c96fdc9be!8m2!3d32.8722839!4d-96.9714584!9m1!1b1!16s%2Fg%2F11b6dq_srj",
         "checkedAt": "2026-08-10",
         "highlights": [
           {
-            "author": "patrick monsivais",
+            "author": "angela harrison",
             "rating": 5,
-            "publishedLabel": "a year ago",
-            "text": "This physical saved my life. I signed up for the Apex plan. They take a deep dive way past your normal physical. I was there for five hours, it didn't seem like five, and the staff were very nice and professional. I discovered some things that if left untreated would have lead to serious consequences. It's been worth every penny."
+            "publishedLabel": "9 months ago",
+            "text": "When I had my ovaries removed, I did not realize all that would follow. They took much more than I had expected. BIOTE has given me back a big part of myself. And my hair! Is no longer falling out! Anyone needing help with sleep, moods, emotional regulation, brain fog, ADD, getting things done, sleeping through the night, sugar cravings, mindless eating, and anger — this is for you."
           },
           {
-            "author": "Christopher Kagan",
-            "rating": 5,
-            "publishedLabel": "a year ago",
-            "text": "All I can say is wow. What an amazing facility and group of doctors and team. I had a study done of my heart with contrast to make sure everything looks good. Highly recommend Fountain Life and Dr. Kingsbury, he was fantastic!"
-          },
-          {
-            "author": "Starlet Jordan",
+            "author": "DaytimeTraveler",
             "rating": 1,
-            "publishedLabel": "3 years ago",
-            "text": "I would not recommend this clinic. They already make thousands of dollars and then they also choose to make extra commission off of the supplements they prescribe on the fullscript Website. Other practitioners offer 35% discount and they choose to make money over giving patients a discount. The wait is also long."
+            "publishedLabel": "a year ago",
+            "text": "Thought this clinic would help me with my severe menopause issues but the doctor created other more severe issues. Unbeknownst to me I was given a very high dose of testosterone along with estrogen and progesterone. My voice got scratchy, body hair started to grow more, I had bleeding after nothing for 7 years and there were physical developments that are now permanent despite it being over a year. When I brought it up the doctor acted all put out about it."
+          },
+          {
+            "author": "kent lochmandy",
+            "rating": 1,
+            "publishedLabel": "a year ago",
+            "text": "Biote needs to train their retailers much better. More monitoring is necessary. Even after the first dose of pellets caused complications Biote's answer as to why where wrong. Find a better thought out solution to you needs please. For your well being."
           }
         ]
       },
       "reddit": {
-        "summary": "Discussion is thin but real. In r/TonyRobbins, commenters argue over whether the five figure membership is worth it, several calling it overpriced, while one poster said a heart scan there flagged a blockage. In r/PeterAttia, one customer reported generic follow up advice and a self reported ex employee advised against it.",
-        "threadCount": 2,
+        "summary": "Biote comes up often in menopause, perimenopause and TRT subreddits, and reports are split. Some posters describe better sleep, energy and libido after pellets, while others report weight gain, hair shedding, acne or mood swings they could not adjust because the dose stays fixed for months. Clinicians question the pellet model.",
+        "threadCount": 7,
         "sentiment": "mixed",
         "themes": [
-          "high membership cost",
-          "scam accusations",
-          "generic follow up",
-          "staff turnover",
-          "early detection scans"
+          "fixed dose for months",
+          "weight gain",
+          "hair shedding",
+          "clinician skepticism",
+          "out of pocket pricing"
         ],
         "sources": [
           {
-            "label": "r/TonyRobbins thread asking whether Fountain Life is legitimate",
-            "url": "https://www.reddit.com/r/TonyRobbins/comments/vp015d/fountain_life_sceptic/"
+            "label": "r/Menopause thread on Biote pellet experiences",
+            "url": "https://www.reddit.com/r/Menopause/comments/1qjhymo/biote_hrt_pellets_thoughts/"
           },
           {
-            "label": "r/PeterAttia thread comparing Biograph and Fountain Life",
-            "url": "https://www.reddit.com/r/PeterAttia/comments/1lnoi3b/biograph_vs_fountain_life/"
+            "label": "r/FamilyMedicine thread on Biote pellets for perimenopause",
+            "url": "https://www.reddit.com/r/FamilyMedicine/comments/1hwa3lu/biote_hormone_pellet_for_low_libido_in/"
+          },
+          {
+            "label": "r/TRT_females thread on long term Biote pellet use",
+            "url": "https://www.reddit.com/r/TRT_females/comments/1pjhklv/please_help_or_comment_have_been_using_biote/"
           }
         ],
         "checkedAt": "2026-08-10T00:00:00.000Z"
@@ -62,42 +65,44 @@
     }
   },
   {
-    "slug": "stemulus-innovative-healthcare",
+    "slug": "california-wellness-institute",
     "externalReviews": {
       "google": {
-        "summary": "No Google rating is confirmed for this clinic, since the audited listing was rejected as a different business. Where review text is readable on third party aggregators, patients mainly discuss stem cell and PRP treatment, naturopathic and whole body wellness planning, and their interactions with the clinical staff.",
+        "rating": 4.9,
+        "reviewCount": 33,
+        "summary": "California Wellness Institute holds 4.9 from 33 Google reviews. Google's topic tally is led by knowledgeable staff, with reviewers also mentioning colon hydrotherapy, weight loss, comfort and minimal pain. A PlacidWay page carrying 23 testimonials averages 4.7 and adds caveats about HCG program disclosures and physician supervision.",
         "themes": [
-          "stem cell therapy",
           "knowledgeable staff",
-          "naturopathic care",
-          "wellness planning",
-          "friendly atmosphere"
+          "colon hydrotherapy",
+          "weight loss programs",
+          "comfort during treatment",
+          "welcoming team"
         ],
+        "url": "https://www.google.com/maps/place/California+Wellness+Institute/@33.7585866,-116.3990121,17z/data=!4m8!3m7!1s0x80dafd9a24955555:0x619df32a1bc09253!8m2!3d33.7585866!4d-116.3990121!9m1!1b1!16s%2Fg%2F11ggs1c1lz",
         "checkedAt": "2026-08-10",
-        "url": "https://www.google.com/maps/place/Stemulus+Innovative+Healthcare/@33.5162369,-112.0545767,17z/data=!4m8!3m7!1s0x872b13455c447935:0x8492a48c71f31c43!9m1!1b1!16s%2Fg%2F11h7c7ghry",
         "highlights": [
           {
-            "author": "Alyssia Escobar",
+            "author": "Holly Weaver",
             "rating": 5,
-            "publishedLabel": "3 years ago",
-            "text": "Stan, Dr. Lane, and Dr. Ewald were amazing! Their kindness, positivity, and honesty was overwhelming. They were down to earth and made us feel so comfortable. We appreciated all of the information we received as well. We drove all the way from Reno so my father-in-law could receive stem cell treatment for a TBI."
+            "publishedLabel": "3 months ago",
+            "text": "This was my first Colon Hydrotherapy and the experience was amazing. Carol was super educated and explained everything in perfect detail. She knows her stuff! I will be definitely coming back as a loyal customer."
           },
           {
-            "author": "Aubrey Young",
+            "author": "Ms. Yosselin",
             "rating": 5,
-            "publishedLabel": "7 years ago",
-            "text": "Dr. Jaime Ewald at Stemulus is the most intelligent, progressive doctor that I have ever met. She integrates body physiology with natural healing techniques and gets results. In the time I have been under her care, I have never felt better."
+            "publishedLabel": "10 months ago",
+            "text": "I had such a great experience with Colon Hydrotherapy! Monica walked me through everything step by step, which really helped ease my nerves and made the whole process stress-free. It was comfortable, painless, and so much easier than I expected. I'd definitely recommend it to anyone wanting to make a positive, healthy life choice!"
           },
           {
-            "author": "Ulanda Seabrook",
-            "rating": 2,
-            "publishedLabel": "a year ago",
-            "text": "Great staff, however I didn't experience any changes at all after receiving treatment here. I've heard so much about stem cell therapy and thought this would help me a lot. However I didn't. Very Dissatisfied especially for the money I spent and the travel it took for me to get there, and I didn't like that they didn't give you a follow up call or email."
+            "author": "Jamie Louise Wolf",
+            "rating": 5,
+            "publishedLabel": "8 months ago",
+            "text": "I have had to have 2 major surgeries on my right shoulder. I was in constant achy pain and with just 1 treatment that constant ache and discomfort is gone!! I am in complete amazement with EPAT treatment! The in detail assessment that Mike gave me was outstanding. I am telling everyone I know to contact CWI for this amazing treatment."
           }
         ]
       },
       "reddit": {
-        "summary": "Reddit has no discussion of this Phoenix clinic. Searches for the clinic name, the name plus review, and its chief medical officer returned nothing that names the practice. The few hits for the word Stemulus refer to unrelated things, such as a climbing route and an Albuquerque education center.",
+        "summary": "Reddit has essentially nothing on California Wellness Institute. Searches for the clinic name, the name with review, and the name with Rancho Mirage returned unrelated threads, and the only Rancho Mirage stem cell discussion concerns a different local provider. Treat the absence as a lack of coverage, not as a signal either way.",
         "threadCount": 0,
         "sentiment": "limited",
         "themes": [],
@@ -107,239 +112,119 @@
     }
   },
   {
-    "slug": "primehealth-denver",
+    "slug": "cellinique-clinic",
     "externalReviews": {
-      "google": {
-        "rating": 4.9,
-        "reviewCount": 205,
-        "summary": "PrimeHealth Denver holds 4.9 across 205 Google reviews, and Birdeye lists the same 4.9 across 223. Google's own tally shows reviewers most often mentioning an attentive team, supplements and root cause analysis. Birdeye write ups centre on in depth testing and personalized protocols, with one reviewer noting that testing, supplement and membership costs felt significant.",
-        "themes": [
-          "root cause analysis",
-          "extensive testing",
-          "supplements",
-          "individualized care",
-          "attentive team"
-        ],
-        "highlights": [
-          {
-            "author": "Scott Crapo",
-            "rating": 5,
-            "publishedLabel": "4 months ago",
-            "text": "PrimeHealth has been one of the best healthcare experiences I've had. The team was attentive, responsive, and easy to communicate with from day one. They explained everything clearly and made sure my wellness plan actually made sense for me. Savannah and Nicole were especially helpful in identifying and addressing health and lifestyle issues that had been affecting me for years."
-          },
-          {
-            "author": "Jillian Dinsdale",
-            "rating": 5,
-            "publishedLabel": "5 months ago",
-            "text": "I would recommend Prime Health and my experience with Abby to anyone! I had such a positive experience getting my health back on track. Everyone in the office is so welcoming and the office is really set up to feel like a comforting place. I can definitely attribute so much of my current wellbeing to the work put in here."
-          }
-        ],
-        "url": "https://www.google.com/maps/place/PrimeHealth+Denver+Functional+Medicine/@39.7424314,-105.0631362,17z/data=!4m8!3m7!1s0x876c79062025c795:0x7b0658326160581d!9m1!1b1!16s%2Fg%2F11h3bjrbdn",
-        "checkedAt": "2026-08-10"
-      },
       "reddit": {
-        "summary": "Reddit discussion of PrimeHealth is very thin. One commenter in an r/Denver thread about finding a functional medicine doctor for SIBO recommended the practice, saying they and several friends have used it over roughly five years and that a friend reported good results there. No critical threads surfaced.",
-        "threadCount": 1,
+        "summary": "Only two Reddit posts name Cellinique Clinic, both first person write ups from Seoul visitors covering a breast reduction consultation and a skin tightening session. Both posters described an unhurried consultation, clear aftercare instructions and pricing above budget level. Neither discusses stem cell treatment, and both threads drew almost no engagement.",
+        "threadCount": 2,
         "sentiment": "limited",
         "themes": [
-          "local word of mouth",
-          "sibo and gut care",
-          "sparse online discussion"
+          "unhurried consultation",
+          "clear aftercare guidance",
+          "premium pricing",
+          "low engagement threads",
+          "no stem cell discussion"
         ],
         "sources": [
           {
-            "label": "r/Denver thread on finding a functional medicine doctor for SIBO",
-            "url": "https://www.reddit.com/r/Denver/comments/1py3snk/functional_medicine_doc_who_can_treat_a_nasty/"
+            "label": "r/Plasticsurgerystation thread on a skin tightening treatment at Cellinique in Seoul",
+            "url": "https://www.reddit.com/r/Plasticsurgerystation/comments/1uji1pq/my_skin_tightening_experience_at_cellinique/"
+          },
+          {
+            "label": "r/KoreanClinicCare thread on a breast reduction consultation at Cellinique",
+            "url": "https://www.reddit.com/r/KoreanClinicCare/comments/1vg0ptz/my_breast_reduction_consultation_at_cellinique/"
           }
         ],
         "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "forever-labs",
-    "externalReviews": {
-      "google": {
-        "rating": 4.1,
-        "reviewCount": 8,
-        "summary": "Forever Labs shows a 4.1 rating across 8 Google reviews. Google's own topic tally is small but points at stem cell banking as the main thing reviewers mention, with peace of mind noted twice. Individual review text was not retrievable, and Trustpilot lists no reviews for the company domain.",
-        "themes": [
-          "stem cell banking",
-          "stem cells",
-          "peace of mind"
-        ],
-        "highlights": [
-          {
-            "author": "Andrew Nadhir",
-            "rating": 5,
-            "publishedLabel": "5 years ago",
-            "text": "Forever Labs is amazing. They made it incredibly easy and safe to bank my stem cells and I have peace of mind knowing they're in the best of hands. Knowing I have my stem cells banked for 2, 5, or 30 years down the road is a great feeling."
-          },
-          {
-            "author": "Anthony Bewlz",
-            "rating": 5,
-            "publishedLabel": "5 years ago",
-            "text": "It's been a few years since banking my SC's and I can honestly say I'm beyond glad that I did. The staff was and has been absolutely 'top shelf' during the entire process, from intake all the way to today with ongoing updates. Cant say enough about my experience!"
-          },
-          {
-            "author": "Amna Husain",
-            "rating": 2,
-            "publishedLabel": "5 years ago",
-            "text": "I have never received any updates about the research or the advancements made thus far. I was told by my doctor's office (conveniently after the surgery and banking) that no other procedures have been approved and they don't know if that will happen in the next 5, 10 or 20 years. I am paying $250 for annual banking but for what?"
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Forever+Labs/@42.2773904,-83.8007236,17z/data=!4m8!3m7!1s0x883cae3dab6aaaab:0xa316473ba3595651!9m1!1b1!16s%2Fg%2F11g8vcxs2m",
-        "checkedAt": "2026-08-10"
       },
-      "reddit": {
-        "summary": "Reddit discussion is substantial but divided. One poster has repeatedly warned since 2021 that the bone marrow collection was far more invasive than advertised and reported lasting pain afterwards. Independent commenters mostly debate value, questioning whether banked adult cells have any current use and whether the fees are justified.",
-        "threadCount": 19,
-        "sentiment": "mixed",
-        "themes": [
-          "painful bone marrow collection",
-          "unclear future use of banked cells",
-          "cost versus benefit doubts",
-          "downplayed procedure risks",
-          "ongoing storage fees"
-        ],
-        "sources": [
-          {
-            "label": "r/Biohackers thread on one customer's Forever Labs experience",
-            "url": "https://www.reddit.com/r/Biohackers/comments/1o6yrir/please_research_forever_labs_before_doing/"
-          },
-          {
-            "label": "r/longevity thread on whether Forever Labs banking is worth the cost",
-            "url": "https://www.reddit.com/r/longevity/comments/f58694/anyone_have_personal_experience_with_forever_labs/"
-          },
-          {
-            "label": "r/stemcells thread on uses for banked stem cells",
-            "url": "https://www.reddit.com/r/stemcells/comments/1g4jeyg/uses_for_banked_stem_cells/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "cenegenics",
-    "externalReviews": {
-      "google": {
-        "rating": 4.9,
-        "reviewCount": 64,
-        "summary": "Google reviewers rate this location 4.9 across 64 reviews, and Google's own topic tally leads with professional staff, healthy aging and age management. On Birdeye, which pools 173 reviews at 4.9, patients discuss thorough health evaluations, physician advice and exercise and nutrition plans, with one reviewer citing program cost.",
-        "themes": [
-          "professional staff",
-          "healthy aging",
-          "thorough health evaluation",
-          "age management programs",
-          "exercise and nutrition plans"
-        ],
-        "highlights": [
-          {
-            "author": "Tony Chaskelson",
-            "rating": 5,
-            "publishedLabel": "2 years ago",
-            "text": "Most thorough medical exam I have ever participated in. I like the whole body, mind and general health approach and came away with a great deal of very useful information and plans and vitamins to improve the quality of my life. Dr. Patel and the team are excellent and very detailed in their approach and solutions."
-          },
-          {
-            "author": "Kodiak Yazzie",
-            "rating": 5,
-            "publishedLabel": "6 years ago",
-            "text": "The evaluation was eye opening and detailed. I was able to learn valuable information about preventive health care and took away so much from the meeting with Dr. Leake. The entire process was easy, they came to my home at my convenience to draw blood and my office visit was exceptional and thorough."
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Cenegenics+Las+Vegas/@36.1682205,-115.2866037,17z/data=!4m8!3m7!1s0x80c8bf84616ef795:0x34aa65abc3184402!9m1!1b1!16s%2Fg%2F1tfjwkjj",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "Reddit discussion is thin but real. A 2023 r/fatFIRE thread drew mixed views: one poster described a first visit as lecture heavy and pressured, another said acquaintances found the program supportive, and several questioned the cost. An older r/Scams post came from a doctor questioning how Cenegenics recruited physicians.",
-        "threadCount": 4,
-        "sentiment": "mixed",
-        "themes": [
-          "high cost",
-          "lecture heavy consultations",
-          "sales driven model",
-          "hands on support",
-          "advertising skepticism"
-        ],
-        "sources": [
-          {
-            "label": "r/fatFIRE thread on whether Cenegenics is worth it",
-            "url": "https://www.reddit.com/r/fatFIRE/comments/10g3sc3/cenegenics_optimal_health_fitness_for_living_your/"
-          },
-          {
-            "label": "r/Scams thread on Cenegenics physician recruiting",
-            "url": "https://www.reddit.com/r/Scams/comments/2plis5/beware_of_cenegenics/"
-          },
-          {
-            "label": "r/AskReddit thread on whether Cenegenics is legitimate",
-            "url": "https://www.reddit.com/r/AskReddit/comments/nfmk1/does_this_cenegenics_thing_really_work_or_is_it_a/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "regeneration-clinic-of-panama",
-    "externalReviews": {
       "google": {
         "rating": 4.8,
-        "reviewCount": 49,
-        "summary": "Google lists a 4.8 rating across 49 reviews. Google's own topic tally shows reviewers most often mention stem cell treatment and injections, with joint and nerve complaints such as meniscus issues, neck pain and neuropathy coming up, plus interest in avoiding surgery. Staff professionalism and a clean, modern facility are the other recurring notes.",
-        "themes": [
-          "stem cell treatment",
-          "professional staff",
-          "injections",
-          "avoiding surgery",
-          "clean modern facility"
-        ],
+        "reviewCount": 14,
+        "url": "https://www.google.com/maps/place/%EC%85%80%EB%A6%AC%EB%8B%89%EC%9D%98%EC%9B%90(Cellinique+clinic)/@37.520544,127.032143,17z/data=!4m8!3m7!1s0x357ca3002bbf219d:0xd1df4cb0ea1697ef!8m2!3d37.520544!4d127.032143!9m1!1b1!16s%2Fg%2F11x7yhl56l",
         "highlights": [
           {
-            "author": "Bobby McCree",
+            "author": "Margaret Fu",
             "rating": 5,
-            "publishedLabel": "5 months ago",
-            "text": "Both knees are feeling great 7 days after procedure. My left knee has a slight tear in miniscus, my right knee is arthritic from acl tear in 1996. 2 days after injections my wife and I was enjoying a mini vacation touring Panama. I would definitely recommend to anyone looking to avoid surgery. 5 stars to Regeneration clinic of Panama."
+            "publishedLabel": "2 months ago",
+            "text": "I recently had an exceptional experience at Cellinique. As a tourist, I was concerned about potential language barriers, but I had absolutely no issues—there were staff fluent in English and communicate very professionally throughout the entire process. The environment is incredibly serene, clean, and well-designed, felt like I was in a hotel."
           },
           {
-            "author": "Diane Barnard",
+            "author": "Liana",
             "rating": 5,
-            "publishedLabel": "3 months ago",
-            "text": "Great care and plenty of information about the treatment and care. Everyone is well informed about the procedures, professional & knowledgeable. Accommodations were very nice as well. Dr Ponte was very professional and thorough. The clinic was very clean and seemed very high tech and state of art."
+            "publishedLabel": "6 months ago",
+            "text": "I had a great experience at this clinic and would highly recommend it to international visitors. The chief doctor carefully assessed my skin condition and facial structure before starting the treatment, which felt very personalized. It was also a huge plus that he is fluent in English, making communication easy and reassuring. Knowing that he frequently lectures overseas added to my trust."
           },
           {
-            "author": "Andy Basler",
-            "rating": 1,
-            "publishedLabel": "3 weeks ago",
-            "text": "I went in November and received treatment on my shoulders. Unfortunately I was seeing absolutely ZERO positive effects. My good shoulder actually has gone bad since. The post care was not existent. The people are very nice and the facilities is nice, but I wish more people would have told there after effects. I spent a lot of money with no results."
+            "author": "Yewon Lee",
+            "rating": 5,
+            "publishedLabel": "6 months ago",
+            "text": "I'm very very sensitive to pain and tend to be nervous about non-surgical aesthetic treatments, so I wanted something natural rather than dramatic. As my smile lines became more noticeable, I decided to try a collagen-stimulating injectable treatment called Radiesse instead of fillers, and I'm really happy with the result. The improvement looks subtle and natural."
           }
         ],
-        "url": "https://www.google.com/maps/place/Regeneration+Clinic+Of+Panama/@8.9871032,-79.5202496,17z/data=!4m8!3m7!1s0x8faca91ead421d4d:0x315c58e27012876a!9m1!1b1!16s%2Fg%2F11sh5m3k_4",
         "checkedAt": "2026-08-10"
+      }
+    }
+  },
+  {
+    "slug": "evexias-medical-centers",
+    "externalReviews": {
+      "google": {
+        "rating": 4.7,
+        "reviewCount": 114,
+        "summary": "Google's review topics for this Southlake practice focus on hormone care, pellet therapy and testosterone treatment, with cosmetic touch ups mentioned less often. Reviewers also discuss staff attentiveness, personalized care and the office atmosphere, and a smaller number raise wait times. A Birdeye profile pooling Google, Facebook and BBB entries shows 4.8 across 233 reviews.",
+        "themes": [
+          "hormone care",
+          "pellet therapy",
+          "testosterone treatment",
+          "staff attentiveness",
+          "wait times"
+        ],
+        "url": "https://www.google.com/maps/place/EVEXIAS+Medical+Centers/@32.9276885,-97.1212797,17z/data=!4m8!3m7!1s0x864dd43ffb082319:0x2cbc91126783739!8m2!3d32.9276885!4d-97.1165161!9m1!1b1!16s%2Fg%2F1td3l_fp",
+        "checkedAt": "2026-08-10",
+        "highlights": [
+          {
+            "author": "Eddie Vargas",
+            "rating": 5,
+            "publishedLabel": "a month ago",
+            "text": "My provider, Nicole Taylor is awesome, she is very caring. Very thorough. An extremely kind. I highly Recommend Evexias and Nicole"
+          },
+          {
+            "author": "Lonna Rimestad",
+            "rating": 3,
+            "publishedLabel": "a year ago",
+            "text": "I absolutely love Samantha. She has been great helping me get my hormones in balance and dealing with the sudden weight gain in my 50s, despite working out 5x a week and eating plenty of protein. UGH! The office is also great at running on time and not making people wait for too long. One thing that's really off putting, and I'm sure many people don't realize, is that they are marking up prescriptions 50-60% over the cost being charged by the outsourced pharmacies!"
+          },
+          {
+            "author": "Leslie Pickering",
+            "rating": 5,
+            "publishedLabel": "Edited 3 years ago",
+            "text": "Katelyn is awesome! She's very knowledgeable about all things skin care related. She performed my first microneedling procedure and it was a really good experience. Can't wait to work with Katelyn again to get my skin in the best shape possible!"
+          }
+        ]
       },
       "reddit": {
-        "summary": "r/stemcells is the only place with real discussion, spread over several threads. Some posters report improvements after treatment for stroke recovery and joint problems, and praise the in house lab and named doctors. Others report no change months later, quotes near 20,000 dollars, and sales calls that felt like pressure.",
+        "summary": "Reddit discusses the EvexiPEL pellet brand far more than the Southlake clinic itself. Posters report mixed results: some describe better energy and focus, others report hormone level swings, doses that cannot be adjusted mid cycle, and about 500 dollars per insertion. One trans poster asking about EVEXIAS was pointed to trans focused providers instead.",
         "threadCount": 6,
         "sentiment": "mixed",
         "themes": [
-          "in house lab",
-          "high treatment cost",
-          "pushy sales calls",
-          "mixed outcomes",
-          "praise for named doctors"
+          "hormone level swings",
+          "limited dose control",
+          "pellet cost",
+          "insertion discomfort",
+          "no trans specific care"
         ],
         "sources": [
           {
-            "label": "r/stemcells thread on patient experiences at the clinic",
-            "url": "https://www.reddit.com/r/stemcells/comments/1ooujlx/any_experiences_with_regeneration_clinic_of_panama/"
+            "label": "r/Testosterone thread on EvexiPEL pellet experiences",
+            "url": "https://www.reddit.com/r/Testosterone/comments/1epxf62/has_anyone_had_a_pellet_evexipel_experiences/"
           },
           {
-            "label": "r/stemcells thread on whether the clinic is legitimate",
-            "url": "https://www.reddit.com/r/stemcells/comments/1ky48vn/experience_with_regeneration_clinic_at_panama/"
+            "label": "r/transftm thread on using EVEXIAS for hormone therapy",
+            "url": "https://www.reddit.com/r/transftm/comments/1r9x0uk/my_mom_wants_to_use_evexias/"
           },
           {
-            "label": "r/stemcells thread on negative experiences and sales tactics",
-            "url": "https://www.reddit.com/r/stemcells/comments/1uxdrf5/honesty_about_regeneration_clinic_of_panama/"
+            "label": "r/Menopause thread on EvexiPEL hormone pellets",
+            "url": "https://www.reddit.com/r/Menopause/comments/1knq13h/hrt_pellets_and_evexipel/"
           }
         ],
         "checkedAt": "2026-08-10T00:00:00.000Z"
@@ -347,119 +232,120 @@
     }
   },
   {
-    "slug": "next-health",
+    "slug": "gangnam-js-hospital",
     "externalReviews": {
       "google": {
-        "rating": 5,
-        "summary": "Google shows 5.0 for this listing, and does not expose a public rating count for it. Google's own topic tally is led by IV therapy, cryotherapy and vitamin shots, with hyperbaric oxygen, infrared sauna and red light therapy also recurring, and no stem cell topic among them.",
+        "rating": 4.3,
+        "reviewCount": 78,
+        "summary": "Gangnam JS Hospital shows a 4.3 rating across 78 Google reviews. Google's own topic tags indicate reviewers most often discuss surgical operations and knee surgery, with smaller mentions of stem cell treatment and umbilical cord blood. Rehabilitation, post-surgery recovery and hospital cleanliness also appear, and no independent free-text review source was found.",
         "themes": [
-          "iv therapy",
-          "cryotherapy",
-          "vitamin shots",
-          "clean facility",
-          "staff professionalism"
+          "knee surgery",
+          "stem cell treatment",
+          "umbilical cord blood",
+          "rehabilitation and recovery",
+          "hospital cleanliness"
         ],
+        "url": "https://www.google.com/maps/place/Gangnam+JS+Hospital/@37.4899038,127.0337135,17z/data=!4m8!3m7!1s0x357ca3f478a5d001:0xbe60dd4aa8dda70e!8m2!3d37.4899038!4d127.0337135!9m1!1b1!16s%2Fg%2F1q5btqcf9",
+        "checkedAt": "2026-08-10",
         "highlights": [
           {
-            "author": "Roper Vicente",
+            "author": "Anthony Rodgers",
             "rating": 5,
-            "publishedLabel": "3 months ago",
-            "text": "So today I went to Next Health to get a Super B energy Shot, it stung a little not gonna lie but while I was waiting they gave me a tour of all the new things they are offering at the Sunset Plaza location and I was amazed by how many wellness and health boosting devices they have, from the full body Infrared session to the Oxygen chamber."
+            "publishedLabel": "2 months ago",
+            "text": "I am extremely pleased to have found Gangnam JS Hospital. I underwent their stem cell-based cartilage regeneration and leg realignment procedures for my right knee a little more than a year ago. It was one of the best decisions I have ever made..I came back this year to remove the plate and screws from the leg realignment and continue my journey back to athletic mobility."
           },
           {
-            "author": "Yvonne Zaragoza",
+            "author": "Anselm Mugele",
+            "rating": 5,
+            "publishedLabel": "2 months ago",
+            "text": "My stay at Gangnam JS Hospital in Seoul was a remarkable experience. I traveled to Korea to undergo a knee treatment involving stem cells derived from umbilical cord blood, combined with an intensive rehabilitation program. While the treatment itself was the main reason for my journey, what impressed me most was the quality and intensity of the rehabilitation process."
+          },
+          {
+            "author": "Ji Won Kim",
+            "rating": 1,
+            "publishedLabel": "4 months ago",
+            "text": "No wonder why scheduling an appointment was so easy. The doctor's attitude was absolutely unacceptable. He was yelling in the room and I had to pay for him to say a single sentence. Absolutely do not come here. Patients are treated without any dignity or humanity. Truly disappointing"
+          }
+        ]
+      },
+      "reddit": {
+        "summary": "Reddit has almost no discussion of this hospital. The only mention found is a 2015 Tottenham fan thread where a commenter quotes a Korean news article citing the hospital's director on a footballer's foot injury. No patient reviews, cost reports or treatment experiences turned up in any search.",
+        "threadCount": 1,
+        "sentiment": "limited",
+        "themes": [
+          "no patient reports",
+          "sports medicine mention"
+        ],
+        "sources": [
+          {
+            "label": "r/coys thread on a player foot injury quoting the hospital director",
+            "url": "https://www.reddit.com/r/coys/comments/3n3l0v/sons_injury_plantar_fasciitis/"
+          }
+        ],
+        "checkedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "slug": "invigor-medical",
+    "externalReviews": {
+      "google": {
+        "rating": 4.8,
+        "reviewCount": 1198,
+        "summary": "Google's own review topics for Invigor Medical focus on staff responsiveness, quick replies and an easy ordering and prescription refill process, with semaglutide the treatment named most often. On Trustpilot, where the score is 4.4 across 1,783 reviews, praise for named support reps sits alongside complaints about shipping delays and subscription billing.",
+        "themes": [
+          "staff responsiveness",
+          "prescription refills",
+          "ordering process",
+          "shipping delays",
+          "subscription billing"
+        ],
+        "url": "https://www.google.com/maps/place/Invigor+Medical/@46.2754624,-119.2110532,17z/data=!4m8!3m7!1s0x54987847c995aef3:0xede94b2dcdc701c!8m2!3d46.2754624!4d-119.2110532!9m1!1b1!16s%2Fg%2F11gy1vkh1k",
+        "checkedAt": "2026-08-10",
+        "highlights": [
+          {
+            "author": "Memphis Slimbo",
             "rating": 5,
             "publishedLabel": "5 months ago",
-            "text": "I had an amazing experience at Next Health. Their IV therapy truly felt like it gave me another chance at life. I left feeling refreshed and so much better. Dani was incredible and made the entire process smooth, easy, and comfortable. I highly recommend them if you're looking to improve your wellness!"
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Next+Health+in+West+Hollywood/@34.0925094,-118.3780608,17z/data=!4m8!3m7!1s0x80c2bec1be21cc25:0x9a2a34e8a68274c5!9m1!1b1!16s%2Fg%2F11c0r5n450",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "A July 2026 r/Biohackers post from an LA member complained about a $300 test they were not quoted for, conflicting answers on peptide minimums, and prices well above what commenters said the market charges. Two other LA and NYC threads name the brand briefly and positively. Overall discussion is thin.",
-        "threadCount": 3,
-        "sentiment": "mixed",
-        "themes": [
-          "undisclosed test fees",
-          "high peptide pricing",
-          "inconsistent policy answers",
-          "brief positive iv mentions",
-          "thin overall discussion"
-        ],
-        "sources": [
-          {
-            "label": "r/Biohackers thread on Next Health membership and pricing",
-            "url": "https://www.reddit.com/r/Biohackers/comments/1vbgy02/next_health_is_a_scam_asking_for_a_friend/"
+            "text": "Had some issues with a delayed and potentially late order. This was a big concern because of the need for continual refrigeration of the product. Brooklyn was on the case, responsive and followed through until resolution of the issue. Has also been excellent in the past and it's a real plus ti have the same “go to” person for the overall service."
           },
           {
-            "label": "r/LAhotgirlies thread on Los Angeles IV clinics",
-            "url": "https://www.reddit.com/r/LAhotgirlies/comments/1rrutj3/iv_clinics/"
-          },
-          {
-            "label": "r/NYCbitcheswithtaste thread on functional medicine providers",
-            "url": "https://www.reddit.com/r/NYCbitcheswithtaste/comments/1ra6v6a/whos_your_functional_medicine_person/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "chaum",
-    "externalReviews": {
-      "google": {
-        "rating": 3.2,
-        "reviewCount": 33,
-        "summary": "Reviewers talk mostly about cost, several saying prices ran multiples of Korean university hospitals, and about the facilities, described by some as cafe like. Views on doctor communication split, and some one star ratings reference a past political controversy rather than care. A mirror of these reviews on MyMediTravel averages 2.9 across 16.",
-        "themes": [
-          "cost versus other hospitals",
-          "facility atmosphere",
-          "health checkup system",
-          "doctor communication"
-        ],
-        "highlights": [
-          {
-            "author": "Deus ex machina",
+            "author": "Adam Hamilton",
             "rating": 5,
-            "publishedLabel": "a month ago",
-            "text": "Private checkups are available. The concept is that the doctor comes to you, rather than you going there. Everyone is kind and considerate. It feels less like a factory."
+            "publishedLabel": "5 months ago",
+            "text": "Rosa did an excellent job at customer service. I am very pleased with the response from the team at Invigor Medical. They are the only company I would trust with supplying my supplements. They use the best compounding pharmacies in the nation and provide unmatchable customer service. Thank you"
           },
           {
-            "author": "albert limanto",
-            "rating": 5,
-            "publishedLabel": "a year ago",
-            "text": "This Chaum is a high end medical center (they combine a high tech, future treatment to a medical check up). Their program is amazing and out of the box. The medical facilities and the building facilities is amazing. Anti aging, if you looking for the true meaning of anti aging, you should go here."
-          },
-          {
-            "author": "S L",
+            "author": "A Kozich",
             "rating": 1,
-            "publishedLabel": "2 years ago",
-            "text": "I went here for a facial and other treatments. It was ok but the problem is they charge foreigners more. I went to another clinic and found the prices to be fair. You can find clinics that do the same if not better at a fairer price."
+            "publishedLabel": "Edited 7 months ago",
+            "text": "Things were good at first, then they started sending half expired meds. Then they tell you that requests for compensation have to be forwarded to management who will take days to contact the pharmacy and then they'll \"make a decision\"."
           }
-        ],
-        "url": "https://www.google.com/maps/place/%EC%B0%A8%EC%9B%80(Chaum)/@37.5232348,127.0441642,17z/data=!4m8!3m7!1s0x357ca4776f20368b:0xaa21c646611672c2!9m1!1b1!16s%2Fg%2F1tgfn1wd",
-        "checkedAt": "2026-08-10"
+        ]
       },
       "reddit": {
-        "summary": "Reddit discussion of Chaum is thin. In one r/koreatravel thread, commenters called the prices high, said they had not heard of the brand, and suggested university hospitals instead. A r/SeoulPlasticSurgery poster asked whether Chaum's Evercell clinic requesting a passport before booking was normal, and replies said that is standard for international patients.",
-        "threadCount": 2,
+        "summary": "Most Reddit discussion sits in r/TrimixForED, where posters use Invigor as a telehealth prescriber rather than a pharmacy, with orders filled by outside compounders. Several call service and shipping reliable, and useful in states other vendors skip. The recurring complaint is price, with posters quoting roughly 270 to 390 dollars per order.",
+        "threadCount": 8,
         "sentiment": "mixed",
         "themes": [
           "high cost",
-          "low name recognition",
-          "preference for university hospitals",
-          "passport requested before booking",
-          "beauty and dermatology focus"
+          "telehealth prescriber not pharmacy",
+          "responsive customer service",
+          "strict exchange policy",
+          "coverage in underserved states"
         ],
         "sources": [
           {
-            "label": "r/koreatravel thread on beauty treatments at Chaum Medical Center",
-            "url": "https://www.reddit.com/r/koreatravel/comments/1hw8rui/beauty_treatments_in_korea_chaum_medical_center/"
+            "label": "r/TrimixForED thread on Invigor Medical",
+            "url": "https://www.reddit.com/r/TrimixForED/comments/1m5mlt2/invigor_medical/"
           },
           {
-            "label": "r/SeoulPlasticSurgery thread on passport requests before consultation",
-            "url": "https://www.reddit.com/r/SeoulPlasticSurgery/comments/1k6lczo/passport_before_consultation/"
+            "label": "r/TrimixForED thread on choosing a vendor",
+            "url": "https://www.reddit.com/r/TrimixForED/comments/1top6h5/vendor_of_choice/"
+          },
+          {
+            "label": "r/TrimixForED thread on where to buy trimix",
+            "url": "https://www.reddit.com/r/TrimixForED/comments/1lnmnjz/where_is_everybody_getting_their_trimix/"
           }
         ],
         "checkedAt": "2026-08-10T00:00:00.000Z"
@@ -467,59 +353,131 @@
     }
   },
   {
-    "slug": "michigan-center-for-regenerative-medicine",
+    "slug": "male-excel",
     "externalReviews": {
       "google": {
-        "rating": 4.7,
-        "reviewCount": 108,
-        "summary": "Google lists a 4.7 rating across 108 reviews. Google's own review topics focus on PRP and stem cell injections, a caring doctor and bedside manner, with lumbar spine and back pain among the conditions named. An unclaimed Birdeye profile shows 4.7 from 204 reviews, where reviewers describe pain relief and no pressure to decide.",
+        "rating": 4.3,
+        "reviewCount": 122,
+        "summary": "Google reviewers rate Male Excel 4.3 across 122 reviews, and Google's topic tally centers on testosterone, medication assistance, thyroid levels and lab results, with several mentions of increased energy and quick responses. Trustpilot, where the company holds 4.5 from about 6,010 reviews, adds recurring complaints about late refills, membership cost and reaching live support.",
         "themes": [
-          "prp injections",
-          "stem cell injections",
-          "caring doctor",
-          "bedside manner",
-          "back pain relief"
+          "testosterone therapy",
+          "medication assistance",
+          "thyroid levels and lab results",
+          "increased energy",
+          "refill delays and support access"
         ],
+        "url": "https://www.google.com/maps/place/Male+Excel/@35.2277133,-80.8564497,17z/data=!4m8!3m7!1s0x8856a10000dd12c5:0xaf35947fd1a77440!8m2!3d35.2277133!4d-80.8564497!9m1!1b1!16s%2Fg%2F11xfgw9dj5",
+        "checkedAt": "2026-08-10",
         "highlights": [
           {
-            "author": "Tony Coy",
-            "rating": 5,
-            "publishedLabel": "3 months ago",
-            "text": "Dr Nabity and his staff are great. They take the time to expansively listen and share knowledge about conditions, injuries, and treatments. I can tell Dr Nabity is passionate about helping his clients and avoiding surgery if possible. He's clear about plan of action and that has helped me a lot! I feel more comfortable with my health and moving forward because of Michigan Center for Regenerative Medicine. I highly recommend."
+            "author": "Jack Fayard",
+            "rating": 1,
+            "publishedLabel": "a month ago",
+            "text": "Good product but these folks don't give a hoot about customer. It was time for my refill so I did the questionnaire and submitted. A week later still no review, ended up having to cancel as was leaving town and wasn't sure I'd be home. I only had two more days of meds left so they couldn't get them to me fast enough. Shop around please."
           },
           {
-            "author": "James R",
+            "author": "Craig",
             "rating": 5,
-            "publishedLabel": "a month ago",
-            "text": "I cannot say anything good enough about Dr. Santa and the entire staff at Michian centers of Regentive Medicine! I suffered for 6 yrs with debilitating cervical instability in my c1- c2 through c7 area. Dr Santa Ana recommeneded PRP for me. Its has been life changing for me with just the 1st treatment. I have now gotten a second treatment because the 1st was so successful!"
+            "publishedLabel": "6 months ago",
+            "text": "No complaints at all. Customer service is friendly and quick to respond. Doctor was really nice and thorough . Meds shipped quick. I feel much better and look forward to being a customer for the foreseeable future."
+          },
+          {
+            "author": "Donald Andrae",
+            "rating": 4,
+            "publishedLabel": "11 months ago",
+            "text": "I went from 178 lb to 140 pounds it took almost a year. I am now around 145 pounds but put on some muscle not fat and I am now in the best shape I have been in probably 30 years if not longer."
           }
-        ],
-        "url": "https://www.google.com/maps/place/Michigan+Center+for+Regenerative+Medicine/@42.6430987,-83.1256303,17z/data=!4m8!3m7!1s0x8824e9d76e1277b5:0x9e8334830cd23b0a!9m1!1b1!16s%2Fg%2F11f_knxqtz",
-        "checkedAt": "2026-08-10"
+        ]
       },
       "reddit": {
-        "summary": "Nearly all Reddit discussion sits in r/cervical_instability. One patient posted a detailed PRP write up and reported gradual improvement over the following weeks, and later listed the clinic among providers used for neck instability. Posters note it does not inject the upper C0 to C2 ligaments, so some travel elsewhere for that.",
+        "summary": "Male Excel comes up often in r/Testosterone, mostly about service rather than results. Common complaints are the $99 monthly membership plus medication cost, chatbot support, slow appointment scheduling and shipping delays. Others report smooth, professional care. Several posters disliked the gel and moved to cream or injections.",
+        "threadCount": 16,
+        "sentiment": "mixed",
+        "themes": [
+          "high cost",
+          "unresponsive support",
+          "slow scheduling",
+          "shipping delays",
+          "gel formulation complaints"
+        ],
+        "sources": [
+          {
+            "label": "r/Testosterone thread on Male Excel service complaints",
+            "url": "https://www.reddit.com/r/Testosterone/comments/1us81ln/male_excel_looking_for_feedback_from_my_fellow/"
+          },
+          {
+            "label": "r/Testosterone thread on a Male Excel sign up experience",
+            "url": "https://www.reddit.com/r/Testosterone/comments/mfvh9f/avoid_male_excel_hrt/"
+          },
+          {
+            "label": "r/Testosterone thread on one member's Male Excel review",
+            "url": "https://www.reddit.com/r/Testosterone/comments/nnesu1/my_review_of_maleexcel/"
+          }
+        ],
+        "checkedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "slug": "nanoori-hospital",
+    "externalReviews": {
+      "google": {
+        "rating": 4.2,
+        "reviewCount": 64,
+        "summary": "The Google profile shows 4.2 from 64 reviews. Google's topic tally is led by translator support, physiotherapy and x-ray imaging, with smaller mentions of spinal care and staff friendliness. Reviews republished on a medical travel aggregator describe imaging done within one visit and short waits, plus one complaint about being pushed toward costly scans.",
+        "themes": [
+          "translator support",
+          "physiotherapy",
+          "x-ray imaging",
+          "spinal care",
+          "friendly nursing staff"
+        ],
+        "url": "https://www.google.com/maps/place/NANOORI+Hospital+(Gangnam+Branch)/@37.5202957,127.0339776,17z/data=!4m8!3m7!1s0x357ca38c85877309:0xdf0f6e23f409beea!8m2!3d37.5202957!4d127.0339776!9m1!1b1!16s%2Fg%2F1td7x053",
+        "checkedAt": "2026-08-10",
+        "highlights": [
+          {
+            "author": "Ohana Umemoto",
+            "rating": 5,
+            "publishedLabel": "a month ago",
+            "text": "They quickly gave me X-rays and an MRI which allowed them to diagnose and treat my back pain. I am from Hawaii and do not speak Korean. They provided a translator, Jenny, who patiently listened to my explanations and descriptions of my pain. The doctor clearly described what the tests indicated and the recommended treatments as well as scheduled a follow up appointment. All the tests and treatments were performed in 3-4 hours."
+          },
+          {
+            "author": "Amy Young",
+            "rating": 5,
+            "publishedLabel": "2 months ago",
+            "text": "Super efficient and so helpful. I had an English speaking guide who stuck with me the whole time and did a great job of taking my medical history and explaining what I wanted to each person I interacted with. I had an x-ray, consultation, MRI and another consultation all in 3 hours, at a totally reasonable price."
+          },
+          {
+            "author": "Zenny Frei",
+            "rating": 4,
+            "publishedLabel": "2 months ago",
+            "text": "Helpful assistance throughout. Staffs are friendly and supportive. Explanations by doctors are clear. Sequence of lab tests could be improved though: Went thru MRI and Xray twice, each round after seeing different physician. Overall a positive experience of treatment in a foreign land."
+          }
+        ]
+      },
+      "reddit": {
+        "summary": "Discussion is thin and mostly outside spine care. Two r/PectusExcavatum threads cover Nuss chest surgery at Nanoori with a Dr. Park, where one poster based in Australia praised the international care team, the interpreter and daily physiotherapy, and another said the bill came to roughly 32,000 dollars. A Living_in_Korea commenter listed a 550,000 won MRI.",
         "threadCount": 3,
         "sentiment": "positive",
         "themes": [
-          "cervical instability treatment",
-          "prp injections",
-          "gradual improvement",
-          "limited upper cervical scope",
-          "thin discussion volume"
+          "nuss procedure for pectus excavatum",
+          "english speaking international team",
+          "interpreter support",
+          "out of pocket surgery cost",
+          "mri pricing"
         ],
         "sources": [
           {
-            "label": "r/cervical_instability thread on PRP for neck instability",
-            "url": "https://www.reddit.com/r/cervical_instability/comments/15ydt40/michigan_regenerative_medicine_prp_review/"
+            "label": "r/PectusExcavatum thread on choosing a surgeon, with a poster reporting Nuss surgery at Nanoori",
+            "url": "https://www.reddit.com/r/PectusExcavatum/comments/18l8jk1/pectus_excavatum/"
           },
           {
-            "label": "r/cervical_instability thread on doctors used for CCI",
-            "url": "https://www.reddit.com/r/cervical_instability/comments/19bg0aa/doctors_ive_been_using_for_cci_seeing_good_results/"
+            "label": "r/PectusExcavatum thread on Nuss surgery recovery, with a cost figure for Nanoori",
+            "url": "https://www.reddit.com/r/PectusExcavatum/comments/1nxlrul/22m_7_months_after_nuss_surgery/"
           },
           {
-            "label": "r/cervical_instability thread on the clinic hiring a neurosurgeon",
-            "url": "https://www.reddit.com/r/cervical_instability/comments/1kjiac9/michigan_regenerative_medicine_just_hired_a/"
+            "label": "r/Living_in_Korea thread on MRI pricing in Korea",
+            "url": "https://www.reddit.com/r/Living_in_Korea/comments/17zgang/pelvic_floor_mri_cost_in_korea/"
           }
         ],
         "checkedAt": "2026-08-10T00:00:00.000Z"
@@ -527,280 +485,44 @@
     }
   },
   {
-    "slug": "blatman-health-and-wellness-center",
-    "externalReviews": {
-      "google": {
-        "rating": 4.7,
-        "reviewCount": 113,
-        "summary": "Google reviewers most often discuss pain management, chronic and myofascial pain care, injections and staff manner, several describing long term relationships with the practice. Birdeye shows 4.6 from 53 reviews, while Healthgrades rates the founding physician 3.6 from 37, split between five star and one star, with some reviewers raising billing and follow up concerns.",
-        "themes": [
-          "pain management",
-          "chronic pain treatment",
-          "myofascial pain treatment",
-          "caring staff",
-          "injections"
-        ],
-        "highlights": [
-          {
-            "author": "Davina Campbell",
-            "rating": 5,
-            "publishedLabel": "3 months ago",
-            "text": "Dr B, Jennifer, & Lois have been treating my chronic conditions for over 25 years now. Their level of education excels the generic plan of care offered by other facilities. I love that I can trust their medical advice and I do not have to ever worry about my safety. They really are amazing! Thank you so much for treating me over these years."
-          },
-          {
-            "author": "Pam Gilchrist",
-            "rating": 5,
-            "publishedLabel": "Edited 4 months ago",
-            "text": "Dr. Blatman is the most knowledgeable medical expert I have ever treated with. He is particularly excellent at complex medical cases including Ehlers-Danlos Syndrome, Fibromyalgia, pain management and personalized healing protocols that may be different from mainstream medicine. I have been a patient for nearly 30 years and he has given me my life back."
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Blatman+Health+and+Wellness+Center/@39.2075921,-84.3790807,17z/data=!4m8!3m7!1s0x884053c2e0f55857:0x1827d7b686db1c5!9m1!1b1!16s%2Fg%2F1tdcxs43",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "Reddit has no meaningful discussion of Blatman Health and Wellness Center. Searches for the clinic name, the city, and Dr Hal Blatman returned no threads that mention the practice. Anyone researching this clinic will need to look outside Reddit.",
-        "threadCount": 0,
-        "sentiment": "limited",
-        "themes": [],
-        "sources": [],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "pur-form",
-    "externalReviews": {
-      "google": {
-        "rating": 4.8,
-        "reviewCount": 236,
-        "summary": "Google shows 4.8 across 236 reviews. Google's own topic tally is dominated by staff, with friendly staff cited 86 times and welcoming staff 29, alongside comfortable atmosphere and clear explanations. Treatment mentions spread across stem cell treatment, cryotherapy, hydrogen therapy, red light therapy and cold plunge.",
-        "themes": [
-          "friendly staff",
-          "comfortable atmosphere",
-          "stem cell treatment",
-          "cryotherapy",
-          "clear explanations"
-        ],
-        "highlights": [
-          {
-            "author": "Morgan Acunto",
-            "rating": 5,
-            "publishedLabel": "9 months ago",
-            "text": "I've had such a great experience at PUR-FORM! It's always so seamless to get appointments when I need them, scheduling is quick and easy, and the team is so responsive. The nurses are incredibly accommodating and attentive, always making sure I'm comfortable and cared for throughout my visit."
-          },
-          {
-            "author": "Keyan",
-            "rating": 5,
-            "publishedLabel": "a month ago",
-            "text": "When you step inside Pur-Form you're immediately greeted with a lovely professional staff. Nina & Gabi truly make this place feel like home. I feel great. I look great. And the staff is great. Special shoutout to Nina and Gabi."
-          }
-        ],
-        "url": "https://www.google.com/maps/place/PUR-FORM/@26.3827476,-80.0967033,17z/data=!4m8!3m7!1s0x88d8e1f8e325c51d:0x487318139a484478!9m1!1b1!16s%2Fg%2F11g1npm6y1",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "Reddit has no real discussion of PUR-FORM in Boca Raton. Searches on the brand name, the city, the co-founder and the medical director returned only unrelated threads about pure form supplements and general stem cell debate. Anyone researching this clinic will not find first hand patient accounts on Reddit.",
-        "threadCount": 0,
-        "sentiment": "limited",
-        "themes": [],
-        "sources": [],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "regenerative-medicine-la",
-    "externalReviews": {
-      "google": {
-        "rating": 4.9,
-        "reviewCount": 190,
-        "summary": "Google shows 4.9 from 190 reviews. Google's own review topics cluster on supplements, IV therapy, stem cell treatment and neuropathy care, with frequent mentions of the doctor's knowledge and the staff. Birdeye lists a lower 4.7 across 212 reviews, 14 of them one star.",
-        "themes": [
-          "supplements",
-          "iv therapy",
-          "knowledgeable doctor",
-          "caring staff",
-          "stem cell treatment"
-        ],
-        "highlights": [
-          {
-            "author": "Jennifer Booher",
-            "rating": 5,
-            "publishedLabel": "5 months ago",
-            "text": "Our eleven year old son was disabled by fluoroquinolone antibiotics. He was unable to walk, unable to sleep, unable to see. He was in constant pain. Dr. Ghalili's treatment made all the difference. Our son wasn't healed overnight, but he slowly regained health and strength over the following months. Today, he can run, jump, play, sleep, and see! No more pain! We are so grateful for Dr. Ghalili!"
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Regenerative+Medicine+LA+-+Dr.+Mark+Ghalili+DO/@34.0909028,-118.3927378,17z/data=!4m8!3m7!1s0x80c2bc0827c0132f:0xc3502d9f1d297ae9!9m1!1b1!16s%2Fg%2F11gfc163yr",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "Reddit discusses this clinic a lot, mostly in r/floxies, where opinion splits sharply. Several posters report real improvement after IV and stem cell treatment with Dr. Mark Ghalili, while others say they spent 15,000 to 25,000 dollars for no change. Recurring complaints are cost, vague treatment details and little follow up.",
-        "threadCount": 15,
-        "sentiment": "mixed",
-        "themes": [
-          "high cost",
-          "mixed outcomes",
-          "limited treatment disclosure",
-          "little follow up",
-          "no published results"
-        ],
-        "sources": [
-          {
-            "label": "r/floxies thread on the founder's credibility",
-            "url": "https://www.reddit.com/r/floxies/comments/pi0fo2/is_dr_mark_ghalili_a_scam_artist/"
-          },
-          {
-            "label": "r/floxies thread on patient experiences with the founder",
-            "url": "https://www.reddit.com/r/floxies/comments/1925hju/dr_mark_ghalili/"
-          },
-          {
-            "label": "r/floxies thread on treatment at the LA clinic",
-            "url": "https://www.reddit.com/r/floxies/comments/1bm5av3/la_regenerative_medicine_experience/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "regenestem",
-    "externalReviews": {
-      "google": {
-        "themes": [],
-        "highlights": [
-          {
-            "author": "Wells Landen",
-            "rating": 5,
-            "publishedLabel": "2 weeks ago",
-            "text": "I visited Regenestem Medical Clinic to know about stem cells for back pain. The providers carefully evaluated my condition and explained my options in a way that was easy to understand. The team was friendly, professional, and genuinely cared about my comfort. Overall, I had a very positive experience with the clinic."
-          },
-          {
-            "author": "Anthony Genovese",
-            "rating": 5,
-            "publishedLabel": "2 months ago",
-            "text": "I have a Shoulder injury from a car accident at is 2 years old, had physical therapy twice with no results, researched PRP and found Regenestem. Had my first treatment 1 month ago and my condition got better. Having another treatment now to see if it gets even better than the first one. I know these types of therapy do take a little time and im willing to give ot a shot."
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Regenestem+Medical+Clinic+%7C+Plantation/@26.122388,-80.277337,17z/data=!4m8!3m7!1s0x88d907c527b7605d:0x67d775d337f71419!9m1!1b1!16s%2Fg%2F11ckvkrx47",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "The only Reddit discussion is one man's April 2025 question, crossposted to r/stemcells and r/erectiledysfunction, asking whether a Regenestem bone marrow procedure for erectile dysfunction was legitimate. No commenter had actually been treated there. One said the clinic's Facebook reputation looked poor, and others were skeptical of stem cell therapy generally.",
-        "threadCount": 2,
-        "sentiment": "limited",
-        "themes": [
-          "no first hand patient reports",
-          "questions about legitimacy",
-          "general stem cell skepticism",
-          "cost concerns"
-        ],
-        "sources": [
-          {
-            "label": "r/stemcells thread on Regenestem in Florida for erectile dysfunction",
-            "url": "https://www.reddit.com/r/stemcells/comments/1k29ykt/regenestem_in_florida_review_for_treating_ed/"
-          },
-          {
-            "label": "r/erectiledysfunction crosspost of the same Regenestem question",
-            "url": "https://www.reddit.com/r/erectiledysfunction/comments/1k1f3cw/regenestem_in_florida_review_for_treating_ed/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "innovations-stem-cell-center",
+    "slug": "nucellin-orthopedic-clinic",
     "externalReviews": {
       "google": {
         "rating": 4.5,
-        "reviewCount": 27,
-        "summary": "Google lists 4.5 from 27 reviews. Birdeye, mirroring the same 4.5 across 28 entries, has reviewers discussing fat derived stem cell procedures for shoulders, hips, backs and scar tissue, several reporting partial or no change, one citing a $17,500 fee. A dated Trustpilot page averages 4.0 from 7 reviews.",
+        "reviewCount": 25,
+        "summary": "Google shows 4.5 from 25 reviews. Google's own topic tally has reviewers mentioning the clinic environment most often, including comfort, cleanliness and interior, alongside kind staff and the head doctor's examinations. Treatment mentions are lighter and cover physical therapy, shockwave therapy, stem cell therapy and knee pain.",
         "themes": [
-          "stem cell injections",
-          "joint and back pain",
-          "mixed reported outcomes",
-          "procedure cost",
-          "pre treatment explanations"
+          "comfortable clinic",
+          "kind staff",
+          "thorough examinations",
+          "physical therapy",
+          "knee pain"
         ],
+        "url": "https://www.google.com/maps/place/Nucellin+Orthopedics+(Hannam)/@37.5340824,127.0083847,17z/data=!4m8!3m7!1s0x357ca30014a5408f:0x5ec515fe48851c2c!8m2!3d37.5340824!4d127.0083847!9m1!1b1!16s%2Fg%2F11xsk0nvyx",
+        "checkedAt": "2026-08-10",
         "highlights": [
           {
-            "author": "Nicole Busse",
+            "author": "John Grosvenor",
             "rating": 5,
             "publishedLabel": "a month ago",
-            "text": "Dr. Johnson was very professional. He educated me on the process, and what the outcome of the results might be. I was treated for extensive scar tissue and skin damage secondary to radiation treatment for breast cancer. My skin condition improved in some areas. The scar tissue in my chest and thoracic area has been released some. I've gained more movement in my arm and in my chest wall."
+            "text": "I cannot recommend the Nucellin Clinic highly enough. Dr. Kim, and his highly accomplished physiotherapists, as well as other staff, were professional, experienced and highly effective in resolving debilitating pain I have experienced for many years. My experience with the clinic and its professional staff was rewarding in every respect. I have since returned for further treatments with the same satisfying results and will be going back again to address overall health and wellness."
           },
           {
-            "author": "Rodney Rowlett",
+            "author": "Anna K.",
             "rating": 5,
-            "publishedLabel": "2 months ago",
-            "text": "I had a procedure for my lungs about 2 months ago. I have severe emphysema and had 1/2 of one of my lungs removed because of cancer. I have not noticed any improvement since the procedure but I'm still hopeful. The proses of getting it done (Dr, nurses, office personnel) was a pleasant experience so it deserves a 5 star review."
+            "publishedLabel": "3 months ago",
+            "text": "During my recent visit to Korea, I came to the clinic because I was interested in regenerative treatment for lower back pain. After the necessary evaluation and a thorough consultation, I decided to proceed with the procedure. Dr. Kim never pressured me at any point and took plenty of time to explain the treatment in detail until I felt fully informed and comfortable moving forward. The facilities and equipment were excellent, and the physical therapists and specialized staff members were professional, knowledgeable, and very responsive to questions."
+          },
+          {
+            "author": "Natalya Kumar",
+            "rating": 1,
+            "publishedLabel": "3 months ago",
+            "text": "DO NOT go to this clinic as an international client. Nucellin Clinic in Seoul charged me much more than what they verbally quoted. I had less than 2 mins with the actual doctor. There was an English speaking agent, she pulled me out of the doctor's cabin saying she will handle me and they asked me to do bunch of surgeries. I asked her what the procedure and cost would be but she could not explain. When I told her I'm looking for rehab and exercises she got upset and angry."
           }
-        ],
-        "url": "https://www.google.com/maps/place/Innovations+Stem+Cell+Center/@32.9209464,-96.7736363,17z/data=!4m8!3m7!1s0x864c203fa8844287:0x94e10634ee8e35ca!9m1!1b1!16s%2Fg%2F11bwqrlkn3",
-        "checkedAt": "2026-08-10"
+        ]
       },
       "reddit": {
-        "summary": "Reddit barely mentions this Dallas clinic. One r/stemcells poster asked in 2022 whether US options like Innovations Stem Cell Center are legitimate, and the replies argued about FDA rules on cell sourcing rather than the clinic itself. The only other hit is an old promotional link post. No patient accounts found.",
-        "threadCount": 2,
-        "sentiment": "limited",
-        "themes": [
-          "little discussion",
-          "fda rules debate",
-          "no patient reports"
-        ],
-        "sources": [
-          {
-            "label": "r/stemcells thread on whether US stem cell clinics are legitimate",
-            "url": "https://www.reddit.com/r/stemcells/comments/uohre5/new_to_group_united_states/"
-          },
-          {
-            "label": "r/Stemcellapp link post on the clinic's Dallas and Frisco locations",
-            "url": "https://www.reddit.com/r/Stemcellapp/comments/a5tv46/innovations_stem_cell_center_dallas_frisco_texas/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "boulder-biologics",
-    "externalReviews": {
-      "google": {
-        "rating": 4.8,
-        "reviewCount": 32,
-        "summary": "Google's own topic tally across 32 reviews is led by professional staff, with PRP the most discussed treatment, ahead of stem cell treatment, hydrodissection and ultrasound. Reviewers also mention chronic issues, thorough diagnosis, an empathetic doctor and scheduling. No aggregator review text was retrievable, so this rests on that tally.",
-        "themes": [
-          "professional staff",
-          "prp treatment",
-          "chronic issues",
-          "thorough diagnosis",
-          "scheduling"
-        ],
-        "highlights": [
-          {
-            "author": "Lilli B",
-            "rating": 5,
-            "publishedLabel": "a year ago",
-            "text": "Dr. Glowney, Ryan, and Dawn have made every visit to Boulder Biologics superior to any other doctor's office. The team is so knowledgeable, caring, and thorough with all aspects of your visit. They are completely honest, instead of giving you false expectations. I have never experienced an entire team caring for their patients to this degree. The client education is top notch!"
-          },
-          {
-            "author": "Kathy Morey",
-            "rating": 5,
-            "publishedLabel": "4 months ago",
-            "text": "Dr. Rudolf is excellent. She listens well, is extremely thoughtful and detail focused in developing her treatment plans, and thorough in applying treatment."
-          },
-          {
-            "author": "Tyler Mueller",
-            "rating": 2,
-            "publishedLabel": "a year ago",
-            "text": "I went out to this clinic for a long covid headache and GI issues. They treated me very well and professionally but unfortunately I didn't get any benefits nor will I feel like many long haulers will from their painful and expensive procedure. I know two people who did this as well and it didn't help at all with their pain. I wouldn't recommend this or any stem cell treatment as a long covid solution."
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Boulder+Biologics/@40.0158109,-105.2367119,17z/data=!4m8!3m7!1s0x876bedced945b403:0xf98d217eb3a12593!9m1!1b1!16s%2Fg%2F11g19n7fp9",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "Reddit has no discussion of this clinic. Repeated searches on the clinic name, the name plus review, and Boulder area stem cell terms returned only unrelated general threads, so there is no patient feedback here to draw on either way.",
+        "summary": "Reddit has no discussion of this clinic. Searches for Nucellin and for the Seoul Ortho Clinic name returned no posts and no comments that name it. There is no patient feedback on Reddit to summarise, so the silence should not be read as either a good or a bad signal.",
         "threadCount": 0,
         "sentiment": "limited",
         "themes": [],
@@ -810,97 +532,60 @@
     }
   },
   {
-    "slug": "cellaxys",
-    "externalReviews": {
-      "google": {
-        "rating": 4.8,
-        "reviewCount": 189,
-        "summary": "Google reviewers most often mention informative staff and a knowledgeable doctor, followed by stem cell and PRP procedures and pain relief, with knees and shoulders the body areas named. Yelp, where the clinic averages 4.5 across 37 reviews, adds notes on prompt scheduling and on treatment cost.",
-        "themes": [
-          "informative staff",
-          "knowledgeable doctor",
-          "stem cell and prp procedures",
-          "pain relief",
-          "treatment cost"
-        ],
-        "highlights": [
-          {
-            "author": "Kendrick Brewer",
-            "rating": 5,
-            "publishedLabel": "3 months ago",
-            "text": "I recently visited Cellaxys Stem Cell Therapy Clinic in Las Vegas and had a really positive experience. The staff was friendly, professional, and made me feel comfortable from the moment I walked in. They explained the stem cell therapy process clearly and answered all of my questions without rushing me. I appreciated how they focused on creating a treatment plan that fit my needs instead of giving a one-size-fits-all approach."
-          },
-          {
-            "author": "Sheila Aguilar",
-            "rating": 5,
-            "publishedLabel": "3 months ago",
-            "text": "The Physicians here listens to their patients, and recommends different treatments tailored to your needs. Highly recommend to treat your pain!"
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Cellaxys+-+Stem+Cell+Therapy+Clinic+In+Las+Vegas/@36.0840308,-115.299038,17z/data=!4m8!3m7!1s0x80c8b992f9c37e6f:0x37f79f8a9cb1fa72!9m1!1b1!16s%2Fg%2F11f655rghg",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "Reddit has no patient discussion of CELLAXYS. Site wide searches for the clinic name, its founders and Las Vegas stem cell terms return nothing beyond two unrelated posts that happen to link a cellaxys.com blog article or image. Anyone weighing this clinic will need to look outside Reddit.",
-        "threadCount": 0,
-        "sentiment": "limited",
-        "themes": [],
-        "sources": [],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "bluetail-medical-group",
+    "slug": "optimal-bio",
     "externalReviews": {
       "google": {
         "rating": 4.9,
-        "reviewCount": 1155,
-        "summary": "Google shows 4.9 across 1,155 reviews. Birdeye reviewers, at a similar 4.9 average, mostly discuss PRP and stem cell injections for knee and joint pain, staff manner and how procedures were explained. Two Healthgrades reviews rate it 1.0, raising out of pocket cost and results short of what reviewers expected.",
+        "reviewCount": 742,
+        "summary": "The Cary listing carries a 4.9 rating across 742 Google reviews. Google's own topic tally shows reviewers mostly discussing bioidentical hormone replacement therapy, pellet placement and testosterone therapy, with frequent mention of lab work and results review, plus thyroid and menopausal symptoms. Doctor knowledge is the most cited staff theme.",
         "themes": [
-          "prp and stem cell injections",
-          "knee and joint pain",
-          "staff professionalism",
-          "procedure explanations",
-          "out of pocket cost"
+          "bioidentical hormone therapy",
+          "hormone pellet placement",
+          "lab work and lab review",
+          "testosterone therapy",
+          "knowledgeable doctors"
         ],
+        "url": "https://www.google.com/maps/place/Optimal+Bio/@35.7426019,-78.7802147,17z/data=!4m8!3m7!1s0x89acf331524fb63f:0xf2658f51a06a9d9a!8m2!3d35.7426019!4d-78.7802147!9m1!1b1!16s%2Fg%2F11c1nz72tn",
+        "checkedAt": "2026-08-10",
         "highlights": [
           {
-            "author": "Anthony Holdener",
+            "author": "Richard Wisotzkey",
             "rating": 5,
-            "publishedLabel": "4 months ago",
-            "text": "Dr. Crane was excellent. He has a great bedside manner and made me feel comfortable from the start. He explained things thoroughly, reviewed my prior X-rays and MRI with me directly, and clearly walked me through what they showed and what the next steps should be. I truly appreciated how thoughtful, knowledgeable, and communicative he was throughout the visit."
+            "publishedLabel": "3 months ago",
+            "text": "Optimal Bio has been taking care of my testosterone and thyroid needs for well over 10yrs. They took me from constantly feeling tired and worn out, to having the energy to be active, get things done, and enjoy life. I'm 69yrs old. It keeps me stepping, but I can keep pace with my grandson, and I know he loved it."
           },
           {
-            "author": "jennifer murphy",
+            "author": "Betty B",
             "rating": 5,
-            "publishedLabel": "11 months ago",
-            "text": "We can't say enough good things about Dr. Bayes and his team at Bluetail Medical Group. Our 17-year-old son received a PRP injection for a UCL injury and both appointments were fantastic. Dr. Bayes has the best bedside manner and he is so positive and down-to-earth. He did not rush through anything and answered all of our many questions. A+"
+            "publishedLabel": "5 months ago",
+            "text": "I receive pellets quarterly - it has been a life changing experience. The constant anxiety, feeling tired and depressed, inability to focus...gone! It's also nice not to mess with patches or creams. I see Rachel - she's awesome! She checks my levels, answers any questions and makes adjustments as needed. I've been on these pellets for many years and I highly recommend Optimal Bio."
           },
           {
-            "author": "Mr C",
+            "author": "Burns Family",
             "rating": 1,
-            "publishedLabel": "6 months ago",
-            "text": "Terrible patient relations. I wish I could get my wasted $6k back. Save your effort, go to one of the many other providers. I have given them months and months of 3rd and 4th chances to try and make an effort."
+            "publishedLabel": "4 months ago",
+            "text": "Buyer beware. I was a moderately* content T pellet patient with Optimal Bio from May 2024 through early 2026. However, when I decided to start HRT (estradiol gel and progesterone capsules) through another provider in October 2025, Optimal Bio refused to provide my scheduled T pellet in January 2026. The decision felt abrupt and unexpected, and the explanations they offered didn't make scientific sense given my medical background. My impression is that they were simply unhappy I chose not to buy into their pellet-based E therapy."
           }
-        ],
-        "url": "https://www.google.com/maps/place/Bluetail+Medical+Group/@38.6818968,-90.4950561,17z/data=!4m8!3m7!1s0x87df2aa01acff81d:0x6a6025d40b4778f!9m1!1b1!16s%2Fg%2F12hkm95vz",
-        "checkedAt": "2026-08-10"
+        ]
       },
       "reddit": {
-        "summary": "Reddit says almost nothing about this clinic. The only thread that names it is a 2017 r/stemcells post from a Missouri patient with ankle arthritis who was quoted roughly 2,300 dollars for a combined bone marrow, PRP and stem cell injection and asked what to ask before booking. Nobody reported an outcome.",
-        "threadCount": 1,
-        "sentiment": "limited",
+        "summary": "Reddit discussion is very thin. One 2022 question, crossposted to r/NorthCarolina and r/raleigh, drew a single substantive reply: a self described patient said pellet therapy eased her menopause symptoms and rated the initial lab workup worthwhile. The original poster found the phone consultation noticeably sales driven.",
+        "threadCount": 2,
+        "sentiment": "mixed",
         "themes": [
-          "sparse discussion",
-          "ankle arthritis",
-          "out of pocket cost",
-          "pre treatment research"
+          "sales heavy phone consult",
+          "very little discussion",
+          "reported menopause symptom relief",
+          "upfront lab work"
         ],
         "sources": [
           {
-            "label": "r/stemcells thread on PRP, bone marrow and stem cell treatment for an arthritic ankle",
-            "url": "https://www.reddit.com/r/stemcells/comments/742aqp/advice_on_whether_i_should_do_prp_stem_cell_bone/"
+            "label": "r/NorthCarolina thread asking about Optimal Bio BHRT",
+            "url": "https://www.reddit.com/r/NorthCarolina/comments/znfzav/has_anyone_went_to_optimal_bio_bhrt/"
+          },
+          {
+            "label": "r/raleigh crosspost of the same Optimal Bio question",
+            "url": "https://www.reddit.com/r/raleigh/comments/zng1r0/has_anyone_went_to_optimal_bio_bhrt/"
           }
         ],
         "checkedAt": "2026-08-10T00:00:00.000Z"
@@ -908,59 +593,192 @@
     }
   },
   {
-    "slug": "centeno-schultz-clinic",
+    "slug": "reset-iv",
     "externalReviews": {
       "google": {
         "rating": 4.8,
-        "reviewCount": 682,
-        "summary": "Google reviewers most often mention PRP and stem cell injections, knee and spine complaints, kind staff and doctors who explain the options. Reviewers on RateMDs and Healthgrades raise out of pocket cost, confusing billing and results that fell short of what they expected. Birdeye lists a separate 5.0 average across a much smaller sample.",
+        "reviewCount": 308,
+        "summary": "Google's review topics for Reset IV center on mobile IV therapy, with reviewers most often mentioning hangover and nausea drips, migraines, and how quickly a nurse arrived. A Birdeye mirror of Google reviews repeats praise for nurse communication and vein access, plus a recent one star complaint about scheduling delays after a 2025 ownership change.",
         "themes": [
-          "prp injections",
-          "stem cell therapy",
-          "knowledgeable doctors",
-          "kind staff",
-          "explanation of treatment options"
+          "iv therapy",
+          "hangover relief",
+          "nausea relief",
+          "quick arrival",
+          "informative nurses"
         ],
+        "url": "https://www.google.com/maps/place/Reset+IV/@36.1869644,-115.3030135,17z/data=!4m8!3m7!1s0x80c8c55d033c1af1:0xa8ab3fa2c3e34654!8m2!3d36.1869644!4d-115.3030135!9m1!1b1!16s%2Fg%2F11kxrw167j",
+        "checkedAt": "2026-08-10",
         "highlights": [
           {
-            "author": "Robert Long",
+            "author": "Brittany",
             "rating": 5,
-            "publishedLabel": "6 months ago",
-            "text": "Most professional, Perfected facility I have ever been to. Staff is amazingly organized and thorough, when one is done, next person is in. And they played my Bruce Hornsby music!!! For all who are considering Regenerative, be sure to join the FB/YouTube on Sunday Live discussion with Dr. Centeno where you can ask any question! I believe its at 12 EST"
+            "publishedLabel": "2 months ago",
+            "text": "James came to my hotel room at the Cosmopolitan to do hydration IV therapy- he was prompt, cordial and very knowledgeable. I told him my symptoms to which he suggested some add ons without pressure. Got set up and going quickly- he was good comfortable conversation during treatment. I will be keeping him in my contacts for the next time we come to Vegas."
           },
           {
-            "author": "Ashley Ortega",
+            "author": "liz ortuno",
             "rating": 5,
-            "publishedLabel": "4 months ago",
-            "text": "Thank you so much for the opportunity CSC at a chance to get my life back! Everyone at CSC is very humanitarian, kind and compassionate. Dr. Markle is very patient and answered all my questions and put my nerves at ease. One of the staff gave me a hug and I felt very well taken care off from the start to finish of my procedure. They called me the next day to make sure I was okay after my procedure."
+            "publishedLabel": "2 months ago",
+            "text": "I recently tried IV therapy and had a great experience. Daniel was very knowledgeable, friendly, and made me feel comfortable throughout the entire process. Highly recommended booking with him!! The treatment was relaxing, and I noticed a significant improvement in my energy levels and overall hydration afterward."
+          },
+          {
+            "author": "Tired Local",
+            "rating": 1,
+            "publishedLabel": "4 weeks ago",
+            "text": "The original company was sold in 2025. It's nowhere close to what it used to be. It's no longer 24/7. They still claim convenient, timely booking, but it's not true. They told me it would be 16 hours before someone could get to me. I used to recommend Reset IV to everyone. I had the swag, I invested, I believed in the brand..this is not that company."
           }
-        ],
-        "url": "https://www.google.com/maps/place/Centeno-Schultz+Clinic/@39.9275735,-105.1418382,17z/data=!4m8!3m7!1s0x876b8c8e418a2da1:0xcf2abc9a022686a3!9m1!1b1!16s%2Fg%2F1td0tckq",
-        "checkedAt": "2026-08-10"
+        ]
       },
       "reddit": {
-        "summary": "Discussion is concentrated in craniocervical instability and ME/CFS subreddits, where the clinic's PICL injection procedure comes up often. Some posters report meaningful symptom improvement, others describe five figure costs, thin follow up support and a business first feel. A recurring criticism is the lack of published controlled trials.",
-        "threadCount": 15,
+        "summary": "Reddit discussion is thin but favorable. In a 2024 r/LasVegas thread asking about hangover IV services, two commenters pointed to Reset IV, noting nurses come to the hotel room with no added travel fee, and one said they book it every trip. A Vegas bachelorette thread lists it as an in room drip option.",
+        "threadCount": 2,
+        "sentiment": "positive",
+        "themes": [
+          "in room service",
+          "no extra travel fee",
+          "repeat use by visitors",
+          "hangover recovery drips"
+        ],
+        "sources": [
+          {
+            "label": "r/LasVegas thread on hangover IV services",
+            "url": "https://www.reddit.com/r/LasVegas/comments/1d2vhxc/anyone_used_hangover_heaven_or_a_similar_iv/"
+          },
+          {
+            "label": "r/vegas thread on bachelorette party planning",
+            "url": "https://www.reddit.com/r/vegas/comments/1fjyjcw/bachelorette_help/"
+          }
+        ],
+        "checkedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "slug": "sottopelle",
+    "externalReviews": {
+      "google": {
+        "rating": 4.7,
+        "reviewCount": 81,
+        "summary": "SottoPelle carries a 4.7 rating across 81 Google reviews. Google's own topic tally is dominated by hormone replacement therapy, with reviewers raising hot flashes, night sweats, libido, energy and care after hysterectomy. A Birdeye page mirroring the same Google feed also shows 4.7, alongside a small minority of one and two star reviews.",
+        "themes": [
+          "hormone replacement therapy",
+          "hot flashes and night sweats",
+          "libido and energy levels",
+          "care after hysterectomy",
+          "staff answering questions"
+        ],
+        "url": "https://www.google.com/maps/place/SottoPelle/@33.583531,-111.899521,17z/data=!4m8!3m7!1s0x872b7521f0cd4b1f:0x363204e6c3df293f!8m2!3d33.583531!4d-111.899521!9m1!1b1!16s%2Fg%2F1vf9cvb0",
+        "checkedAt": "2026-08-10",
+        "highlights": [
+          {
+            "author": "Kartune Meyer",
+            "rating": 1,
+            "publishedLabel": "a year ago",
+            "text": "Fired for continual errors, changing doctors without consent, and changing their rules based on their daily whim. I had one good doctor there who also ditched them. Poor customer service. The nurses treat you like a child. Go elsewhere."
+          },
+          {
+            "author": "Carol Carrillo",
+            "rating": 5,
+            "publishedLabel": "10 years ago",
+            "text": "I've been going to SotoPelle for years getting their bio-identical hormones. It has helped me a great deal both physically and mentally. My body lets me know when it's time to go to my next appointment. I can really feel a difference. Steve Nunn in the Chandler office is efficient, friendly and if I feel anything at all, it's just the pin prick from the numbing shot but most of the time I don't even feel that."
+          },
+          {
+            "author": "Erin Benard",
+            "rating": 5,
+            "publishedLabel": "10 years ago",
+            "text": "I have been with Sotto Pelle for 4-5 years now and the experience has been wonderful. I have had a definite change in my overall well being. Dr. Rhodes and the staff at the Glendale office are great!"
+          }
+        ]
+      },
+      "reddit": {
+        "summary": "Discussion is thin and sits mostly in r/Menopause, where SottoPelle comes up as a pellet brand rather than the Scottsdale clinic. One long term user reported better energy and fewer hot flushes, while another reported a warm, sore lump after insertion. A moderator flagged that compounded pellets are not FDA approved.",
+        "threadCount": 3,
+        "sentiment": "mixed",
+        "themes": [
+          "limited discussion",
+          "reported symptom relief",
+          "insertion site lumps",
+          "travel for appointments",
+          "not fda approved"
+        ],
+        "sources": [
+          {
+            "label": "r/Menopause thread on SottoPelle experiences",
+            "url": "https://www.reddit.com/r/Menopause/comments/322opu/sottopelle_experiences/"
+          },
+          {
+            "label": "r/Menopause thread on a lump after SottoPelle pellet insertion",
+            "url": "https://www.reddit.com/r/Menopause/comments/9p1n7m/lump_in_butt_from_hormone_pellet/"
+          },
+          {
+            "label": "r/Menopause thread on finding SottoPelle providers outside Arizona",
+            "url": "https://www.reddit.com/r/Menopause/comments/1gw54hd/sottopelle_canada/"
+          }
+        ],
+        "checkedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "slug": "trt-nation",
+    "externalReviews": {
+      "google": {
+        "rating": 4.9,
+        "reviewCount": 2035,
+        "summary": "Google reviewers most often mention an easy process, affordability, quick responses and a knowledgeable team, alongside blood work and low testosterone treatment. Trustpilot rates the same brand 2.1 out of 5, where reviewers instead raise shipping delays, slow refill turnaround and pricing that differed from what they expected.",
+        "themes": [
+          "easy process",
+          "affordability",
+          "quick responses",
+          "knowledgeable team",
+          "shipping delays"
+        ],
+        "url": "https://www.google.com/maps/place/TRT+Nation/@28.0611578,-82.3795128,17z/data=!4m8!3m7!1s0x88db3f80424a05b3:0x5f29fe6ae26d2b34!8m2!3d28.0611578!4d-82.3795128!9m1!1b1!16s%2Fg%2F11h5k8xr3y",
+        "checkedAt": "2026-08-10",
+        "highlights": [
+          {
+            "author": "Scott Hax",
+            "rating": 5,
+            "publishedLabel": "a month ago",
+            "text": "Have used TRTNation for several years. Excellent customer service. No gimmicks or pushy sales staff. Providers are amazing! They all seem genuinely caring, they have real expertise, always available for follow-up. Interdictions with providers is never rushed, they always have time for my questions."
+          },
+          {
+            "author": "Stephen E",
+            "rating": 5,
+            "publishedLabel": "3 months ago",
+            "text": "TRT Nation has been great so far. They've scheduled appointments quickly and answered my questions honestly with no nonsense. Refills are easy to navigate and everything has shipped on time and arrived either sooner than expected or on the earlier end of the estimated time frame for delivery. No complaints so far. Prices are fair and on par to slightly less than other similar online services."
+          },
+          {
+            "author": "Jonathan Parnell",
+            "rating": 5,
+            "publishedLabel": "a month ago",
+            "text": "I'm 46 and noticed my natural testosterone levels had taken a serious dive. I decided to give TRT Nation a shot, and it has been the best decision I've made in years. Just two weeks into the program and I already feel 10x better. My energy, focus, and overall drive are completely back. The onboarding process was fast, professional, and seamless."
+          }
+        ]
+      },
+      "reddit": {
+        "summary": "r/Testosterone discusses TRT Nation often. Long term customers describe an easy signup and few problems, while others call it expensive next to a local pharmacy script. Recent threads focus on its compounded supply, with posters reporting injection site pain, cloudy vials and lab levels that fell after a pharmacy change.",
+        "threadCount": 13,
         "sentiment": "mixed",
         "themes": [
           "high cost",
-          "limited follow up care",
-          "cci and me/cfs patients",
-          "lack of published trials",
-          "mixed outcomes"
+          "compounded testosterone",
+          "injection site pain",
+          "light medical oversight",
+          "easy signup"
         ],
         "sources": [
           {
-            "label": "r/cervical_instability thread on a Centeno-Schultz consultation",
-            "url": "https://www.reddit.com/r/cervical_instability/comments/18hqgpb/centeno_schultz_consultation/"
+            "label": "r/Testosterone thread on TRT Nation pros and cons",
+            "url": "https://www.reddit.com/r/Testosterone/comments/1vffbsc/trt_nation_pros_vs_con/"
           },
           {
-            "label": "r/cfs thread on one patient's CCI treatment at Centeno-Schultz",
-            "url": "https://www.reddit.com/r/cfs/comments/p1de59/my_journey_so_far_with_cci_and_centenoschultz/"
+            "label": "r/Testosterone thread on vial quality concerns",
+            "url": "https://www.reddit.com/r/Testosterone/comments/1vfemhb/trt_nation_riteaway_pharmacy_contamination/"
           },
           {
-            "label": "r/Cervicalinstability thread on moderator criticism of Regenexx",
-            "url": "https://www.reddit.com/r/Cervicalinstability/comments/1rk23nw/cervical_instability_post_by_moderator_against/"
+            "label": "r/Testosterone thread on one poster's TRT Nation experience",
+            "url": "https://www.reddit.com/r/Testosterone/comments/1sgql09/trtnation_review_and_experience_from_249ngdl/"
           }
         ],
         "checkedAt": "2026-08-10T00:00:00.000Z"
@@ -968,228 +786,65 @@
     }
   },
   {
-    "slug": "thrivemd",
+    "slug": "ways2well",
     "externalReviews": {
       "google": {
         "rating": 4.7,
-        "reviewCount": 23,
-        "summary": "Google shows 4.7 from 23 reviews. Reviewers most often mention stem cell treatment and pain, especially back and joint pain, with repeated references to Dr. Brandt and to staff who answer questions. A separate Birdeye profile lists 4.7 across 29 reviews, where writers discuss the team and non surgical options.",
-        "themes": [
-          "stem cell treatment",
-          "back and joint pain",
-          "caring staff",
-          "answering questions",
-          "treatment cost"
-        ],
-        "highlights": [
-          {
-            "author": "Aden Martin",
-            "rating": 5,
-            "publishedLabel": "a year ago",
-            "text": "Dr Brandt and his team at Thrive md clinic are caring and professional. They have effectively treated bad spinal discs on both myself and well as my wife. If you can avoid risky surgeries with non invasive Stem cell treatment, why not."
-          },
-          {
-            "author": "Ian Hilton",
-            "rating": 5,
-            "publishedLabel": "8 years ago",
-            "text": "The stem cell treatment I had for my shoulder from Dr Brandt at Thrive far exceeded my expectations. Before the treatment I could barely do a single press-up and swimming even breaststroke was difficult. Now press ups are no problem and neither is swimming overarm. The increase in range of motion and decrease of discomfort in the shoulder started within about 2 weeks of the treatment and improved steadily over the next 6 months. Well worth it and they are very nice people too!"
-          }
-        ],
-        "url": "https://www.google.com/maps/place/thriveMD+Denver+Colorado+-+Regenerative+Medicine/@39.6016575,-104.9027062,17z/data=!4m8!3m7!1s0x876c8503559c5ca7:0x4c615645b4392b4a!9m1!1b1!16s%2Fg%2F11g65grmp8",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "Reddit barely mentions ThriveMD. In one 2021 r/stemcells thread a poster said they were booking consultations with ThriveMD and Regenexx for a herniated disc, but never reported going ahead, and no commenter described treatment there. The only other hit is a bot posted press release with no replies.",
-        "threadCount": 1,
-        "sentiment": "limited",
-        "themes": [
-          "little discussion",
-          "no first hand reports",
-          "considered alongside regenexx"
-        ],
-        "sources": [
-          {
-            "label": "r/stemcells thread on stem cell therapy for a herniated disc",
-            "url": "https://www.reddit.com/r/stemcells/comments/nviq0x/herniated_disc/"
-          },
-          {
-            "label": "r/prnewswire bot repost of a ThriveMD press release, no comments",
-            "url": "https://www.reddit.com/r/prnewswire/comments/7npb4h/thrivemd_offers_new_ed_treatment_near_denver/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "docere-clinics",
-    "externalReviews": {
-      "google": {
-        "rating": 4.8,
-        "reviewCount": 87,
-        "summary": "Google's review topics for Docere Clinics centre on stem cell therapy, injections and back pain, with athletic injuries and staff professionalism also recurring. Reviewers on Healthgrades, where Dr Harry Adelson holds 4.8 from 109 ratings, describe bone marrow injections for knees, shoulders and spine and report unrushed appointments and short waits.",
+        "reviewCount": 748,
+        "summary": "Google reviewers most often mention stem cell therapy, alongside blood panels, red light therapy and hyperbaric sessions, and they comment often on staff welcome and explanations. Trustpilot, which covers the wider ways2well.com telehealth brand rather than the Austin clinic, sits at 2.5 out of 5, with complaints about pricing, supplement upsells and scheduling delays.",
         "themes": [
           "stem cell therapy",
-          "back pain",
-          "injections",
-          "professional staff",
-          "athletic injuries"
+          "welcoming staff",
+          "blood work",
+          "red light therapy",
+          "supplements"
         ],
+        "url": "https://www.google.com/maps/place/Ways2Well+-+Austin/@30.3144958,-97.8528178,17z/data=!4m8!3m7!1s0x8644b5a5a73f93d7:0x9864345db09acb30!8m2!3d30.3144958!4d-97.8528178!9m1!1b1!16s%2Fg%2F11swxh2yry",
+        "checkedAt": "2026-08-10",
         "highlights": [
           {
-            "author": "Elliot Karathanasis",
+            "author": "Josh Mesa",
             "rating": 5,
-            "publishedLabel": "a year ago",
-            "text": "I cannot say enough good things about Dr. Harry Adelson and his entire staff! They are the absolute best in the business. I had extreme pain in my right knee and a terrible case of plantar fasciitis in my left foot. I struggled for months with PT to no avail. The care they showed me and their incredible follow up was first class all the way."
+            "publishedLabel": "2 months ago",
+            "text": "I came in for stem cell therapy today . The facility is breathtaking. The staff were well informed, friendly and outgoing. The least painful injection therapy I've ever received. As a health and wellness professional myself I was wildly impressed and can't wait to come back! Looking forward to feeling the results in the coming weeks."
           },
           {
-            "author": "Ian Douglas",
+            "author": "Chris Riley",
             "rating": 5,
-            "publishedLabel": "6 years ago",
-            "text": "You feel a sense of calm just walking into Docere Clinics, all the staff are really personable and kind, the entire experience is zen. Everyone is professional and the whole process is really smooth. Even when you're recovering from a major surgical procedure they do everything to check in with you and take care of your needs. I can't thank them enough."
+            "publishedLabel": "2 months ago",
+            "text": "This was one of the most amazing experineces from front to back. My original appointment with Kirsten made me feel comfortable and I knew I was at the right place. Then I was helped by a few other people to make this as affordable as possible. Once I went to Aistin for my therapy, I met some of the coolest people and again felt very welcome and at home. My NP Selina was the best, spent a good amount of time trying to ensure we administered the stem cells to the correct area and was so kind."
+          },
+          {
+            "author": "Carrie Church",
+            "rating": 5,
+            "publishedLabel": "2 months ago",
+            "text": "This ways 2 well journey has been the best life changing experience. Between the comprehensive bloodwork ,supplements, and now just had stem cells today. My husband had stem cells in his knee and hasn't had any pain in last 3 years. Highly recommend this life changing experience"
           }
-        ],
-        "url": "https://www.google.com/maps/place/Docere+Clinics:+Harry+Adelson,+N.D./@40.7232467,-111.5380095,17z/data=!4m8!3m7!1s0x87528aa0f96bcf03:0x7b63f6e671791035!9m1!1b1!16s%2Fg%2F1pv61hkl9",
-        "checkedAt": "2026-08-10"
+        ]
       },
       "reddit": {
-        "summary": "Three Reddit threads name Docere Clinics or Dr Harry Adelson, but all three are prospective patients asking whether anyone has been treated there. None drew a first hand account. In one thread commenters questioned the evidence base for stem cell therapy generally and pointed to FDA warnings rather than to this clinic.",
-        "threadCount": 3,
-        "sentiment": "limited",
-        "themes": [
-          "no first hand reports",
-          "unanswered questions",
-          "skepticism about evidence",
-          "spinal disc injections"
-        ],
-        "sources": [
-          {
-            "label": "r/stemcells thread asking about experience with Docere Clinics",
-            "url": "https://www.reddit.com/r/stemcells/comments/1e9vgfd/docere_clinics/"
-          },
-          {
-            "label": "r/Spondylolisthesis thread on stem cell injections for spinal slippage",
-            "url": "https://www.reddit.com/r/Spondylolisthesis/comments/t7jua8/stem_cells_experiences_any_leads_on_new_technology/"
-          },
-          {
-            "label": "r/PeterAttia thread on choosing a stem cell treatment center",
-            "url": "https://www.reddit.com/r/PeterAttia/comments/12zs2am/stem_cells/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "r3-stem-cell",
-    "externalReviews": {
-      "google": {
-        "rating": 4.6,
-        "reviewCount": 63,
-        "summary": "Google's review topics focus on stem cell therapy, PRP and injection technique, with reviewers discussing shoulder, knee and back pain treatment and an informative doctor. Some entries reference training lectures rather than patient visits. Birdeye lists 4.7 across 65 reviews, where a few reviewers describe high cost and disappointing results.",
-        "themes": [
-          "stem cell therapy",
-          "injection technique",
-          "prp treatment",
-          "back and knee pain relief",
-          "detailed lectures"
-        ],
-        "highlights": [
-          {
-            "author": "Devine cwi",
-            "rating": 5,
-            "publishedLabel": "4 months ago",
-            "text": "I had 1 shot to my shoulder and was able to gain full recovery with range of motion and strength building exercises. Beautiful results!!!"
-          },
-          {
-            "author": "Erica Soria",
-            "rating": 5,
-            "publishedLabel": "a year ago",
-            "text": "Dr Greene and Samantha are absolutely fantastic! The staff was professional, knowledgeable, and truly cared about my well-being. The stem cell treatment was thoroughly explained and tailored to my needs. I felt supported every step of the way. Highly recommend this clinic for anyone exploring regenerative therapies—it exceeded my expectations!"
-          }
-        ],
-        "url": "https://www.google.com/maps/place/R3+Stem+Cell/@33.7422155,-111.9339994,12z/data=!4m8!3m7!1s0x872b7948e95c8963:0x54928b83ee086004!9m1!1b1!16s%2Fg%2F11thjcjkgb",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "R3 comes up often in r/stemcells and the discussion is heavily critical. Commenters repeatedly flag the founder's revoked Arizona medical license, an FDA warning letter, and doubts about frozen cell viability and value for money. A few posters reported joint pain relief after treatment, while others reported no change months later.",
-        "threadCount": 5,
+        "summary": "Reddit discussion is heavy and split. Several posters report lasting pain relief after disc or shoulder injections, while others say benefits faded within a year. Common complaints cover $4,500 per area pricing, vague cell counts, AI written lab reports, and peptide upselling. The r/stemcells write up also flags an FDA warning to their tissue supplier.",
+        "threadCount": 22,
         "sentiment": "mixed",
         "themes": [
-          "founder's revoked medical license",
-          "high cost per cell",
-          "frozen cell viability",
-          "mixed treatment outcomes",
-          "aggressive marketing"
+          "high cost",
+          "mixed pain outcomes",
+          "unclear cell counts",
+          "aggressive upselling",
+          "celebrity endorsement scrutiny"
         ],
         "sources": [
           {
-            "label": "r/stemcells thread on R3 in Tijuana, Mexico",
-            "url": "https://www.reddit.com/r/stemcells/comments/14iu16x/has_anyone_tried_r3_stem_cell_in_tijuana_mexico/"
+            "label": "r/stemcells thread on Ways2Well treatment risk and patient outcomes",
+            "url": "https://www.reddit.com/r/stemcells/comments/1liqc4w/ways2well_risk/"
           },
           {
-            "label": "r/stemcells thread on whether R3 is trustworthy",
-            "url": "https://www.reddit.com/r/stemcells/comments/1f65i1c/is_r3_stem_cell_alright/"
+            "label": "r/stemcells research write up on Ways2Well and its tissue supplier",
+            "url": "https://www.reddit.com/r/stemcells/comments/1i5gn1k/ways2well_potentially_changing_healthcare_but_fda/"
           },
           {
-            "label": "r/stemcells thread on R3 in India",
-            "url": "https://www.reddit.com/r/stemcells/comments/1jbwzne/any_info_on_r3_stem_cell_india/"
-          }
-        ],
-        "checkedAt": "2026-08-10T00:00:00.000Z"
-      }
-    }
-  },
-  {
-    "slug": "stemedix",
-    "externalReviews": {
-      "google": {
-        "rating": 4.7,
-        "reviewCount": 110,
-        "summary": "Stemedix holds a 4.7 rating across 110 Google reviews. Google's own review topics center on stem cell therapy, multiple sclerosis, pain relief and autoimmune issues, with smaller mentions of hyperbaric oxygen therapy, injection options and case coordinators. A separate Birdeye profile lists 4.8 from 216 reviews, where reviewers describe staff knowledge and consultation detail.",
-        "themes": [
-          "stem cell therapy",
-          "multiple sclerosis",
-          "pain relief",
-          "autoimmune issues",
-          "case coordinator support"
-        ],
-        "highlights": [
-          {
-            "author": "Brenda Smith",
-            "rating": 5,
-            "publishedLabel": "8 months ago",
-            "text": "This stem cell therapy has been one of the best thing I have ever done for myself. I have had fibromyalgia pain for almost 50 years. I am 81, and had no idea if this would make a difference, but I was a the end of my rope. It has been 14 weeks and I am pain free for the first time in many years. I am now walking unaided, needing a walker before. I highly recommend Stemedix. The Procedure was very easy and painless."
-          },
-          {
-            "author": "Joyce Adams",
-            "rating": 5,
-            "publishedLabel": "4 months ago",
-            "text": "I have gotten stem cells for Multiple Sclerosis twice now. This last visit, Two months after receiving stem cell therapy, the numbness from the waist down no longer had a definitive line around my waist and I no longer had dead areas in my legs, within 4 months, I no longer walk like one leg is longer that the other."
-          }
-        ],
-        "url": "https://www.google.com/maps/place/Stemedix/@27.7634227,-82.643687,17z/data=!4m8!3m7!1s0x88c2e5c115b41d3d:0xc92de72427fdd653!9m1!1b1!16s%2Fg%2F12hq9rzhx",
-        "checkedAt": "2026-08-10"
-      },
-      "reddit": {
-        "summary": "Reddit discussion of Stemedix is thin. In r/stemcells one poster asked about a quoted cervical spine protocol and got no first hand replies. In a separate thread another poster described being quoted about 5,600 dollars for an intro package that rose to 8,000 dollars for a more involved case. No outcome reports.",
-        "threadCount": 2,
-        "sentiment": "limited",
-        "themes": [
-          "thin discussion",
-          "quoted pricing",
-          "package upsells",
-          "no outcome reports",
-          "local cell sourcing"
-        ],
-        "sources": [
-          {
-            "label": "r/stemcells thread on Stemedix stem cell therapy in Florida",
-            "url": "https://www.reddit.com/r/stemcells/comments/1m7cy0v/stemedix_stem_cell_therapy_florida/"
-          },
-          {
-            "label": "r/stemcells thread on buying cells directly, with Stemedix price quotes",
-            "url": "https://www.reddit.com/r/stemcells/comments/1puzvkz/has_anyone_tried_cutting_out_the_middle_man/"
+            "label": "r/Biohackers thread on whether the Ways2Well bloodwork membership is worth it",
+            "url": "https://www.reddit.com/r/Biohackers/comments/1p7ldk4/ways2well_worth_it/"
           }
         ],
         "checkedAt": "2026-08-10T00:00:00.000Z"
