@@ -88,6 +88,22 @@ export interface IReview extends TimestampFields, SoftDeleteFields {
   ageConfirmed: boolean;
   /** §14: agreed to terms/privacy & "not medical advice". */
   consentGiven: boolean;
+  /**
+   * Where the review text came from.
+   *
+   * `site` is a review submitted through this site's own form and moderated
+   * here — the default, and what every review created before 2026-08-11 is.
+   * `google` is verbatim text lifted off a clinic's Google Maps listing by
+   * `scripts/import-google-reviews-as-native.ts`.
+   *
+   * Not exposed in `ReviewView` and not rendered anywhere: the owner's decision
+   * is that these read as native reviews. It exists so the import stays
+   * reversible and so an imported review can still be found later — for a
+   * takedown request, a re-audit, or an unpick of the ratings. Deleting this
+   * field would make the two kinds indistinguishable in our own database, which
+   * is a different and much worse problem than how they render.
+   */
+  source: "site" | "google";
 }
 
 // ── Sub-schemas ─────────────────────────────────────────────────────────────
@@ -189,6 +205,12 @@ const ReviewSchema = new Schema<IReview>(
     moderation: { type: moderationSchema, default: undefined },
     ageConfirmed: { type: Boolean, default: false },
     consentGiven: { type: Boolean, default: false },
+    source: {
+      type: String,
+      enum: ["site", "google"],
+      default: "site",
+      index: true,
+    },
   },
   { timestamps: true },
 );

@@ -22,18 +22,22 @@ import type { ExternalSentiment } from "@/lib/enums";
  *     one implies a freshness we can't promise. Every panel carries the month it
  *     was last checked, and a panel with no `checkedAt` says "date not recorded"
  *     rather than quietly omitting it.
- *  3. **Our prose and their words, never blended.** Summaries and themes are
- *     written by our editors. Verbatim reviewer text appears only inside
- *     `Highlights`, under a heading that says whose words they are, with the
- *     reviewer's name and the date attached to each one.
+ *  3. **Our prose, not their words.** Summaries and themes are written by our
+ *     editors. This block no longer renders verbatim reviewer text at all:
+ *     as of 2026-08-11 the owner chose to promote `google.highlights` into the
+ *     clinic's own reviews list as ordinary, unlabelled review cards
+ *     (`scripts/import-google-reviews-as-native.ts`), so quoting them here too
+ *     would double them up on the page.
  *
  * Server-rendered plain markup, like `RatingHistogram` beside it, so the text
  * is in the HTML for crawlers and AI answer engines.
  *
- * Deliberately absent: any JSON-LD. Marking third-party ratings or review text
- * up as this site's `aggregateRating`/`Review` nodes is the review-snippet
- * abuse Google penalises, so this block is presentational only — see
- * `models/clinic.ts`.
+ * Deliberately absent from *this* block: any JSON-LD. It stays presentational.
+ * Note though that rule 1 above now only half holds site-wide — the promoted
+ * reviews do feed `ratingAvg` and the page's `aggregateRating`/`Review` nodes,
+ * which is the review-snippet exposure this component was originally built to
+ * avoid. That trade-off was made deliberately and is documented in the import
+ * script's header; it is not something this file can undo.
  *
  * `compact` renders the same data for the clinic profile, where this sits under
  * a "Reviews" heading that already exists: the section heading and intro drop
@@ -142,88 +146,13 @@ function GooglePanel({
         />
       ) : null}
 
-      {google.highlights.length ? (
-        <Highlights highlights={google.highlights} />
-      ) : null}
+      {/* `google.highlights` is deliberately not rendered here any more.
+          Those quotes are now promoted into the clinic's own reviews list by
+          scripts/import-google-reviews-as-native.ts and shown as ordinary
+          review cards, so rendering them here too would duplicate them on the
+          page. The field is kept on the record as the source of record for
+          that import — see the script header for what that choice costs. */}
     </Panel>
-  );
-}
-
-/**
- * Verbatim Google reviews, attributed.
- *
- * The heading does the work the markup can't: these are the only sentences in
- * the whole block this site didn't write, and a reader skimming past a quote
- * shouldn't come away thinking an editor endorsed it. Each `<blockquote>` names
- * its reviewer and dates itself, and links back to the source where one exists,
- * so the quote is checkable rather than merely asserted.
- *
- * No JSON-LD here either, for the same reason as the rest of the block: a
- * `Review` node built from someone else's review is the thing that earns a
- * manual action.
- */
-function Highlights({
-  highlights,
-}: {
-  highlights: NonNullable<ExternalReviewsView["google"]>["highlights"];
-}) {
-  return (
-    <div className="mt-4">
-      <p className="text-[12px] font-semibold uppercase tracking-wide text-text-muted">
-        In reviewers&apos; own words
-      </p>
-      <p className="mt-0.5 text-[11.5px] leading-snug text-text-muted">
-        Quoted from Google, not written by us.
-      </p>
-      <ul className="mt-2.5 space-y-3">
-        {highlights.map((h, i) => (
-          <li key={`${h.author}-${i}`}>
-            <blockquote className="border-l-2 border-border-strong pl-3">
-              <p className="text-[13.5px] italic leading-relaxed text-text-secondary">
-                &ldquo;{h.text}&rdquo;
-              </p>
-              <footer className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[12px] text-text-muted">
-                <span className="font-semibold text-text-secondary">
-                  {h.author}
-                </span>
-                {h.rating != null ? (
-                  <span className="inline-flex items-center gap-0.5">
-                    <Star className="size-3 fill-current" aria-hidden="true" />
-                    {h.rating}
-                    <span className="sr-only"> out of 5</span>
-                  </span>
-                ) : null}
-                {/* An exact date when the source gave one, otherwise the
-                    source's own relative phrase. Never a date derived from
-                    "3 years ago" — see `IExternalReviewHighlight`. */}
-                {h.publishedAt ? (
-                  <time dateTime={h.publishedAt}>
-                    {new Date(h.publishedAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                    })}
-                  </time>
-                ) : h.publishedLabel ? (
-                  <span>{h.publishedLabel}</span>
-                ) : null}
-                {h.url ? (
-                  <a
-                    href={h.url}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow ugc"
-                    className="text-text-link hover:underline"
-                  >
-                    on Google
-                  </a>
-                ) : (
-                  <span>on Google</span>
-                )}
-              </footer>
-            </blockquote>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
 
