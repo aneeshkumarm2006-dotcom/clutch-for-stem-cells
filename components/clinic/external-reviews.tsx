@@ -1,9 +1,10 @@
 import * as React from "react";
-import { ExternalLink, MessagesSquare, Star } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { formatCount } from "@/lib/format";
 import { Chip } from "@/components/ui/chip";
+import { GoogleMark, RedditMark } from "@/components/brand/platform-marks";
 import type { ExternalReviewsView } from "@/lib/public-data";
 import type { ExternalSentiment } from "@/lib/enums";
 
@@ -107,7 +108,7 @@ function GooglePanel({
 
   return (
     <Panel
-      icon={<Star className="size-4" aria-hidden="true" />}
+      icon={<GoogleMark className="size-[17px]" />}
       title="Google reviews"
       checkedAt={google.checkedAt}
       href={google.url}
@@ -185,7 +186,7 @@ function RedditPanel({
 }) {
   return (
     <Panel
-      icon={<MessagesSquare className="size-4" aria-hidden="true" />}
+      icon={<RedditMark className="size-[17px]" />}
       title="Reddit discussion"
       checkedAt={reddit.checkedAt}
     >
@@ -298,7 +299,10 @@ function Panel({
   return (
     <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
       <div className="flex items-center gap-2">
-        <span className="text-text-muted">{icon}</span>
+        {/* The platform's own mark, in its own colours — the fastest way to say
+            "this figure came from somewhere else" before the heading is read.
+            No `text-*` here: the marks carry their own fills. */}
+        <span className="inline-flex shrink-0 items-center">{icon}</span>
         <h3 className="font-display text-[15px] font-semibold text-text-primary">
           {title}
         </h3>
