@@ -216,9 +216,9 @@ export interface HomepageContent {
 export const HOMEPAGE_DEFAULTS: HomepageContent = {
   hero: {
     headline:
-      "My Stem Cell Guide: Trusted Information, Research & Patient Resources",
+      "Find and compare trusted regenerative medicine clinics with My Stem Cell Guide.",
     subhead:
-      "Compare accredited stem cell clinics worldwide by treatment, condition, location, and verified patient reviews.",
+      "Compare accredited stem cell clinics worldwide by treatment, condition, location, pricing, and verified patient reviews to help you make a more informed healthcare decision.",
     ctaPrimaryLabel: "Find a clinic",
     ctaPrimaryHref: "/find-a-clinic",
     ctaSecondaryLabel: "Browse all clinics",
@@ -237,7 +237,7 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
     eyebrow: "",
     title: "Browse by type of stem cell therapy",
     description:
-      "Compare clinics offering mesenchymal stem cell (MSC), autologous, bone-marrow-derived, umbilical-cord, and systemic cell therapy.",
+      "Compare stem cell clinics offering mesenchymal stem cell (MSC), autologous, bone marrow-derived, umbilical cord, exosome, PRP, and systemic therapies for a wide range of medical conditions.",
     linkLabel: "All treatments",
     linkHref: "/treatments",
     limit: 9,
@@ -247,7 +247,7 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
     eyebrow: "",
     title: "Browse by condition",
     description:
-      "From stem cell therapy for knee arthritis and joint pain to neurological, autoimmune, and anti-aging care.",
+      "Compare stem cell therapy options for knee arthritis, joint pain, neurological disorders, autoimmune conditions, and anti-aging care across verified clinics.",
     linkLabel: "All conditions",
     linkHref: "/conditions",
     limit: 9,
@@ -285,7 +285,11 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
     enabled: true,
     eyebrow: "",
     title: "Browse by destination",
-    description: "Popular medical-travel destinations for regenerative care.",
+    // Only names countries that actually have published listings. Naming an
+    // empty destination sends people to a page with nothing on it, and the
+    // thin-term soft-404 gate would keep that page out of the index anyway.
+    description:
+      "Compare regenerative medicine clinics across popular medical travel destinations including the United States, Mexico, Panama, and South Korea.",
     linkLabel: "All destinations",
     linkHref: "/locations",
     limit: 8,
@@ -391,9 +395,29 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
     moreHref: "/faq",
     items: [
       {
-        question: "How much does stem cell treatment cost?",
+        question: "How do I choose the right stem cell clinic?",
         answer:
-          "There is no single stem cell treatment price. Cost follows the cell source, how many sessions a protocol needs, and the country you travel to. A single knee injection sits at the low end, a multi-day systemic protocol with follow-up at the high end. Each listing shows the clinic's own indicative starting price, and you can filter the directory by budget.",
+          "Choosing the right stem cell clinic involves more than comparing prices. Look for clinic accreditation, physician experience, available treatment options, verified patient reviews, and transparent pricing. My Stem Cell Guide helps you compare trusted clinics by treatment, condition, location, and patient feedback so you can make a more informed decision.",
+      },
+      {
+        question: "How much does stem cell therapy cost?",
+        answer:
+          "The cost of stem cell therapy varies with the treatment type, the cell source, the condition being treated, the clinic, and the country. A single knee injection sits at the low end, a multi-day systemic protocol with follow-up at the high end. Every listing shows the clinic's own indicative starting price, so you can compare stem cell treatment cost and filter the directory by budget.",
+      },
+      {
+        question: "What conditions can stem cell therapy help treat?",
+        answer:
+          "Many patients research stem cell therapy for conditions such as knee osteoarthritis, joint pain, sports injuries, autoimmune disorders, neurological conditions, and anti-aging treatments. Available therapies and treatment approaches differ between clinics, so it is worth comparing providers against your specific condition rather than in general.",
+      },
+      {
+        question: "What is mesenchymal stem cell (MSC) therapy?",
+        answer:
+          "Mesenchymal stem cell (MSC) therapy uses cells sourced from bone marrow, fat tissue, or umbilical cord tissue, which are being studied for their regenerative and anti-inflammatory properties. MSC therapy is commonly explored for orthopedic, autoimmune, and neurological conditions, and clinics differ in where they source the cells and how many a protocol uses. Compare clinics offering MSC therapy and other regenerative medicine treatments here.",
+      },
+      {
+        question: "How can I compare stem cell clinics worldwide?",
+        answer:
+          "Comparing stem cell clinics worldwide is easier when treatments, accreditation, pricing, patient reviews, and locations sit in one place. My Stem Cell Guide lets you research regenerative medicine clinics across multiple countries side by side, so you can shortlist on the things you can actually check before you contact anyone.",
       },
       {
         question: "What are the benefits of stem cell therapy?",
@@ -404,11 +428,6 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
         question: "Does stem cell therapy help with knee pain?",
         answer:
           "Knees are the most researched use case in this directory. Clinics offering stem cell therapy for knee arthritis typically inject cells into the joint to target pain and stiffness, but research is still developing and outcomes differ between patients. Compare what each clinic actually offers before you commit.",
-      },
-      {
-        question: "What are mesenchymal stem cells?",
-        answer:
-          "Mesenchymal stem cells (MSCs) are cells sourced from bone marrow, fat tissue, or umbilical cord tissue. They are the cell type behind most MSC therapy listed here, and clinics differ in where they source them and how many cells a protocol uses.",
       },
       {
         question:
@@ -434,7 +453,11 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
     limit: 3,
   },
   keywords: [
+    "my stem cell guide",
     "stem cell guide",
+    "stem cell clinics worldwide",
+    "compare stem cell clinics",
+    "regenerative medicine clinics",
     "stem cell treatment",
     "stem cell therapy",
     "stem cell cost",

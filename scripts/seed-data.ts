@@ -838,9 +838,10 @@ export const PLANS: PlanSeed[] = [
 // ── Homepage / settings content ─────────────────────────────────────────────
 
 export const HERO = {
-  headline: "Find and trust regenerative-medicine clinics",
+  headline:
+    "Find and compare trusted regenerative medicine clinics with My Stem Cell Guide.",
   subhead:
-    "Compare accredited stem cell clinics worldwide by treatment, condition, location, and verified patient reviews.",
+    "Compare accredited stem cell clinics worldwide by treatment, condition, location, pricing, and verified patient reviews to help you make a more informed healthcare decision.",
   ctaPrimaryLabel: "Find a clinic",
   ctaSecondaryLabel: "Browse all clinics",
 };
