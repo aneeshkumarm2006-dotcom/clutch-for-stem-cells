@@ -1,0 +1,266 @@
+[
+  {
+    "name": "Stem Cell & PRP Institute of L.A.",
+    "slug": "stem-cell-and-prp-institute-of-la",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Single-physician regenerative medicine office in the Cedars-Sinai Medical Office Towers",
+    "description": "Stem Cell & PRP Institute of L.A. is a solo regenerative medicine practice run by Dr. Padra Nourparvar, a board-certified osteopathic physician. The office is Suite 545E in the Cedars-Sinai Medical Office Towers at 8631 West 3rd Street, on the Los Angeles side of the Beverly Hills line, and it draws most of its local patients from Westwood, Santa Monica, Bel Air and Brentwood. Nourparvar states that he evaluates and treats every patient himself, placing injections under ultrasound or fluoroscopic guidance rather than handing procedures to other providers.\n\nThe bulk of the caseload is orthopedic: knee and hip arthritis, rotator cuff and labral tears, disc and facet pain, tendinopathy and sports injuries. Alongside it the practice runs a smaller autoimmune and systemic programme, and inflammatory bowel disease is the part of it the clinic has written about most, with a condition page and two long-form articles on Crohn's disease and ulcerative colitis. What is offered for IBD is intravenous mesenchymal cells given systemically rather than into the bowel, sometimes paired with platelet-rich plasma. Cells come either from the patient, harvested by a small fat aspiration or a bone marrow draw, or from screened donated umbilical cord blood and Wharton's jelly tissue. Exosomes, shockwave therapy, prolotherapy, autologous conditioned serum, IV nutrient infusions and adipose banking for later use round out the menu, and there is a substantial men's health, hair and aesthetics side to the practice as well.\n\nNone of this is FDA-approved for these uses and the clinic says so plainly in its own site disclosure. There is no published price list, insurance does not pay for the therapies, and the practice publishes no protocol detail, dosing or outcome data of its own for the IBD programme, so the specifics are set at consultation. Out-of-state and international patients start with a telehealth visit and are usually able to complete evaluation and treatment inside a two to three day trip.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786622970/library/rcp7dnat1lon69lj7hl8.webp",
+      "publicId": "library/rcp7dnat1lon69lj7hl8",
+      "width": 2000,
+      "height": 540,
+      "alt": "Stem Cell & PRP Institute of L.A. logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786622974/library/valw1rsldj17ctls4xgf.webp",
+      "publicId": "library/valw1rsldj17ctls4xgf",
+      "width": 1080,
+      "height": 1440,
+      "alt": "Dr. Padra Nourparvar of Stem Cell & PRP Institute of L.A. in Los Angeles"
+    },
+
+    "treatmentTypes": [
+      "msc-therapy",
+      "prp",
+      "regenerative-orthopedics",
+      "autologous-therapy",
+      "allogeneic-therapy",
+      "adipose-derived-therapy",
+      "bone-marrow-derived-therapy",
+      "cord-blood-therapy",
+      "exosome-therapy",
+      "iv-systemic-therapy",
+      "stem-cell-banking"
+    ],
+    "conditionsTreated": [
+      "crohns-ibd",
+      "joint-pain",
+      "knee-osteoarthritis",
+      "back-and-spine",
+      "rotator-cuff-shoulder",
+      "hip-osteoarthritis",
+      "sports-injuries",
+      "sexual-health",
+      "neuropathy",
+      "hair-restoration",
+      "skin-aesthetic",
+      "parkinsons",
+      "autism-supportive",
+      "copd-pulmonary",
+      "stroke-recovery",
+      "rheumatoid-arthritis"
+    ],
+    "cellSources": [
+      "autologous",
+      "adipose",
+      "bone-marrow",
+      "allogeneic",
+      "umbilical-cord",
+      "cord-blood",
+      "placental-whartons-jelly",
+      "exosomes"
+    ],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 30 },
+      { "treatment": "prp", "percent": 25 },
+      { "treatment": "msc-therapy", "percent": 20 },
+      { "treatment": "exosome-therapy", "percent": 10 },
+      { "treatment": "iv-systemic-therapy", "percent": 10 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published price list. Every plan is quoted after an in-person or telehealth consultation, and the total depends on the cell source, whether a fat or bone marrow harvest is involved, and how many sessions are planned. Insurance does not cover the therapies.",
+
+    "physiciansCount": 1,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Padra Nourparvar",
+      "title": "Founder and treating physician",
+      "credentials": "DO, board-certified physician licensed in California",
+      "bio": "Earned his medical degree at the New York College of Osteopathic Medicine and trained at UCLA, UC Irvine, NYU, Mount Sinai and Children's Hospital Los Angeles. He is the only physician at the practice and performs every evaluation and procedure himself, working under ultrasound or fluoroscopic guidance. His awards include the UCLA Vice Provost Prize for Best Research Article of the Year and the Motif Award for Advancement of Health, sponsored by The Walt Disney Company. California osteopathic licence 20A11300, NPI 1457504136, with a primary taxonomy of family medicine."
+    },
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "Cedars-Sinai Medical Office Towers, 8631 West 3rd Street, Suite 545E",
+        "city": "Los Angeles",
+        "region": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "90048",
+        "phone": "310-361-5480",
+        "lat": 34.073829,
+        "lng": -118.380438
+      }
+    ],
+
+    "website": "https://www.stemwavepro.com",
+    "contactEmail": "wavelaconsult@gmail.com",
+    "social": {
+      "instagram": "https://www.instagram.com/stemcellprpla/",
+      "facebook": "https://www.facebook.com/profile.php?id=100054264051553"
+    },
+
+    "highlights": [
+      "One physician, Dr. Padra Nourparvar, does every evaluation and every procedure",
+      "Suite 545E in the Cedars-Sinai Medical Office Towers, 8631 West 3rd Street, Los Angeles",
+      "Crohn's and ulcerative colitis are handled with intravenous mesenchymal cells, not gut injections",
+      "Cells sourced from the patient's own fat or bone marrow, or from screened donated cord blood and Wharton's jelly",
+      "Injections placed under ultrasound or fluoroscopic guidance",
+      "Telehealth first visit for out-of-town patients, treatment usually inside a two to three day trip"
+    ],
+    "faqs": [
+      {
+        "question": "What is offered for Crohn's disease and ulcerative colitis?",
+        "answer": "Intravenous mesenchymal stem cells, given systemically so they circulate rather than being placed into the bowel, sometimes paired with platelet-rich plasma. The clinic does not publish a dosing schedule or a set number of infusions. Dr. Nourparvar sets the plan at consultation and describes the therapy as an option for patients who have not fully responded to standard drugs."
+      },
+      {
+        "question": "Where do the cells come from?",
+        "answer": "Either from the patient, through a small fat aspiration or a bone marrow draw, or from screened donated umbilical cord blood and Wharton's jelly tissue. Exosome preparations are offered separately, and the practice also banks a patient's own adipose tissue for later use."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care. The clinic states the same thing in its own site disclosure."
+      },
+      {
+        "question": "Who performs the treatment?",
+        "answer": "Dr. Padra Nourparvar, the only physician at the practice. He is a board-certified osteopathic physician who trained at UCLA, UC Irvine, NYU, Mount Sinai and Children's Hospital Los Angeles, and he says he carries out every procedure himself rather than passing patients to other providers."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "There is no published price list. Everything is quoted after a consultation, and the clinic states that insurance does not cover regenerative therapy. It says payment plans and financing options are available, and it runs an online payment page."
+      },
+      {
+        "question": "Can I be treated if I live out of state?",
+        "answer": "Yes. Out-of-town patients start with a telehealth consultation so the case can be reviewed before travel is booked. Evaluation and treatment are then scheduled together, and the clinic suggests staying in Los Angeles for one to three days afterwards."
+      },
+      {
+        "question": "Is the clinic part of Cedars-Sinai?",
+        "answer": "No. The office rents Suite 545E in the Cedars-Sinai Medical Office Towers on West 3rd Street. It is an independent private practice in that building, not a department of Cedars-Sinai Medical Center."
+      }
+    ],
+
+    "costPage": {
+      "introEmpty": "The practice publishes no price list. Dr. Nourparvar quotes after a consultation, and the figure moves with which biologic is used, how much of it, and how many sessions the plan calls for. Autologous work carries the extra cost of the harvest itself, whether that is a small fat aspiration or a bone marrow draw. Donor cord blood and Wharton's jelly material is bought in by the vial, so the number of vials in your plan matters as much as the headline figure when you compare quotes.",
+      "items": [
+        {
+          "label": "Initial in-person consultation and evaluation",
+          "currency": "USD",
+          "unit": "one time",
+          "note": "Covers the exam and a review of your imaging. Ask whether the fee is credited against treatment if you go ahead."
+        },
+        {
+          "label": "Telehealth consultation for out-of-town patients",
+          "currency": "USD",
+          "unit": "one time",
+          "note": "The first step the clinic recommends before booking travel. Ask whether it is billed on its own or folded into the in-person evaluation."
+        },
+        {
+          "label": "Intravenous mesenchymal stem cell infusion",
+          "currency": "USD",
+          "unit": "per session",
+          "note": "The route used for Crohn's disease, ulcerative colitis and the other systemic conditions. Cost turns on the cell source and how many infusions the plan calls for."
+        },
+        {
+          "label": "Autologous fat or bone marrow harvest",
+          "currency": "USD",
+          "unit": "per procedure",
+          "note": "A separate line from the infusion or injection. Ask whether processing of the sample is included in the same figure."
+        },
+        {
+          "label": "Cord blood or Wharton's jelly product",
+          "currency": "USD",
+          "unit": "per vial",
+          "note": "Donor material the clinic buys in. Ask how many vials your plan uses, since this is where two quotes usually diverge."
+        },
+        {
+          "label": "PRP or PRF injection",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "The cheapest option on the menu and the usual starting point for joint and tendon work."
+        },
+        {
+          "label": "Exosome therapy",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Priced on its own and sometimes added to a cell or PRP session rather than replacing it."
+        },
+        {
+          "label": "Shockwave therapy (ESWT)",
+          "currency": "USD",
+          "unit": "per session",
+          "note": "Normally sold as a course rather than a single visit. Ask what a full course costs before booking the first one."
+        },
+        {
+          "label": "Adipose banking for future use",
+          "currency": "USD",
+          "unit": "one time",
+          "note": "The harvest and cryopreservation are quoted up front. Ask separately what annual storage costs, since that is an ongoing bill."
+        }
+      ],
+      "includes": [
+        "Evaluation and treatment planning by Dr. Nourparvar himself",
+        "Ultrasound or fluoroscopic guidance during the procedure",
+        "Written post-procedure instructions",
+        "Virtual follow-up for patients who travelled in"
+      ],
+      "excludes": [
+        "Imaging and laboratory work ordered before treatment",
+        "Repeat sessions beyond the first",
+        "Annual storage fees if you bank adipose tissue",
+        "Travel and accommodation for out-of-town patients",
+        "Medication your gastroenterologist or other specialist continues to prescribe"
+      ],
+      "insuranceNote": "Insurance does not pay for these therapies. The clinic states that regenerative treatment is considered investigational and is not covered, so the whole bill is out of pocket. Ask for an itemised receipt if you intend to try an HSA or FSA claim, which the practice has publicly encouraged patients to do with year-end FSA balances.",
+      "financingNote": "No lender is named on the site. The clinic says it offers flexible payment options and financing and points patients to an online payment page, so ask the office which plans it actually accepts before your visit.",
+      "faqs": [
+        {
+          "question": "How much does Stem Cell & PRP Institute of L.A. cost?",
+          "answer": "There is no published figure. Every plan is quoted after a consultation, and the total depends on the cell source, the number of sessions and whether a harvest is involved. Ask for the quote broken out line by line, because the harvest, the biologic and the injection are separate costs here."
+        },
+        {
+          "question": "Does insurance cover stem cell therapy for Crohn's or colitis?",
+          "answer": "No. The clinic states that regenerative therapies are investigational and are not covered by insurance. Some patients apply HSA or FSA funds instead, so ask for an itemised receipt."
+        },
+        {
+          "question": "Is the first consultation free?",
+          "answer": "The site does not say that it is. Ask when you book, and ask separately whether the telehealth visit that out-of-town patients start with carries its own fee."
+        }
+      ],
+      "sources": [
+        { "label": "Clinic website", "url": "https://www.stemwavepro.com" },
+        {
+          "label": "Crohn's disease and ulcerative colitis condition page",
+          "url": "https://www.stemwavepro.com/ibd-crohns-colitis-stem-cell-therapy/"
+        },
+        {
+          "label": "Out-of-town patients page",
+          "url": "https://www.stemwavepro.com/out-of-town-patients/"
+        },
+        {
+          "label": "Stem cell therapies page",
+          "url": "https://www.stemwavepro.com/stem-cell-therapies/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+
+    "seo": {
+      "focusKeyword": "stem cell and prp institute of la"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "stem cell and prp institute of la reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]

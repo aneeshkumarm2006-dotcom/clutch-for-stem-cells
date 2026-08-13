@@ -1,0 +1,308 @@
+[
+  {
+    "name": "The Regenerative Center",
+    "slug": "the-regenerative-center",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Neurosurgeon-led cell therapy, PRP and rehab under one roof in Paducah, Kentucky",
+    "description": "The Regenerative Center is a multi-specialty clinic at 2725 James Sanders Blvd in Paducah, Kentucky, registered with Medicare as Advancing Medical Solutions PSC. Dr. Matt Wallis, a chiropractor who founded IMAC Regeneration Center of Kentucky and grew that model to 15 clinics across five states, opened this practice in November 2023. Sean McDonald, MD, a neurosurgeon who moved into non-surgical spine and regenerative work, is the medical director and takes case reviews himself. Nine providers work on site across neurosurgery, chiropractic, physical therapy and nurse practitioner care, so most patients get rehab and structural care wrapped around whatever injection they come in for.\n\nThe cell work draws on three sources. Fat harvested from the patient under local anesthetic, bone marrow drawn from the hip, and mesenchymal cells from donated umbilical cord tissue. The clinic states it never uses embryonic cells. Delivery is either an image-guided injection placed with ultrasound or fluoroscopy for a joint, disc or nerve target, or an IV infusion where the target is systemic, which is how the neurological, autoimmune and lung protocols are run. PRP is sold on its own for orthopedic cases and hair restoration and is sometimes paired with cells.\n\nParkinson's is the condition the center leads with, and there is real history behind that. From December 2020 the Paducah practice at this address, then trading as IMAC Regeneration Center, was one of three sites in a Phase 1 study of umbilical cord derived mesenchymal cells for bradykinesia in Parkinson's disease, registered as NCT04385056 under an FDA-authorized IND. The center says Dr. McDonald was the lead physician administering it. That study has since closed and no trial is open here now, so anything offered today is elective, investigational and quoted privately after a free case review. The practice is also in the VA Community Care Network, though that referral route covers its non-opioid pain management, physical therapy and chiropractic care rather than cell therapy.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786622256/library/xrniwpquqmcqk71hac7b.webp",
+      "publicId": "library/xrniwpquqmcqk71hac7b",
+      "width": 2000,
+      "height": 800,
+      "alt": "The Regenerative Center logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786622258/library/ndpbtkx2bcts6lq36val.webp",
+      "publicId": "library/ndpbtkx2bcts6lq36val",
+      "width": 1200,
+      "height": 600,
+      "alt": "The Regenerative Center provider team in Paducah, Kentucky"
+    },
+    "treatmentTypes": [
+      "msc-therapy",
+      "autologous-therapy",
+      "adipose-derived-therapy",
+      "bone-marrow-derived-therapy",
+      "allogeneic-therapy",
+      "iv-systemic-therapy",
+      "prp",
+      "regenerative-orthopedics"
+    ],
+    "conditionsTreated": [
+      "parkinsons",
+      "multiple-sclerosis",
+      "neuropathy",
+      "stroke-recovery",
+      "back-and-spine",
+      "knee-osteoarthritis",
+      "joint-pain",
+      "rotator-cuff-shoulder",
+      "hip-osteoarthritis",
+      "sports-injuries",
+      "copd-pulmonary",
+      "rheumatoid-arthritis",
+      "lupus",
+      "crohns-ibd",
+      "hair-restoration",
+      "sexual-health"
+    ],
+    "cellSources": [
+      "autologous",
+      "adipose",
+      "bone-marrow",
+      "umbilical-cord",
+      "allogeneic"
+    ],
+    "accreditations": [],
+    "serviceFocus": [
+      {
+        "treatment": "regenerative-orthopedics",
+        "percent": 35
+      },
+      {
+        "treatment": "msc-therapy",
+        "percent": 25
+      },
+      {
+        "treatment": "prp",
+        "percent": 20
+      },
+      {
+        "treatment": "iv-systemic-therapy",
+        "percent": 10
+      },
+      {
+        "treatment": "adipose-derived-therapy",
+        "percent": 10
+      }
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published price list. Cell therapy and PRP are quoted per plan after a free case review, which can be done by phone, video chat or in person. The physical therapy, chiropractic and physician visits around the procedure are billed to most major insurers instead.",
+    "foundedYear": 2023,
+    "physiciansCount": 1,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Sean McDonald, MD",
+      "title": "Medical Director",
+      "credentials": "MD, neurosurgeon, Kentucky-licensed in neurological surgery",
+      "bio": "Neurosurgeon who trained at the University of Alberta and started out in western Kentucky as a partner in a local neurosurgical group before moving toward non-surgical options. He took the Gold Medal in 2000 for the highest marks on his neurosurgical fellowship exams and is a member of the American Academy of Orthopedic Medicine. He runs the clinic's neurological and cell therapy protocols and personally handles the complimentary case reviews. The center says he was the lead physician administering the Phase 1 stem cell study for bradykinesia in Parkinson's disease at the Paducah site."
+    },
+    "team": [
+      {
+        "name": "Matt Wallis, DC",
+        "title": "Founder and Clinic Director",
+        "credentials": "DC, Doctor of Chiropractic, Life University",
+        "bio": "Opened Lone Oak Chiropractic in 1998, then founded IMAC Regeneration Center of Kentucky, the first Integrated Medicine and Chiropractic center, and grew that model to 15 clinics across five states. He opened The Regenerative Center in Paducah in November 2023 and runs it as owner and clinic director."
+      },
+      {
+        "name": "Sandy Miller, PT",
+        "title": "Chief Operating Officer and Physical Therapist",
+        "credentials": "PT, Bachelor of Health Science in Physical Therapy, University of Missouri Columbia",
+        "bio": "Physical therapist who has worked alongside Dr. Wallis for eight years. She runs clinic operations and still treats patients on the movement and pain side."
+      },
+      {
+        "name": "Daniela Cardenas, PA-C",
+        "title": "Physician Assistant, Men's and Women's Wellness",
+        "credentials": "PA-C, master's degree from Bethel University",
+        "bio": "Physician assistant covering medical weight loss and hormone optimization. She studied biology and chemistry at Murray State University before her master's at Bethel University, and moved to the United States from Colombia."
+      },
+      {
+        "name": "Kayla Klope, DPT",
+        "title": "Physical Therapy Director",
+        "credentials": "DPT, Bellarmine University",
+        "bio": "Earned her doctorate in physical therapy at Bellarmine University in Louisville in 2012 after a science degree from Murray State. She directs the physical therapy side of the practice and works mostly with patients trying to avoid surgery."
+      },
+      {
+        "name": "Lauren McClain, APRN",
+        "title": "Orthopedic Nurse Practitioner",
+        "credentials": "APRN",
+        "bio": "Advanced practice registered nurse on the orthopedic side, handling patient evaluations and follow-up through the injection and rehabilitation protocols."
+      },
+      {
+        "name": "Amanda Reyes-Gill, APRN",
+        "title": "Orthopedic Nurse Practitioner",
+        "credentials": "APRN, FNP-C, board-certified family nurse practitioner",
+        "bio": "Board-certified family nurse practitioner working across the orthopedic and regenerative side of the clinic. She holds membership with the American Association of Nurse Practitioners and continues training through Empire Medical."
+      },
+      {
+        "name": "Derek Snodgrass, DC",
+        "title": "Director of Spinal Health",
+        "credentials": "DC, Logan College of Chiropractic",
+        "bio": "Chiropractor who graduated from Logan College of Chiropractic in Chesterfield, Missouri in 2008 and practiced in both Missouri and Kentucky, including multi-disciplinary clinics, before joining here to lead spinal health."
+      },
+      {
+        "name": "Jared Snowaert, DPT",
+        "title": "Rehabilitation Specialist",
+        "credentials": "DPT",
+        "bio": "Doctor of physical therapy who handles rehabilitation cases. Originally from Upper Michigan."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "2725 James Sanders Blvd",
+        "city": "Paducah",
+        "region": "Kentucky",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "42001",
+        "phone": "270-554-5114",
+        "lat": 37.0708,
+        "lng": -88.6839
+      }
+    ],
+    "website": "https://regencenterexperts.com",
+    "contactEmail": "contactus@regencenterexperts.com",
+    "social": {
+      "facebook": "https://www.facebook.com/TheRegenCenter/",
+      "instagram": "https://www.instagram.com/regencenterexperts/",
+      "youtube": "https://www.youtube.com/@RegenCenterExperts"
+    },
+    "highlights": [
+      "Medical director Sean McDonald, MD, is a neurosurgeon who moved into non-surgical spine and regenerative care",
+      "The practice at this Paducah address was one of three registered sites in the Phase 1 Parkinson's bradykinesia cell study NCT04385056",
+      "Cells come from the patient's own fat or bone marrow, or from donated umbilical cord tissue, given by image-guided injection or IV",
+      "Nine providers on site spanning neurosurgery, chiropractic, physical therapy and nurse practitioner care",
+      "In the VA Community Care Network for non-opioid pain management, physical therapy and chiropractic",
+      "Free case review by phone, video chat or in person before any quote is given"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "Mesenchymal cells from three sources. Fat taken from the patient under local anesthetic, bone marrow drawn from the hip, and tissue from screened donated umbilical cord. The clinic states it does not use embryonic cells."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "Was the Parkinson's clinical trial real?",
+        "answer": "Yes. Phase 1 study NCT04385056 tested umbilical cord derived mesenchymal cells given by IV infusion for bradykinesia in Parkinson's disease, and the Paducah site at this address, then trading as IMAC Regeneration Center, was one of three locations. Dosing started in December 2020 and the study closed in 2022. The center says its current medical director led the dosing here. No study is open at the clinic now, so treatment you receive today is elective care rather than trial participation."
+      },
+      {
+        "question": "How are the cells given?",
+        "answer": "Either as an image-guided injection placed with ultrasound or fluoroscopy when the target is a joint, disc or nerve, or as an IV infusion for the neurological, autoimmune and lung protocols."
+      },
+      {
+        "question": "Does insurance cover it?",
+        "answer": "Partly. The clinic accepts most major insurance for the conventional side of what it does, meaning physician visits, physical therapy and chiropractic care. Cell therapy and PRP are cash-pay. Ask for the quote split into insurance lines and cash lines before you start."
+      },
+      {
+        "question": "Can veterans be treated here?",
+        "answer": "Yes, through the VA Community Care Network, but the VA has to approve a referral first and the covered services are non-opioid pain management, physical therapy and chiropractic rather than cell therapy. Ask your VA primary care provider to refer to Advancing Medical Solutions, NPI 1699454249."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "Nothing is published. The center runs a free case review by phone, video chat or in person and quotes each plan afterward, so the figure depends on the cell source, how many sites are treated and whether the protocol is one injection or a course of infusions."
+      }
+    ],
+    "costPage": {
+      "introEmpty": "The Regenerative Center publishes no price list. The free case review comes first, by phone, video chat or in person, and the quote follows once a provider has looked at your imaging and history. What you pay turns on how much of the plan is cell therapy or PRP, which is cash-pay, and how much is physical therapy, chiropractic and physician visits, which the clinic bills to most major insurers. Ask for that split in writing before you commit to anything.",
+      "items": [
+        {
+          "label": "Case review and evaluation",
+          "currency": "USD",
+          "unit": "one time",
+          "note": "Advertised as complimentary and offered by phone, video chat or in person with the medical director."
+        },
+        {
+          "label": "Stem cell therapy from your own fat or bone marrow",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Quoted after the case review. The harvest is done in office under local anesthetic, so the fee covers collection, processing and the image-guided injection."
+        },
+        {
+          "label": "Umbilical cord derived cell therapy",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Donor tissue is bought in, so this line prices differently from harvesting your own cells. Ask which product is being used and at what dose."
+        },
+        {
+          "label": "IV cell infusion for neurological, autoimmune or lung conditions",
+          "currency": "USD",
+          "unit": "per course",
+          "note": "Systemic protocols are often more than one infusion. Ask how many are inside the quoted number and what a repeat would cost."
+        },
+        {
+          "label": "PRP injection",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Sold on its own for joints, discs and hair restoration. Cheaper than cell therapy and often the first step offered."
+        },
+        {
+          "label": "Physical therapy, chiropractic and physician visits",
+          "currency": "USD",
+          "unit": "per visit",
+          "note": "The side of the practice billed to most major insurers, so your cost here is a copay and deductible rather than a cash price."
+        },
+        {
+          "label": "Hormone therapy, peptides and medical weight loss",
+          "currency": "USD",
+          "unit": "per month",
+          "note": "Separate ongoing programs with their own monthly cost. They sit outside any cell therapy quote."
+        }
+      ],
+      "includes": [
+        "The complimentary case review with a provider",
+        "Review of your history and imaging, and a written treatment plan",
+        "In-office harvest and processing when the cells are your own",
+        "Ultrasound or fluoroscopy guidance on targeted injections"
+      ],
+      "excludes": [
+        "Outside MRI or other diagnostic imaging you do not already have",
+        "Travel and lodging for out-of-state patients",
+        "Hormone, peptide and medical weight-loss programs",
+        "Repeat infusions beyond the quoted course"
+      ],
+      "insuranceNote": "The clinic says it accepts most major insurance, and that applies to the conventional side of the practice, meaning physician visits, physical therapy and chiropractic care. Cell therapy and PRP are elective and are very rarely covered, so plan on paying cash for those lines. Veterans referred through the VA Community Care Network are covered for non-opioid pain management, physical therapy and chiropractic only, and the VA has to authorize the referral before treatment starts.",
+      "financingNote": "No financing partner is named on the site. Ask the patient care coordinator what payment plans are available and whether paying for a full course up front changes the total.",
+      "faqs": [
+        {
+          "question": "How much does The Regenerative Center cost?",
+          "answer": "There is no published figure. Cell therapy and PRP are quoted per plan after the free case review, and the number moves with the cell source, how many sites are treated and whether the protocol is a single injection or a course of infusions. The rehab and physician side is billed to insurance instead, so ask for the quote split into cash lines and insurance lines."
+        },
+        {
+          "question": "Is the first appointment free?",
+          "answer": "The case review is advertised as complimentary and can be done by phone, video chat or in person. Any imaging you do not already have is a separate cost."
+        },
+        {
+          "question": "Will insurance pay for stem cell therapy here?",
+          "answer": "Almost certainly not. Cell therapy is elective and investigational, and insurers do not cover it. What the clinic bills to insurance is the physical therapy, chiropractic and physician visits around the procedure."
+        },
+        {
+          "question": "Is there a veterans route?",
+          "answer": "Yes, but a limited one. The practice takes VA Community Care Network referrals for non-opioid pain management, physical therapy and chiropractic, with VA approval needed first. Cell therapy is not part of that route."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Clinic complimentary case review page",
+          "url": "https://regencenterexperts.com/complimentary-case-review/"
+        },
+        {
+          "label": "Clinic about page",
+          "url": "https://regencenterexperts.com/about-us/"
+        },
+        {
+          "label": "Clinic VA Community Care page",
+          "url": "https://regencenterexperts.com/veteran-affairs-community-care-for-veterans-the-regenerative-center/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+    "seo": {
+      "focusKeyword": "the regenerative center"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "the regenerative center reviews"
+      }
+    },
+    "isClaimed": false
+  }
+]

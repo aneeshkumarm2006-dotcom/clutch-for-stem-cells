@@ -1,0 +1,208 @@
+[
+  {
+    "name": "MD Stem Cells",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Autologous bone marrow cell studies for stroke, Parkinson's and vision loss, treated in Coral Springs, Florida",
+    "description": "MD Stem Cells treats patients inside registered clinical studies rather than as a conventional clinic. The neurologic arm is NEST, the Neurologic Stem Cell Treatment Study (NCT02795052), and the eye arm is SCOTS 2, the Stem Cell Ophthalmology Treatment Study II (NCT03011541). Both list MD Stem Cells as sponsor and both are still recruiting. The group has sponsored registered studies since 2012. Steven Levy, MD is chairman and study director and runs protocol design and oversight. Jeffrey Weiss, MD, a retina specialist certified by the American Board of Ophthalmology, is principal investigator and performs the procedures in Florida.\n\nEverything here uses the patient's own bone marrow, so there is no donor tissue involved. Marrow is aspirated under local anaesthetic with sedation, processed the same day, and given back as an intravenous infusion together with an intranasal application to the lower nasal passages, which the NEST protocol uses as a route toward the central nervous system. NEST enrols chronic stroke, Parkinson's disease, multiple sclerosis, traumatic brain injury, spinal cord injury and peripheral neuropathy, and stroke recovery is one of its larger categories. The eye side covers macular degeneration, retinitis pigmentosa, Stargardt disease, optic neuropathy and glaucoma, delivered retrobulbar, sub-Tenon or intravenously. A visit runs about three days, covering evaluation, the procedure, then a post-procedure check before travelling home.\n\nUS treatment takes place in Coral Springs, Florida. The Westport, Connecticut address is the company's administrative and enrolment office, and a second treatment site operates in Dubai. These are investigational procedures conducted within registered studies, not FDA-approved standard care, and participants pay a fee to take part. MD Stem Cells publishes no price list and reviews medical records before offering a place. Reported outcomes vary between individuals.",
+
+    "treatmentTypes": ["bone-marrow-derived-therapy", "autologous-therapy", "iv-systemic-therapy"],
+    "conditionsTreated": ["stroke-recovery", "parkinsons", "multiple-sclerosis", "neuropathy", "spinal-cord-injury"],
+    "cellSources": ["bone-marrow", "autologous"],
+    "accreditations": ["clinical-trial-participation", "board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "bone-marrow-derived-therapy", "percent": 55 },
+      { "treatment": "autologous-therapy", "percent": 25 },
+      { "treatment": "iv-systemic-therapy", "percent": 20 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published price list. Places in SCOTS 2 and NEST are patient-funded, and the fee is quoted after the clinical team reviews your records and confirms eligibility. Travel, lodging and imaging ordered by your own specialists are separate.",
+
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Jeffrey N. Weiss",
+      "title": "Principal Investigator",
+      "credentials": "MD, certified by the American Board of Ophthalmology, Florida licence ME49219",
+      "bio": "Retina specialist who performs the bone marrow procedures for both studies in Florida. Formerly chief of retinal surgery at the Joslin Diabetes Center in Boston and on the faculty of Harvard Medical School. Has been in practice since 1982 and is the named principal investigator on the SCOTS, NEST, SciExVR and ACIST study records."
+    },
+    "team": [
+      {
+        "name": "Dr. Steven Levy",
+        "title": "Chairman and Study Director",
+        "credentials": "MD",
+        "bio": "Designs and directs the study protocols and is the central contact listed on the clinicaltrials.gov records. His role covers protocol oversight and study administration rather than performing the procedures. Trained in ophthalmology and later moved into life science and healthcare business development."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "city": "Coral Springs",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "33065",
+        "phone": "203-423-9494",
+        "lat": 26.2712,
+        "lng": -80.2706
+      },
+      {
+        "isHQ": false,
+        "addressLine": "3 Sylvan Road South",
+        "city": "Westport",
+        "region": "Connecticut",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "06880",
+        "phone": "203-571-1418",
+        "lat": 41.1344,
+        "lng": -73.3713
+      },
+      {
+        "isHQ": false,
+        "city": "Dubai",
+        "country": "United Arab Emirates",
+        "countryCode": "AE",
+        "lat": 25.2048,
+        "lng": 55.2708
+      }
+    ],
+
+    "website": "https://mdstemcells.com",
+    "contactEmail": "stevenlevy@mdstemcells.com",
+
+    "highlights": [
+      "Treats inside two registered studies, NEST (NCT02795052) and SCOTS 2 (NCT03011541), both still recruiting",
+      "Uses only the patient's own bone-marrow-derived cells, with no donor tissue",
+      "Neurologic cells given by IV infusion plus intranasal application in the same visit",
+      "Principal investigator is a retina specialist with an active Florida licence and ophthalmology board certification",
+      "US treatment in Coral Springs, Florida, with the administrative office in Westport, Connecticut",
+      "Three-day visit covering evaluation, the procedure, then a post-procedure check"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "The patient's own bone marrow. A small volume is aspirated under local anaesthetic with sedation, concentrated the same day, and given back during the same visit. No donor or umbilical-cord tissue is used, so there is no tissue matching step."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care. MD Stem Cells runs them within studies registered on clinicaltrials.gov, which is a registration, not an FDA approval."
+      },
+      {
+        "question": "How are the cells given for stroke or another neurologic condition?",
+        "answer": "Two ways in the same session. An intravenous infusion, plus an application to the lower third of the nasal passages. The NEST protocol uses the intranasal route to try to reach the central nervous system along the trigeminal nerve pathway."
+      },
+      {
+        "question": "Do you treat eye conditions as well?",
+        "answer": "Yes, under the separate SCOTS 2 study. It covers macular degeneration, retinitis pigmentosa, Stargardt disease, optic neuropathy, optic nerve atrophy and glaucoma. For eyes the cells are placed retrobulbar or sub-Tenon, near the back of the eye, and sometimes given intravenously as well."
+      },
+      {
+        "question": "Where does the treatment actually happen?",
+        "answer": "In the United States, the treatment site is Coral Springs, Florida, and that is where the principal investigator performs the procedures. The Westport, Connecticut address is the administrative and enrolment office, not a treatment room. There is also a treatment site in Dubai."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "There is no published figure. Participation is patient-funded and quoted individually after the clinical team has reviewed your medical records and confirmed you are eligible. Travel and lodging for the three-day visit are on top."
+      },
+      {
+        "question": "How long do I need to be there?",
+        "answer": "About three days. Day one is the baseline evaluation and consultation, day two is the bone marrow harvest and delivery, and day three is a post-procedure check and travel clearance."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "md stem cells"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "md stem cells reviews"
+      }
+    },
+
+    "costPage": {
+      "introEmpty": "MD Stem Cells publishes no price list anywhere on its site. Places in SCOTS 2 and NEST are patient-funded, which means you pay to take part in the study, and the figure is quoted to you individually once the clinical team has read your records and agreed you are eligible. So the first step is a records review rather than a price conversation, and the number arrives after it.",
+      "items": [
+        {
+          "label": "NEST enrolment for neurologic conditions",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Covers the bone marrow harvest and the combined IV and intranasal delivery. Ask whether the quote is per procedure or covers any repeat treatment."
+        },
+        {
+          "label": "SCOTS 2 enrolment for eye conditions",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Quoted separately from the neurologic study. Ask whether treating both eyes changes the figure."
+        },
+        {
+          "label": "Eligibility and medical records review",
+          "currency": "USD",
+          "unit": "one time",
+          "note": "The screening step before any offer of a place. Ask whether this is billed on its own or folded into the enrolment fee."
+        },
+        {
+          "label": "Travel and lodging for the three-day visit",
+          "currency": "USD",
+          "unit": "per visit",
+          "note": "Arranged and paid by the patient. Three nights near the Coral Springs site is the usual requirement, and it is the cost most people forget to budget."
+        }
+      ],
+      "includes": [
+        "Baseline evaluation and specialist consultation on day one",
+        "Bone marrow aspiration under local anaesthetic with sedation",
+        "Same-day processing and delivery of the cells",
+        "Post-procedure check and travel clearance before you fly home"
+      ],
+      "excludes": [
+        "Flights, lodging and ground transport for the three-day visit",
+        "Imaging and specialist reports your own doctors order for the eligibility review",
+        "Any follow-up care with your usual physicians once you are home",
+        "Repeat treatment, which is quoted separately"
+      ],
+      "insuranceNote": "Insurance does not cover this. Study participation is self-funded and the procedures are investigational rather than approved care, so there is no billing code to submit. Ask for an itemised receipt if you intend to try an HSA or FSA claim, and do not count on it being accepted.",
+      "financingNote": "No published financing programme. Ask what the payment schedule looks like, when the money is due relative to the procedure date, and what happens to it if the records review rules you ineligible after you have paid.",
+      "faqs": [
+        {
+          "question": "How much does MD Stem Cells cost?",
+          "answer": "The clinic does not publish a figure. Both studies are patient-funded and quoted case by case after a records review. Get the quote in writing and ask exactly what it covers, because travel and the three nights near the Florida site sit outside it."
+        },
+        {
+          "question": "Does insurance pay for any of it?",
+          "answer": "No. These are investigational procedures inside a registered study, not approved treatment, so insurers do not reimburse them. Ask for an itemised receipt if you want to attempt an HSA or FSA claim."
+        },
+        {
+          "question": "Is the eligibility review free?",
+          "answer": "Ask before you send anything. The published process starts with submitting your diagnosis and recent scans through the clinic's form, and the fee conversation follows the review, so confirm in advance whether the review itself carries a charge."
+        }
+      ],
+      "sources": [
+        {
+          "label": "MD Stem Cells contact and eligibility page",
+          "url": "https://mdstemcells.com/contact-eligibility/"
+        },
+        {
+          "label": "NEST study record on clinicaltrials.gov",
+          "url": "https://clinicaltrials.gov/study/NCT02795052"
+        },
+        {
+          "label": "SCOTS 2 study record on clinicaltrials.gov",
+          "url": "https://clinicaltrials.gov/study/NCT03011541"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623281/library/ffe5d6rxrm0wnncg5a9c.webp",
+      "publicId": "library/ffe5d6rxrm0wnncg5a9c",
+      "width": 620,
+      "height": 148,
+      "alt": "MD Stem Cells logo"
+    },
+
+    "isClaimed": false
+  }
+]

@@ -1,0 +1,261 @@
+[
+  {
+    "name": "Hope Biosciences",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "A Sugar Land cell bank and cGMP manufacturer whose therapy reaches patients only through FDA authorized trials",
+    "description": "Hope Biosciences is a biopharmaceutical company and cell bank at 16700 Creek Bend Drive in Sugar Land, about twenty miles southwest of Houston. Donna Chang founded it in 2016. The company bought the building it occupies and won a $1 million performance incentive from the City of Sugar Land in January 2026. Inside are ISO 7 and ISO 8 cleanrooms run to cGMP standards under an ISO 9001:2015 quality system, and the company says it is the only clinical grade bank in the United States storing mesenchymal stem cells from both adults and newborns.\n\nWhat a member of the public can actually buy here is banking. About a tablespoon of fat from an adult, or the placenta and amniotic membrane after a birth, goes through a five to seven week culture process that builds a master cell bank the company expects to yield more than a thousand doses. Prices are published and identical for adults and newborns. One payment of $10,000 settles it, or you can pay $7,000 with $250 a year after that, or $3,950 with $500 a year. Samples are collected in the Greater Houston area and shipped in by kit from anywhere else in the country.\n\nTreatment is a separate matter and it is not for sale. Because the cultured cells are regulated as drug products, Hope Biosciences can release them only inside an FDA authorized study, and those run through the Hope Biosciences Research Foundation, a 501(c)(3) founded in 2020 at the same address that charges patients nothing. Protocols have covered multiple sclerosis, Parkinson's disease, rheumatoid arthritis, lupus, post COVID syndrome, brain injury and Crohn's disease. The multiple sclerosis work is furthest along. A 24 patient Phase 2 of autologous HB-adMSCs met its primary endpoint in 2024, and in August 2025 the FDA granted the cells RMAT designation for relapsing remitting MS. All of it remains investigational and none of it is FDA approved.",
+
+    "treatmentTypes": [
+      "stem-cell-banking",
+      "adipose-derived-therapy",
+      "msc-therapy",
+      "autologous-therapy",
+      "allogeneic-therapy",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "multiple-sclerosis",
+      "parkinsons",
+      "rheumatoid-arthritis",
+      "lupus",
+      "post-covid-recovery",
+      "crohns-ibd"
+    ],
+    "cellSources": ["adipose", "autologous", "allogeneic", "placental-whartons-jelly"],
+    "accreditations": ["gmp-certified-lab", "iso-9001", "clinical-trial-participation"],
+    "serviceFocus": [
+      { "treatment": "stem-cell-banking", "percent": 60 },
+      { "treatment": "adipose-derived-therapy", "percent": 20 },
+      { "treatment": "iv-systemic-therapy", "percent": 10 },
+      { "treatment": "allogeneic-therapy", "percent": 10 }
+    ],
+
+    "priceMin": 3950,
+    "priceMax": 10000,
+    "currency": "USD",
+    "priceModel": "package",
+    "priceNote": "Banking is the only thing with a published price. One programme, three payment plans, the same for adults and newborns. $10,000 once, or $7,000 plus $250 a year, or $3,950 plus $500 a year. Treatment is not sold. Cells are released only into FDA authorized studies run by the nonprofit Hope Biosciences Research Foundation, which states those studies cost patients nothing.",
+
+    "foundedYear": 2016,
+    "teamSize": "11-50",
+    "languages": ["English"],
+
+    "team": [
+      {
+        "name": "Donna Chang",
+        "title": "Co-Founder, President and Chief Executive Officer",
+        "credentials": "Graduate degree in biotechnology, Johns Hopkins University",
+        "bio": "Started Hope Biosciences in Sugar Land in 2016 with one employee, after studying premed at the University of Toronto and working in economic development recruiting life sciences companies to Texas. She co-founded the nonprofit Hope Biosciences Research Foundation in 2020 and speaks for the company on its FDA filings."
+      },
+      {
+        "name": "Hyeonggeun Park",
+        "title": "Lab Director",
+        "bio": "Named by the company as the inventor of its cell culture technology, the five to seven week process that turns a small fat or placenta sample into a master cell bank. He runs the Sugar Land laboratory."
+      },
+      {
+        "name": "Dr. Djamchid Lotfi",
+        "title": "Principal Investigator, Hope Biosciences Research Foundation",
+        "credentials": "MD",
+        "bio": "Listed on clinicaltrials.gov as principal investigator for the foundation's Phase 2 study of autologous HB-adMSCs in multiple sclerosis (NCT06800404), running at Sugar Land since May 2025."
+      },
+      {
+        "name": "Ridhima Vij",
+        "title": "Clinical Research Scientist",
+        "bio": "Works on the HB-adMSC programme and reported the Phase 2 multiple sclerosis findings in the company's August 2025 announcement of its RMAT designation."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "16700 Creek Bend Dr",
+        "city": "Sugar Land",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "77478",
+        "phone": "832-975-8840",
+        "lat": 29.6018,
+        "lng": -95.625
+      }
+    ],
+
+    "website": "https://www.hope.bio",
+    "contactEmail": "info@hope.bio",
+    "social": {
+      "instagram": "https://www.instagram.com/hope.bio/",
+      "facebook": "https://www.facebook.com/hopebiosciences/",
+      "linkedin": "https://www.linkedin.com/company/hopebio",
+      "x": "https://twitter.com/hopebiosciences",
+      "youtube": "https://www.youtube.com/channel/UCfQeFTtclHeGT6Nz3cl2rDQ"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623100/library/tgh33g8swvvb5lxbr9nj.webp",
+      "publicId": "library/tgh33g8swvvb5lxbr9nj",
+      "width": 1000,
+      "height": 587,
+      "alt": "Hope Biosciences logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623104/library/gdh4itqbgbomfyz5sawj.webp",
+      "publicId": "library/gdh4itqbgbomfyz5sawj",
+      "width": 2000,
+      "height": 1333,
+      "alt": "Hope Biosciences cell culture laboratory in Sugar Land, Texas"
+    },
+
+    "highlights": [
+      "cGMP manufacturing plant and cell bank at 16700 Creek Bend Drive in Sugar Land, west of Houston",
+      "Banks pure mesenchymal stem cells from adult fat and from newborn placenta, not cord blood",
+      "Banking prices are published and run from $3,950 to $10,000 depending on the plan",
+      "Cells are released only inside FDA authorized studies, so there is no treatment to buy",
+      "FDA granted RMAT designation to HB-adMSCs for relapsing remitting multiple sclerosis in August 2025",
+      "Studies run through the nonprofit Hope Biosciences Research Foundation at no cost to patients"
+    ],
+
+    "faqs": [
+      {
+        "question": "Can I get a stem cell treatment here?",
+        "answer": "Not as a purchase. Hope Biosciences banks and manufactures cells, it does not sell infusions. Its cultured cells are regulated as drug products, so they are released only inside an FDA authorized clinical trial or expanded access protocol run by the Hope Biosciences Research Foundation. There is no walk-in treatment menu at the Sugar Land site."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. HB-adMSCs are investigational and are not approved by the FDA for any use. They are given only under FDA authorized research protocols, and they are not a replacement for standard medical care. The RMAT designation granted in August 2025 is a development pathway, not an approval."
+      },
+      {
+        "question": "What does banking cost?",
+        "answer": "There is one banking programme with three payment plans, priced the same for adults and newborns. Plan A is $10,000 once with no annual fee. Plan B is $7,000 upfront plus $250 a year. Plan C is $3,950 upfront plus $500 a year. Cells can be stored indefinitely."
+      },
+      {
+        "question": "What cells do you bank?",
+        "answer": "Pure mesenchymal stem cells, cultured rather than frozen as raw tissue. For adults they come from about a tablespoon of fat. For newborns they come from the placenta and amniotic membrane, not cord blood. The five to seven week culture process builds a master cell bank the company expects to yield more than a thousand doses."
+      },
+      {
+        "question": "Do I have to live near Houston to bank?",
+        "answer": "No. In the Greater Houston area Hope Bio picks up the sample on the day it is taken. From elsewhere in the country you ship it in a kit the company supplies. You still need somewhere to have the fat sample collected, so ask who does that in your area and what they charge before you sign up."
+      },
+      {
+        "question": "How do people get into the studies?",
+        "answer": "Through the Hope Biosciences Research Foundation, which keeps a patient registry and lists its protocols on clinicaltrials.gov. Several protocols require you to have banked cells with Hope Biosciences first, and some are open only to people who took part in an earlier study. Eligibility is set per protocol, not by the company."
+      },
+      {
+        "question": "Is multiple sclerosis actively being studied?",
+        "answer": "Yes. A 24 patient Phase 2 of autologous HB-adMSCs in MS (NCT05116540) finished in June 2024 and met its primary endpoint, and the FDA granted RMAT designation for relapsing remitting MS in August 2025. A follow-on Phase 2 (NCT06800404) started at Sugar Land in May 2025, but it is active and not recruiting, and it enrolled only people who had been in the placebo arm of the first study."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "hope biosciences"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "hope biosciences reviews"
+      }
+    },
+
+    "costPage": {
+      "intro": "Hope Biosciences publishes its banking prices, which is unusual in this directory, and sells nothing else to the public. One banking programme, three payment plans, the same figures whether the cells come from an adult's fat or a newborn's placenta. What is not on the price list is treatment. The cultured cells are drug products, so they are released only into FDA authorized studies run by the nonprofit Hope Biosciences Research Foundation, which states those studies cost patients nothing. The real variable in your total is the collection procedure and how many years you expect to store.",
+      "items": [
+        {
+          "label": "Stem cell banking, Lifetime Plan A",
+          "priceMin": 10000,
+          "priceMax": 10000,
+          "currency": "USD",
+          "unit": "one time",
+          "note": "A single payment with no recurring charge afterwards. Same figure for adult and newborn banking."
+        },
+        {
+          "label": "Stem cell banking, Plan B",
+          "priceMin": 7000,
+          "priceMax": 7000,
+          "currency": "USD",
+          "unit": "upfront",
+          "note": "$7,000 to start, then $250 a year in maintenance for as long as the cells are stored."
+        },
+        {
+          "label": "Stem cell banking, Plan C",
+          "priceMin": 3950,
+          "priceMax": 3950,
+          "currency": "USD",
+          "unit": "upfront",
+          "note": "The cheapest way in at $3,950, then $500 a year. The most expensive of the three if you store for a long time."
+        },
+        {
+          "label": "Annual maintenance after the upfront fee",
+          "priceMin": 0,
+          "priceMax": 500,
+          "currency": "USD",
+          "unit": "per year",
+          "note": "Nothing on Plan A, $250 on Plan B, $500 on Plan C. Cells can be stored indefinitely, so this is the figure that decides which plan wins."
+        },
+        {
+          "label": "Fat or placenta collection procedure",
+          "currency": "USD",
+          "unit": "one time",
+          "note": "Not quoted on the site. Hope Bio collects or receives the sample, but taking the fat is a separate medical procedure, so ask who performs it locally and what they bill."
+        },
+        {
+          "label": "Treatment using your banked cells",
+          "currency": "USD",
+          "unit": "per protocol",
+          "note": "Not for sale. Cells are released only into FDA authorized studies, and the Hope Biosciences Research Foundation states its studies are free to patients."
+        }
+      ],
+      "includes": [
+        "The five to seven week culture process that turns the sample into a master cell bank",
+        "Sterility and safety testing throughout processing",
+        "Cryogenic storage at the Sugar Land facility, with no expiry date on the cells",
+        "A full refund of the fee if the lab cannot successfully process and bank your cells"
+      ],
+      "excludes": [
+        "The procedure to collect the fat sample",
+        "Courier costs for samples sent from outside the Greater Houston area, which the site does not price",
+        "Annual maintenance on Plan B and Plan C",
+        "Any treatment, which is not sold at any price"
+      ],
+      "insuranceNote": "Banking is a private purchase and is not billed to insurance. The studies are a separate matter. The Hope Biosciences Research Foundation is a 501(c)(3) and states there is no cost to patients in the protocols it runs, so there is nothing to claim there either. Ask for an itemised receipt if you intend to try an HSA or FSA claim on the banking fee.",
+      "financingNote": "No published financing programme. The three plans are the financing. Plan C drops the entry cost to $3,950 and pushes $500 a year onto the back end, while Plan A closes it out at $10,000 and stops. On the published figures the three converge at roughly twelve years of storage, so the sensible question is how long you actually expect to store rather than which sticker is smallest.",
+      "faqs": [
+        {
+          "question": "How much does Hope Biosciences cost?",
+          "answer": "Banking is $10,000 as a single payment, or $7,000 with a $250 annual fee, or $3,950 with a $500 annual fee. Those figures cover both adult and newborn banking and are published on the company's own pages. Treatment is not for sale at any price."
+        },
+        {
+          "question": "Which plan is cheapest?",
+          "answer": "It depends on how long you store. Plan C is cheapest to start and Plan A is cheapest over a long horizon. On the published numbers the three even out at around twelve years, so the answer turns on your age and your intent rather than on the headline figure."
+        },
+        {
+          "question": "Is there an extra charge to use my cells later?",
+          "answer": "Not from Hope Biosciences, because the cells are released into FDA authorized studies rather than sold. The Research Foundation says its studies are free to patients. What that does not cover is travel to Sugar Land for infusions and follow-up visits, which can be repeated over several months."
+        },
+        {
+          "question": "Does insurance cover stem cell banking?",
+          "answer": "No. It is a private purchase and no insurer pays for it. Ask for an itemised receipt if you plan to try an HSA or FSA claim."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Adult stem cell banking pricing",
+          "url": "https://www.hope.bio/adult-stem-cell-banking"
+        },
+        {
+          "label": "Newborn stem cell banking pricing",
+          "url": "https://www.hope.bio/newborn-stem-cell-banking"
+        },
+        {
+          "label": "Hope Biosciences FAQ on release of banked cells",
+          "url": "https://www.hope.bio/faq"
+        },
+        {
+          "label": "Hope Biosciences Research Foundation research page",
+          "url": "https://www.hopebio.org/research"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+
+    "isClaimed": false
+  }
+]

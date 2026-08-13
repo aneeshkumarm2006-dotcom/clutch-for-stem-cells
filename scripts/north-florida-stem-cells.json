@@ -1,0 +1,243 @@
+[
+  {
+    "name": "North Florida Stem Cells",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "A single-physician Orange Park practice built around umbilical cord blood infusions for autism",
+    "description": "North Florida Stem Cells is a one-physician practice at 421 Kingsley Avenue in Orange Park, Florida, a Clay County town just south of Jacksonville. Eric Weiss, MD, FACS runs it. He is board-certified in plastic and reconstructive surgery, took his MD at Duke, trained in general surgery at UC San Francisco and UC Davis and in plastic surgery at the University of Miami, and served as chief of plastic surgery at Naval Hospital Jacksonville before leaving the Navy as a commander. The practice was registered in Florida in 2018.\n\nAutism is the reason the clinic exists. Dr. Weiss's youngest son, Marston, is on the autism spectrum and had several rounds of umbilical cord blood before his father began offering the same treatment to other families. The clinic treats autism as a neuroinflammatory condition and points to the Duke University cord blood trials as its evidence base. It is unusually blunt about the numbers it quotes, saying roughly 65 to 70 percent of children show measurable improvement and about 30 percent do not, and that the reason for the difference is not yet understood.\n\nEverything used here is donor material. Whole umbilical cord blood and cord tissue arrive frozen from a screened donor lab, are thawed in the office and infused within minutes, and Dr. Weiss deliberately avoids lab-expanded cells. The usual route is a 30 to 45 minute IV infusion, with sedation offered at no extra charge to children who struggle with the needle, and a direct joint injection is an option for arthritis. Beyond autism the practice lists arthritis, anti-aging, traumatic brain injury, Parkinson's, Alzheimer's, cerebral palsy, multiple sclerosis and stroke. None of these uses are FDA-approved, and Florida law requires the clinic to say so to every patient. There is no price list. Dosing is worked out per vial after a consultation.",
+
+    "treatmentTypes": [
+      "cord-blood-therapy",
+      "allogeneic-therapy",
+      "iv-systemic-therapy",
+      "msc-therapy",
+      "regenerative-orthopedics"
+    ],
+    "conditionsTreated": [
+      "autism-supportive",
+      "joint-pain",
+      "anti-aging-longevity",
+      "multiple-sclerosis",
+      "parkinsons",
+      "stroke-recovery",
+      "rheumatoid-arthritis",
+      "knee-osteoarthritis",
+      "hip-osteoarthritis",
+      "spinal-cord-injury",
+      "cardiovascular",
+      "diabetes-supportive"
+    ],
+    "cellSources": ["cord-blood", "umbilical-cord", "allogeneic"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "cord-blood-therapy", "percent": 55 },
+      { "treatment": "iv-systemic-therapy", "percent": 25 },
+      { "treatment": "msc-therapy", "percent": 10 },
+      { "treatment": "regenerative-orthopedics", "percent": 10 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published price list. Dosing is set per vial after a consultation, so the quote follows the number of vials Dr. Weiss recommends for the patient's weight and condition. A cord blood vial holds roughly 30 million cells and a cord tissue vial roughly 3 million. CareCredit is accepted.",
+
+    "foundedYear": 2018,
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Eric Weiss",
+      "title": "Founder",
+      "credentials": "MD, FACS, board-certified in plastic and reconstructive surgery",
+      "bio": "Founder and the only physician at the practice. He earned a BS in chemistry at Davidson College and his MD at Duke, completed general surgery training at UC San Francisco and UC Davis, and finished a plastic surgery residency at the University of Miami. He is a fellow of the American College of Surgeons and was previously board-certified in general surgery. His military service included a spell as chief of plastic surgery at Naval Hospital Jacksonville, and he left the US Navy at the rank of commander. He moved into cord blood work after his son Marston, who is on the autism spectrum, improved following several infusions."
+    },
+    "team": [
+      {
+        "name": "Lisa Moore",
+        "title": "Registered Nurse",
+        "credentials": "RN",
+        "bio": "The practice's registered nurse, working alongside Dr. Weiss on infusion days at the Orange Park office."
+      },
+      {
+        "name": "Twanda Jansen",
+        "title": "Practice Manager",
+        "bio": "Runs the day to day operations of the Orange Park office."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "421 Kingsley Ave, Suite 200",
+        "city": "Orange Park",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "32073",
+        "phone": "904-215-5800",
+        "lat": 30.1657,
+        "lng": -81.7034
+      }
+    ],
+
+    "website": "https://northfloridastemcells.com",
+    "social": {
+      "instagram": "https://www.instagram.com/northfloridastemcells/",
+      "facebook": "https://www.facebook.com/profile.php?id=61582883825996",
+      "youtube": "https://www.youtube.com/@northfloridastemcells2607"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623059/library/um9wadetgbuijc9gdfsx.webp",
+      "publicId": "library/um9wadetgbuijc9gdfsx",
+      "width": 1536,
+      "height": 517,
+      "alt": "North Florida Stem Cells logo, the Eric Weiss MD regenerative medicine wordmark"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623061/library/aimiiwm67kqopulkjwfm.webp",
+      "publicId": "library/aimiiwm67kqopulkjwfm",
+      "width": 600,
+      "height": 815,
+      "alt": "Dr. Eric Weiss, founder of North Florida Stem Cells in Orange Park, Florida"
+    },
+
+    "highlights": [
+      "One office, at 421 Kingsley Avenue in Orange Park, south of Jacksonville",
+      "Run by Eric Weiss, MD, FACS, board-certified in plastic and reconstructive surgery and a former US Navy commander",
+      "Autism is the main program, started after the founder's own son improved on cord blood",
+      "Donor umbilical cord blood and cord tissue only, minimally manipulated and never lab-expanded",
+      "IV infusion runs 30 to 45 minutes, with sedation available to children at no extra charge",
+      "Quoted per vial after a consultation, with CareCredit accepted"
+    ],
+    "faqs": [
+      {
+        "question": "What cells does the clinic use?",
+        "answer": "Whole umbilical cord blood and umbilical cord tissue from a screened donor lab, not the patient's own cells. The material arrives frozen on dry ice, is thawed in the office and infused within minutes. Dr. Weiss does not use cells that have been expanded in culture, and the practice says it cannot work with cord blood families banked privately at birth."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care. Florida law requires the practice to give every patient that notice in writing."
+      },
+      {
+        "question": "How is the treatment given and how long does it take?",
+        "answer": "Through an IV in the hand or arm. The infusion itself runs about 30 to 45 minutes and the visit takes roughly an hour once the line is placed and the cells are brought to room temperature. For arthritis a direct joint injection can be used instead of or alongside the IV. Children who find the IV difficult can be sedated with an intramuscular dose of ketamine or midazolam, which the clinic provides at no additional cost."
+      },
+      {
+        "question": "Does the clinic treat adults as well as children?",
+        "answer": "Yes. Autism is the largest program and most of those patients are children, but the same infusion is offered to adults for arthritis, anti-aging, traumatic brain injury and neurological conditions."
+      },
+      {
+        "question": "How many children with autism respond?",
+        "answer": "The clinic's own figure is that roughly 65 to 70 percent of children show measurable improvement, while about 30 percent see no benefit it can measure. It says the reason for that split is not yet understood and is still being researched."
+      },
+      {
+        "question": "Who is turned away?",
+        "answer": "The practice does not treat people with active cancer or an active infection. It also asks patients to stop NSAIDs about a week before the infusion, and steroids or DMARDs such as Enbrel and Humira about two weeks before, unless their own physician says otherwise."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "There is no published price. Dosing is set per vial after a consultation and the quote is built from there. CareCredit is accepted."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "north florida stem cells"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "north florida stem cells reviews"
+      }
+    },
+
+    "costPage": {
+      "introEmpty": "North Florida Stem Cells does not publish a price list. Dosing is worked out per vial after a consultation with Dr. Weiss, based on body weight and the condition being treated, and the quote follows from the number of vials he recommends. That means the figure moves with the dose rather than sitting at a fixed package price, and a heavier adult will be quoted more than a small child for the same protocol.",
+      "items": [
+        {
+          "label": "Consultation with Dr. Eric Weiss",
+          "currency": "USD",
+          "unit": "per visit",
+          "note": "Required before any infusion. The practice does not publish a consultation fee."
+        },
+        {
+          "label": "Umbilical cord blood IV infusion",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Priced by the number of vials. A vial holds roughly 30 million cells and dosing runs to about 1 to 2 million cells per kilogram of body weight."
+        },
+        {
+          "label": "Umbilical cord tissue vial",
+          "currency": "USD",
+          "unit": "per vial",
+          "note": "Roughly 3 million cells per vial. Added to the cord blood dose when Dr. Weiss recommends it."
+        },
+        {
+          "label": "Direct joint injection",
+          "currency": "USD",
+          "unit": "per joint",
+          "note": "An option for arthritis, used instead of or alongside the IV route."
+        },
+        {
+          "label": "Sedation for children",
+          "priceMin": 0,
+          "priceMax": 0,
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Intramuscular ketamine or midazolam for young patients who find the IV placement distressing. The clinic states it charges nothing extra for this."
+        }
+      ],
+      "includes": [
+        "Consultation and medical history review with Dr. Weiss before treatment",
+        "The umbilical cord blood or cord tissue itself, shipped frozen from the donor lab",
+        "IV placement, premedication where it is needed, and observation afterwards",
+        "Sedation for children who need it, which the clinic states carries no additional charge"
+      ],
+      "excludes": [
+        "Travel and accommodation, which matters here because families fly in from out of state and abroad",
+        "Repeat rounds, which many patients go on to book and which are quoted separately",
+        "Therapies, diets and medications managed by other providers"
+      ],
+      "insuranceNote": "Insurance does not cover this. Cord blood therapy for autism and the other conditions listed here is investigational and not FDA-approved, so it is paid privately.",
+      "financingNote": "The practice accepts CareCredit, the healthcare credit card. It points patients to short-term interest-free promotional terms or longer fixed monthly plans, with applications taken online or in the office and a decision inside a few minutes.",
+      "faqs": [
+        {
+          "question": "How much does North Florida Stem Cells cost?",
+          "answer": "The practice does not publish figures. Dosing is set per vial after a consultation with Dr. Weiss, and the quote is built from the number of vials your weight and condition call for."
+        },
+        {
+          "question": "Why is the price given per vial?",
+          "answer": "Because the dose is weight-based. The clinic works to roughly 1 to 2 million cells per kilogram, and a cord blood vial holds about 30 million cells, so an adult needs more vials than a small child."
+        },
+        {
+          "question": "Will insurance pay for any of it?",
+          "answer": "No. These uses are not FDA-approved and are treated as elective, so patients pay out of pocket."
+        },
+        {
+          "question": "Is there a payment plan?",
+          "answer": "CareCredit is accepted. It offers interest-free promotional terms over shorter periods or fixed monthly payments over longer ones, and approval decisions come back within minutes."
+        },
+        {
+          "question": "Does one round finish the treatment?",
+          "answer": "Not always. The clinic says some patients do well after a single infusion while others with chronic or progressive conditions benefit from a series spaced out over time. Each round is quoted separately."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Pricing of Stem Cells section, North Florida Stem Cells",
+          "url": "https://northfloridastemcells.com/stem-cell-info/"
+        },
+        {
+          "label": "North Florida Stem Cells financing page",
+          "url": "https://northfloridastemcells.com/financing/"
+        },
+        {
+          "label": "North Florida Stem Cells FAQ",
+          "url": "https://northfloridastemcells.com/faq/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+
+    "isClaimed": false
+  }
+]

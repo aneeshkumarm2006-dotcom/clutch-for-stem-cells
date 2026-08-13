@@ -1,0 +1,336 @@
+[
+  {
+    "name": "Cendant Stem Cell Center",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Denver-area regenerative practice running a dedicated foot neuropathy programme in Greenwood Village, Houston and Scottsdale",
+    "description": "Cendant Stem Cell Center is a regenerative medicine practice headquartered at 6501 E Belleview Ave in Greenwood Village, just south of Denver near the Denver Tech Center. The business dates to 2013, when Cendant Health Center LLC was registered in Colorado, and a second company, Cendant Stem Cell Center LLC, followed in 2016. Dr. Daniel Lann is the lead physician and medical director. He holds an MD, is board-certified in emergency medicine by the American Board of Emergency Medicine, and is licensed in Colorado and Texas. He is the only clinician the practice names publicly.\n\nPeripheral neuropathy gets the most developed treatment of anything here. It runs under a separate brand, Cendant Neuropathy, with its own clinic pages for Denver, Houston and Scottsdale. The protocol pairs mesenchymal cells taken from a screened, donated umbilical-cord tissue and blood allograft with a processed microvascular tissue allograft intended to rebuild the small vessels feeding the nerve. Cendant offers the two together as one combined procedure and aims it at diabetic, chemotherapy-related and idiopathic neuropathy. Cells go in by IV or by targeted injection, sometimes with PRP added. The clinic also publishes the literature it leans on, with citations and named clinical-trial registrations, though the efficacy percentages it quotes alongside them are its own summary rather than published results for its own patients.\n\nThe rest of the practice is mostly orthopedic: knee, hip and shoulder arthritis, disc and spinal stenosis pain, meniscus and labrum tears, treated with ultrasound-guided injections, bone marrow aspirate concentrate drawn from the back of the hip, PRP and exosomes. There are also programmes for Parkinson's disease, multiple sclerosis, COPD and age management, plus NAD+ and vitamin IV therapy. None of this is FDA-approved. Cendant publishes no price list, gives the first consultation free, and points patients at third-party financing of up to $25,000.",
+
+    "treatmentTypes": [
+      "msc-therapy",
+      "allogeneic-therapy",
+      "autologous-therapy",
+      "bone-marrow-derived-therapy",
+      "regenerative-orthopedics",
+      "prp",
+      "exosome-therapy",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "neuropathy",
+      "parkinsons",
+      "knee-osteoarthritis",
+      "back-and-spine",
+      "joint-pain",
+      "rotator-cuff-shoulder",
+      "hip-osteoarthritis",
+      "sports-injuries",
+      "multiple-sclerosis",
+      "copd-pulmonary",
+      "anti-aging-longevity"
+    ],
+    "cellSources": [
+      "umbilical-cord",
+      "cord-blood",
+      "bone-marrow",
+      "exosomes",
+      "allogeneic",
+      "autologous"
+    ],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "msc-therapy", "percent": 30 },
+      { "treatment": "regenerative-orthopedics", "percent": 25 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 15 },
+      { "treatment": "prp", "percent": 12 },
+      { "treatment": "exosome-therapy", "percent": 10 },
+      { "treatment": "iv-systemic-therapy", "percent": 8 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published prices. The first consultation is free, and a figure only comes after a physician has reviewed your imaging, history and symptoms. Cendant advertises third-party patient financing of up to $25,000 for approved applicants.",
+
+    "foundedYear": 2013,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Daniel Lann",
+      "title": "Lead Physician and Medical Director",
+      "credentials": "MD, board-certified in emergency medicine (American Board of Emergency Medicine), licensed in Colorado and Texas",
+      "bio": "Graduated from the University of Texas Long School of Medicine in San Antonio in 2002 and completed emergency medicine residency there. He has been certified by the American Board of Emergency Medicine since 2006 and is actively maintaining that certification. He is also a former Naval Flight Officer. At Cendant he does the interventional work, including ultrasound-guided joint and spine injections, and the practice puts his clinical focus at foot neuropathy, Parkinson's disease and interventional orthopedics. His board certification is in emergency medicine rather than in neurology or orthopedics."
+    },
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "6501 E Belleview Ave, Suite 110",
+        "city": "Greenwood Village",
+        "region": "Colorado",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "80111",
+        "phone": "720-338-4491",
+        "lat": 39.624,
+        "lng": -104.913
+      },
+      {
+        "isHQ": false,
+        "addressLine": "2901 Wilcrest Dr, Suite 140",
+        "city": "Houston",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "77042",
+        "phone": "713-552-3142",
+        "lat": 29.7327,
+        "lng": -95.5718
+      },
+      {
+        "isHQ": false,
+        "addressLine": "9375 E Shea Blvd, Suite 100-117D",
+        "city": "Scottsdale",
+        "region": "Arizona",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "85260",
+        "phone": "602-834-3997",
+        "lat": 33.5812,
+        "lng": -111.8787
+      },
+      {
+        "isHQ": false,
+        "addressLine": "925 E Southlake Blvd, Suite 110",
+        "city": "Southlake",
+        "region": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "76092",
+        "phone": "214-934-8858",
+        "lat": 32.941,
+        "lng": -97.1381
+      },
+      {
+        "isHQ": false,
+        "addressLine": "3221 Eastbrook Dr, Suite 102",
+        "city": "Fort Collins",
+        "region": "Colorado",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "80525",
+        "phone": "970-829-9012",
+        "lat": 40.543,
+        "lng": -105.0421
+      },
+      {
+        "isHQ": false,
+        "addressLine": "202 W 22nd St, Suite C",
+        "city": "Durango",
+        "region": "Colorado",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "81301",
+        "phone": "970-567-8258",
+        "lat": 37.2874,
+        "lng": -107.8777
+      },
+      {
+        "isHQ": false,
+        "addressLine": "5300 N Meridian Ave, Suite 6",
+        "city": "Oklahoma City",
+        "region": "Oklahoma",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "73112",
+        "phone": "806-500-9948",
+        "lat": 35.5243,
+        "lng": -97.6011
+      },
+      {
+        "isHQ": false,
+        "addressLine": "14242 Fort St",
+        "city": "Omaha",
+        "region": "Nebraska",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "68164",
+        "phone": "402-612-2662",
+        "lat": 41.3067,
+        "lng": -96.1364
+      }
+    ],
+
+    "website": "https://cendanthealth.com",
+    "social": {
+      "facebook": "https://www.facebook.com/cendantstemcellcenter/",
+      "instagram": "https://www.instagram.com/cendantstemcell/",
+      "linkedin": "https://www.linkedin.com/company/cendant-stem-cell-center"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786625340/library/tgsczejhqrcp6qrjiran.webp",
+      "publicId": "library/tgsczejhqrcp6qrjiran",
+      "width": 270,
+      "height": 270,
+      "alt": "Cendant Stem Cell Center logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786625342/library/noipiqatlyvkixruy4xo.webp",
+      "publicId": "library/noipiqatlyvkixruy4xo",
+      "width": 768,
+      "height": 702,
+      "alt": "Dr. Daniel Lann, medical director of Cendant Stem Cell Center in Greenwood Village, Colorado"
+    },
+
+    "highlights": [
+      "Operating since 2013, with its main clinic in Greenwood Village near the Denver Tech Center",
+      "Medical director Dr. Daniel Lann is an MD board-certified in emergency medicine",
+      "Runs a separate neuropathy brand with staffed clinics in Denver, Houston and Scottsdale",
+      "Neuropathy protocol pairs umbilical-cord mesenchymal cells with a microvascular tissue allograft",
+      "Also offers bone marrow aspirate concentrate, PRP and exosomes for joint and spine work",
+      "Free first consultation, no published prices, financing advertised up to $25,000"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "Both donor and patient cells, depending on the treatment. Most of the work uses mesenchymal cells from a screened, donated umbilical-cord tissue and blood allograft, which Cendant says also carries exosomes, collagens and growth factors. For orthopedic cases it also draws bone marrow aspirate concentrate from the back of the patient's own hip under local anaesthetic and light sedation, and adds PRP to some injections."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care. The donor tissue Cendant uses is registered with the FDA as a human cell and tissue product under 21 CFR 1271, which is a registration requirement rather than approval of the treatment. Worth knowing: one of the clinic's own blog posts calls its microvascular tissue FDA-approved. Its research page states the accurate position, that the tissue is a registered 361 product and not an approved drug or device."
+      },
+      {
+        "question": "What does the neuropathy programme actually involve?",
+        "answer": "Two therapies, offered separately or combined in a single procedure. Umbilical-cord mesenchymal cells are given by IV or by injection near the affected nerves, and a processed microvascular tissue allograft is placed to restore blood flow to the small vessels around them. Before that there is an assessment covering history, medications, sensation, balance, strength and any existing nerve conduction studies or imaging. It is aimed at diabetic, chemotherapy-related and idiopathic neuropathy of the feet."
+      },
+      {
+        "question": "Where would I be treated?",
+        "answer": "Greenwood Village, Colorado is the main clinic and the only address with an independent footprint behind it, including a BBB file and a Yelp listing. Houston and Scottsdale are the other two the neuropathy brand treats as staffed clinics, each with published hours and its own phone. Cendant additionally lists Southlake near Dallas, Fort Collins, Durango, Oklahoma City and Omaha, and markets a further handful of cities as service areas with no clinic phone of their own. Ask which specific address you would attend and on which days before you book, because the smaller sites look like scheduled visits rather than full-time offices."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "Cendant publishes no prices. The first consultation is free and a quote follows a physician review of your case. The clinic advertises third-party financing of up to $25,000, which gives a rough sense of the range treatments fall into but is not a price."
+      },
+      {
+        "question": "Who would treat me?",
+        "answer": "Dr. Daniel Lann is the only clinician the practice names publicly. He is board-certified in emergency medicine and does the interventional work himself, including ultrasound-guided injections. Marketing copy refers to physicians in the plural and to care coordinators, so ask who specifically will perform your procedure at the site you attend."
+      },
+      {
+        "question": "Is there downtime?",
+        "answer": "Procedures are outpatient and same-day. Bone marrow harvesting is done under local anaesthetic with light sedation, so arrange a lift home for that one. Patients typically return to normal activity soon afterwards, and results, where they occur, are described over weeks to months rather than immediately."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "cendant stem cell center"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "cendant stem cell center reviews"
+      }
+    },
+
+    "costPage": {
+      "introEmpty": "Cendant Stem Cell Center publishes no price list on either of its sites. The first consultation is free, and the number only appears after a physician has read your imaging and history and put a plan together. What moves that number is which therapy you end up on, how many sites are being treated and whether you are getting the combined neuropathy procedure rather than one half of it. The one public figure anywhere on the site is the financing ceiling of $25,000, which tells you roughly the band these protocols sit in without telling you what yours costs.",
+      "items": [
+        {
+          "label": "Initial consultation",
+          "priceMin": 0,
+          "priceMax": 0,
+          "currency": "USD",
+          "unit": "one time",
+          "note": "Advertised as free across both Cendant sites. This is where the assessment and the quote happen."
+        },
+        {
+          "label": "Umbilical-cord mesenchymal cell therapy",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Quoted privately. Given by IV or as a targeted injection. Ask whether the quote is per session or covers a course."
+        },
+        {
+          "label": "Microvascular tissue (MVT) allograft",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "The second half of the neuropathy protocol, priced separately from the cell therapy."
+        },
+        {
+          "label": "Combined MVT and mesenchymal cell procedure",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "The clinic's signature neuropathy option, both therapies in one visit. Ask what this costs against either one alone, since that is the real decision."
+        },
+        {
+          "label": "Bone marrow aspirate concentrate (BMAC)",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Uses your own marrow, harvested from the back of the hip under local anaesthetic and light sedation. Usually the orthopedic route rather than the neuropathy one."
+        },
+        {
+          "label": "PRP injection",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Sometimes billed on its own, sometimes folded into a cell injection. Check which."
+        },
+        {
+          "label": "IV therapy (NAD+, vitamin and nutrient drips)",
+          "currency": "USD",
+          "unit": "per session",
+          "note": "Wellness side of the practice, priced per drip and separate from any regenerative procedure."
+        }
+      ],
+      "includes": [
+        "A free first consultation with a physician review of your history and imaging",
+        "The assessment that produces the treatment plan",
+        "The procedure itself, done same-day in the office",
+        "Care coordinator contact before and after treatment"
+      ],
+      "excludes": [
+        "Any imaging, nerve conduction study or lab work you still need",
+        "Repeat sessions, if the plan calls for more than one",
+        "Travel and accommodation for patients coming to a Colorado, Texas or Arizona site from elsewhere",
+        "The wellness add-ons such as IV drips, hormone work and PEMF, which are billed separately"
+      ],
+      "insuranceNote": "Cell therapy here is cash-pay. Insurance does not cover investigational regenerative procedures, and Cendant does not claim it does. Some diagnostic work ordered around the treatment may still go through your own plan, so ask what is billable and get an itemised receipt if you intend to try an HSA or FSA.",
+      "financingNote": "Cendant advertises third-party patient financing of up to $25,000 with monthly payments, applied for after the consultation and treatment estimate. Approval and terms come from the finance provider, not the clinic, and some options involve a credit check. Ask which provider and what the APR is before signing, because the advertised ceiling is an approval limit rather than a price.",
+      "faqs": [
+        {
+          "question": "How much does Cendant Stem Cell Center cost?",
+          "answer": "There is no published figure. Cendant quotes each patient after a free consultation and a physician review, and the total depends on which therapy you are put on and how many sites are treated. Ask for the quote broken out by line rather than as one number, and ask specifically whether it covers one session or a course."
+        },
+        {
+          "question": "Is the first consultation really free?",
+          "answer": "That is what both Cendant sites say, on the main site and on the neuropathy brand. Confirm it when you book, and ask separately whether any imaging or testing they want done first is billed to you."
+        },
+        {
+          "question": "Does insurance cover any of it?",
+          "answer": "No. These are elective, investigational procedures and are paid out of pocket. Ask for an itemised receipt if you plan to put any of it through an HSA or FSA."
+        },
+        {
+          "question": "What should I ask before I pay?",
+          "answer": "Ask which cell source is in your quote, since the umbilical-cord allograft and your own bone marrow are different procedures at different prices. Ask what a second session would cost if the first does not do enough. And ask who is performing the procedure at the site you are attending, because only one physician is named publicly."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Cendant Stem Cell Center financing page",
+          "url": "https://cendanthealth.com/financing/"
+        },
+        {
+          "label": "Cendant Neuropathy Denver clinic page",
+          "url": "https://cendantneuropathy.com/denver-neuropathy-clinic/"
+        },
+        {
+          "label": "Cendant Neuropathy mesenchymal therapy page",
+          "url": "https://cendantneuropathy.com/therapies/mesenchymal-therapy/"
+        },
+        {
+          "label": "Cendant Neuropathy BMAC therapy page",
+          "url": "https://cendantneuropathy.com/therapies/bone-marrow-aspirate-concentrate-bmac/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+
+    "isClaimed": false
+  }
+]

@@ -1,0 +1,264 @@
+[
+  {
+    "name": "Miami Stem Cell",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "South Miami clinic pairing orthopedic cell injections with a separate autism programme",
+    "description": "Miami Stem Cell is a regenerative medicine practice at 6262 Sunset Drive in South Miami, with a second office in Honolulu. It says it has been running for more than 16 years and has performed over 8,500 procedures, and that 92% of patients report significant improvement. Those are the clinic's own numbers and none of them is independently verifiable. The work splits two ways. Most of the volume is orthopedic, meaning knee, hip, shoulder, spine and hand pain treated with targeted injections. Running alongside that is a distinct autism programme under Dr. Eric Weiss, a board-certified plastic and reconstructive surgeon who moved into regenerative medicine after his own son was diagnosed.\n\nPatients take one of two routes. Autologous treatment uses bone marrow aspirate concentrate drawn from the patient's own hip. Allogeneic treatment uses mesenchymal cells and exosomes taken from Wharton's jelly in screened, donated umbilical cord tissue, which the clinic says is processed in FDA-registered, AATB-certified and cGMP-compliant labs. Delivery is either a targeted injection or an IV infusion, depending on whether the problem is local or systemic. The clinic also offers PRP, peptides, hair restoration and an anti-aging line built around exosomes, plus Muse cells, an uncommon cell subset it markets heavily.\n\nNone of this is FDA-approved. Since 1 July 2025, Florida Senate Bill 1768 has allowed licensed physicians in the state to give non-FDA-approved stem cell therapy for orthopedic conditions, wound care and pain management, subject to sourcing and consent rules, and the clinic cites that statute directly. The autism work sits outside that carve-out and is off-label. First consultations are free and run about 15 minutes, and a 40% deposit is taken to book a procedure.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623254/library/sfxlfvkqtqiudxyholdq.webp",
+      "publicId": "library/sfxlfvkqtqiudxyholdq",
+      "width": 877,
+      "height": 877,
+      "alt": "Miami Stem Cell logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623257/library/clrusikvs0seko73zc1c.webp",
+      "publicId": "library/clrusikvs0seko73zc1c",
+      "width": 2000,
+      "height": 1000,
+      "alt": "Miami Stem Cell clinic in South Miami, Florida"
+    },
+
+    "treatmentTypes": [
+      "msc-therapy",
+      "exosome-therapy",
+      "allogeneic-therapy",
+      "autologous-therapy",
+      "bone-marrow-derived-therapy",
+      "cord-blood-therapy",
+      "iv-systemic-therapy",
+      "prp",
+      "regenerative-orthopedics"
+    ],
+    "conditionsTreated": [
+      "autism-supportive",
+      "joint-pain",
+      "knee-osteoarthritis",
+      "back-and-spine",
+      "hip-osteoarthritis",
+      "rotator-cuff-shoulder",
+      "sports-injuries",
+      "neuropathy",
+      "rheumatoid-arthritis",
+      "post-covid-recovery",
+      "hair-restoration",
+      "sexual-health",
+      "anti-aging-longevity"
+    ],
+    "cellSources": [
+      "umbilical-cord",
+      "placental-whartons-jelly",
+      "exosomes",
+      "bone-marrow",
+      "cord-blood",
+      "autologous",
+      "allogeneic"
+    ],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "msc-therapy", "percent": 40 },
+      { "treatment": "exosome-therapy", "percent": 20 },
+      { "treatment": "prp", "percent": 15 },
+      { "treatment": "iv-systemic-therapy", "percent": 15 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 10 }
+    ],
+
+    "priceMin": 4000,
+    "priceMax": 15000,
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "The clinic publishes guide ranges rather than a price list. It puts a single stem cell injection at $4,000 to $7,000 and a full protocol at anything from a few thousand dollars up to more than $10,000, and prices the autism programme by the child's weight, from around $8,000 to $15,000. The final figure is quoted after an evaluation. Consultations are free and last 15 minutes, and a 40% deposit is taken to book.",
+
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Eric Weiss",
+      "title": "Medical Director, Autism Program",
+      "credentials": "MD, board-certified plastic and reconstructive surgeon, FACS",
+      "bio": "Trained at Duke, with a general surgery residency at UCSF and a plastic surgery residency at the University of Miami. He left surgical practice for regenerative medicine after his own son was diagnosed with autism, and now runs the autism programme at Miami Stem Cell alongside his own clinic in North Florida. He holds an active Florida medical licence."
+    },
+    "team": [
+      {
+        "name": "Greice Murphy",
+        "title": "Chief Executive Officer",
+        "bio": "Runs the business side of Miami Stem Cell and is listed as its founder in the clinic's own site data. She is the named contact for enquiries."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "6262 Sunset Drive, Suite 400",
+        "city": "South Miami",
+        "region": "Florida",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "33143",
+        "phone": "305-598-7777",
+        "lat": 25.7035,
+        "lng": -80.2946
+      },
+      {
+        "isHQ": false,
+        "addressLine": "1401 S Beretania St, Ste 400",
+        "city": "Honolulu",
+        "region": "Hawaii",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "96814",
+        "phone": "305-598-7777",
+        "lat": 21.3001,
+        "lng": -157.8394
+      }
+    ],
+
+    "website": "https://stemcellmia.com",
+    "contactEmail": "gmurphy@stemcellmia.com",
+    "social": {
+      "facebook": "https://www.facebook.com/MiamiStemCell/",
+      "instagram": "https://www.instagram.com/miamistemcell/",
+      "youtube": "https://www.youtube.com/@StemCellMiami1"
+    },
+
+    "highlights": [
+      "Two offices, South Miami and Honolulu, with all treatment done in the United States",
+      "Separate autism programme run by Dr. Eric Weiss, a board-certified plastic and reconstructive surgeon",
+      "Offers both routes, autologous bone marrow concentrate and donor Wharton's jelly cells with exosomes",
+      "Targeted joint injections and IV infusions, both given in the office",
+      "Free 15-minute consultation, then a 40% deposit to book a procedure",
+      "Clinic states more than 16 years of practice and over 8,500 procedures performed"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "Two options. Autologous treatment uses bone marrow aspirate concentrate drawn from your own hip. Allogeneic treatment uses mesenchymal cells and exosomes from Wharton's jelly in screened, donated umbilical cord tissue. The clinic says its donor material is processed in FDA-registered, AATB-certified and cGMP-compliant labs. It also markets Muse cells, a less common subset."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care. Florida Senate Bill 1768 has let licensed physicians in the state offer non-FDA-approved stem cell therapy for orthopedic conditions, wound care and pain management since 1 July 2025, but that is a state carve-out, not federal approval, and it does not cover the autism work."
+      },
+      {
+        "question": "What does the autism programme involve?",
+        "answer": "It is run by Dr. Eric Weiss and uses umbilical-cord-derived mesenchymal cells given by IV. Families are asked to complete baseline testing first, including gut health screening and folate receptor antibody testing. The clinic says about 40% of families return for a second treatment after six or seven months. This use is off-label."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "The clinic publishes ranges rather than a fixed price. It puts a single injection at $4,000 to $7,000 and a full protocol at a few thousand dollars up to more than $10,000. The autism programme is quoted by the child's weight, from around $8,000 to $15,000. Your own figure comes after an evaluation."
+      },
+      {
+        "question": "Do I need any tests before treatment?",
+        "answer": "For most treatments, yes. The clinic asks for recent imaging, an MRI or X-rays for spinal procedures, and a tumor marker blood test. It says it works with an imaging partner to offer the MRI at a reduced $200."
+      },
+      {
+        "question": "Where is the treatment actually done?",
+        "answer": "At the clinic's own offices. The main one is 6262 Sunset Drive in South Miami and there is a second at 1401 S Beretania Street in Honolulu. Nothing is sent offshore, and the clinic argues that point at length in its own material."
+      },
+      {
+        "question": "How long before anything changes?",
+        "answer": "The clinic says most patients notice a difference between two and twelve weeks, and that tissue changes can continue for up to six months. It states that some patients respond to one session while others need a series. Results vary and no outcome is promised."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "miami stem cell"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "miami stem cell reviews"
+      }
+    },
+
+    "costPage": {
+      "intro": "Miami Stem Cell does publish figures, which is unusual, but they are guide ranges rather than a menu. A single injection is put at $4,000 to $7,000, a full protocol at anything from a few thousand dollars to more than $10,000, and the autism programme at roughly $8,000 to $15,000 depending on the child's weight and how many vials are used. The number you are actually given comes after a free 15-minute consultation and an evaluation, and imaging and blood work are billed on top.",
+      "items": [
+        {
+          "label": "Single stem cell injection",
+          "priceMin": 4000,
+          "priceMax": 7000,
+          "currency": "USD",
+          "unit": "per injection",
+          "note": "The clinic's published range for one targeted injection. Where you land in it depends on the joint and whether the cells are your own or from a donor."
+        },
+        {
+          "label": "Full treatment protocol",
+          "currency": "USD",
+          "unit": "per protocol",
+          "note": "Described by the clinic as a few thousand dollars up to more than $10,000, with no fixed figure. Ask how many sites and how many sessions are in the quote, since that is what moves it."
+        },
+        {
+          "label": "Autism programme, IV umbilical cord cells",
+          "priceMin": 8000,
+          "priceMax": 15000,
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Priced by the child's weight and the number of vials needed. The clinic puts smaller children near $8,000 and older or heavier children at up to $15,000. About 40% of families return for a second treatment, which is a second cost."
+        },
+        {
+          "label": "Pre-treatment MRI",
+          "priceMin": 200,
+          "priceMax": 200,
+          "currency": "USD",
+          "unit": "per scan",
+          "note": "The clinic says it partners with an imaging provider to offer the MRI at this reduced rate. Spinal procedures need imaging before booking."
+        },
+        {
+          "label": "Initial consultation",
+          "priceMin": 0,
+          "priceMax": 0,
+          "currency": "USD",
+          "unit": "per consultation",
+          "note": "Free and about 15 minutes. Used to work out whether you are a candidate before anything is quoted."
+        }
+      ],
+      "includes": [
+        "The procedure itself and the cells or exosomes used",
+        "Physician evaluation and the written treatment plan",
+        "The free 15-minute consultation before you commit"
+      ],
+      "excludes": [
+        "Pre-treatment imaging and blood work, including the MRI and tumor marker test",
+        "Repeat or follow-up treatments, which are quoted separately",
+        "Travel and lodging if you are coming in from out of the area"
+      ],
+      "insuranceNote": "Nothing here is covered. The clinic states that insurers including Medicare classify regenerative treatments as investigational and will not pay, so plan for the whole thing as an out-of-pocket cost. Ask for an itemized receipt if you intend to try an HSA or FSA claim.",
+      "financingNote": "The clinic advertises interest-free financing with no hidden fees and says approval is quick, and it has also pointed patients to CareCredit over terms of up to 36 months. A 40% deposit is taken when you schedule the procedure, so ask how that sits alongside a financing plan before you sign anything.",
+      "faqs": [
+        {
+          "question": "How much does Miami Stem Cell cost?",
+          "answer": "A single injection is put at $4,000 to $7,000, a full protocol at a few thousand dollars up to more than $10,000, and the autism programme at roughly $8,000 to $15,000 by the child's weight. These are the clinic's published ranges. Your own number comes after an evaluation."
+        },
+        {
+          "question": "Is the consultation free?",
+          "answer": "Yes. The first consultation is free and runs about 15 minutes, by phone or video. It is used to decide whether you are a candidate and to sketch the plan, and the quote follows from there."
+        },
+        {
+          "question": "Does insurance pay for any of it?",
+          "answer": "No. The clinic says insurers including Medicare treat these therapies as investigational and do not cover them. Everything is out of pocket."
+        },
+        {
+          "question": "What gets billed on top of the treatment price?",
+          "answer": "Imaging and labs. Most treatments need recent imaging and a tumor marker blood test, and spinal procedures need an MRI or X-rays. The clinic says it can arrange the MRI at a reduced $200 through a partner. Repeat treatments are quoted separately."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Miami Stem Cell pricing guidance",
+          "url": "https://stemcellmia.com/best-stem-cell-therapy-miami/"
+        },
+        {
+          "label": "Miami Stem Cell FAQs, including autism programme pricing",
+          "url": "https://stemcellmia.com/faqs/"
+        },
+        {
+          "label": "Miami Stem Cell cost of therapy in Florida",
+          "url": "https://stemcellmia.com/stem-cell-therapy-cost-florida/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+
+    "isClaimed": false
+  }
+]

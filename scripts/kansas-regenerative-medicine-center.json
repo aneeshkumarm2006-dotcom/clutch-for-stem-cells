@@ -1,0 +1,291 @@
+[
+  {
+    "name": "Kansas Regenerative Medicine Center",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Stand-alone stem cell practice using a patient's own fat and bone marrow, in Manhattan and Leawood, Kansas",
+    "description": "Kansas Regenerative Medicine Center is a stand-alone stem cell practice with clinics in Manhattan and Leawood, Kansas. It was started in 2014 by John Farley and Ken Woods, two men from the cattle business who had nine knee surgeries between them and went looking for something other than more surgery. KRMC marked its tenth anniversary in March 2024 and said it had treated more than 4,000 patients by then. Andrew Pope, MD, a board-certified family physician who also runs his own direct primary care clinic in Manhattan, is medical director for both sites. James Sigler, MD, board-certified in physical medicine and rehabilitation and in sports medicine, sees patients on the Kansas City side.\n\nThe clinic works only with a patient's own cells. Fat is taken in a liposuction-style harvest that runs about 30 minutes under local anesthetic, or marrow is aspirated, and the sample is concentrated in the on-site lab into stromal vascular fraction. Platelet-rich plasma drawn from the patient's blood the same morning is sometimes added. Collection through deployment takes roughly 2 to 4 hours in one visit, and the cells go into a joint, into a vein, or into soft tissue under ultrasound or fluoroscopic guidance depending on what is being treated. KRMC states plainly that it does not use embryonic, umbilical-cord, amniotic or any other donor-derived product.\n\nMost of the caseload is orthopedic, covering knees, shoulders, hips, backs, hands and feet. Alongside that the clinic runs named programmes for autoimmune disease, listing lupus, rheumatoid arthritis, seronegative arthropathy, fibromyalgia, ulcerative colitis and Crohn's; for neurological conditions including multiple sclerosis, peripheral neuropathy and spinal cord injury; and for cardiac and pulmonary conditions including COPD, emphysema and heart failure. KRMC says autoimmune cases in particular may be advised to have a series of deployments rather than a single one. None of this is FDA-approved and the clinic describes all of it as investigational, run under Institutional Review Board oversight through the International Cell Surgical Society with outcome data collected for research.",
+
+    "treatmentTypes": [
+      "adipose-derived-therapy",
+      "svf",
+      "autologous-therapy",
+      "bone-marrow-derived-therapy",
+      "msc-therapy",
+      "prp",
+      "iv-systemic-therapy",
+      "regenerative-orthopedics"
+    ],
+    "conditionsTreated": [
+      "lupus",
+      "rheumatoid-arthritis",
+      "multiple-sclerosis",
+      "crohns-ibd",
+      "copd-pulmonary",
+      "cardiovascular",
+      "neuropathy",
+      "spinal-cord-injury",
+      "parkinsons",
+      "stroke-recovery",
+      "knee-osteoarthritis",
+      "hip-osteoarthritis",
+      "back-and-spine",
+      "rotator-cuff-shoulder",
+      "joint-pain",
+      "sports-injuries"
+    ],
+    "cellSources": ["adipose", "bone-marrow", "autologous"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "adipose-derived-therapy", "percent": 40 },
+      { "treatment": "svf", "percent": 20 },
+      { "treatment": "bone-marrow-derived-therapy", "percent": 15 },
+      { "treatment": "prp", "percent": 15 },
+      { "treatment": "iv-systemic-therapy", "percent": 10 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published price list. KRMC says the cost depends on the condition and on how the cells are deployed, and quotes each case after a consultation that is free for applicants the panel accepts. The fee covers harvesting, preparation and deployment in the one visit. Insurance generally does not cover it.",
+
+    "foundedYear": 2014,
+    "teamSize": "1-10",
+    "physiciansCount": 2,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Andrew Pope",
+      "title": "Medical Director, Manhattan and Kansas City",
+      "credentials": "MD, board-certified in family medicine",
+      "bio": "A Kansas native who took both his undergraduate degrees and his MD at the University of Kansas, then trained in primary care at Via Christi Family Medicine. He practiced in a nine-physician group in Manhattan before opening his own direct primary care clinic, BlueFire Med, in 2017. He began treating patients with adult adipose stem cells through KRMC in 2014 and is now medical director for both Kansas sites. He also volunteers at the local free health clinic."
+    },
+    "team": [
+      {
+        "name": "Dr. James Sigler",
+        "title": "Physician, Kansas City",
+        "credentials": "MD, FAAPMR, board-certified in physical medicine and rehabilitation and in sports medicine",
+        "bio": "Joined KRMC in November 2020. He trained at the University of Kansas School of Medicine, was chief resident in physical medicine and rehabilitation at Kansas University Medical Center, and completed a sports and spine fellowship at Northwestern's Rehabilitation Institute of Chicago. At KRMC he handles the spine and pain side of the practice, from disc pain and sciatica to shoulder, hip and knee joints, and has published on interventional pain management."
+      },
+      {
+        "name": "Ken Woods",
+        "title": "CEO and co-founder",
+        "bio": "Co-founded KRMC in 2014 with John Farley after both of them were treated with adipose stem cells themselves. He runs the company side of the practice."
+      },
+      {
+        "name": "John Farley",
+        "title": "Co-founder",
+        "bio": "The other half of the founding pair. He and Ken Woods came to stem cell therapy as patients, after years of orthopedic pain from ranch work and sport, and started the clinic once their own results held up."
+      },
+      {
+        "name": "Kate Sloan",
+        "title": "COO and Director of Marketing",
+        "bio": "Runs day-to-day operations across the two clinics and writes most of the practice's patient-facing articles."
+      },
+      {
+        "name": "Brady Srna",
+        "title": "Stem Cell Technician",
+        "bio": "Works in the on-site lab processing harvested fat and marrow, and is one of the staff patients deal with directly through the treatment day."
+      },
+      {
+        "name": "David Pfeifer",
+        "title": "Stem Cell Technician",
+        "bio": "Second of the practice's cell technicians, handling sample processing and preparation ahead of deployment."
+      },
+      {
+        "name": "Yalissa Vinson",
+        "title": "Patient Care Coordinator",
+        "bio": "First point of contact for candidate applications, scheduling and follow-up after treatment."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "4809 Vue Du Lac Pl., #101",
+        "city": "Manhattan",
+        "region": "Kansas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "66503",
+        "phone": "(785) 320-4700",
+        "lat": 39.2024,
+        "lng": -96.6363
+      },
+      {
+        "isHQ": false,
+        "addressLine": "4800 W. 135th St., Suite 190",
+        "city": "Leawood",
+        "region": "Kansas",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "66209",
+        "phone": "(913) 800-7555",
+        "lat": 38.8851,
+        "lng": -94.6422
+      }
+    ],
+
+    "website": "https://kansasrmc.com",
+    "contactEmail": "info@kansasrmc.com",
+    "social": {
+      "instagram": "https://www.instagram.com/kansasrmc/",
+      "youtube": "https://www.youtube.com/user/KansasRMC",
+      "facebook": "https://www.facebook.com/KansasRMC/",
+      "linkedin": "https://www.linkedin.com/company/kansas-regenerative-medicine-center"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623390/library/gr73zcp1klfcjdxyw3wd.webp",
+      "publicId": "library/gr73zcp1klfcjdxyw3wd",
+      "width": 276,
+      "height": 107,
+      "alt": "Kansas Regenerative Medicine Center logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623393/library/y106hhf2myu2rkk32zeh.webp",
+      "publicId": "library/y106hhf2myu2rkk32zeh",
+      "width": 641,
+      "height": 423,
+      "alt": "Dr. James Sigler and Dr. Andrew Pope of Kansas Regenerative Medicine Center in Manhattan, Kansas"
+    },
+
+    "highlights": [
+      "Founded in Manhattan, Kansas in 2014, with a second clinic in Leawood serving the Kansas City side",
+      "Only autologous cells, taken from the patient's own fat or bone marrow, with PRP from their blood",
+      "Harvest, lab processing and deployment inside one 2 to 4 hour visit under local anesthetic",
+      "Named programmes for autoimmune, neurological and cardiac or pulmonary conditions alongside the orthopedic work",
+      "Two board-certified physicians, in family medicine and in physical medicine and rehabilitation",
+      "Says it passed 4,000 patients treated by its tenth anniversary in March 2024"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "Only the patient's own. Fat is harvested in a small liposuction-style procedure or marrow is aspirated, and the sample is concentrated in the clinic's own lab into stromal vascular fraction. Platelet-rich plasma from the patient's blood is sometimes added. KRMC does not use embryonic, umbilical-cord, amniotic or any other donor-derived cells."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care. KRMC says its protocols are run under Institutional Review Board oversight through the International Cell Surgical Society and that patient outcomes are recorded for research."
+      },
+      {
+        "question": "What happens on the day?",
+        "answer": "It is one outpatient visit of roughly 2 to 4 hours. The collection itself takes about 30 minutes under local anesthetic, processing takes around 90 minutes, and the cells are deployed the same day. Most patients go back to normal activity the next day."
+      },
+      {
+        "question": "Do you treat lupus and other autoimmune conditions?",
+        "answer": "Yes. The clinic runs a separate autoimmune programme and names lupus, rheumatoid arthritis, seronegative arthropathy, fibromyalgia, ulcerative colitis, Crohn's disease, primary sclerosing cholangitis and inflammatory bowel disease. For autoimmune cases the clinic says a series of deployments may work better than a single one, which is decided case by case."
+      },
+      {
+        "question": "What about heart, lung and neurological conditions?",
+        "answer": "There are named programmes for both. The cardiac and pulmonary list covers COPD, emphysema, asthma, reactive airway disease, congestive heart failure, cardiomyopathy and recovery after a heart attack. The neurology list covers multiple sclerosis, peripheral neuropathy, spinal cord injury, Parkinson's, stroke and several rarer conditions. Whether a given case is accepted is decided at consultation."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "There is no published price. The cost depends on the condition and on the deployment method, and is quoted after a consultation that is free for applicants the clinic accepts as candidates. KRMC points patients to Bank of the Flint Hills for medical financing and says insurance generally will not cover the treatment."
+      },
+      {
+        "question": "Where are the two clinics?",
+        "answer": "Manhattan, Kansas at 4809 Vue Du Lac Pl. and Leawood, Kansas at 4800 W. 135th St. for the Kansas City area. Both use the same treatment approach, and Dr. Pope is medical director across both."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "kansas regenerative medicine center"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "kansas regenerative medicine center reviews"
+      }
+    },
+
+    "costPage": {
+      "introEmpty": "KRMC publishes no price list. The clinic says the figure depends on which condition is being treated and on which type of deployment it needs, so an injection into one knee and an intravenous deployment for an autoimmune or pulmonary case are not quoted the same way. You apply through the candidate form first, and applicants the panel accepts are seen at no charge. Whatever is quoted at that visit is meant to cover the harvest, the lab work and the deployment as one fee, so the useful question is what sits outside it.",
+      "items": [
+        {
+          "label": "Consultation for accepted candidates",
+          "priceMin": 0,
+          "priceMax": 0,
+          "currency": "USD",
+          "unit": "one time",
+          "note": "Free once the panel has read your application. It can include a review of x-rays and records or a call rather than an office visit."
+        },
+        {
+          "label": "Adipose stem cell deployment",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "The main procedure. Fat harvest, processing into stromal vascular fraction and same-day deployment are quoted together. Fat yields enough cells to treat more than one site in a day, so ask how the quote changes with the number of areas."
+        },
+        {
+          "label": "Bone marrow stem cell deployment",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "The alternative source, used for orthopedic cases. KRMC says a marrow draw supports one or two joints on the same day, which caps what a single visit can cover."
+        },
+        {
+          "label": "Intravenous deployment for autoimmune, neurological or cardiac and pulmonary cases",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Priced apart from a joint injection. For autoimmune cases the clinic may recommend a series, so ask what the second and third deployments cost before you commit to the first."
+        },
+        {
+          "label": "Platelet-rich plasma",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Drawn from your own blood on the day. It is usually added to a stem cell deployment to enrich it rather than sold on its own, so check whether it is inside the quote or beside it."
+        }
+      ],
+      "includes": [
+        "Consultation with one of the clinic's physicians once your application is accepted",
+        "Harvesting the cells, from fat or from bone marrow",
+        "Processing and concentration in the clinic's own lab",
+        "Same-day deployment, with ultrasound or fluoroscopic guidance where the site needs it"
+      ],
+      "excludes": [
+        "Imaging, records or lab work you have to obtain elsewhere before the assessment",
+        "Any further deployment where a series is advised, though KRMC says it gives financial consideration on repeat treatments",
+        "Travel and lodging, which matters here because patients come from across the Midwest and further",
+        "Physical therapy or rehabilitation afterwards"
+      ],
+      "insuranceNote": "Expect to pay out of pocket. KRMC says insurance generally will not cover the cost of stem cell treatment because it is still classed as experimental. Anything ordered around it, such as imaging done at another practice, may be handled differently by your plan, so keep those bills separate.",
+      "financingNote": "There is no in-house payment plan. KRMC directs patients to Bank of the Flint Hills, a Kansas bank that takes personal loan applications online, and links to that application from its own FAQ. Confirm the arrangement with the clinic before you apply, since the referral is to an ordinary personal loan rather than a medical credit product.",
+      "faqs": [
+        {
+          "question": "How much does Kansas Regenerative Medicine Center cost?",
+          "answer": "There is no published figure. The clinic quotes each case after the consultation and says the price turns on the condition and on the type of deployment. It does say the fee covers harvesting, preparation and deployment together, including image guidance where that is used, so ask for the quote broken out by line."
+        },
+        {
+          "question": "Is the consultation free?",
+          "answer": "Yes for candidates. You fill in the candidate application first, and applicants the panel accepts are invited in at no charge. That visit may take the form of an office evaluation, a review of your x-rays and records, or a phone consultation."
+        },
+        {
+          "question": "Does insurance pay for any of it?",
+          "answer": "Generally no. KRMC says insurance will not cover the actual cost of stem cell treatment in most cases because the therapy is still considered experimental."
+        },
+        {
+          "question": "Is financing available?",
+          "answer": "The clinic points patients to Bank of the Flint Hills, which takes personal loan applications online. There is no published in-house plan, so ask what the current arrangement is before you apply anywhere."
+        },
+        {
+          "question": "Will I need more than one treatment?",
+          "answer": "Most orthopedic patients have a single deployment. KRMC says certain degenerative conditions, autoimmune disease in particular, may respond better to a series, decided case by case, and that it gives financial consideration on those repeat treatments."
+        }
+      ],
+      "sources": [
+        {
+          "label": "KRMC homepage FAQ on cost and financing",
+          "url": "https://kansasrmc.com/"
+        },
+        {
+          "label": "KRMC frequently asked questions",
+          "url": "https://kansasrmc.com/stem-cell-therapy/faqs"
+        },
+        {
+          "label": "KRMC stem cell therapy overview",
+          "url": "https://kansasrmc.com/stem-cell-therapy"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+
+    "isClaimed": false
+  }
+]

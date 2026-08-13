@@ -1,0 +1,268 @@
+[
+  {
+    "name": "Regenesis Stem Cell Center",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Same-day bone marrow and platelet procedures from one Huntsville physician, with a named COPD programme",
+    "description": "Regenesis Stem Cell Center is a single-physician clinic in south Huntsville, Alabama, run by Dr. Charles Lee. Lee spent about 30 years in cardiothoracic and high-risk obstetric anesthesia in New Orleans and Huntsville, founded Comprehensive Anesthesiology Services in 1995, and began fellowship study in anti-aging and regenerative medicine in 2007. He founded Regenesis in August 2013 and started offering bone marrow procedures the following year. Six staff work alongside him: a nurse practitioner, two registered nurses, a phlebotomist and medical assistant, a lab technician, and a front office administrator.\n\nEverything the clinic injects comes from the patient. Marrow is aspirated on the morning of the procedure under local anesthetic with oral or IV sedation, concentrated in the clinic's own lab over two to three hours while the patient waits, then placed under real-time ultrasound or fluoroscopic guidance along with platelet-rich plasma drawn the same day. Regenesis calls this protocol its Gold Standard Stem Cell Therapy and says it holds each injection to a minimum nucleated cell and platelet count. It does not use donor, umbilical-cord, amniotic or placental products, and its FAQ pages argue at length against clinics that do.\n\nMost of the caseload is orthopedic: knees, hips, shoulders, backs, necks, elbows, feet and ankles, mainly osteoarthritis, old sports injuries and pain left over after surgery. Regenesis also runs a specific COPD programme, using the same marrow concentrate and platelet-rich plasma to target lung inflammation in patients with chronic bronchitis or emphysema, plus protocols for peripheral neuropathy, hair restoration and sexual health, and a stellate ganglion block service for PTSD. These cell therapies are investigational, no major insurer pays for them, and each plan is quoted after Dr. Lee has reviewed the patient's history and imaging.",
+
+    "treatmentTypes": [
+      "bone-marrow-derived-therapy",
+      "autologous-therapy",
+      "prp",
+      "regenerative-orthopedics",
+      "msc-therapy"
+    ],
+    "conditionsTreated": [
+      "copd-pulmonary",
+      "knee-osteoarthritis",
+      "joint-pain",
+      "back-and-spine",
+      "rotator-cuff-shoulder",
+      "hip-osteoarthritis",
+      "sports-injuries",
+      "neuropathy",
+      "rheumatoid-arthritis",
+      "hair-restoration",
+      "sexual-health"
+    ],
+    "cellSources": ["autologous", "bone-marrow"],
+    "accreditations": ["board-certified-physicians"],
+    "serviceFocus": [
+      { "treatment": "bone-marrow-derived-therapy", "percent": 45 },
+      { "treatment": "prp", "percent": 25 },
+      { "treatment": "regenerative-orthopedics", "percent": 20 },
+      { "treatment": "msc-therapy", "percent": 10 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published price list. Dr. Lee quotes the procedure after an initial appointment covering history, symptoms and imaging, and the figure depends on how many sites are injected. A non-refundable deposit is taken at the pre-operative visit to hold the procedure date.",
+
+    "foundedYear": 2013,
+    "teamSize": "1-10",
+    "physiciansCount": 1,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Charles Lee",
+      "title": "Founder",
+      "credentials": "MD, board certified by the American Board of Anesthesiology",
+      "bio": "Trained at LSU Medical School in New Orleans and completed his internship and anesthesiology residency at LSU Charity Hospital, with an emphasis on cardiothoracic, pediatric, high-risk obstetric and neonatal anesthesia. He practised anesthesia in Huntsville for roughly three decades before founding Regenesis in August 2013. He holds Metabolic Medical Institute fellowships in stem cell therapy and in anti-aging and regenerative medicine, and intermediate and advanced Interventional Orthobiologics Foundation certifications covering knee, hip, ankle, foot, shoulder, elbow, wrist, hand and spine injections. Regenesis says he was the first physician in Alabama to take up regenerative and stem cell medicine, and that the state medical board credentialed him specifically for stem cell harvesting, isolation and orthopedic injections."
+    },
+    "team": [
+      {
+        "name": "Mandy Caruso",
+        "title": "Nurse Practitioner",
+        "credentials": "MSN, CRNP, board-certified family nurse practitioner (FNP-C)",
+        "bio": "More than ten years of nursing across cardiology, outpatient surgery, mental health, pediatrics, hormone replacement and stem cell therapy. She holds a bachelor's degree in anthropology from the University of Alabama alongside her nursing degrees and has a stated interest in preventive medicine and health education."
+      },
+      {
+        "name": "Kristina Nottingham",
+        "title": "Registered Nurse",
+        "credentials": "BSN, RN",
+        "bio": "Six years in emergency medicine and trauma ICU nursing before joining Regenesis. She trained at the University of West Florida and moved to Huntsville from Pensacola."
+      },
+      {
+        "name": "Susanna Minnick",
+        "title": "Registered Nurse",
+        "credentials": "RN, BS",
+        "bio": "Over a decade in pediatric and adolescent psychiatric care before joining the clinic. Originally from Berks County, Pennsylvania, and also a licensed pastor."
+      },
+      {
+        "name": "Madison Stinson",
+        "title": "Phlebotomist and Medical Assistant",
+        "credentials": "PhT, phlebotomist, medical assistant",
+        "bio": "Handles blood draws and clinical support on procedure days, with a background in pharmacy and community healthcare in north Alabama."
+      },
+      {
+        "name": "Eric Lee",
+        "title": "Lab Technician",
+        "bio": "Runs the on-site lab that processes and concentrates bone marrow and plasma while patients wait."
+      },
+      {
+        "name": "Courtney Wagner",
+        "title": "Front Office Administrator",
+        "bio": "Joined Regenesis in February 2021 after more than a decade in financial and customer service roles. She handles scheduling and the front desk."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "4025 Pepperwood Circle SW, Suite C",
+        "city": "Huntsville",
+        "region": "Alabama",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "35801",
+        "phone": "(256) 715-8193",
+        "lat": 34.6957,
+        "lng": -86.5806
+      }
+    ],
+
+    "website": "https://regenesisstemcell.com",
+    "social": {
+      "facebook": "https://www.facebook.com/drregenesis",
+      "instagram": "https://www.instagram.com/drregenesis/",
+      "youtube": "https://www.youtube.com/channel/UCTVYMYI7_It4NCFx5GwC-fg",
+      "x": "https://twitter.com/drregenesis",
+      "linkedin": "https://www.linkedin.com/in/charles-lee-m-d-05210ba9/"
+    },
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623140/library/rvhhzqdgee5pijyuk2b1.webp",
+      "publicId": "library/rvhhzqdgee5pijyuk2b1",
+      "width": 180,
+      "height": 180,
+      "alt": "Regenesis Stem Cell Center logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786623142/library/cjrtgp6mw12wfxlgv8ju.webp",
+      "publicId": "library/cjrtgp6mw12wfxlgv8ju",
+      "width": 1276,
+      "height": 700,
+      "alt": "The Regenesis Stem Cell Center team outside the clinic in Huntsville, Alabama"
+    },
+
+    "highlights": [
+      "Founded in 2013 by Dr. Charles Lee, board certified by the American Board of Anesthesiology",
+      "Only the patient's own bone marrow and platelets, aspirated and injected the same day",
+      "On-site lab concentrates the marrow in two to three hours while the patient waits",
+      "Injections placed under real-time ultrasound or fluoroscopic guidance",
+      "Named COPD programme alongside a caseload that is mostly orthopedic",
+      "One clinic in south Huntsville, about 15 minutes from Huntsville International Airport"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "Your own. Dr. Lee aspirates bone marrow on the morning of the procedure, the clinic's lab concentrates it over two to three hours, and it goes back in with platelet-rich plasma drawn from your blood the same day. Regenesis does not use donor, umbilical-cord, amniotic or placental products."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care."
+      },
+      {
+        "question": "Do you really treat COPD?",
+        "answer": "Regenesis runs a specific COPD protocol using the same marrow concentrate and platelet-rich plasma it uses for joints, aimed at inflammation in the lungs rather than at the underlying disease. Most of the clinic's work is still orthopedic, so ask how many COPD patients Dr. Lee has treated and what he tracks in his patient registry."
+      },
+      {
+        "question": "Who performs the procedure?",
+        "answer": "Dr. Charles Lee, the only physician at the practice. A nurse practitioner, two registered nurses, a phlebotomist and a lab technician make up the rest of the clinical staff."
+      },
+      {
+        "question": "How long does the procedure day take?",
+        "answer": "A single day. Marrow aspiration in the morning under sedation, two to three hours of lab processing while you wait, then 20 to 30 minutes of injections depending on how many sites are treated. Patients are escorted to their vehicle and go home the same day."
+      },
+      {
+        "question": "What happens before the procedure?",
+        "answer": "An initial appointment of about an hour to review your history, symptoms and any imaging, followed by a pre-operative visit for instructions, prescriptions and a non-refundable deposit that reserves your procedure date."
+      },
+      {
+        "question": "Will insurance pay for it?",
+        "answer": "Not usually. The clinic's own FAQ says no major carrier covers bone marrow concentrate procedures, and that only a few self-directed employer plans, some workers' compensation cases and certain military programmes have paid. Plan on covering it yourself unless your plan says otherwise."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "regenesis stem cell center"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "regenesis stem cell center reviews"
+      }
+    },
+
+    "costPage": {
+      "introEmpty": "Regenesis publishes no prices. Dr. Lee reviews your history, symptoms and imaging at a first appointment, then quotes the procedure once he knows which areas he is treating. Cost scales with the number of injection sites, so one knee and a both-knees plan are different numbers even though they share a single marrow aspiration and one lab run. A non-refundable deposit is taken at the pre-operative visit to hold your procedure date.",
+      "items": [
+        {
+          "label": "Bone marrow concentrate and PRP procedure, single site",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "One aspiration, one lab run, injections into one joint or area. Quoted after Dr. Lee has seen your imaging."
+        },
+        {
+          "label": "Multi-site or bilateral procedure",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "A single marrow aspiration can supply several injection sites in the same visit. Ask what each extra site adds rather than assuming the price doubles."
+        },
+        {
+          "label": "COPD protocol",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Same marrow aspiration and lab processing as the orthopedic work, quoted on its own after an assessment."
+        },
+        {
+          "label": "Platelet-rich plasma without the marrow procedure",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "The clinic says its joint PRP injections typically carry 10 billion platelets or more. Cheaper than a full cell procedure, so ask whether it is an option for your case."
+        },
+        {
+          "label": "Stellate ganglion block for PTSD",
+          "currency": "USD",
+          "unit": "per session",
+          "note": "Given as a series of injections rather than one, so ask for the price of the full series and not just the first block."
+        },
+        {
+          "label": "Non-refundable procedure deposit",
+          "currency": "USD",
+          "unit": "one time",
+          "note": "Taken at the pre-operative appointment to reserve your date. Ask whether it is credited against the procedure fee."
+        }
+      ],
+      "includes": [
+        "Bone marrow aspiration by Dr. Lee under local anesthetic with oral or IV sedation",
+        "Concentration of the marrow and preparation of platelet-rich plasma in the clinic's own lab",
+        "Ultrasound or fluoroscopy-guided placement of the injections",
+        "The clinic's follow-up programme of phone consultations and post-procedure office visits"
+      ],
+      "excludes": [
+        "The initial appointment and any labs or imaging ordered at it",
+        "Repeat procedures or extra joints treated on a later date",
+        "Aesthetic, hormone and weight-loss services, which are billed separately",
+        "Travel and lodging for out-of-town patients"
+      ],
+      "insuranceNote": "Treat this as cash pay. The clinic's own insurance FAQ says no major carrier covers bone marrow concentrate procedures, and that the exceptions it has seen are a few self-directed employer plans, some workers' compensation claims and certain military programmes. Ask for an itemised receipt if you intend to try an HSA or FSA claim.",
+      "financingNote": "No financing programme is advertised. The only published payment step is the non-refundable deposit at the pre-operative visit, so ask what the balance is and when it falls due.",
+      "faqs": [
+        {
+          "question": "How much does Regenesis Stem Cell Center cost?",
+          "answer": "There is no published figure. Dr. Lee quotes after reviewing your history and imaging, and the total depends on how many sites are injected. Ask for the quote broken down by site, and ask what the deposit covers."
+        },
+        {
+          "question": "Is the first appointment free?",
+          "answer": "The site advertises a free consultation on its foot and ankle listing but does not state a consultation fee anywhere else, so ask when you book. The initial appointment runs about an hour, and any labs or imaging ordered at it are billed on top."
+        },
+        {
+          "question": "Does insurance cover it?",
+          "answer": "Almost never. No major carrier pays for these procedures. A few self-directed employer plans, some workers' compensation claims and certain military programmes have covered bone marrow concentrate work, so one call to your plan is worth making before you assume it is out of pocket."
+        },
+        {
+          "question": "Is the deposit refundable?",
+          "answer": "No. Regenesis takes a non-refundable deposit at the pre-operative appointment to hold your procedure day. Ask whether it is credited against the procedure fee or charged on top of it."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Regenesis therapy procedures page",
+          "url": "https://regenesisstemcell.com/therapy-procedures"
+        },
+        {
+          "label": "Regenesis insurance FAQ",
+          "url": "https://regenesisstemcell.com/faq/will-insurance-cover-stem-cell-therapy"
+        },
+        {
+          "label": "Regenesis blog on high-dose PRP",
+          "url": "https://regenesisstemcell.com/blog"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+
+    "isClaimed": false
+  }
+]

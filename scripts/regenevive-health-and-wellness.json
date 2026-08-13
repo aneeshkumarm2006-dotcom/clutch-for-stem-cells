@@ -1,0 +1,262 @@
+[
+  {
+    "name": "RegeneVive Health and Wellness",
+    "slug": "regenevive-health-and-wellness",
+    "status": "draft",
+    "tier": "basic",
+    "tagline": "Autologous bone marrow and fat cell therapy in Glenview, formerly GIOSTAR Chicago",
+    "description": "RegeneVive Health and Wellness is a regenerative medicine clinic in Glenview, Illinois, a northern suburb of Chicago. It opened in 2018 as GIOSTAR Chicago, the Illinois clinic of the Global Institute of Stem Cell Therapy and Research, and took its current name in early 2025. The address, the phone number and the clinical leadership all stayed the same through the change. Dr. Rama Sood, who ran a pediatric practice in Toledo for more than thirty years before moving into regenerative medicine, is the medical director and owner.\n\nThe clinic works only with a patient's own cells. Bone marrow or fat is taken on the day of the procedure, processed in the on-site lab and given back the same day, either injected into the joint or soft tissue being treated or infused intravenously. Nothing is cultured or expanded, no donor tissue is used, and the clinic states that it does not carry out surgery or use experimental medications. Platelet-rich plasma and prolotherapy are offered alongside. Most of the caseload is orthopedic and covers the knee, hip, shoulder, ankle, wrist, elbow and back. The clinic also runs pulmonary protocols for COPD and post-COVID breathing problems, and treats peripheral neuropathy, slow-healing wounds, hair loss, skin aging and erectile dysfunction, with IV nutrient therapy sold separately.\n\nNone of this is approved by the FDA. The clinic calls the treatments investigational, says it follows guidance from the NIH, the International Society for Stem Cell Research and the International Society for Cell and Gene Therapy, and says cells are screened for viral, bacterial and fungal contamination before they are given back. Patients start by filling in a medical history form, which the medical team reviews against its own inclusion and exclusion criteria before a specialist calls back to discuss the case. There is no published price list, nothing is billed to insurance, and payment plans are arranged case by case.",
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1786624662/library/gqhbcx3tobjojfz7nabb.webp",
+      "publicId": "library/gqhbcx3tobjojfz7nabb",
+      "width": 900,
+      "height": 900,
+      "alt": "RegeneVive Health and Wellness logo"
+    },
+    "treatmentTypes": [
+      "autologous-therapy",
+      "bone-marrow-derived-therapy",
+      "adipose-derived-therapy",
+      "regenerative-orthopedics",
+      "prp",
+      "msc-therapy",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "copd-pulmonary",
+      "knee-osteoarthritis",
+      "neuropathy",
+      "joint-pain",
+      "back-and-spine",
+      "rotator-cuff-shoulder",
+      "hip-osteoarthritis",
+      "sports-injuries",
+      "post-covid-recovery",
+      "skin-aesthetic",
+      "hair-restoration",
+      "sexual-health",
+      "anti-aging-longevity"
+    ],
+    "cellSources": [
+      "autologous",
+      "bone-marrow",
+      "adipose"
+    ],
+    "accreditations": [
+      "board-certified-physicians"
+    ],
+    "serviceFocus": [
+      {
+        "treatment": "regenerative-orthopedics",
+        "percent": 40
+      },
+      {
+        "treatment": "bone-marrow-derived-therapy",
+        "percent": 20
+      },
+      {
+        "treatment": "prp",
+        "percent": 15
+      },
+      {
+        "treatment": "iv-systemic-therapy",
+        "percent": 15
+      },
+      {
+        "treatment": "adipose-derived-therapy",
+        "percent": 10
+      }
+    ],
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No published price list. The clinic quotes a plan only after its medical team has read your history form and worked out which protocol it thinks fits, so the figure depends on the condition, the cell source and how many procedures are involved. Insurance is not accepted and payment plans are arranged case by case.",
+    "foundedYear": 2018,
+    "physiciansCount": 2,
+    "languages": [
+      "English"
+    ],
+    "medicalDirector": {
+      "name": "Dr. Rama Sood",
+      "title": "Medical Director and Owner",
+      "credentials": "MD, diplomate of the American Board of Pediatrics",
+      "bio": "Ran a pediatric practice in Toledo, Ohio for more than thirty years and chaired the department of pediatrics at Flower Hospital there for over twenty-five of them. She trained in regenerative medicine with the Global Stem Cells Group, covering orthopedic injection technique and laboratory cell processing, and earlier helped set up a stem cell center in Chandigarh, India. She oversees patient screening, procedures and follow-up at the Glenview clinic."
+    },
+    "team": [
+      {
+        "name": "Dr. Jay Rosenberg",
+        "title": "Surgeon",
+        "credentials": "MD, board-certified in plastic surgery and general surgery",
+        "bio": "Board-certified plastic and general surgeon with more than twenty-five years in surgical practice, previously a physician at AMITA Health Saint Joseph Hospital in Elgin. He covers the procedural side of the clinic's regenerative treatments."
+      },
+      {
+        "name": "Debra Mollé",
+        "title": "Vice President, Advanced Regenerative Therapies",
+        "credentials": "Exercise science and communications, Parkland College",
+        "bio": "Grew up in the northern Chicago suburbs and spent twenty-six years in healthcare leadership roles at the American Board of Psychiatry and Neurology, Life Time Fitness, Advocate Good Shepherd Hospital and Rush Copley Medical Center before joining the clinic."
+      },
+      {
+        "name": "Billie Taylor",
+        "title": "Clinical Nurse",
+        "credentials": "Nursing diploma, BA psychology (DePaul University), MHA (Capella University)",
+        "bio": "Clinical nurse at the Glenview clinic, with a nursing diploma, a psychology degree from DePaul and a master's in healthcare administration."
+      },
+      {
+        "name": "Shelly Sood",
+        "title": "Partner",
+        "bio": "Works on the business side of the practice and is named as its authorized official on the clinic's federal provider registration."
+      }
+    ],
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "2550 Compass Rd, Unit H",
+        "city": "Glenview",
+        "region": "Illinois",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "60026",
+        "phone": "(844) 446-7827",
+        "lat": 42.099,
+        "lng": -87.8191
+      }
+    ],
+    "website": "https://regenevive.com",
+    "contactEmail": "info@regenevive.com",
+    "social": {
+      "instagram": "https://www.instagram.com/regenevive/",
+      "facebook": "https://www.facebook.com/people/RegeneVive-Health-and-Wellness/61572986964853/",
+      "x": "https://x.com/regenevivehw",
+      "youtube": "https://www.youtube.com/@RegeneVive"
+    },
+    "highlights": [
+      "Opened in Glenview in 2018 as GIOSTAR Chicago and renamed RegeneVive Health and Wellness in early 2025",
+      "Works only with the patient's own cells, taken from bone marrow or fat and returned the same day",
+      "Medical director Dr. Rama Sood spent more than thirty years in pediatrics before moving into regenerative medicine",
+      "Orthopedic injection work is the bulk of the practice, with pulmonary protocols for COPD alongside it",
+      "Applicants are screened through a medical history form and a three-step review before being accepted",
+      "Cash pay only, with no insurance billing and payment plans arranged case by case"
+    ],
+    "faqs": [
+      {
+        "question": "What kind of cells do you use?",
+        "answer": "Only the patient's own. Bone marrow or fat is taken on the day of the procedure, processed in the clinic's on-site lab and given back the same day, either as a targeted injection or as an IV infusion. The clinic does not use donor, cord or culture-expanded cells."
+      },
+      {
+        "question": "Is this FDA-approved?",
+        "answer": "No. Cell therapies are investigational and are not approved by the FDA for these uses. They are elective procedures and are not a replacement for standard medical care. The clinic says it follows guidance from the NIH, the ISSCR and the ISCT, and that cells are screened for viral, bacterial and fungal contamination before use."
+      },
+      {
+        "question": "What does the clinic actually treat?",
+        "answer": "Most of the work is orthopedic, covering arthritis and injury in the knee, hip, shoulder, ankle, wrist, elbow and back. The clinic also runs pulmonary protocols for COPD and post-COVID breathing problems, and treats peripheral neuropathy, slow-healing wounds, hair loss, skin aging and erectile dysfunction. IV nutrient therapy is sold separately."
+      },
+      {
+        "question": "How do I find out whether I am a candidate?",
+        "answer": "You fill in a medical history form on the clinic's website. The medical team reads it against its inclusion and exclusion criteria in a three-step review, and a specialist calls back within roughly forty-eight to seventy-two hours to talk through the case and what it would cost."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "There is no published figure. The clinic quotes each plan after reviewing your history, and the total turns on the condition, whether cells come from bone marrow or fat, and how many procedures the plan involves."
+      },
+      {
+        "question": "Does insurance cover it?",
+        "answer": "No. Regenerative cell therapy is not billed to insurance here. The clinic says it will work out a payment plan with you instead."
+      },
+      {
+        "question": "Was this clinic called something else before?",
+        "answer": "Yes. It opened in Glenview in 2018 as GIOSTAR Chicago, the Illinois clinic of the Global Institute of Stem Cell Therapy and Research, and changed its name to RegeneVive Health and Wellness in early 2025. The address, the phone number and the medical director did not change. The older giostarchicago.com pages still turn up in search results."
+      }
+    ],
+    "seo": {
+      "focusKeyword": "regenevive health and wellness"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "regenevive health and wellness reviews"
+      }
+    },
+    "costPage": {
+      "introEmpty": "RegeneVive publishes no price list. The sequence is that you fill in a medical history form, the medical team reads it against its inclusion and exclusion criteria, and a specialist then calls back with a quote for the protocol they think fits. What you end up paying turns on the condition being treated, whether the cells are drawn from bone marrow or from fat, and how many procedures the plan runs to. Nothing here is billed to insurance, so the quote is the whole cost.",
+      "items": [
+        {
+          "label": "Candidacy review and consultation",
+          "currency": "USD",
+          "unit": "one time",
+          "note": "Starts with the online medical history form. Ask whether the review and the call-back carry a fee before you submit anything, because the clinic does not say either way in public."
+        },
+        {
+          "label": "Bone marrow harvest with same-day injection",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Marrow is drawn, processed on site and given back the same day. Ask whether the lab processing is quoted as a separate line, since it has been billed that way in the past."
+        },
+        {
+          "label": "Adipose harvest with same-day injection",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "The fat-derived alternative to the marrow route. Ask which one the clinic is proposing for your condition and why, because the price differs."
+        },
+        {
+          "label": "Platelet-rich plasma injection",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Sometimes quoted inside a cell package rather than on its own. Worth asking whether it is already included."
+        },
+        {
+          "label": "IV cell infusion",
+          "currency": "USD",
+          "unit": "per treatment",
+          "note": "Used for the systemic protocols such as COPD rather than for a single joint. Often quoted alongside a joint injection in the same visit."
+        },
+        {
+          "label": "IV nutrient therapy",
+          "currency": "USD",
+          "unit": "per session",
+          "note": "The Myers cocktail and similar drips are a separate wellness service and are not part of a regenerative quote."
+        }
+      ],
+      "includes": [
+        "Review of your medical history form by the clinic's medical team",
+        "Harvest, on-site processing and same-day administration in one visit",
+        "Follow-up contact after the procedure"
+      ],
+      "excludes": [
+        "Imaging and lab work ordered before the procedure",
+        "Travel and lodging, which out-of-town patients need for a multi-day visit",
+        "IV nutrient drips and aesthetic services, which are priced on their own",
+        "Any repeat procedure beyond the first plan"
+      ],
+      "insuranceNote": "The clinic states plainly that insurance does not cover regenerative cell therapy here. Everything is cash pay. Ask for an itemized receipt if you intend to try an HSA or FSA claim, and do not assume the harvest or the lab work will be reimbursed either.",
+      "financingNote": "There is no published financing program, but the clinic says it will work with you on a payment plan that fits your situation. Ask what that means in practice, whether it is an in-house installment arrangement or a third-party lender, and what the total comes to if you spread it.",
+      "faqs": [
+        {
+          "question": "How much does RegeneVive Health and Wellness cost?",
+          "answer": "The clinic does not publish a number. You get a quote after the medical team has read your history form, and it depends on the condition, the cell source and how many procedures the plan involves. Ask for it itemized by line rather than as a single total."
+        },
+        {
+          "question": "Is the first consultation free?",
+          "answer": "The clinic does not say. The first step is an online medical history form rather than a paid visit, so ask what the review and the call-back cost before you commit to anything."
+        },
+        {
+          "question": "Will insurance pay for any of it?",
+          "answer": "No. The clinic says insurance does not cover regenerative cell therapy at this location, so the whole cost sits with you. Some patients recover part of it through an HSA or FSA, which needs an itemized receipt."
+        },
+        {
+          "question": "Do I need more than one procedure?",
+          "answer": "Ask, because it changes the total. Some plans run to more than one procedure, so a quote for a single session may not be the whole picture. Get the number of procedures written into the quote."
+        }
+      ],
+      "sources": [
+        {
+          "label": "RegeneVive costs and expenses FAQ",
+          "url": "https://regenevive.com/faq/locations-worldwide-and-costs-and-expenses/"
+        },
+        {
+          "label": "RegeneVive contact page",
+          "url": "https://regenevive.com/contact/"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-13"
+    },
+    "isClaimed": false
+  }
+]
