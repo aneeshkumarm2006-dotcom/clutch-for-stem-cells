@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/common/section";
 import { BlockRenderer } from "@/components/blocks/block-renderer";
 import { PageLead } from "@/components/common/page-lead";
+import { StaticPageSchema } from "@/components/seo/static-page-schema";
 
 export const revalidate = 3600;
 
@@ -25,6 +26,7 @@ export default async function ForClinicsPage() {
 
   return (
     <>
+      <StaticPageSchema path="/for-clinics" />
       {/* Hero */}
       <section
         className="border-b border-border"

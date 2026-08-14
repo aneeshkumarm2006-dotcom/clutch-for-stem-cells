@@ -4,7 +4,9 @@ import { pageMetadata } from "@/lib/page-metadata";
 import { getDirectoryData } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
-import { itemListJsonLd } from "@/lib/seo";
+import { buildJsonLd } from "@/lib/schema/engine";
+import { getSchemaContext } from "@/lib/schema/context";
+import { staticPageMeta } from "@/config/static-pages";
 import { Directory } from "@/components/directory/directory";
 import { JsonLd } from "@/components/seo/json-ld";
 import { BlockRenderer } from "@/components/blocks/block-renderer";
@@ -36,13 +38,28 @@ export default async function ClinicsPage({
     getPageContent("/clinics"),
   ]);
 
-  const jsonLd = data.cards.length
-    ? [
-        itemListJsonLd(
-          data.cards.map((c) => ({ path: `/clinic/${c.slug}`, name: c.name })),
-        ),
-      ]
-    : [];
+  // `CollectionPage` + a typed `ItemList`, not a bare list: the page node names
+  // what this URL is, and each entry's `@id` is the same `…#clinic` node that
+  // clinic's own profile publishes, so the directory and the profiles describe
+  // one set of entities rather than two overlapping ones.
+  const meta = staticPageMeta("/clinics");
+  const ctx = await getSchemaContext();
+  const jsonLd = buildJsonLd(
+    "directory",
+    {
+      name: meta?.title ?? content.title,
+      description: meta?.description,
+      path: "/clinics",
+      items: data.cards.map((c) => ({
+        path: `/clinic/${c.slug}`,
+        name: c.name,
+      })),
+      itemType: "MedicalClinic",
+      itemIdFragment: "clinic",
+      itemsName: content.title,
+    },
+    ctx,
+  );
 
   return (
     <>

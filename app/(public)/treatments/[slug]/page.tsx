@@ -120,13 +120,16 @@ export default async function TreatmentDirectoryPage({
       lastReviewed: editorial?.lastReviewedAt,
       dateModified: editorial?.updatedAt,
       reviewedBy: editorial?.reviewer,
+      // Derived from the term itself rather than stored: one fewer field to keep
+      // correct, and it cannot contradict the page's own subject.
+      specialtyHints: [term.name, term.shortDescription],
       about: medicalTherapyJsonLd({
         name: term.name,
         description: term.shortDescription ?? term.description,
         path,
       }),
     }),
-    ...editorialJsonLd(editorial),
+    ...editorialJsonLd(editorial, path),
     ...(data.cards.length
       ? [
           itemListJsonLd(
@@ -134,6 +137,12 @@ export default async function TreatmentDirectoryPage({
               path: `/clinic/${c.slug}`,
               name: c.name,
             })),
+            {
+              name: `${term.name} clinics`,
+              path,
+              itemType: "MedicalClinic",
+              itemIdFragment: "clinic",
+            },
           ),
         ]
       : []),

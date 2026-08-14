@@ -216,6 +216,10 @@ export async function CombinationPage({
         lastReviewed: view.editorial.lastReviewedAt,
         dateModified: view.editorial.updatedAt,
         reviewedBy: view.editorial.reviewer,
+        // The title names both halves of the pair ("MSC Therapy for Knee
+        // Osteoarthritis"), which is what lets the specialty resolve through the
+        // condition where the therapy name alone would not.
+        specialtyHints: [view.title, view.intro],
         about: ctx.about,
       },
       faqs: view.editorial.faqs,
@@ -223,6 +227,7 @@ export async function CombinationPage({
         path: `/clinic/${c.slug}`,
         name: c.name,
       })),
+      itemsName: view.title,
     },
     schemaCtx,
     view.schemaOverrides ?? null,

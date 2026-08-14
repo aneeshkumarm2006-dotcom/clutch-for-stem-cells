@@ -10,7 +10,14 @@
  * Schema.org types emitted (PRD §11 + AEO): `Organization`, `WebSite`,
  * `MedicalClinic`, `AggregateRating`, `Review`, `BreadcrumbList`, `FAQPage`,
  * `BlogPosting`, `MedicalWebPage`, `MedicalCondition`, `MedicalTherapy`,
- * `ItemList`.
+ * `ItemList`, `WebPage`/`CollectionPage`/`AboutPage`/`ContactPage`, `Person`,
+ * `ProfilePage`, `OfferCatalog`.
+ *
+ * **One graph, not N snippets.** Every node that references the publisher or the
+ * site does so by `@id` (`…/#organization`, `…/#website`) rather than by
+ * inlining another copy, and page-level nodes carry their own stable `@id`
+ * (`…/clinic/acme#clinic`, `…#webpage`). See the "Node identity" section below —
+ * it is the single change that most improves how a crawler reads this site.
  */
 import type { Metadata } from "next";
 
@@ -39,6 +46,39 @@ export function absoluteUrl(path = "/"): string {
 export const clinicUrl = (slug: string): string =>
   absoluteUrl(`/clinic/${slug}`);
 export const blogUrl = (slug: string): string => absoluteUrl(`/blog/${slug}`);
+
+// ── Node identity (@id) ──────────────────────────────────────────────────────
+
+/**
+ * Stable `@id`s for the two site-wide nodes `<BaseSchema>` puts on every page.
+ *
+ * Why this matters more than it looks: without them each page emitted its own
+ * anonymous copy of the publisher (`BlogPosting.publisher`, `WebPage.isPartOf`
+ * …), so a crawler read one `Organization` per page and had no way to tell they
+ * were the same entity. Pointing every reference at `…/#organization` collapses
+ * that into a single node the whole site hangs off, which is what turns a pile
+ * of per-page snippets into one connected knowledge graph.
+ */
+const trimSlash = (url: string): string => url.replace(/\/$/, "");
+
+export const orgId = (siteUrl: string = SITE_URL): string =>
+  `${trimSlash(siteUrl)}/#organization`;
+
+export const websiteId = (siteUrl: string = SITE_URL): string =>
+  `${trimSlash(siteUrl)}/#website`;
+
+/** A page-scoped `@id`, e.g. `https://…/clinic/acme#clinic`. */
+export const nodeId = (path: string, fragment: string): string =>
+  `${absoluteUrl(path)}#${fragment}`;
+
+/** A bare `@id` reference to another node in the same graph. */
+const ref = (id: string): JsonLd => ({ "@id": id });
+
+/**
+ * Content language for every node that carries `inLanguage`. A single-locale
+ * site, so a constant; it becomes a parameter the day a second locale ships.
+ */
+export const CONTENT_LANGUAGE = "en";
 
 /**
  * Fallback title template used when Settings supply none — keeps every page
@@ -283,6 +323,28 @@ function compact<T extends JsonLd>(obj: T): T {
   return obj;
 }
 
+/**
+ * The public policy pages that back a YMYL publisher's claims.
+ *
+ * Google's `Organization` reference does not list these, but they are valid
+ * schema.org and they are how a health publisher states *in machine-readable
+ * form* that it has an editorial process, a corrections route, and a disclosed
+ * funding model. On a YMYL directory that is the cheapest E-E-A-T signal there
+ * is: the pages already exist, they just were not being pointed at.
+ */
+export interface OrganizationPolicyPaths {
+  /** Editorial standards → `/editorial-policy`. */
+  publishingPrinciples?: string;
+  /** How errors are corrected. */
+  correctionsPolicy?: string;
+  /** Ethical standards. */
+  ethicsPolicy?: string;
+  /** Where a reader reports a problem → `/contact`. */
+  actionableFeedbackPolicy?: string;
+  /** Who owns and funds the site → `/about`. */
+  ownershipFundingInfo?: string;
+}
+
 /** Runtime identity for the site-wide nodes, resolved from admin Settings. */
 export interface SiteIdentityInput {
   name?: string;
@@ -294,45 +356,138 @@ export interface SiteIdentityInput {
   type?: string;
   /** Path the sitelinks search box deep-links into. */
   searchPath?: string;
+  /** One-paragraph description of the publisher (Google: recommended). */
+  description?: string;
+  /** Registered legal name, when it differs from the brand. */
+  legalName?: string;
+  alternateName?: string;
+  /** Public contact email → `email` + `contactPoint.email`. */
+  email?: string;
+  /** Public contact phone → `telephone` + `contactPoint.telephone`. */
+  telephone?: string;
+  /**
+   * Postal address. Settings stores this as one free-text line, and
+   * `Organization.address` legitimately ranges over `Text` as well as
+   * `PostalAddress` — emitting the text we actually have beats splitting it into
+   * a `PostalAddress` whose parts we would be guessing at.
+   */
+  address?: string;
+  /** ISO date (or year) the site launched. */
+  foundingDate?: string;
+  /** Subject-matter the publisher covers → helps entity resolution. */
+  knowsAbout?: string[];
+  /** Root-relative paths to the publisher's policy pages. */
+  policies?: OrganizationPolicyPaths;
+  /** Path of the contact page → `contactPoint.url`. */
+  contactPath?: string;
+}
+
+/** `logo` as an `ImageObject` — Google reads the URL form, but the object form
+ * is what lets the same image be referenced (and sized) elsewhere. */
+function logoNode(logo: string | undefined, siteUrl: string): JsonLd | undefined {
+  if (!logo) return undefined;
+  return {
+    "@type": "ImageObject",
+    "@id": `${trimSlash(siteUrl)}/#logo`,
+    url: absoluteUrl(logo),
+    contentUrl: absoluteUrl(logo),
+  };
 }
 
 /**
  * `Organization` for the publisher.
  *
  * Every field is overridable so the admin Settings (site name, uploaded logo,
- * social profiles) drive the node at runtime; the `config/site.ts` constants are
- * only the build-time fallback for when the DB is unavailable. Passing no
- * argument reproduces the original constants-only behaviour.
+ * social profiles, contact details) drive the node at runtime; the
+ * `config/site.ts` constants are only the build-time fallback for when the DB is
+ * unavailable. Passing no argument reproduces the original constants-only
+ * behaviour.
+ *
+ * The `@type` stays `Organization` by default rather than `MedicalOrganization`,
+ * and that is deliberate: this site is a directory and publisher, not a care
+ * provider. `MedicalOrganization` asserts that the entity delivers healthcare,
+ * which would be a false claim about *us* — the clinics we list carry it, and
+ * they are the ones who actually treat patients. It remains configurable in
+ * admin Settings for a deployment where the operator really is a provider.
  */
 export function organizationJsonLd(opts: SiteIdentityInput = {}): JsonLd {
   const sameAs = (opts.sameAs ?? Object.values(SOCIAL_LINKS)).filter(Boolean);
+  const siteUrl = opts.url ?? SITE_URL;
+  const p = opts.policies ?? {};
+  const contact =
+    opts.email || opts.telephone || opts.contactPath
+      ? compact({
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          email: opts.email,
+          telephone: opts.telephone,
+          url: opts.contactPath ? absoluteUrl(opts.contactPath) : undefined,
+          availableLanguage: CONTENT_LANGUAGE,
+        })
+      : undefined;
+
   return compact({
     "@context": "https://schema.org",
     "@type": opts.type ?? "Organization",
-    "@id": `${(opts.url ?? SITE_URL).replace(/\/$/, "")}/#organization`,
+    "@id": orgId(siteUrl),
     name: opts.name ?? SITE_NAME,
-    url: opts.url ?? SITE_URL,
-    logo: opts.logo ? absoluteUrl(opts.logo) : undefined,
+    legalName: opts.legalName,
+    alternateName: opts.alternateName,
+    url: siteUrl,
+    logo: logoNode(opts.logo, siteUrl),
+    // Google's Organization guidance treats `image` and `logo` separately;
+    // repeating the logo as `image` is what makes the entity render an icon in
+    // surfaces that read `image` and ignore `logo`.
+    image: opts.logo ? absoluteUrl(opts.logo) : undefined,
+    description: opts.description ?? SITE_DESCRIPTION,
+    email: opts.email,
+    telephone: opts.telephone,
+    address: opts.address,
+    foundingDate: opts.foundingDate,
+    knowsAbout: opts.knowsAbout?.length ? opts.knowsAbout : undefined,
+    contactPoint: contact,
     sameAs: sameAs.length ? sameAs : undefined,
+    // Publisher-integrity signals. Absent keys simply drop out, so a deployment
+    // that has not written these pages emits exactly what it did before.
+    publishingPrinciples: p.publishingPrinciples
+      ? absoluteUrl(p.publishingPrinciples)
+      : undefined,
+    correctionsPolicy: p.correctionsPolicy
+      ? absoluteUrl(p.correctionsPolicy)
+      : undefined,
+    ethicsPolicy: p.ethicsPolicy ? absoluteUrl(p.ethicsPolicy) : undefined,
+    actionableFeedbackPolicy: p.actionableFeedbackPolicy
+      ? absoluteUrl(p.actionableFeedbackPolicy)
+      : undefined,
+    ownershipFundingInfo: p.ownershipFundingInfo
+      ? absoluteUrl(p.ownershipFundingInfo)
+      : undefined,
   });
 }
 
 /**
- * `WebSite` with a `SearchAction` — lets search engines render a sitelinks
- * search box that deep-links into our global search (PRD §11). Emitted
- * site-wide (see `components/seo/base-schema.tsx`) and linked to the
- * `Organization` node by `@id` so crawlers read one connected graph.
+ * `WebSite` — the node that names the site and anchors every page's `isPartOf`.
+ *
+ * The `SearchAction` stays. Google retired the sitelinks search box on
+ * 2024-11-21, so it no longer renders anything there, but Google explicitly says
+ * unsupported structured data causes no harm and that *site names* still read a
+ * variation of this same `WebSite` node — and other engines (and LLM crawlers)
+ * do still act on `SearchAction`. Removing it would cost the site-name signal to
+ * save nothing.
  */
 export function websiteJsonLd(opts: SiteIdentityInput = {}): JsonLd {
-  const base = (opts.url ?? SITE_URL).replace(/\/$/, "");
+  const siteUrl = opts.url ?? SITE_URL;
   const searchPath = opts.searchPath ?? "/search";
-  return {
+  return compact({
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${base}/#website`,
+    "@id": websiteId(siteUrl),
     name: opts.name ?? SITE_NAME,
-    url: opts.url ?? SITE_URL,
-    publisher: { "@id": `${base}/#organization` },
+    alternateName: opts.alternateName,
+    url: siteUrl,
+    description: opts.description ?? SITE_DESCRIPTION,
+    inLanguage: CONTENT_LANGUAGE,
+    publisher: ref(orgId(siteUrl)),
     potentialAction: {
       "@type": "SearchAction",
       target: {
@@ -341,7 +496,32 @@ export function websiteJsonLd(opts: SiteIdentityInput = {}): JsonLd {
       },
       "query-input": "required name=search_term_string",
     },
-  };
+  });
+}
+
+/**
+ * Facts about a clinic that live on *populated* references rather than on the
+ * clinic document itself (its treatments, conditions, accreditations, named
+ * clinicians). The caller resolves them to plain names; this file never touches
+ * Mongo. All optional, so an existing call site that passes a bare `IClinic`
+ * keeps working and simply emits the smaller node it emitted before.
+ */
+export interface ClinicSeoExtras {
+  /** Treatment names the clinic offers → `availableService` (`MedicalTherapy`). */
+  services?: string[];
+  /**
+   * Condition names the clinic treats. Used only to derive `medicalSpecialty` —
+   * the conditions themselves belong to the condition pages, not to this node.
+   */
+  conditions?: string[];
+  /**
+   * Accreditations held → `hasCredential`. Named `…Held` because `IClinic`
+   * already has an `accreditations` field holding the unresolved ObjectIds, and
+   * this is the resolved form.
+   */
+  accreditationsHeld?: { name: string; issuingBody?: string }[];
+  /** Named clinicians (medical director, listed team) → `employee`. */
+  staff?: { name: string; role?: string }[];
 }
 
 type ClinicSeoInput = Pick<
@@ -360,7 +540,71 @@ type ClinicSeoInput = Pick<
   | "currency"
   | "locations"
   | "languages"
->;
+  | "foundedYear"
+> &
+  ClinicSeoExtras;
+
+/**
+ * schema.org `MedicalSpecialty` is a closed enumeration — 43 members, and
+ * anything outside it is not a specialty, it is a string a validator ignores.
+ * (The common mistake is `https://schema.org/Orthopedic`, which does not exist;
+ * orthopaedics is `Musculoskeletal`.)
+ *
+ * Rather than store a specialty per clinic, derive it from the taxonomy the
+ * clinic is already tagged with. Patterns are ordered most-specific-first and a
+ * term that matches nothing contributes nothing — an unmapped term is better
+ * than a guessed specialty, because a wrong `medicalSpecialty` on a health
+ * business is a factual error about what that business treats.
+ */
+const SPECIALTY_PATTERNS: [RegExp, string][] = [
+  [/rheumat|lupus|autoimmun|psoriatic|ankylosing/i, "Rheumatologic"],
+  [
+    /knee|hip|shoulder|joint|osteoarth|arthrit|cartilage|tendon|tendin|ligament|rotator|meniscus|spine|spinal disc|back pain|disc |orthop|musculoskelet|sports injur|fracture|bursitis|plantar/i,
+    "Musculoskeletal",
+  ],
+  [
+    /neuro|parkinson|alzheimer|dementia|multiple sclerosis|\bms\b|stroke|spinal cord|neuropath|traumatic brain|cerebral palsy|autism|epilep/i,
+    "Neurologic",
+  ],
+  [/cardi|heart|vascular|ischemi|myocard/i, "Cardiovascular"],
+  [/lung|pulmonar|copd|asthma|respirator|fibrosis/i, "Pulmonary"],
+  [/kidney|renal|nephr/i, "Renal"],
+  [/crohn|colitis|liver|hepat|gastro|bowel|\bibd\b|pancrea/i, "Gastroenterologic"],
+  [
+    /diabet|thyroid|hormone|testosterone|endocrin|menopause|\btrt\b|adrenal|metabolic/i,
+    "Endocrine",
+  ],
+  [/erectile|urolog|prostate|bladder|peyronie/i, "Urologic"],
+  [/fertilit|ovarian|gynec|endometri|vaginal|uterine/i, "Gynecologic"],
+  [/cancer|oncolog|tumou?r|leukemi|lymphoma/i, "Oncologic"],
+  [/retina|macular|ocular|optom|dry eye|glaucoma/i, "Optometric"],
+  [/hearing|tinnitus|sinus|otolaryng/i, "Otolaryngologic"],
+  [/skin|dermat|alopecia|hair loss|wound|scar|eczema|vitiligo/i, "Dermatology"],
+  [/cosmetic|aesthetic|plastic surg|facial rejuven|breast/i, "PlasticSurgery"],
+  [/physiotherap|physical therap|rehabilitat|prehab/i, "Physiotherapy"],
+  [/anti-?ag|longevity|immune|wellness|\biv\b|systemic|whole-?body/i, "PrimaryCare"],
+];
+
+/**
+ * Map free-text treatment/condition names onto `MedicalSpecialty` enum URLs.
+ * Deduped, order-stable, and capped — a clinic claiming a dozen specialties
+ * reads as noise, and the first few are the ones its taxonomy leans on.
+ */
+export function medicalSpecialtiesFor(
+  terms: (string | undefined)[],
+  limit = 5,
+): string[] {
+  const found: string[] = [];
+  for (const term of terms) {
+    if (!term) continue;
+    for (const [pattern, specialty] of SPECIALTY_PATTERNS) {
+      if (!pattern.test(term)) continue;
+      if (!found.includes(specialty)) found.push(specialty);
+      break;
+    }
+  }
+  return found.slice(0, limit).map((s) => `https://schema.org/${s}`);
+}
 
 function postalAddress(loc: IClinic["locations"][number]): JsonLd {
   return compact({
@@ -376,19 +620,51 @@ function postalAddress(loc: IClinic["locations"][number]): JsonLd {
 /**
  * `MedicalClinic` (a Schema.org `MedicalBusiness`/`LocalBusiness` subtype) with
  * an embedded `AggregateRating` when the clinic has approved reviews.
+ *
+ * Google requires `name` + `address` on a `LocalBusiness` and recommends
+ * `telephone`, `geo`, `priceRange`, `url`, `image`, `aggregateRating` and
+ * `review` — all of which this emits when the record has them. The
+ * `aggregateRating`/`review` pair is specifically allowed here because Google
+ * restricts it to "sites that capture reviews about *other* local businesses",
+ * which is exactly what a third-party directory is; a clinic publishing the same
+ * markup about itself would be the self-serving case Google disallows.
+ *
+ * `medicalSpecialty` and `availableService` are the two properties that make
+ * this node say what the clinic actually *does* rather than just where it is.
+ * Both are derived from the taxonomy the clinic is already tagged with, so they
+ * cannot drift from what the page shows.
  */
 export function medicalClinicJsonLd(clinic: ClinicSeoInput): JsonLd {
   const hq =
     clinic.locations?.find((l) => l.isHQ) ?? clinic.locations?.[0] ?? null;
   const image = clinic.coverImage?.url ?? clinic.logo?.url;
+  const url = clinicUrl(clinic.slug);
+
+  const specialties = medicalSpecialtiesFor([
+    ...(clinic.conditions ?? []),
+    ...(clinic.services ?? []),
+  ]);
+
+  // Every distinct country the clinic operates in. A directory profile covers
+  // all of a group's sites even though `address` can only name the HQ.
+  const areaServed = [
+    ...new Set(
+      (clinic.locations ?? [])
+        .map((l) => l.country?.trim())
+        .filter((c): c is string => Boolean(c)),
+    ),
+  ];
 
   return compact({
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
+    "@id": `${url}#clinic`,
     name: clinic.name,
-    url: clinicUrl(clinic.slug),
+    url,
+    mainEntityOfPage: url,
     description: clinic.description ?? clinic.tagline,
     image: image ? absoluteUrl(image) : undefined,
+    logo: clinic.logo?.url ? absoluteUrl(clinic.logo.url) : undefined,
     sameAs: clinic.website || undefined,
     telephone: hq?.phone,
     address: hq ? postalAddress(hq) : undefined,
@@ -396,13 +672,48 @@ export function medicalClinicJsonLd(clinic: ClinicSeoInput): JsonLd {
       hq?.lat != null && hq?.lng != null
         ? { "@type": "GeoCoordinates", latitude: hq.lat, longitude: hq.lng }
         : undefined,
+    areaServed: areaServed.length ? areaServed : undefined,
+    // Closed enumeration — see `medicalSpecialtiesFor`. Emitted as a bare string
+    // when there is one, since a single-element array reads as a list of one.
+    medicalSpecialty:
+      specialties.length === 1
+        ? specialties[0]
+        : specialties.length
+          ? specialties
+          : undefined,
+    availableService: clinic.services?.length
+      ? clinic.services.map((name) => ({ "@type": "MedicalTherapy", name }))
+      : undefined,
     // `knowsLanguage`, not `availableLanguage`: the latter is only defined on
     // `ContactPoint`/`ServiceChannel`/`LodgingBusiness`, so a validator reads it
     // on a `MedicalClinic` as an inapplicable property and rejects the node.
     // `knowsLanguage` is declared on `Organization`, which `MedicalClinic`
     // inherits from through `MedicalOrganization`.
     knowsLanguage: clinic.languages?.length ? clinic.languages : undefined,
+    // A year, not a full date — schema.org `Date` accepts ISO 8601 year form and
+    // inventing a month/day we do not have would be worse than the coarser value.
+    foundingDate: clinic.foundedYear ? String(clinic.foundedYear) : undefined,
+    currenciesAccepted: clinic.currency,
     priceRange: priceRange(clinic),
+    // Accreditations are the clinic's own E-E-A-T. `recognizedBy` names the
+    // issuing body, which is the part that carries the weight.
+    hasCredential: clinic.accreditationsHeld?.length
+      ? clinic.accreditationsHeld.map((a) =>
+          compact({
+            "@type": "EducationalOccupationalCredential",
+            name: a.name,
+            credentialCategory: "Accreditation",
+            recognizedBy: a.issuingBody
+              ? { "@type": "Organization", name: a.issuingBody }
+              : undefined,
+          }),
+        )
+      : undefined,
+    employee: clinic.staff?.length
+      ? clinic.staff.map((p) =>
+          compact({ "@type": "Person", name: p.name, jobTitle: p.role }),
+        )
+      : undefined,
     aggregateRating:
       clinic.reviewCount > 0 ? aggregateRatingJsonLd(clinic, false) : undefined,
   });
@@ -581,6 +892,18 @@ export interface BlogPostingSeoInput {
   reviewer?: ReviewerSeoInput | null;
   /** ISO date/Date the post was last medically reviewed → `lastReviewed`. */
   lastReviewed?: Date | string | null;
+  /**
+   * Path of the author's bio page → `author.url`. Google explicitly recommends
+   * linking an author to a profile page so the byline resolves to an entity
+   * instead of staying a bare string.
+   */
+  authorPath?: string;
+  /** Target terms → `keywords`. */
+  keywords?: string[];
+  /** Section/category the post sits in → `articleSection`. */
+  section?: string;
+  /** Body length in words → `wordCount`. */
+  wordCount?: number;
 }
 
 const toIso = (d?: Date | string | null): string | undefined => {
@@ -595,40 +918,64 @@ export function blogPostingJsonLd(post: BlogPostingSeoInput): JsonLd {
   return compact({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${url}#article`,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    isPartOf: ref(websiteId()),
     headline: post.title,
     description: post.excerpt,
     image: post.coverImageUrl ? absoluteUrl(post.coverImageUrl) : undefined,
     url,
+    inLanguage: CONTENT_LANGUAGE,
     datePublished: toIso(post.publishedAt),
     dateModified: toIso(post.updatedAt) ?? toIso(post.publishedAt),
+    articleSection: post.section,
+    keywords: post.keywords?.length ? post.keywords : undefined,
+    wordCount: post.wordCount,
     author: post.author
-      ? { "@type": "Person", name: post.author }
-      : { "@type": "Organization", name: SITE_NAME },
+      ? compact({
+          "@type": "Person",
+          name: post.author,
+          url: post.authorPath ? absoluteUrl(post.authorPath) : undefined,
+        })
+      : ref(orgId()),
     // Medical-review provenance for YMYL health content (omitted when unset).
     reviewedBy: reviewerNode(post.reviewer),
     lastReviewed: toIso(post.lastReviewed),
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    // Reference, not a second copy: `<BaseSchema>` already put the fully
+    // described `Organization` on this page.
+    publisher: ref(orgId()),
   });
 }
 
-/** `FAQPage` from a clinic's (or a static page's) FAQ list (PRD §6.3). */
+/**
+ * `FAQPage` from a clinic's (or a static page's) FAQ list (PRD §6.3).
+ *
+ * Worth being honest about what this now buys: Google retired the FAQ rich
+ * result on 2024-08 for most sites and dropped it entirely on 2026-05, so this
+ * node no longer produces stars-and-accordions in Google. It stays because it is
+ * free, valid, and still the cleanest machine-readable form of a Q&A block for
+ * the answer engines and LLM crawlers this site targets — but it should not be
+ * treated as a ranking lever, and no page should be restructured to earn one.
+ *
+ * `path` is optional purely for backward compatibility; pass it so the node gets
+ * an `@id` and joins the page's graph instead of floating free.
+ */
 export function faqPageJsonLd(
   faqs: Pick<IFaq, "question" | "answer">[],
+  path?: string,
 ): JsonLd {
-  return {
+  return compact({
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": path ? nodeId(path, "faq") : undefined,
+    inLanguage: CONTENT_LANGUAGE,
+    isPartOf: path ? ref(websiteId()) : undefined,
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
-  };
+  });
 }
 
 // ── Medical / topical pages (taxonomy + combination pages, AEO) ───────────────
@@ -640,15 +987,40 @@ export interface ReviewerSeoInput {
   credentials?: string;
   /** Authoritative profile URLs (registry, ORCID, LinkedIn). */
   sameAs?: string[];
+  /**
+   * The reviewer's bio slug. Every byline shape in this app already carries it
+   * (`ReviewerByline`), so accepting it here is what wires the whole site's
+   * `reviewedBy` to one `Person` entity without touching a single page.
+   */
+  slug?: string;
+  /** Explicit bio path, when it isn't `/reviewers/{slug}`. */
+  path?: string;
+  /** Role/title, e.g. "Regenerative Medicine Physician". */
+  title?: string;
+  /** Role/title (alias for {@link ReviewerSeoInput.title}). */
+  jobTitle?: string;
 }
 
-/** Build the `Person` node for a medical reviewer (or `undefined` if none). */
+/**
+ * Build the `Person` node for a medical reviewer (or `undefined` if none).
+ *
+ * When the reviewer has a bio page, this emits an `@id` pointing at that page's
+ * `Person` node. That is the difference between "some doctor called Jane Doe
+ * checked this page" repeated fifty times, and one reviewer entity that fifty
+ * pages demonstrably share — which is the whole point of reviewer attribution on
+ * YMYL content.
+ */
 function reviewerNode(reviewer?: ReviewerSeoInput | null): JsonLd | undefined {
   if (!reviewer?.name) return undefined;
+  const path =
+    reviewer.path ?? (reviewer.slug ? `/reviewers/${reviewer.slug}` : undefined);
   return compact({
     "@type": "Person",
+    "@id": path ? nodeId(path, "person") : undefined,
     name: reviewer.name,
     honorificSuffix: reviewer.credentials,
+    jobTitle: reviewer.jobTitle ?? reviewer.title,
+    url: path ? absoluteUrl(path) : undefined,
     sameAs: reviewer.sameAs?.length ? reviewer.sameAs : undefined,
   });
 }
@@ -665,8 +1037,18 @@ export interface MedicalWebPageSeoInput {
   reviewedBy?: ReviewerSeoInput | null;
   /** The primary entity the page is about (a MedicalCondition/Therapy node). */
   about?: JsonLd;
-  /** Schema.org `MedicalSpecialty` string, e.g. "Rheumatology". */
+  /**
+   * `MedicalSpecialty` enum member, e.g. `"Musculoskeletal"`. Normalized to the
+   * full `https://schema.org/…` URL, which is the form the enumeration takes —
+   * a bare human-readable string like "Rheumatology" is not a member and is
+   * silently ignored by anything that actually resolves the enum.
+   */
   specialty?: string;
+  /** Free-text terms to derive `specialty` from when none is set explicitly. */
+  specialtyHints?: (string | undefined)[];
+  /** Primary image of the page → `primaryImageOfPage`. */
+  image?: string;
+  datePublished?: Date | string | null;
 }
 
 /**
@@ -674,19 +1056,45 @@ export interface MedicalWebPageSeoInput {
  * (`lastReviewed` + `reviewedBy`) and an `about` link to the condition/therapy
  * entity. Emit alongside the more specific `MedicalCondition`/`MedicalTherapy`
  * node (pass that node as `about`).
+ *
+ * `medicalAudience` is the property that says who the page is written for.
+ * Without it a page describing a therapy is ambiguous between patient-facing
+ * guidance and clinician reference material; this directory is unambiguously the
+ * former, and saying so is the difference between a health page that resolves
+ * cleanly and one that does not.
  */
 export function medicalWebPageJsonLd(input: MedicalWebPageSeoInput): JsonLd {
+  const url = absoluteUrl(input.path);
+  const specialty =
+    (input.specialty
+      ? `https://schema.org/${input.specialty.replace(/^https?:\/\/schema\.org\//, "")}`
+      : undefined) ?? medicalSpecialtiesFor(input.specialtyHints ?? [], 1)[0];
+
   return compact({
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
+    "@id": `${url}#webpage`,
     name: input.name,
     description: input.description,
-    url: absoluteUrl(input.path),
+    url,
+    inLanguage: CONTENT_LANGUAGE,
+    isPartOf: ref(websiteId()),
+    primaryImageOfPage: input.image
+      ? { "@type": "ImageObject", url: absoluteUrl(input.image) }
+      : undefined,
+    datePublished: toIso(input.datePublished),
     lastReviewed: toIso(input.lastReviewed),
     dateModified: toIso(input.dateModified) ?? toIso(input.lastReviewed),
     reviewedBy: reviewerNode(input.reviewedBy),
+    // Patient-facing by definition — this is a consumer directory, not a
+    // clinician reference.
+    medicalAudience: {
+      "@type": "MedicalAudience",
+      audienceType: "Patient",
+    },
     about: input.about,
-    specialty: input.specialty,
+    specialty,
+    publisher: ref(orgId()),
   });
 }
 
@@ -767,23 +1175,68 @@ export interface PersonSeoInput {
   description?: string;
   image?: string;
   sameAs?: string[];
+  /** Subjects the person is qualified on → `knowsAbout` (entity resolution). */
+  knowsAbout?: string[];
+  /** Stable record id → `identifier` (recommended on a `ProfilePage`). */
+  identifier?: string;
+  /** Whether the person reviews for us → `worksFor` the publisher. */
+  affiliated?: boolean;
+  standalone?: boolean;
 }
 
 /**
  * `Person` node for a medical reviewer's bio page — the E-E-A-T author entity
  * that `MedicalWebPage.reviewedBy` references across the site.
+ *
+ * The `@id` is the load-bearing part: it is the same `…#person` id every
+ * `reviewedBy` on the site points at, so the reviewer is one entity with N
+ * signed pages rather than N unrelated name strings.
  */
 export function personJsonLd(input: PersonSeoInput): JsonLd {
+  const url = absoluteUrl(input.path);
   return compact({
-    "@context": "https://schema.org",
+    ...(input.standalone === false ? {} : { "@context": "https://schema.org" }),
     "@type": "Person",
+    "@id": `${url}#person`,
     name: input.name,
-    url: absoluteUrl(input.path),
+    url,
+    mainEntityOfPage: url,
     honorificSuffix: input.credentials,
     jobTitle: input.jobTitle,
     description: input.description,
     image: input.image ? absoluteUrl(input.image) : undefined,
+    identifier: input.identifier,
+    knowsAbout: input.knowsAbout?.length ? input.knowsAbout : undefined,
+    worksFor: input.affiliated === false ? undefined : ref(orgId()),
     sameAs: input.sameAs?.length ? input.sameAs : undefined,
+  });
+}
+
+/**
+ * `ProfilePage` wrapping a `Person` — the type Google documents for author and
+ * "about me" pages, and one of the few structured-data features it still
+ * actively supports.
+ *
+ * A bare `Person` says a person exists. `ProfilePage` says *this URL is that
+ * person's profile*, which is what lets the byline on every reviewed page
+ * resolve to a page Google can show. For a YMYL directory whose reviewer
+ * attribution is the E-E-A-T story, that is the correct wrapper.
+ */
+export function profilePageJsonLd(input: {
+  person: PersonSeoInput;
+  dateCreated?: Date | string | null;
+  dateModified?: Date | string | null;
+}): JsonLd {
+  return compact({
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": nodeId(input.person.path, "profilepage"),
+    url: absoluteUrl(input.person.path),
+    inLanguage: CONTENT_LANGUAGE,
+    isPartOf: ref(websiteId()),
+    dateCreated: toIso(input.dateCreated),
+    dateModified: toIso(input.dateModified) ?? toIso(input.dateCreated),
+    mainEntity: personJsonLd({ ...input.person, standalone: false }),
   });
 }
 
@@ -791,7 +1244,12 @@ export function personJsonLd(input: PersonSeoInput): JsonLd {
 
 /** The `WebPage` subtypes we emit. `CollectionPage` marks a directory/index. */
 export type WebPageType =
-  "WebPage" | "CollectionPage" | "AboutPage" | "ContactPage";
+  | "WebPage"
+  | "CollectionPage"
+  | "AboutPage"
+  | "ContactPage"
+  | "FAQPage"
+  | "ProfilePage";
 
 export interface WebPageSeoInput {
   name: string;
@@ -803,6 +1261,8 @@ export interface WebPageSeoInput {
   image?: string;
   datePublished?: Date | string | null;
   dateModified?: Date | string | null;
+  /** The primary thing the page is about, as a nested node or an `@id` ref. */
+  about?: JsonLd;
 }
 
 /**
@@ -810,22 +1270,31 @@ export interface WebPageSeoInput {
  * describe — editor-composed pages and directory/index pages. Medical topic
  * pages use {@link medicalWebPageJsonLd} instead, which additionally carries the
  * `reviewedBy`/`lastReviewed` YMYL provenance.
+ *
+ * `isPartOf` is an `@id` reference rather than an inline `WebSite`. It used to
+ * be a fresh anonymous copy on every page, which meant a crawler saw one
+ * unnamed website per URL instead of the single `WebSite` node `<BaseSchema>`
+ * already publishes.
  */
 export function webPageJsonLd(input: WebPageSeoInput): JsonLd {
+  const url = absoluteUrl(input.path);
   return compact({
     "@context": "https://schema.org",
     "@type": input.type ?? "WebPage",
+    "@id": `${url}#webpage`,
     name: input.name,
     description: input.description,
-    url: absoluteUrl(input.path),
+    url,
+    inLanguage: CONTENT_LANGUAGE,
     image: input.image ? absoluteUrl(input.image) : undefined,
+    primaryImageOfPage: input.image
+      ? { "@type": "ImageObject", url: absoluteUrl(input.image) }
+      : undefined,
     datePublished: toIso(input.datePublished),
     dateModified: toIso(input.dateModified) ?? toIso(input.datePublished),
-    isPartOf: {
-      "@type": "WebSite",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    about: input.about,
+    isPartOf: ref(websiteId()),
+    publisher: ref(orgId()),
   });
 }
 
@@ -833,23 +1302,71 @@ export interface ItemListEntry {
   /** Root-relative path or absolute URL of the listed item. */
   path: string;
   name?: string;
+  /** Thumbnail of the listed item. */
+  image?: string;
+}
+
+export interface ItemListOptions {
+  /** Human name of the list, e.g. "Top rated stem cell clinics". */
+  name?: string;
+  /** Root-relative path of the page the list is on → `@id`. */
+  path?: string;
+  /** `@type` of each listed thing, e.g. `MedicalClinic`. Omit for URL-only. */
+  itemType?: string;
+  /**
+   * `@id` fragment the listed item carries on its own page, e.g. `clinic` for
+   * the `…/clinic/acme#clinic` node. Set it and each entry points at the *same*
+   * node the target page publishes, instead of introducing a near-duplicate.
+   */
+  itemIdFragment?: string;
 }
 
 /**
- * `ItemList` of the clinics rendered on a directory/combination page — helps
- * search + answer engines read the result set as an ordered list. Only emit
- * when there is at least one item (never an empty list).
+ * `ItemList` of the clinics (or terms, or posts) rendered on a listing page —
+ * helps search and answer engines read the result set as one ordered set rather
+ * than a wall of links. Only emit when there is at least one item.
+ *
+ * Note on expectations: Google's carousel rich result covers only Recipe,
+ * Course, Restaurant and Movie, so an `ItemList` of clinics will not draw a
+ * carousel. It earns its place as entity/ordering data for AI answer surfaces,
+ * not as a SERP feature.
+ *
+ * When `itemType` is given each entry nests a typed `item` instead of a bare
+ * `url` — the richer form, and the one that lets a consumer know the list is of
+ * clinics without fetching every URL.
  */
-export function itemListJsonLd(items: ItemListEntry[]): JsonLd {
-  return {
+export function itemListJsonLd(
+  items: ItemListEntry[],
+  opts: ItemListOptions = {},
+): JsonLd {
+  return compact({
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "@id": opts.path ? nodeId(opts.path, "itemlist") : undefined,
+    name: opts.name,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
     numberOfItems: items.length,
-    itemListElement: items.map((item, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      url: absoluteUrl(item.path),
-      name: item.name,
-    })),
-  };
+    itemListElement: items.map((item, i) =>
+      compact({
+        "@type": "ListItem",
+        position: i + 1,
+        // A `ListItem` carries `url` *or* a nested `item`, not both — the two are
+        // the summary-page and all-in-one forms of the same statement, and
+        // emitting both just says it twice.
+        url: opts.itemType ? undefined : absoluteUrl(item.path),
+        name: opts.itemType ? undefined : item.name,
+        item: opts.itemType
+          ? compact({
+              "@type": opts.itemType,
+              "@id": opts.itemIdFragment
+                ? nodeId(item.path, opts.itemIdFragment)
+                : undefined,
+              name: item.name,
+              url: absoluteUrl(item.path),
+              image: item.image ? absoluteUrl(item.image) : undefined,
+            })
+          : undefined,
+      }),
+    ),
+  });
 }

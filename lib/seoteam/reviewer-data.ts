@@ -88,6 +88,8 @@ export async function getReviewerForEdit(
 }
 
 export interface ReviewerProfile {
+  /** Stable record id → `ProfilePage.mainEntity.identifier`. */
+  id: string;
   name: string;
   slug: string;
   credentials?: string;
@@ -95,6 +97,9 @@ export interface ReviewerProfile {
   bio?: string;
   photoUrl?: string;
   sameAs: string[];
+  /** Timestamps → `ProfilePage.dateCreated` / `dateModified` (both recommended). */
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 /** Public bio for `/reviewers/[slug]` (active reviewers only). */
@@ -108,6 +113,7 @@ export async function getReviewerBySlug(
   }).lean<IMedicalReviewer>();
   if (!d) return null;
   return {
+    id: id(d._id),
     name: d.name,
     slug: d.slug,
     credentials: d.credentials,
@@ -115,6 +121,8 @@ export async function getReviewerBySlug(
     bio: d.bio,
     photoUrl: d.photo?.url,
     sameAs: d.sameAs ?? [],
+    createdAt: iso(d.createdAt),
+    updatedAt: iso(d.updatedAt),
   };
 }
 

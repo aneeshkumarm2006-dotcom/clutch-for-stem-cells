@@ -7,9 +7,9 @@
  * shapes live in `lib/schema/adapters.ts`. Porting the engine to another
  * dashboard means rewriting those two files — never this one.
  */
-import type { JsonLd } from "@/lib/seo";
+import type { JsonLd, OrganizationPolicyPaths } from "@/lib/seo";
 
-export type { JsonLd };
+export type { JsonLd, OrganizationPolicyPaths };
 
 /**
  * A builder may return `null`/`undefined` for a node that doesn't apply to the
@@ -36,6 +36,22 @@ export interface SchemaContext {
   organizationType: string;
   /** Path the `WebSite` `SearchAction` deep-links into, e.g. `/search`. */
   searchPath?: string;
+  /** One-paragraph publisher description → `Organization.description`. */
+  description?: string;
+  /** Public contact details → `Organization.email`/`telephone`/`address`. */
+  email?: string;
+  telephone?: string;
+  address?: string;
+  /** Path of the contact page → `contactPoint.url`. */
+  contactPath?: string;
+  /** Subject-matter the publisher covers → `Organization.knowsAbout`. */
+  knowsAbout?: string[];
+  /**
+   * Paths to the publisher's public policy pages → `publishingPrinciples`,
+   * `correctionsPolicy`, `ethicsPolicy`, `actionableFeedbackPolicy`,
+   * `ownershipFundingInfo`. The machine-readable half of E-E-A-T.
+   */
+  policies?: OrganizationPolicyPaths;
 }
 
 /**

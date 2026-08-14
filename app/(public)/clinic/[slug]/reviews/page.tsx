@@ -37,6 +37,7 @@ import {
 
 import { JsonLd } from "@/components/seo/json-ld";
 import { buildJsonLd } from "@/lib/schema/engine";
+import { clinicNodeInput } from "@/lib/schema/adapters";
 import { getSchemaContext } from "@/lib/schema/context";
 import { redirectOrNotFound, resolveRedirect } from "@/lib/redirects";
 import { pageMetadata } from "@/lib/page-metadata";
@@ -188,7 +189,8 @@ export default async function ClinicReviewsPage({
   const jsonLd = buildJsonLd(
     "clinic",
     {
-      clinic: clinic.raw,
+      clinic: clinicNodeInput(clinic),
+      path: `/clinic/${clinic.slug}/reviews`,
       reviews: reviews.reviews.map(
         (r) =>
           ({

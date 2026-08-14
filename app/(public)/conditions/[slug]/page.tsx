@@ -84,13 +84,14 @@ export default async function ConditionDirectoryPage({
       lastReviewed: editorial?.lastReviewedAt,
       dateModified: editorial?.updatedAt,
       reviewedBy: editorial?.reviewer,
+      specialtyHints: [term.name, term.shortDescription],
       about: medicalConditionJsonLd({
         name: term.name,
         description: term.shortDescription ?? term.description,
         path,
       }),
     }),
-    ...editorialJsonLd(editorial),
+    ...editorialJsonLd(editorial, path),
     ...(data.cards.length
       ? [
           itemListJsonLd(
@@ -98,6 +99,12 @@ export default async function ConditionDirectoryPage({
               path: `/clinic/${c.slug}`,
               name: c.name,
             })),
+            {
+              name: `Clinics treating ${term.name}`,
+              path,
+              itemType: "MedicalClinic",
+              itemIdFragment: "clinic",
+            },
           ),
         ]
       : []),

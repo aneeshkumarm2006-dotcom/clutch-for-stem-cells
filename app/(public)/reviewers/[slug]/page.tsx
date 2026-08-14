@@ -5,7 +5,8 @@ import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
 
 import { pageMetadata } from "@/lib/page-metadata";
-import { personJsonLd } from "@/lib/seo";
+import { buildJsonLd } from "@/lib/schema/engine";
+import { getSchemaContext } from "@/lib/schema/context";
 import {
   getActiveReviewerSlugs,
   getReviewerBySlug,
@@ -52,15 +53,29 @@ export default async function ReviewerBioPage({
   if (!r) notFound();
 
   const path = `/reviewers/${r.slug}`;
-  const jsonLd = personJsonLd({
-    name: r.name,
-    path,
-    credentials: r.credentials,
-    jobTitle: r.title,
-    description: r.bio,
-    image: r.photoUrl,
-    sameAs: r.sameAs,
-  });
+  // `ProfilePage` wrapping the `Person`, via the schema engine — the type Google
+  // documents for author/reviewer bios and one of the few it still actively
+  // supports. The nested `Person` carries the `@id` that every `reviewedBy`
+  // across the site points at, so this page is where that entity is defined.
+  const ctx = await getSchemaContext();
+  const jsonLd = buildJsonLd(
+    "reviewer",
+    {
+      person: {
+        name: r.name,
+        path,
+        credentials: r.credentials,
+        jobTitle: r.title,
+        description: r.bio,
+        image: r.photoUrl,
+        sameAs: r.sameAs,
+        identifier: r.id,
+      },
+      dateCreated: r.createdAt,
+      dateModified: r.updatedAt,
+    },
+    ctx,
+  );
 
   return (
     <>

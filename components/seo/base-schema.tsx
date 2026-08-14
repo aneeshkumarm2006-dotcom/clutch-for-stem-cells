@@ -27,6 +27,13 @@ export async function BaseSchema() {
     sameAs: ctx.sameAs,
     type: ctx.organizationType,
     searchPath: ctx.searchPath,
+    description: ctx.description,
+    email: ctx.email,
+    telephone: ctx.telephone,
+    address: ctx.address,
+    contactPath: ctx.contactPath,
+    knowsAbout: ctx.knowsAbout,
+    policies: ctx.policies,
   };
 
   return (

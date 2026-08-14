@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/page-metadata";
 import { getTreatments, type TaxonomyTerm } from "@/lib/public-data";
 import { getPageContent } from "@/lib/page-content";
+import { buildJsonLd } from "@/lib/schema/engine";
+import { getSchemaContext } from "@/lib/schema/context";
+import { staticPageMeta } from "@/config/static-pages";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { TaxonomyCard } from "@/components/taxonomy/taxonomy-card";
 import { BlockRenderer } from "@/components/blocks/block-renderer";
@@ -39,8 +43,30 @@ export default async function TreatmentsIndexPage() {
   ]);
   const groups = groupByCategory(treatments);
 
+  // `CollectionPage` + `ItemList`. The entries are topic pages rather than
+  // entities, so they stay plain `ListItem`s: the therapy entity itself is
+  // described on its own page, and duplicating a half-built `MedicalTherapy`
+  // node here would compete with the full one.
+  const meta = staticPageMeta("/treatments");
+  const ctx = await getSchemaContext();
+  const jsonLd = buildJsonLd(
+    "directory",
+    {
+      name: meta?.title ?? content.title,
+      description: meta?.description,
+      path: "/treatments",
+      items: treatments.map((t) => ({
+        path: `/treatments/${t.slug}`,
+        name: t.name,
+      })),
+      itemsName: content.title,
+    },
+    ctx,
+  );
+
   return (
     <div className="container py-10 md:py-14">
+      <JsonLd data={jsonLd} />
       <Breadcrumbs
         className="mb-4"
         items={[

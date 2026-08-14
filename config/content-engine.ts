@@ -61,6 +61,38 @@ export const CONTENT_ENGINE = {
     sameAs: Object.values(SOCIAL_LINKS).filter(Boolean) as string[],
     /** The sitelinks search box deep-links here. */
     searchPath: "/search",
+    /** `contactPoint.url` on the `Organization` node. */
+    contactPath: "/contact",
+    /**
+     * Subject-matter the publisher covers → `Organization.knowsAbout`. These are
+     * topics, not keywords: the point is to let an engine resolve what this
+     * entity is authoritative *about*, which is why they read as the site's
+     * actual coverage rather than as a target-term list.
+     */
+    knowsAbout: [
+      "Stem cell therapy",
+      "Regenerative medicine",
+      "Mesenchymal stem cell therapy",
+      "Medical tourism",
+      "Clinic accreditation",
+    ] as string[],
+    /**
+     * The publisher-integrity pages, in machine-readable form.
+     *
+     * On a YMYL health directory this is the cheapest E-E-A-T available: the
+     * pages already exist and are already linked in the footer, and pointing the
+     * `Organization` node at them is what states — to a crawler rather than only
+     * to a reader — that the site has an editorial process, a corrections route,
+     * and disclosed ownership. Blank out any entry whose page a deployment does
+     * not have; an absent key simply drops from the node.
+     */
+    policies: {
+      publishingPrinciples: "/editorial-policy",
+      correctionsPolicy: "/editorial-policy",
+      ethicsPolicy: "/editorial-policy",
+      actionableFeedbackPolicy: "/contact",
+      ownershipFundingInfo: "/about",
+    },
   },
 
   /**
@@ -123,10 +155,14 @@ export const CONTENT_ENGINE = {
       build: buildPageNodes,
     }),
 
-    /** Medical-reviewer bio (the E-E-A-T author entity). */
+    /**
+     * Medical-reviewer bio (the E-E-A-T author entity). `ProfilePage` is the
+     * wrapper Google documents for author/"about me" pages and still actively
+     * supports; the `Person` is nested inside it as `mainEntity`.
+     */
     reviewer: defineContentType({
       label: "Reviewer bio",
-      nodes: ["Person"],
+      nodes: ["ProfilePage", "Person"],
       build: buildReviewerNodes,
     }),
 

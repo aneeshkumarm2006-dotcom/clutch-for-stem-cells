@@ -16,6 +16,16 @@ import { BlogArticle } from "@/components/blog/blog-article";
 
 export const revalidate = 60;
 
+/** Words in the rendered body → `BlogPosting.wordCount`. HTML tags don't count. */
+function wordCountOf(html: string): number | undefined {
+  const words = html
+    .replace(/<[^>]*>/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+  return words || undefined;
+}
+
 export async function generateStaticParams() {
   try {
     const slugs = await getPublishedBlogSlugs();
@@ -85,6 +95,11 @@ export default async function BlogPostPage({
         updatedAt: post.updatedAt,
         reviewer: post.reviewer,
         lastReviewed: post.lastReviewedAt,
+        // The post's own target terms, not a keyword-stuffed list: these are the
+        // phrases the editor already declared for internal linking, so they
+        // cannot describe the article as something it is not.
+        keywords: post.keywords.map((k) => k.keyword).filter(Boolean),
+        wordCount: wordCountOf(post.body),
       },
     },
     ctx,

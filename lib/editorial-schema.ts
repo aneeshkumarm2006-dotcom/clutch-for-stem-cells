@@ -49,11 +49,13 @@ export function editorialFaqs(
  */
 export function editorialJsonLd(
   editorial: EditorialSchemaInput | null | undefined,
+  /** Root-relative path of the page, so the `FAQPage` gets a scoped `@id`. */
+  path?: string,
 ): JsonLd[] {
   if (!editorial) return [];
   const faqs = editorialFaqs(editorial);
   return [
-    ...(faqs.length ? [faqPageJsonLd(faqs)] : []),
+    ...(faqs.length ? [faqPageJsonLd(faqs, path)] : []),
     ...blocksToSchemaOrg(editorial.blocks ?? [], { skip: ["faq"] }),
   ];
 }

@@ -85,7 +85,7 @@ export default async function CountryDirectoryPage({
       dateModified: editorial?.updatedAt,
       reviewedBy: editorial?.reviewer,
     }),
-    ...editorialJsonLd(editorial),
+    ...editorialJsonLd(editorial, path),
     ...(data.cards.length
       ? [
           itemListJsonLd(
@@ -93,6 +93,11 @@ export default async function CountryDirectoryPage({
               path: `/clinic/${c.slug}`,
               name: c.name,
             })),
+            {
+              path,
+              itemType: "MedicalClinic",
+              itemIdFragment: "clinic",
+            },
           ),
         ]
       : []),

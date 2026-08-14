@@ -50,6 +50,8 @@ export const getSchemaContext = cache(async (): Promise<SchemaContext> => {
   const structured = settings?.structuredData;
   const sameAs = sameAsFrom(settings);
 
+  const contact = settings?.contact;
+
   return {
     siteName: structured?.organizationName?.trim() || fallback.name,
     siteUrl: fallback.url,
@@ -60,5 +62,19 @@ export const getSchemaContext = cache(async (): Promise<SchemaContext> => {
     organizationType:
       structured?.organizationType?.trim() || fallback.organizationType,
     searchPath: fallback.searchPath,
+    // The publisher's own description falls back to the site description, so the
+    // `Organization` node is never left without one — Google lists `description`
+    // as recommended and it was the field the schema review flagged as missing.
+    description:
+      settings?.seoDefaults?.metaDescription?.trim() || fallback.description,
+    // Contact details are optional by design: a directory that has not published
+    // a phone number should not invent one, and each absent field simply drops
+    // out of the node.
+    email: contact?.email?.trim() || undefined,
+    telephone: contact?.phone?.trim() || undefined,
+    address: contact?.address?.trim() || undefined,
+    contactPath: fallback.contactPath,
+    knowsAbout: [...fallback.knowsAbout],
+    policies: { ...fallback.policies },
   };
 });

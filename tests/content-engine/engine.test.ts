@@ -18,7 +18,19 @@ import { buildJsonLd, previewJsonLd } from "@/lib/schema/engine";
 import { validateNode, dropInvalidNodes, parseCustomJsonLd } from "@/lib/schema/validate";
 import { blocksToSchemaOrg } from "@/lib/blocks/schema";
 import { blockSchema, blocksSchema } from "@/lib/validation/block";
-import { buildMetadata, absoluteUrl } from "@/lib/seo";
+import {
+  absoluteUrl,
+  blogPostingJsonLd,
+  buildMetadata,
+  itemListJsonLd,
+  medicalClinicJsonLd,
+  medicalSpecialtiesFor,
+  medicalWebPageJsonLd,
+  organizationJsonLd,
+  profilePageJsonLd,
+  webPageJsonLd,
+  websiteJsonLd,
+} from "@/lib/seo";
 import { SITE_URL } from "@/config/site";
 import type { SchemaContext, JsonLd } from "@/lib/schema/types";
 import type { BlockInput } from "@/lib/validation/block";
@@ -307,4 +319,128 @@ test("robots: granular index/follow resolve correctly", () => {
   // A thin/filtered route stays noindex, follow so equity still flows.
   const thin = buildMetadata({ title: "T", noindex: true });
   assert.deepEqual(thin.robots, { index: false, follow: true });
+});
+
+// ── The connected graph (@id wiring) ────────────────────────────────────────
+//
+// These are the tests that would have caught the original problem: every page
+// used to inline its own anonymous copy of the publisher and the website, so a
+// crawler saw N unrelated `Organization` nodes instead of one entity the whole
+// site hangs off.
+
+test("page nodes reference the site-wide Organization/WebSite by @id, never inline a copy", () => {
+  const page = webPageJsonLd({ name: "About", path: "/about", type: "AboutPage" });
+  const post = blogPostingJsonLd({ title: "T", slug: "t" });
+
+  // A reference is a bare {"@id": …} — no "@type", which is what makes it a
+  // pointer at the existing node rather than a second definition of it.
+  assert.deepEqual(page.isPartOf, { "@id": `${absoluteUrl("/")}#website` });
+  assert.deepEqual(page.publisher, { "@id": `${absoluteUrl("/")}#organization` });
+  assert.deepEqual(post.publisher, { "@id": `${absoluteUrl("/")}#organization` });
+
+  // …and the nodes that own those @ids actually declare them.
+  assert.equal(organizationJsonLd()["@id"], `${absoluteUrl("/")}#organization`);
+  assert.equal(websiteJsonLd()["@id"], `${absoluteUrl("/")}#website`);
+});
+
+test("a clinic's node @id is the one a listing's ItemList points at", () => {
+  const clinic = medicalClinicJsonLd({
+    name: "Acme",
+    slug: "acme",
+    ratingAvg: 0,
+    reviewCount: 0,
+    currency: "USD",
+    locations: [],
+    languages: [],
+  } as never);
+
+  const list = itemListJsonLd([{ path: "/clinic/acme", name: "Acme" }], {
+    itemType: "MedicalClinic",
+    itemIdFragment: "clinic",
+  });
+  const entry = (list.itemListElement as JsonLd[])[0];
+
+  assert.equal(clinic["@id"], `${absoluteUrl("/clinic/acme")}#clinic`);
+  assert.equal((entry.item as JsonLd)["@id"], clinic["@id"]);
+  // url *or* item, never both.
+  assert.equal(entry.url, undefined);
+});
+
+test("a reviewer's byline slug resolves to the Person @id their bio page defines", () => {
+  const bio = profilePageJsonLd({
+    person: { name: "Jane Doe", path: "/reviewers/jane-doe", credentials: "MD" },
+  });
+  const page = medicalWebPageJsonLd({
+    name: "Knee OA",
+    path: "/conditions/knee-osteoarthritis",
+    // The shape every byline in the app already has — no page has to be changed
+    // for the reviewer to become one shared entity.
+    reviewedBy: { name: "Jane Doe", credentials: "MD", slug: "jane-doe" },
+  });
+
+  const expected = `${absoluteUrl("/reviewers/jane-doe")}#person`;
+  assert.equal((bio.mainEntity as JsonLd)["@id"], expected);
+  assert.equal((page.reviewedBy as JsonLd)["@id"], expected);
+});
+
+// ── MedicalClinic: what the clinic does, not just where it is ───────────────
+
+test("a clinic's taxonomy becomes availableService + a valid MedicalSpecialty", () => {
+  const clinic = medicalClinicJsonLd({
+    name: "Acme",
+    slug: "acme",
+    ratingAvg: 0,
+    reviewCount: 0,
+    currency: "USD",
+    locations: [],
+    languages: [],
+    services: ["Bone-marrow-derived therapy"],
+    conditions: ["Knee osteoarthritis"],
+  } as never);
+
+  assert.deepEqual(clinic.availableService, [
+    { "@type": "MedicalTherapy", name: "Bone-marrow-derived therapy" },
+  ]);
+  // Orthopaedics is `Musculoskeletal`. `Orthopedic` is the plausible-looking
+  // value that does not exist in the enumeration.
+  assert.equal(clinic.medicalSpecialty, "https://schema.org/Musculoskeletal");
+});
+
+test("an unmappable term contributes no specialty rather than a guessed one", () => {
+  assert.deepEqual(medicalSpecialtiesFor(["Exosome therapy"]), []);
+  assert.deepEqual(medicalSpecialtiesFor([undefined, ""]), []);
+});
+
+test("medicalSpecialtiesFor dedupes, keeps order, and caps the list", () => {
+  const found = medicalSpecialtiesFor(
+    ["Knee osteoarthritis", "Rotator cuff tear", "Multiple sclerosis"],
+  );
+  assert.deepEqual(found, [
+    "https://schema.org/Musculoskeletal",
+    "https://schema.org/Neurologic",
+  ]);
+  assert.equal(medicalSpecialtiesFor(["Knee pain", "Stroke", "Lupus"], 2).length, 2);
+});
+
+// ── The reviewer bio page ──────────────────────────────────────────────────
+
+test("a reviewer bio emits one ProfilePage with the Person nested, not two nodes", () => {
+  const nodes = buildJsonLd(
+    "reviewer",
+    { person: { name: "Jane Doe", path: "/reviewers/jane-doe" } },
+    CTX,
+  );
+
+  assert.equal(nodes.length, 1);
+  assert.equal(nodes[0]["@type"], "ProfilePage");
+  assert.equal((nodes[0].mainEntity as JsonLd)["@type"], "Person");
+  // The nested Person must not re-declare @context — it is not a root node.
+  assert.equal((nodes[0].mainEntity as JsonLd)["@context"], undefined);
+});
+
+test("a ProfilePage without a mainEntity is invalid and never reaches the page", () => {
+  assert.equal(
+    dropInvalidNodes([{ "@type": "ProfilePage", url: absoluteUrl("/x") }]).length,
+    0,
+  );
 });

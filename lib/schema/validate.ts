@@ -20,12 +20,35 @@ const RULES: Record<
   string,
   { required?: string[]; recommended?: string[] }
 > = {
-  Organization: { required: ["name", "url"], recommended: ["logo"] },
+  Organization: {
+    required: ["name", "url"],
+    recommended: ["logo", "description", "sameAs"],
+  },
+  MedicalOrganization: {
+    required: ["name", "url"],
+    recommended: ["logo", "description"],
+  },
   WebSite: { required: ["name", "url"] },
   WebPage: { required: ["name", "url"] },
   CollectionPage: { required: ["name", "url"] },
+  AboutPage: { required: ["name", "url"] },
+  ContactPage: { required: ["name", "url"] },
+  // Google documents `mainEntity` as the one required property of a ProfilePage,
+  // and the entity itself needs a name to be worth anything.
+  ProfilePage: { required: ["mainEntity"], recommended: ["dateModified"] },
+  // No `reviewedBy`/`lastReviewed` recommendation: reviewer attribution is
+  // deliberately optional on this site (a page ships unreviewed rather than
+  // fabricating a reviewer), so warning on every unreviewed page would nag about
+  // a decision that was made on purpose.
   MedicalWebPage: { required: ["name", "url"] },
-  MedicalClinic: { required: ["name"], recommended: ["address", "image"] },
+  // Google requires `name` + `address` on a LocalBusiness. `address` stays a
+  // warning rather than an error on purpose: a clinic whose address we have not
+  // confirmed should still emit its name, url, rating and services, and dropping
+  // the whole node over one missing field would lose all of that.
+  MedicalClinic: {
+    required: ["name"],
+    recommended: ["address", "image", "url"],
+  },
   Product: { required: ["name"] },
   Service: { required: ["name"] },
   SoftwareApplication: { required: ["name"] },
@@ -40,6 +63,7 @@ const RULES: Record<
   Person: { required: ["name"] },
   MedicalCondition: { required: ["name"] },
   MedicalTherapy: { required: ["name"] },
+  OfferCatalog: { required: ["itemListElement"] },
 };
 
 /** `true` when a key is genuinely absent (null, "", [], {}). */

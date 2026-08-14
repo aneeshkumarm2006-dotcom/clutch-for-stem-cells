@@ -7,6 +7,7 @@ import { FindClinicWizard } from "@/components/find/find-clinic-wizard";
 import { BlockRenderer } from "@/components/blocks/block-renderer";
 import { PageLead } from "@/components/common/page-lead";
 import { getPageContent } from "@/lib/page-content";
+import { StaticPageSchema } from "@/components/seo/static-page-schema";
 
 export const revalidate = 3600;
 
@@ -28,6 +29,7 @@ export default async function FindAClinicPage() {
           "radial-gradient(120% 70% at 50% -10%, #E1F0FC, #F2F8FD 55%)",
       }}
     >
+      <StaticPageSchema path="/find-a-clinic" />
       <div className="container max-w-2xl py-10 md:py-14">
         <header className="mb-6 text-center">
           <span className="inline-flex items-center gap-1.5 rounded-sm bg-tint px-2.5 py-1 text-xs font-semibold text-azure-700">

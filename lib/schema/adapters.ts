@@ -21,11 +21,12 @@ import {
   medicalClinicJsonLd,
   medicalWebPageJsonLd,
   offerCatalogJsonLd,
-  personJsonLd,
+  profilePageJsonLd,
   reviewJsonLd,
   webPageJsonLd,
   type BlogPostingSeoInput,
   type ItemListEntry,
+  type ItemListOptions,
   type MedicalWebPageSeoInput,
   type OfferItemInput,
   type PersonSeoInput,
@@ -33,6 +34,7 @@ import {
 } from "@/lib/seo";
 import { blocksToSchemaOrg } from "@/lib/blocks/schema";
 import type { BlockInput } from "@/lib/validation/block";
+import type { ClinicProfile } from "@/lib/public-data";
 import type { NodeList } from "@/lib/schema/types";
 
 /**
@@ -59,6 +61,42 @@ export interface ClinicSchemaData {
   priceItems?: OfferItemInput[];
   /** Page-scoped Q&A → `FAQPage`. The cost page's cost questions. */
   faqs?: FaqEntry[];
+  /**
+   * Root-relative path of the URL being rendered. A clinic has three (`/clinic/x`,
+   * `/clinic/x/reviews`, `/clinic/x/cost`) and only the caller knows which one
+   * this is — it scopes the `FAQPage` `@id` to the URL that actually shows the
+   * questions.
+   */
+  path?: string;
+}
+
+/**
+ * Fold a clinic's *resolved* taxonomy back onto the raw document for the schema
+ * builders.
+ *
+ * `clinic.raw` alone describes where a clinic is; it cannot say what it treats,
+ * because its treatments, conditions and accreditations are ObjectIds until the
+ * read layer populates them. This is the one place that joins the two, so all
+ * three clinic URLs (profile, reviews, cost) emit the same `MedicalClinic` node
+ * instead of three subtly different ones.
+ */
+export function clinicNodeInput(clinic: ClinicProfile): ClinicNodeInput {
+  const staff = [clinic.medicalDirector, ...clinic.team]
+    .filter((p): p is NonNullable<typeof p> => Boolean(p?.name))
+    .map((p) => ({ name: p.name, role: p.title }));
+
+  return {
+    ...clinic.raw,
+    services: clinic.treatments.map((t) => t.name).filter(Boolean),
+    conditions: clinic.conditions.map((c) => c.name).filter(Boolean),
+    accreditationsHeld: clinic.accreditations.map((a) => ({
+      name: a.name,
+      issuingBody: a.issuingBody,
+    })),
+    // Named clinicians only. A head count would be a different claim, and
+    // `physiciansCount` is not the same thing as `numberOfEmployees`.
+    staff: staff.length ? staff : undefined,
+  };
 }
 
 /**
@@ -95,7 +133,7 @@ export function buildClinicNodes(data: ClinicSchemaData): NodeList {
       ...(catalog ? { hasOfferCatalog: catalog } : {}),
       ...(reviews.length ? { review: reviews } : {}),
     },
-    data.faqs?.length ? faqPageJsonLd(data.faqs) : null,
+    data.faqs?.length ? faqPageJsonLd(data.faqs, data.path) : null,
   ];
 }
 
@@ -118,18 +156,31 @@ export interface TopicalSchemaData {
   faqs?: FaqEntry[];
   /** Clinics listed on the page → `ItemList`. */
   items?: ItemListEntry[];
+  /** Name for that `ItemList`, e.g. "Stem cell clinics for knee osteoarthritis". */
+  itemsName?: string;
 }
 
 /**
  * Shared by taxonomy term pages and combination (matrix) pages — both are a
  * `MedicalWebPage` wrapping a condition/therapy entity, optionally with an FAQ
  * block and a list of matching clinics.
+ *
+ * The list is typed as `MedicalClinic` and each entry's `@id` points at the
+ * `…#clinic` node the clinic's own profile publishes, so "clinics for knee
+ * osteoarthritis" resolves to the same eleven entities the profile pages
+ * describe rather than to eleven anonymous list positions.
  */
 export function buildTopicalNodes(data: TopicalSchemaData): NodeList {
+  const listOpts: ItemListOptions = {
+    name: data.itemsName,
+    path: data.webPage.path,
+    itemType: "MedicalClinic",
+    itemIdFragment: "clinic",
+  };
   return [
     medicalWebPageJsonLd(data.webPage),
-    data.faqs?.length ? faqPageJsonLd(data.faqs) : null,
-    data.items?.length ? itemListJsonLd(data.items) : null,
+    data.faqs?.length ? faqPageJsonLd(data.faqs, data.webPage.path) : null,
+    data.items?.length ? itemListJsonLd(data.items, listOpts) : null,
   ];
 }
 
@@ -140,6 +191,15 @@ export interface DirectorySchemaData {
   description?: string;
   path: string;
   items?: ItemListEntry[];
+  /**
+   * `@type` of the listed things, e.g. `MedicalClinic` on `/clinics`. Omit for a
+   * list of pages (a treatment index lists topics, not entities), which falls
+   * back to plain `ListItem` + `url` entries.
+   */
+  itemType?: string;
+  /** `@id` fragment those items carry on their own page, e.g. `clinic`. */
+  itemIdFragment?: string;
+  itemsName?: string;
 }
 
 export function buildDirectoryNodes(data: DirectorySchemaData): NodeList {
@@ -150,7 +210,14 @@ export function buildDirectoryNodes(data: DirectorySchemaData): NodeList {
       path: data.path,
       type: "CollectionPage",
     }),
-    data.items?.length ? itemListJsonLd(data.items) : null,
+    data.items?.length
+      ? itemListJsonLd(data.items, {
+          name: data.itemsName,
+          path: data.path,
+          itemType: data.itemType,
+          itemIdFragment: data.itemIdFragment,
+        })
+      : null,
   ];
 }
 
@@ -171,14 +238,28 @@ export function buildPageNodes(data: PageSchemaData): NodeList {
   return [webPageJsonLd(data.page), ...blocksToSchemaOrg(data.blocks ?? [])];
 }
 
-// ── reviewer bio → Person (E-E-A-T author entity) ───────────────────────────
+// ── reviewer bio → ProfilePage wrapping a Person (E-E-A-T author entity) ────
 
 export interface ReviewerSchemaData {
   person: PersonSeoInput;
+  dateCreated?: Date | string | null;
+  dateModified?: Date | string | null;
 }
 
+/**
+ * One `ProfilePage`, not a `ProfilePage` **and** a top-level `Person`: the
+ * `Person` is the page's `mainEntity`, and emitting it twice would put two nodes
+ * with the same `@id` on one URL. Every `reviewedBy` elsewhere on the site
+ * points at that same `@id`, so the reviewer stays a single entity.
+ */
 export function buildReviewerNodes(data: ReviewerSchemaData): NodeList {
-  return [personJsonLd(data.person)];
+  return [
+    profilePageJsonLd({
+      person: data.person,
+      dateCreated: data.dateCreated,
+      dateModified: data.dateModified,
+    }),
+  ];
 }
 
 // ── standalone FAQ page → FAQPage ───────────────────────────────────────────
@@ -197,6 +278,6 @@ export function buildFaqPageNodes(data: FaqPageSchemaData): NodeList {
       description: data.description,
       path: data.path,
     }),
-    data.faqs.length ? faqPageJsonLd(data.faqs) : null,
+    data.faqs.length ? faqPageJsonLd(data.faqs, data.path) : null,
   ];
 }

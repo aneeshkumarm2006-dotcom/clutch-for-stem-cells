@@ -5,6 +5,7 @@ import { pageMetadata } from "@/lib/page-metadata";
 import { SiteSetting } from "@/models";
 import { dbConnect } from "@/lib/db";
 import { getPageContent } from "@/lib/page-content";
+import { StaticPageSchema } from "@/components/seo/static-page-schema";
 import { LeadForm } from "@/components/lead/lead-form";
 import { BlockRenderer } from "@/components/blocks/block-renderer";
 import { PageLead } from "@/components/common/page-lead";
@@ -51,6 +52,11 @@ export default async function ContactPage({
 
   return (
     <div className="container max-w-4xl py-10 md:py-14">
+      {/* `ContactPage`, not a plain `WebPage`: Google reads the two distinctly,
+          and the `Organization` node already points `actionableFeedbackPolicy`
+          here, so typing the page closes that loop. The listing variant renders
+          on this same URL, so the node describes `/contact` either way. */}
+      <StaticPageSchema path="/contact" type="ContactPage" />
       <header className="mb-8 max-w-2xl">
         <h1 className="font-display text-[30px] font-bold leading-tight tracking-[-0.02em] text-text-primary md:text-[34px]">
           {content.title}

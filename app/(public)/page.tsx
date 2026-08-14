@@ -18,7 +18,8 @@ import {
 } from "lucide-react";
 
 import { pageMetadata } from "@/lib/page-metadata";
-import { faqPageJsonLd, renderJsonLd } from "@/lib/seo";
+import { faqPageJsonLd, itemListJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import { getHomeData } from "@/lib/public-data";
 import { getHomepageContent } from "@/lib/homepage";
 import { getPublishedBlogPosts } from "@/lib/seoteam/blog-data";
@@ -96,19 +97,37 @@ export default async function HomePage() {
   const divider = (key: string) =>
     browse[0] === key ? undefined : "border-t border-border";
 
+  // The homepage graph. `Organization` + `WebSite` come from <BaseSchema> in the
+  // layout; what belongs *here* is what this page uniquely shows — the featured
+  // clinics as an `ItemList`, and the FAQ block if the editor left it on.
+  //
+  // On the `ItemList`: it will not draw a carousel, because Google's carousel
+  // rich result covers only Recipe/Course/Restaurant/Movie. It earns its place
+  // by naming the four entities the homepage promotes, each pointing at the
+  // `…#clinic` node its own profile publishes.
+  const homeJsonLd = [
+    c.featured.enabled && home.featuredClinics.length
+      ? itemListJsonLd(
+          home.featuredClinics.slice(0, c.featured.limit).map((clinic) => ({
+            path: `/clinic/${clinic.slug}`,
+            name: clinic.name,
+          })),
+          {
+            name: c.featured.title,
+            path: "/",
+            itemType: "MedicalClinic",
+            itemIdFragment: "clinic",
+          },
+        )
+      : null,
+    c.faq.emitJsonLd && faqItems.length ? faqPageJsonLd(faqItems, "/") : null,
+  ].filter((n): n is NonNullable<typeof n> => n != null);
+
   return (
     <>
       {/* Organization + WebSite JSON-LD now come from <BaseSchema> in the public
           layout, so every page carries them — not just the homepage. */}
-      {c.faq.emitJsonLd && faqItems.length ? (
-        <script
-          type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: renderJsonLd(faqPageJsonLd(faqItems)),
-          }}
-        />
-      ) : null}
+      {homeJsonLd.length ? <JsonLd data={homeJsonLd} /> : null}
 
       {/* Hero — Design §5.3 */}
       <section

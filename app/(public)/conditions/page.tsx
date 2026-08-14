@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/page-metadata";
 import { getConditions, type TaxonomyTerm } from "@/lib/public-data";
 import { getPageContent } from "@/lib/page-content";
+import { buildJsonLd } from "@/lib/schema/engine";
+import { getSchemaContext } from "@/lib/schema/context";
+import { staticPageMeta } from "@/config/static-pages";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { BlockRenderer } from "@/components/blocks/block-renderer";
 import { PageLead } from "@/components/common/page-lead";
@@ -30,8 +34,26 @@ export default async function ConditionsIndexPage() {
   ]);
   const groups = groupByCategory(conditions);
 
+  const meta = staticPageMeta("/conditions");
+  const ctx = await getSchemaContext();
+  const jsonLd = buildJsonLd(
+    "directory",
+    {
+      name: meta?.title ?? content.title,
+      description: meta?.description,
+      path: "/conditions",
+      items: conditions.map((c) => ({
+        path: `/conditions/${c.slug}`,
+        name: c.name,
+      })),
+      itemsName: content.title,
+    },
+    ctx,
+  );
+
   return (
     <div className="container py-10 md:py-14">
+      <JsonLd data={jsonLd} />
       <Breadcrumbs
         className="mb-4"
         items={[

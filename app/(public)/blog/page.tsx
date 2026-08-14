@@ -3,6 +3,10 @@ import { BookOpen } from "lucide-react";
 
 import { pageMetadata } from "@/lib/page-metadata";
 import { getPublishedBlogPosts } from "@/lib/seoteam/blog-data";
+import { buildJsonLd } from "@/lib/schema/engine";
+import { getSchemaContext } from "@/lib/schema/context";
+import { staticPageMeta } from "@/config/static-pages";
+import { JsonLd } from "@/components/seo/json-ld";
 import { BlogCard } from "@/components/blog/blog-card";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { Pagination } from "@/components/ui/pagination";
@@ -49,8 +53,31 @@ export default async function BlogIndexPage({
     getPageContent("/blog"),
   ]);
 
+  // Each paginated index self-canonicalizes, so the graph is scoped to the URL
+  // being rendered rather than always claiming to be page 1's list.
+  const path = page > 1 ? `/blog?page=${page}` : "/blog";
+  const meta = staticPageMeta("/blog");
+  const ctx = await getSchemaContext();
+  const jsonLd = buildJsonLd(
+    "directory",
+    {
+      name: meta?.title ?? content.title,
+      description: meta?.description,
+      path,
+      items: data.posts.map((p) => ({
+        path: `/blog/${p.slug}`,
+        name: p.title,
+      })),
+      itemType: "BlogPosting",
+      itemIdFragment: "article",
+      itemsName: content.title,
+    },
+    ctx,
+  );
+
   return (
     <div className="container py-10 md:py-14">
+      <JsonLd data={jsonLd} />
       {/* Matches the other index pages (and the trail /blog/[slug] links back
           through), and emits the BreadcrumbList JSON-LD with it. */}
       <Breadcrumbs
