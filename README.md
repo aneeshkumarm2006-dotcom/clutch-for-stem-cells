@@ -40,7 +40,7 @@ components/
 config/site.ts     SITE_NAME, currency, feature flags — PRD §12
 lib/
   auth/            authOptions + RBAC helpers + password/token utils (Stage 2)
-  email.ts         Resend transactional email (Stage 2; extended in 3.5)
+  email.ts         SMTP email via nodemailer (auth + owner lead notifications)
   db.ts            Cached Mongoose connection (serverless-safe)
   utils.ts         cn() class merge helper
   validation/      Shared Zod schemas (Stage 1.10)
@@ -56,9 +56,12 @@ types/             Module augmentation (next-auth session/JWT claims)
 Auth.js (NextAuth v4) with **credentials + Google**, JWT sessions carrying
 `role` + `status`. Server code authorizes via `lib/auth` (`getCurrentUser`,
 `requireRole`, `requireApiRole`); `middleware.ts` gates `/admin`
-(Editor/Admin/SuperAdmin) and `/account` (authenticated). Email verification and
-password reset go through Resend — with `RESEND_API_KEY` unset, links are logged
-to the server console so the flows are testable locally.
+(Editor/Admin/SuperAdmin) and `/account` (authenticated). Email verification,
+password reset, and owner lead notifications go out over SMTP from our own
+mailbox (nodemailer + Gmail app password) — with `SMTP_USER`/`SMTP_PASS` unset,
+emails are logged to the server console so the flows are testable locally.
+`/api/admin/email-test` (Admin+) reports the live SMTP config and can send a
+test message; `npx tsx scripts/verify-smtp.ts` checks auth without sending.
 
 The seeded SuperAdmin (`admin@mystemcellguide.com`) ships without a password —
 use **Reset your password** (`/auth/reset`) to set one, then sign in.

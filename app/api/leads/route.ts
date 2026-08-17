@@ -4,8 +4,9 @@
  * Public, unauthenticated. Handles consultation/quote/message/match leads from
  * the clinic profile dialog, the find-a-clinic wizard, and the contact form.
  * Rate-limited + captcha-guarded (captcha is bypassed in dev — see lib/captcha),
- * validated with `leadCreateSchema`, then a notification email is sent to the
- * clinic and/or admin. Reviewer/contact PII lives only in the lead + that email.
+ * validated with `leadCreateSchema`. The lead is persisted first, then the site
+ * owners are notified by email (`LEADS_NOTIFY_EMAIL` — never the clinic, never
+ * the submitter). Contact PII lives only in the lead + that internal email.
  */
 import { NextResponse } from "next/server";
 
@@ -15,15 +16,20 @@ import { trackEvent } from "@/lib/analytics";
 import { sendLeadNotificationEmail } from "@/lib/email";
 import { absoluteUrl } from "@/lib/seo";
 import { leadCreateSchema } from "@/lib/validation/lead";
-import { Clinic, Condition, Lead, SiteSetting, Treatment } from "@/models";
+import { Clinic, Condition, Lead, Treatment } from "@/models";
 
 export const dynamic = "force-dynamic";
+// The owner notification does live SMTP work after the lead is saved — Node
+// runtime (Edge has no TCP sockets) with headroom over Vercel's default
+// function timeout so a slow SMTP handshake can't cut the request short.
+export const runtime = "nodejs";
+export const maxDuration = 30;
 
 const TYPE_LABELS: Record<string, string> = {
   consultation: "Consultation request",
   quote: "Quote request",
-  message: "Message",
-  match: "Clinic match",
+  message: "Contact enquiry",
+  match: "Clinic match request",
 };
 
 export async function POST(req: Request): Promise<Response> {
@@ -85,15 +91,19 @@ export async function POST(req: Request): Promise<Response> {
     source: data.source,
   });
 
-  // Best-effort notification — never block the response on email.
+  // Owner notification — persisted above, notified second, and *awaited*: on a
+  // serverless host the instance freezes once the response returns, which would
+  // kill a fire-and-forget SMTP handshake mid-flight. The send itself never
+  // throws; this try/catch covers the label lookups, so a mail or lookup
+  // failure can never cost the saved lead.
   try {
-    const settings = await SiteSetting.getGlobal();
-    const adminEmail = settings.contact?.email || process.env.EMAIL_FROM;
-
-    const [clinic, condition, treatments] = await Promise.all([
-      data.clinicId
-        ? Clinic.findById(data.clinicId).select("name contactEmail").lean()
-        : null,
+    const [clinic, matchedClinics, condition, treatments] = await Promise.all([
+      data.clinicId ? Clinic.findById(data.clinicId).select("name").lean() : null,
+      data.matchedClinicIds.length
+        ? Clinic.find({ _id: { $in: data.matchedClinicIds } })
+            .select("name")
+            .lean()
+        : [],
       data.conditionId
         ? Condition.findById(data.conditionId).select("name").lean()
         : null,
@@ -104,32 +114,26 @@ export async function POST(req: Request): Promise<Response> {
         : [],
     ]);
 
-    const recipients = new Set<string>();
-    if (clinic?.contactEmail) recipients.add(clinic.contactEmail);
-    if (adminEmail) recipients.add(adminEmail);
-
-    const manageUrl = absoluteUrl(`/admin/leads/${lead._id}`);
-    await Promise.all(
-      [...recipients].map((to) =>
-        sendLeadNotificationEmail({
-          to,
-          manageUrl,
-          lead: {
-            typeLabel: TYPE_LABELS[data.type] ?? "Inquiry",
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            country: data.country,
-            conditionLabel: condition?.name,
-            treatmentLabels: treatments.map((t) => t.name),
-            budgetRange: data.budgetRange,
-            timeframe: data.timeframe,
-            message: data.message,
-            clinicName: clinic?.name,
-          },
-        }),
-      ),
-    );
+    await sendLeadNotificationEmail({
+      manageUrl: absoluteUrl("/admin/leads"),
+      lead: {
+        typeLabel: TYPE_LABELS[data.type] ?? "Inquiry",
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        country: data.country,
+        conditionLabel: condition?.name,
+        treatmentLabels: treatments.map((t) => t.name),
+        budgetRange: data.budgetRange,
+        timeframe: data.timeframe,
+        message: data.message,
+        clinicName: clinic?.name,
+        matchedClinicNames: matchedClinics.map((c) => c.name),
+        consentGiven: data.consentGiven,
+        ageConfirmed: data.ageConfirmed,
+        source: data.source,
+      },
+    });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error("Lead notification failed:", err);
