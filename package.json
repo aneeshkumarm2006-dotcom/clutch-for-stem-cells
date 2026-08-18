@@ -21,7 +21,8 @@
     "test": "npm run test:analyticshub && npm run test:engine",
     "test:analyticshub": "tsx --test tests/analyticshub/crypto.test.ts tests/analyticshub/password.test.ts tests/analyticshub/session.test.ts tests/analyticshub/handler.test.ts tests/analyticshub/palette.test.ts",
     "test:engine": "tsx --tsconfig tsconfig.test.json --test tests/content-engine/engine.test.ts tests/content-engine/db.test.ts tests/content-engine/meta-text.test.ts tests/content-engine/indexation.test.ts",
-    "fetch-google-reviews": "tsx scripts/fetch-google-reviews.ts"
+    "fetch-google-reviews": "tsx scripts/fetch-google-reviews.ts",
+    "import-pages": "tsx --conditions=react-server scripts/import-pages.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
