@@ -185,6 +185,7 @@ export async function getAdminClinicFormData(
     },
     tagline: c.tagline ?? "",
     description: c.description ?? "",
+    bodyMarkdown: c.bodyMarkdown ?? "",
     logo: serializeImage(c.logo),
     coverImage: serializeImage(c.coverImage),
     gallery: (c.gallery ?? []).map((g) => serializeImage(g)).filter(Boolean),

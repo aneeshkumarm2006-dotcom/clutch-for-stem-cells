@@ -100,6 +100,7 @@ export interface ClinicFormValues {
   tier: string;
   tagline?: string;
   description?: string;
+  bodyMarkdown?: string;
   verification: {
     isVerified: boolean;
     verifiedAt?: string;
@@ -243,7 +244,10 @@ const SECTIONS = [
 ] as const;
 
 const opt = (vals: readonly string[]) =>
-  vals.map((v) => ({ value: v, label: v.charAt(0).toUpperCase() + v.slice(1) }));
+  vals.map((v) => ({
+    value: v,
+    label: v.charAt(0).toUpperCase() + v.slice(1),
+  }));
 
 // `emptyClinic()` lives in `./clinic-form-defaults` (a non-client module) so the
 // New-clinic Server Component can call it without hitting the client-reference
@@ -800,7 +804,16 @@ export function ClinicForm({
               rows={6}
               {...register("description")}
             />
-            <ContentFlagWarning texts={[watch("description"), watch("tagline")]} />
+            <ContentFlagWarning
+              texts={[watch("description"), watch("tagline")]}
+            />
+            <TextareaField
+              label="Profile article (Markdown)"
+              hint="Optional long-form section rendered under Verification on /clinic/…, for the context the short description has nowhere to put. Headings, lists, bold and links only. Leave blank and nothing renders."
+              rows={10}
+              {...register("bodyMarkdown")}
+            />
+            <ContentFlagWarning texts={[watch("bodyMarkdown")]} />
             <div className="grid gap-4 sm:grid-cols-2">
               <Controller
                 control={control}
@@ -1094,7 +1107,10 @@ export function ClinicForm({
                     wrapperClassName="sm:col-span-2"
                     {...register(`locations.${i}.addressLine` as const)}
                   />
-                  <TextField label="City" {...register(`locations.${i}.city` as const)} />
+                  <TextField
+                    label="City"
+                    {...register(`locations.${i}.city` as const)}
+                  />
                   <TextField
                     label="Region / state"
                     {...register(`locations.${i}.region` as const)}
@@ -1491,7 +1507,9 @@ export function ClinicForm({
                 )}
               />
               <p className="text-[12.5px] text-text-muted">
-                Renders under the review list. Supports Markdown.
+                Renders under the review list, after the derived &ldquo;How to
+                read these reviews&rdquo; section rather than in place of it.
+                Supports Markdown.
               </p>
             </div>
 

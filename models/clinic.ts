@@ -331,6 +331,17 @@ export interface IClinic extends TimestampFields, SoftDeleteFields {
   verification: IVerification;
   tagline?: string;
   description?: string;
+  /**
+   * Long-form editorial copy for the profile itself, rendered as Markdown under
+   * the structured sections.
+   *
+   * `description` is the short "About" paragraph and stays plain text, so it has
+   * nowhere to put a headed, multi-section answer to "what should I know before
+   * choosing this clinic". This is that seam, and it is the profile's
+   * counterpart to `reviewsPage.bodyMarkdown` and `costPage.bodyMarkdown`:
+   * optional, additive, and rendered only when an editor has written something.
+   */
+  bodyMarkdown?: string;
   logo?: IImage;
   coverImage?: IImage;
   gallery: IImage[];
@@ -590,6 +601,7 @@ const ClinicSchema = new Schema<IClinic>(
     },
     tagline: { type: String, trim: true },
     description: { type: String },
+    bodyMarkdown: { type: String },
     logo: { type: imageSchema, default: undefined },
     coverImage: { type: imageSchema, default: undefined },
     gallery: { type: [imageSchema], default: [] },

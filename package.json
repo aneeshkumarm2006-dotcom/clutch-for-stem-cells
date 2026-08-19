@@ -12,6 +12,7 @@
     "seed": "tsx scripts/seed.ts",
     "import-clinics": "tsx scripts/import-clinics.ts",
     "import-clinic-costs": "tsx scripts/import-clinic-costs.ts",
+    "import-clinic-content": "tsx scripts/import-clinic-content.ts",
     "import-clinic-reputation": "tsx scripts/import-clinic-reputation.ts",
     "import-term-content": "tsx --conditions=react-server scripts/import-term-content.ts",
     "recompute-counts": "tsx scripts/recompute-clinic-counts.ts",

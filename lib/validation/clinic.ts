@@ -224,6 +224,12 @@ const clinicObjectSchema = z.object({
   verification: verificationSchema.default({ isVerified: false }),
   tagline: z.string().max(200).optional(),
   description: z.string().optional(),
+  // Blank means "no editorial section", same contract as the child pages'
+  // `bodyMarkdown`, so the admin form can submit an empty string freely.
+  bodyMarkdown: z.preprocess(
+    blankToUndefined,
+    z.string().max(20_000).optional(),
+  ),
   logo: imageSchema.optional(),
   coverImage: imageSchema.optional(),
   gallery: z.array(imageSchema).default([]),

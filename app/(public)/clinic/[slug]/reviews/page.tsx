@@ -22,7 +22,9 @@
  * (admin → clinic → "Reviews page"): heading, both intro variants, a Markdown
  * body under the list, the sidebar card, and a `seo` block scoped to this URL.
  * Each one is a fallback, not a replacement — an unset field keeps the derived
- * copy below, which is what every clinic without a `reviewsPage` renders.
+ * copy below, which is what every clinic without a `reviewsPage` renders. The
+ * Markdown body is the one that is additive rather than a fallback: it renders
+ * *after* the derived `<ReviewsContext>` block, not instead of it.
  */
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -490,20 +492,24 @@ export default async function ClinicReviewsPage({
             ) : null}
           </section>
 
-          {/* Editorial context under the list. An editor's own copy wins;
-              otherwise `<ReviewsContext>` derives the same job from the clinic
-              record, so the page is never just a widget and a list.
-              `renderMarkdown` escapes HTML before rendering its subset, so the
-              stored string can't smuggle markup into the page (PRD §13). */}
+          {/* Editorial context under the list. `<ReviewsContext>` derives the
+              baseline from the clinic record so the page is never just a widget
+              and a list, and an editor's `bodyMarkdown` is *appended* to it
+              rather than swapped in: the derived copy stays live against the
+              clinic's own counts and category scores, which hand-written prose
+              cannot, so replacing it would trade an always-current section for
+              one that goes stale the next time a review lands. Editors who want
+              the derived block gone can still empty it out via the intro/heading
+              overrides above. `renderMarkdown` escapes HTML before rendering its
+              subset, so the stored string can't smuggle markup in (PRD §13). */}
+          <ReviewsContext clinic={clinic} stats={stats} />
           {bodyMarkdown ? (
             <section
               className="prose-article mt-10"
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: renderMarkdown(bodyMarkdown) }}
             />
-          ) : (
-            <ReviewsContext clinic={clinic} stats={stats} />
-          )}
+          ) : null}
         </div>
 
         {/* Rail */}

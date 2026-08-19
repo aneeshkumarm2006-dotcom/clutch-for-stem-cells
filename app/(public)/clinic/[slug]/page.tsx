@@ -21,6 +21,7 @@ import { buildJsonLd } from "@/lib/schema/engine";
 import { clinicNodeInput } from "@/lib/schema/adapters";
 import { getSchemaContext } from "@/lib/schema/context";
 import { redirectOrNotFound } from "@/lib/redirects";
+import { renderMarkdown } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/page-metadata";
 import {
   clinicKeywords,
@@ -134,6 +135,14 @@ export default async function ClinicProfilePage({
     name: c.name,
   }));
 
+  /**
+   * Optional editorial article for this profile. Blank/whitespace-only means
+   * "not set" — the same convention the child pages use for their own
+   * `bodyMarkdown`, so an empty admin textarea renders nothing rather than an
+   * empty headed section.
+   */
+  const bodyMarkdown = clinic.raw.bodyMarkdown?.trim() || null;
+
   // Build the sticky subnav from sections actually present.
   const subnavItems: SubnavItem[] = [
     { id: "overview", label: "Overview" },
@@ -150,6 +159,7 @@ export default async function ClinicProfilePage({
       ? { id: "team", label: "Team" }
       : null,
     { id: "verification", label: "Verification" },
+    bodyMarkdown ? { id: "about-details", label: "Good to know" } : null,
     clinic.locations.length ? { id: "location", label: "Location" } : null,
     { id: "contact", label: "Contact" },
   ].filter((x): x is SubnavItem => x != null);
@@ -808,6 +818,20 @@ export default async function ClinicProfilePage({
               </div>
             </div>
           </section>
+
+          {/* Editorial article. Sits after the structured sections because it is
+              the part a reader turns to once they have seen the facts above:
+              what the treatment model actually is, what to ask, and what this
+              provider is not. `renderMarkdown` escapes HTML before rendering its
+              subset, so the stored string can't smuggle markup in (PRD §13). */}
+          {bodyMarkdown ? (
+            <section
+              id="about-details"
+              className="prose-article scroll-mt-32"
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: renderMarkdown(bodyMarkdown) }}
+            />
+          ) : null}
 
           {/* Location */}
           {clinic.locations.length ? (
