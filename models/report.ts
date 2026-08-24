@@ -14,7 +14,12 @@ import {
   REPORT_STATUSES,
 } from "@/lib/enums";
 import type { ReportEntityType, ReportReason, ReportStatus } from "@/lib/enums";
-import { registerModel, type TimestampFields } from "@/models/_shared";
+import {
+  registerModel,
+  spamMetaSchema,
+  type ISpamMeta,
+  type TimestampFields,
+} from "@/models/_shared";
 
 export interface IReport extends TimestampFields {
   _id: Types.ObjectId;
@@ -27,6 +32,11 @@ export interface IReport extends TimestampFields {
   details?: string;
   /** Optional reporter contact — private, never rendered publicly. */
   reporterEmail?: string;
+  /**
+   * Classifier verdict + reasoning (public-form guard). Absent on records
+   * created before the guard shipped, and on anything an admin entered by hand.
+   */
+  spam?: ISpamMeta;
   status: ReportStatus;
   resolvedBy?: Types.ObjectId | null;
   resolvedAt?: Date | null;
@@ -53,6 +63,7 @@ const ReportSchema = new Schema<IReport>(
     details: { type: String, trim: true, maxlength: 2000 },
     // Private contact — excluded from query results by default.
     reporterEmail: { type: String, trim: true, lowercase: true, select: false },
+    spam: { type: spamMetaSchema, default: undefined },
     status: {
       type: String,
       enum: REPORT_STATUSES,

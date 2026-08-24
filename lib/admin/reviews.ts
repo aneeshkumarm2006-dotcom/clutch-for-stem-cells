@@ -54,6 +54,15 @@ export interface AdminReviewRow {
   submittedAt?: string;
   /** Unsupported "cure/guaranteed" language flagged for staff review (§8.8). */
   contentFlags: ContentFlag[];
+  /**
+   * Why the spam classifier held this review. Shown on the row in the Spam
+   * tab — an operator who can't see the reasoning can't correct it.
+   */
+  spam?: {
+    score: number;
+    category: string | null;
+    reasons: { code: string; detail: string; weight: number }[];
+  };
 }
 
 export interface ReviewsQuery {
@@ -195,6 +204,18 @@ export async function getAdminReviews(
         r.body?.experience,
         r.body?.improvement,
       ]),
+      spam:
+        r.spam && r.spam.reasons?.length
+          ? {
+              score: r.spam.score,
+              category: r.spam.category ?? null,
+              reasons: r.spam.reasons.map((x) => ({
+                code: x.code,
+                detail: x.detail,
+                weight: x.weight,
+              })),
+            }
+          : undefined,
     };
   });
 

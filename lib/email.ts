@@ -232,30 +232,8 @@ function detailRows(rows: [string, string | undefined | null][]): string {
 
 // ── Auth templates ───────────────────────────────────────────────────────────
 
-export function verifyEmailUrl(token: string): string {
-  return `${SITE_URL}/api/auth/verify-email?token=${encodeURIComponent(token)}`;
-}
-
 export function resetPasswordUrl(token: string): string {
   return `${SITE_URL}/auth/reset?token=${encodeURIComponent(token)}`;
-}
-
-export async function sendVerificationEmail(
-  to: string,
-  token: string,
-): Promise<SendResult> {
-  const url = verifyEmailUrl(token);
-  return sendEmail({
-    to,
-    subject: `Verify your ${SITE_NAME} email`,
-    html: layout(
-      "Verify your email",
-      `<p style="margin:0 0 20px;color:#5C7388;">Confirm this address to finish setting up your account.</p>
-       ${button(url, "Verify email")}
-       <p style="margin:20px 0 0;color:#90AAC0;font-size:13px;">This link expires in 24 hours. If you didn't create an account, you can ignore this email.</p>`,
-    ),
-    text: `Verify your ${SITE_NAME} email by opening this link (expires in 24 hours):\n${url}\n\nIf you didn't create an account, you can ignore this email.`,
-  });
 }
 
 export async function sendPasswordResetEmail(

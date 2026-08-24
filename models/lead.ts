@@ -9,7 +9,12 @@
 import { Schema, type Types } from "mongoose";
 import { LEAD_STATUSES, LEAD_TIMEFRAMES, LEAD_TYPES } from "@/lib/enums";
 import type { LeadStatus, LeadTimeframe, LeadType } from "@/lib/enums";
-import { registerModel, type TimestampFields } from "@/models/_shared";
+import {
+  registerModel,
+  spamMetaSchema,
+  type ISpamMeta,
+  type TimestampFields,
+} from "@/models/_shared";
 
 export interface ILeadNote {
   _id?: Types.ObjectId;
@@ -36,6 +41,11 @@ export interface ILead extends TimestampFields {
   consentGiven: boolean;
   /** §8.6: submitter confirmed 18+ (or guardian). */
   ageConfirmed: boolean;
+  /**
+   * Classifier verdict + reasoning (public-form guard). Absent on records
+   * created before the guard shipped, and on anything an admin entered by hand.
+   */
+  spam?: ISpamMeta;
   status: LeadStatus;
   source?: string;
   assignedTo?: Types.ObjectId | null;
@@ -75,6 +85,7 @@ const LeadSchema = new Schema<ILead>(
     message: { type: String, trim: true },
     consentGiven: { type: Boolean, default: false },
     ageConfirmed: { type: Boolean, default: false },
+    spam: { type: spamMetaSchema, default: undefined },
     status: { type: String, enum: LEAD_STATUSES, default: "new", index: true },
     source: { type: String, trim: true },
     assignedTo: { type: Schema.Types.ObjectId, ref: "User", default: null },

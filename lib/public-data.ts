@@ -33,7 +33,6 @@ import {
   CellSource,
   Clinic,
   Condition,
-  Lead,
   Location,
   MedicalReviewer,
   Plan,
@@ -1573,66 +1572,6 @@ export async function getActivePlans(): Promise<PlanView[]> {
     highlighted: Boolean(p.highlighted),
     ctaLabel: p.ctaLabel,
   }));
-}
-
-// ── Member account (PRD §6.10) ───────────────────────────────────────────────
-
-export interface MemberReview {
-  id: string;
-  clinicName: string;
-  clinicSlug: string;
-  status: string;
-  ratingOverall: number;
-  headline?: string;
-  createdAt: string;
-}
-
-export interface MemberLead {
-  id: string;
-  type: string;
-  clinicName?: string;
-  status: string;
-  createdAt: string;
-}
-
-/** The member's submitted reviews (matched by their private email). */
-export async function getMemberReviews(email: string): Promise<MemberReview[]> {
-  await dbConnect();
-  const docs = await Review.find({ "reviewer.email": email.toLowerCase() })
-    .sort({ createdAt: -1 })
-    .populate("clinicId", "name slug")
-    .lean<IReview[]>();
-  return docs.map((r) => {
-    const clinic = r.clinicId as unknown as PopulatedRef | null;
-    return {
-      id: id(r._id),
-      clinicName: clinic?.name ?? "Clinic",
-      clinicSlug: clinic?.slug ?? "",
-      status: r.status,
-      ratingOverall: r.ratingOverall,
-      headline: r.headline,
-      createdAt: new Date(r.createdAt).toISOString(),
-    };
-  });
-}
-
-/** The member's inquiries/consultation requests (matched by email). */
-export async function getMemberLeads(email: string): Promise<MemberLead[]> {
-  await dbConnect();
-  const docs = await Lead.find({ email: email.toLowerCase() })
-    .sort({ createdAt: -1 })
-    .populate("clinicId", "name")
-    .lean();
-  return docs.map((l) => {
-    const clinic = l.clinicId as unknown as PopulatedRef | null;
-    return {
-      id: id(l._id),
-      type: l.type,
-      clinicName: clinic?.name,
-      status: l.status,
-      createdAt: new Date(l.createdAt).toISOString(),
-    };
-  });
 }
 
 // ── Global search (clinics) ──────────────────────────────────────────────────

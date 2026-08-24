@@ -31,6 +31,16 @@ export interface AdminLeadRow {
   assignedToName?: string;
   internalNotes: { note: string; byName?: string; at?: string }[];
   createdAt?: string;
+  /**
+   * Why the classifier held this lead. Shown on the row in the Spam view — an
+   * operator who can't see the reasoning can't correct it, and correcting it is
+   * the only way the filter ever improves.
+   */
+  spam?: {
+    score: number;
+    category: string | null;
+    reasons: { code: string; detail: string; weight: number }[];
+  };
 }
 
 export interface LeadsQuery {
@@ -129,6 +139,18 @@ export async function getAdminLeads(
       at: iso(n.at),
     })),
     createdAt: iso(d.createdAt),
+    spam:
+      d.spam && d.spam.reasons?.length
+        ? {
+            score: d.spam.score,
+            category: d.spam.category ?? null,
+            reasons: d.spam.reasons.map((r) => ({
+              code: r.code,
+              detail: r.detail,
+              weight: r.weight,
+            })),
+          }
+        : undefined,
   }));
 
   const counts = {

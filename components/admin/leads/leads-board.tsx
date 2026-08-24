@@ -37,7 +37,7 @@ const TIMEFRAME: Record<string, string> = {
   researching: "Researching",
 };
 
-const WORKFLOW = ["new", "contacted", "qualified", "closed"] as const;
+const WORKFLOW = ["new", "contacted", "qualified", "closed", "spam"] as const;
 
 function relTime(iso?: string): string {
   if (!iso) return "–";
@@ -180,6 +180,34 @@ export function LeadsBoard({
           {selected.message ? (
             <div className="mb-4 rounded-lg bg-surface-alt px-3.5 py-3 text-[13px] leading-relaxed text-slate-700">
               “{selected.message}”
+            </div>
+          ) : null}
+
+          {/*
+            Why the filter held this. Shown in full, never summarised to a
+            score: an operator who can't see the reasoning can't judge whether
+            the machine was wrong, and judging that is the only way the rules
+            ever improve. Moving the lead to any other status clears it.
+          */}
+          {selected.spam?.reasons.length ? (
+            <div className="mb-4 rounded-lg border border-warning/30 bg-warning-bg/50 px-3.5 py-3">
+              <div className="mb-1.5 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wide text-warning-fg">
+                Flagged as {selected.spam.category ?? "spam"}
+                <span className="font-normal normal-case text-text-muted">
+                  score {selected.spam.score}
+                </span>
+              </div>
+              <ul className="space-y-1 text-[12.5px] leading-relaxed text-slate-700">
+                {selected.spam.reasons.map((r) => (
+                  <li key={r.code} className="flex gap-1.5">
+                    <span className="text-text-muted">+{r.weight}</span>
+                    <span>{r.detail}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-[12px] text-text-muted">
+                Set the status to New to clear this and treat it as a real lead.
+              </p>
             </div>
           ) : null}
 

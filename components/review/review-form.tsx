@@ -17,6 +17,7 @@ import { TextField, TextareaField, SelectField } from "@/components/ui/form-fiel
 import { StarRatingInput } from "@/components/ui/star-rating-input";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
 import { SUB_RATING_LABELS } from "@/components/ui/rating-stars";
+import { useSpamGuard } from "@/components/forms/spam-guard";
 import type { SubRatingKey } from "@/lib/enums";
 
 interface Option {
@@ -49,6 +50,7 @@ export function ReviewForm({
 }: ReviewFormProps) {
   const [step, setStep] = React.useState(0);
   const [submitting, setSubmitting] = React.useState(false);
+  const spam = useSpamGuard();
   const [submitted, setSubmitted] = React.useState(false);
 
   // Field state.
@@ -143,6 +145,7 @@ export function ReviewForm({
         },
         consentGiven: true,
         ageConfirmed: true,
+        ...spam.payload(),
       }),
     });
     setSubmitting(false);
@@ -151,6 +154,8 @@ export function ReviewForm({
       setSubmitted(true);
       return;
     }
+    // A captcha token is single-use — re-arm the widget before they retry.
+    spam.reset();
     const data = (await res.json().catch(() => null)) as { error?: string } | null;
     setError(data?.error ?? "Something went wrong. Please try again.");
     toast.error(data?.error ?? "Something went wrong. Please try again.");
@@ -400,6 +405,7 @@ export function ReviewForm({
             </span>
           </label>
           <DisclaimerNote variant="results" />
+          {spam.fields}
         </div>
       ) : null}
 

@@ -30,7 +30,6 @@
  */
 import Link from "next/link";
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import {
   ArrowLeft,
   BadgeCheck,
@@ -50,7 +49,11 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { buildJsonLd } from "@/lib/schema/engine";
 import { clinicNodeInput } from "@/lib/schema/adapters";
 import { getSchemaContext } from "@/lib/schema/context";
-import { redirectOrNotFound, resolveRedirect } from "@/lib/redirects";
+import {
+  applyRedirect,
+  redirectOrNotFound,
+  resolveRedirect,
+} from "@/lib/redirects";
 import { pageMetadata } from "@/lib/page-metadata";
 import {
   clinicCostKeywords,
@@ -130,7 +133,7 @@ export default async function ClinicCostPage({
     // child segment across: /clinic/old/cost → /clinic/new/cost.
     const hit = await resolveRedirect(`/clinic/${params.slug}`);
     if (hit?.to.startsWith("/")) {
-      redirect(`${hit.to.replace(/\/+$/, "")}/cost`);
+      applyRedirect(hit, `${hit.to.replace(/\/+$/, "")}/cost`);
     }
     return redirectOrNotFound(`/clinic/${params.slug}/cost`);
   }

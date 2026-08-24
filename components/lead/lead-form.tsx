@@ -18,6 +18,7 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { TextField, TextareaField, SelectField } from "@/components/ui/form-field";
+import { useSpamGuard } from "@/components/forms/spam-guard";
 import type { LeadType } from "@/lib/enums";
 
 const leadFormSchema = z.object({
@@ -58,6 +59,7 @@ export function LeadForm({
   onSuccess,
 }: LeadFormProps) {
   const [sent, setSent] = React.useState(false);
+  const spam = useSpamGuard();
   const {
     register,
     handleSubmit,
@@ -84,6 +86,7 @@ export function LeadForm({
         message: values.message || undefined,
         consentGiven: true,
         ageConfirmed: true,
+        ...spam.payload(),
       }),
     });
 
@@ -92,6 +95,8 @@ export function LeadForm({
       onSuccess?.();
       return;
     }
+    // A captcha token is single-use — re-arm the widget before they retry.
+    spam.reset();
     const data = (await res.json().catch(() => null)) as { error?: string } | null;
     toast.error(data?.error ?? "Something went wrong. Please try again.");
   }
@@ -189,6 +194,8 @@ export function LeadForm({
       {errors.agree ? (
         <p className="-mt-2 text-[12.5px] text-danger">{errors.agree.message}</p>
       ) : null}
+
+      {spam.fields}
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? "Sending…" : submitLabel}

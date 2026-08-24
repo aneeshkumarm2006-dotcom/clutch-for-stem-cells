@@ -10,14 +10,13 @@
  *   if (blocked) return blocked;
  */
 import { verifyCaptcha } from "@/lib/captcha";
-import { rateLimit, rateLimitHeaders } from "@/lib/rate-limit";
+import { getClientIp, subnetKey } from "@/lib/net";
+import { rateLimitAll, rateLimitHeaders } from "@/lib/rate-limit";
 
-/** Best-effort client IP from proxy headers (Vercel sets `x-forwarded-for`). */
-export function getClientIp(req: Request): string {
-  const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) return fwd.split(",")[0]!.trim();
-  return req.headers.get("x-real-ip")?.trim() || "unknown";
-}
+// Re-exported for the handlers that already import it from here. The single
+// implementation lives in `lib/net` so this guard and the spam guard can never
+// disagree about which header the client IP comes from.
+export { getClientIp };
 
 export interface GuardOptions {
   /** Namespace for the limiter key, e.g. "review" | "lead" | "contact". */
@@ -41,11 +40,24 @@ export async function guardPublicForm(
   opts: GuardOptions,
 ): Promise<Response | null> {
   const ip = getClientIp(req);
+  const subnet = subnetKey(ip);
+  const limit = opts.limit ?? 5;
+  const windowSeconds = opts.windowSeconds ?? 600;
 
-  const limitResult = await rateLimit(`ratelimit:${opts.action}:${ip}`, {
-    limit: opts.limit ?? 5,
-    windowSeconds: opts.windowSeconds ?? 600,
-  });
+  // Address AND network neighbourhood: a per-address cap is free to evade with
+  // a rented /24, so the subnet gets its own (looser) bucket over the same
+  // window. Both counters increment on every call — see `rateLimitAll`.
+  const limitResult = await rateLimitAll([
+    { key: `ratelimit:${opts.action}:${ip}`, opts: { limit, windowSeconds } },
+    ...(subnet
+      ? [
+          {
+            key: `ratelimit:${opts.action}:net:${subnet}`,
+            opts: { limit: limit * 6, windowSeconds },
+          },
+        ]
+      : []),
+  ]);
   if (!limitResult.success) {
     return Response.json(
       { error: "Too many requests. Please try again in a little while." },

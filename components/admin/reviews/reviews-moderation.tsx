@@ -188,6 +188,34 @@ export function ReviewsModeration({ rows }: { rows: AdminReviewRow[] }) {
               </div>
             ) : null}
 
+            {/*
+              Why the spam filter held this review. Rendered in full rather
+              than as a score: an operator who can't see the reasoning can't
+              judge whether the machine was wrong. Approving or restoring the
+              review clears it and records the override.
+            */}
+            {selected.spam?.reasons.length ? (
+              <div className="mb-4 rounded-lg border border-warning/30 bg-warning-bg/50 px-3.5 py-3">
+                <div className="mb-1.5 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wide text-warning-fg">
+                  Flagged as {selected.spam.category ?? "spam"}
+                  <span className="font-normal normal-case text-text-muted">
+                    score {selected.spam.score}
+                  </span>
+                </div>
+                <ul className="space-y-1 text-[12.5px] leading-relaxed text-slate-700">
+                  {selected.spam.reasons.map((r) => (
+                    <li key={r.code} className="flex gap-1.5">
+                      <span className="text-text-muted">+{r.weight}</span>
+                      <span>{r.detail}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-[12px] text-text-muted">
+                  Approving or restoring this review clears the flag.
+                </p>
+              </div>
+            ) : null}
+
             {selected.headline ? (
               <div className="mb-4 font-display text-[15px] font-semibold">
                 “{selected.headline}”

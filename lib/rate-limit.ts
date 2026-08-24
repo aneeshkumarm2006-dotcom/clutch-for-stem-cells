@@ -143,3 +143,124 @@ export function rateLimitHeaders(
   }
   return headers;
 }
+
+/**
+ * Check several keys in one go and return the *most* restrictive result — used
+ * to cap an address and its /24 (or /48) together, so rotating through a rented
+ * subnet doesn't reset the counter. Every key is incremented regardless of which
+ * one trips first, otherwise a blocked address would stop feeding the subnet
+ * counter that is supposed to be catching it.
+ */
+export async function rateLimitAll(
+  keys: Array<{ key: string; opts: RateLimitOptions }>,
+): Promise<RateLimitResult> {
+  const results = await Promise.all(keys.map((k) => rateLimit(k.key, k.opts)));
+  const blocked = results.filter((r) => !r.success);
+  if (blocked.length) {
+    // Report the longest wait so a client that respects Retry-After only comes
+    // back once every bucket it tripped has actually reset.
+    return blocked.reduce((worst, r) => (r.reset > worst.reset ? r : worst));
+  }
+  return results.reduce((least, r) =>
+    r.remaining < least.remaining ? r : least,
+  );
+}
+
+// ── Failure counters ────────────────────────────────────────────────────────
+// `rateLimit` increments on every call, which is wrong for a login: a staff
+// member who mistypes twice and then succeeds should not have burned three of
+// their ten attempts for the next 15 minutes. These primitives split reading
+// from writing so the caller increments only on a *failed* attempt and wipes
+// the counter on success.
+
+export interface CounterState {
+  count: number;
+  /** Epoch ms when the window resets (0 when no window is open). */
+  resetAt: number;
+}
+
+/** Read a counter without touching it. Fails open (`count: 0`) on error. */
+export async function peekCounter(key: string): Promise<CounterState> {
+  if (!isRateLimitConfigured()) {
+    const entry = memoryWindows.get(key);
+    if (!entry || entry.resetAt <= Date.now()) return { count: 0, resetAt: 0 };
+    return { count: entry.count, resetAt: entry.resetAt };
+  }
+
+  try {
+    const res = await fetch(`${REST_URL}/pipeline`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${REST_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([
+        ["GET", key],
+        ["PTTL", key],
+      ]),
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`Upstash error: ${res.status}`);
+    const data = (await res.json()) as Array<{ result?: unknown }>;
+    const count = Number(data[0]?.result ?? 0) || 0;
+    const pttl = Number(data[1]?.result ?? 0) || 0;
+    return { count, resetAt: pttl > 0 ? Date.now() + pttl : 0 };
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("Counter peek failed (failing open):", err);
+    return { count: 0, resetAt: 0 };
+  }
+}
+
+/** Increment a counter, opening a fixed window on the first hit. Never throws. */
+export async function bumpCounter(
+  key: string,
+  windowSeconds: number,
+): Promise<void> {
+  if (!isRateLimitConfigured()) {
+    memoryRateLimit(key, { limit: Number.MAX_SAFE_INTEGER, windowSeconds });
+    return;
+  }
+
+  try {
+    await fetch(`${REST_URL}/pipeline`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${REST_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([
+        ["INCR", key],
+        ["EXPIRE", key, windowSeconds, "NX"],
+      ]),
+      cache: "no-store",
+    });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("Counter bump failed (ignored):", err);
+  }
+}
+
+/** Delete counters (a successful login clears its own). Never throws. */
+export async function clearCounters(keys: string[]): Promise<void> {
+  if (!keys.length) return;
+  if (!isRateLimitConfigured()) {
+    for (const key of keys) memoryWindows.delete(key);
+    return;
+  }
+
+  try {
+    await fetch(`${REST_URL}/pipeline`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${REST_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(keys.map((key) => ["DEL", key])),
+      cache: "no-store",
+    });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("Counter clear failed (ignored):", err);
+  }
+}

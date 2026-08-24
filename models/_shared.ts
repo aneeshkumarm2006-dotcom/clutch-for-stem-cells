@@ -252,6 +252,61 @@ export const contentFlagSchema = new Schema<IContentFlag>(
   { _id: false },
 );
 
+// ── Spam classification (public-form guard) ─────────────────────────────────
+
+/**
+ * The classifier's reasoning, stored alongside a *kept* submission (`allow` or
+ * `quarantine`). Rejected payloads go to `BlockedSubmission` instead.
+ *
+ * `reasons` is stored, not just the score, because an operator who cannot see
+ * *why* something was flagged cannot correct it — and correcting it is the only
+ * way the filter ever improves.
+ */
+export interface ISpamMeta {
+  /** "allow" | "quarantine" — a rejected payload is never written here. */
+  verdict: string;
+  score: number;
+  category?: string | null;
+  reasons: Array<{ code: string; detail: string; weight: number }>;
+  /**
+   * Hash of the human-written fields only (the email is deliberately excluded).
+   * Floods replay one payload across many harvested addresses, so hashing the
+   * address would make every copy look unique.
+   */
+  payloadHash?: string;
+  /** Cleared when an operator marks something "not spam". */
+  checkedAt?: Date | null;
+  /** Set when a human overrode the machine, so backfills never re-flag it. */
+  overriddenBy?: Types.ObjectId | null;
+  overriddenAt?: Date | null;
+}
+
+export const spamMetaSchema = new Schema<ISpamMeta>(
+  {
+    verdict: { type: String, required: true },
+    score: { type: Number, required: true, default: 0 },
+    category: { type: String, default: null },
+    reasons: {
+      type: [
+        new Schema(
+          {
+            code: { type: String, required: true },
+            detail: { type: String, required: true },
+            weight: { type: Number, required: true },
+          },
+          { _id: false },
+        ),
+      ],
+      default: [],
+    },
+    payloadHash: { type: String, default: undefined },
+    checkedAt: { type: Date, default: null },
+    overriddenBy: { type: Schema.Types.ObjectId, ref: "User", default: null },
+    overriddenAt: { type: Date, default: null },
+  },
+  { _id: false },
+);
+
 // ── Soft-delete plugin ──────────────────────────────────────────────────────
 
 /**

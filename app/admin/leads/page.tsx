@@ -21,6 +21,9 @@ const TABS = [
   ["contacted", "Contacted"],
   ["qualified", "Qualified"],
   ["closed", "Closed"],
+  // Quarantined by the spam guard: stored and categorised, never emailed.
+  // Moving one out of this tab is the "not spam" action.
+  ["spam", "Spam"],
   ["all", "All"],
 ] as const;
 

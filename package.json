@@ -16,14 +16,18 @@
     "import-clinic-reputation": "tsx scripts/import-clinic-reputation.ts",
     "import-term-content": "tsx --conditions=react-server scripts/import-term-content.ts",
     "recompute-counts": "tsx scripts/recompute-clinic-counts.ts",
+    "backfill-spam": "tsx scripts/backfill-spam.ts",
     "migrate": "tsx scripts/migrations/001-content-engine.ts",
+    "check:spam": "tsx scripts/spam-corpus-check.ts",
     "check:meta": "tsx scripts/check-meta.ts",
     "check:meta:crawl": "tsx scripts/check-meta.ts --crawl",
-    "test": "npm run test:analyticshub && npm run test:engine",
+    "test": "npm run test:analyticshub && npm run test:engine && npm run test:spam",
+    "test:spam": "tsx --tsconfig tsconfig.test.json --test tests/spam/classify.test.ts tests/spam/net.test.ts",
     "test:analyticshub": "tsx --test tests/analyticshub/crypto.test.ts tests/analyticshub/password.test.ts tests/analyticshub/session.test.ts tests/analyticshub/handler.test.ts tests/analyticshub/palette.test.ts",
     "test:engine": "tsx --tsconfig tsconfig.test.json --test tests/content-engine/engine.test.ts tests/content-engine/db.test.ts tests/content-engine/meta-text.test.ts tests/content-engine/indexation.test.ts",
     "fetch-google-reviews": "tsx scripts/fetch-google-reviews.ts",
-    "import-pages": "tsx --conditions=react-server scripts/import-pages.ts"
+    "import-pages": "tsx --conditions=react-server scripts/import-pages.ts",
+    "import-blog-sections": "tsx --conditions=react-server scripts/import-blog-sections.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

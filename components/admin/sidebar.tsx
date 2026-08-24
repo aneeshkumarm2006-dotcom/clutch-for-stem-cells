@@ -16,6 +16,7 @@ import {
   Search,
   Send,
   Settings,
+  ShieldBan,
   Star,
   Users,
   type LucideIcon,
@@ -52,6 +53,10 @@ const NAV: NavEntry[][] = [
     { type: "leaf", label: "Reviews", href: "/admin/reviews", icon: Star, minRole: "editor", badge: "reviews" },
     { type: "leaf", label: "Reports", href: "/admin/reports", icon: Flag, minRole: "editor", badge: "reports" },
     { type: "leaf", label: "Leads", href: "/admin/leads", icon: Send, minRole: "editor" },
+    // Deliberately un-badged: a badge that counts bots is one nobody trusts
+    // within a week. The reviews/reports badges filter on pending/open, which
+    // quarantined submissions never carry, so they stay bot-free too.
+    { type: "leaf", label: "Blocked", href: "/admin/spam", icon: ShieldBan, minRole: "admin" },
     {
       type: "group",
       label: "Taxonomy",

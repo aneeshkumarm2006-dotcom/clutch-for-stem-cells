@@ -17,6 +17,7 @@ import {
   PASSWORD_RESET_TTL_HOURS,
 } from "@/lib/auth/tokens";
 import { sendPasswordResetEmail } from "@/lib/email";
+import { guardPublicForm } from "@/lib/public-form";
 import { passwordResetRequestSchema } from "@/lib/validation/user";
 import { User } from "@/models/user";
 
@@ -27,6 +28,18 @@ export async function POST(req: Request): Promise<NextResponse> {
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
+
+  // Every POST here can send an email through our own SMTP mailbox, so an
+  // uncapped endpoint is a free way to burn the sending reputation and the
+  // daily quota of the account the site notifies leads from. Capped per address
+  // and per /24; no captcha, since staff hit this from the sign-in page.
+  const blocked = await guardPublicForm(req, {
+    action: "password-reset",
+    requireCaptcha: false,
+    limit: 5,
+    windowSeconds: 60 * 60,
+  });
+  if (blocked) return blocked as NextResponse;
 
   const parsed = passwordResetRequestSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ ok: true });

@@ -1,0 +1,122 @@
+{
+  "segment": "treatments",
+  "terms": [
+    {
+      "slug": "svf",
+      "blocks": [
+        {
+          "type": "richText",
+          "data": {
+            "html": "<h2>What is Stromal Vascular Fraction (SVF)?</h2><p>Stromal Vascular Fraction (SVF) is a concentrated collection of regenerative cells obtained from a person's own adipose (fat) tissue. It contains mesenchymal stem cells (MSCs), endothelial cells, immune cells, pericytes, and other supportive cells that are being studied for their potential role in tissue repair and regenerative medicine.</p><p>Unlike laboratory-expanded stem cells, SVF is typically processed and used during the same treatment session without culturing the cells. Because it is derived from the patient's own tissue, it is commonly referred to as an autologous therapy.</p><p>Researchers continue to study Stromal Vascular Fraction therapy for conditions affecting joints, soft tissues, autoimmune disorders, and other regenerative medicine applications. If you are considering treatment, comparing clinic experience, physician qualifications, treatment protocols, and patient reviews can help you make a more informed decision. Browse the SVF clinics below to explore providers offering this therapy.</p>"
+          }
+        },
+        {
+          "type": "richText",
+          "data": {
+            "html": "<h2>SVF in plain terms</h2><p>Stromal vascular fraction, or SVF, is what you get when <a href=\"/treatments/adipose-derived-therapy\">fat tissue</a> is processed to remove the fat cells themselves and keep everything else: the mix of stem cells, blood vessel cells, and growth factors that live in the tissue surrounding fat. It is not a purified stem cell product. It is a \"whole fraction,\" which is exactly what the name says. Because the tissue comes from the patient's own body, SVF is an <a href=\"/treatments/autologous-therapy\">autologous therapy</a>.</p><p>Clinics favor it because it can be prepared same-day, in-office, without sending anything to an outside lab, which keeps both the cost and the regulatory classification simpler than cultured or expanded cell products.</p><p>The tradeoff: because it is not purified or expanded, the exact stem cell concentration in an SVF injection varies more from patient to patient than a lab-cultured product would. For most orthopedic uses, with hip and knee <a href=\"/conditions/joint-pain\">joint pain</a> the most common, clinics consider this an acceptable tradeoff for the same-day convenience and lower cost. For more complex conditions, some clinics prefer processing methods that yield a more concentrated, purified cell count instead. It is a fair question to put to every provider you shortlist: ask which processing method they use and why, then compare the answers across the <a href=\"/find-a-clinic\">clinics offering SVF</a>.</p>"
+          }
+        },
+        {
+          "type": "steps",
+          "data": {
+            "title": "How is Stromal Vascular Fraction (SVF) collected?",
+            "intro": "Most SVF treatments follow these general steps.",
+            "steps": [
+              {
+                "title": "A small amount of adipose (fat) tissue is collected using a minimally invasive liposuction procedure."
+              },
+              {
+                "title": "The tissue is processed to separate the stromal vascular fraction from mature fat cells."
+              },
+              {
+                "title": "The SVF preparation is then administered according to the physician's treatment protocol."
+              },
+              {
+                "title": "Patients receive follow-up care based on the condition being treated and the clinic's recommendations."
+              }
+            ],
+            "footnote": "The exact processing methods and treatment protocols may differ between clinics."
+          }
+        },
+        {
+          "type": "comparisonTable",
+          "data": {
+            "title": "SVF compared with other stem cell therapies",
+            "columns": [
+              "Stromal Vascular Fraction (SVF)",
+              "Bone marrow stem cells",
+              "Expanded stem cells"
+            ],
+            "rows": [
+              {
+                "label": "Where the cells come from",
+                "cells": [
+                  "Adipose (fat) tissue",
+                  "Bone marrow",
+                  "Cells are cultured in a laboratory before treatment"
+                ]
+              },
+              {
+                "label": "What the preparation contains",
+                "cells": [
+                  "Multiple regenerative cell types",
+                  "Primarily bone marrow derived cells",
+                  "A higher number of expanded cells"
+                ]
+              },
+              {
+                "label": "Timing",
+                "cells": [
+                  "Usually prepared and used the same day",
+                  "Usually a same-day procedure",
+                  "Requires laboratory expansion over time"
+                ]
+              },
+              {
+                "label": "Where it is commonly offered",
+                "cells": [
+                  "Regenerative medicine clinics",
+                  "Orthopedic and regenerative applications",
+                  "Availability depends on local regulations"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "checklist",
+          "data": {
+            "title": "Why compare SVF clinics?",
+            "intro": "Choosing the right clinic involves more than finding the lowest price. Consider factors such as:",
+            "items": [
+              "Physician qualifications and experience",
+              "Clinic accreditation and safety standards",
+              "Treatment protocols and patient evaluation process",
+              "Follow-up care and rehabilitation support",
+              "Published outcomes and patient reviews",
+              "Country-specific regulations for SVF therapy"
+            ],
+            "footnote": "Use the clinic listings above to compare providers and learn more about available treatment options."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "adipose-derived-therapy",
+      "blocks": [
+        {
+          "type": "richText",
+          "data": {
+            "html": "<h2><strong>About Adipose-Derived Stem Cell Therapy</strong></h2><p>Adipose-derived stem cell therapy uses regenerative cells collected from a patient's own fat tissue. It is one of the treatment approaches explored in regenerative medicine for orthopedic conditions, joint pain, and other medical applications.</p><p>Since treatment methods and physician experience can vary between clinics, comparing providers is an important part of the research process. My Stem Cell Guide helps you compare clinics offering adipose-derived stem cell therapy by treatment options, location, pricing (where available), and verified patient reviews.</p><p><br /></p>"
+          }
+        },
+        {
+          "type": "richText",
+          "data": {
+            "html": "<h2>Adipose-derived therapy: what is actually different about fat-based stem cells</h2><p>Fat tissue is one of the richest accessible sources of mesenchymal stem cells in the adult body. By some estimates, a given volume of fat tissue yields hundreds of times more stem cells than the same volume of bone marrow, which is the other common collection site. That is the main reason adipose-derived therapy has become the default starting point at many clinics: fewer cells need to be harvested to reach a clinically useful dose, and the collection procedure, a small-volume liposuction, is generally less uncomfortable than a bone marrow draw. Because the cells come from the patient's own body it is an <a href=\"/treatments/autologous-therapy\">autologous therapy</a>, and when the harvested tissue is concentrated but not purified, the preparation is usually called <a href=\"/treatments/svf\">stromal vascular fraction (SVF)</a>.</p><p>You may also see \"adipose-derived stem cell drip\" mentioned. That refers to intravenous administration rather than direct joint injection, and it is typically used for systemic or inflammatory conditions rather than a single joint problem. It is a different use case from the hip and knee <a href=\"/conditions/joint-pain\">joint pain</a> injections most people researching this site are looking into, so if a clinic recommends an IV drip for a localized joint issue, ask specifically why, since direct injection is the more established approach for that kind of problem. Put the same question to every provider you <a href=\"/find-a-clinic\">compare</a>.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}

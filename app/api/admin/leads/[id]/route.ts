@@ -1,6 +1,12 @@
 /**
  * Lead workflow `/api/admin/leads/[id]` (PRD §8.4 / Stage 6.6). Editor+.
  * Status transitions, assignment, and appending internal notes.
+ *
+ * Moving a lead OFF `spam` is the "not spam" action: it clears the classifier's
+ * stored reasoning and stamps the human override, so the backfill script leaves
+ * the lead alone from then on. A machine verdict must never survive the human
+ * who overruled it — an operator who un-flags something and still sees the
+ * flag's reasoning on the row will stop trusting the whole view.
  */
 import { z } from "zod";
 
@@ -32,7 +38,23 @@ export async function PATCH(
     const lead = await Lead.findById(params.id);
     if (!lead) return fail("Lead not found.", 404);
 
-    if (status) lead.status = status;
+    if (status) {
+      const wasSpam = lead.status === "spam";
+      lead.status = status;
+      if (wasSpam && status !== "spam") {
+        // "Not spam": drop the machine's reasoning, record who overruled it.
+        lead.spam = {
+          verdict: "allow",
+          score: 0,
+          category: null,
+          reasons: [],
+          payloadHash: lead.spam?.payloadHash,
+          checkedAt: lead.spam?.checkedAt ?? null,
+          overriddenBy: user.id as never,
+          overriddenAt: new Date(),
+        };
+      }
+    }
     if (assignedTo !== undefined) {
       lead.assignedTo = (assignedTo || null) as never;
     }

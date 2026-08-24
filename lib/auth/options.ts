@@ -1,23 +1,35 @@
 /**
  * Auth.js (NextAuth v4) configuration — Stage 2.1.
  *
- * Providers: Credentials (email/password) + Google OAuth. Strategy is JWT
- * (required by the Credentials provider and keeps middleware DB-free). The
- * user's `id`, `role`, and `status` are written onto the token in the `jwt`
- * callback and mirrored onto the session in `session`, so server components,
- * route handlers, and the Edge middleware all authorize from the token alone.
+ * **Staff-only.** There is no public sign-up and no OAuth: the only provider is
+ * Credentials, and accounts exist solely because a Super Admin created one in
+ * `/admin/users` (or `npm run seed` did). Self-service registration and the
+ * Google button were removed — the public site never exposed sign-in, so the
+ * member area was surface with no users behind it.
  *
- * There is intentionally **no** database adapter: with JWT sessions we persist
- * the `User` record ourselves (credentials in the register route; Google in the
- * `signIn` callback below) which keeps the single Mongoose `User` collection as
- * the source of truth for roles.
+ * Strategy is JWT (required by the Credentials provider and keeps middleware
+ * DB-free). The user's `id`, `role`, and `status` are written onto the token in
+ * the `jwt` callback and mirrored onto the session in `session`, so server
+ * components, route handlers, and the Edge middleware all authorize from the
+ * token alone.
+ *
+ * There is intentionally **no** database adapter: with JWT sessions the single
+ * Mongoose `User` collection stays the source of truth for roles.
+ *
+ * Brute-force throttling lives in `authorize` (see `lib/auth/login-throttle`):
+ * NextAuth owns this endpoint, so the guard can't sit in a route handler.
  */
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
 
 import { dbConnect } from "@/lib/db";
 import { verifyPassword } from "@/lib/auth/password";
+import {
+  clearLoginFailures,
+  ipFromAuthRequest,
+  recordLoginFailure,
+  throttleLogin,
+} from "@/lib/auth/login-throttle";
 import { User } from "@/models/user";
 import { signInSchema } from "@/lib/validation/user";
 import type { UserRole, UserStatus } from "@/lib/enums";
@@ -27,6 +39,7 @@ export const AUTH_ERRORS = {
   invalidCredentials: "InvalidCredentials",
   emailNotVerified: "EmailNotVerified",
   accountSuspended: "AccountSuspended",
+  tooManyAttempts: "TooManyAttempts",
 } as const;
 
 interface AuthUserFields {
@@ -36,9 +49,8 @@ interface AuthUserFields {
 }
 
 /**
- * Load the role/status/id we cache on the token, by email. Used to enrich the
- * JWT for Google sign-ins (whose `user` object is the OAuth profile, not our
- * record) and to refresh the token on `update`.
+ * Load the role/status/id we cache on the token, by email. Used to refresh the
+ * JWT on `update` (e.g. after a role change in the admin panel).
  */
 async function loadAuthFields(email: string): Promise<AuthUserFields | null> {
   await dbConnect();
@@ -51,11 +63,6 @@ async function loadAuthFields(email: string): Promise<AuthUserFields | null> {
   if (!user) return null;
   return { id: String(user._id), role: user.role, status: user.status };
 }
-
-/** Whether Google OAuth is configured (drives the "Continue with Google" UI). */
-export const googleEnabled = Boolean(
-  process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET,
-);
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -71,10 +78,17 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         const parsed = signInSchema.safeParse(credentials);
         if (!parsed.success) throw new Error(AUTH_ERRORS.invalidCredentials);
         const { email, password } = parsed.data;
+
+        // Throttle before touching the database, so a flood costs the attacker
+        // more than it costs us. Counts failures only — see login-throttle.
+        const ip = ipFromAuthRequest(req);
+        if (await throttleLogin(ip, email)) {
+          throw new Error(AUTH_ERRORS.tooManyAttempts);
+        }
 
         await dbConnect();
         const user = await User.findOne({ email, isDeleted: false }).select(
@@ -83,11 +97,16 @@ export const authOptions: NextAuthOptions = {
 
         // Use a constant message for both "no user" and "no/wrong password" so
         // the form never reveals which emails are registered.
-        if (!user?.passwordHash)
+        if (!user?.passwordHash) {
+          await recordLoginFailure(ip, email);
           throw new Error(AUTH_ERRORS.invalidCredentials);
+        }
 
         const ok = await verifyPassword(password, user.passwordHash);
-        if (!ok) throw new Error(AUTH_ERRORS.invalidCredentials);
+        if (!ok) {
+          await recordLoginFailure(ip, email);
+          throw new Error(AUTH_ERRORS.invalidCredentials);
+        }
 
         if (user.status === "suspended") {
           throw new Error(AUTH_ERRORS.accountSuspended);
@@ -95,6 +114,8 @@ export const authOptions: NextAuthOptions = {
         if (!user.emailVerified) {
           throw new Error(AUTH_ERRORS.emailNotVerified);
         }
+
+        await clearLoginFailures(ip, email);
 
         user.lastLoginAt = new Date();
         await user.save();
@@ -108,74 +129,14 @@ export const authOptions: NextAuthOptions = {
         };
       },
     }),
-    ...(googleEnabled
-      ? [
-          GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-            allowDangerousEmailAccountLinking: true,
-          }),
-        ]
-      : []),
   ],
   callbacks: {
-    /**
-     * Google sign-in has no adapter, so we upsert the `User` here. A Google
-     * email is provider-verified, so we mark `emailVerified`. Suspended accounts
-     * are refused.
-     */
-    async signIn({ user, account, profile }) {
-      if (account?.provider !== "google") return true;
-      const email = user.email?.toLowerCase();
-      if (!email) return false;
-
-      await dbConnect();
-      const existing = await User.findOne({ email }).select(
-        "status provider emailVerified name avatar",
-      );
-
-      if (existing) {
-        // Returning a URL string redirects there with our precise error code,
-        // instead of NextAuth's generic `AccessDenied`.
-        if (existing.status === "suspended") {
-          return "/auth/sign-in?error=AccountSuspended";
-        }
-        const patch: Record<string, unknown> = { lastLoginAt: new Date() };
-        if (!existing.emailVerified) patch.emailVerified = new Date();
-        if (!existing.name && user.name) patch.name = user.name;
-        await existing.updateOne(patch);
-        return true;
-      }
-
-      await User.create({
-        email,
-        name: user.name ?? (profile as { name?: string })?.name,
-        role: "member",
-        status: "active",
-        provider: "google",
-        emailVerified: new Date(),
-        avatar: user.image ? { url: user.image } : undefined,
-        lastLoginAt: new Date(),
-      });
-      return true;
-    },
-
-    async jwt({ token, user, account, trigger }) {
+    async jwt({ token, user, trigger }) {
       // Initial sign-in via Credentials: `user` carries our fields.
       if (user) {
         token.id = user.id;
         if (user.role) token.role = user.role;
         if (user.status) token.status = user.status;
-      }
-
-      // Google: `user` is the OAuth profile (no role) — read our record.
-      if (account?.provider === "google" && token.email) {
-        const fields = await loadAuthFields(token.email);
-        if (fields) {
-          token.id = fields.id;
-          token.role = fields.role;
-          token.status = fields.status;
-        }
       }
 
       // Refresh cached claims when the client calls `useSession().update()`

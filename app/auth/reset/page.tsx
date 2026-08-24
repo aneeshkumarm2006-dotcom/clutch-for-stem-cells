@@ -4,9 +4,11 @@ import Link from "next/link";
 import { AuthCard } from "@/components/auth/auth-card";
 import { ResetForm } from "@/components/auth/reset-form";
 
+/** Staff-only, like `/auth/sign-in` — keep it out of the index. */
 export const metadata: Metadata = {
   title: "Reset your password",
   description: "We'll email you a secure reset link.",
+  robots: { index: false, follow: false },
 };
 
 export default function ResetPage({

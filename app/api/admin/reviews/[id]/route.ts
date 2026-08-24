@@ -49,9 +49,28 @@ export async function PATCH(
     let recompute = false;
     const now = new Date();
 
+    // Approving or restoring a review the classifier held is the "not spam"
+    // action: the machine's reasoning is dropped and the human override is
+    // stamped, so the backfill script never re-flags it. A verdict must never
+    // outlive the person who overruled it.
+    const clearSpamVerdict = (): void => {
+      if (!review.spam || review.spam.verdict === "allow") return;
+      review.spam = {
+        verdict: "allow",
+        score: 0,
+        category: null,
+        reasons: [],
+        payloadHash: review.spam.payloadHash,
+        checkedAt: review.spam.checkedAt ?? null,
+        overriddenBy: user.id as never,
+        overriddenAt: now,
+      };
+    };
+
     switch (action) {
       case "approve":
         review.status = "approved";
+        clearSpamVerdict();
         review.moderation = {
           ...review.moderation,
           reviewedBy: user.id as never,
@@ -75,6 +94,7 @@ export async function PATCH(
         break;
       case "restore":
         review.status = "pending";
+        clearSpamVerdict();
         recompute = true;
         break;
       case "verify":

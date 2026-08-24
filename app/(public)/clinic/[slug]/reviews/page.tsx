@@ -28,7 +28,6 @@
  */
 import Link from "next/link";
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import {
   ArrowLeft,
   MessageSquareText,
@@ -41,7 +40,11 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { buildJsonLd } from "@/lib/schema/engine";
 import { clinicNodeInput } from "@/lib/schema/adapters";
 import { getSchemaContext } from "@/lib/schema/context";
-import { redirectOrNotFound, resolveRedirect } from "@/lib/redirects";
+import {
+  applyRedirect,
+  redirectOrNotFound,
+  resolveRedirect,
+} from "@/lib/redirects";
 import { pageMetadata } from "@/lib/page-metadata";
 import {
   clinicReviewsKeywords,
@@ -146,7 +149,7 @@ export default async function ClinicReviewsPage({
     // child segment across: /clinic/old/reviews → /clinic/new/reviews.
     const hit = await resolveRedirect(`/clinic/${params.slug}`);
     if (hit?.to.startsWith("/")) {
-      redirect(`${hit.to.replace(/\/+$/, "")}/reviews`);
+      applyRedirect(hit, `${hit.to.replace(/\/+$/, "")}/reviews`);
     }
     return redirectOrNotFound(`/clinic/${params.slug}/reviews`);
   }

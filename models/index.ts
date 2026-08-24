@@ -14,6 +14,7 @@ export {
   contentFlagSchema,
   schemaOverrideSchema,
   blockSchema,
+  spamMetaSchema,
   softDeletePlugin,
   registerModel,
   toPlainObject,
@@ -28,6 +29,7 @@ export type {
   IFaqEntry,
   IKeyFact,
   IContentFlag,
+  ISpamMeta,
   SoftDeleteFields,
   TimestampFields,
 } from "@/models/_shared";
@@ -90,6 +92,18 @@ export type { ILead, ILeadNote } from "@/models/lead";
 
 export { Report, default as ReportModel } from "@/models/report";
 export type { IReport } from "@/models/report";
+
+export {
+  BlockedSubmission,
+  default as BlockedSubmissionModel,
+  BLOCKED_FORMS,
+  toBlockedReasons,
+} from "@/models/blocked-submission";
+export type {
+  IBlockedSubmission,
+  IBlockedReason,
+  BlockedForm,
+} from "@/models/blocked-submission";
 
 export { BlogPost, default as BlogPostModel } from "@/models/blog-post";
 export type { IBlogPost, IBlogKeyword } from "@/models/blog-post";

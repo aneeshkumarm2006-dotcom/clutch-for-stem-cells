@@ -17,6 +17,9 @@ import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { TextField } from "@/components/ui/form-field";
 import { DisclaimerNote } from "@/components/compliance/disclaimer-note";
+// Shared with the spam guard, which rejects budget values the form can't emit.
+import { BUDGETS, TIMEFRAMES } from "@/config/lead-options";
+import { useSpamGuard } from "@/components/forms/spam-guard";
 
 export interface WizardOption {
   id: string;
@@ -29,21 +32,6 @@ export interface FindClinicWizardProps {
   treatments: WizardOption[];
   countries: { name: string; slug: string }[];
 }
-
-const BUDGETS = [
-  { value: "under-5000", label: "Under $5,000", priceMax: 5000 },
-  { value: "5000-10000", label: "$5,000 – $10,000", priceMax: 10000 },
-  { value: "10000-20000", label: "$10,000 – $20,000", priceMax: 20000 },
-  { value: "20000-plus", label: "$20,000+", priceMax: undefined },
-  { value: "flexible", label: "Flexible / not sure", priceMax: undefined },
-];
-
-const TIMEFRAMES = [
-  { value: "asap", label: "As soon as possible" },
-  { value: "1-3mo", label: "Within 1–3 months" },
-  { value: "3-6mo", label: "Within 3–6 months" },
-  { value: "researching", label: "Just researching" },
-];
 
 const STEPS = ["Condition", "Treatment", "Location", "Budget", "Timeframe", "Contact"];
 
@@ -65,6 +53,7 @@ export function FindClinicWizard({
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [agree, setAgree] = React.useState(false);
+  const spam = useSpamGuard();
 
   const condition = conditions.find((c) => c.id === conditionId);
   const toggleTreatment = (id: string) =>
@@ -118,6 +107,7 @@ export function FindClinicWizard({
           consentGiven: true,
           ageConfirmed: true,
           source: "find-a-clinic",
+          ...spam.payload(),
         }),
       });
     } catch {
@@ -286,6 +276,7 @@ export function FindClinicWizard({
               </span>
             </label>
             <DisclaimerNote variant="medical" />
+            {spam.fields}
           </div>
         </Fieldset>
       ) : null}

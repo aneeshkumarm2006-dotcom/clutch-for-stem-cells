@@ -17,7 +17,7 @@
  */
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect, redirect } from "next/navigation";
 
 import { dbConnect } from "@/lib/db";
 import { normalizePath } from "@/lib/validation/redirect";
@@ -97,6 +97,29 @@ export async function resolveRedirect(
 const MAX_REDIRECT_HOPS = 5;
 
 /**
+ * Send the visitor onward at the status code the editor chose.
+ *
+ * Next's `redirect()` emits **307 Temporary Redirect** and takes no status
+ * argument, so calling it for a rule stored as `301` silently downgrades a
+ * permanent move to a temporary one and the destination never inherits the
+ * source's link equity — the entire point of recording the redirect. App Router
+ * cannot emit a literal `301`; `permanentRedirect()` emits **308**, which is the
+ * permanent equivalent and which search engines treat interchangeably with 301.
+ *
+ * So: `301` → 308 (permanent), `302` → 307 (temporary).
+ *
+ * `to` overrides the stored destination for routes that rebuild a child path
+ * from a parent's rule (`/clinic/old/cost` → `/clinic/new/cost`).
+ *
+ * Never returns.
+ */
+export function applyRedirect(hit: ResolvedRedirect, to?: string): never {
+  const target = to ?? hit.to;
+  if (hit.statusCode === 301) permanentRedirect(target);
+  redirect(target);
+}
+
+/**
  * The one line a dynamic route calls instead of `notFound()`.
  *
  * "This URL doesn't resolve" is precisely the moment a redirect should be
@@ -109,6 +132,6 @@ const MAX_REDIRECT_HOPS = 5;
  */
 export async function redirectOrNotFound(path: string): Promise<never> {
   const hit = await resolveRedirect(path);
-  if (hit) redirect(hit.to);
+  if (hit) applyRedirect(hit);
   notFound();
 }

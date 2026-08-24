@@ -127,7 +127,7 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     return renewSeoSession(NextResponse.next(), session);
   }
 
-  // ── /admin/* + /account/* — NextAuth JWT ───────────────────────────────────
+  // ── /admin/* — NextAuth JWT (staff only; there is no member area) ──────────
   const token = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
@@ -153,10 +153,5 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 }
 
 export const config = {
-  matcher: [
-    "/admin/:path*",
-    "/account/:path*",
-    "/seoteam/:path*",
-    "/api/:path*",
-  ],
+  matcher: ["/admin/:path*", "/seoteam/:path*", "/api/:path*"],
 };

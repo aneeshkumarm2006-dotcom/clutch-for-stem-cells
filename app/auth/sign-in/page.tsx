@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Check } from "lucide-react";
 
 import { AuthCard } from "@/components/auth/auth-card";
 import { SignInForm } from "@/components/auth/sign-in-form";
 import { getCurrentUser, sanitizeCallbackUrl } from "@/lib/auth";
-import { googleEnabled } from "@/lib/auth/options";
 
+/**
+ * Staff sign-in. Public sign-up and Google OAuth were removed, so this page is
+ * only reachable by someone who already has an account (admin/editor) — hence
+ * `noindex` and no "create an account" footer.
+ */
 export const metadata: Metadata = {
   title: "Sign in",
-  description: "Sign in to manage your shortlist and reviews.",
+  description: "Sign in to the site admin.",
+  robots: { index: false, follow: false },
 };
 
-/** Google-redirect error codes → friendly copy (Design §13). */
+/** Error codes NextAuth can redirect here with → friendly copy (Design §13). */
 const ERROR_COPY: Record<string, string> = {
   AccountSuspended: "This account is suspended. Contact support for help.",
-  OAuthAccountNotLinked:
-    "That email is already registered. Sign in with your password instead.",
-  AccessDenied: "Sign-in was cancelled or not permitted.",
+  TooManyAttempts: "Too many attempts. Wait a few minutes and try again.",
   Configuration: "Sign-in is temporarily unavailable. Try again shortly.",
   Verification: "That link is invalid or has expired.",
 };
@@ -39,28 +41,10 @@ export default async function SignInPage({
   const errorMessage = errorCode
     ? (ERROR_COPY[errorCode] ?? "Something went wrong. Try again.")
     : null;
-  const verified = searchParams.verified === "1";
   const reset = searchParams.reset === "1";
 
   return (
-    <AuthCard
-      title="Welcome back"
-      subtitle="Sign in to manage your shortlist and reviews."
-      footer={
-        <>
-          New here?{" "}
-          <Link
-            href="/auth/sign-up"
-            className="font-semibold text-text-link hover:underline"
-          >
-            Create an account
-          </Link>
-        </>
-      }
-    >
-      {verified ? (
-        <Banner tone="success">Email verified. Sign in to continue.</Banner>
-      ) : null}
+    <AuthCard title="Welcome back" subtitle="Sign in to the site admin.">
       {reset ? (
         <Banner tone="success">
           Password updated. Sign in with your new password.
@@ -68,7 +52,7 @@ export default async function SignInPage({
       ) : null}
       {errorMessage ? <Banner tone="danger">{errorMessage}</Banner> : null}
 
-      <SignInForm googleEnabled={googleEnabled} callbackUrl={callbackUrl} />
+      <SignInForm callbackUrl={callbackUrl} />
     </AuthCard>
   );
 }

@@ -11,6 +11,8 @@ import type { ReviewStatus, ReviewVerificationMethod } from "@/lib/enums";
 import {
   softDeletePlugin,
   registerModel,
+  spamMetaSchema,
+  type ISpamMeta,
   type SoftDeleteFields,
   type TimestampFields,
 } from "@/models/_shared";
@@ -66,6 +68,11 @@ export interface IModeration {
 export interface IReview extends TimestampFields, SoftDeleteFields {
   _id: Types.ObjectId;
   clinicId: Types.ObjectId;
+  /**
+   * Classifier verdict + reasoning (public-form guard). Absent on records
+   * created before the guard shipped, and on anything imported or admin-entered.
+   */
+  spam?: ISpamMeta;
   status: ReviewStatus;
   isVerified: boolean;
   verificationMethod?: ReviewVerificationMethod;
@@ -181,6 +188,7 @@ const ReviewSchema = new Schema<IReview>(
       required: true,
       index: true,
     },
+    spam: { type: spamMetaSchema, default: undefined },
     status: {
       type: String,
       enum: REVIEW_STATUSES,

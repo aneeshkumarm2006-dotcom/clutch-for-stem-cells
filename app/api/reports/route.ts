@@ -2,15 +2,22 @@
  * Report / flag submission `/api/reports` (PRD §14 / Stage 8.7).
  *
  * Public, unauthenticated. Lets a visitor flag a review or clinic for admin
- * review; the flag lands `open` in the `/admin/reports` queue. Rate-limited +
- * captcha-guarded like the other public forms. The flagged entity must exist
- * (and, for clinics, be published) so the queue never fills with dead refs.
- * Reporter email is stored privately and never echoed back.
+ * review; a clean flag lands `open` in the `/admin/reports` queue. Guarded by
+ * `lib/spam/guard` like the other public forms:
+ *
+ *   allow      → `status: "open"`.
+ *   quarantine → `status: "dismissed"` with the classifier's reasons attached,
+ *                so it stays recoverable without cluttering the live queue.
+ *   reject     → never written to `Report`; binned in `BlockedSubmission`.
+ *
+ * The flagged entity must exist (and, for clinics, not be deleted) so the queue
+ * never fills with dead refs. Reporter email is stored privately and never
+ * echoed back.
  */
 import { NextResponse } from "next/server";
 
 import { dbConnect } from "@/lib/db";
-import { guardPublicForm } from "@/lib/public-form";
+import { guardSubmission, spamSuccessResponse } from "@/lib/spam/guard";
 import { reportCreateSchema } from "@/lib/validation/report";
 import { Clinic, Report, Review } from "@/models";
 
@@ -24,16 +31,7 @@ export async function POST(req: Request): Promise<Response> {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const captchaToken =
-    body && typeof body === "object"
-      ? ((body as Record<string, unknown>).captchaToken as string | undefined)
-      : undefined;
-
-  const blocked = await guardPublicForm(req, {
-    action: "report",
-    captchaToken,
-  });
-  if (blocked) return blocked;
+  const raw = (body ?? {}) as Record<string, unknown>;
 
   const parsed = reportCreateSchema.safeParse(body);
   if (!parsed.success) {
@@ -46,6 +44,22 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
   const data = parsed.data;
+
+  const guard = await guardSubmission(req, {
+    form: "report",
+    captchaToken: typeof raw.captchaToken === "string" ? raw.captchaToken : null,
+    payload: raw,
+    input: {
+      email: data.reporterEmail || undefined,
+      subject: data.reason,
+      message: data.details,
+      honeypot: typeof raw.hp === "string" ? raw.hp : undefined,
+      elapsedMs: typeof raw.elapsedMs === "number" ? raw.elapsedMs : undefined,
+    },
+  });
+
+  if (guard.blocked) return guard.blocked;
+  if (guard.rejected) return spamSuccessResponse({ ok: true }, 201);
 
   await dbConnect();
 
@@ -85,7 +99,10 @@ export async function POST(req: Request): Promise<Response> {
     reason: data.reason,
     details: data.details?.trim() || undefined,
     reporterEmail: data.reporterEmail?.trim() || undefined,
-    status: "open",
+    // `Report` has no "spam" status — quarantine parks it as `dismissed`, which
+    // keeps it out of the open queue while staying visible (and reopenable).
+    status: guard.assessment.verdict === "quarantine" ? "dismissed" : "open",
+    spam: guard.spamMeta,
   });
 
   return NextResponse.json({ ok: true }, { status: 201 });

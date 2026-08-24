@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { TextField, TextareaField } from "@/components/ui/form-field";
+import { useSpamGuard } from "@/components/forms/spam-guard";
 import {
   Dialog,
   DialogContent,
@@ -51,6 +52,7 @@ export function ReportDialog({
   const [details, setDetails] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
+  const spam = useSpamGuard();
 
   const subject = label ?? (entityType === "review" ? "this review" : "this clinic");
 
@@ -79,12 +81,15 @@ export function ReportDialog({
           reason,
           details: details.trim() || undefined,
           reporterEmail: email.trim() || undefined,
+          ...spam.payload(),
         }),
       });
       if (res.ok) {
         setDone(true);
         return;
       }
+      // A captcha token is single-use — re-arm the widget before they retry.
+      spam.reset();
       const data = (await res.json().catch(() => null)) as
         | { error?: string }
         | null;
@@ -183,6 +188,8 @@ export function ReportDialog({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+
+            {spam.fields}
 
             {error ? (
               <p className="text-[13px] text-danger" role="alert">
