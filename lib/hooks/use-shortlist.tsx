@@ -2,6 +2,8 @@
 
 import * as React from "react";
 
+import { SHORTLIST_ADD_EVENT } from "@/lib/guide-capture-store";
+
 /**
  * Shortlist state — PRD §7 / §6.10 / Stage 5.11 + 5.13.
  *
@@ -59,9 +61,23 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
   const toggle = React.useCallback((slug: string) => {
     setSlugs((prev) => {
       const next = new Set(prev);
-      if (next.has(slug)) next.delete(slug);
-      else next.add(slug);
+      const added = !next.has(slug);
+      if (added) next.add(slug);
+      else next.delete(slug);
       writeLocal([...next]);
+      // Announce additions only. The guide-capture modal listens for this to
+      // offer emailing the shortlist; an unsave is not an intent signal. Fired
+      // from an effect rather than inline so the state updater stays pure under
+      // StrictMode's double invocation.
+      if (added) {
+        queueMicrotask(() => {
+          window.dispatchEvent(
+            new CustomEvent(SHORTLIST_ADD_EVENT, {
+              detail: { slug, slugs: [...next] },
+            }),
+          );
+        });
+      }
       return next;
     });
   }, []);

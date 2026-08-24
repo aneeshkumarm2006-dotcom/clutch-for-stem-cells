@@ -405,3 +405,184 @@ export async function sendReviewStatusEmail({
       `\n\nIf you think this was a mistake, reply to this email and our team will take another look.`,
   });
 }
+
+// ── Guide capture: shortlist + the 12 questions ──────────────────────────────
+
+/** One saved clinic, resolved to display fields by the caller. */
+export interface GuideClinicSummary {
+  name: string;
+  slug: string;
+  location?: string;
+  focus?: string;
+}
+
+/**
+ * Deliver what the capture modal promised: the visitor's shortlist and the 12
+ * questions to ask any clinic. This is the entire relationship. There is no
+ * sequence behind it, which is why the modal can honestly say "sent once", so
+ * the message has to stand on its own.
+ *
+ * Sent to the address the visitor typed, so `to` is submitter-controlled: every
+ * interpolated value goes through `esc`, and the clinic links are built from
+ * our own slugs rather than anything in the request body.
+ */
+export async function sendShortlistGuideEmail({
+  to,
+  clinics,
+  questions,
+}: {
+  to: string;
+  clinics: GuideClinicSummary[];
+  questions: readonly { question: string; why: string }[];
+}): Promise<SendResult> {
+  const shortlistUrl = `${SITE_URL}/shortlist`;
+
+  const clinicsHtml = clinics.length
+    ? `<h2 style="font-size:15px;margin:24px 0 10px;">Your shortlist</h2>
+       ${clinics
+         .map(
+           (c) => `<div style="border:1px solid #D8E8F4;border-radius:12px;padding:14px 16px;margin-bottom:10px;">
+             <a href="${SITE_URL}/clinic/${encodeURIComponent(c.slug)}" style="color:#0E80CC;font-weight:600;font-size:15px;text-decoration:none;">${esc(c.name)}</a>
+             ${c.location ? `<div style="color:#5C7388;font-size:13px;margin-top:2px;">${esc(c.location)}</div>` : ""}
+             ${c.focus ? `<div style="color:#90AAC0;font-size:12.5px;margin-top:2px;">${esc(c.focus)}</div>` : ""}
+           </div>`,
+         )
+         .join("")}
+       <p style="margin:12px 0 0;font-size:13px;color:#5C7388;">Your live shortlist stays at <a href="${shortlistUrl}" style="color:#0E80CC;">${shortlistUrl}</a> in the browser you saved it from.</p>`
+    : `<h2 style="font-size:15px;margin:24px 0 10px;">Your shortlist</h2>
+       <p style="margin:0;color:#5C7388;font-size:14px;">You had not saved a clinic yet. Save one from any profile and it appears at <a href="${shortlistUrl}" style="color:#0E80CC;">${shortlistUrl}</a>.</p>`;
+
+  const questionsHtml = questions
+    .map(
+      (q, i) => `<div style="margin:0 0 16px;">
+        <div style="font-size:14px;font-weight:600;color:#0C2233;">${i + 1}. ${esc(q.question)}</div>
+        <div style="font-size:13px;color:#5C7388;margin-top:3px;">${esc(q.why)}</div>
+      </div>`,
+    )
+    .join("");
+
+  const textLines = [
+    `Your shortlist and the 12 questions to ask any stem cell clinic.`,
+    "",
+    "YOUR SHORTLIST",
+    ...(clinics.length
+      ? clinics.map(
+          (c) =>
+            `- ${c.name}${c.location ? ` (${c.location})` : ""}\n  ${SITE_URL}/clinic/${c.slug}`,
+        )
+      : [`- Nothing saved yet. Save a clinic and it appears at ${shortlistUrl}.`]),
+    "",
+    "THE 12 QUESTIONS",
+    ...questions.flatMap((q, i) => [`${i + 1}. ${q.question}`, `   Why: ${q.why}`]),
+    "",
+    `${SITE_NAME} is an informational directory, not a medical provider. This is information only, not medical advice. Always consult a licensed physician.`,
+    "",
+    "You received this because you asked for it on our site. We do not add you to any list, and this is the only email we send.",
+  ];
+
+  return sendEmail({
+    to,
+    subject: `Your shortlist and the 12 questions to ask any clinic | ${SITE_NAME}`,
+    html: layout(
+      "Your shortlist and the 12 questions",
+      `<p style="margin:0 0 4px;color:#5C7388;">Here is everything you asked for. Take the questions to the consultation and write the answers down, so you can compare clinics side by side later.</p>
+       ${clinicsHtml}
+       <h2 style="font-size:15px;margin:26px 0 12px;">The 12 questions to ask any stem cell clinic</h2>
+       ${questionsHtml}
+       <p style="margin:22px 0 0;">${button(shortlistUrl, "Open your shortlist")}</p>
+       <p style="margin:22px 0 0;padding-top:16px;border-top:1px solid #D8E8F4;color:#90AAC0;font-size:12.5px;">Information only. Not medical advice or an endorsement. Always consult a licensed physician. Individual results vary and no outcome is guaranteed.</p>`,
+      `${SITE_NAME} is an informational directory, not a medical provider. You received this because you requested it on our site, and this is the only email we send. Reply to this message to be removed from our records.`,
+    ),
+    text: textLines.join("\n"),
+  });
+}
+
+/** What the owners are told about a new guide signup. */
+export interface CaptureNotificationData {
+  email: string;
+  /** Human label for the trigger, e.g. "Saved to shortlist". */
+  triggerLabel: string;
+  /** Clinic names the visitor had shortlisted at capture time. */
+  clinicNames: string[];
+  /** Saved slugs with no live clinic behind them. */
+  unresolvedSlugs?: string[];
+  profileViewCount?: number;
+  path?: string;
+  referrer?: string;
+  utm?: {
+    source?: string;
+    medium?: string;
+    campaign?: string;
+  };
+  /** Outcome of the guide email we just tried to send them. */
+  deliveryLabel: string;
+  deliveryError?: string;
+}
+
+/**
+ * Tell the owners a visitor just handed over their address.
+ *
+ * Same recipients and same shape as the lead notification
+ * ({@link resolveLeadRecipients}), with Reply-To set to the subscriber so
+ * hitting reply starts a direct conversation. Sent *after* the guide email so
+ * the notification can report whether that one actually left, which is the
+ * question worth answering in the same breath.
+ *
+ * Owners-only: the subscriber never sees this, and it is the only place their
+ * address travels besides the record and their own guide email.
+ */
+export async function sendCaptureNotificationEmail({
+  capture,
+  manageUrl,
+}: {
+  capture: CaptureNotificationData;
+  manageUrl?: string;
+}): Promise<SendResult> {
+  const to = await resolveLeadRecipients();
+
+  const shortlist = capture.clinicNames.length
+    ? capture.clinicNames.join(", ")
+    : "Nothing saved yet";
+
+  const fields: [string, string | undefined | null][] = [
+    ["Email", capture.email],
+    ["Trigger", capture.triggerLabel],
+    ["Shortlist", shortlist],
+    ["Unavailable slugs", capture.unresolvedSlugs?.join(", ")],
+    [
+      "Clinic profiles viewed",
+      capture.profileViewCount == null
+        ? undefined
+        : String(capture.profileViewCount),
+    ],
+    ["Captured on", capture.path],
+    ["Referrer", capture.referrer],
+    [
+      "Campaign",
+      [capture.utm?.source, capture.utm?.medium, capture.utm?.campaign]
+        .filter(Boolean)
+        .join(" / ") || undefined,
+    ],
+    ["Guide email", capture.deliveryLabel],
+    ["Delivery error", capture.deliveryError],
+  ];
+
+  const textLines = fields
+    .filter(([, v]) => v != null && String(v).trim() !== "")
+    .map(([label, value]) => `${label}: ${value}`);
+  if (manageUrl) textLines.push(`\nManage: ${manageUrl}`);
+
+  return sendEmail({
+    to,
+    replyTo: capture.email,
+    subject: `New guide signup: ${capture.email} | ${SITE_NAME}`,
+    html: layout(
+      "New guide signup",
+      `<p style="margin:0 0 16px;color:#5C7388;">Someone asked for their shortlist and the 12 questions. Their copy has already been sent, so no action is needed unless the delivery below failed.</p>
+       <table style="width:100%;border-collapse:collapse;">${detailRows(fields)}</table>
+       ${manageUrl ? `<p style="margin:24px 0 0;">${button(manageUrl, "Open in admin")}</p>` : ""}`,
+      `Internal notification for the ${SITE_NAME} owners. Replying goes to the subscriber.`,
+    ),
+    text: `New guide signup via ${SITE_NAME}\n\n` + textLines.join("\n"),
+  });
+}

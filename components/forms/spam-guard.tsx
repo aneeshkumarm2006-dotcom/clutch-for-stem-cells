@@ -101,7 +101,14 @@ export interface SpamGuard {
 export function useSpamGuard(): SpamGuard {
   const mountedAt = React.useRef<number>(Date.now());
   const honeypotRef = React.useRef<HTMLInputElement>(null);
-  const widgetRef = React.useRef<HTMLDivElement>(null);
+  // A *callback* ref, not `useRef`. Every caller renders `fields` inside a
+  // Radix dialog, and Radix only mounts its content when the dialog opens: an
+  // object ref is still null when the config arrives, the render effect below
+  // bails, and nothing ever re-runs it, so the widget never appears and every
+  // submission is refused for a missing token. Holding the node in state makes
+  // the effect depend on the node actually being in the DOM, so it renders when
+  // the dialog opens and re-renders if it is closed and opened again.
+  const [widgetEl, setWidgetEl] = React.useState<HTMLDivElement | null>(null);
   const widgetIdRef = React.useRef<string | null>(null);
   const tokenRef = React.useRef<string | undefined>(undefined);
 
@@ -131,16 +138,17 @@ export function useSpamGuard(): SpamGuard {
     };
   }, []);
 
-  // Render the widget once the key and the script are both available.
+  // Render the widget once the key, the script, and the container are all
+  // available.
   React.useEffect(() => {
-    if (!config?.siteKey || !widgetRef.current) return;
+    if (!config?.siteKey || !widgetEl) return;
     let active = true;
 
     void loadTurnstile()
       .then(() => {
-        if (!active || !widgetRef.current || !window.turnstile) return;
+        if (!active || !window.turnstile) return;
         if (widgetIdRef.current !== null) return;
-        widgetIdRef.current = window.turnstile.render(widgetRef.current, {
+        widgetIdRef.current = window.turnstile.render(widgetEl, {
           sitekey: config.siteKey,
           // Real visitors see nothing; the challenge only appears if Cloudflare
           // decides this session needs interaction.
@@ -172,7 +180,7 @@ export function useSpamGuard(): SpamGuard {
         widgetIdRef.current = null;
       }
     };
-  }, [config?.siteKey]);
+  }, [config?.siteKey, widgetEl]);
 
   const payload = React.useCallback(
     () => ({
@@ -218,7 +226,7 @@ export function useSpamGuard(): SpamGuard {
           defaultValue=""
         />
       </div>
-      {config?.siteKey ? <div ref={widgetRef} className="mt-1" /> : null}
+      {config?.siteKey ? <div ref={setWidgetEl} className="mt-1" /> : null}
     </>
   );
 

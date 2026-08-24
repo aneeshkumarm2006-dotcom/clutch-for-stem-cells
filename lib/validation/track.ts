@@ -19,6 +19,11 @@ export const TRACKABLE_CLIENT_EVENTS = [
   "profile_view",
   "filter_use",
   "search",
+  // Guide-capture impressions and dismissals. The submission itself is counted
+  // server-side (see `/api/email-capture`), so only the two events a browser is
+  // the sole witness to travel over this endpoint.
+  "guide_modal_shown",
+  "guide_modal_dismissed",
 ] as const;
 
 const OBJECT_ID_RE = /^[a-f\d]{24}$/i;

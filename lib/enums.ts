@@ -383,3 +383,46 @@ export const CALLOUT_TONE_LABELS: Record<CalloutTone, string> = {
 /** HTTP status for a redirect record — permanent (301) or temporary (302). */
 export const REDIRECT_STATUS_CODES = [301, 302] as const;
 export type RedirectStatusCode = (typeof REDIRECT_STATUS_CODES)[number];
+
+// ── Guide capture / shortlist email modal ───────────────────────────────────
+/**
+ * What made the capture modal appear. Stored on every `EmailCapture` so the
+ * admin can tell which trigger actually earns addresses.
+ */
+export const CAPTURE_TRIGGERS = [
+  "second-profile",
+  "shortlist-add",
+  "manual",
+] as const;
+export type CaptureTrigger = (typeof CAPTURE_TRIGGERS)[number];
+
+export const CAPTURE_TRIGGER_LABELS: Record<CaptureTrigger, string> = {
+  "second-profile": "2nd clinic profile",
+  "shortlist-add": "Saved to shortlist",
+  manual: "Entered by admin",
+};
+
+/** Record lifecycle an operator manages (separate from email delivery). */
+export const CAPTURE_STATUSES = [
+  "new",
+  "archived",
+  "unsubscribed",
+  "spam",
+] as const;
+export type CaptureStatus = (typeof CAPTURE_STATUSES)[number];
+
+/** Outcome of the one guide email we owe the subscriber. */
+export const CAPTURE_DELIVERY_STATES = [
+  "pending",
+  "sent",
+  "failed",
+  "skipped",
+] as const;
+export type CaptureDelivery = (typeof CAPTURE_DELIVERY_STATES)[number];
+
+export const CAPTURE_DELIVERY_LABELS: Record<CaptureDelivery, string> = {
+  pending: "Pending",
+  sent: "Sent",
+  failed: "Failed",
+  skipped: "Not configured",
+};

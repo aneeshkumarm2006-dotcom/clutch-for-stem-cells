@@ -31,6 +31,11 @@ const FLAGS: [string, string, string][] = [
   ["enableBilling", "Billing", "Live Stripe billing for tiers"],
   ["enableSavedSearches", "Saved searches", "Save searches with alerts"],
   ["enableDarkMode", "Dark mode", "Theme toggle"],
+  [
+    "enableGuideCapture",
+    "Guide capture modal",
+    "Offer the shortlist + 12 questions email after a 2nd clinic profile or a shortlist save",
+  ],
 ];
 
 const NAV = [

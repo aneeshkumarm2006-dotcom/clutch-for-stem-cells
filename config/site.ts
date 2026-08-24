@@ -42,6 +42,8 @@ export const FEATURES = {
   enableSavedSearches: false,
   /** Dark mode (token map in Design appendix) — Phase 2. */
   enableDarkMode: false,
+  /** Guide-capture modal (shortlist + the 12 questions by email). */
+  enableGuideCapture: true,
 } as const;
 
 export type FeatureFlag = keyof typeof FEATURES;

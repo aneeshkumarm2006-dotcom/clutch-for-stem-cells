@@ -19,12 +19,31 @@ import { SITE_NAME } from "@/config/site";
 
 const STORAGE_KEY = "sc:cookie-consent";
 
+/** Dispatched on `window` the moment a choice is made. */
+export const COOKIE_CONSENT_EVENT = "sc:cookie-consent";
+
 type Choice = "accepted" | "rejected";
 
 /** Read the stored analytics-consent decision (client only). */
 export function hasAnalyticsConsent(): boolean {
   if (typeof window === "undefined") return false;
   return window.localStorage.getItem(STORAGE_KEY) === "accepted";
+}
+
+/**
+ * True while the banner is still on screen waiting for an answer. Anything that
+ * wants to open its own dialog should hold until this is false, so a visitor is
+ * never asked two things at once with the banner half-covered.
+ */
+export function isCookieChoicePending(): boolean {
+  if (typeof window === "undefined") return true;
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    return stored !== "accepted" && stored !== "rejected";
+  } catch {
+    // Storage blocked: the banner shows itself in this case, so it is pending.
+    return true;
+  }
 }
 
 export function CookieConsent() {
@@ -47,7 +66,7 @@ export function CookieConsent() {
     try {
       window.localStorage.setItem(STORAGE_KEY, choice);
       window.dispatchEvent(
-        new CustomEvent("sc:cookie-consent", { detail: choice }),
+        new CustomEvent(COOKIE_CONSENT_EVENT, { detail: choice }),
       );
     } catch {
       /* ignore persistence failures */

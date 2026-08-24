@@ -69,6 +69,7 @@ const featureFlagsSchema = z
     enableBilling: z.boolean(),
     enableSavedSearches: z.boolean(),
     enableDarkMode: z.boolean(),
+    enableGuideCapture: z.boolean(),
   })
   .partial();
 

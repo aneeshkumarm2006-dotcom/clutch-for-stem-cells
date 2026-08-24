@@ -94,6 +94,12 @@ export { Report, default as ReportModel } from "@/models/report";
 export type { IReport } from "@/models/report";
 
 export {
+  EmailCapture,
+  default as EmailCaptureModel,
+} from "@/models/email-capture";
+export type { IEmailCapture, ICaptureUtm } from "@/models/email-capture";
+
+export {
   BlockedSubmission,
   default as BlockedSubmissionModel,
   BLOCKED_FORMS,

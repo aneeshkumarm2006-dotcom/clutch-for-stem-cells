@@ -10,6 +10,7 @@ export * from "@/lib/validation/review";
 export * from "@/lib/validation/taxonomy";
 export * from "@/lib/validation/lead";
 export * from "@/lib/validation/report";
+export * from "@/lib/validation/email-capture";
 export * from "@/lib/validation/user";
 export * from "@/lib/validation/plan";
 export * from "@/lib/validation/site-setting";

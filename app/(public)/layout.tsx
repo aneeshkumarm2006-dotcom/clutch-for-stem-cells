@@ -9,9 +9,11 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { AccountNav } from "@/components/layout/account-nav";
 import { CookieConsent } from "@/components/compliance/cookie-consent";
+import { GuideCaptureModal } from "@/components/shortlist/guide-capture-modal";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 import { BaseSchema } from "@/components/seo/base-schema";
 import { getAnalyticsConfig } from "@/lib/analytics";
+import { isFeatureOn } from "@/lib/feature-flags";
 import { ShortlistProvider } from "@/lib/hooks/use-shortlist";
 
 export default async function PublicLayout({
@@ -21,7 +23,13 @@ export default async function PublicLayout({
 }) {
   // Provider config (admin Settings → env fallback). Read here so the client
   // scripts can load post-consent; cached, so it doesn't force dynamic render.
-  const analyticsConfig = await getAnalyticsConfig();
+  // The capture-modal flag comes from the same Settings singleton (kill switch
+  // in admin Settings → Feature flags), so flipping it off removes the modal
+  // from the tree entirely rather than only hiding it.
+  const [analyticsConfig, guideCapture] = await Promise.all([
+    getAnalyticsConfig(),
+    isFeatureOn("enableGuideCapture"),
+  ]);
 
   return (
     <ShortlistProvider>
@@ -41,6 +49,7 @@ export default async function PublicLayout({
         </main>
         <Footer />
         <CookieConsent />
+        {guideCapture ? <GuideCaptureModal /> : null}
       </div>
       <AnalyticsScripts config={analyticsConfig} />
     </ShortlistProvider>

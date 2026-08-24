@@ -187,6 +187,7 @@ export interface IFeatureFlags {
   enableBilling: boolean;
   enableSavedSearches: boolean;
   enableDarkMode: boolean;
+  enableGuideCapture: boolean;
 }
 
 /** Ranking weights w1..w6 (PRD §9). Admin-tunable; defaults sum to 1.0. */
@@ -514,6 +515,7 @@ const featureFlagsSchema = new Schema<IFeatureFlags>(
     enableBilling: { type: Boolean, default: false },
     enableSavedSearches: { type: Boolean, default: false },
     enableDarkMode: { type: Boolean, default: false },
+    enableGuideCapture: { type: Boolean, default: true },
   },
   { _id: false },
 );

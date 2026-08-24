@@ -1,6 +1,8 @@
 import { Badge, type BadgeProps } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type {
+  CaptureDelivery,
+  CaptureStatus,
   ClinicStatus,
   ClinicTier,
   LeadStatus,
@@ -53,6 +55,21 @@ const REPORT_STATUS: Record<ReportStatus, [Variant, string]> = {
   dismissed: ["neutral", "Dismissed"],
 };
 
+const CAPTURE_STATUS: Record<CaptureStatus, [Variant, string]> = {
+  new: ["info", "New"],
+  archived: ["neutral", "Archived"],
+  unsubscribed: ["warning", "Unsubscribed"],
+  spam: ["danger", "Spam"],
+};
+
+const CAPTURE_DELIVERY: Record<CaptureDelivery, [Variant, string]> = {
+  pending: ["warning", "Pending"],
+  sent: ["success", "Sent"],
+  failed: ["danger", "Failed"],
+  // Not an error: SMTP simply isn't configured in this environment.
+  skipped: ["neutral", "Not sent"],
+};
+
 const USER_STATUS: Record<UserStatus, [Variant, string]> = {
   active: ["success", "Active"],
   suspended: ["danger", "Suspended"],
@@ -95,6 +112,14 @@ export const LeadStatusBadge = ({ status }: { status: LeadStatus }) => (
 export const ReportStatusBadge = ({ status }: { status: ReportStatus }) => (
   <Pill pair={REPORT_STATUS[status]} />
 );
+export const CaptureStatusBadge = ({ status }: { status: CaptureStatus }) => (
+  <Pill pair={CAPTURE_STATUS[status]} />
+);
+export const CaptureDeliveryBadge = ({
+  delivery,
+}: {
+  delivery: CaptureDelivery;
+}) => <Pill pair={CAPTURE_DELIVERY[delivery]} />;
 export const UserStatusBadge = ({ status }: { status: UserStatus }) => (
   <Pill pair={USER_STATUS[status]} />
 );

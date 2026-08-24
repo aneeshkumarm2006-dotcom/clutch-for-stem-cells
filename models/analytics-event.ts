@@ -19,6 +19,12 @@ export const ANALYTICS_EVENT_NAMES = [
   "lead_submit",
   "review_submit",
   "search",
+  // Guide-capture modal funnel. `guide_capture` is fired server-side by the
+  // capture route, so it is complete; the two client-fired events are gated on
+  // analytics consent like every other beacon and therefore undercount.
+  "guide_modal_shown",
+  "guide_modal_dismissed",
+  "guide_capture",
 ] as const;
 
 export type AnalyticsEventName = (typeof ANALYTICS_EVENT_NAMES)[number];
