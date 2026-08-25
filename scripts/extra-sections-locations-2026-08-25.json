@@ -1,0 +1,51 @@
+{
+  "segment": "locations",
+  "terms": [
+    {
+      "slug": "usa",
+      "blocks": [
+        {
+          "type": "richText",
+          "data": {
+            "html": "<h2>What is actually different about getting treated in the United States</h2><p>If you are specifically looking for US-based options rather than treatment abroad, the main thing worth understanding upfront is the regulatory ceiling. The FDA currently restricts US clinics to minimally-manipulated, autologous, same-day procedures for orthopedic use. Our page on <a href=\"/treatments/autologous-therapy\">autologous therapy</a> explains what that means in practice.</p><p>This is why you will not find expanded or cultured cell treatments, or donor-derived cord tissue products marketed as stem cell therapy, at a compliant US clinic. Those fall outside what is currently permitted without going through the FDA drug approval pathway.</p><p>It is not necessarily a limitation. Same-day autologous treatment has the most straightforward safety profile of any approach on this site, because there is no outside lab processing and no donor material involved.</p><p>It does mean that if you have read about higher-dose, lab-expanded treatments, which are more common in Mexico, Panama and parts of Asia, you are unlikely to find an equivalent US option. Any US clinic claiming to offer one is worth questioning closely. Browse specific providers in our <a href=\"/find-a-clinic\">clinic directory</a>, or compare treatment approaches country by country on our <a href=\"/locations\">destinations page</a>.</p>"
+          }
+        },
+        {
+          "type": "checklist",
+          "data": {
+            "title": "What to check before treatment at a US clinic",
+            "intro": "A clinic operating legally in the United States has satisfied the FDA's rules on what may be done to cells before they go back in. That is all it tells you. It is not evidence the treatment works, so the checking a drug approval process would have done falls to you instead.",
+            "items": [
+              "Are these my own cells, and are they collected, processed and reinjected in the same visit? A compliant US orthopedic protocol answers yes to both.",
+              "Who performs the procedure, and what is their specialty? Regenerative injections are offered by physicians from a wide range of backgrounds.",
+              "Is the injection done under ultrasound or fluoroscopic guidance? For deeper joints such as the hip, this changes how accurately the cells land.",
+              "What does the quote include? Consultation, imaging, the procedure and follow-up visits are often priced separately.",
+              "Is the clinic making claims the FDA has warned about, such as treating unrelated systemic conditions with an orthopedic product?",
+              "What happens if a complication develops later, and who is responsible for treating it?"
+            ],
+            "footnote": "Run the answers past a doctor who knows your history before you commit. Our methodology page explains how we rank and verify the clinics listed here."
+          }
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Is stem cell therapy legal in the United States?",
+          "answer": "Minimally-manipulated, autologous, same-day procedures are offered legally at US clinics for orthopedic use. Expanded or cultured cell products, and donor-derived cord tissue products marketed as stem cell therapy, fall outside what the FDA currently permits without going through the drug approval pathway."
+        },
+        {
+          "question": "Why do US clinics not offer lab-expanded or cultured stem cells?",
+          "answer": "Culturing cells to multiply their numbers takes the product beyond the FDA's minimal manipulation standard, which puts it on the drug approval pathway. That is why expanded-cell protocols are more commonly found in countries such as Mexico, Panama and Thailand than at a compliant US clinic."
+        },
+        {
+          "question": "How much does stem cell therapy cost in the United States?",
+          "answer": "US clinics performing minimally-manipulated, same-day autologous procedures generally quote in the region of $4,000 to $10,000 per joint, though what you are actually charged depends on the condition, the protocol, and how many sessions are recommended. Ask specifically whether imaging guidance and follow-up visits are included in the quoted price."
+        },
+        {
+          "question": "Is stem cell therapy covered by insurance in the US?",
+          "answer": "Almost never, because it is not FDA-approved for orthopedic use. Most patients pay out of pocket, which is one of the reasons some research treatment abroad."
+        }
+      ],
+      "reviewStatus": "approved"
+    }
+  ]
+}
