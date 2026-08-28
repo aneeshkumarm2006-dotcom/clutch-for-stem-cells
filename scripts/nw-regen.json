@@ -1,0 +1,164 @@
+[
+  {
+    "name": "NW Regen",
+    "status": "published",
+    "tier": "basic",
+    "tagline": "Same-day autologous fat and PRP injections placed under ultrasound guidance, plus adipose stem cell banking through American Cell Technology",
+    "description": "NW Regen is a cash-pay regenerative and interventional medicine practice on SW Upper Boones Ferry Road in Portland, Oregon, running since 2018 under founder Ryan Wood. The orthopedic side is the part that puts it in this directory: prolotherapy, platelet-rich plasma, and micro-fragmented adipose tissue grafting for damaged tendons, ligaments, and joints, every injection placed under musculoskeletal ultrasound or fluoroscopy.\n\nThe cell therapy is autologous and minimally manipulated. Fat is harvested from the patient, micro-fragmented, and put back during the same visit, either into the joint or by IV. Nothing is culture expanded and no donor cells are used, which places the clinic in the same-day autologous category rather than the expanded-MSC market most offshore clinics work in. Wood holds the RMSK credential in diagnostic musculoskeletal sonography, and the practice also runs Digital Motion X-ray for craniocervical instability and upper cervical ligament injuries.\n\nPersonal stem cell banking is the unusual part. NW Regen harvests adipose-derived cells and sends them to American Cell Technology, an FDA-registered current good tissue practice facility, to be cryopreserved in liquid nitrogen. Banked cells stay available for later injections and IVs at the clinic, which is the whole argument for banking at forty rather than at the point of need at sixty.\n\nTwo things are worth knowing before you call. All three providers are naturopathic physicians and Wood also holds a chiropractic degree; there are no MDs or DOs on staff. And the highest-volume procedure in the building is not orthopedic at all, it is the stellate ganglion block, which Wood has performed more than 3,000 times for PTSD, dysautonomia, POTS, and long COVID. He teaches ultrasound-guided regenerative injection technique for the Hackett Hemwall Patterson Foundation and the European School of Prolotherapy and Regenerative Medicine. The office is open Monday through Thursday and closed Friday through Sunday.",
+
+    "logo": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1787853217/library/qjolulydhearc8rwn4cy.webp",
+      "publicId": "library/qjolulydhearc8rwn4cy",
+      "width": 800,
+      "height": 800,
+      "alt": "NW Regen logo"
+    },
+    "coverImage": {
+      "url": "https://res.cloudinary.com/de26l2h0a/image/upload/v1787853219/library/x3gp47qfxjbdc1kkvlmh.webp",
+      "publicId": "library/x3gp47qfxjbdc1kkvlmh",
+      "width": 1200,
+      "height": 675,
+      "alt": "NW Regen clinic branding over the Portland, Oregon riverfront"
+    },
+
+    "treatmentTypes": [
+      "stem-cell-banking",
+      "adipose-derived-therapy",
+      "autologous-therapy",
+      "regenerative-orthopedics",
+      "prp",
+      "iv-systemic-therapy"
+    ],
+    "conditionsTreated": [
+      "joint-pain",
+      "sports-injuries",
+      "knee-osteoarthritis",
+      "back-and-spine",
+      "rotator-cuff-shoulder",
+      "hip-osteoarthritis",
+      "neuropathy",
+      "hair-restoration",
+      "sexual-health",
+      "post-covid-recovery"
+    ],
+    "cellSources": ["adipose", "autologous"],
+    "accreditations": [],
+    "serviceFocus": [
+      { "treatment": "regenerative-orthopedics", "percent": 40 },
+      { "treatment": "prp", "percent": 20 },
+      { "treatment": "adipose-derived-therapy", "percent": 20 },
+      { "treatment": "stem-cell-banking", "percent": 10 },
+      { "treatment": "iv-systemic-therapy", "percent": 10 }
+    ],
+
+    "currency": "USD",
+    "priceModel": "consult_to_quote",
+    "priceNote": "No prices are published. NW Regen is cash-pay for everything it does and holds no insurance contracts, so fees are quoted after a consultation and scale with the length and complexity of the visit. A first appointment usually runs about an hour. HSA and FSA funds are accepted, CareCredit is not. The clinic issues superbills with procedure and diagnostic coding if you want to file an out-of-network claim yourself, though whether anything comes back is up to your insurer.",
+
+    "foundedYear": 2018,
+    "teamSize": "1-10",
+    "physiciansCount": 3,
+    "languages": ["English"],
+
+    "medicalDirector": {
+      "name": "Dr. Ryan R. Wood",
+      "title": "Founder and Clinical Director",
+      "credentials": "ND, DC, RMSK",
+      "bio": "Wood founded NW Regen and has practiced for close to twenty years. He is a licensed naturopathic physician who also holds a doctorate in chiropractic, and he carries the RMSK credential in diagnostic musculoskeletal sonography, which is the tool the rest of his practice is built around. His orthopedic work covers regenerative injection therapy, peripheral nerve entrapments and hydrodissection, and complex spine problems including craniocervical instability, where he pairs ultrasound with Digital Motion X-ray. Outside orthopedics he has performed more than 3,000 stellate ganglion blocks for PTSD, dysautonomia, POTS, and long COVID, which is among the highest counts anywhere. He lectures and teaches injection technique for the Hackett Hemwall Patterson Foundation and the European School of Prolotherapy and Regenerative Medicine, and publishes on ultrasound-guided nerve and autonomic procedures. Other clinicians refer refractory cases to him."
+    },
+    "team": [
+      {
+        "name": "Dr. Alicia Hart",
+        "title": "Integrative Physician",
+        "credentials": "ND",
+        "bio": "Hart is a naturopathic physician who handles the clinic's mental health and complex chronic care. She diagnoses and treats ADHD in adults and in children aged seven and up, and works with anxiety, CPTSD, depression, and postpartum mood disorders. She also carries much of the connective tissue and dysautonomia caseload, including Ehlers-Danlos, MCAS, and POTS, using a mix of medication management, herbal therapy, and lifestyle support."
+      },
+      {
+        "name": "Dr. William Hibbitts",
+        "title": "Naturopathic Physician",
+        "credentials": "ND",
+        "bio": "Hibbitts focuses on chronic pain and psychedelic-assisted therapy, and performs ultrasound-guided injections alongside Wood. He came to medicine sideways. A trek through the Andean highlands, where children asked him for medicine instead of sweets, emptied his first aid kit and pointed him at global health; he went on to spend more than two years in Guinea, West Africa as a Peace Corps public health volunteer, working with village medical staff and learning plant medicine from a local Karamoxo."
+      }
+    ],
+
+    "locations": [
+      {
+        "isHQ": true,
+        "addressLine": "16250 SW Upper Boones Ferry Rd",
+        "city": "Portland",
+        "region": "Oregon",
+        "country": "United States",
+        "countryCode": "US",
+        "postalCode": "97224",
+        "phone": "503-799-6115",
+        "lat": 45.3906,
+        "lng": -122.7516
+      }
+    ],
+
+    "website": "https://nwregen.com",
+    "contactEmail": "info@nwregen.com",
+    "social": {
+      "facebook": "https://www.facebook.com/nwregen",
+      "instagram": "https://www.instagram.com/nwregen1/",
+      "linkedin": "https://www.linkedin.com/company/nwregen/",
+      "youtube": "https://www.youtube.com/@NorthwestRegen"
+    },
+
+    "highlights": [
+      "Banks adipose-derived stem cells through American Cell Technology, an FDA-registered current good tissue practice facility",
+      "Banked cells can be drawn on later for both joint injections and IV therapy at the clinic",
+      "Cells are micro-fragmented and used the same visit; nothing is culture expanded and no donor cells are used",
+      "Every injection is placed under musculoskeletal ultrasound or fluoroscopic guidance",
+      "Founder Ryan Wood holds the RMSK credential and teaches injection technique for the Hackett Hemwall Patterson Foundation",
+      "All three providers are naturopathic physicians; there are no MDs or DOs on staff",
+      "Cash-pay only, with superbills for out-of-network claims and HSA or FSA funds accepted",
+      "Open Monday to Thursday, closed Friday through Sunday"
+    ],
+    "faqs": [
+      {
+        "question": "Is adipose stem cell therapy FDA approved?",
+        "answer": "No. Micro-fragmented adipose tissue used within the same procedure is handled as minimally manipulated autologous tissue, not as an approved drug, and there is no FDA-approved adipose stem cell product for arthritis, tendon injury, hair loss, or long COVID. Treat what NW Regen offers as investigational, and expect informed consent to say so."
+      },
+      {
+        "question": "What actually gets injected?",
+        "answer": "Your own fat, micro-fragmented on site into MFAT and put back the same day, either into the joint or by IV. That is not the same thing as stromal vascular fraction, which requires enzymatic digestion, and it is not culture-expanded MSCs. NW Regen also uses PRP from your blood and dextrose prolotherapy, often in combination."
+      },
+      {
+        "question": "How does the stem cell banking work?",
+        "answer": "Cells are harvested from your fat at the Portland office and shipped to American Cell Technology, which cryopreserves them in liquid nitrogen at an FDA-registered cGTP facility. They stay stored under your name and can be released back to NW Regen for later injections or IVs. The pitch is that you bank while your cells are younger than they will be when you need them."
+      },
+      {
+        "question": "What does it cost and will insurance pay?",
+        "answer": "Nothing is published, and everything is quoted after a consultation. NW Regen holds no insurance contracts and bills nobody but you. It will issue a superbill with the procedure and diagnostic codes so you can file an out-of-network claim, but whether anything comes back is between you and your insurer. HSA and FSA funds work; CareCredit is not accepted."
+      },
+      {
+        "question": "Are the providers medical doctors?",
+        "answer": "No. All three are licensed naturopathic physicians, and Ryan Wood additionally holds a doctorate in chiropractic and the RMSK sonography credential. Oregon licenses NDs with a wider scope than most states, injection therapy included, but if you specifically want an MD or DO holding the needle this is not the clinic."
+      },
+      {
+        "question": "Do they treat long COVID with stem cells?",
+        "answer": "Not primarily. The long COVID work here is built around the stellate ganglion block, an anesthetic injection aimed at the sympathetic chain, which Wood has done more than 3,000 times for autonomic conditions. Cell therapy and IVs are separate offerings and are not presented as the long COVID protocol."
+      },
+      {
+        "question": "What conditions do they inject for?",
+        "answer": "Knee, ankle and foot problems including meniscal tears, ACL, MCL and PCL tears, plantar fasciitis and Achilles tendinopathy; shoulder, elbow, wrist and hand tears and chronic tendinitis; hip and sacroiliac pain and instability; and neck and back problems including cervical degenerative disc disease, herniated discs and craniocervical instability. Nerve work covers carpal tunnel, entrapments and peripheral neuropathy."
+      },
+      {
+        "question": "How long is a hair restoration appointment?",
+        "answer": "About an hour and a half in total, with roughly twenty-five minutes of that spent injecting. NW Regen uses PRP and MFAT for androgenic alopecia and alopecia areata in both men and women, and says most people see changes around three months with the fuller picture at six months or later. Sessions are usually repeated."
+      }
+    ],
+
+    "seo": {
+      "focusKeyword": "nw regen"
+    },
+    "reviewsPage": {
+      "seo": {
+        "focusKeyword": "nw regen reviews"
+      }
+    },
+
+    "isClaimed": false
+  }
+]
