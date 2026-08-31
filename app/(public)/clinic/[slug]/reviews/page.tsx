@@ -19,8 +19,9 @@
  * toggle and the filtered/paged variants.
  *
  * Every piece of copy here has an editor override on `Clinic.reviewsPage`
- * (admin → clinic → "Reviews page"): heading, both intro variants, a Markdown
- * body under the list, the sidebar card, and a `seo` block scoped to this URL.
+ * (admin → clinic → "Reviews page"): heading, both intro variants, the "What
+ * Patients Say" summary, a Markdown body under the list, the sidebar card, and
+ * a `seo` block scoped to this URL.
  * Each one is a fallback, not a replacement — an unset field keeps the derived
  * copy below, which is what every clinic without a `reviewsPage` renders. The
  * Markdown body is the one that is additive rather than a fallback: it renders
@@ -185,6 +186,7 @@ export default async function ClinicReviewsPage({
     stats.total > 0 ? cms?.intro : (cms?.introEmpty ?? cms?.intro),
   );
   const bodyMarkdown = override(cms?.bodyMarkdown);
+  const summary = override(cms?.summary);
 
   // Same `clinic` content type as the profile, so any per-record schema
   // overrides an editor set in the admin panel still apply. The `MedicalClinic`
@@ -420,13 +422,19 @@ export default async function ClinicReviewsPage({
             />
           ) : null}
 
-          {/* Review list */}
+          {/* Review list, under the heading the reviews themselves answer.
+              "What Patients Say" replaced a count-only heading ("All 12
+              reviews") in August 2026: the count is still on the page twice
+              over — in the intro and in the muted line below — and a heading
+              that states the question a searcher typed is worth more than one
+              that restates a number. `reviewsPage.summary` is the answer to it
+              in prose, written per clinic from its own reviews, and it is the
+              passage an AI answer engine can quote as-is. Clinics without a
+              summary render the heading straight onto the list, as before. */}
           <section id="reviews" className="mt-10 scroll-mt-24">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="font-display text-xl font-semibold text-text-primary">
-                {stats.total > 0
-                  ? `All ${formatCount(stats.total)} ${stats.total === 1 ? "review" : "reviews"}`
-                  : "Patient reviews"}
+                What Patients Say
               </h2>
               {stats.total > 0 ? (
                 <ReviewsControls
@@ -442,6 +450,20 @@ export default async function ClinicReviewsPage({
                 />
               ) : null}
             </div>
+
+            {summary ? (
+              <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-text-secondary">
+                {summary}
+              </p>
+            ) : null}
+
+            {stats.total > 0 && !isFiltered ? (
+              <p className="mt-2 text-[13px] text-text-muted">
+                All {formatCount(stats.total)}{" "}
+                {stats.total === 1 ? "review" : "reviews"} published for{" "}
+                {clinic.name} on this site.
+              </p>
+            ) : null}
 
             {isFiltered ? (
               <p className="mt-3 text-[13.5px] text-text-secondary">

@@ -87,6 +87,7 @@ const reviewsPageSchema = z
     heading: z.preprocess(blankToUndefined, z.string().max(200).optional()),
     intro: z.preprocess(blankToUndefined, z.string().max(2000).optional()),
     introEmpty: z.preprocess(blankToUndefined, z.string().max(2000).optional()),
+    summary: z.preprocess(blankToUndefined, z.string().max(2000).optional()),
     bodyMarkdown: z.preprocess(
       blankToUndefined,
       z.string().max(20_000).optional(),

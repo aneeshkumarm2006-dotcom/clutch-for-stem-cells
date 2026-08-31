@@ -155,6 +155,7 @@ export interface ClinicFormValues {
     heading?: string;
     intro?: string;
     introEmpty?: string;
+    summary?: string;
     bodyMarkdown?: string;
     ctaHeading?: string;
     ctaBody?: string;
@@ -1484,10 +1485,17 @@ export function ClinicForm({
               hint="Used instead of the above while the clinic has zero published reviews."
               {...register("reviewsPage.introEmpty")}
             />
+            <TextareaField
+              label="“What Patients Say” summary"
+              rows={4}
+              hint="Sits under the What Patients Say heading, above the reviews themselves. Write it from the reviews this clinic actually has: the condition, the treatment, the outcome reported, how long it took, and the doctor or staff named. Leave blank and the heading simply sits on top of the list."
+              {...register("reviewsPage.summary")}
+            />
             <ContentFlagWarning
               texts={[
                 watch("reviewsPage.intro"),
                 watch("reviewsPage.introEmpty"),
+                watch("reviewsPage.summary"),
                 watch("reviewsPage.bodyMarkdown"),
                 watch("reviewsPage.ctaBody"),
               ]}

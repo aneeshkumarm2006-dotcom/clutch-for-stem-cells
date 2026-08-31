@@ -125,6 +125,22 @@ export interface IClinicReviewsPage {
   intro?: string;
   /** Intro paragraph shown when it has none yet. */
   introEmpty?: string;
+  /**
+   * "What patients say" summary, rendered as plain prose directly under that
+   * heading and above the review list.
+   *
+   * Hand-written per clinic *from the reviews this clinic actually has* — the
+   * condition treated, what was done, the outcome reported, over what timeline,
+   * and the doctor or staff named. Nothing here may be derived, which is why it
+   * is a stored field rather than another `ReviewsContext` paragraph: a
+   * generator can count stars, it cannot read four reviews and say what they
+   * have in common. It is also the passage an AI answer engine can lift whole
+   * when asked "what do patients say about <clinic>".
+   *
+   * Unset on a clinic with no reviews, and on one nobody has written a summary
+   * for yet: the heading and list render exactly as they did before.
+   */
+  summary?: string;
   /** Markdown section rendered under the review list (editorial context). */
   bodyMarkdown?: string;
   /** Sidebar "Been treated here?" card copy. */
@@ -475,6 +491,7 @@ const clinicReviewsPageSchema = new Schema<IClinicReviewsPage>(
     heading: { type: String, trim: true, maxlength: 200 },
     intro: { type: String, trim: true, maxlength: 2000 },
     introEmpty: { type: String, trim: true, maxlength: 2000 },
+    summary: { type: String, trim: true, maxlength: 2000 },
     bodyMarkdown: { type: String },
     ctaHeading: { type: String, trim: true, maxlength: 200 },
     ctaBody: { type: String, trim: true, maxlength: 1000 },

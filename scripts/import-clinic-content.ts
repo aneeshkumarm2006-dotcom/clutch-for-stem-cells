@@ -59,6 +59,7 @@ const CHILD_FIELDS: Record<string, readonly string[]> = {
     "heading",
     "intro",
     "introEmpty",
+    "summary",
     "bodyMarkdown",
     "ctaHeading",
     "ctaBody",

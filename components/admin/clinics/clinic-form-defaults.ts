@@ -51,6 +51,7 @@ export function emptyClinic(): ClinicFormValues {
       heading: "",
       intro: "",
       introEmpty: "",
+      summary: "",
       bodyMarkdown: "",
       ctaHeading: "",
       ctaBody: "",

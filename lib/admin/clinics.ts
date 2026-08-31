@@ -260,6 +260,7 @@ export async function getAdminClinicFormData(
       heading: c.reviewsPage?.heading ?? "",
       intro: c.reviewsPage?.intro ?? "",
       introEmpty: c.reviewsPage?.introEmpty ?? "",
+      summary: c.reviewsPage?.summary ?? "",
       bodyMarkdown: c.reviewsPage?.bodyMarkdown ?? "",
       ctaHeading: c.reviewsPage?.ctaHeading ?? "",
       ctaBody: c.reviewsPage?.ctaBody ?? "",
