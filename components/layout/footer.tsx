@@ -29,6 +29,10 @@ export const DEFAULT_FOOTER_COLUMNS: FooterColumn[] = [
       { label: "Treatments", href: "/treatments" },
       { label: "Conditions", href: "/conditions" },
       { label: "Destinations", href: "/locations" },
+      // Sitewide rather than only from the hub: the calculators are entry
+      // points from search, and a section reachable only from its own index is
+      // a section nothing links to.
+      { label: "Calculators", href: "/tools" },
       { label: "Write a review", href: "/reviews/new" },
       { label: "Blog", href: "/blog" },
     ],

@@ -10,6 +10,7 @@
 import type { MetadataRoute } from "next";
 
 import { absoluteUrl } from "@/lib/seo";
+import { TOOLS, TOOLS_PATH, toolPath } from "@/config/tools";
 import {
   getClinicCostSitemapEntries,
   getClinicReviewSitemapEntries,
@@ -40,6 +41,15 @@ const STATIC_ROUTES: {
   { path: "/locations", changeFrequency: "weekly", priority: 0.8 },
   { path: "/blog", changeFrequency: "daily", priority: 0.7 },
   { path: "/find-a-clinic", changeFrequency: "monthly", priority: 0.7 },
+  { path: TOOLS_PATH, changeFrequency: "monthly", priority: 0.6 },
+  // One row per calculator, from the registry, so a new tool cannot ship
+  // missing from the sitemap. Their copy changes rarely; the numbers on the
+  // cost tools change with the directory, which is why they are not `yearly`.
+  ...TOOLS.map((tool) => ({
+    path: toolPath(tool.slug),
+    changeFrequency: "monthly" as ChangeFreq,
+    priority: 0.5,
+  })),
   { path: "/for-clinics", changeFrequency: "monthly", priority: 0.6 },
   { path: "/about", changeFrequency: "monthly", priority: 0.4 },
   { path: "/methodology", changeFrequency: "monthly", priority: 0.5 },

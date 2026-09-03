@@ -33,6 +33,7 @@
  */
 import { SITE_NAME } from "@/config/site";
 import type { StaticPageGroup } from "@/config/static-pages";
+import { TOOLS, TOOLS_HUB, toolPath } from "@/config/tools";
 import type { BlockInput } from "@/lib/validation/block";
 
 /** A one-off string a page owns that is not a title, lead, or block. */
@@ -875,6 +876,88 @@ export const EDITABLE_PAGES: EditablePage[] = [
     legalReview: true,
     blocks: prose(TERMS_BODY),
   },
+  // ── Calculators ───────────────────────────────────────────────────────────
+  //
+  // Generated from `config/tools.ts` rather than typed out again, so the copy an
+  // editor sees in the admin is the copy the page renders, and a new calculator
+  // arrives in the CMS the moment it is added to the registry.
+  //
+  // Each tool ships two blocks: the explainer, then the FAQ. Splitting them is
+  // what lets an editor rewrite one without touching the other, and the FAQ
+  // block is the one that emits `FAQPage` JSON-LD, so keeping it a real block
+  // rather than folding it into the prose is load-bearing for the structured
+  // data as well as for the editing.
+  {
+    path: TOOLS_HUB.path,
+    label: "Tools hub",
+    group: "Tools",
+    notes: {
+      title: "The page H1.",
+      lead: "The paragraph under the H1. Links are allowed.",
+      blocks: "Rendered below the grid of tools.",
+    },
+    hasUpdated: false,
+    hasLegalReview: false,
+    hasBlocks: true,
+    hasBlocksAfter: false,
+    extras: [
+      {
+        key: "eyebrow",
+        label: "Eyebrow badge",
+        hint: "The small pill above the H1.",
+        value: TOOLS_HUB.eyebrow,
+      },
+      {
+        key: "intro",
+        label: "Privacy line",
+        hint: "Shown under the H1, above the tool grid.",
+        value: TOOLS_HUB.intro,
+      },
+    ],
+    title: TOOLS_HUB.heading,
+    lead: TOOLS_HUB.lead,
+    blocks: prose(TOOLS_HUB.body),
+  },
+  ...TOOLS.map(
+    (tool): EditablePage => ({
+      path: toolPath(tool.slug),
+      label: tool.name,
+      group: "Tools",
+      notes: {
+        title: "The page H1.",
+        lead: "The paragraph under the H1. Links are allowed.",
+        blocks:
+          "Rendered below the calculator: the explainer, then the FAQ. The FAQ block is what produces this page's FAQ structured data.",
+      },
+      hasUpdated: false,
+      hasLegalReview: false,
+      hasBlocks: true,
+      hasBlocksAfter: false,
+      extras: [
+        {
+          key: "eyebrow",
+          label: "Eyebrow badge",
+          hint: "The small pill above the H1.",
+          value: tool.eyebrow,
+        },
+      ],
+      title: tool.heading,
+      lead: tool.lead,
+      blocks: [
+        ...prose(tool.body),
+        {
+          type: "faq",
+          data: {
+            title: "Common questions",
+            items: tool.faqs.map((f) => ({
+              question: f.question,
+              answer: f.answer,
+            })),
+          },
+        },
+      ],
+    }),
+  ),
 ];
 
 const BY_PATH = new Map(EDITABLE_PAGES.map((p) => [p.path, p]));
@@ -904,5 +987,6 @@ export const EDITABLE_PAGE_GROUPS: StaticPageGroup[] = [
   "Core",
   "Directory",
   "Content",
+  "Tools",
   "Legal",
 ];

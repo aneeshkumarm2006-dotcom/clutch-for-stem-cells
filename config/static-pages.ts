@@ -20,9 +20,15 @@
  * form `normalizePagePath` produces, which is what the override lookup keys on.
  */
 import { SITE_NAME } from "@/config/site";
+import { TOOLS, TOOLS_HUB, toolPath } from "@/config/tools";
 
 /** Grouping used purely to section the `/admin/seo` list. */
-export type StaticPageGroup = "Core" | "Directory" | "Content" | "Legal";
+export type StaticPageGroup =
+  | "Core"
+  | "Directory"
+  | "Content"
+  | "Tools"
+  | "Legal";
 
 export interface StaticPageMeta {
   /** Normalized root-relative path, e.g. `/` or `/find-a-clinic`. */
@@ -174,6 +180,23 @@ export const STATIC_PAGES: StaticPageMeta[] = [
     title: "Terms of service",
     description: `The terms that govern your use of ${SITE_NAME}.`,
   },
+  // Calculators. Generated from `config/tools.ts` so a tool's shipped title and
+  // description live next to the copy they head, and adding a calculator cannot
+  // leave it missing from `/admin/seo`.
+  {
+    path: TOOLS_HUB.path,
+    label: "Tools hub",
+    group: "Tools",
+    title: TOOLS_HUB.title,
+    description: TOOLS_HUB.description,
+  },
+  ...TOOLS.map((tool) => ({
+    path: toolPath(tool.slug),
+    label: tool.name,
+    group: "Tools" as const,
+    title: tool.title,
+    description: tool.description,
+  })),
 ];
 
 /**
@@ -202,5 +225,6 @@ export const STATIC_PAGE_GROUPS: StaticPageGroup[] = [
   "Core",
   "Directory",
   "Content",
+  "Tools",
   "Legal",
 ];

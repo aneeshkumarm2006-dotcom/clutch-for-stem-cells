@@ -23,6 +23,7 @@
  * same contract `app/sitemap.ts` uses.
  */
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/config/site";
+import { TOOLS, TOOLS_PATH, toolPath } from "@/config/tools";
 import { absoluteUrl } from "@/lib/seo";
 import {
   getConditions,
@@ -128,6 +129,21 @@ export async function GET(): Promise<Response> {
     section("Treatments", termLinks(treatments, "/treatments")),
     section("Conditions", termLinks(conditions, "/conditions")),
     section("Destinations", termLinks(countries, "/locations")),
+    // Calculators, from the registry. An assistant asked "what does this cost"
+    // or "am I a candidate" should be pointed at a tool that computes an
+    // answer, not at a page that discusses the question.
+    section("Calculators", [
+      {
+        name: "All calculators",
+        path: TOOLS_PATH,
+        note: "free, browser-side tools for cost, candidacy, symptom scores and body metrics",
+      },
+      ...TOOLS.map((tool) => ({
+        name: tool.name,
+        path: toolPath(tool.slug),
+        note: tool.blurb,
+      })),
+    ]),
     section("Editorial standards", [
       {
         name: "Methodology",
