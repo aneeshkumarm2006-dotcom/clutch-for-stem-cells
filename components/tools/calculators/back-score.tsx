@@ -33,9 +33,9 @@ const MAX_PER_SECTION = 5;
  * that before they spend four minutes rating how far they can walk, not after.
  */
 export function BackScoreCalculator() {
-  const [answers, setAnswers] = React.useState<Record<string, number | undefined>>(
-    {},
-  );
+  const [answers, setAnswers] = React.useState<
+    Record<string, number | undefined>
+  >({});
 
   const result = scoreQuestionnaire({
     domains: DOMAINS,
@@ -79,7 +79,10 @@ export function BackScoreCalculator() {
           </Button>
         </div>
 
-        <AnsweredMeter answered={result.answered} total={BACK_SECTIONS.length} />
+        <AnsweredMeter
+          answered={result.answered}
+          total={BACK_SECTIONS.length}
+        />
 
         <div className="space-y-6">
           {BACK_SECTIONS.map((section, i) => (

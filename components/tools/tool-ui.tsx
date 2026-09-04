@@ -247,9 +247,7 @@ export function Segmented<T extends string>({
               key={opt.value}
               className={cn(
                 "flex-1 cursor-pointer rounded-[7px] px-3 text-center font-medium transition-colors",
-                size === "sm"
-                  ? "py-1 text-[12.5px]"
-                  : "py-1.5 text-[13px]",
+                size === "sm" ? "py-1 text-[12.5px]" : "py-1.5 text-[13px]",
                 active
                   ? "bg-surface text-text-primary shadow-xs"
                   : "text-text-muted hover:text-text-secondary",
@@ -423,8 +421,7 @@ export function LikertScaleKey({ scale }: { scale: string[] }) {
     <p className="px-3 pb-2 text-[12px] text-text-muted">
       {scale.map((label, i) => (
         <span key={label} className="mr-3 inline-block whitespace-nowrap">
-          <span className="font-semibold text-text-secondary">{i}</span>{" "}
-          {label}
+          <span className="font-semibold text-text-secondary">{i}</span> {label}
         </span>
       ))}
     </p>
@@ -514,7 +511,9 @@ export function ResultStat({
         {value}
       </p>
       {hint ? (
-        <p className="mt-0.5 text-[12px] leading-snug text-text-muted">{hint}</p>
+        <p className="mt-0.5 text-[12px] leading-snug text-text-muted">
+          {hint}
+        </p>
       ) : null}
     </div>
   );
@@ -572,10 +571,7 @@ export function ScaleBar({
   activeLabel?: string;
 }) {
   const span = Math.max(axisMax - axisMin, 1);
-  const pct = Math.min(
-    100,
-    Math.max(0, ((value - axisMin) / span) * 100),
-  );
+  const pct = Math.min(100, Math.max(0, ((value - axisMin) / span) * 100));
 
   return (
     <div className="mt-4" aria-hidden="true">
@@ -601,7 +597,7 @@ export function ScaleBar({
           })}
         </div>
         <div
-          className="absolute -top-1 size-4.5 -translate-x-1/2 rounded-full border-[3px] border-primary bg-surface shadow-sm"
+          className="size-4.5 absolute -top-1 -translate-x-1/2 rounded-full border-[3px] border-primary bg-surface shadow-sm"
           style={{ left: `${pct}%`, height: 18, width: 18 }}
         />
       </div>

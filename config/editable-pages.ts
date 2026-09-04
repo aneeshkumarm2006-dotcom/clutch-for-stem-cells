@@ -446,7 +446,7 @@ export const EDITABLE_PAGES: EditablePage[] = [
     hasBlocksAfter: true,
     extras: [],
     title: "Frequently asked questions",
-    lead: 'Can\'t find what you\'re looking for? <a href="/contact">Contact our team</a>.',
+    lead: "Can't find what you're looking for? <a href=\"/contact\">Contact our team</a>.",
     blocks: [{ type: "faq", data: { title: undefined, items: FAQ_ITEMS } }],
     blocksAfter: prose(FAQ_AFTER_BODY),
   },
@@ -742,7 +742,8 @@ export const EDITABLE_PAGES: EditablePage[] = [
     label: "Site search",
     group: "Directory",
     notes: {
-      title: "The H1 shown before a query is typed. With a query the H1 becomes the query itself.",
+      title:
+        "The H1 shown before a query is typed. With a query the H1 becomes the query itself.",
       lead: "The paragraph under the H1. Links are allowed.",
       blocks: "Rendered below the results.",
       seo: "Applies to the bare /search landing. Every ?q= results page is already noindex in code.",
@@ -783,7 +784,11 @@ export const EDITABLE_PAGES: EditablePage[] = [
     hasBlocks: true,
     hasBlocksAfter: false,
     extras: [
-      { key: "emptyTitle", label: "Empty-state heading", value: "No posts yet" },
+      {
+        key: "emptyTitle",
+        label: "Empty-state heading",
+        value: "No posts yet",
+      },
       {
         key: "emptyDescription",
         label: "Empty-state description",
@@ -918,46 +923,44 @@ export const EDITABLE_PAGES: EditablePage[] = [
     lead: TOOLS_HUB.lead,
     blocks: prose(TOOLS_HUB.body),
   },
-  ...TOOLS.map(
-    (tool): EditablePage => ({
-      path: toolPath(tool.slug),
-      label: tool.name,
-      group: "Tools",
-      notes: {
-        title: "The page H1.",
-        lead: "The paragraph under the H1. Links are allowed.",
-        blocks:
-          "Rendered below the calculator: the explainer, then the FAQ. The FAQ block is what produces this page's FAQ structured data.",
+  ...TOOLS.map((tool): EditablePage => ({
+    path: toolPath(tool.slug),
+    label: tool.name,
+    group: "Tools",
+    notes: {
+      title: "The page H1.",
+      lead: "The paragraph under the H1. Links are allowed.",
+      blocks:
+        "Rendered below the calculator: the explainer, then the FAQ. The FAQ block is what produces this page's FAQ structured data.",
+    },
+    hasUpdated: false,
+    hasLegalReview: false,
+    hasBlocks: true,
+    hasBlocksAfter: false,
+    extras: [
+      {
+        key: "eyebrow",
+        label: "Eyebrow badge",
+        hint: "The small pill above the H1.",
+        value: tool.eyebrow,
       },
-      hasUpdated: false,
-      hasLegalReview: false,
-      hasBlocks: true,
-      hasBlocksAfter: false,
-      extras: [
-        {
-          key: "eyebrow",
-          label: "Eyebrow badge",
-          hint: "The small pill above the H1.",
-          value: tool.eyebrow,
+    ],
+    title: tool.heading,
+    lead: tool.lead,
+    blocks: [
+      ...prose(tool.body),
+      {
+        type: "faq",
+        data: {
+          title: "Common questions",
+          items: tool.faqs.map((f) => ({
+            question: f.question,
+            answer: f.answer,
+          })),
         },
-      ],
-      title: tool.heading,
-      lead: tool.lead,
-      blocks: [
-        ...prose(tool.body),
-        {
-          type: "faq",
-          data: {
-            title: "Common questions",
-            items: tool.faqs.map((f) => ({
-              question: f.question,
-              answer: f.answer,
-            })),
-          },
-        },
-      ],
-    }),
-  ),
+      },
+    ],
+  })),
 ];
 
 const BY_PATH = new Map(EDITABLE_PAGES.map((p) => [p.path, p]));

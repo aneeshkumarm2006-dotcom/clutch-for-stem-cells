@@ -19,7 +19,12 @@ import {
   ToolNote,
   ToolPanel,
 } from "@/components/tools/tool-ui";
-import { BMI_BANDS, calcBmi, kneeLoadFromExcessKg, round } from "@/lib/tools/calc";
+import {
+  BMI_BANDS,
+  calcBmi,
+  kneeLoadFromExcessKg,
+  round,
+} from "@/lib/tools/calc";
 
 /**
  * BMI, with the part that makes it relevant here: what the excess weight is
@@ -45,10 +50,22 @@ export function BmiCalculator() {
   return (
     <div className="space-y-4">
       <ToolPanel className="space-y-4">
-        <UnitsToggle units={units} onChange={setUnits} className="max-w-[220px]" />
+        <UnitsToggle
+          units={units}
+          onChange={setUnits}
+          className="max-w-[220px]"
+        />
         <ToolGrid>
-          <HeightField units={units} valueCm={heightCm} onChange={setHeightCm} />
-          <WeightField units={units} valueKg={weightKg} onChange={setWeightKg} />
+          <HeightField
+            units={units}
+            valueCm={heightCm}
+            onChange={setHeightCm}
+          />
+          <WeightField
+            units={units}
+            valueKg={weightKg}
+            onChange={setWeightKg}
+          />
         </ToolGrid>
       </ToolPanel>
 

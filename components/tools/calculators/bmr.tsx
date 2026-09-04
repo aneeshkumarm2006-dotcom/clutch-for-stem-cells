@@ -56,15 +56,17 @@ export function BmrCalculator() {
   // How far apart the two equations land. Usually small; worth showing when it
   // is not, because a large gap is a signal the inputs sit at the edge of where
   // either equation was fitted.
-  const spread = result
-    ? Math.abs(result.bmr - result.bmrHarrisBenedict)
-    : 0;
+  const spread = result ? Math.abs(result.bmr - result.bmrHarrisBenedict) : 0;
 
   return (
     <div className="space-y-4">
       <ToolPanel className="space-y-5">
         <div className="flex flex-wrap gap-3">
-          <UnitsToggle units={units} onChange={setUnits} className="w-[200px]" />
+          <UnitsToggle
+            units={units}
+            onChange={setUnits}
+            className="w-[200px]"
+          />
           <Segmented<Sex>
             label="Sex"
             size="sm"
@@ -79,8 +81,16 @@ export function BmrCalculator() {
         </div>
 
         <ToolGrid cols={3}>
-          <HeightField units={units} valueCm={heightCm} onChange={setHeightCm} />
-          <WeightField units={units} valueKg={weightKg} onChange={setWeightKg} />
+          <HeightField
+            units={units}
+            valueCm={heightCm}
+            onChange={setHeightCm}
+          />
+          <WeightField
+            units={units}
+            valueKg={weightKg}
+            onChange={setWeightKg}
+          />
           <NumberField
             label="Age"
             suffix="yrs"

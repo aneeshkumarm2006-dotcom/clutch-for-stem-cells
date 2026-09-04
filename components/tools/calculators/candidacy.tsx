@@ -25,9 +25,9 @@ import { scoreCandidacy } from "@/lib/tools/cost";
  * a good profile can outweigh a contraindication.
  */
 export function CandidacyCalculator() {
-  const [answers, setAnswers] = React.useState<Record<string, string | undefined>>(
-    {},
-  );
+  const [answers, setAnswers] = React.useState<
+    Record<string, string | undefined>
+  >({});
 
   const result = scoreCandidacy(CANDIDACY_QUESTIONS, answers);
   const started = result.answered > 0;

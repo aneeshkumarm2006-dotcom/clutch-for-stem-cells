@@ -57,7 +57,9 @@ export function TravelCostCalculator({
   const [upfrontExtras, setUpfrontExtras] = React.useState<number | undefined>(
     400,
   );
-  const [followUpTrips, setFollowUpTrips] = React.useState<number | undefined>(0);
+  const [followUpTrips, setFollowUpTrips] = React.useState<number | undefined>(
+    0,
+  );
   const [contingency, setContingency] = React.useState<Contingency>("0.1");
 
   const result = estimateTravelCost({
@@ -210,8 +212,8 @@ export function TravelCostCalculator({
         <ToolNote>
           Settle three things in writing before booking. Who is responsible if a
           complication develops once you are home, what follow-up the quoted
-          price includes, and whether your own insurer or doctor will pick up the
-          aftermath of a procedure they did not authorise.
+          price includes, and whether your own insurer or doctor will pick up
+          the aftermath of a procedure they did not authorise.
         </ToolNote>
 
         <div className="mt-5 flex flex-col gap-2 sm:flex-row">

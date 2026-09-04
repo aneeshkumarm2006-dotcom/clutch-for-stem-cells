@@ -21,10 +21,7 @@
  */
 
 export type ToolCategory =
-  | "Cost and budget"
-  | "Candidacy"
-  | "Symptom scores"
-  | "Body metrics";
+  "Cost and budget" | "Candidacy" | "Symptom scores" | "Body metrics";
 
 /** Icon key, resolved to a lucide icon in `components/tools/tool-icon.tsx`. */
 export type ToolIcon =
@@ -121,7 +118,7 @@ export const TOOLS: ToolDef[] = [
 <p>Every band shows how many clinics produced it. A band built from four clinics is a hint. A band built from thirty is close to a market rate. Where a treatment has too few published prices to stand on its own, the calculator falls back to the all-clinics band and tells you it has.</p>
 <h2>How the adjustments work</h2>
 <p>Two extra areas do not cost twice one area. The consultation, the cell harvest or vial preparation and the procedure time are paid once whichever joint is being injected, so each additional area is costed at roughly two thirds of the first. Repeat sessions are costed at four fifths, because a second session repeats most of the procedure but not the workup.</p>
-<p>Choosing a destination scales the result by that country's median against the global median across the directory. That is a real effect and often a large one, but it is a price signal rather than a quality signal, and reading it as either would be a mistake.</p>
+<p>Choosing a destination scales the result by that country's median against the global median across the directory. That is a real effect and often a large one, but it is a price signal, not a quality signal.</p>
 <h2>What a quote leaves out</h2>
 <p>Clinic pricing is quoted for the procedure. Imaging, pre-treatment bloodwork, physiotherapy afterwards and follow-up appointments are frequently billed separately, and if you are travelling then flights and accommodation can add a third again on top. Price the trip, not the injection, and get in writing what a figure covers before you commit to it.</p>
 `,
@@ -480,7 +477,11 @@ export const TOOLS: ToolDef[] = [
           "Some clinics offer it for degenerative disc disease and facet joint pain. The evidence is less developed than for knee osteoarthritis, and delivering anything into a disc and then measuring what happened is genuinely difficult. Ask for the specific diagnosis being treated and what published results exist for it.",
       },
     ],
-    related: ["knee-pain-score", "am-i-a-candidate", "stem-cell-cost-calculator"],
+    related: [
+      "knee-pain-score",
+      "am-i-a-candidate",
+      "stem-cell-cost-calculator",
+    ],
   },
   {
     slug: "bmr-calculator",
@@ -558,7 +559,7 @@ export const TOOLS: ToolDef[] = [
 <p>The US Navy circumference method typically lands within three to four percentage points of a DEXA scan, which is enough to place you in a band and to track direction over time. It is not enough to argue about a single point. Where it struggles is with unusual fat distribution and with very lean or very heavy people, both of which sit outside the population it was fitted on.</p>
 <p>Without tape measurements the calculator uses the Deurenberg equation, which estimates body fat from BMI, age and sex. It carries all of BMI's problems, including calling muscular people fat, so treat it as a rough placeholder rather than a measurement.</p>
 <h2>What the bands mean</h2>
-<p>Essential fat is the minimum the body needs to function, around 3 to 5 percent for men and 10 to 13 percent for women, and going below it is dangerous rather than impressive. The athletic and fitness bands above it describe what regular training tends to produce. The average band is where most of the adult population sits, and it is a description rather than a diagnosis.</p>
+<p>Essential fat is the minimum the body needs to function, around 3 to 5 percent for men and 10 to 13 percent for women, and going below it is dangerous rather than impressive. The athletic and fitness bands above it describe what regular training tends to produce. The average band is where most of the adult population sits, and being in it diagnoses nothing.</p>
 <h2>Why it is more useful than BMI</h2>
 <p>Because it separates the two things BMI cannot. Lean mass is what supports and stabilises a joint, and fat mass is what loads it. Two people with the same BMI and a fifteen point difference in body fat are in genuinely different positions when it comes to a painful knee, and only one of those numbers can see it.</p>
 `,
@@ -566,7 +567,7 @@ export const TOOLS: ToolDef[] = [
       {
         question: "What is a healthy body fat percentage?",
         answer:
-          "Roughly 14 to 24 percent for men and 21 to 31 percent for women covers the fitness and average bands used here. Women carry more essential fat than men for physiological reasons, which is why the bands differ rather than being a single scale.",
+          "Roughly 14 to 24 percent for men and 21 to 31 percent for women covers the fitness and average bands used here. Women carry more essential fat than men, so the bands are set separately by sex.",
       },
       {
         question: "How accurate is the Navy method?",
@@ -705,7 +706,10 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
 ];
 
 /** Tools grouped for the hub, in category order, skipping empty groups. */
-export function toolsByCategory(): { category: ToolCategory; tools: ToolDef[] }[] {
+export function toolsByCategory(): {
+  category: ToolCategory;
+  tools: ToolDef[];
+}[] {
   return TOOL_CATEGORIES.map((category) => ({
     category,
     tools: TOOLS.filter((t) => t.category === category),

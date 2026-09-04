@@ -24,11 +24,7 @@ import { TOOLS, TOOLS_HUB, toolPath } from "@/config/tools";
 
 /** Grouping used purely to section the `/admin/seo` list. */
 export type StaticPageGroup =
-  | "Core"
-  | "Directory"
-  | "Content"
-  | "Tools"
-  | "Legal";
+  "Core" | "Directory" | "Content" | "Tools" | "Legal";
 
 export interface StaticPageMeta {
   /** Normalized root-relative path, e.g. `/` or `/find-a-clinic`. */

@@ -142,8 +142,9 @@ export function SurgeryCompareCalculator({ data }: { data: ToolPriceData }) {
             sub={
               <>
                 A course of {treatment!.name.toLowerCase()} at{" "}
-                {money(regenerative.typical)} against a {surgery.label.toLowerCase()}{" "}
-                midpoint of {money(comparison.surgeryMidpoint)}. That is{" "}
+                {money(regenerative.typical)} against a{" "}
+                {surgery.label.toLowerCase()} midpoint of{" "}
+                {money(comparison.surgeryMidpoint)}. That is{" "}
                 {comparison.relativePercent}% of the surgery figure.
               </>
             }
@@ -174,9 +175,9 @@ export function SurgeryCompareCalculator({ data }: { data: ToolPriceData }) {
 
           {comparison.overlaps ? (
             <ToolNote tone="warning">
-              At these settings the two price ranges overlap, so cost is not what
-              separates the options for you. Weigh the evidence and the recovery
-              time instead.
+              At these settings the two price ranges overlap, so cost is not
+              what separates the options for you. Weigh the evidence and the
+              recovery time instead.
             </ToolNote>
           ) : null}
 

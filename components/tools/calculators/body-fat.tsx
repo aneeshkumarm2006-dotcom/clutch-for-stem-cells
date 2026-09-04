@@ -66,7 +66,11 @@ export function BodyFatCalculator() {
     <div className="space-y-4">
       <ToolPanel className="space-y-5">
         <div className="flex flex-wrap gap-3">
-          <UnitsToggle units={units} onChange={setUnits} className="w-[200px]" />
+          <UnitsToggle
+            units={units}
+            onChange={setUnits}
+            className="w-[200px]"
+          />
           <Segmented<Sex>
             label="Sex"
             size="sm"
@@ -81,8 +85,16 @@ export function BodyFatCalculator() {
         </div>
 
         <ToolGrid cols={3}>
-          <HeightField units={units} valueCm={heightCm} onChange={setHeightCm} />
-          <WeightField units={units} valueKg={weightKg} onChange={setWeightKg} />
+          <HeightField
+            units={units}
+            valueCm={heightCm}
+            onChange={setHeightCm}
+          />
+          <WeightField
+            units={units}
+            valueKg={weightKg}
+            onChange={setWeightKg}
+          />
           <NumberField
             label="Age"
             suffix="yrs"
@@ -181,17 +193,17 @@ export function BodyFatCalculator() {
 
           {result.method === "bmi" ? (
             <ToolNote tone="warning">
-              This figure came from the Deurenberg equation, which estimates body
-              fat from BMI, age and sex. It inherits everything BMI cannot see,
-              including calling muscular people fat. Add a neck and waist
+              This figure came from the Deurenberg equation, which estimates
+              body fat from BMI, age and sex. It inherits everything BMI cannot
+              see, including calling muscular people fat. Add a neck and waist
               measurement for a result worth tracking.
             </ToolNote>
           ) : (
             <ToolNote>
-              Measure at the same time of day each time, ideally before eating. A
-              centimetre of error moves the result by roughly a percentage point,
-              so consistency matters more than getting any single reading exactly
-              right.
+              Measure at the same time of day each time, ideally before eating.
+              A centimetre of error moves the result by roughly a percentage
+              point, so consistency matters more than getting any single reading
+              exactly right.
             </ToolNote>
           )}
         </ResultPanel>

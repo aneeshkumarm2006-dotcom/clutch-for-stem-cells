@@ -60,13 +60,7 @@ export function itemIdsFor(def: QuestionnaireDef): string[] {
 
 // ── Knee ────────────────────────────────────────────────────────────────────
 
-const FIVE_POINT = [
-  "None",
-  "Mild",
-  "Moderate",
-  "Severe",
-  "Extreme",
-];
+const FIVE_POINT = ["None", "Mild", "Moderate", "Severe", "Extreme"];
 
 /**
  * Knee pain, stiffness and function over the last 48 hours. Three domains and
@@ -79,7 +73,8 @@ export const KNEE_QUESTIONNAIRE: QuestionnaireDef = {
     {
       key: "pain",
       label: "Pain",
-      prompt: "How much knee pain have you had in the last 48 hours when you are",
+      prompt:
+        "How much knee pain have you had in the last 48 hours when you are",
       items: [
         { id: "p1", label: "Walking on flat ground" },
         { id: "p2", label: "Going up or down stairs" },

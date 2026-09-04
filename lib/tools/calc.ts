@@ -51,12 +51,7 @@ export type Sex = "male" | "female";
 // ── BMI ─────────────────────────────────────────────────────────────────────
 
 export type BmiCategory =
-  | "underweight"
-  | "healthy"
-  | "overweight"
-  | "obese-1"
-  | "obese-2"
-  | "obese-3";
+  "underweight" | "healthy" | "overweight" | "obese-1" | "obese-2" | "obese-3";
 
 export interface BmiBand {
   key: BmiCategory;
@@ -135,11 +130,7 @@ export function kneeLoadFromExcessKg(excessKg: number): {
 // ── BMR and TDEE ────────────────────────────────────────────────────────────
 
 export type ActivityLevel =
-  | "sedentary"
-  | "light"
-  | "moderate"
-  | "active"
-  | "very-active";
+  "sedentary" | "light" | "moderate" | "active" | "very-active";
 
 export const ACTIVITY_FACTORS: Record<
   ActivityLevel,
@@ -299,7 +290,10 @@ export function calcBodyFatDeurenberg(
   sex: Sex,
 ): number {
   const bf =
-    1.2 * bmi + 0.23 * clamp(age, 15, 100) - 10.8 * (sex === "male" ? 1 : 0) - 5.4;
+    1.2 * bmi +
+    0.23 * clamp(age, 15, 100) -
+    10.8 * (sex === "male" ? 1 : 0) -
+    5.4;
   return round(Math.max(2, bf), 1);
 }
 

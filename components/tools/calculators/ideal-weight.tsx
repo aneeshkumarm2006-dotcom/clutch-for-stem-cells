@@ -33,7 +33,9 @@ export function IdealWeightCalculator() {
   const [units, setUnits] = React.useState<Units>("metric");
   const [sex, setSex] = React.useState<Sex>("male");
   const [heightCm, setHeightCm] = React.useState<number | undefined>(178);
-  const [currentKg, setCurrentKg] = React.useState<number | undefined>(undefined);
+  const [currentKg, setCurrentKg] = React.useState<number | undefined>(
+    undefined,
+  );
 
   const result = heightCm ? calcIdealWeight(heightCm, sex) : null;
 
@@ -52,7 +54,11 @@ export function IdealWeightCalculator() {
     <div className="space-y-4">
       <ToolPanel className="space-y-5">
         <div className="flex flex-wrap gap-3">
-          <UnitsToggle units={units} onChange={setUnits} className="w-[200px]" />
+          <UnitsToggle
+            units={units}
+            onChange={setUnits}
+            className="w-[200px]"
+          />
           <Segmented<Sex>
             label="Sex"
             size="sm"
@@ -67,7 +73,11 @@ export function IdealWeightCalculator() {
         </div>
 
         <ToolGrid>
-          <HeightField units={units} valueCm={heightCm} onChange={setHeightCm} />
+          <HeightField
+            units={units}
+            valueCm={heightCm}
+            onChange={setHeightCm}
+          />
           <WeightField
             units={units}
             valueKg={currentKg}
@@ -82,7 +92,7 @@ export function IdealWeightCalculator() {
           <ResultHeadline
             label="Healthy weight range for your height"
             value={`${formatWeight(result.healthyBmiRangeKg.min, units)} to ${formatWeight(result.healthyBmiRangeKg.max, units)}`}
-            sub="This is the range clinicians work with. Everywhere inside it is fine, and where you sit within it reasonably depends on build."
+            sub="This is the range clinicians work with. Everywhere inside it is fine, and where you sit within it depends on build."
           />
 
           <Breakdown

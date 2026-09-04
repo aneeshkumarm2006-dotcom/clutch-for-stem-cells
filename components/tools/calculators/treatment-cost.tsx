@@ -24,10 +24,7 @@ import {
 } from "@/components/ui/select";
 import { formatPrice } from "@/lib/format";
 import { estimateTreatmentCost } from "@/lib/tools/cost";
-import {
-  countryFactor,
-  type ToolPriceData,
-} from "@/lib/tools/price-band";
+import { countryFactor, type ToolPriceData } from "@/lib/tools/price-band";
 
 const ANY_COUNTRY = "__any";
 
@@ -86,11 +83,10 @@ export function TreatmentCostCalculator({ data }: { data: ToolPriceData }) {
     return (
       <ToolPanel>
         <p className="text-[14px] leading-relaxed text-text-secondary">
-          No clinic in the directory publishes pricing in {data.currency} yet, so
-          there is nothing here to build an estimate from. Rather than show an
-          invented range, this calculator waits until there is real data behind
-          it. In the meantime, clinic profiles list prices where the clinic has
-          given one.
+          No clinic in the directory publishes pricing in {data.currency} yet,
+          so there is nothing here to build an estimate from, and this
+          calculator will not invent one. In the meantime, clinic profiles list
+          prices where the clinic has given one.
         </p>
         <Button asChild className="mt-4">
           <Link href="/clinics">Browse clinics</Link>
@@ -147,8 +143,8 @@ export function TreatmentCostCalculator({ data }: { data: ToolPriceData }) {
               </SelectContent>
             </Select>
             <p className="text-[12.5px] text-text-muted">
-              Scales the estimate by how that country&apos;s median compares with
-              the directory median. A price signal, not a quality signal.
+              Scales the estimate by how that country&apos;s median compares
+              with the directory median. A price signal, not a quality signal.
             </p>
           </div>
         </ToolSection>
@@ -222,9 +218,7 @@ export function TreatmentCostCalculator({ data }: { data: ToolPriceData }) {
 
           <div className="mt-5">
             <Button asChild>
-              <Link href={directoryHref}>
-                See clinics in this range
-              </Link>
+              <Link href={directoryHref}>See clinics in this range</Link>
             </Button>
           </div>
         </ResultPanel>

@@ -209,10 +209,7 @@ test("body fat falls back to the BMI estimate and says so", () => {
   assert.equal(withoutTape.method, "bmi");
 
   // Fat and lean mass must account for the whole body, whichever method ran.
-  assert.equal(
-    round(withTape.fatMassKg + withTape.leanMassKg, 1),
-    85,
-  );
+  assert.equal(round(withTape.fatMassKg + withTape.leanMassKg, 1), 85);
 });
 
 test("ideal weight formulas and the healthy range", () => {
@@ -447,9 +444,7 @@ test("travel cost reports the non-treatment share", () => {
 });
 
 test("surgery comparison reports direction and overlap", () => {
-  const surgery = SURGERY_REFERENCES.find(
-    (s) => s.key === "knee-replacement",
-  )!;
+  const surgery = SURGERY_REFERENCES.find((s) => s.key === "knee-replacement")!;
 
   const cheaper = compareWithSurgery(surgery, {
     low: 6_000,

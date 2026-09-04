@@ -172,7 +172,12 @@ export const CANDIDACY_QUESTIONS: CandidacyQuestion[] = [
         points: 4,
         note: "Remission is not automatically a bar, but it needs your oncologist's view in writing before a clinic will proceed.",
       },
-      { value: "never", label: "No history of cancer", effect: "positive", points: 10 },
+      {
+        value: "never",
+        label: "No history of cancer",
+        effect: "positive",
+        points: 10,
+      },
     ],
   },
   {
@@ -191,7 +196,8 @@ export const CANDIDACY_QUESTIONS: CandidacyQuestion[] = [
   },
   {
     id: "blood",
-    question: "Are you taking blood thinners or do you have a clotting disorder?",
+    question:
+      "Are you taking blood thinners or do you have a clotting disorder?",
     answers: [
       {
         value: "yes",
@@ -306,7 +312,12 @@ export const CANDIDACY_QUESTIONS: CandidacyQuestion[] = [
     question: "Would you travel abroad for treatment?",
     answers: [
       { value: "yes", label: "Yes", effect: "positive", points: 10 },
-      { value: "maybe", label: "Possibly, for the right clinic", effect: "neutral", points: 8 },
+      {
+        value: "maybe",
+        label: "Possibly, for the right clinic",
+        effect: "neutral",
+        points: 8,
+      },
       {
         value: "no",
         label: "No, treatment has to be local",

@@ -36,9 +36,9 @@ const ITEM_IDS = itemIdsFor(DEF);
  * from the denominator, so a half-filled form does not read as a healthy knee.
  */
 export function KneeScoreCalculator() {
-  const [answers, setAnswers] = React.useState<Record<string, number | undefined>>(
-    {},
-  );
+  const [answers, setAnswers] = React.useState<
+    Record<string, number | undefined>
+  >({});
 
   const result = scoreQuestionnaire({
     domains: DOMAINS,
@@ -138,10 +138,9 @@ export function KneeScoreCalculator() {
           {complete ? (
             <ToolNote>
               Note the score and today&apos;s date. Repeated in three and six
-              months,
-              the change is worth far more than the number on its own, because
-              symptom recall over months is poor and a dated pair of scores is
-              not.
+              months, the change is worth far more than the number on its own,
+              because symptom recall over months is poor and a dated pair of
+              scores is not.
             </ToolNote>
           ) : (
             <ToolNote tone="warning">

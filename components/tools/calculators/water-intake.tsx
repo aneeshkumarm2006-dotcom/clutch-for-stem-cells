@@ -19,7 +19,12 @@ import {
   ToolNote,
   ToolPanel,
 } from "@/components/tools/tool-ui";
-import { CLIMATE_FACTORS, calcWaterIntake, round, type Climate } from "@/lib/tools/calc";
+import {
+  CLIMATE_FACTORS,
+  calcWaterIntake,
+  round,
+  type Climate,
+} from "@/lib/tools/calc";
 
 const CLIMATES: Climate[] = ["temperate", "warm", "hot"];
 
@@ -49,10 +54,18 @@ export function WaterIntakeCalculator() {
   return (
     <div className="space-y-4">
       <ToolPanel className="space-y-5">
-        <UnitsToggle units={units} onChange={setUnits} className="max-w-[220px]" />
+        <UnitsToggle
+          units={units}
+          onChange={setUnits}
+          className="max-w-[220px]"
+        />
 
         <ToolGrid>
-          <WeightField units={units} valueKg={weightKg} onChange={setWeightKg} />
+          <WeightField
+            units={units}
+            valueKg={weightKg}
+            onChange={setWeightKg}
+          />
           <NumberField
             label="Exercise a day"
             suffix="min"
@@ -96,7 +109,10 @@ export function WaterIntakeCalculator() {
               value={volume(result.drinkMl, units)}
               emphasis
             />
-            <ResultStat label="From food" value={volume(result.fromFoodMl, units)} />
+            <ResultStat
+              label="From food"
+              value={volume(result.fromFoodMl, units)}
+            />
             <ResultStat
               label="Climate adjustment"
               value={`x${CLIMATE_FACTORS[climate].factor}`}
@@ -118,8 +134,8 @@ export function WaterIntakeCalculator() {
 
           <ToolNote>
             Urine colour is a better day-to-day check than any calculation. Pale
-            straw means you are fine. If you have kidney disease, heart failure or
-            a fluid target from a clinician, that target overrides everything
+            straw means you are fine. If you have kidney disease, heart failure
+            or a fluid target from a clinician, that target overrides everything
             here.
           </ToolNote>
         </ResultPanel>

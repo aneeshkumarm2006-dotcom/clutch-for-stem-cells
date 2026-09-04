@@ -105,15 +105,15 @@ export function estimateTreatmentCost(
   const countryFactor = clamp(input.countryFactor, 0.2, 4);
 
   const areaFactor = round(1 + ADDITIONAL_AREA_SHARE * (areas - 1), 2);
-  const sessionFactor = round(
-    1 + ADDITIONAL_SESSION_SHARE * (sessions - 1),
-    2,
-  );
+  const sessionFactor = round(1 + ADDITIONAL_SESSION_SHARE * (sessions - 1), 2);
 
   const total = areaFactor * sessionFactor * countryFactor;
 
   const steps = [
-    { label: `${areas} area${areas > 1 ? "s" : ""} treated`, factor: areaFactor },
+    {
+      label: `${areas} area${areas > 1 ? "s" : ""} treated`,
+      factor: areaFactor,
+    },
     {
       label: `${sessions} session${sessions > 1 ? "s" : ""} in the course`,
       factor: sessionFactor,
@@ -246,7 +246,8 @@ export function estimateTravelCost(input: TravelCostInput): TravelCostResult {
     contingency,
     total,
     nonTreatmentTotal,
-    overheadPercent: total > 0 ? round((nonTreatmentTotal / total) * 100, 0) : 0,
+    overheadPercent:
+      total > 0 ? round((nonTreatmentTotal / total) * 100, 0) : 0,
   };
 }
 
@@ -411,11 +412,7 @@ export interface CandidacyQuestion {
 }
 
 export type CandidacyVerdict =
-  | "blocked"
-  | "unlikely"
-  | "possible"
-  | "reasonable"
-  | "strong";
+  "blocked" | "unlikely" | "possible" | "reasonable" | "strong";
 
 export interface CandidacyResult {
   verdict: CandidacyVerdict;
@@ -433,10 +430,7 @@ export interface CandidacyResult {
   strengths: string[];
 }
 
-const VERDICTS: Record<
-  CandidacyVerdict,
-  { label: string; summary: string }
-> = {
+const VERDICTS: Record<CandidacyVerdict, { label: string; summary: string }> = {
   blocked: {
     label: "Not right now",
     summary:
@@ -488,7 +482,10 @@ export function scoreCandidacy(
     answered += 1;
 
     if (chosen.effect === "blocker") {
-      blockers.push({ question: q.question, note: chosen.note ?? chosen.label });
+      blockers.push({
+        question: q.question,
+        note: chosen.note ?? chosen.label,
+      });
       continue;
     }
 

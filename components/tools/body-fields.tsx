@@ -97,7 +97,8 @@ export function HeightField({
         value={feet}
         placeholder="5"
         onChange={(ft) => {
-          if (ft === undefined && inches === undefined) return onChange(undefined);
+          if (ft === undefined && inches === undefined)
+            return onChange(undefined);
           onChange(round(feetInchesToCm(ft ?? 0, inches ?? 0), 1));
         }}
       />
@@ -109,7 +110,8 @@ export function HeightField({
         value={inches}
         placeholder="10"
         onChange={(inch) => {
-          if (inch === undefined && feet === undefined) return onChange(undefined);
+          if (inch === undefined && feet === undefined)
+            return onChange(undefined);
           onChange(round(feetInchesToCm(feet ?? 0, inch ?? 0), 1));
         }}
       />
@@ -151,7 +153,9 @@ export function WeightField({
       max={880}
       value={valueKg === undefined ? undefined : round(kgToLb(valueKg), 1)}
       placeholder="165"
-      onChange={(lb) => onChange(lb === undefined ? undefined : round(lbToKg(lb), 1))}
+      onChange={(lb) =>
+        onChange(lb === undefined ? undefined : round(lbToKg(lb), 1))
+      }
     />
   );
 }
