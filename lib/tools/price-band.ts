@@ -28,6 +28,8 @@ export interface ToolPriceData {
   overall: PriceBand;
   /** One entry per treatment that at least one priced clinic offers. */
   treatments: PriceSlice[];
+  /** One entry per condition at least one priced clinic treats. */
+  conditions: PriceSlice[];
   /** One entry per country with at least one priced clinic. */
   countries: PriceSlice[];
   currency: string;
@@ -87,6 +89,73 @@ export function bandFromPoints(points: PricePoint[]): PriceBand {
   };
 }
 
+/** Which slice a cost estimate started from. */
+export type BandSource = "treatment" | "condition" | "overall";
+
+export interface BaseBandChoice {
+  band: PriceBand;
+  source: BandSource;
+  /** What to call it in "worked out from the base band for X". */
+  label: string;
+  /** False when the slice borrowed the all-clinics band. */
+  ownData: boolean;
+}
+
+/**
+ * Choose the band a cost estimate starts from, given what the visitor picked.
+ *
+ * Treatment wins over condition wherever it has its own data, because clinics
+ * price a procedure rather than a diagnosis: "what MSC therapy costs" is a
+ * quoted thing, while "what treating knee osteoarthritis costs" is the general
+ * pricing of the clinics that happen to list that condition. The condition band
+ * is a real fallback and a useful one, but it is the weaker of the two and the
+ * `source` this returns is what lets the page say which it used.
+ */
+export function pickBaseBand(input: {
+  treatment?: PriceSlice;
+  condition?: PriceSlice;
+  overall: PriceBand;
+}): BaseBandChoice | null {
+  const { treatment, condition, overall } = input;
+  if (treatment?.ownData) {
+    return {
+      band: treatment.band,
+      source: "treatment",
+      label: treatment.name,
+      ownData: true,
+    };
+  }
+  if (condition?.ownData) {
+    return {
+      band: condition.band,
+      source: "condition",
+      label: condition.name,
+      ownData: true,
+    };
+  }
+  // Neither slice stands on its own. Prefer whichever the visitor named, so the
+  // page can say "too few clinics publish a price for X" about the thing they
+  // actually chose, rather than about a field they left alone.
+  const named = treatment ?? condition;
+  if (named) {
+    return {
+      band: named.band,
+      source: treatment ? "treatment" : "condition",
+      label: named.name,
+      ownData: false,
+    };
+  }
+  if (overall.typical > 0) {
+    return {
+      band: overall,
+      source: "overall",
+      label: "all listed clinics",
+      ownData: overall.sampleSize > 0,
+    };
+  }
+  return null;
+}
+
 /** The destination multiplier: a country's median against the global median. */
 export function countryFactor(
   country: PriceBand | undefined,
@@ -108,6 +177,7 @@ export function emptyPriceData(currency: string): ToolPriceData {
   return {
     overall: { low: 0, typical: 0, high: 0, sampleSize: 0 },
     treatments: [],
+    conditions: [],
     countries: [],
     currency,
     clinicCount: 0,

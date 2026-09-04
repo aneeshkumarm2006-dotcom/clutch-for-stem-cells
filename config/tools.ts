@@ -21,7 +21,11 @@
  */
 
 export type ToolCategory =
-  "Cost and budget" | "Candidacy" | "Symptom scores" | "Body metrics";
+  | "Find a clinic"
+  | "Cost and budget"
+  | "Candidacy"
+  | "Symptom scores"
+  | "Body metrics";
 
 /** Icon key, resolved to a lucide icon in `components/tools/tool-icon.tsx`. */
 export type ToolIcon =
@@ -35,7 +39,10 @@ export type ToolIcon =
   | "percent"
   | "ruler"
   | "droplet"
-  | "stethoscope";
+  | "stethoscope"
+  | "search"
+  | "table"
+  | "bone";
 
 export interface ToolFaq {
   question: string;
@@ -79,17 +86,17 @@ export const TOOLS_HUB = {
   path: TOOLS_PATH,
   title: "Health and Cost Calculators",
   description:
-    "Free calculators for people researching regenerative medicine, covering treatment cost, travel budget, candidacy screening, joint symptom scores and body metrics.",
+    "Free calculators for people researching regenerative medicine, covering clinic matching, treatment cost, travel budget, candidacy screening, joint symptom scores and body metrics.",
   eyebrow: "Free tools",
   heading: "Calculators and tools",
-  lead: "Work out what treatment is likely to cost, whether you fit the profile clinics treat, and how your symptoms score today. Nothing here asks for an email and no result is stored.",
+  lead: "Work out which clinics fit what you are looking for, what treatment is likely to cost, whether you fit the profile clinics treat, and how your symptoms score today. Nothing here asks for an email and no result is stored.",
   /** Intro rendered above the tool grid. */
   intro:
     "Every calculator runs in your browser. Numbers you type are not sent anywhere, and results are not saved between visits.",
   body: `
 <h2>What these are for</h2>
 <p>Researching a treatment you pay for yourself involves a lot of arithmetic that nobody does for you. What is this likely to cost once travel is in it. Am I even the sort of patient this is offered to. Is my knee bad enough to be worth it, or bad enough that the window has closed. These tools do that arithmetic and show their working.</p>
-<p>The cost tools are built on prices published by clinics listed in this directory, so the starting figure is not a guess and you can click through to the profiles behind it. The screening and symptom tools encode what clinics ask on their own intake forms, which is a reasonable proxy for whether a consultation is worth booking.</p>
+<p>The cost and matching tools are built on what clinics listed in this directory actually publish, so the starting figure is not a guess and you can click through to the profiles behind it. Nothing in the matching is weighted by what a clinic pays for its listing. The screening and symptom tools encode what clinics ask on their own intake forms, which is a reasonable proxy for whether a consultation is worth booking.</p>
 <h2>What they are not</h2>
 <p>None of these is a diagnosis, and none replaces an examination. A score of 62 on a symptom questionnaire is a number to take to an appointment, not a decision. The candidacy tool can tell you that active cancer rules treatment out today because every reputable clinic screens for it, but it cannot tell you that a treatment will work, because for most of the conditions clinics advertise, nobody can say that yet.</p>
 <p>Use them to arrive at a consultation with better questions and a realistic budget. That is genuinely worth something, and it is all a calculator can honestly offer.</p>
@@ -100,6 +107,68 @@ export const TOOLS_HUB = {
 
 export const TOOLS: ToolDef[] = [
   {
+    slug: "clinic-match-quiz",
+    name: "Clinic match quiz",
+    category: "Find a clinic",
+    icon: "search",
+    blurb:
+      "Four questions, then the clinics in this directory that fit, and what each one misses.",
+    title: "Stem Cell Clinic Match Quiz",
+    description:
+      "Answer four questions about condition, treatment, budget and destination, and see which clinics in our directory match, ranked by fit with every gap shown.",
+    eyebrow: "Four questions, three clinics",
+    heading: "Stem cell clinic match quiz",
+    lead: "Tell it what you want treated, what you are willing to spend and where you would travel. It ranks the clinics listed here against those answers and shows you what each one does not match on, not only what it does.",
+    body: `
+<h2>How the matching works</h2>
+<p>Four inputs, weighted in the order they actually matter. Condition carries the most weight, because a clinic that does not treat your condition is not a near miss, it is the wrong clinic. Treatment type comes next, then destination, then budget. Budget is weighted lowest of the four on purpose: a published price range is an opening figure rather than a quote, and ranking it above clinical fit would put the cheapest clinic at the top of a list for a condition it does not treat.</p>
+<p>Anything you leave blank is left out of the calculation rather than counted against a clinic. Answer only the condition and the score you see is a fair read of condition fit alone. That also means a shortlist built on one answer is a weaker shortlist, which is why the panel says how many criteria it used.</p>
+<h2>What the match percentage means</h2>
+<p>It is the share of your criteria a clinic meets, and nothing more. Ninety percent does not mean a ninety percent chance of a good outcome, that the clinic is any good, or that the treatment works. It means the clinic ticks most of the boxes you described. The result panel prints what each clinic missed for exactly this reason: a list showing only the hits reads as an endorsement of every row on it, including the third one that is there because nothing better existed.</p>
+<p>When nothing in the directory meets everything you asked for, the panel says so and shows the nearest partial matches instead of quietly pretending they are full ones. Usually widening the destination is enough to fix it.</p>
+<h2>Placement in these results is not for sale</h2>
+<p>The ranking uses your four answers, then rating and review count to break ties. A clinic's listing plan, its featured flag and its position in the directory have no effect on it at all. Paid placement elsewhere on this site is labelled where it appears; here there is none to label, because a tool that says "these three fit what you described" while sorting by who paid would be selling advertising dressed as advice.</p>
+<h2>What to do with a shortlist</h2>
+<p>Treat it as three profiles worth reading properly, not three recommendations. Before contacting any of them, get the specifics in writing: what cells, from what source, how many, who performs the procedure and what their qualifications are, what the price covers and what it does not, what happens if there is a complication after you fly home, and what the clinic will and will not claim about results. A clinic that answers all of that plainly has told you more than any match score can.</p>
+<p>Nothing you enter is sent anywhere. The quiz runs in your browser against a list built into the page, there is no form to submit, no email to hand over, and no record kept of what you selected.</p>
+<h2>This or the guided match</h2>
+<p>There are two ways to narrow the directory on this site and they are for different moods. This quiz answers immediately and asks for nothing: you see the shortlist, you read the profiles, you contact whoever you want on your own terms. The <a href="/find-a-clinic">guided match</a> asks the same questions plus a timeframe and your contact details, and puts you in front of clinics rather than the other way around.</p>
+<p>If you are still working out what your options even are, start here. If you already know roughly what you want and would rather have clinics come to you with quotes, that one saves you writing the same email five times. The result panel links across once you have a shortlist.</p>
+`,
+    faqs: [
+      {
+        question: "How do I choose a stem cell clinic?",
+        answer:
+          "Start with the ones that treat your condition and offer the treatment you have been researching, then judge them on specifics: who performs the procedure and their qualifications, what the cells are and where they come from, whether the facility is accredited, what the quoted price includes, and how aftercare works if you have travelled. This quiz narrows the first part. The second part is a conversation, and a clinic that will not put its answers in writing has answered you anyway.",
+      },
+      {
+        question: "Is this shortlist paid placement?",
+        answer:
+          "No. Results are ordered by how many of your criteria each clinic meets, with rating and review count breaking ties. Listing plans and featured placement have no effect on the ranking here.",
+      },
+      {
+        question: "Do I have to give my email to see the results?",
+        answer:
+          "No. There is no form and no gate. The quiz runs entirely in your browser and nothing you select is sent to us or stored.",
+      },
+      {
+        question: "Why does a clinic appear that does not match my condition?",
+        answer:
+          "Because too few clinics matched everything you asked for to fill three places, so the closest partial matches are shown instead, each labelled with what it misses. That is deliberate. An empty list is more useful than three false positives, and a list padded with silent mismatches is worse than either.",
+      },
+      {
+        question: "Does a high match score mean the treatment will work?",
+        answer:
+          "No, and it is not able to. The score describes how well a clinic fits the preferences you typed in. It says nothing about whether stem cell therapy is effective for your condition, which for most of the conditions clinics advertise is still an open question that no directory can settle.",
+      },
+    ],
+    related: [
+      "stem-cell-cost-calculator",
+      "am-i-a-candidate",
+      "treatment-comparison",
+    ],
+  },
+  {
     slug: "stem-cell-cost-calculator",
     name: "Treatment cost calculator",
     category: "Cost and budget",
@@ -108,14 +177,18 @@ export const TOOLS: ToolDef[] = [
       "Estimate a course of treatment from prices clinics in this directory publish.",
     title: "Stem Cell Therapy Cost Calculator",
     description:
-      "Estimate what stem cell therapy costs by treatment type, number of joints and destination, using prices published by clinics in our directory.",
+      "Estimate what stem cell therapy costs by condition, treatment type, number of joints and destination, from prices published by clinics in our directory.",
     eyebrow: "Built on published clinic prices",
     heading: "Stem cell therapy cost calculator",
-    lead: "Pick a treatment, how many areas you need treated and where you would go. The estimate starts from what clinics on this site actually publish, not from a made-up average.",
+    lead: "Pick a condition, a treatment, how many areas you need treated and where you would go. The estimate starts from what clinics on this site actually publish, and it lists the clinics it came from underneath.",
     body: `
 <h2>Where the numbers come from</h2>
 <p>The starting band for each treatment is taken from the price ranges published by clinics listed in this directory, in US dollars. The low figure is the 25th percentile of what those clinics quote at the bottom of their range, the high figure is the 75th percentile of their upper bounds, and the typical figure is the median midpoint. Percentiles rather than the raw minimum and maximum, so one unusually cheap or unusually expensive clinic does not stretch the whole band out of shape.</p>
 <p>Every band shows how many clinics produced it. A band built from four clinics is a hint. A band built from thirty is close to a market rate. Where a treatment has too few published prices to stand on its own, the calculator falls back to the all-clinics band and tells you it has.</p>
+<h2>Condition or treatment, and why the answer differs</h2>
+<p>Both selectors change the estimate, but they are not equally strong. Clinics price a procedure, not a diagnosis, so the band for a named treatment is close to a quoted thing. A band cut by condition is the general pricing of the clinics that list that condition, which is a weaker claim and useful mainly when you know what you want treated but not yet how. Where you pick both, the treatment band is what the estimate starts from, and the panel always names the band it used.</p>
+<h2>The clinics under the result</h2>
+<p>The estimate is followed by listings that fit what you selected, ordered by how well they match and never by what a clinic pays. That is the point of running this on a directory rather than in an article: the number is not a closing figure, it is a route into the records it was calculated from, and you can click through and check them. A clinic quoting well outside the band is not automatically wrong, but it is worth asking why.</p>
 <h2>How the adjustments work</h2>
 <p>Two extra areas do not cost twice one area. The consultation, the cell harvest or vial preparation and the procedure time are paid once whichever joint is being injected, so each additional area is costed at roughly two thirds of the first. Repeat sessions are costed at four fifths, because a second session repeats most of the procedure but not the workup.</p>
 <p>Choosing a destination scales the result by that country's median against the global median across the directory. That is a real effect and often a large one, but it is a price signal, not a quality signal.</p>
@@ -150,9 +223,9 @@ export const TOOLS: ToolDef[] = [
       },
     ],
     related: [
+      "clinic-match-quiz",
       "medical-travel-cost-calculator",
-      "stem-cell-vs-surgery-cost",
-      "am-i-a-candidate",
+      "treatment-comparison",
     ],
   },
   {
@@ -255,9 +328,69 @@ export const TOOLS: ToolDef[] = [
       },
     ],
     related: [
+      "treatment-comparison",
       "stem-cell-cost-calculator",
-      "am-i-a-candidate",
       "knee-pain-score",
+    ],
+  },
+  {
+    slug: "treatment-comparison",
+    name: "Treatment comparison",
+    category: "Cost and budget",
+    icon: "table",
+    blurb:
+      "Cortisone, hyaluronic acid, PRP, stem cells and surgery on cost, recovery and evidence.",
+    title: "Stem Cell Therapy vs Cortisone, PRP and Surgery",
+    description:
+      "Compare cost, recovery time, how long it lasts and the state of the evidence for cortisone, hyaluronic acid, PRP, stem cell therapy and surgery, side by side.",
+    eyebrow: "Cost, recovery and evidence",
+    heading: "Stem cell therapy compared with cortisone, PRP and surgery",
+    lead: "The question after what does it cost is usually how does it compare. This puts the options for a knee, hip, shoulder or back next to each other on cost, recovery, how long the benefit lasts and how much evidence sits behind each one.",
+    body: `
+<h2>How to read the table</h2>
+<p>Pick the joint or region you are dealing with and the table shows only the options that genuinely apply to it. Hyaluronic acid appears for the knee and not the shoulder because that is where it is used. Fusion appears for the back and not the knee. Filtering by the actual clinical question keeps the comparison honest, where one table listing every intervention for every body part would not be.</p>
+<p>Costs are per course, not per appointment, and each cell says what it covers. Recovery is the time to a normal day rather than to full sport, which is a longer and much more variable number for every surgical row.</p>
+<h2>Where the figures come from, and where they do not</h2>
+<p>Every cost on this page is indicative: a broad United States self-pay range from our own reference table, carrying the date it was last reviewed. It is an order of magnitude for comparing options, not a quote, and it is not the output of a price survey.</p>
+<p>It would be neater to price the regenerative rows from what clinics in this directory publish, and we do not, for a reason worth stating. A clinic's published range covers everything that clinic charges for, so filtering it by treatment tells you what clinics offering PRP charge in general, not what PRP costs. Built into a table like this it produces a PRP figure several times the real one, sitting directly above an identical stem cell figure, because they are the same clinics. A wrong number in the exact column you are using to tell the options apart is worse than an honest estimate. For pricing that does come from listings on this site, the cost calculator is the tool, and it shows how many clinics stand behind every band.</p>
+<p>The caveat that matters most on any list price: what an insured patient actually pays has almost no relationship to it, and the same procedure varies several fold between facilities in the same city. Use these figures to see the shape of the difference between options, then get a real quote for your own situation.</p>
+<h2>Why there is no best option column</h2>
+<p>Because the columns are not comparable in the same way. Cost compares cleanly. Recovery compares cleanly. Likelihood of benefit does not, and pretending otherwise would be the most misleading thing this page could do. Joint replacement is tracked by national registries that follow implants for decades. Corticosteroid injection has been through large randomised trials. Most regenerative protocols rest on small studies and observational series, and are not approved by the FDA or the EMA for the conditions they are marketed for. Putting four stars against three in an effectiveness column would flatten that difference into something that looks like a score, so the evidence column is a sentence instead and the conclusion is yours to draw.</p>
+<h2>The comparison people usually skip</h2>
+<p>Conservative care sits at the top of the table for a reason, and it is the row most people scroll past. Structured exercise and load management is what clinical guidelines recommend first for osteoarthritis, on consistent trial evidence, and it is the cheapest option by a wide margin. It is also unglamorous, slow and requires you to do something several times a week for months, which is why it loses to an injection in most people's decision making long before the evidence does.</p>
+<p>That is not an argument against considering anything else. It is an argument for knowing what you are comparing against, because a treatment that beats doing nothing is not the same as a treatment that beats the option your physiotherapist already offered you.</p>
+`,
+    faqs: [
+      {
+        question: "Is stem cell therapy better than a cortisone shot?",
+        answer:
+          "Nobody can answer that from the current evidence. Corticosteroid has been shown in trials to reduce pain for weeks to a few months, then fade, and repeated knee injections have been associated with cartilage loss. Stem cell therapy is not approved for these conditions and rests on much thinner evidence, at ten to fifty times the price. What is clear is the cost and the recovery. What is not clear is which one leaves you better off in two years.",
+      },
+      {
+        question: "How much does a cortisone injection cost?",
+        answer:
+          "Self-pay figures in the United States generally run from around 100 to 600 dollars per injection including the visit, and it is usually covered by insurance when a clinician recommends it. That is the single largest cost gap in the table, because it is the option nearly every patient is offered before they start researching anything else.",
+      },
+      {
+        question: "Is PRP the same as stem cell therapy?",
+        answer:
+          "No. PRP concentrates platelets from your own blood, which is a straightforward blood draw and spin. Stem cell treatments use cells, whether harvested from your own bone marrow or fat or supplied from a donor source. PRP is cheaper, better studied, and the trials that exist are still mixed. Clinics that use the two terms interchangeably in their marketing are worth a closer look.",
+      },
+      {
+        question: "Should I try stem cell therapy before a knee replacement?",
+        answer:
+          "That is a decision for a surgeon who has examined you and seen your imaging, not for a comparison table. What the table can tell you is the shape of the trade-off: a replacement is expensive, has a long recovery and decades of registry data behind it, while an injection is cheaper, has a short recovery and far less evidence. Where the joint has already lost most of its cartilage, no injection restores it.",
+      },
+      {
+        question: "How accurate are the costs on this page?",
+        answer:
+          "They are indicative United States self-pay ranges from our own reference table, dated on the page and approximate by design. They are deliberately not taken from clinic listings on this site, because a clinic publishes one range covering everything it charges for, which cannot answer what a single procedure costs. Treat every figure here as an order of magnitude for comparing options, use the cost calculator for pricing drawn from real listings, and get a written quote before committing to anything.",
+      },
+    ],
+    related: [
+      "stem-cell-cost-calculator",
+      "stem-cell-vs-surgery-cost",
+      "clinic-match-quiz",
     ],
   },
   {
@@ -423,9 +556,67 @@ export const TOOLS: ToolDef[] = [
       },
     ],
     related: [
+      "hip-pain-score",
       "back-pain-disability-score",
+      "treatment-comparison",
+    ],
+  },
+  {
+    slug: "hip-pain-score",
+    name: "Hip pain score",
+    category: "Symptom scores",
+    icon: "bone",
+    blurb:
+      "Score hip pain, stiffness and daily function out of 100 across 25 items.",
+    title: "Hip Osteoarthritis Self-Assessment",
+    description:
+      "Score hip pain, stiffness and daily function out of 100 in a few minutes, see which severity band you fall in, and take a dated number to your appointment.",
+    eyebrow: "Pain, stiffness and function",
+    heading: "Hip pain and function self-assessment",
+    lead: "Twenty five questions on pain, stiffness and the everyday movements a bad hip interferes with. It gives you a number out of 100 and the band it falls in, which is a far more useful thing to bring to an appointment than trying to remember how the last few months went.",
+    body: `
+<h2>What the score measures</h2>
+<p>How much your hip is interfering with an ordinary day, over the last 48 hours, across three domains: pain, stiffness and daily function. Each item is rated from none to extreme, the answers are normalised to a 0 to 100 scale, and higher means more symptoms. The three domain scores are shown separately as well as the total, because a hip that is stiff but not especially painful is a different problem from one that hurts constantly and moves freely.</p>
+<p>The function items are hip specific rather than generic. Putting on a sock, getting into a car, lying on the painful side at night and twisting on the leg are the movements a hip restricts first, and none of them appear on a knee questionnaire. That is why this is a separate assessment rather than the knee one with a word swapped.</p>
+<h2>This is not WOMAC or HOOS</h2>
+<p>The established hip instruments, WOMAC and HOOS, are validated, published and not ours to reprint. WOMAC in particular is licensed. So this assessment covers the same domains, in the same structure, on the same five point response scale, with item wording written for this site. That means the number it gives you is directly comparable with your own earlier scores here, and only roughly comparable with a score a clinic takes using the real instrument. If a formal score is needed, a clinician will administer the real one.</p>
+<h2>What the bands mean</h2>
+<p>Minimal and mild describe symptoms that show up in particular activities rather than across the day. Moderate is the point at which symptoms are shaping how you move through a normal day, and it is a reasonable trigger for a proper assessment if you have not had one. Severe and extreme are the ranges where surgical options are usually part of the conversation, though the score is nowhere near the whole picture: imaging, examination, your age, your other health conditions and what you actually want to be able to do all count for more than a questionnaire.</p>
+<h2>The most useful thing you can do with the number</h2>
+<p>Write it down with today's date, and do it again in three and six months. Symptom recall over months is genuinely poor, which is why the answer to "how has it been since I last saw you" is so often unreliable, and a dated pair of scores is not. A hip that has moved from 38 to 61 over two seasons is a clearer piece of information than any single reading, whatever you end up doing about it.</p>
+<p>What this cannot do is tell you whether you have osteoarthritis, what is causing the pain, or what treatment you need. Hip pain comes from tendons, bursae, the joint itself, the lower back and occasionally from things that are not musculoskeletal at all, and no set of questions separates those. Groin pain that is severe, sudden, follows an injury, or comes with fever or unexplained weight loss needs a doctor rather than a questionnaire.</p>
+`,
+    faqs: [
+      {
+        question: "How do I know if my hip pain is arthritis?",
+        answer:
+          "You do not, from a questionnaire. Hip osteoarthritis is usually diagnosed from a combination of history, examination and imaging, and pain felt around the hip frequently comes from somewhere else entirely, including the lower back. What this assessment tells you is how much your symptoms are interfering with daily activity, which is worth knowing whatever the cause turns out to be.",
+      },
+      {
+        question: "What score means I need a hip replacement?",
+        answer:
+          "No score decides that. Surgeons weigh imaging, examination findings, how long the symptoms have persisted, what has already been tried, your general health and what you need to be able to do. A high score means your symptoms are significant enough to be worth a proper assessment. It is one input to that conversation and not a threshold.",
+      },
+      {
+        question: "Is this the WOMAC or HOOS questionnaire?",
+        answer:
+          "No. Those are validated, licensed instruments and reproducing them here would not be legitimate. This covers the same domains in the same structure on the same scale, with wording written for this site, which makes it reliable for tracking your own change over time and only approximately comparable with a formally administered score.",
+      },
+      {
+        question: "How often should I repeat it?",
+        answer:
+          "Every three months is enough for most people, or before and after any treatment or change in your programme. More frequent than that and you are mostly measuring how good a week you happened to be having.",
+      },
+      {
+        question: "Can stem cell therapy help hip osteoarthritis?",
+        answer:
+          "It is offered for it, and the evidence is limited. Regenerative treatments for hip osteoarthritis are not approved by the FDA or the EMA, published work is mostly small studies and observational series, and the hip is less studied than the knee. A high score here is a reason to get assessed, not a reason to book a treatment, and any clinic presenting it as a settled option is ahead of the evidence.",
+      },
+    ],
+    related: [
+      "knee-pain-score",
+      "treatment-comparison",
       "am-i-a-candidate",
-      "stem-cell-vs-surgery-cost",
     ],
   },
   {
@@ -699,6 +890,7 @@ export function toolPaths(): string[] {
 }
 
 export const TOOL_CATEGORIES: ToolCategory[] = [
+  "Find a clinic",
   "Cost and budget",
   "Candidacy",
   "Symptom scores",

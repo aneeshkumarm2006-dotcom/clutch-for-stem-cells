@@ -48,14 +48,33 @@ import {
   bandFromPoints,
   countryFactor,
   percentile,
+  pickBaseBand,
+  type PriceSlice,
 } from "@/lib/tools/price-band";
 import {
   BACK_QUESTIONNAIRE,
+  HIP_QUESTIONNAIRE,
   KNEE_QUESTIONNAIRE,
   domainsFor,
   itemIdsFor,
 } from "@/lib/tools/questionnaires";
 import { CANDIDACY_QUESTIONS } from "@/lib/tools/candidacy";
+import {
+  MATCH_WEIGHTS,
+  askedCriteria,
+  budgetFit,
+  directoryHref,
+  matchClinics,
+  scoreClinic,
+  type ClinicMatchIndex,
+  type MatchClinic,
+} from "@/lib/tools/match";
+import {
+  COMPARISON_FOCUSES,
+  COMPARISON_OPTIONS,
+  comparisonRows,
+  comparisonSpread,
+} from "@/lib/tools/comparison";
 
 // ── Units ───────────────────────────────────────────────────────────────────
 
@@ -331,7 +350,7 @@ test("the back questionnaire scores ten sections as a percentage", () => {
 });
 
 test("every band set covers the whole 0 to 100 axis", () => {
-  for (const def of [KNEE_QUESTIONNAIRE, BACK_QUESTIONNAIRE]) {
+  for (const def of [KNEE_QUESTIONNAIRE, HIP_QUESTIONNAIRE, BACK_QUESTIONNAIRE]) {
     assert.equal(def.bands[0]!.min, 0);
     assert.equal(def.bands.at(-1)!.max, 100);
     for (let i = 1; i < def.bands.length; i += 1) {
@@ -598,4 +617,402 @@ test("every candidacy question is answerable and scorable", () => {
     const values = new Set(q.answers.map((a) => a.value));
     assert.equal(values.size, q.answers.length, `${q.id} has duplicate values`);
   }
+});
+
+// ── Hip questionnaire ───────────────────────────────────────────────────────
+
+test("the hip questionnaire is its own item set, not the knee one relabelled", () => {
+  const ids = itemIdsFor(HIP_QUESTIONNAIRE);
+  assert.equal(ids.length, 25);
+  assert.equal(new Set(ids).size, 25, "item ids must be unique");
+  assert.equal(HIP_QUESTIONNAIRE.scale.length, 5);
+  assert.deepEqual(
+    HIP_QUESTIONNAIRE.domains.map((d) => d.items.length),
+    [6, 2, 17],
+  );
+
+  // The two sets share a scale and a structure but not their wording. If this
+  // ever fails, somebody has copied the knee list across and the hip page is
+  // asking about stairs where it should be asking about socks and car seats.
+  const kneeLabels = new Set(
+    KNEE_QUESTIONNAIRE.domains.flatMap((d) => d.items.map((i) => i.label)),
+  );
+  const hipOnly = HIP_QUESTIONNAIRE.domains
+    .flatMap((d) => d.items.map((i) => i.label))
+    .filter((label) => !kneeLabels.has(label));
+  assert.ok(
+    hipOnly.length >= 6,
+    `hip set has only ${hipOnly.length} items the knee set does not`,
+  );
+});
+
+// ── Base band selection ─────────────────────────────────────────────────────
+
+const slice = (
+  slug: string,
+  typical: number,
+  sampleSize: number,
+  ownData: boolean,
+): PriceSlice => ({
+  slug,
+  name: slug,
+  band: {
+    low: typical * 0.8,
+    typical,
+    high: typical * 1.2,
+    sampleSize,
+  },
+  ownData,
+});
+
+test("treatment beats condition as the base band, and both beat nothing", () => {
+  const overall = { low: 8_000, typical: 12_000, high: 18_000, sampleSize: 40 };
+
+  // Both have their own data: the treatment band wins, because clinics price a
+  // procedure rather than a diagnosis.
+  const both = pickBaseBand({
+    treatment: slice("msc", 9_000, 12, true),
+    condition: slice("knee", 15_000, 20, true),
+    overall,
+  })!;
+  assert.equal(both.source, "treatment");
+  assert.equal(both.band.typical, 9_000);
+
+  // Treatment fell back to the global band, condition did not: use condition.
+  const conditionWins = pickBaseBand({
+    treatment: slice("rare", 12_000, 1, false),
+    condition: slice("knee", 15_000, 20, true),
+    overall,
+  })!;
+  assert.equal(conditionWins.source, "condition");
+  assert.equal(conditionWins.ownData, true);
+
+  // Neither stands alone: keep the named slice so the page can name the thing
+  // the visitor actually chose when it explains the fallback.
+  const fellBack = pickBaseBand({
+    treatment: slice("rare", 12_000, 1, false),
+    overall,
+  })!;
+  assert.equal(fellBack.source, "treatment");
+  assert.equal(fellBack.ownData, false);
+
+  // Nothing selected at all falls through to the all-clinics band.
+  const nothing = pickBaseBand({ overall })!;
+  assert.equal(nothing.source, "overall");
+
+  // An empty directory produces no band rather than a zeroed one dressed up as
+  // an estimate.
+  assert.equal(
+    pickBaseBand({ overall: { low: 0, typical: 0, high: 0, sampleSize: 0 } }),
+    null,
+  );
+});
+
+// ── Clinic matching ─────────────────────────────────────────────────────────
+
+const clinic = (
+  over: Partial<MatchClinic> & { slug: string },
+): MatchClinic => ({
+  name: over.slug,
+  verified: false,
+  ratingAvg: 0,
+  reviewCount: 0,
+  chips: [],
+  conditions: [],
+  treatments: [],
+  countries: [],
+  countrySlugs: [],
+  priceMin: null,
+  priceMax: null,
+  currency: "USD",
+  ...over,
+});
+
+const INDEX: ClinicMatchIndex = {
+  clinics: [
+    clinic({
+      slug: "full-match",
+      name: "Full Match",
+      conditions: ["knee-osteoarthritis"],
+      treatments: ["msc-therapy"],
+      countries: ["Mexico"],
+      countrySlugs: ["mexico"],
+      priceMin: 6_000,
+      priceMax: 9_000,
+      ratingAvg: 4.2,
+      reviewCount: 10,
+    }),
+    clinic({
+      slug: "wrong-country",
+      name: "Wrong Country",
+      conditions: ["knee-osteoarthritis"],
+      treatments: ["msc-therapy"],
+      countries: ["Panama"],
+      countrySlugs: ["panama"],
+      priceMin: 7_000,
+      priceMax: 8_000,
+    }),
+    clinic({
+      slug: "unpriced",
+      name: "Unpriced",
+      conditions: ["knee-osteoarthritis"],
+      treatments: ["msc-therapy"],
+      countries: ["Mexico"],
+      countrySlugs: ["mexico"],
+    }),
+    clinic({
+      slug: "unrelated",
+      name: "Unrelated",
+      conditions: ["hair-restoration"],
+      treatments: ["prp"],
+      countries: ["South Korea"],
+      countrySlugs: ["south-korea"],
+    }),
+  ],
+  conditions: [
+    { slug: "knee-osteoarthritis", name: "Knee osteoarthritis", count: 3 },
+    { slug: "hair-restoration", name: "Hair restoration", count: 1 },
+  ],
+  treatments: [
+    { slug: "msc-therapy", name: "MSC therapy", count: 3 },
+    { slug: "prp", name: "PRP", count: 1 },
+  ],
+  countries: [
+    { slug: "mexico", name: "Mexico", count: 2 },
+    { slug: "panama", name: "Panama", count: 1 },
+    { slug: "south-korea", name: "South Korea", count: 1 },
+  ],
+  currency: "USD",
+  clinicCount: 4,
+};
+
+test("only answered questions count toward the match denominator", () => {
+  assert.deepEqual(askedCriteria({}), []);
+  assert.deepEqual(askedCriteria({ condition: "knee-osteoarthritis" }), [
+    "condition",
+  ]);
+  // A budget of zero is "not answered", not "a ceiling of nothing".
+  assert.deepEqual(askedCriteria({ budgetMax: 0 }), []);
+
+  // One criterion answered and met is a full score, not 40 out of 100.
+  const onlyCondition = scoreClinic(
+    INDEX.clinics[0]!,
+    { condition: "knee-osteoarthritis" },
+    INDEX,
+  )!;
+  assert.equal(onlyCondition.score, 100);
+  assert.equal(onlyCondition.exact, true);
+});
+
+test("an unpriced clinic is not punished for a budget it cannot answer", () => {
+  const query = { condition: "knee-osteoarthritis", budgetMax: 8_000 };
+
+  const priced = scoreClinic(INDEX.clinics[0]!, query, INDEX)!;
+  assert.equal(priced.score, 100);
+
+  // The unpriced clinic answers the condition and drops budget from the
+  // denominator, so it still scores 100 while stating what it could not check.
+  const unpriced = scoreClinic(INDEX.clinics[2]!, query, INDEX)!;
+  assert.equal(unpriced.score, 100);
+  assert.ok(unpriced.misses.some((m) => m.criterion === "budget"));
+  assert.equal(unpriced.exact, false, "a stated gap is not a full match");
+
+  // Another currency is the same kind of unknown as no price at all.
+  assert.equal(
+    budgetFit(
+      clinic({ slug: "krw", currency: "KRW", priceMin: 5_000_000 }),
+      "USD",
+      8_000,
+    ),
+    null,
+  );
+});
+
+test("budget fit rewards overlap and part-credits a near miss", () => {
+  const c = (min: number, max: number) =>
+    clinic({ slug: "c", priceMin: min, priceMax: max });
+  assert.equal(budgetFit(c(6_000, 9_000), "USD", 8_000), 1);
+  // Starts above the ceiling but within the tolerance.
+  assert.equal(budgetFit(c(9_000, 12_000), "USD", 8_000), 0.5);
+  // Far above it.
+  assert.equal(budgetFit(c(30_000, 40_000), "USD", 8_000), 0);
+  // Under a floor the visitor set is information, not a mismatch.
+  assert.equal(budgetFit(c(1_000, 2_000), "USD", 20_000, 10_000), 0.5);
+});
+
+test("ranking is by fit, and partial matches announce themselves", () => {
+  const query = {
+    condition: "knee-osteoarthritis",
+    treatment: "msc-therapy",
+    country: "mexico",
+    budgetMax: 9_000,
+  };
+  const outcome = matchClinics(INDEX, query, 3);
+
+  assert.equal(outcome.asked.length, 4);
+  assert.equal(outcome.results[0]!.clinic.slug, "full-match");
+  assert.equal(outcome.results[0]!.score, 100);
+  assert.equal(outcome.exactCount, 1);
+  assert.ok(outcome.relaxed, "a list padded with near misses must say so");
+
+  // The unrelated clinic matches nothing and is dropped rather than listed last.
+  assert.ok(
+    outcome.results.every((r) => r.clinic.slug !== "unrelated"),
+    "a zero-score clinic is noise, not a third suggestion",
+  );
+
+  // Every listed clinic after the first carries its gaps.
+  for (const result of outcome.results.slice(1)) {
+    assert.ok(result.misses.length > 0);
+    assert.ok(result.misses.every((m) => m.label.length > 0));
+  }
+});
+
+test("a clinic that answered everything outranks one that could not", () => {
+  // Both score 100: the unpriced clinic drops budget from its denominator
+  // rather than failing it. Somebody who has just typed a budget in wants the
+  // clinic whose published price actually fits it first.
+  const outcome = matchClinics(
+    INDEX,
+    { condition: "knee-osteoarthritis", budgetMax: 9_000 },
+    3,
+  );
+  // Three clinics tie on 100. The two whose published price fits go first, in
+  // rating order; the one that could not answer the budget question goes last.
+  assert.deepEqual(
+    outcome.results.map((r) => r.clinic.slug),
+    ["full-match", "wrong-country", "unpriced"],
+  );
+  assert.ok(outcome.results.every((r) => r.score === 100));
+  assert.equal(outcome.results[0]!.misses.length, 0);
+  assert.equal(outcome.results.at(-1)!.misses.length, 1);
+});
+
+test("matching ignores everything about a clinic except fit and reviews", () => {
+  // A verified, heavily reviewed clinic that misses the condition must lose to
+  // an unknown one that matches it. Placement is not for sale here.
+  const index: ClinicMatchIndex = {
+    ...INDEX,
+    clinics: [
+      clinic({
+        slug: "famous",
+        name: "Famous",
+        verified: true,
+        badge: "premier",
+        ratingAvg: 5,
+        reviewCount: 900,
+        conditions: ["hair-restoration"],
+        treatments: ["msc-therapy"],
+      }),
+      clinic({
+        slug: "obscure",
+        name: "Obscure",
+        conditions: ["knee-osteoarthritis"],
+        treatments: ["msc-therapy"],
+      }),
+    ],
+  };
+  const outcome = matchClinics(
+    index,
+    { condition: "knee-osteoarthritis", treatment: "msc-therapy" },
+    2,
+  );
+  assert.equal(outcome.results[0]!.clinic.slug, "obscure");
+  assert.ok(MATCH_WEIGHTS.condition > MATCH_WEIGHTS.budget);
+});
+
+test("no answers produces no shortlist rather than an arbitrary one", () => {
+  const outcome = matchClinics(INDEX, {}, 3);
+  assert.deepEqual(outcome.results, []);
+  assert.equal(outcome.candidateCount, 0);
+  assert.equal(directoryHref({}, INDEX), "/clinics");
+});
+
+test("the directory link carries the same filters the quiz used", () => {
+  const href = directoryHref(
+    {
+      condition: "knee-osteoarthritis",
+      treatment: "msc-therapy",
+      country: "mexico",
+      budgetMin: 5_000,
+      budgetMax: 10_000,
+    },
+    INDEX,
+  );
+  assert.ok(href.startsWith("/clinics?"));
+  const params = new URLSearchParams(href.split("?")[1]!);
+  assert.equal(params.get("condition"), "knee-osteoarthritis");
+  assert.equal(params.get("treatment"), "msc-therapy");
+  // The directory matches a country by display name, not by slug.
+  assert.equal(params.get("country"), "Mexico");
+  assert.equal(params.get("priceMax"), "10000");
+});
+
+// ── Treatment comparison ────────────────────────────────────────────────────
+
+test("every comparison option is internally consistent", () => {
+  const focusKeys = new Set(COMPARISON_FOCUSES.map((f) => f.key));
+  const seen = new Set<string>();
+  for (const option of COMPARISON_OPTIONS) {
+    assert.ok(!seen.has(option.key), `duplicate option ${option.key}`);
+    seen.add(option.key);
+    assert.ok(option.costLow > 0, `${option.key} needs a cost floor`);
+    assert.ok(
+      option.costHigh >= option.costLow,
+      `${option.key} has an inverted cost range`,
+    );
+    assert.ok(option.focus.length > 0, `${option.key} applies to nothing`);
+    for (const key of option.focus) {
+      assert.ok(focusKeys.has(key), `${option.key} names unknown focus ${key}`);
+    }
+    // Every row has to be able to say what is known about it, because the table
+    // has no score to fall back on.
+    assert.ok(
+      option.evidence.length > 40,
+      `${option.key} needs an evidence note`,
+    );
+  }
+});
+
+test("every focus has options on both sides of the decision", () => {
+  for (const focus of COMPARISON_FOCUSES) {
+    const rows = comparisonRows(focus.key);
+    assert.ok(rows.length >= 4, `${focus.key} has too few options to compare`);
+    const kinds = new Set(rows.map((r) => r.kind));
+    assert.ok(kinds.has("regenerative"), `${focus.key} has no regenerative row`);
+    assert.ok(kinds.has("surgical"), `${focus.key} has no surgical row`);
+    assert.ok(kinds.has("conventional"), `${focus.key} has no conventional row`);
+    assert.ok(kinds.has("none"), `${focus.key} omits doing nothing invasive`);
+  }
+});
+
+test("the comparison table never prices a row from a clinic-level range", () => {
+  // A clinic's published range covers everything it charges for, so slicing it
+  // by treatment answers "what do clinics offering PRP charge in general",
+  // not "what does PRP cost". Wiring that in put PRP at roughly 4,000 to
+  // 20,000 dollars, identical to the stem cell row beneath it. If a
+  // `treatmentSlug` reappears on an option, that mistake is being rebuilt.
+  for (const option of COMPARISON_OPTIONS) {
+    assert.ok(
+      !("treatmentSlug" in option),
+      `${option.key} is being priced from directory listings again`,
+    );
+  }
+
+  // PRP has to stay visibly cheaper than a stem cell course, which is the one
+  // comparison a reader of this table most often comes for.
+  const prp = COMPARISON_OPTIONS.find((o) => o.key === "prp")!;
+  const stemCell = COMPARISON_OPTIONS.find((o) => o.key === "stem-cell")!;
+  assert.ok(prp.costHigh < stemCell.costLow);
+});
+
+test("the comparison spread reads from the real floor and ceiling", () => {
+  const rows = comparisonRows("knee");
+  const spread = comparisonSpread(rows)!;
+  assert.equal(spread.cheapest.costLow, Math.min(...rows.map((r) => r.costLow)));
+  assert.equal(
+    spread.dearest.costHigh,
+    Math.max(...rows.map((r) => r.costHigh)),
+  );
+  assert.equal(comparisonSpread([]), null);
 });

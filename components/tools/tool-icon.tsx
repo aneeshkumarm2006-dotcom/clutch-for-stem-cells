@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Activity,
+  Bone,
   Calculator,
   ClipboardCheck,
   Droplet,
@@ -10,7 +11,9 @@ import {
   Plane,
   Ruler,
   Scale,
+  Search,
   Stethoscope,
+  Table2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -38,6 +41,9 @@ const ICONS: Record<ToolIconKey, LucideIcon> = {
   ruler: Ruler,
   droplet: Droplet,
   stethoscope: Stethoscope,
+  search: Search,
+  table: Table2,
+  bone: Bone,
 };
 
 export function ToolIcon({

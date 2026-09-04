@@ -1,12 +1,14 @@
 /**
- * Symptom questionnaires — the item sets behind the knee and back score tools.
+ * Symptom questionnaires — the item sets behind the knee, hip and back score
+ * tools.
  *
  * IMPORTANT, and the reason this file exists separately from `calc.ts`:
  *
- * The two best known instruments in this space, WOMAC for knee osteoarthritis
- * and the Oswestry Disability Index for low back pain, are published,
- * validated, and *not* ours to reprint. WOMAC in particular is a licensed
- * instrument. So these are not those questionnaires. They cover the same
+ * The best known instruments in this space, WOMAC for knee and hip
+ * osteoarthritis, HOOS for the hip, and the Oswestry Disability Index for low
+ * back pain, are published, validated, and *not* ours to reprint. WOMAC in
+ * particular is a licensed instrument. So these are not those questionnaires,
+ * and adding a joint does not change that. They cover the same
  * activity domains, in the same structure and on the same response scale,
  * with item wording written here, and the pages say so in as many words.
  *
@@ -58,9 +60,60 @@ export function itemIdsFor(def: QuestionnaireDef): string[] {
   return def.domains.flatMap((d) => d.items.map((i) => i.id));
 }
 
-// ── Knee ────────────────────────────────────────────────────────────────────
+// ── Joints (knee and hip) ───────────────────────────────────────────────────
 
 const FIVE_POINT = ["None", "Mild", "Moderate", "Severe", "Extreme"];
+
+/**
+ * Severity bands shared by the knee and hip questionnaires.
+ *
+ * Shared deliberately. Both score the same three domains on the same scale and
+ * normalise to 0 to 100, so a hip at 55 and a knee at 55 describe the same
+ * amount of interference with a normal day. Two band sets that drifted apart
+ * would make the two pages quietly incomparable for no reason.
+ */
+const JOINT_BANDS: ScoreBand[] = [
+  {
+    key: "minimal",
+    label: "Minimal",
+    min: 0,
+    max: 19.9,
+    summary:
+      "Symptoms are limited and rarely getting in the way of everyday activity.",
+  },
+  {
+    key: "mild",
+    label: "Mild",
+    min: 20,
+    max: 39.9,
+    summary:
+      "Noticeable symptoms that show up in specific activities rather than across the day.",
+  },
+  {
+    key: "moderate",
+    label: "Moderate",
+    min: 40,
+    max: 59.9,
+    summary:
+      "Symptoms are shaping how you move through a normal day and are worth a clinical assessment.",
+  },
+  {
+    key: "severe",
+    label: "Severe",
+    min: 60,
+    max: 79.9,
+    summary:
+      "Most of the listed activities are affected. This is the range where surgical options are usually discussed.",
+  },
+  {
+    key: "extreme",
+    label: "Extreme",
+    min: 80,
+    max: 100,
+    summary:
+      "Symptoms dominate daily function. See a clinician rather than working from any online score.",
+  },
+];
 
 /**
  * Knee pain, stiffness and function over the last 48 hours. Three domains and
@@ -117,48 +170,73 @@ export const KNEE_QUESTIONNAIRE: QuestionnaireDef = {
       ],
     },
   ],
-  bands: [
+  bands: JOINT_BANDS,
+};
+
+/**
+ * Hip pain, stiffness and function over the last 48 hours. Same three domains
+ * and the same scale as the knee set, with items chosen for the movements a
+ * painful hip actually restricts.
+ *
+ * The overlap with the knee list is smaller than it looks. Stairs and standing
+ * up from a chair are common to both, but a hip is what stops somebody putting
+ * on a sock, getting into a car, lying on one side at night or turning to look
+ * over a shoulder while reversing, and none of those are knee items. The reverse
+ * holds too, which is why this is a separate list rather than the knee list with
+ * one word swapped.
+ */
+export const HIP_QUESTIONNAIRE: QuestionnaireDef = {
+  scale: FIVE_POINT,
+  domains: [
     {
-      key: "minimal",
-      label: "Minimal",
-      min: 0,
-      max: 19.9,
-      summary:
-        "Symptoms are limited and rarely getting in the way of everyday activity.",
+      key: "pain",
+      label: "Pain",
+      prompt:
+        "How much hip or groin pain have you had in the last 48 hours when you are",
+      items: [
+        { id: "p1", label: "Walking on flat ground" },
+        { id: "p2", label: "Going up or down stairs" },
+        { id: "p3", label: "In bed at night" },
+        { id: "p4", label: "Sitting for a long stretch" },
+        { id: "p5", label: "Standing upright" },
+        { id: "p6", label: "Straightening the hip out fully" },
+      ],
     },
     {
-      key: "mild",
-      label: "Mild",
-      min: 20,
-      max: 39.9,
-      summary:
-        "Noticeable symptoms that show up in specific activities rather than across the day.",
+      key: "stiffness",
+      label: "Stiffness",
+      prompt: "How stiff has the hip felt",
+      items: [
+        { id: "s1", label: "First thing after waking up" },
+        { id: "s2", label: "Later in the day, after sitting or resting" },
+      ],
     },
     {
-      key: "moderate",
-      label: "Moderate",
-      min: 40,
-      max: 59.9,
-      summary:
-        "Symptoms are shaping how you move through a normal day and are worth a clinical assessment.",
-    },
-    {
-      key: "severe",
-      label: "Severe",
-      min: 60,
-      max: 79.9,
-      summary:
-        "Most of the listed activities are affected. This is the range where surgical options are usually discussed.",
-    },
-    {
-      key: "extreme",
-      label: "Extreme",
-      min: 80,
-      max: 100,
-      summary:
-        "Symptoms dominate daily function. See a clinician rather than working from any online score.",
+      key: "function",
+      label: "Daily function",
+      prompt: "How much difficulty have you had",
+      items: [
+        { id: "f1", label: "Going down stairs" },
+        { id: "f2", label: "Going up stairs" },
+        { id: "f3", label: "Standing up from a low chair" },
+        { id: "f4", label: "Standing still for a few minutes" },
+        { id: "f5", label: "Bending down to the floor" },
+        { id: "f6", label: "Walking on flat ground" },
+        { id: "f7", label: "Getting in or out of a car" },
+        { id: "f8", label: "Going around a shop" },
+        { id: "f9", label: "Putting on socks or shoes" },
+        { id: "f10", label: "Getting out of bed" },
+        { id: "f11", label: "Lying on the painful side at night" },
+        { id: "f12", label: "Rolling over in bed" },
+        { id: "f13", label: "Getting in or out of a bath" },
+        { id: "f14", label: "Sitting down on a low seat" },
+        { id: "f15", label: "Getting on or off the toilet" },
+        { id: "f16", label: "Twisting or pivoting on the leg" },
+        { id: "f17", label: "Getting into and out of a car boot or low cupboard" },
+      ],
     },
   ],
+  bands: JOINT_BANDS,
 };
 
 // ── Back ────────────────────────────────────────────────────────────────────

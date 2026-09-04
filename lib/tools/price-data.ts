@@ -9,6 +9,13 @@
  * band and the pages print it, because a band built from four clinics and a band
  * built from forty deserve different amounts of trust.
  *
+ * Bands are cut three ways, because those are the three things a visitor
+ * actually picks: by treatment, by condition treated, and by country. A
+ * condition band is a weaker claim than a treatment band and the copy says so:
+ * clinics price a procedure, not a diagnosis, so "what clinics treating knee
+ * osteoarthritis charge" is the spread of those clinics' general pricing rather
+ * than a quoted price for a knee.
+ *
  * Deliberate limits, all of which the copy states:
  *  - Only clinics publishing a price in the site's default currency are counted.
  *    Mixing currencies without live FX would invent precision that is not there.
@@ -26,7 +33,7 @@ import { unstable_cache } from "next/cache";
 
 import { dbConnect } from "@/lib/db";
 import { DEFAULT_CURRENCY } from "@/config/site";
-import { Clinic, Treatment, type ITaxonomyBase } from "@/models";
+import { Clinic, Condition, Treatment, type ITaxonomyBase } from "@/models";
 import {
   MIN_SAMPLE,
   bandFromPoints,
@@ -42,6 +49,7 @@ const PRICE_DATA_REVALIDATE_SECONDS = 3600;
 interface PricedClinic {
   point: PricePoint;
   treatmentIds: string[];
+  conditionIds: string[];
   countries: string[];
 }
 
@@ -69,16 +77,17 @@ function countrySlug(name: string): string {
 async function readPriceData(): Promise<ToolPriceData> {
   await dbConnect();
 
-  const [clinicDocs, treatmentDocs] = await Promise.all([
+  const [clinicDocs, treatmentDocs, conditionDocs] = await Promise.all([
     Clinic.find({
       status: "published",
       isDeleted: false,
       currency: DEFAULT_CURRENCY,
       $or: [{ priceMin: { $gt: 0 } }, { priceMax: { $gt: 0 } }],
     })
-      .select("priceMin priceMax treatmentTypes locations")
+      .select("priceMin priceMax treatmentTypes conditionsTreated locations")
       .lean(),
     Treatment.find({ isActive: true }).select("name slug").lean(),
+    Condition.find({ isActive: true }).select("name slug").lean(),
   ]);
 
   const priced: PricedClinic[] = [];
@@ -88,6 +97,7 @@ async function readPriceData(): Promise<ToolPriceData> {
     priced.push({
       point,
       treatmentIds: (doc.treatmentTypes ?? []).map(String),
+      conditionIds: (doc.conditionsTreated ?? []).map(String),
       countries: Array.from(
         new Set(
           (doc.locations ?? [])
@@ -100,33 +110,49 @@ async function readPriceData(): Promise<ToolPriceData> {
 
   const overall = bandFromPoints(priced.map((c) => c.point));
 
-  // Treatments, keyed by the term's id so the join needs no extra query.
-  const treatmentTerms = (treatmentDocs as unknown as ITaxonomyBase[]).map(
-    (t) => ({ id: String(t._id), name: t.name, slug: t.slug }),
-  );
-  const byTreatment = new Map<string, PricePoint[]>();
-  for (const clinic of priced) {
-    for (const tid of clinic.treatmentIds) {
-      const list = byTreatment.get(tid);
-      if (list) list.push(clinic.point);
-      else byTreatment.set(tid, [clinic.point]);
+  /**
+   * Group price points under a taxonomy's term ids and turn each into a slice.
+   *
+   * Treatments and conditions differ only in which id array on the clinic they
+   * read, so the fallback rule (a term under `MIN_SAMPLE` borrows the global
+   * band and says so, via `ownData`) is written once and holds for both.
+   */
+  const slicesFor = (
+    docs: unknown[],
+    idsOf: (clinic: PricedClinic) => string[],
+  ): PriceSlice[] => {
+    const terms = (docs as ITaxonomyBase[]).map((t) => ({
+      id: String(t._id),
+      name: t.name,
+      slug: t.slug,
+    }));
+    const byTerm = new Map<string, PricePoint[]>();
+    for (const clinic of priced) {
+      for (const termId of idsOf(clinic)) {
+        const list = byTerm.get(termId);
+        if (list) list.push(clinic.point);
+        else byTerm.set(termId, [clinic.point]);
+      }
     }
-  }
+    return terms
+      .map((term) => {
+        const points = byTerm.get(term.id) ?? [];
+        const ownData = points.length >= MIN_SAMPLE;
+        return {
+          slug: term.slug,
+          name: term.name,
+          band: ownData
+            ? bandFromPoints(points)
+            : { ...overall, sampleSize: points.length },
+          ownData,
+        };
+      })
+      .filter((slice) => slice.band.typical > 0)
+      .sort((a, b) => a.name.localeCompare(b.name));
+  };
 
-  const treatments: PriceSlice[] = treatmentTerms
-    .map((term) => {
-      const points = byTreatment.get(term.id) ?? [];
-      const ownData = points.length >= MIN_SAMPLE;
-      return {
-        slug: term.slug,
-        name: term.name,
-        band: ownData
-          ? bandFromPoints(points)
-          : { ...overall, sampleSize: points.length },
-        ownData,
-      };
-    })
-    .filter((slice) => slice.band.typical > 0);
+  const treatments = slicesFor(treatmentDocs, (c) => c.treatmentIds);
+  const conditions = slicesFor(conditionDocs, (c) => c.conditionIds);
 
   // Countries, keyed by name because that is what a clinic location stores.
   const byCountry = new Map<string, PricePoint[]>();
@@ -155,7 +181,8 @@ async function readPriceData(): Promise<ToolPriceData> {
 
   return {
     overall,
-    treatments: treatments.sort((a, b) => a.name.localeCompare(b.name)),
+    treatments,
+    conditions,
     countries,
     currency: DEFAULT_CURRENCY,
     clinicCount: priced.length,
