@@ -29,6 +29,8 @@ import {
   type ComparisonOption,
   type OptionKind,
 } from "@/lib/tools/comparison";
+import { RelatedClinics } from "@/components/tools/related-clinics";
+import type { ClinicMatchIndex } from "@/lib/tools/match";
 import { cn } from "@/lib/utils";
 
 const KIND_LABELS: Record<OptionKind, string> = {
@@ -85,14 +87,23 @@ function KindPill({ kind }: { kind: OptionKind }) {
  * number here is an indicative self-pay range carrying the date it was last
  * reviewed, and the page sends anybody who wants directory pricing to the cost
  * calculator, where a clinic-level band is the right answer to the question.
+ *
+ * The shortlist under the table is matched on the focus's condition, not on a
+ * row. Nothing here can say which clinic does PRP the way a trial did it, and
+ * the honest link from "here is what the options cost" is "here are the clinics
+ * listed for this condition", which is what it prints.
  */
-export function TreatmentComparison() {
+export function TreatmentComparison({ index }: { index: ClinicMatchIndex }) {
   const [focusKey, setFocusKey] = React.useState<string>(
     COMPARISON_FOCUSES[0]!.key,
   );
 
   const focus = focusByKey(focusKey)!;
   const rows = React.useMemo(() => comparisonRows(focusKey), [focusKey]);
+  const clinicQuery = React.useMemo(
+    () => ({ condition: focus.conditionSlug }),
+    [focus.conditionSlug],
+  );
   const spread = comparisonSpread(rows);
   const money = (v: number) => formatPrice(v, { currency: DEFAULT_CURRENCY });
 
@@ -237,6 +248,23 @@ export function TreatmentComparison() {
           on far thinner evidence. Any decision here belongs with a clinician who
           has examined you and seen your imaging.
         </ToolNote>
+
+        {focus.conditionSlug ? (
+          <RelatedClinics
+            index={index}
+            query={clinicQuery}
+            title="Find clinics offering these treatments"
+            intro={
+              <>
+                Listed clinics that treat {focus.label.toLowerCase()}. Which of
+                the options above any one of them offers is a question for the
+                clinic: the table is reference data, not a claim about these
+                listings.
+              </>
+            }
+            ctaLabel={`See all clinics for ${focus.label.toLowerCase()}`}
+          />
+        ) : null}
 
         <div className="mt-5 flex flex-col gap-2 sm:flex-row">
           {focus.conditionSlug ? (

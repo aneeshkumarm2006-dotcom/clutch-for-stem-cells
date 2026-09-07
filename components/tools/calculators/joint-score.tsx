@@ -16,7 +16,9 @@ import {
   ToolNote,
   ToolPanel,
 } from "@/components/tools/tool-ui";
+import { RelatedClinics } from "@/components/tools/related-clinics";
 import { scoreQuestionnaire } from "@/lib/tools/calc";
+import type { ClinicMatchIndex } from "@/lib/tools/match";
 import {
   HIP_QUESTIONNAIRE,
   KNEE_QUESTIONNAIRE,
@@ -71,8 +73,23 @@ const JOINTS: Record<
  * a normal day. It does not say what to do about it, and a tool that answered a
  * high score with "you may be a candidate for stem cell therapy" would be
  * inventing a clinical judgement it has no basis for.
+ *
+ * The clinic shortlist under a completed score does not bend that rule, and the
+ * way it is wired is what keeps it from doing so. It is matched on the condition
+ * the questionnaire is about and nothing else, so the same clinics appear at a
+ * score of 12 and at a score of 88; the band never reaches the query. It is a
+ * shorter path into the directory for somebody who has just spent five minutes
+ * describing their hip, not an answer to what they should do about it, and it is
+ * held back until the form is complete so a third-filled questionnaire does not
+ * end in a list of clinics.
  */
-export function JointScoreCalculator({ joint }: { joint: Joint }) {
+export function JointScoreCalculator({
+  joint,
+  index,
+}: {
+  joint: Joint;
+  index: ClinicMatchIndex;
+}) {
   const { def, conditionSlug, conditionLabel } = JOINTS[joint];
   const domains = React.useMemo(() => domainsFor(def), [def]);
   const itemIds = React.useMemo(() => itemIdsFor(def), [def]);
@@ -80,6 +97,11 @@ export function JointScoreCalculator({ joint }: { joint: Joint }) {
   const [answers, setAnswers] = React.useState<
     Record<string, number | undefined>
   >({});
+
+  const clinicQuery = React.useMemo(
+    () => ({ condition: conditionSlug }),
+    [conditionSlug],
+  );
 
   const result = scoreQuestionnaire({
     domains,
@@ -192,18 +214,35 @@ export function JointScoreCalculator({ joint }: { joint: Joint }) {
           )}
 
           {complete ? (
-            <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-              <Button asChild variant="secondary">
-                <Link href={`/conditions/${conditionSlug}`}>
-                  Read about {conditionLabel}
-                </Link>
-              </Button>
-              <Button asChild variant="secondary">
-                <Link href="/tools/treatment-comparison">
-                  Compare the treatment options
-                </Link>
-              </Button>
-            </div>
+            <>
+              <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+                <Button asChild variant="secondary">
+                  <Link href={`/conditions/${conditionSlug}`}>
+                    Read about {conditionLabel}
+                  </Link>
+                </Button>
+                <Button asChild variant="secondary">
+                  <Link href="/tools/treatment-comparison">
+                    Compare the treatment options
+                  </Link>
+                </Button>
+              </div>
+
+              <RelatedClinics
+                index={index}
+                query={clinicQuery}
+                title="Explore relevant clinics"
+                intro={
+                  <>
+                    Listed clinics that treat {conditionLabel}. These are not
+                    matched to your score, and nothing above says you need
+                    treatment: what a score is for is a conversation with a
+                    clinician who has examined you.
+                  </>
+                }
+                ctaLabel={`See all clinics for ${conditionLabel}`}
+              />
+            </>
           ) : null}
         </ResultPanel>
       ) : (
