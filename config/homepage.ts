@@ -176,6 +176,17 @@ export interface HomepageContent {
     clinicsLabel: string;
     verifiedLabel: string;
     reviewsLabel: string;
+    /**
+     * Fewest verified clinics worth publishing a counter for. Below it the
+     * Verified tile is dropped and the strip renders the remaining stats.
+     *
+     * The count itself is never wrong — it is a live query — but a trust strip
+     * that answers "how many of these clinics have you verified?" with "1"
+     * argues against the section it sits in. This makes the tile appear when it
+     * has something to say instead of hard-coding a judgement call in the page.
+     * `0` publishes the number whatever it is.
+     */
+    verifiedMinimum: number;
   };
   testimonials: {
     enabled: boolean;
@@ -370,6 +381,10 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
     clinicsLabel: "Clinics",
     verifiedLabel: "Verified",
     reviewsLabel: "Patient reviews",
+    // Five is the point where the number reads as a programme rather than as an
+    // exception. Raise it, lower it, or set 0 to always publish, in
+    // /admin/content/homepage.
+    verifiedMinimum: 5,
   },
   testimonials: {
     enabled: true,
@@ -506,6 +521,16 @@ function num(stored: unknown, fallback: number): number {
     : fallback;
 }
 
+/**
+ * Like {@link num} but accepts 0. Use it for a threshold or offset, where zero
+ * is a real setting rather than the absence of one.
+ */
+function count(stored: unknown, fallback: number): number {
+  return typeof stored === "number" && Number.isFinite(stored) && stored >= 0
+    ? Math.floor(stored)
+    : fallback;
+}
+
 /** A stored list counts only when non-empty — an empty grid is never intended. */
 function list<T>(stored: unknown, fallback: T[]): T[] {
   return Array.isArray(stored) && stored.length > 0 ? (stored as T[]) : fallback;
@@ -638,6 +663,12 @@ export function resolveHomepage(
       clinicsLabel: str(o.trust?.clinicsLabel, d.trust.clinicsLabel),
       verifiedLabel: str(o.trust?.verifiedLabel, d.trust.verifiedLabel),
       reviewsLabel: str(o.trust?.reviewsLabel, d.trust.reviewsLabel),
+      // `num()` treats 0 as unset, and 0 is a meaningful choice here ("always
+      // show the count"), so this threshold is resolved on its own terms.
+      verifiedMinimum: count(
+        o.trust?.verifiedMinimum,
+        d.trust.verifiedMinimum,
+      ),
     },
     testimonials: {
       enabled: bool(o.testimonials?.enabled, d.testimonials.enabled),

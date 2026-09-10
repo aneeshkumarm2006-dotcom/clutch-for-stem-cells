@@ -64,7 +64,7 @@ import {
 import { renderMarkdown } from "@/lib/markdown";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { getClinicProfile } from "@/lib/public-data";
-import { formatPrice } from "@/lib/format";
+import { formatPrice, usdEstimate, usdEstimateNote } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
 import { RatingStars } from "@/components/ui/rating-stars";
@@ -187,6 +187,43 @@ export default async function ClinicCostPage({
     if (item.priceMax != null) return `Up to ${money(item.priceMax)}`;
     return null;
   };
+
+  /**
+   * The same row in approximate USD, or `null` when there is nothing to add: a
+   * row already priced in dollars, a currency with no reference rate, or a
+   * quote-only / "Included" row where there is no number to convert. Mirrors
+   * `rowPrice`'s shape so a range stays a range, with one "≈" for the pair.
+   */
+  const rowPriceUsd = (item: (typeof items)[number]): string | null => {
+    const cur = item.currency || currency;
+    const min = usdEstimate(item.priceMin, cur);
+    const max = usdEstimate(item.priceMax, cur);
+    const money = (n: number) => formatPrice(n, { currency: "USD" });
+    if (min != null && max != null) {
+      return max > min ? `≈ ${money(min)} to ${money(max)}` : `≈ ${money(min)}`;
+    }
+    if (min != null) return `≈ ${money(min)}`;
+    if (max != null) return `≈ ${money(max)}`;
+    return null;
+  };
+
+  /**
+   * The headline range in approximate USD. Built from the numbers rather than by
+   * rewriting `headlineRange`, so the "From"/"Up to"/"to" wording stays in one
+   * place and the dollar line reads the same way the native one does.
+   */
+  const headlineRangeUsd = (() => {
+    const min = usdEstimate(clinic.priceMin, currency);
+    const max = usdEstimate(clinic.priceMax, currency);
+    const money = (n: number) => formatPrice(n, { currency: "USD" });
+    if (min != null && max != null) return `≈ ${money(min)} to ${money(max)}`;
+    if (min != null) return `≈ from ${money(min)}`;
+    if (max != null) return `≈ up to ${money(max)}`;
+    return null;
+  })();
+
+  /** Rate + date footnote for the table. `null` for a USD clinic. */
+  const fxNote = usdEstimateNote(currency);
 
   const headlineRange =
     clinic.priceMin != null && clinic.priceMax != null
@@ -338,6 +375,7 @@ export default async function ClinicCostPage({
                 icon={<Tag className="size-4" />}
                 label="Typical cost"
                 value={headlineRange ?? "Quoted per patient"}
+                sub={headlineRange ? headlineRangeUsd : null}
               />
               <Stat
                 icon={<Receipt className="size-4" />}
@@ -399,6 +437,7 @@ export default async function ClinicCostPage({
                   <tbody>
                     {items.map((item, i) => {
                       const price = rowPrice(item);
+                      const priceUsd = price ? rowPriceUsd(item) : null;
                       return (
                         <tr
                           key={`${item.label}-${i}`}
@@ -420,6 +459,11 @@ export default async function ClinicCostPage({
                                 On consultation
                               </span>
                             )}
+                            {priceUsd ? (
+                              <span className="mt-0.5 block font-sans text-[12.5px] font-normal text-text-muted">
+                                {priceUsd}
+                              </span>
+                            ) : null}
                           </td>
                           {/* Plain hyphen, not an en dash. The site-wide copy
                               rule (`lib/meta-text.ts`) bans em and en dashes in
@@ -445,6 +489,15 @@ export default async function ClinicCostPage({
             {items.length && clinic.priceNote ? (
               <p className="mt-3 text-[13.5px] leading-relaxed text-text-secondary">
                 {clinic.priceNote}
+              </p>
+            ) : null}
+
+            {/* Names the rate behind every "≈ $" above and the date it was
+                read, so the estimates are checkable and visibly not a quote.
+                Renders only for a clinic that bills in another currency. */}
+            {fxNote ? (
+              <p className="mt-3 text-[12.5px] leading-relaxed text-text-muted">
+                {fxNote}
               </p>
             ) : null}
           </section>
@@ -647,10 +700,13 @@ function Stat({
   icon,
   label,
   value,
+  /** Secondary line under the value, e.g. the approximate USD equivalent. */
+  sub,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
+  sub?: string | null;
 }) {
   return (
     <div className="rounded-lg border border-border bg-surface-alt p-4">
@@ -660,6 +716,11 @@ function Stat({
       </dt>
       <dd className="mt-0.5 font-display text-[15px] font-semibold text-text-primary">
         {value}
+        {sub ? (
+          <span className="mt-0.5 block font-sans text-[12.5px] font-normal text-text-muted">
+            {sub}
+          </span>
+        ) : null}
       </dd>
     </div>
   );

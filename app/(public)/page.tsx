@@ -19,11 +19,13 @@ import {
 
 import { pageMetadata } from "@/lib/page-metadata";
 import { faqPageJsonLd, itemListJsonLd } from "@/lib/seo";
+import { clinicListEntry } from "@/lib/schema/adapters";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getHomeData } from "@/lib/public-data";
 import { getHomepageContent } from "@/lib/homepage";
 import { getPublishedBlogPosts } from "@/lib/seoteam/blog-data";
 import { formatCount } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { SearchBar } from "@/components/search/search-bar";
@@ -85,6 +87,19 @@ export default async function HomePage() {
   const heroImage = c.hero.backgroundImage?.url;
   const faqItems = c.faq.items;
 
+  // Trust counters. The Verified tile is held back until there are enough
+  // verified clinics for the number to support the section's claim rather than
+  // undercut it — the threshold is editor-set (`trust.verifiedMinimum`, 0 to
+  // always publish). The remaining tiles then lay out as two columns instead of
+  // three, so the strip never renders a gap where a tile was.
+  const trustStats = [
+    { value: formatCount(home.stats.clinics), label: c.trust.clinicsLabel },
+    home.stats.verified >= c.trust.verifiedMinimum
+      ? { value: formatCount(home.stats.verified), label: c.trust.verifiedLabel }
+      : null,
+    { value: formatCount(home.stats.reviews), label: c.trust.reviewsLabel },
+  ].filter((s): s is { value: string; label: string } => s != null);
+
   // The five browse sections share one container; the first visible one skips
   // the top divider so the rule always sits *between* sections.
   const browse = [
@@ -108,10 +123,9 @@ export default async function HomePage() {
   const homeJsonLd = [
     c.featured.enabled && home.featuredClinics.length
       ? itemListJsonLd(
-          home.featuredClinics.slice(0, c.featured.limit).map((clinic) => ({
-            path: `/clinic/${clinic.slug}`,
-            name: clinic.name,
-          })),
+          home.featuredClinics
+            .slice(0, c.featured.limit)
+            .map(clinicListEntry),
           {
             name: c.featured.title,
             path: "/",
@@ -381,20 +395,20 @@ export default async function HomePage() {
                   </Button>
                 ) : null}
               </div>
-              {c.trust.showStats ? (
-                <div className="grid grid-cols-3 gap-2 sm:gap-4">
-                  <Stat
-                    value={formatCount(home.stats.clinics)}
-                    label={c.trust.clinicsLabel}
-                  />
-                  <Stat
-                    value={formatCount(home.stats.verified)}
-                    label={c.trust.verifiedLabel}
-                  />
-                  <Stat
-                    value={formatCount(home.stats.reviews)}
-                    label={c.trust.reviewsLabel}
-                  />
+              {c.trust.showStats && trustStats.length ? (
+                <div
+                  className={cn(
+                    "grid gap-2 sm:gap-4",
+                    trustStats.length === 3 ? "grid-cols-3" : "grid-cols-2",
+                  )}
+                >
+                  {trustStats.map((stat) => (
+                    <Stat
+                      key={stat.label}
+                      value={stat.value}
+                      label={stat.label}
+                    />
+                  ))}
                 </div>
               ) : null}
             </div>

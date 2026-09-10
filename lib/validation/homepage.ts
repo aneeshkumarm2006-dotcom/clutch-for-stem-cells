@@ -119,6 +119,8 @@ export const homepageContentSchema = z
         clinicsLabel: z.string().max(60),
         verifiedLabel: z.string().max(60),
         reviewsLabel: z.string().max(60),
+        // 0 is valid and means "publish the count whatever it is".
+        verifiedMinimum: z.number().int().min(0).max(100_000),
       })
       .partial(),
     testimonials: z

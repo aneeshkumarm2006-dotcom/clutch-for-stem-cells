@@ -1494,6 +1494,36 @@ async function getFeaturedClinics(
   return toClinicCards(pool.slice(0, limit) as unknown as ClinicListItem[]);
 }
 
+/**
+ * Order countries for the homepage "Browse by destination" strip.
+ *
+ * `getCountries()` returns every active country in the editor's `order`, which
+ * is the right order for a filter rail but wrong for a strip that is truncated
+ * to `destinations.limit`. Countries stood up ahead of their first listing sit
+ * at low `order` values, so an empty Colombia/Thailand/India/Turkey could hold
+ * the first slots and push a country with real inventory past the cut — which is
+ * exactly how South Korea (8 clinics, `order: 11`) fell off a strip of 8 while
+ * four zero-clinic countries stayed on it.
+ *
+ * So: countries that have clinics first, then the rest. The editor's `order` is
+ * preserved *within* each group, so curation still decides the sequence and
+ * only the empty/non-empty split is imposed. Empty countries are kept rather
+ * than filtered — their pages are deliberately indexable while they fill in
+ * (see `lib/seo-indexation.ts`) and the strip is one of the few places that
+ * links them.
+ */
+function orderDestinations(countries: CountryTerm[]): CountryTerm[] {
+  return countries
+    .map((country, index) => ({ country, index }))
+    .sort((a, b) => {
+      const aHas = a.country.clinicCount > 0 ? 0 : 1;
+      const bHas = b.country.clinicCount > 0 ? 0 : 1;
+      // Stable within a group: fall back to the incoming (order, name) index.
+      return aHas - bHas || a.index - b.index;
+    })
+    .map(({ country }) => country);
+}
+
 export async function getHomeData(): Promise<HomeData> {
   await dbConnect();
   const [settings, content] = await Promise.all([
@@ -1530,7 +1560,7 @@ export async function getHomeData(): Promise<HomeData> {
     content,
     treatments,
     conditions,
-    countries,
+    countries: orderDestinations(countries),
     featuredClinics,
     stats: {
       clinics: clinicCount,

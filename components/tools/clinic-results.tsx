@@ -7,7 +7,7 @@ import { Check, MapPin, Minus } from "lucide-react";
 import { RatingStars } from "@/components/ui/rating-stars";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
 import { RemoteImage } from "@/components/common/remote-image";
-import { formatPrice } from "@/lib/format";
+import { formatPrice, usdEstimate } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { ClinicMatch, MatchClinic } from "@/lib/tools/match";
 import type { VerificationBadge } from "@/lib/enums";
@@ -36,16 +36,42 @@ function PriceLine({
 }) {
   const cur = clinic.currency ?? currency;
   const money = (v: number) => formatPrice(v, { currency: cur });
+  // These rows are ranked against each other, so a won price sitting beside a
+  // dollar one is worse here than anywhere else: the reader is comparing the
+  // numbers directly. `null` for a USD clinic and for any currency without a
+  // reference rate (see `config/fx.ts`).
+  const usd = (v: number) => {
+    const est = usdEstimate(v, cur);
+    return est == null ? null : formatPrice(est, { currency: "USD" });
+  };
 
   if (clinic.priceMin && clinic.priceMax && clinic.priceMax > clinic.priceMin) {
+    const [lo, hi] = [usd(clinic.priceMin), usd(clinic.priceMax)];
     return (
       <>
         {money(clinic.priceMin)} to {money(clinic.priceMax)}
+        {lo && hi ? (
+          <span className="block text-[12px] text-text-muted">
+            &#8776; {lo} to {hi}
+          </span>
+        ) : null}
       </>
     );
   }
   const single = clinic.priceMin ?? clinic.priceMax;
-  if (single) return <>From {money(single)}</>;
+  if (single) {
+    const est = usd(single);
+    return (
+      <>
+        From {money(single)}
+        {est ? (
+          <span className="block text-[12px] text-text-muted">
+            &#8776; {est}
+          </span>
+        ) : null}
+      </>
+    );
+  }
   return <span className="text-text-muted">Price not published</span>;
 }
 

@@ -3,7 +3,12 @@ import Link from "next/link";
 import { MapPin, ArrowRight, MessageSquareText } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { getInitials, formatPrice } from "@/lib/format";
+import {
+  getInitials,
+  formatPrice,
+  formatUsdEstimate,
+  usdEstimateNote,
+} from "@/lib/format";
 import { RatingStars } from "@/components/ui/rating-stars";
 import { VerifiedBadge, FeaturedBadge } from "@/components/ui/verified-badge";
 import { Chip } from "@/components/ui/chip";
@@ -85,6 +90,10 @@ export function ClinicCard({
     priceMin != null && priceModel !== "consult_to_quote"
       ? formatPrice(priceMin, currency ? { currency } : undefined)
       : null;
+  // A price in won or pesos is unreadable next to one in dollars, and the card
+  // is where clinics are compared side by side. `null` for a USD clinic and for
+  // any currency without a rate, so the extra line only appears when it helps.
+  const priceUsd = priceLabel ? formatUsdEstimate(priceMin, currency) : null;
 
   return (
     <article
@@ -193,6 +202,14 @@ export function ClinicCard({
                 <p className="font-display text-[17px] font-bold tracking-[-0.01em] text-text-primary">
                   {priceLabel}
                 </p>
+                {priceUsd ? (
+                  <p
+                    className="text-[12px] text-text-muted"
+                    title={usdEstimateNote(currency) ?? undefined}
+                  >
+                    {priceUsd}
+                  </p>
+                ) : null}
               </>
             ) : (
               <p className="font-display text-[15px] font-semibold text-text-primary">

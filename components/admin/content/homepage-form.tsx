@@ -703,6 +703,24 @@ export function HomepageForm({
                 />
               </div>
             ) : null}
+            {v.trust.showStats ? (
+              <TextField
+                type="number"
+                min={0}
+                label="Hide the verified counter below"
+                hint="Fewest verified clinics worth publishing a number for. Under it the tile is dropped and the strip shows the other two. Set 0 to always show it."
+                placeholder={String(d.trust.verifiedMinimum)}
+                value={String(v.trust.verifiedMinimum)}
+                onChange={(e) =>
+                  set("trust", {
+                    verifiedMinimum: Math.max(
+                      0,
+                      Math.floor(Number(e.target.value) || 0),
+                    ),
+                  })
+                }
+              />
+            ) : null}
           </Panel>
 
           {/* ── Testimonials ─────────────────────────────────────────── */}

@@ -111,6 +111,8 @@ export interface HomepageView {
     clinicsLabel: Stored;
     verifiedLabel: Stored;
     reviewsLabel: Stored;
+    /** Always a concrete number: a blank threshold has no useful meaning. */
+    verifiedMinimum: number;
   };
   testimonials: {
     enabled: boolean;
@@ -150,6 +152,12 @@ const flag = (v: unknown, fallback: boolean): boolean =>
 
 const count = (v: unknown, fallback: number): number =>
   typeof v === "number" && Number.isFinite(v) && v > 0 ? Math.floor(v) : fallback;
+
+/** Like {@link count} but 0 is a real value, not an absent one. */
+const threshold = (v: unknown, fallback: number): number =>
+  typeof v === "number" && Number.isFinite(v) && v >= 0
+    ? Math.floor(v)
+    : fallback;
 
 /** Stored list, or the shipped one when nothing is stored. */
 function seeded<T>(stored: unknown, shipped: T[]): T[] {
@@ -271,6 +279,10 @@ export async function getHomepageView(): Promise<HomepageView> {
       clinicsLabel: text(hp.trust?.clinicsLabel),
       verifiedLabel: text(hp.trust?.verifiedLabel),
       reviewsLabel: text(hp.trust?.reviewsLabel),
+      verifiedMinimum: threshold(
+        hp.trust?.verifiedMinimum,
+        d.trust.verifiedMinimum,
+      ),
     },
     testimonials: {
       enabled: flag(hp.testimonials?.enabled, d.testimonials.enabled),

@@ -120,6 +120,8 @@ export interface IHomepage {
     clinicsLabel?: string;
     verifiedLabel?: string;
     reviewsLabel?: string;
+    /** Hide the verified counter below this many verified clinics. 0 = always. */
+    verifiedMinimum?: number;
   };
   testimonials?: {
     enabled?: boolean;
@@ -417,6 +419,7 @@ const homepageSchema = new Schema<IHomepage>(
           clinicsLabel: { type: String, trim: true },
           verifiedLabel: { type: String, trim: true },
           reviewsLabel: { type: String, trim: true },
+          verifiedMinimum: { type: Number, min: 0 },
         },
         { _id: false },
       ),

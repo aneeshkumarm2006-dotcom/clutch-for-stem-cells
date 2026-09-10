@@ -5,6 +5,7 @@ import { getDirectoryData } from "@/lib/public-data";
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import { buildJsonLd } from "@/lib/schema/engine";
+import { clinicListEntry } from "@/lib/schema/adapters";
 import { getSchemaContext } from "@/lib/schema/context";
 import { staticPageMeta } from "@/config/static-pages";
 import { Directory } from "@/components/directory/directory";
@@ -50,10 +51,7 @@ export default async function ClinicsPage({
       name: meta?.title ?? content.title,
       description: meta?.description,
       path: "/clinics",
-      items: data.cards.map((c) => ({
-        path: `/clinic/${c.slug}`,
-        name: c.name,
-      })),
+      items: data.cards.map(clinicListEntry),
       itemType: "MedicalClinic",
       itemIdFragment: "clinic",
       itemsName: content.title,

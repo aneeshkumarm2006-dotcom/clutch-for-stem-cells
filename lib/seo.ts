@@ -1304,6 +1304,24 @@ export interface ItemListEntry {
   name?: string;
   /** Thumbnail of the listed item. */
   image?: string;
+  /**
+   * ── Optional descriptive fields for a `LocalBusiness`-shaped `itemType` ────
+   *
+   * A listed item is a *reference*: its `@id` is the same node its own page
+   * publishes in full, so the two merge into one entity rather than competing.
+   * A validator, though, reads each node where it stands, and reports a
+   * name-and-URL stub typed `MedicalClinic` as a `LocalBusiness` missing most of
+   * what one should carry. These close that gap with values the listing already
+   * displays on screen, so the markup and the page cannot disagree.
+   *
+   * All optional. Omit them and the entry stays the bare reference it was.
+   */
+  /** "City, Country" as shown on the card → `address`. */
+  address?: string;
+  /** Pre-formatted range, e.g. "8500-20000 USD" → `priceRange`. */
+  priceRange?: string;
+  /** Rating + count, emitted as a nested `AggregateRating`. Skipped at 0. */
+  rating?: { value: number; reviewCount: number };
 }
 
 export interface ItemListOptions {
@@ -1364,6 +1382,18 @@ export function itemListJsonLd(
               name: item.name,
               url: absoluteUrl(item.path),
               image: item.image ? absoluteUrl(item.image) : undefined,
+              address: item.address,
+              priceRange: item.priceRange,
+              aggregateRating:
+                item.rating && item.rating.reviewCount > 0
+                  ? {
+                      "@type": "AggregateRating",
+                      ratingValue: item.rating.value,
+                      reviewCount: item.rating.reviewCount,
+                      bestRating: 5,
+                      worstRating: 1,
+                    }
+                  : undefined,
             })
           : undefined,
       }),

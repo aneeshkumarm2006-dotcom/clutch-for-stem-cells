@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { inter, jakarta } from "./fonts";
 import "./globals.css";
 import { AuthSessionProvider } from "@/components/auth/session-provider";
+import { ChunkErrorRecovery } from "@/components/common/chunk-error-recovery";
 import SmoothScroll from "@/components/smooth-scroll";
 import { IconSprite } from "@/components/ui/icon-sprite";
 import { Toaster } from "@/components/ui/sonner";
@@ -34,6 +35,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
       <body>
+        {/* Recovers a tab whose cached HTML names chunks a new deploy replaced. */}
+        <ChunkErrorRecovery />
         <IconSprite />
         <SmoothScroll />
         <AuthSessionProvider>

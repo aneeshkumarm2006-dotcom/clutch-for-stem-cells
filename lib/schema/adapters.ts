@@ -35,6 +35,7 @@ import {
 import { blocksToSchemaOrg } from "@/lib/blocks/schema";
 import type { BlockInput } from "@/lib/validation/block";
 import type { ClinicProfile } from "@/lib/public-data";
+import type { ClinicCardData } from "@/components/clinic/clinic-card";
 import type { NodeList } from "@/lib/schema/types";
 
 /**
@@ -145,6 +146,45 @@ export interface BlogPostSchemaData {
 
 export function buildBlogPostNodes(data: BlogPostSchemaData): NodeList {
   return [blogPostingJsonLd(data.post)];
+}
+
+// ── listing entries → the `MedicalClinic` stubs inside an ItemList ──────────
+
+/**
+ * One clinic card → one `ItemList` entry.
+ *
+ * Every listing on the site (homepage, `/clinics`, treatment, condition and
+ * location pages) renders the same `ClinicCardData`, so mapping it here once
+ * means all of them describe their listed clinics identically, and the markup
+ * carries exactly what the card shows the reader: the logo, the "City, Country"
+ * line, the rating, the starting price. Nothing is invented for the schema.
+ *
+ * That matters for validation as well as consistency. The entry's `@id` is the
+ * `…#clinic` node the clinic's own profile publishes in full, so the two merge
+ * into one entity — but a validator reads the node where it stands, and a
+ * `MedicalClinic` (a `LocalBusiness` subtype) with nothing but a name and a URL
+ * gets reported as one missing most of its recommended fields. This is what the
+ * "non-critical issues" on a listing page's Local Business markup are.
+ */
+export function clinicListEntry(card: ClinicCardData): ItemListEntry {
+  return {
+    path: `/clinic/${card.slug}`,
+    name: card.name,
+    image: card.logoUrl,
+    // The card appends " +2" when a clinic has more sites than the one shown.
+    // That is a UI affordance, not part of the address, so it comes off.
+    address: card.location?.replace(/\s+\+\d+$/, "") || undefined,
+    // Matches the `priceRange` format on the clinic's own node ("min-max CUR"),
+    // and is omitted for the quote-only clinics whose card shows no price.
+    priceRange:
+      card.priceMin != null && card.priceModel !== "consult_to_quote"
+        ? `${card.priceMin} ${card.currency ?? "USD"}`
+        : undefined,
+    rating:
+      card.reviewCount > 0
+        ? { value: card.ratingAvg, reviewCount: card.reviewCount }
+        : undefined,
+  };
 }
 
 // ── topical pages (taxonomy terms + combination pages) → MedicalWebPage ─────

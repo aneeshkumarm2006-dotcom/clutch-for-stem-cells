@@ -12,6 +12,7 @@ import {
 import { directoryParamsFrom, isTopView } from "@/lib/directory-query";
 import { shouldNoindexDirectory } from "@/lib/seo-indexation";
 import { itemListJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
+import { clinicListEntry } from "@/lib/schema/adapters";
 import { editorialJsonLd } from "@/lib/editorial-schema";
 import { getApprovedComboLinks } from "@/lib/seoteam/matrix-data";
 import { Directory } from "@/components/directory/directory";
@@ -89,10 +90,7 @@ export default async function CountryDirectoryPage({
     ...(data.cards.length
       ? [
           itemListJsonLd(
-            data.cards.map((c) => ({
-              path: `/clinic/${c.slug}`,
-              name: c.name,
-            })),
+            data.cards.map(clinicListEntry),
             {
               path,
               itemType: "MedicalClinic",

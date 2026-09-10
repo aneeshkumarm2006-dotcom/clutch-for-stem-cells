@@ -36,7 +36,14 @@ import {
   getPublishedClinicSlugs,
   getRelatedClinics,
 } from "@/lib/public-data";
-import { formatPrice, formatCount, getInitials } from "@/lib/format";
+import {
+  formatPrice,
+  formatCount,
+  formatUsdEstimate,
+  getInitials,
+  usdEstimate,
+  usdEstimateNote,
+} from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
@@ -168,6 +175,15 @@ export default async function ClinicProfilePage({
     clinic.priceMin != null && clinic.priceModel !== "consult_to_quote"
       ? formatPrice(clinic.priceMin, { currency: clinic.currency })
       : null;
+  // USD orientation for a clinic that quotes in another currency. All three
+  // return `null` for a USD clinic, so the dollar figures simply do not render.
+  const priceMinUsd = priceLabel
+    ? formatUsdEstimate(clinic.priceMin, clinic.currency)
+    : null;
+  // The range prints one "≈" for the pair, so the max is taken as a number and
+  // formatted plainly rather than having its own prefix stripped back off.
+  const priceMaxUsd = usdEstimate(clinic.priceMax, clinic.currency);
+  const fxNote = usdEstimateNote(clinic.currency);
 
   // MedicalClinic (+ nested AggregateRating) + up to 5 Reviews, assembled by the
   // schema engine from the `clinic` content-type map, with any per-record
@@ -508,6 +524,11 @@ export default async function ClinicProfilePage({
                   <p className="font-display text-2xl font-bold tracking-[-0.01em] text-text-primary">
                     {priceLabel ?? "On consultation"}
                   </p>
+                  {priceMinUsd ? (
+                    <p className="text-[13px] text-text-muted">
+                      {priceMinUsd}
+                    </p>
+                  ) : null}
                   {clinic.priceModel ? (
                     <p className="text-[12.5px] text-text-muted">
                       {PRICE_MODEL_LABELS[clinic.priceModel] ??
@@ -530,6 +551,12 @@ export default async function ClinicProfilePage({
                         currency: clinic.currency,
                       })}
                     </p>
+                    {priceMinUsd && priceMaxUsd ? (
+                      <p className="text-[13px] text-text-muted">
+                        {priceMinUsd} to{" "}
+                        {formatPrice(priceMaxUsd, { currency: "USD" })}
+                      </p>
+                    ) : null}
                   </div>
                 ) : null}
                 {clinic.ratingBreakdown?.value ? (
@@ -547,6 +574,12 @@ export default async function ClinicProfilePage({
                 <p className="mt-3 text-[13.5px] text-text-secondary">
                   {clinic.priceNote}
                 </p>
+              ) : null}
+              {/* States the rate and its date, so a visitor can see how the
+                  dollar figures above were reached and that the clinic bills in
+                  its own currency. Absent entirely for a USD clinic. */}
+              {fxNote ? (
+                <p className="mt-2 text-[12.5px] text-text-muted">{fxNote}</p>
               ) : null}
               {/* The keyword-bearing internal link into the cost page, which
                   carries the itemised price table, what a quote covers, and the

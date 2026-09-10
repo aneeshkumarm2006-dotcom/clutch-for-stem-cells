@@ -27,6 +27,7 @@ import {
   medicalTherapyJsonLd,
   medicalWebPageJsonLd,
 } from "@/lib/seo";
+import { clinicListEntry } from "@/lib/schema/adapters";
 import { editorialJsonLd } from "@/lib/editorial-schema";
 import { getApprovedComboLinks } from "@/lib/seoteam/matrix-data";
 import { Directory } from "@/components/directory/directory";
@@ -133,10 +134,7 @@ export default async function TreatmentDirectoryPage({
     ...(data.cards.length
       ? [
           itemListJsonLd(
-            data.cards.map((c) => ({
-              path: `/clinic/${c.slug}`,
-              name: c.name,
-            })),
+            data.cards.map(clinicListEntry),
             {
               name: `${term.name} clinics`,
               path,
