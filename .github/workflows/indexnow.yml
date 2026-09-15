@@ -1,0 +1,113 @@
+# IndexNow — submit changed URLs to Bing, Yandex, Naver, Seznam and Yep after a
+# production deploy, and periodically to catch database-only publishes.
+#
+# The API routes under app/api/seoteam/* and app/api/admin/page-seo already ping
+# inline when an editor publishes. This workflow covers everything they cannot
+# see:
+#
+#   * clinic, taxonomy and tool pages whose URLs ship with a code change
+#   * content written by scripts/import-*.ts, which write straight to MongoDB
+#     from a laptop and never touch a route handler or a git push
+#
+# It works by diffing production's own sitemap.xml against the previous run's
+# snapshot, so it needs no knowledge of what changed — whatever the sitemap now
+# lists that it did not before (or lists with a newer <lastmod>) gets submitted.
+#
+# ## Triggers
+#
+# `deployment_status` rather than `push`, because it must run *after* the deploy
+# is live: a push-triggered job races Vercel and would read the previous build's
+# sitemap, snapshot it as current, and then never submit those URLs. Vercel's
+# GitHub integration fires this event when it finishes promoting a deployment.
+# The schedule is what actually covers the import scripts, since those produce
+# no push at all.
+#
+# ## Setup (see README → IndexNow)
+#
+#   * `INDEXNOW_KEY` repository secret, matching the committed public/<key>.txt
+#   * `SITE_URL` repository variable, e.g. https://your-domain.com
+#
+# With either missing the job exits successfully having done nothing, so a fork
+# or a fresh clone does not accumulate red runs.
+name: IndexNow
+
+on:
+  deployment_status:
+  schedule:
+    # Every 6 hours. Frequent enough that a batch of imported clinics is
+    # submitted the same day, rare enough to stay well inside the protocol's
+    # fair-use expectations.
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      submit_all:
+        description: "Submit every sitemap URL, ignoring the snapshot"
+        type: boolean
+        default: false
+
+# One run at a time: two concurrent runs would each diff against the same
+# snapshot and double-submit.
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    # On deployment_status, only a *successful production* deployment counts.
+    # Other events carry no deployment payload, so the condition passes through.
+    if: >-
+      github.event_name != 'deployment_status' ||
+      (github.event.deployment_status.state == 'success' &&
+       contains(fromJSON('["production","Production"]'), github.event.deployment.environment))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Resolve target site
+        id: site
+        env:
+          # Repository variable wins; the deployment event's own URL is the
+          # fallback so a repo that has not set the variable still works after a
+          # deploy. Never a hardcoded domain.
+          SITE_URL: ${{ vars.SITE_URL }}
+          EVENT_URL: ${{ github.event.deployment_status.environment_url }}
+        run: |
+          url="${SITE_URL:-$EVENT_URL}"
+          url="${url%/}"
+          if [ -z "$url" ]; then
+            echo "::notice::No SITE_URL repository variable and no deployment URL. Skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          elif [ -z "${{ secrets.INDEXNOW_KEY }}" ]; then
+            echo "::notice::INDEXNOW_KEY secret is not set. Skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "url=$url" >> "$GITHUB_OUTPUT"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Only the diff script is needed, not the app, so keep the checkout to it.
+      - name: Check out the diff script
+        if: steps.site.outputs.skip == 'false'
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+          sparse-checkout-cone-mode: false
+
+      # A unique key per run with a prefix restore-key is the rolling-snapshot
+      # pattern: cache entries are immutable, so the restore reads the newest
+      # previous run and the post-job save writes this run's.
+      - name: Restore previous sitemap snapshot
+        if: steps.site.outputs.skip == 'false'
+        uses: actions/cache@v4
+        with:
+          path: .indexnow-cache
+          key: indexnow-sitemap-${{ github.run_id }}
+          restore-keys: |
+            indexnow-sitemap-
+
+      - name: Diff sitemap and submit changed URLs
+        if: steps.site.outputs.skip == 'false'
+        env:
+          SITE_URL: ${{ steps.site.outputs.url }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          SUBMIT_ALL: ${{ github.event.inputs.submit_all }}
+        run: node .github/scripts/indexnow-diff.mjs

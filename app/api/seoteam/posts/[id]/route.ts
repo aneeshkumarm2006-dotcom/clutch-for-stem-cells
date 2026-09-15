@@ -6,6 +6,7 @@
 import { revalidatePath } from "next/cache";
 
 import { dbConnect } from "@/lib/db";
+import { pingIndexNow } from "@/lib/indexnow";
 import { fail, ok, parseBody, withSeoAuth } from "@/lib/seoteam/api";
 import { sanitizeBlogHtml } from "@/lib/seoteam/sanitize";
 import { blogPostUpdateSchema } from "@/lib/validation/blog-post";
@@ -62,7 +63,9 @@ export async function PATCH(
     // else publish now.
     if (data.status === "published") {
       const now = new Date();
-      const explicit = data.publishedAt ? new Date(data.publishedAt) : undefined;
+      const explicit = data.publishedAt
+        ? new Date(data.publishedAt)
+        : undefined;
       post.publishedAt =
         explicit ??
         (post.publishedAt && post.publishedAt <= now ? post.publishedAt : now);
@@ -76,6 +79,16 @@ export async function PATCH(
     revalidatePath("/blog");
     revalidatePath(`/blog/${oldSlug}`);
     if (post.slug !== oldSlug) revalidatePath(`/blog/${post.slug}`);
+
+    // Same set of URLs the revalidation above touches. An unpublish is pinged
+    // too: that is how the engines learn to drop a URL that now 404s. A rename
+    // submits both slugs, so the old URL is recrawled (and redirected/dropped)
+    // instead of sitting in the index as a stale duplicate.
+    pingIndexNow([
+      "/blog",
+      `/blog/${oldSlug}`,
+      ...(post.slug !== oldSlug ? [`/blog/${post.slug}`] : []),
+    ]);
 
     return ok({ id: String(post._id), slug: post.slug });
   });
@@ -92,6 +105,7 @@ export async function DELETE(
     if (!deleted) return fail("Post not found.", 404);
     revalidatePath("/blog");
     revalidatePath(`/blog/${deleted.slug}`);
+    pingIndexNow(["/blog", `/blog/${deleted.slug}`]);
     return ok({ ok: true });
   });
 }

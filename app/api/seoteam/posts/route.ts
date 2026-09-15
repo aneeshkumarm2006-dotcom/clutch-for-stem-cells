@@ -6,6 +6,7 @@
 import { revalidatePath } from "next/cache";
 
 import { dbConnect } from "@/lib/db";
+import { pingIndexNow } from "@/lib/indexnow";
 import { fail, ok, parseBody, withSeoAuth } from "@/lib/seoteam/api";
 import { sanitizeBlogHtml } from "@/lib/seoteam/sanitize";
 import { getAdminBlogPosts } from "@/lib/seoteam/blog-data";
@@ -61,6 +62,11 @@ export async function POST(req: Request): Promise<Response> {
     if (post.status === "published") {
       revalidatePath("/blog");
       revalidatePath(`/blog/${post.slug}`);
+      // Only tell the engines about a post that is actually live: a future
+      // `publishedAt` is a scheduled post, which `/blog/[slug]` still 404s.
+      if (post.publishedAt && post.publishedAt <= new Date()) {
+        pingIndexNow(["/blog", `/blog/${post.slug}`]);
+      }
     }
 
     return ok({ id: String(post._id), slug: post.slug }, 201);

@@ -11,8 +11,13 @@
 import { revalidatePath } from "next/cache";
 
 import { dbConnect } from "@/lib/db";
+import { pingIndexNow } from "@/lib/indexnow";
 import { fail, ok, parseBody, withSeoAuth } from "@/lib/seoteam/api";
-import { blocksFaqs, blocksScanText, sanitizeBlocks } from "@/lib/blocks/server";
+import {
+  blocksFaqs,
+  blocksScanText,
+  sanitizeBlocks,
+} from "@/lib/blocks/server";
 import { reviewEditorialWrite } from "@/lib/content-review";
 import { getAdminPages, isReservedSlug } from "@/lib/seoteam/page-data";
 import { pageCreateSchema } from "@/lib/validation/page";
@@ -66,7 +71,12 @@ export async function POST(req: Request): Promise<Response> {
       lastReviewedAt: data.lastReviewedAt ?? (approved ? new Date() : null),
     });
 
-    if (approved) revalidatePath(`/${page.slug}`);
+    // Only an approved page has a live URL — a draft is never generated at all,
+    // so there is nothing for a crawler to fetch yet.
+    if (approved) {
+      revalidatePath(`/${page.slug}`);
+      pingIndexNow(`/${page.slug}`);
+    }
 
     return ok({ id: String(page._id), slug: page.slug }, 201);
   });

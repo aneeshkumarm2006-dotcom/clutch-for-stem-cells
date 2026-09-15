@@ -1,0 +1,10 @@
+Keeps `public/` in git so the IndexNow key file has a home.
+
+This project serves its root-level static files from `app/` (favicon.ico,
+icon.svg, apple-icon.png, and llms.txt via app/llms.txt/route.ts), so `public/`
+would otherwise be empty. The IndexNow key file is the exception: the protocol
+requires it at a literal path whose name IS the key, which a Next.js route
+segment cannot express without also shadowing every CMS page at `/<slug>`.
+
+Drop `<your-indexnow-key>.txt` here (one line, exactly the key, nothing else)
+and commit it. See README → IndexNow.

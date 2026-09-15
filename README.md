@@ -19,7 +19,7 @@ cp .env.example .env.local   # fill in MONGODB_URI etc.
 npm run dev                  # http://localhost:3000
 ```
 
-Scripts: `dev` · `build` · `start` · `lint` · `format` · `format:check` · `seed`.
+Scripts: `dev` · `build` · `start` · `lint` · `format` · `format:check` · `seed` · `indexnow:ping`.
 
 ## Project structure
 
@@ -65,6 +65,79 @@ test message; `npx tsx scripts/verify-smtp.ts` checks auth without sending.
 
 The seeded SuperAdmin (`admin@mystemcellguide.com`) ships without a password —
 use **Reset your password** (`/auth/reset`) to set one, then sign in.
+
+## IndexNow (instant indexing)
+
+[IndexNow](https://www.indexnow.org/) is a free, open protocol: one POST tells
+**Bing, Yandex, Naver, Seznam and Yep** that a URL was published, changed, or
+removed, instead of waiting for them to crawl. **Google does not participate** —
+`app/sitemap.ts` remains how Googlebot discovers content, and nothing here
+changes it. The payoff is Bing, which is a primary retrieval layer for ChatGPT
+Search, so a same-minute push there is the fastest route into AI answers.
+
+No paid API, no new runtime dependency — native `fetch` only.
+
+### One-time setup
+
+There is exactly one manual step, and it is the one thing that silently
+disables IndexNow if it is wrong. Do it in this order:
+
+1. **Get a key.** [bing.com/webmasters](https://www.bing.com/webmasters) →
+   **IndexNow** → generate. It looks like `a1b2c3d4e5f64a7b8c9d0e1f2a3b4c5d`.
+2. **Commit the key file.** Create `public/<key>.txt` containing *exactly* that
+   key and nothing else, and commit it. The engines fetch it to prove you own
+   the host, so **it is public by design and is not a secret.**
+3. **Set `INDEXNOW_KEY`** to the same value in Vercel (Production scope) and as
+   a GitHub Actions **repository secret** of the same name.
+4. **Set a `SITE_URL` repository variable** (e.g. `https://your-domain.com`) so
+   the workflow knows where to read production's sitemap.
+5. **Verify**, after the deploy that carries the key file:
+
+   ```bash
+   NEXT_PUBLIC_SITE_URL=https://your-domain.com npm run indexnow:ping -- --verify
+   ```
+
+   This fetches the key file and checks it byte-for-byte against `INDEXNOW_KEY`.
+   Until it says OK, every submission is answered 403/422.
+6. **Backfill once**, to submit the existing site:
+
+   ```bash
+   NEXT_PUBLIC_SITE_URL=https://your-domain.com npm run indexnow:ping -- --all
+   ```
+
+With `INDEXNOW_KEY` unset, everything below is a silent no-op, so a fresh clone
+needs none of this. Submissions are also skipped unless `VERCEL_ENV` is
+`production`, so dev and preview deploys never ping.
+
+### What submits, and when
+
+| Trigger | Covers |
+| --- | --- |
+| `lib/indexnow.ts` → `pingIndexNow()` in the publish routes | Blog posts (`/api/seoteam/posts`), composed pages (`/api/seoteam/pages`), per-route meta (`/api/admin/page-seo`). Create, update, unpublish, delete, and both slugs on a rename. |
+| `.github/workflows/indexnow.yml` | Everything the routes cannot see: URLs that ship with a code change (clinics, taxonomy, tools) and content written straight to MongoDB by `scripts/import-*.ts`. Diffs production's `sitemap.xml` against the previous run's snapshot and submits only what changed. |
+| `npm run indexnow:ping` | Manual backfill and repair. Takes URLs as arguments, or `--all` for every sitemap URL; `--dry` lists without submitting, `--verify` checks the key file. |
+
+`pingIndexNow` is **fire-and-forget**: it returns `void`, is never awaited, and
+cannot delay or fail the response it rides along with. Every failure mode (no
+key, network error, a 4xx) degrades to a log line — the same discipline
+`app/sitemap.ts` uses when the database is unreachable. A 403 or 422 is logged
+loudly, because a bad key file is the one failure nothing else surfaces.
+
+Only canonical, indexable URLs are submitted: query strings (faceted directory
+variants are `noindex` with a canonical back to the clean path), fragments,
+off-host URLs, and private prefixes (`/admin`, `/api/`, `/auth/`, `/account`,
+`/seoteam`, `/analyticshub`, `/r/`) are dropped before the request is built.
+
+Two deliberate behaviours in the workflow worth knowing:
+
+- It triggers on `deployment_status` (production success) rather than `push`,
+  because a push-triggered job races Vercel: it would read the *previous*
+  build's sitemap, snapshot it as current, and then never submit those URLs.
+  This needs the Vercel↔GitHub integration; without it, the 6-hourly schedule
+  and `workflow_dispatch` still cover everything.
+- Its **first** run submits nothing and only seeds the snapshot, so enabling it
+  never fires the whole site at the engines unannounced. Use `--all` (step 6)
+  or a `workflow_dispatch` with `submit_all` for that.
 
 ## Design tokens
 

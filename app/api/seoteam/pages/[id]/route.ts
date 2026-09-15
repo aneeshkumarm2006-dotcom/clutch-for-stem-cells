@@ -10,8 +10,13 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { isValidObjectId } from "mongoose";
 
 import { dbConnect } from "@/lib/db";
+import { pingIndexNow } from "@/lib/indexnow";
 import { fail, ok, parseBody, withSeoAuth } from "@/lib/seoteam/api";
-import { blocksFaqs, blocksScanText, sanitizeBlocks } from "@/lib/blocks/server";
+import {
+  blocksFaqs,
+  blocksScanText,
+  sanitizeBlocks,
+} from "@/lib/blocks/server";
 import { reviewEditorialWrite } from "@/lib/content-review";
 import { isReservedSlug } from "@/lib/seoteam/page-data";
 import { REDIRECTS_CACHE_TAG } from "@/lib/redirects";
@@ -80,8 +85,10 @@ export async function PATCH(
 
     await page.save();
 
+    const renamed = Boolean(data.slug && data.slug !== previousSlug);
+
     // A renamed page must not orphan its old URL — record the 301 automatically.
-    if (data.slug && data.slug !== previousSlug) {
+    if (renamed) {
       await Redirect.updateOne(
         { from: `/${previousSlug}` },
         { $set: { to: `/${page.slug}`, statusCode: 301 } },
@@ -92,6 +99,16 @@ export async function PATCH(
     }
 
     if (nowApproved || wasApproved) revalidatePath(`/${page.slug}`);
+
+    // Mirror the revalidations above. `wasApproved && !nowApproved` is an
+    // unpublish and is still submitted, so the engines recrawl and drop the
+    // URL rather than serving a cached copy of a page that now 404s. A rename
+    // submits the old slug too, which is where the fresh 301 now lives.
+    const changedUrls = [
+      ...(renamed ? [`/${previousSlug}`] : []),
+      ...(nowApproved || wasApproved ? [`/${page.slug}`] : []),
+    ];
+    if (changedUrls.length) pingIndexNow(changedUrls);
 
     return ok({ id: String(page._id), slug: page.slug });
   });
@@ -109,6 +126,7 @@ export async function DELETE(
     if (!page) return fail("Page not found.", 404);
 
     revalidatePath(`/${page.slug}`);
+    pingIndexNow(`/${page.slug}`);
     return ok({ ok: true });
   });
 }

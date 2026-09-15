@@ -12,6 +12,7 @@
 import { dbConnect } from "@/lib/db";
 import { fail, ok, parseBody, withRole } from "@/lib/admin/api";
 import { recordAuditFromRequest } from "@/lib/audit";
+import { pingIndexNow } from "@/lib/indexnow";
 import { pageSeoUpdateSchema } from "@/lib/validation/site-setting";
 import { STATIC_PAGES, normalizePagePath } from "@/config/static-pages";
 import { SiteSetting, GLOBAL_SETTINGS_KEY, toPlainObject } from "@/models";
@@ -37,6 +38,24 @@ const PRESERVED = [
   "robots",
 ] as const;
 
+/**
+ * Canonical form of one `pageSeo` row, used only to answer "did this row
+ * actually change?" so the IndexNow submission carries the handful of URLs an
+ * editor touched rather than all ~30 managed pages on every save. Key order,
+ * `path`, and the subdocument's mongoose internals are all irrelevant to that
+ * question; an `undefined` field is the same as an absent one.
+ */
+function seoFingerprint(entry: Record<string, unknown> | undefined): string {
+  if (!entry) return "";
+  const keys = Object.keys(entry)
+    .filter(
+      (k) =>
+        k !== "_id" && k !== "__v" && k !== "path" && entry[k] !== undefined,
+    )
+    .sort();
+  return JSON.stringify(keys.map((k) => [k, entry[k]]));
+}
+
 export async function PATCH(req: Request): Promise<Response> {
   return withRole("editor", async (user) => {
     const parsed = await parseBody(req, pageSeoUpdateSchema);
@@ -55,6 +74,8 @@ export async function PATCH(req: Request): Promise<Response> {
 
     const seen = new Set<string>();
     const pageSeo: Record<string, unknown>[] = [];
+    /** Paths whose stored meta this save adds, edits, or clears. */
+    const changedPaths = new Set<string>();
 
     for (const row of parsed.data.pageSeo) {
       const path = normalizePagePath(row.path);
@@ -78,6 +99,18 @@ export async function PATCH(req: Request): Promise<Response> {
         (v) => v !== undefined && v !== false,
       );
       if (hasValue) pageSeo.push({ ...seo, path });
+
+      if (
+        seoFingerprint(hasValue ? seo : undefined) !== seoFingerprint(existing)
+      ) {
+        changedPaths.add(path);
+      }
+    }
+
+    // A row the request omitted entirely is a deletion of that override, which
+    // changes the rendered `<head>` just as much as an edit does.
+    for (const path of stored.keys()) {
+      if (!seen.has(path)) changedPaths.add(path);
     }
 
     await SiteSetting.updateOne(
@@ -93,6 +126,10 @@ export async function PATCH(req: Request): Promise<Response> {
       entityId: GLOBAL_SETTINGS_KEY,
       after: { paths: pageSeo.map((p) => p.path) },
     });
+
+    // These routes render their title/description from this record, so a saved
+    // override is a content change on a live URL.
+    if (changedPaths.size) pingIndexNow([...changedPaths]);
 
     return ok({ ok: true, count: pageSeo.length });
   });
